@@ -22,9 +22,10 @@
 		7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89AA75256D715F009AD87C /* UIViewController+Extensions.swift */; };
 		7C89AA81256D7342009AD87C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89AA80256D7342009AD87C /* RegisterViewController.swift */; };
 		7C89AA91256D8286009AD87C /* Questionnaire.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA90256D8286009AD87C /* Questionnaire.storyboard */; };
-		B3B2A22D256ED1FC0052E6C8 /* FanPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A22C256ED1FC0052E6C8 /* FanPickerView.swift */; };
 		B3B2A232256ED2A60052E6C8 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A231256ED2A60052E6C8 /* UIImage+Extensions.swift */; };
 		B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */; };
+		B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */; };
+		B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B2A251256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,9 +68,10 @@
 		7C89AA75256D715F009AD87C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		7C89AA80256D7342009AD87C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		7C89AA90256D8286009AD87C /* Questionnaire.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Questionnaire.storyboard; sourceTree = "<group>"; };
-		B3B2A22C256ED1FC0052E6C8 /* FanPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanPickerView.swift; sourceTree = "<group>"; };
 		B3B2A231256ED2A60052E6C8 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatPresentViewController.swift; sourceTree = "<group>"; };
+		B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatCollectionViewCell.swift; sourceTree = "<group>"; };
+		B3B2A251256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionnaireFatCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				7C89AA35256D6D3D009AD87C /* Application */,
 				7C89AA6E256D7132009AD87C /* Storyboards */,
 				7C89AA8C256D817B009AD87C /* Controllers */,
+				B3B2A245256EDDCA0052E6C8 /* Views */,
 				7C89AA6D256D70FE009AD87C /* Helpers */,
 				7C89AA6C256D70E5009AD87C /* Extention */,
 				7C89AA7C256D717F009AD87C /* Resources */,
@@ -174,7 +177,6 @@
 			children = (
 				7C89AA58256D6FDB009AD87C /* Constants.swift */,
 				7C89AA60256D700F009AD87C /* UserProfile.swift */,
-				B3B2A22C256ED1FC0052E6C8 /* FanPickerView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -213,6 +215,15 @@
 				B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */,
 			);
 			name = Questionnarie;
+			sourceTree = "<group>";
+		};
+		B3B2A245256EDDCA0052E6C8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */,
+				B3B2A251256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,6 +334,7 @@
 				7C89AA04256D69CB009AD87C /* Assets.xcassets in Resources */,
 				7C89AA91256D8286009AD87C /* Questionnaire.storyboard in Resources */,
 				7C89AA02256D69CA009AD87C /* LoginRegister.storyboard in Resources */,
+				B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,10 +362,10 @@
 				B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */,
 				7C89AA81256D7342009AD87C /* RegisterViewController.swift in Sources */,
 				7C89AA77256D715F009AD87C /* UIView+Extensions.swift in Sources */,
-				B3B2A22D256ED1FC0052E6C8 /* FanPickerView.swift in Sources */,
 				7C89AA66256D704D009AD87C /* LoginViewController.swift in Sources */,
 				B3B2A232256ED2A60052E6C8 /* UIImage+Extensions.swift in Sources */,
 				7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */,
+				B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */,
 				7C89AA61256D700F009AD87C /* UserProfile.swift in Sources */,
 				7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */,
 				7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */,
