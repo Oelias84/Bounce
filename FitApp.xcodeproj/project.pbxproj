@@ -26,6 +26,7 @@
 		B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */; };
 		B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */; };
 		B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B2A251256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib */; };
+		B3E6E98D257142CD00958C48 /* MealPlan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E6E98C257142CD00958C48 /* MealPlan.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatPresentViewController.swift; sourceTree = "<group>"; };
 		B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatCollectionViewCell.swift; sourceTree = "<group>"; };
 		B3B2A251256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionnaireFatCollectionViewCell.xib; sourceTree = "<group>"; };
+		B3E6E98C257142CD00958C48 /* MealPlan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MealPlan.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 				7C89AA05256D69CB009AD87C /* LaunchScreen.storyboard */,
 				7C89AA00256D69CA009AD87C /* LoginRegister.storyboard */,
 				7C89AA90256D8286009AD87C /* Questionnaire.storyboard */,
+				B3E6E98C257142CD00958C48 /* MealPlan.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -220,10 +223,18 @@
 		B3B2A245256EDDCA0052E6C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B3E6E995257143C500958C48 /* QuestionnaireFatCollectionViewCell */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B3E6E995257143C500958C48 /* QuestionnaireFatCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
 				B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */,
 				B3B2A251256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib */,
 			);
-			path = Views;
+			path = QuestionnaireFatCollectionViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,6 +343,7 @@
 			files = (
 				7C89AA07256D69CB009AD87C /* LaunchScreen.storyboard in Resources */,
 				7C89AA04256D69CB009AD87C /* Assets.xcassets in Resources */,
+				B3E6E98D257142CD00958C48 /* MealPlan.storyboard in Resources */,
 				7C89AA91256D8286009AD87C /* Questionnaire.storyboard in Resources */,
 				7C89AA02256D69CA009AD87C /* LoginRegister.storyboard in Resources */,
 				B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */,
