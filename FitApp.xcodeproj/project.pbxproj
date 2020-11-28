@@ -26,6 +26,8 @@
 		B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */; };
 		B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */; };
 		B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B2A251256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib */; };
+		B3E36E7025727F63006CE558 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E36E6F25727F63006CE558 /* Home.storyboard */; };
+		B3E36E75257285F3006CE558 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E36E74257285F3006CE558 /* HomeViewController.swift */; };
 		B3E6E98D257142CD00958C48 /* MealPlan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E6E98C257142CD00958C48 /* MealPlan.storyboard */; };
 		B3E6E9A02571446E00958C48 /* MealPlanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3E6E99F2571446E00958C48 /* MealPlanTableViewCell.xib */; };
 		B3E6E9AD25714C1400958C48 /* MealPlanTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E6E9AC25714C1400958C48 /* MealPlanTableViewCell.swift */; };
@@ -76,6 +78,8 @@
 		B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatPresentViewController.swift; sourceTree = "<group>"; };
 		B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatCollectionViewCell.swift; sourceTree = "<group>"; };
 		B3B2A251256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionnaireFatCollectionViewCell.xib; sourceTree = "<group>"; };
+		B3E36E6F25727F63006CE558 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		B3E36E74257285F3006CE558 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B3E6E98C257142CD00958C48 /* MealPlan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MealPlan.storyboard; sourceTree = "<group>"; };
 		B3E6E99F2571446E00958C48 /* MealPlanTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MealPlanTableViewCell.xib; sourceTree = "<group>"; };
 		B3E6E9AC25714C1400958C48 /* MealPlanTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlanTableViewCell.swift; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 				7C89AA00256D69CA009AD87C /* LoginRegister.storyboard */,
 				7C89AA90256D8286009AD87C /* Questionnaire.storyboard */,
 				B3E6E98C257142CD00958C48 /* MealPlan.storyboard */,
+				B3E36E6F25727F63006CE558 /* Home.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				B3B2A236256ED4850052E6C8 /* Questionnarie */,
+				B3E36E74257285F3006CE558 /* HomeViewController.swift */,
 				7C89AA65256D704D009AD87C /* LoginViewController.swift */,
 				7C89AA80256D7342009AD87C /* RegisterViewController.swift */,
 				B3E6E9B725714D5800958C48 /* MealPlanViewController.swift */,
@@ -365,6 +371,7 @@
 				B3E6E9A02571446E00958C48 /* MealPlanTableViewCell.xib in Resources */,
 				7C89AA02256D69CA009AD87C /* LoginRegister.storyboard in Resources */,
 				B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */,
+				B3E36E7025727F63006CE558 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +401,7 @@
 				7C89AA77256D715F009AD87C /* UIView+Extensions.swift in Sources */,
 				B3E6E9AD25714C1400958C48 /* MealPlanTableViewCell.swift in Sources */,
 				7C89AA66256D704D009AD87C /* LoginViewController.swift in Sources */,
+				B3E36E75257285F3006CE558 /* HomeViewController.swift in Sources */,
 				B3B2A232256ED2A60052E6C8 /* UIImage+Extensions.swift in Sources */,
 				7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */,
 				B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */,
