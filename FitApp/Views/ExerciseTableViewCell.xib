@@ -3,57 +3,89 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExerciseCell" rowHeight="251" id="Asi-Ib-zQC">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="251"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExerciseCell" rowHeight="145" id="Asi-Ib-zQC" customClass="ExerciseTableViewCell" customModule="FitApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="145"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Asi-Ib-zQC" id="d2j-AO-hiV">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="251"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="145"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Hps-AU-BzS">
-                        <rect key="frame" x="32" y="23" width="217.5" height="54"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqZ-Bb-saw">
+                        <rect key="frame" x="16" y="16" width="382" height="113"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="שם האימון" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcy-6V-o8l">
-                                <rect key="frame" x="0.0" y="0.0" width="113" height="33.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="משפט המתאר את האימון בקצרה" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWk-tN-dlR">
-                                <rect key="frame" x="0.0" y="33.5" width="217.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Hps-AU-BzS">
+                                <rect key="frame" x="12" y="12" width="217.5" height="54"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="שם האימון" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcy-6V-o8l">
+                                        <rect key="frame" x="0.0" y="0.0" width="113" height="33.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="משפט המתאר את האימון בקצרה" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWk-tN-dlR">
+                                        <rect key="frame" x="0.0" y="33.5" width="217.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22s-0H-tb5">
+                                <rect key="frame" x="290" y="76" width="80" height="25"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="fYZ-Pa-Bej"/>
+                                    <constraint firstAttribute="height" constant="25" id="qDp-Zp-cIc"/>
+                                </constraints>
+                                <state key="normal" title="פרטים">
+                                    <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="DetailButtonAction:" destination="Asi-Ib-zQC" eventType="touchUpInside" id="bV8-TV-TmI"/>
+                                </connections>
+                            </button>
                         </subviews>
-                    </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22s-0H-tb5">
-                        <rect key="frame" x="91" y="92" width="246" height="50"/>
-                        <color key="backgroundColor" red="0.43436774610000001" green="0.39554607870000003" blue="0.85887217520000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="qDp-Zp-cIc"/>
+                            <constraint firstItem="Hps-AU-BzS" firstAttribute="leading" secondItem="hqZ-Bb-saw" secondAttribute="leading" constant="12" id="Vqc-M3-A0e"/>
+                            <constraint firstItem="Hps-AU-BzS" firstAttribute="top" secondItem="hqZ-Bb-saw" secondAttribute="top" constant="12" id="k1h-51-fqo"/>
+                            <constraint firstAttribute="bottom" secondItem="22s-0H-tb5" secondAttribute="bottom" constant="12" id="kbi-gn-soD"/>
+                            <constraint firstAttribute="trailing" secondItem="22s-0H-tb5" secondAttribute="trailing" constant="12" id="zCg-Om-VOy"/>
                         </constraints>
-                        <state key="normal" title="הבא">
-                            <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        </state>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
-                                <real key="value" value="10"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </button>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Hps-AU-BzS" firstAttribute="top" secondItem="d2j-AO-hiV" secondAttribute="topMargin" constant="12" id="9gE-6k-4cj"/>
-                    <constraint firstItem="Hps-AU-BzS" firstAttribute="leading" secondItem="d2j-AO-hiV" secondAttribute="leadingMargin" constant="12" id="Xy8-f2-qRz"/>
+                    <constraint firstAttribute="trailing" secondItem="hqZ-Bb-saw" secondAttribute="trailing" constant="16" id="G3U-VR-COv"/>
+                    <constraint firstAttribute="bottom" secondItem="hqZ-Bb-saw" secondAttribute="bottom" constant="16" id="Orb-FN-geV"/>
+                    <constraint firstItem="hqZ-Bb-saw" firstAttribute="leading" secondItem="d2j-AO-hiV" secondAttribute="leading" constant="16" id="Q3f-Sr-4V9"/>
+                    <constraint firstItem="hqZ-Bb-saw" firstAttribute="top" secondItem="d2j-AO-hiV" secondAttribute="top" constant="16" id="zIZ-c2-Wen"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="114.49275362318842" y="13.727678571428571"/>
+            <connections>
+                <outlet property="cellBackgroundView" destination="hqZ-Bb-saw" id="yC3-tf-rTm"/>
+                <outlet property="descriptionLabel" destination="VWk-tN-dlR" id="683-QM-hn8"/>
+                <outlet property="titleLabel" destination="gcy-6V-o8l" id="dtr-gv-MTM"/>
+            </connections>
+            <point key="canvasLocation" x="114.49275362318842" y="-21.763392857142858"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

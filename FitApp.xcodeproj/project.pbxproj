@@ -24,6 +24,7 @@
 		7C89AA91256D8286009AD87C /* Questionnaire.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA90256D8286009AD87C /* Questionnaire.storyboard */; };
 		B330B87625757C1000BDB206 /* Exercises.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B330B87525757C1000BDB206 /* Exercises.storyboard */; };
 		B330B87F25757F1300BDB206 /* ExerciseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B330B87E25757F1300BDB206 /* ExerciseTableViewCell.xib */; };
+		B330B88A257581AA00BDB206 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B330B889257581AA00BDB206 /* ExerciseTableViewCell.swift */; };
 		B3B2A232256ED2A60052E6C8 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A231256ED2A60052E6C8 /* UIImage+Extensions.swift */; };
 		B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */; };
 		B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */; };
@@ -78,6 +79,7 @@
 		7C89AA90256D8286009AD87C /* Questionnaire.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Questionnaire.storyboard; sourceTree = "<group>"; };
 		B330B87525757C1000BDB206 /* Exercises.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Exercises.storyboard; sourceTree = "<group>"; };
 		B330B87E25757F1300BDB206 /* ExerciseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseTableViewCell.xib; sourceTree = "<group>"; };
+		B330B889257581AA00BDB206 /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
 		B3B2A231256ED2A60052E6C8 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatPresentViewController.swift; sourceTree = "<group>"; };
 		B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				B330B87E25757F1300BDB206 /* ExerciseTableViewCell.xib */,
+				B330B889257581AA00BDB206 /* ExerciseTableViewCell.swift */,
 			);
 			name = ExerciseTabelViewCell;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */,
+				B330B88A257581AA00BDB206 /* ExerciseTableViewCell.swift in Sources */,
 				7C89AA81256D7342009AD87C /* RegisterViewController.swift in Sources */,
 				7C89AA77256D715F009AD87C /* UIView+Extensions.swift in Sources */,
 				B3E6E9AD25714C1400958C48 /* MealPlanTableViewCell.swift in Sources */,
