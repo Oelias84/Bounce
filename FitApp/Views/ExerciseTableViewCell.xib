@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExerciseCell" rowHeight="145" id="Asi-Ib-zQC" customClass="ExerciseTableViewCell" customModule="FitApp" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="exerciseCell" rowHeight="145" id="Asi-Ib-zQC" customClass="ExerciseTableViewCell" customModule="FitApp" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="145"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Asi-Ib-zQC" id="d2j-AO-hiV">
@@ -52,7 +52,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="DetailButtonAction:" destination="Asi-Ib-zQC" eventType="touchUpInside" id="bV8-TV-TmI"/>
+                                    <action selector="detailButtonAction:" destination="Asi-Ib-zQC" eventType="touchUpInside" id="bV8-TV-TmI"/>
                                 </connections>
                             </button>
                         </subviews>

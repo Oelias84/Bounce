@@ -5,6 +5,10 @@
 //  Created by iOS Bthere on 30/11/2020.
 //
 
+protocol ExerciseTableViewCellDelegate {
+    func detailButtonTapped()
+}
+
 import UIKit
 
 class ExerciseTableViewCell: UITableViewCell {
@@ -12,6 +16,8 @@ class ExerciseTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var cellBackgroundView: UIView!
+    
+    var delegate: ExerciseTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,8 +30,8 @@ class ExerciseTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    @IBAction func DetailButtonAction(_ sender: Any) {
-        
+    @IBAction func detailButtonAction(_ sender: Any) {
+        delegate?.detailButtonTapped()
     }
 }
 
