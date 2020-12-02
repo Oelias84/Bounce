@@ -9,12 +9,24 @@ import UIKit
 
 class ExercisesTableViewController: UITableViewController {
     
-    let exercises = ["תרגיל 3#", "תרגיל 2#", "תרגיל 1#"]
+    var exercises: [Exercise]!
+    var selectedExercise: Exercise?
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == K.SegueId.moveToExerciseViewController {
+            let controller = (segue.destination as! UINavigationController).viewControllers[0] as! ExerciseViewController
+            if let exercise = selectedExercise {
+                controller.exercise = exercise
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UINib(nibName: "ExerciseTableViewCell", bundle: nil), forCellReuseIdentifier: "exerciseCell")
+        tableView.register(UINib(nibName: K.NibName.exerciseTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.exerciseCell)
+        
+        exercises = [Exercise(name: "Ex 1", exerciseDescription: "bla bla bla bla"), Exercise(name: "Ex 2", exerciseDescription: "bla bla bla bla"), Exercise(name: "Ex 3", exerciseDescription: "bla bla bla bla"), Exercise(name: "Ex 4", exerciseDescription: "bla bla bla bla"), Exercise(name: "Ex 5", exerciseDescription: "bla bla bla bla")]
     }
 
     // MARK: - Table view data source
@@ -24,9 +36,10 @@ class ExercisesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let exercise = exercises[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "exerciseCell", for: indexPath) as! ExerciseTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.exerciseCell, for: indexPath) as! ExerciseTableViewCell
+        cell.exerciseData = exercise
+        cell.indexPath = indexPath
         cell.delegate = self
-        cell.titleLabel.text = exercise
         return cell
     }
     
@@ -36,7 +49,9 @@ class ExercisesTableViewController: UITableViewController {
 }
 
 extension ExercisesTableViewController: ExerciseTableViewCellDelegate {
-    func detailButtonTapped() {
-        performSegue(withIdentifier: "moveToExerciseDetail", sender: self)
+    
+    func detailButtonTapped(indexPath: IndexPath) {
+        selectedExercise = exercises[indexPath.row]
+        performSegue(withIdentifier: K.SegueId.moveToExerciseDetailViewController , sender: self)
     }
 }

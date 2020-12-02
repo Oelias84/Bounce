@@ -17,24 +17,22 @@ class MealPlanViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.register(UINib(nibName: "MealPlanTableViewCell", bundle: nil), forCellReuseIdentifier: "mealCell")
+        tableView.register(UINib(nibName: K.NibName.mealPlanTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.mealCell)
     }
-
 }
 
 extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         5
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "mealCell", for: indexPath) as! MealPlanTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.mealCell, for: indexPath) as! MealPlanTableViewCell
         cell.indexPath = indexPath
         cell.delegate = self
         cell.selectionStyle = .none
         return cell
     }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let normalHeight: CGFloat = 124
@@ -57,12 +55,12 @@ extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension MealPlanViewController: MealPlanTableViewCellDelegate  {
+    
     func detailTapped(cell: IndexPath) {
         selectedCellIndexPath = cell
         tableView.beginUpdates()
         tableView.endUpdates()
         if selectedCellIndexPath != nil {
-            // This ensures, that the cell is fully visible once expanded
             tableView.scrollToRow(at: cell, at: .none, animated: true)
         }
     }

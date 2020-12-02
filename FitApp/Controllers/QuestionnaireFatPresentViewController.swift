@@ -17,8 +17,8 @@ class QuestionnaireFatPresentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let imageNib = UINib(nibName: "QuestionnaireFatCollectionViewCell", bundle: nil)
-        collectionView.register(imageNib, forCellWithReuseIdentifier: "fanCell")
+        let imageNib = UINib(nibName: K.NibName.questionnaireFatCollectionViewCell, bundle: nil)
+        collectionView.register(imageNib, forCellWithReuseIdentifier: K.CellId.fanCell)
     }
     
     @IBAction func nextButtonAction(_ sender: Any) {
@@ -33,7 +33,7 @@ extension QuestionnaireFatPresentViewController: UICollectionViewDelegate, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fanCell", for: indexPath) as! QuestionnaireFatCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CellId.fanCell, for: indexPath) as! QuestionnaireFatCollectionViewCell
         cell.layer.cornerRadius = 10
         cell.image.image = UIImage(named: pickerItems[indexPath.row])
         return cell
