@@ -6,12 +6,20 @@
 //
 
 protocol ExerciseTableViewCellDelegate {
-    func detailButtonTapped()
+    func detailButtonTapped(indexPath: IndexPath)
 }
 
 import UIKit
 
 class ExerciseTableViewCell: UITableViewCell {
+    
+    var exerciseData: Exercise! {
+        didSet {
+            titleLabel.text = exerciseData.name
+            descriptionLabel.text = exerciseData.exerciseDescription
+        }
+    }
+    var indexPath: IndexPath!
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -24,14 +32,8 @@ class ExerciseTableViewCell: UITableViewCell {
         setupView()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
     @IBAction func detailButtonAction(_ sender: Any) {
-        delegate?.detailButtonTapped()
+        delegate?.detailButtonTapped(indexPath: indexPath)
     }
 }
 
