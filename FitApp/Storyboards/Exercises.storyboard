@@ -23,7 +23,7 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" image="RunIcon" id="G4F-FZ-PkL"/>
                     <connections>
-                        <segue destination="NhH-xs-aJL" kind="show" identifier="moveToExerciseDetail" id="Hlm-C0-CF7"/>
+                        <segue destination="NhH-xs-aJL" kind="show" identifier="moveToExerciseDetailViewController" id="Hlm-C0-CF7"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HHz-go-u7a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -33,7 +33,7 @@
         <!--ExerciseViewController-->
         <scene sceneID="Wef-AP-r5B">
             <objects>
-                <viewController storyboardIdentifier="ExerciseViewController" title="ExerciseViewController" modalPresentationStyle="fullScreen" id="NhH-xs-aJL" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExerciseViewController" title="ExerciseViewController" modalPresentationStyle="fullScreen" id="NhH-xs-aJL" customClass="ExerciseViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LQF-Wr-RHb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -46,10 +46,10 @@
             </objects>
             <point key="canvasLocation" x="1133" y="-48"/>
         </scene>
-        <!--View Controller-->
+        <!--Exercise Detail View Controller-->
         <scene sceneID="nK4-Nn-IHZ">
             <objects>
-                <viewController storyboardIdentifier="ExerciseDescriptionViewController" id="vou-Yh-puf" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExerciseDescriptionViewController" id="vou-Yh-puf" customClass="ExerciseDetailViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cNU-u4-aCH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -67,6 +67,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="TTr-Re-3xb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nvh-9B-ZK6">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
