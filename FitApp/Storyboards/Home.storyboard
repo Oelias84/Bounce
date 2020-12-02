@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--MeallViewController-->
+        <!--MealViewController-->
         <scene sceneID="rUg-OZ-daz">
             <objects>
-                <viewControllerPlaceholder storyboardName="MealPlan" referencedIdentifier="MeallViewController" id="VD2-d0-tXD" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="MealPlan" referencedIdentifier="MealViewController" id="VD2-d0-tXD" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="sj6-nL-Tch"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ATy-zV-Rie" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

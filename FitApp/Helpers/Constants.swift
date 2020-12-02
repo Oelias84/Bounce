@@ -30,7 +30,7 @@ struct K {
         //Home
         static let homeViewController = "HomeViewController"
         //Meal
-        static let mealViewController = "MeallViewController"
+        static let mealViewController = "MealViewController"
 		//Questionnaire
         static let questionnaireWelcome = "QuestionnaireWelcome"
         static let questionnaireSecond = "QuestionnaireSecond"
