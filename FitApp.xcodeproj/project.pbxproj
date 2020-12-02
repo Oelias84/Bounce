@@ -26,6 +26,9 @@
 		B330B87F25757F1300BDB206 /* ExerciseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B330B87E25757F1300BDB206 /* ExerciseTableViewCell.xib */; };
 		B330B88A257581AA00BDB206 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B330B889257581AA00BDB206 /* ExerciseTableViewCell.swift */; };
 		B330B88F257583D200BDB206 /* ExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B330B88E257583D200BDB206 /* ExercisesTableViewController.swift */; };
+		B36B71872577BD99001CD393 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B71862577BD99001CD393 /* ExerciseDetailViewController.swift */; };
+		B36B718C2577BDF3001CD393 /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B718B2577BDF3001CD393 /* ExerciseViewController.swift */; };
+		B36B71922577BF0C001CD393 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B71912577BF0C001CD393 /* Exercise.swift */; };
 		B3B2A232256ED2A60052E6C8 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A231256ED2A60052E6C8 /* UIImage+Extensions.swift */; };
 		B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */; };
 		B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */; };
@@ -82,6 +85,9 @@
 		B330B87E25757F1300BDB206 /* ExerciseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseTableViewCell.xib; sourceTree = "<group>"; };
 		B330B889257581AA00BDB206 /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
 		B330B88E257583D200BDB206 /* ExercisesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewController.swift; sourceTree = "<group>"; };
+		B36B71862577BD99001CD393 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
+		B36B718B2577BDF3001CD393 /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
+		B36B71912577BF0C001CD393 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		B3B2A231256ED2A60052E6C8 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatPresentViewController.swift; sourceTree = "<group>"; };
 		B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -142,6 +148,7 @@
 		7C89A9F9256D69CA009AD87C /* FitApp */ = {
 			isa = PBXGroup;
 			children = (
+				B36B71902577BEFC001CD393 /* Models */,
 				7C89AA35256D6D3D009AD87C /* Application */,
 				7C89AA6E256D7132009AD87C /* Storyboards */,
 				7C89AA8C256D817B009AD87C /* Controllers */,
@@ -226,11 +233,11 @@
 			isa = PBXGroup;
 			children = (
 				B3B2A236256ED4850052E6C8 /* Questionnarie */,
+				B36B71852577BCE8001CD393 /* Exercise */,
 				B3E36E74257285F3006CE558 /* HomeViewController.swift */,
 				7C89AA65256D704D009AD87C /* LoginViewController.swift */,
 				7C89AA80256D7342009AD87C /* RegisterViewController.swift */,
 				B3E6E9B725714D5800958C48 /* MealPlanViewController.swift */,
-				B330B88E257583D200BDB206 /* ExercisesTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -242,6 +249,24 @@
 				B330B889257581AA00BDB206 /* ExerciseTableViewCell.swift */,
 			);
 			name = ExerciseTabelViewCell;
+			sourceTree = "<group>";
+		};
+		B36B71852577BCE8001CD393 /* Exercise */ = {
+			isa = PBXGroup;
+			children = (
+				B330B88E257583D200BDB206 /* ExercisesTableViewController.swift */,
+				B36B71862577BD99001CD393 /* ExerciseDetailViewController.swift */,
+				B36B718B2577BDF3001CD393 /* ExerciseViewController.swift */,
+			);
+			name = Exercise;
+			sourceTree = "<group>";
+		};
+		B36B71902577BEFC001CD393 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B36B71912577BF0C001CD393 /* Exercise.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		B3B2A236256ED4850052E6C8 /* Questionnarie */ = {
@@ -423,11 +448,14 @@
 				7C89AA81256D7342009AD87C /* RegisterViewController.swift in Sources */,
 				7C89AA77256D715F009AD87C /* UIView+Extensions.swift in Sources */,
 				B3E6E9AD25714C1400958C48 /* MealPlanTableViewCell.swift in Sources */,
+				B36B71922577BF0C001CD393 /* Exercise.swift in Sources */,
+				B36B71872577BD99001CD393 /* ExerciseDetailViewController.swift in Sources */,
 				7C89AA66256D704D009AD87C /* LoginViewController.swift in Sources */,
 				B3E36E75257285F3006CE558 /* HomeViewController.swift in Sources */,
 				B3B2A232256ED2A60052E6C8 /* UIImage+Extensions.swift in Sources */,
 				7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */,
 				B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */,
+				B36B718C2577BDF3001CD393 /* ExerciseViewController.swift in Sources */,
 				B330B88F257583D200BDB206 /* ExercisesTableViewController.swift in Sources */,
 				7C89AA61256D700F009AD87C /* UserProfile.swift in Sources */,
 				7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */,
