@@ -22,10 +22,14 @@
 		7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89AA75256D715F009AD87C /* UIViewController+Extensions.swift */; };
 		7C89AA81256D7342009AD87C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89AA80256D7342009AD87C /* RegisterViewController.swift */; };
 		7C89AA91256D8286009AD87C /* Questionnaire.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA90256D8286009AD87C /* Questionnaire.storyboard */; };
+		B302982025793BBA00CF41F0 /* UserProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B302981F25793BBA00CF41F0 /* UserProgress.swift */; };
 		B330B87625757C1000BDB206 /* Exercises.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B330B87525757C1000BDB206 /* Exercises.storyboard */; };
 		B330B87F25757F1300BDB206 /* ExerciseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B330B87E25757F1300BDB206 /* ExerciseTableViewCell.xib */; };
 		B330B88A257581AA00BDB206 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B330B889257581AA00BDB206 /* ExerciseTableViewCell.swift */; };
 		B330B88F257583D200BDB206 /* ExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B330B88E257583D200BDB206 /* ExercisesTableViewController.swift */; };
+		B341E230257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B341E22F257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift */; };
+		B341E236257FA6F500EE05A7 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B341E235257FA6F500EE05A7 /* Date+Extensions.swift */; };
+		B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B341E23A257FB3F400EE05A7 /* UITextField+Extensions.swift */; };
 		B36B71872577BD99001CD393 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B71862577BD99001CD393 /* ExerciseDetailViewController.swift */; };
 		B36B718C2577BDF3001CD393 /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B718B2577BDF3001CD393 /* ExerciseViewController.swift */; };
 		B36B71922577BF0C001CD393 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B71912577BF0C001CD393 /* Exercise.swift */; };
@@ -81,10 +85,14 @@
 		7C89AA75256D715F009AD87C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		7C89AA80256D7342009AD87C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		7C89AA90256D8286009AD87C /* Questionnaire.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Questionnaire.storyboard; sourceTree = "<group>"; };
+		B302981F25793BBA00CF41F0 /* UserProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProgress.swift; sourceTree = "<group>"; };
 		B330B87525757C1000BDB206 /* Exercises.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Exercises.storyboard; sourceTree = "<group>"; };
 		B330B87E25757F1300BDB206 /* ExerciseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseTableViewCell.xib; sourceTree = "<group>"; };
 		B330B889257581AA00BDB206 /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
 		B330B88E257583D200BDB206 /* ExercisesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewController.swift; sourceTree = "<group>"; };
+		B341E22F257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnairePersonalDetailsViewController.swift; sourceTree = "<group>"; };
+		B341E235257FA6F500EE05A7 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		B341E23A257FB3F400EE05A7 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		B36B71862577BD99001CD393 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
 		B36B718B2577BDF3001CD393 /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
 		B36B71912577BF0C001CD393 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
@@ -195,6 +203,8 @@
 				7C89AA74256D715F009AD87C /* UIView+Extensions.swift */,
 				7C89AA75256D715F009AD87C /* UIViewController+Extensions.swift */,
 				B3B2A231256ED2A60052E6C8 /* UIImage+Extensions.swift */,
+				B341E235257FA6F500EE05A7 /* Date+Extensions.swift */,
+				B341E23A257FB3F400EE05A7 /* UITextField+Extensions.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -265,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				B36B71912577BF0C001CD393 /* Exercise.swift */,
+				B302981F25793BBA00CF41F0 /* UserProgress.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -273,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */,
+				B341E22F257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift */,
 			);
 			name = Questionnarie;
 			sourceTree = "<group>";
@@ -448,9 +460,13 @@
 				7C89AA81256D7342009AD87C /* RegisterViewController.swift in Sources */,
 				7C89AA77256D715F009AD87C /* UIView+Extensions.swift in Sources */,
 				B3E6E9AD25714C1400958C48 /* MealPlanTableViewCell.swift in Sources */,
+				B341E230257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift in Sources */,
+				B302982025793BBA00CF41F0 /* UserProgress.swift in Sources */,
 				B36B71922577BF0C001CD393 /* Exercise.swift in Sources */,
 				B36B71872577BD99001CD393 /* ExerciseDetailViewController.swift in Sources */,
+				B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */,
 				7C89AA66256D704D009AD87C /* LoginViewController.swift in Sources */,
+				B341E236257FA6F500EE05A7 /* Date+Extensions.swift in Sources */,
 				B3E36E75257285F3006CE558 /* HomeViewController.swift in Sources */,
 				B3B2A232256ED2A60052E6C8 /* UIImage+Extensions.swift in Sources */,
 				7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */,

@@ -13,6 +13,28 @@ struct K {
 		
 		static let name = "userName"
 		static let id = "userId"
+        
+        struct UserBasicDetails {
+            static let weight = "weight"
+            static let height = "height"
+            static let fatPercentage = "fatPercentage"
+        }
+        
+        struct UserActivity {
+            static let kilometre = "kilometres"
+            static let steps = "steps"
+        }
+        
+        struct UserNutrition {
+            static let mealsPerDay = "mealsPerDay"
+            static let mostHungry = "mostHungry"
+            static let leastHungry = "leastHungry"
+        }
+        
+        struct UserFitnessLevel {
+            static let fitnessLevel = "fitnessLevel"
+            static let weaklyWorkouts = "weaklyWorkouts"
+        }
 	}
 	
 	struct StoryboardName {
@@ -32,6 +54,7 @@ struct K {
         //Meal
         static let mealViewController = "MealViewController"
 		//Questionnaire
+        static let questionnaireNavigation = "QuestionnaireNavigation"
         static let questionnaireWelcome = "QuestionnaireWelcome"
         static let questionnaireSecond = "QuestionnaireSecond"
         static let questionnaireThird = "QuestionnaireThird"
@@ -48,6 +71,14 @@ struct K {
         
         static let moveToExerciseViewController = "moveToExerciseViewController"
         static let moveToExerciseDetailViewController = "moveToExerciseDetailViewController"
+        
+        //Questionnaire Segue
+        static let moveToPersonalDetails = "moveToPersonalDetails"
+        static let moveToFatPercentage = "moveToFatPercentage"
+        static let moveToActivity = "moveToActivity"
+        static let moveToNutrition = "moveToNutrition"
+        static let moveToFitnessLevel = "moveToFitnessLevel"
+        static let moveToSumup = "moveToSumup"
     }
     
     struct CellId {
