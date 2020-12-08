@@ -24,8 +24,8 @@ class LoginViewController: UIViewController {
 	}
 	
 	@IBAction func signInButtonAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
-        let questionnaireVC = storyboard.instantiateViewController(identifier: K.StoryboardNameId.questionnaireWelcome)
-		navigationController?.pushViewController(questionnaireVC, animated: true)
+        let storyboard = UIStoryboard(name: K.StoryboardName.Home, bundle: nil)
+        let homeVC = storyboard.instantiateViewController(identifier: K.StoryboardNameId.homeViewController)
+		navigationController?.pushViewController(homeVC, animated: true)
 	}
 }
