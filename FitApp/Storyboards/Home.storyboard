@@ -194,27 +194,69 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CEP-8X-txW">
+                                <rect key="frame" x="6" y="662" width="402" height="234"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JM3-OM-1Th">
+                                        <rect key="frame" x="119" y="32" width="164" height="50"/>
+                                        <color key="backgroundColor" red="0.43436774610000001" green="0.39554607870000003" blue="0.85887217520000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="164" id="7a5-o4-bxj"/>
+                                            <constraint firstAttribute="height" constant="50" id="c1N-G9-nD7"/>
+                                        </constraints>
+                                        <state key="normal" title="בואו נתחיל">
+                                            <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="questionnaireStartButtonAction:" destination="65l-oX-bHe" eventType="touchUpInside" id="BR2-5L-1Px"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <constraints>
+                                    <constraint firstItem="JM3-OM-1Th" firstAttribute="centerX" secondItem="CEP-8X-txW" secondAttribute="centerX" id="3W5-BL-gqP"/>
+                                    <constraint firstAttribute="height" constant="234" id="C9K-2N-2Fi"/>
+                                    <constraint firstItem="JM3-OM-1Th" firstAttribute="top" secondItem="CEP-8X-txW" secondAttribute="top" constant="32" id="oVz-I7-rny"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8pW-15-4q7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="CEP-8X-txW" firstAttribute="leading" secondItem="8pW-15-4q7" secondAttribute="leading" constant="6" id="0cI-VS-UJS"/>
                             <constraint firstItem="0U1-yB-lxr" firstAttribute="top" secondItem="u82-fd-ybZ" secondAttribute="bottom" constant="34" id="3gh-Oo-ZHe"/>
                             <constraint firstItem="jfT-tk-bBc" firstAttribute="leading" secondItem="8pW-15-4q7" secondAttribute="leading" constant="16" id="AjE-Nm-9Il"/>
                             <constraint firstItem="jfT-tk-bBc" firstAttribute="top" secondItem="8pW-15-4q7" secondAttribute="top" constant="46" id="Qvl-2F-1Ph"/>
                             <constraint firstItem="0U1-yB-lxr" firstAttribute="centerX" secondItem="oXi-sI-Ov4" secondAttribute="centerX" id="Thm-Gf-TrH"/>
                             <constraint firstItem="u82-fd-ybZ" firstAttribute="top" secondItem="jfT-tk-bBc" secondAttribute="bottom" constant="24" id="eda-iS-M1l"/>
+                            <constraint firstAttribute="bottom" secondItem="CEP-8X-txW" secondAttribute="bottom" id="oFQ-bS-TOZ"/>
+                            <constraint firstItem="8pW-15-4q7" firstAttribute="trailing" secondItem="CEP-8X-txW" secondAttribute="trailing" constant="6" id="zRr-eT-Jll"/>
                             <constraint firstItem="u82-fd-ybZ" firstAttribute="centerX" secondItem="oXi-sI-Ov4" secondAttribute="centerX" id="zkM-Qw-08U"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title=" " image="HomeIcon" id="huH-1c-Qcl"/>
                     <navigationItem key="navigationItem" id="iKW-MR-WrV"/>
                     <connections>
+                        <outlet property="carbsCountLabel" destination="oVv-Ky-GsP" id="IkM-u7-FI9"/>
+                        <outlet property="fatCountLabel" destination="aiS-TJ-dYx" id="Tci-qL-tEk"/>
                         <outlet property="progressView" destination="u82-fd-ybZ" id="hH5-js-cQV"/>
+                        <outlet property="proteinCountLabel" destination="pe4-yu-ZBb" id="JQp-Xu-AnU"/>
+                        <outlet property="questionnaireStartButton" destination="JM3-OM-1Th" id="RV8-Yx-C4z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZmW-3o-guf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1022" y="749"/>
+            <point key="canvasLocation" x="1021.7391304347827" y="748.66071428571422"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ADI-1a-awp">
@@ -230,6 +272,7 @@
                         <segue destination="65l-oX-bHe" kind="relationship" relationship="viewControllers" id="aa6-aT-idU"/>
                         <segue destination="nJB-tX-ghA" kind="relationship" relationship="viewControllers" id="rac-r4-k2O"/>
                         <segue destination="zmZ-sf-tsA" kind="relationship" relationship="viewControllers" id="8KR-2F-jie"/>
+                        <segue destination="kKO-sv-88B" kind="relationship" relationship="viewControllers" id="qgd-Sq-ljZ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z6e-Q0-Wt7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -284,11 +327,31 @@
             </objects>
             <point key="canvasLocation" x="-429" y="749"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="gME-il-TgW">
+            <objects>
+                <viewController id="kKO-sv-88B" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zO8-mr-jDo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="6lB-vT-foh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" image="gear" catalog="system" id="aOL-u8-b4d"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HLt-g9-6ZW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1770" y="749"/>
+        </scene>
     </scenes>
     <resources>
         <image name="HomeIcon" width="26.5" height="26"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
