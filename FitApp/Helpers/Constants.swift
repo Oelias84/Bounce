@@ -15,8 +15,11 @@ struct K {
 		static let id = "userId"
         
         struct UserBasicDetails {
+            static let birthDate = "birthDate"
             static let weight = "weight"
             static let height = "height"
+        }
+        struct UserFatPrecdntage {
             static let fatPercentage = "fatPercentage"
         }
         
