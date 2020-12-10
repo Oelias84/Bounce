@@ -37,6 +37,7 @@
 		B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */; };
 		B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */; };
 		B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B2A251256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib */; };
+		B3CA0CE3258111FD00923902 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CA0CE2258111FD00923902 /* CircularProgressView.swift */; };
 		B3E36E7025727F63006CE558 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E36E6F25727F63006CE558 /* Home.storyboard */; };
 		B3E36E75257285F3006CE558 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E36E74257285F3006CE558 /* HomeViewController.swift */; };
 		B3E6E98D257142CD00958C48 /* MealPlan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E6E98C257142CD00958C48 /* MealPlan.storyboard */; };
@@ -100,6 +101,7 @@
 		B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatPresentViewController.swift; sourceTree = "<group>"; };
 		B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatCollectionViewCell.swift; sourceTree = "<group>"; };
 		B3B2A251256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionnaireFatCollectionViewCell.xib; sourceTree = "<group>"; };
+		B3CA0CE2258111FD00923902 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		B3E36E6F25727F63006CE558 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		B3E36E74257285F3006CE558 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B3E6E98C257142CD00958C48 /* MealPlan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MealPlan.storyboard; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				B330B87D25757E8A00BDB206 /* ExerciseTabelViewCell */,
 				B3E6E99E2571444000958C48 /* MealPlanTableViewCell */,
 				B3E6E99A2571443200958C48 /* QuestionnaireFatCollectionViewCell */,
+				B3CA0CE2258111FD00923902 /* CircularProgressView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */,
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
 				B3E6E9B825714D5800958C48 /* MealPlanViewController.swift in Sources */,
+				B3CA0CE3258111FD00923902 /* CircularProgressView.swift in Sources */,
 				7C89AA59256D6FDB009AD87C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
