@@ -43,7 +43,7 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u82-fd-ybZ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u82-fd-ybZ" customClass="CircularProgressView" customModule="FitApp" customModuleProvider="target">
                                 <rect key="frame" x="82" y="177" width="250" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="13o-cg-Dio"/>
@@ -198,10 +198,9 @@
                                 <rect key="frame" x="6" y="662" width="402" height="234"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JM3-OM-1Th">
-                                        <rect key="frame" x="119" y="32" width="164" height="50"/>
+                                        <rect key="frame" x="34" y="52.5" width="334" height="50"/>
                                         <color key="backgroundColor" red="0.43436774610000001" green="0.39554607870000003" blue="0.85887217520000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="164" id="7a5-o4-bxj"/>
                                             <constraint firstAttribute="height" constant="50" id="c1N-G9-nD7"/>
                                         </constraints>
                                         <state key="normal" title="בואו נתחיל">
@@ -216,12 +215,21 @@
                                             <action selector="questionnaireStartButtonAction:" destination="65l-oX-bHe" eventType="touchUpInside" id="BR2-5L-1Px"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="לחצי כאן כדי שנוכל להכיר אותך" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcj-ct-FRS">
+                                        <rect key="frame" x="99" y="16" width="204.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
                                     <constraint firstItem="JM3-OM-1Th" firstAttribute="centerX" secondItem="CEP-8X-txW" secondAttribute="centerX" id="3W5-BL-gqP"/>
                                     <constraint firstAttribute="height" constant="234" id="C9K-2N-2Fi"/>
-                                    <constraint firstItem="JM3-OM-1Th" firstAttribute="top" secondItem="CEP-8X-txW" secondAttribute="top" constant="32" id="oVz-I7-rny"/>
+                                    <constraint firstItem="JM3-OM-1Th" firstAttribute="top" secondItem="wcj-ct-FRS" secondAttribute="bottom" constant="16" id="LL6-eL-5pz"/>
+                                    <constraint firstItem="wcj-ct-FRS" firstAttribute="centerX" secondItem="CEP-8X-txW" secondAttribute="centerX" id="Lab-T4-xxE"/>
+                                    <constraint firstItem="wcj-ct-FRS" firstAttribute="top" secondItem="CEP-8X-txW" secondAttribute="top" constant="16" id="Vf3-gS-ib3"/>
+                                    <constraint firstAttribute="trailing" secondItem="JM3-OM-1Th" secondAttribute="trailing" constant="34" id="cmT-nz-KlO"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
@@ -248,15 +256,18 @@
                     <navigationItem key="navigationItem" id="iKW-MR-WrV"/>
                     <connections>
                         <outlet property="carbsCountLabel" destination="oVv-Ky-GsP" id="IkM-u7-FI9"/>
+                        <outlet property="carbsTargateLabel" destination="mar-kr-c7w" id="fl2-lI-kXy"/>
+                        <outlet property="circularProgress" destination="u82-fd-ybZ" id="7ze-5G-gzG"/>
                         <outlet property="fatCountLabel" destination="aiS-TJ-dYx" id="Tci-qL-tEk"/>
-                        <outlet property="progressView" destination="u82-fd-ybZ" id="hH5-js-cQV"/>
+                        <outlet property="fatTargateLabel" destination="ZBO-tA-KUF" id="R35-rL-8lR"/>
                         <outlet property="proteinCountLabel" destination="pe4-yu-ZBb" id="JQp-Xu-AnU"/>
+                        <outlet property="proteinTargateLabel" destination="VOb-3k-qut" id="eBt-Mz-DbU"/>
                         <outlet property="questionnaireStartButton" destination="JM3-OM-1Th" id="RV8-Yx-C4z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZmW-3o-guf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1021.7391304347827" y="748.66071428571422"/>
+            <point key="canvasLocation" x="1022" y="749"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ADI-1a-awp">
@@ -341,7 +352,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HLt-g9-6ZW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1770" y="749"/>
+            <point key="canvasLocation" x="1755" y="749"/>
         </scene>
     </scenes>
     <resources>
