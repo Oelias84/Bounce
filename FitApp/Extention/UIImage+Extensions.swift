@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIImage {
+    
     func imageWithSize(_ size:CGSize) -> UIImage {
         var scaledImageRect = CGRect.zero
         

@@ -18,6 +18,9 @@ extension UIViewController {
 		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: self)
 		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: self)
 	}
+    func addScreenTappGesture() {
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissView)))
+    }
 	@objc func keyboardWillShow(notification: NSNotification) {
 		if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
 			if self.view.frame.origin.y == 0 {
@@ -30,4 +33,7 @@ extension UIViewController {
 			self.view.frame.origin.y = 0
 		}
 	}
+    @objc func dismissView() {
+        view.endEditing(true)
+    }
 }
