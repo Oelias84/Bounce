@@ -17,9 +17,69 @@ struct UserProfile {
 			standard.set(id, forKey: K.User.id)
 		}
 	}
+    //UserBasicDetails
 	var name: String?{
 		didSet{
 			standard.set(name, forKey: K.User.name)
 		}
 	}
+    var birthDate: String? {
+        didSet {
+            standard.set(birthDate, forKey: K.User.UserBasicDetails.birthDate)
+        }
+    }
+    var weight: Double? {
+        didSet {
+            standard.set(weight, forKey: K.User.UserBasicDetails.weight)
+        }
+    }
+    var height: Int? {
+        didSet {
+            standard.set(height, forKey: K.User.UserBasicDetails.height)
+        }
+    }
+    //UserFatPrecdntage
+    var fatPercentage: Double? {
+        didSet {
+            standard.set(fatPercentage, forKey: K.User.UserFatPrecdntage.fatPercentage)
+        }
+    }
+    //UserActivity
+    var kilometre: Double? {
+        didSet {
+            standard.set(kilometre, forKey: K.User.UserActivity.kilometre)
+        }
+    }
+    var steps: Int? {
+        didSet {
+            standard.set(steps, forKey: K.User.UserActivity.steps)
+        }
+    }
+    //UserNutrition
+    var mealsPerDay: Int? {
+        didSet {
+            standard.set(mealsPerDay, forKey: K.User.UserNutrition.mealsPerDay)
+        }
+    }
+    var mostHungry: Int? {
+        didSet {
+            standard.set(mostHungry, forKey: K.User.UserNutrition.mostHungry)
+        }
+    }
+    var leastHungry: Int? {
+        didSet {
+            standard.set(leastHungry, forKey: K.User.UserNutrition.leastHungry)
+        }
+    }
+    //UserFitnessLevel
+    var fitnessLevel: Int? {
+        didSet {
+            standard.set(fitnessLevel, forKey: K.User.UserFitnessLevel.fitnessLevel)
+        }
+    }
+    var weaklyWorkouts: Int? {
+        didSet {
+            standard.set(weaklyWorkouts, forKey: K.User.UserFitnessLevel.weaklyWorkouts)
+        }
+    }
 }
