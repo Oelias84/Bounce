@@ -15,26 +15,31 @@ struct K {
 		static let id = "userId"
         
         struct UserBasicDetails {
+			
             static let birthDate = "birthDate"
             static let weight = "weight"
             static let height = "height"
         }
-        struct UserFatPrecdntage {
+        struct UserFatPercentage {
+			
             static let fatPercentage = "fatPercentage"
         }
         
         struct UserActivity {
-            static let kilometre = "kilometres"
+			
+            static let kilometers = "kilometers"
             static let steps = "steps"
         }
         
         struct UserNutrition {
+			
             static let mealsPerDay = "mealsPerDay"
             static let mostHungry = "mostHungry"
             static let leastHungry = "leastHungry"
         }
         
         struct UserFitnessLevel {
+			
             static let fitnessLevel = "fitnessLevel"
             static let weaklyWorkouts = "weaklyWorkouts"
         }
@@ -97,4 +102,12 @@ struct K {
         static let mealPlanTableViewCell = "MealPlanTableViewCell"
         static let questionnaireFatCollectionViewCell = "QuestionnaireFatCollectionViewCell"
     }
+	
+	struct Units {
+		
+		static let kilometers = "ק״מ"
+		static let centimeter = "ס״מ"
+		static let steps = "צעדים"
+		static let unknown = "לא ידוע"
+	}
 }
