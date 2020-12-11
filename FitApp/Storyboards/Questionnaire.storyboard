@@ -39,7 +39,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="PzG-Rq-Lca" kind="show" identifier="moveToPersonalDetails" id="qDg-mk-OYi"/>
+                                    <segue destination="PzG-Rq-Lca" kind="show" identifier="moveToPersonalDetails" id="BdS-7W-V8c"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="q_welcome" translatesAutoresizingMaskIntoConstraints="NO" id="Er9-QG-hR8">
@@ -136,7 +136,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="nextButtonAction:" destination="pSN-kH-Eth" eventType="touchUpInside" id="rlr-ad-1fB"/>
-                                    <segue destination="9J8-iP-E6D" kind="show" identifier="moveToActivity" id="wwD-pb-3kz"/>
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="haf-7R-eyy">
@@ -185,6 +184,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="haf-7R-eyy" id="Z5U-2a-ogt"/>
+                        <segue destination="9J8-iP-E6D" kind="show" identifier="moveToActivity" id="YLV-FR-FGj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDm-va-A8e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -221,7 +221,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="nextButtonAction:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="U9b-ji-sP0"/>
-                                    <segue destination="tgm-97-b7M" kind="show" identifier="moveToFitnessLevel" id="ocw-yf-uEN"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="ie3-Uu-Xba" userLabel="Prompt Stack View">
@@ -678,6 +677,7 @@
                         <outlet property="mostHungerCheckSecond" destination="uj9-44-Bwb" id="jzr-nF-3i0"/>
                         <outlet property="mostHungerCheckThird" destination="lDt-FC-gMg" id="MwO-v3-KZW"/>
                         <outlet property="nextButton" destination="oQ8-li-Ioz" id="Pe6-sf-DfK"/>
+                        <segue destination="tgm-97-b7M" kind="show" identifier="moveToFitnessLevel" id="m7k-Sb-MqB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XOJ-5S-VPS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -838,7 +838,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="nextButtonAction:" destination="9J8-iP-E6D" eventType="touchUpInside" id="bSf-l3-ro5"/>
-                                    <segue destination="tbo-Fu-A0i" kind="show" identifier="moveToNutrition" id="FjC-E3-UT8"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="על מנת להתאים לך את כמות הקלוריות היומית בצורה הטובה ביותר, נרצה לדעת עד כמה את פעילה במהלך היום" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2b-yB-RfJ">
@@ -876,6 +875,7 @@
                         <outlet property="stepsCheckBox" destination="XO0-qv-nLS" id="4lU-SS-43X"/>
                         <outlet property="stepsLabel" destination="038-xu-HAO" id="5kl-vk-k19"/>
                         <outlet property="stepsSlider" destination="RoB-B0-B9Y" id="Xae-2r-2mj"/>
+                        <segue destination="tbo-Fu-A0i" kind="show" identifier="moveToNutrition" id="XSb-jf-aXm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pog-fA-5eY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1209,7 +1209,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="nextButtonAction:" destination="tgm-97-b7M" eventType="touchUpInside" id="WWQ-ML-Cyq"/>
-                                    <segue destination="1ZW-um-s0r" kind="show" identifier="moveToSumup" id="pHl-E7-yCr"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1239,6 +1238,7 @@
                         <outlet property="weaklyWorkoutCheckForth" destination="LFR-DL-vOU" id="Bag-dk-I9v"/>
                         <outlet property="weaklyWorkoutCheckSecond" destination="N5H-CX-SDw" id="4zz-RG-3qE"/>
                         <outlet property="weaklyWorkoutCheckThird" destination="m0A-Z9-eQh" id="Zeu-bC-cZ3"/>
+                        <segue destination="1ZW-um-s0r" kind="show" identifier="moveToSumup" id="DIn-bP-nBF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p3Q-UZ-soW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1556,7 +1556,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="nextButtonAction:" destination="PzG-Rq-Lca" eventType="touchUpInside" id="qo9-E9-Zpr"/>
-                                    <segue destination="pSN-kH-Eth" kind="show" identifier="moveToFatPercentage" id="6BW-fj-9cJ"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="wov-xo-vys" userLabel="Prompt Stack View">
@@ -1686,6 +1685,7 @@
                         <outlet property="heightTextField" destination="kyL-fV-kv6" id="JZQ-ql-ywO"/>
                         <outlet property="nextButton" destination="pvx-WA-0Gs" id="5ab-w9-VOf"/>
                         <outlet property="weightTextField" destination="Ivh-Kg-Zbh" id="CTE-aO-rOs"/>
+                        <segue destination="pSN-kH-Eth" kind="show" identifier="moveToFatPercentage" id="kWW-OZ-bDf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GCH-Sz-wML" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
