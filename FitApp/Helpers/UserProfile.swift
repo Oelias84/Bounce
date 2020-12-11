@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserProfile {
+class UserProfile {
 	
 	private let standard = UserDefaults.standard
 	static var shared = UserProfile()
@@ -23,7 +23,7 @@ struct UserProfile {
 			standard.set(name, forKey: K.User.name)
 		}
 	}
-    var birthDate: String? {
+    var birthDate: Date? {
         didSet {
             standard.set(birthDate, forKey: K.User.UserBasicDetails.birthDate)
         }
@@ -41,13 +41,13 @@ struct UserProfile {
     //UserFatPrecdntage
     var fatPercentage: Double? {
         didSet {
-            standard.set(fatPercentage, forKey: K.User.UserFatPrecdntage.fatPercentage)
+            standard.set(fatPercentage, forKey: K.User.UserFatPercentage.fatPercentage)
         }
     }
     //UserActivity
-    var kilometre: Double? {
+    var kilometer: Double? {
         didSet {
-            standard.set(kilometre, forKey: K.User.UserActivity.kilometre)
+            standard.set(kilometer, forKey: K.User.UserActivity.kilometers)
         }
     }
     var steps: Int? {
