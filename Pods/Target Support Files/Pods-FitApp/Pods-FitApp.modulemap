@@ -1,0 +1,6 @@
+framework module Pods_FitApp {
+  umbrella header "Pods-FitApp-umbrella.h"
+
+  export *
+  module * { export * }
+}
