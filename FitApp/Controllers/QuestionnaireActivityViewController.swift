@@ -42,9 +42,8 @@ class QuestionnaireActivityViewController: UIViewController {
                 UserProfile.shared.steps = Int(steps)
 				UserProfile.shared.kilometer = nil
             }
-        } else {
-            return
         }
+		performSegue(withIdentifier: K.SegueId.moveToNutrition, sender: self)
     }
     @IBAction func kilometersSliderAction(_ sender: UISlider) {
 		kilometersLabel.text = String(format: "%.1f", sender.value) + " " + K.Units.kilometers

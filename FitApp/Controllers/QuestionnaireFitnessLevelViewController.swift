@@ -21,11 +21,7 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 	@IBOutlet weak var weaklyWorkoutCheckThird: UIButton!
 	@IBOutlet weak var weaklyWorkoutCheckForth: UIButton!
 	
-	@IBOutlet weak var nextButton: UIButton! {
-		didSet {
-			nextButton.isEnabled = false
-		}
-	}
+	@IBOutlet weak var nextButton: UIButton!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -36,9 +32,12 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 		if fitnessLevel != 0 && weaklyWorkouts != 0 {
 			UserProfile.shared.fitnessLevel = fitnessLevel
 			UserProfile.shared.weaklyWorkouts = weaklyWorkouts
+			performSegue(withIdentifier: K.SegueId.moveToSumup, sender: self)
+		} else {
+			//show alert
+			return
 		}
 	}
-	
 	@IBAction func levelCheckBoxes(sender: UIButton) {
 		sender.isSelected = !sender.isSelected
 		fitnessLevel = sender.tag
@@ -56,9 +55,10 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 		default:
 			return
 		}
-		enableNextButton(sender)
+		if !sender.isSelected {
+			fitnessLevel = 0
+		}
 	}
-	
 	@IBAction func weaklyWorkoutsCheckBoxes(sender: UIButton) {
 		sender.isSelected = !sender.isSelected
 		
@@ -94,18 +94,8 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 		default:
 			return
 		}
-		enableNextButton(sender)
-	}
-}
-
-extension QuestionnaireFitnessLevelViewController {
-	
-	private func enableNextButton(_ sender: UIButton) {
 		if !sender.isSelected {
-			nextButton.isEnabled = false
-			//present user message for not selecting
-		} else if fitnessLevel != 0 && weaklyWorkouts != 0 {
-			nextButton.isEnabled = true
+			weaklyWorkouts = 0
 		}
 	}
 }

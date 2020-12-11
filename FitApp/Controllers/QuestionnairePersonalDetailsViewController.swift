@@ -13,11 +13,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	@IBOutlet weak var heightTextField: UITextField!
     @IBOutlet weak var weightTextField: UITextField!
 	
-	@IBOutlet weak var nextButton: UIButton! {
-		didSet {
-			nextButton.isEnabled = false
-		}
-	}
+	@IBOutlet weak var nextButton: UIButton!
 	
     private let heightNumberArray = Array(100...250)
 	private let weightNumberArray = Array(30...200)
@@ -46,7 +42,9 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
             UserProfile.shared.birthDate = birthDate
             UserProfile.shared.height = height
             UserProfile.shared.weight = weight
+			performSegue(withIdentifier: K.SegueId.moveToFatPercentage, sender: self)
         } else {
+			//show alert
             return
         }
     }

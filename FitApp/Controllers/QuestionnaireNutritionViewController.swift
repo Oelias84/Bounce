@@ -28,11 +28,7 @@ class QuestionnaireNutritionViewController: UIViewController {
     @IBOutlet weak var leastHungerCheckThird: UIButton!
     @IBOutlet weak var leastHungerCheckForth: UIButton!
     
-    @IBOutlet weak var nextButton: UIButton! {
-        didSet {
-            nextButton.isEnabled = false
-        }
-    }
+    @IBOutlet weak var nextButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,10 +36,11 @@ class QuestionnaireNutritionViewController: UIViewController {
     }
     
     @IBAction func nextButtonAction(_ sender: Any) {
-        if numberOfMeals != 0 || mostHunger != 0 || leastHunger != 0 {
+        if numberOfMeals != 0 && mostHunger != 0 && leastHunger != 0 {
             UserProfile.shared.mealsPerDay = numberOfMeals
             UserProfile.shared.mostHungry = mostHunger
             UserProfile.shared.leastHungry = leastHunger
+			performSegue(withIdentifier: K.SegueId.moveToFitnessLevel, sender: self)
         }
     }
     
@@ -82,7 +79,9 @@ class QuestionnaireNutritionViewController: UIViewController {
         default:
             return
         }
-        enableNextButton(sender)
+		if !sender.isSelected {
+			numberOfMeals = 0
+		}
     }
     @IBAction func mostHungryCheckBoxes(sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -116,7 +115,9 @@ class QuestionnaireNutritionViewController: UIViewController {
         default:
             return
         }
-        enableNextButton(sender)
+		if !sender.isSelected {
+			mostHunger = 0
+		}
     }
     @IBAction func leastHungryCheckBoxes(sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -150,18 +151,8 @@ class QuestionnaireNutritionViewController: UIViewController {
         default:
             return
         }
-        enableNextButton(sender)
-    }
-}
-
-extension QuestionnaireNutritionViewController {
-    
-    private func enableNextButton(_ sender: UIButton) {
-        if !sender.isSelected {
-            nextButton.isEnabled = false
-            //present user message for not selecting
-        } else if numberOfMeals != 0 && mostHunger != 0 && leastHunger != 0 {
-            nextButton.isEnabled = true
-        }
+		if !sender.isSelected {
+			leastHunger = 0
+		}
     }
 }
