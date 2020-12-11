@@ -12,7 +12,7 @@
         <!--Welcome View Controller-->
         <scene sceneID="iVp-xe-LE5">
             <objects>
-                <viewController title="Welcome View Controller" id="yWR-93-bCJ" customClass="ViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Welcome View Controller" id="yWR-93-bCJ" customClass="StartViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sm6-Ub-KvP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
