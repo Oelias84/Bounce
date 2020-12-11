@@ -6,65 +6,57 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegisterViewController: UIViewController {
-
+	
 	
 	@IBOutlet weak var emailTextfield: UITextField!
 	@IBOutlet weak var passwordTextfield: UITextField!
 	@IBOutlet weak var confirmPasswordTextfield: UITextField!
 	
-//	var handle: AuthStateDidChangeListenerHandle?
-	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-//		Auth.auth().addStateDidChangeListener { (auth, user) in
-//			print(auth.apnsToken, user?.displayName)
-//		}
 	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		raiseScreenWhenKeyboardAppears()
+		addScreenTappGesture()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		
-//		if let handle = handle {
-////			Auth.auth().removeStateDidChangeListener(handle)
-//		}
 		removeKeyboardListener()
 	}
 	
 	@IBAction func singUpButtonAction(_ sender: Any) {
 		
-		if let email = emailTextfield.text, !email.isEmpty,
-		   let password = passwordTextfield.text, !password.isEmpty,
-		   let confirmPassword = confirmPasswordTextfield.text, !confirmPassword.isEmpty {
+		if passwordTextfield.text != confirmPasswordTextfield.text {
+			let alertController = UIAlertController(title: "Password Incorrect", message: "Please re-type password", preferredStyle: .alert)
+			let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
 			
-			if !email.isValidEmail {
-				print("email is invalid")
-			} else if password.count < 6 {
-				print("password most have at least 6 characters")
-			} else if password != confirmPassword {
-				print("confirmed password no equal to password")
-			} else {
-//				FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { result, error in
-//
-//					if error != nil {
-//						print(error.debugDescription)
-//						return
-//					}
-//					if let result = result {
-//						UserProfile.shared.id = result.user.uid
-//					}
-//				}
+			alertController.addAction(defaultAction)
+			self.present(alertController, animated: true, completion: nil)
+		}
+		else{
+			Auth.auth().createUser(withEmail: emailTextfield.text!, password: passwordTextfield.text!){ (user, error) in
+				if error == nil {
+					let storyboard = UIStoryboard(name: K.StoryboardName.Home, bundle: nil)
+					let homeVC = storyboard.instantiateViewController(identifier: K.StoryboardNameId.HomeTabBar)
+					
+					homeVC.modalPresentationStyle = .fullScreen
+					self.present(homeVC, animated: true)
+				} else {
+					let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+					let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+					
+					alertController.addAction(defaultAction)
+					self.present(alertController, animated: true, completion: nil)
+				}
 			}
-		}else {
-			//alert empty fields
 		}
 	}
-
 }

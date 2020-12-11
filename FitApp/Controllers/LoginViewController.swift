@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
 	
@@ -16,6 +17,7 @@ class LoginViewController: UIViewController {
 		super.viewDidLoad()
 		
 		raiseScreenWhenKeyboardAppears()
+		addScreenTappGesture()
 	}
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
@@ -24,8 +26,21 @@ class LoginViewController: UIViewController {
 	}
 	
 	@IBAction func signInButtonAction(_ sender: Any) {
-        let storyboard = UIStoryboard(name: K.StoryboardName.Home, bundle: nil)
-        let homeVC = storyboard.instantiateViewController(identifier: K.StoryboardNameId.homeViewController)
-		navigationController?.pushViewController(homeVC, animated: true)
+		
+		Auth.auth().signIn(withEmail: emailTextfield.text!, password: passwordTextfield.text!) { (user, error) in
+			if error == nil{
+				let storyboard = UIStoryboard(name: K.StoryboardName.Home, bundle: nil)
+				let homeVC = storyboard.instantiateViewController(identifier: K.StoryboardNameId.HomeTabBar)
+				
+				homeVC.modalPresentationStyle = .fullScreen
+				self.present(homeVC, animated: true)
+			} else {
+				let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+				let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+				
+				alertController.addAction(defaultAction)
+				self.present(alertController, animated: true, completion: nil)
+			}
+		}
 	}
 }
