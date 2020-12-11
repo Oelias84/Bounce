@@ -194,7 +194,7 @@
         <!--Questionnaire Nutrition-->
         <scene sceneID="gpr-R5-pAz">
             <objects>
-                <viewController storyboardIdentifier="QuestionnaireFifth" title="Questionnaire Nutrition" id="tbo-Fu-A0i" customClass="QuestionnaireFitnessLevelViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QuestionnaireFifth" title="Questionnaire Nutrition" id="tbo-Fu-A0i" customClass="QuestionnaireNutritionViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bu1-Ct-4n0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -885,16 +885,16 @@
         <!--Questionnaire Fitness Level-->
         <scene sceneID="nYF-El-OUd">
             <objects>
-                <viewController storyboardIdentifier="QuestionnaireSixth" title="Questionnaire Fitness Level" id="tgm-97-b7M" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QuestionnaireSixth" title="Questionnaire Fitness Level" id="tgm-97-b7M" customClass="QuestionnaireFitnessLevelViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fUL-zV-OC5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="o5R-G9-aHx" userLabel="Prompt Stack View">
-                                <rect key="frame" x="32" y="238" width="350" height="420.5"/>
+                                <rect key="frame" x="32" y="223.5" width="350" height="449"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="0mB-lV-fTY">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="59"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="68.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מתחיל" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9Z-3p-Zu4">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="26.5"/>
@@ -903,42 +903,52 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="2xO-XM-2G7">
-                                                <rect key="frame" x="0.0" y="38.5" width="350" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="38.5" width="350" height="30"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1D-ZK-yM3">
-                                                        <rect key="frame" x="0.0" y="4" width="6" height="12"/>
+                                                        <rect key="frame" x="0.0" y="9" width="6" height="12"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="12" id="Vbi-y5-p7R"/>
                                                             <constraint firstAttribute="width" constant="6" id="bfu-Jp-zK3"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="175ס״מ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaO-J6-hSC">
-                                                        <rect key="frame" x="18" y="0.0" width="300" height="20.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="פעם ראשונה שאני מתחילה" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaO-J6-hSC">
+                                                        <rect key="frame" x="18" y="5" width="290" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" systemColor="systemBlueColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="MGx-zA-5R4">
-                                                        <rect key="frame" x="330" y="2" width="20" height="16.5"/>
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQA-mm-po0">
+                                                        <rect key="frame" x="320" y="0.0" width="30" height="30"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="20" id="hd7-0C-zAK"/>
-                                                            <constraint firstAttribute="width" constant="20" id="wED-p8-eVH"/>
+                                                            <constraint firstAttribute="width" constant="30" id="jrZ-4k-6PX"/>
+                                                            <constraint firstAttribute="height" constant="30" id="nSo-D9-VT5"/>
                                                         </constraints>
-                                                    </imageView>
+                                                        <color key="tintColor" name="AccentColor"/>
+                                                        <state key="normal">
+                                                            <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
+                                                        </state>
+                                                        <state key="selected">
+                                                            <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="levelCheckBoxesWithSender:" destination="tgm-97-b7M" eventType="touchUpInside" id="drd-86-9Jm"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
                                     <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aH8-XN-xkb">
-                                        <rect key="frame" x="0.0" y="83" width="350" height="1"/>
+                                        <rect key="frame" x="0.0" y="92.5" width="350" height="1"/>
                                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="DZo-Ii-EY8"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="i2l-dS-rFQ">
-                                        <rect key="frame" x="0.0" y="108" width="350" height="59"/>
+                                        <rect key="frame" x="0.0" y="117.5" width="350" height="68.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ביניים" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6FY-K7-qhr">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="26.5"/>
@@ -947,42 +957,52 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="FS7-vt-lJV">
-                                                <rect key="frame" x="0.0" y="38.5" width="350" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="38.5" width="350" height="30"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxG-RS-2gS">
-                                                        <rect key="frame" x="0.0" y="4" width="6" height="12"/>
+                                                        <rect key="frame" x="0.0" y="9" width="6" height="12"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="12" id="Itt-7L-ueo"/>
                                                             <constraint firstAttribute="width" constant="6" id="Kof-Gl-jjg"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="175ס״מ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzK-Fh-hE8">
-                                                        <rect key="frame" x="18" y="0.0" width="300" height="20.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="התאמנתי בעבר" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzK-Fh-hE8">
+                                                        <rect key="frame" x="18" y="5" width="290" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" systemColor="systemBlueColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="g7V-Id-OSr">
-                                                        <rect key="frame" x="330" y="2" width="20" height="16.5"/>
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uL2-4u-nYs">
+                                                        <rect key="frame" x="320" y="0.0" width="30" height="30"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="20" id="7aj-AW-6ms"/>
-                                                            <constraint firstAttribute="width" constant="20" id="Cd0-54-YpZ"/>
+                                                            <constraint firstAttribute="width" constant="30" id="nuW-B7-5sX"/>
+                                                            <constraint firstAttribute="height" constant="30" id="z5U-g1-Jhy"/>
                                                         </constraints>
-                                                    </imageView>
+                                                        <color key="tintColor" name="AccentColor"/>
+                                                        <state key="normal">
+                                                            <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
+                                                        </state>
+                                                        <state key="selected">
+                                                            <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="levelCheckBoxesWithSender:" destination="tgm-97-b7M" eventType="touchUpInside" id="44o-Ez-JmL"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
                                     <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a3t-yr-DiZ">
-                                        <rect key="frame" x="0.0" y="191" width="350" height="1"/>
+                                        <rect key="frame" x="0.0" y="210" width="350" height="1"/>
                                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Efw-pd-4MI"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="4ok-oM-RpL">
-                                        <rect key="frame" x="0.0" y="216" width="350" height="59"/>
+                                        <rect key="frame" x="0.0" y="235" width="350" height="68.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מתקדם" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hui-jL-IFE">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="26.5"/>
@@ -991,42 +1011,52 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="vrx-p0-b3a">
-                                                <rect key="frame" x="0.0" y="38.5" width="350" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="38.5" width="350" height="30"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtD-Z2-9Rd">
-                                                        <rect key="frame" x="0.0" y="4" width="6" height="12"/>
+                                                        <rect key="frame" x="0.0" y="9" width="6" height="12"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="12" id="LYf-dg-khc"/>
                                                             <constraint firstAttribute="width" constant="6" id="weo-IV-zLe"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="175ס״מ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mq1-xA-KvD">
-                                                        <rect key="frame" x="18" y="0.0" width="300" height="20.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מתאמנת על בסיס קבוע" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mq1-xA-KvD">
+                                                        <rect key="frame" x="18" y="5" width="290" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" systemColor="systemBlueColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0uD-1D-Ah2">
-                                                        <rect key="frame" x="330" y="2" width="20" height="16.5"/>
+                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NAA-nj-EzD">
+                                                        <rect key="frame" x="320" y="0.0" width="30" height="30"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="20" id="3HA-Ve-5lJ"/>
-                                                            <constraint firstAttribute="height" constant="20" id="IIN-Sl-1TK"/>
+                                                            <constraint firstAttribute="width" constant="30" id="GCu-hM-4Ij"/>
+                                                            <constraint firstAttribute="height" constant="30" id="nXF-O2-PGr"/>
                                                         </constraints>
-                                                    </imageView>
+                                                        <color key="tintColor" name="AccentColor"/>
+                                                        <state key="normal">
+                                                            <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
+                                                        </state>
+                                                        <state key="selected">
+                                                            <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="levelCheckBoxesWithSender:" destination="tgm-97-b7M" eventType="touchUpInside" id="Yic-7a-RlR"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
                                     <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NyC-AE-Uki">
-                                        <rect key="frame" x="0.0" y="299" width="350" height="1"/>
+                                        <rect key="frame" x="0.0" y="327.5" width="350" height="1"/>
                                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="OjW-iS-tTj"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ICZ-zv-MhJ">
-                                        <rect key="frame" x="0.0" y="324" width="350" height="96.5"/>
+                                        <rect key="frame" x="0.0" y="352.5" width="350" height="96.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5r-t3-ADQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="54.5"/>
@@ -1048,7 +1078,7 @@
                                                                 <color key="textColor" systemColor="systemBlueColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n7m-NH-8K5">
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n7m-NH-8K5">
                                                                 <rect key="frame" x="12.5" y="0.0" width="30" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="hem-VQ-0pd"/>
@@ -1061,6 +1091,9 @@
                                                                 <state key="selected">
                                                                     <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="weaklyWorkoutsCheckBoxesWithSender:" destination="tgm-97-b7M" eventType="touchUpInside" id="FT2-9c-NRa"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -1073,7 +1106,7 @@
                                                                 <color key="textColor" systemColor="systemBlueColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5H-CX-SDw">
+                                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5H-CX-SDw">
                                                                 <rect key="frame" x="13" y="0.0" width="30" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="1Lc-8V-nPe"/>
@@ -1086,6 +1119,9 @@
                                                                 <state key="selected">
                                                                     <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="weaklyWorkoutsCheckBoxesWithSender:" destination="tgm-97-b7M" eventType="touchUpInside" id="2IQ-Mv-YUd"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -1098,7 +1134,7 @@
                                                                 <color key="textColor" systemColor="systemBlueColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0A-Z9-eQh">
+                                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0A-Z9-eQh">
                                                                 <rect key="frame" x="12.5" y="0.0" width="30" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="30" id="PWk-Uv-did"/>
@@ -1111,6 +1147,9 @@
                                                                 <state key="selected">
                                                                     <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="weaklyWorkoutsCheckBoxesWithSender:" destination="tgm-97-b7M" eventType="touchUpInside" id="uyT-X3-Wyh"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -1123,7 +1162,7 @@
                                                                 <color key="textColor" systemColor="systemBlueColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFR-DL-vOU">
+                                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFR-DL-vOU">
                                                                 <rect key="frame" x="12.5" y="0.0" width="30" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="2zo-h6-w0o"/>
@@ -1136,6 +1175,9 @@
                                                                 <state key="selected">
                                                                     <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="weaklyWorkoutsCheckBoxesWithSender:" destination="tgm-97-b7M" eventType="touchUpInside" id="bpt-tg-Q9k"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -1166,6 +1208,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="nextButtonAction:" destination="tgm-97-b7M" eventType="touchUpInside" id="WWQ-ML-Cyq"/>
                                     <segue destination="1ZW-um-s0r" kind="show" identifier="moveToSumup" id="pHl-E7-yCr"/>
                                 </connections>
                             </button>
@@ -1187,6 +1230,16 @@
                     <navigationItem key="navigationItem" title="רמת כושר" largeTitleDisplayMode="always" id="570-pX-tD4">
                         <barButtonItem key="backBarButtonItem" title=" " id="rsk-B6-Xai"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="advancedButton" destination="NAA-nj-EzD" id="xNs-b3-tiR"/>
+                        <outlet property="beginnerButton" destination="nQA-mm-po0" id="2fb-RQ-hWE"/>
+                        <outlet property="intermediateButton" destination="uL2-4u-nYs" id="l10-g5-Xsn"/>
+                        <outlet property="nextButton" destination="qxq-qI-xqi" id="Iqe-02-UM0"/>
+                        <outlet property="weaklyWorkoutCheckFirst" destination="n7m-NH-8K5" id="Q38-9V-lMp"/>
+                        <outlet property="weaklyWorkoutCheckForth" destination="LFR-DL-vOU" id="Bag-dk-I9v"/>
+                        <outlet property="weaklyWorkoutCheckSecond" destination="N5H-CX-SDw" id="4zz-RG-3qE"/>
+                        <outlet property="weaklyWorkoutCheckThird" destination="m0A-Z9-eQh" id="Zeu-bC-cZ3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p3Q-UZ-soW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1195,7 +1248,7 @@
         <!--Questionnaire Summary-->
         <scene sceneID="cws-RR-hkw">
             <objects>
-                <viewController storyboardIdentifier="QuestionnaireSeventh" title="Questionnaire Summary" id="1ZW-um-s0r" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QuestionnaireSeventh" title="Questionnaire Summary" id="1ZW-um-s0r" customClass="QuestionnaireFitnessLevelViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0fz-KW-KiP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1608,7 +1661,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="circle" catalog="system" width="128" height="121"/>
         <image name="q_welcome" width="208.5" height="245.5"/>

@@ -39,6 +39,7 @@
 		B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B2A251256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib */; };
 		B3BB8F35258223E400D70628 /* QuestionnaireActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB8F34258223E400D70628 /* QuestionnaireActivityViewController.swift */; };
 		B3BB8F3B2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB8F3A2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift */; };
+		B3BB8F4125826FEB00D70628 /* QuestionnaireNutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB8F4025826FEB00D70628 /* QuestionnaireNutritionViewController.swift */; };
 		B3CA0CE3258111FD00923902 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CA0CE2258111FD00923902 /* CircularProgressView.swift */; };
 		B3E36E7025727F63006CE558 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E36E6F25727F63006CE558 /* Home.storyboard */; };
 		B3E36E75257285F3006CE558 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E36E74257285F3006CE558 /* HomeViewController.swift */; };
@@ -105,6 +106,7 @@
 		B3B2A251256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionnaireFatCollectionViewCell.xib; sourceTree = "<group>"; };
 		B3BB8F34258223E400D70628 /* QuestionnaireActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireActivityViewController.swift; sourceTree = "<group>"; };
 		B3BB8F3A2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFitnessLevelViewController.swift; sourceTree = "<group>"; };
+		B3BB8F4025826FEB00D70628 /* QuestionnaireNutritionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireNutritionViewController.swift; sourceTree = "<group>"; };
 		B3CA0CE2258111FD00923902 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		B3E36E6F25727F63006CE558 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		B3E36E74257285F3006CE558 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				B341E22F257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift */,
 				B3BB8F34258223E400D70628 /* QuestionnaireActivityViewController.swift */,
 				B3BB8F3A2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift */,
+				B3BB8F4025826FEB00D70628 /* QuestionnaireNutritionViewController.swift */,
 			);
 			name = Questionnarie;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				B3E6E9AD25714C1400958C48 /* MealPlanTableViewCell.swift in Sources */,
 				B341E230257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift in Sources */,
 				B302982025793BBA00CF41F0 /* UserProgress.swift in Sources */,
+				B3BB8F4125826FEB00D70628 /* QuestionnaireNutritionViewController.swift in Sources */,
 				B36B71922577BF0C001CD393 /* Exercise.swift in Sources */,
 				B36B71872577BD99001CD393 /* ExerciseDetailViewController.swift in Sources */,
 				B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */,
