@@ -41,4 +41,9 @@ extension Date {
         formatter.timeZone         = .current
         return formatter.string(from: self)
     }
+	var age: String? {
+		let calendar = Calendar.current
+		let ageComponents = calendar.dateComponents([.year], from: self, to: Date())
+		return "\(ageComponents.year!)"
+	}
 }

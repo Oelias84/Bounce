@@ -106,11 +106,4 @@ extension String {
 		let predicate = NSPredicate(format:"SELF MATCHES %@", argumentArray:[regEx])
 		return predicate.evaluate(with: self)
 	}
-	
-	var age: String? {
-		let birthday = fullDateFromStringWith(format: "dd/MM/yyyy")!
-		let calendar = Calendar.current
-		let ageComponents = calendar.dateComponents([.year], from: birthday, to: Date())
-		return "\(ageComponents.year!)"
-	}
 }
