@@ -23,9 +23,9 @@ class QuestionnaireFatPresentViewController: UIViewController {
     }
     
     @IBAction func nextButtonAction(_ sender: Any) {
-        if let fatPresentage = selectedPercentage {
+        if let fatPercentage = selectedPercentage {
             var fatPrecent: Double = 0.0
-            switch fatPresentage {
+            switch fatPercentage {
             case "Fat1":
                 fatPrecent = 10.0
             case "Fat2":

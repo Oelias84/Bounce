@@ -34,18 +34,20 @@ class QuestionnaireActivityViewController: UIViewController {
     @IBAction func nextButtonAction(_ sender: Any) {
         if kilometersCheckBox.isSelected {
             if let kilometers = kilometersLabel.text?.split(separator: " ").first {
-                UserProfile.shared.kilometre = Double(kilometers)
+                UserProfile.shared.kilometer = Double(kilometers)
+				UserProfile.shared.steps = nil
             }
         } else if stepsCheckBox.isSelected {
             if let steps = stepsLabel.text {
                 UserProfile.shared.steps = Int(steps)
+				UserProfile.shared.kilometer = nil
             }
         } else {
             return
         }
     }
     @IBAction func kilometersSliderAction(_ sender: UISlider) {
-        kilometersLabel.text = String(format: "%.1f", sender.value) + " ק״מ"
+		kilometersLabel.text = String(format: "%.1f", sender.value) + " " + K.Units.kilometers
     }
     @IBAction func stepsSliderAction(_ sender: UISlider) {
         stepsLabel.text = String(format: "%.0f", sender.value)
