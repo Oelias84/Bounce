@@ -7,6 +7,7 @@ target 'FitApp' do
 
   # Pods for FitApp
 		pod 'Firebase/Auth'
+		pod 'Firebase/Core'
 
   target 'FitAppTests' do
     inherit! :search_paths
