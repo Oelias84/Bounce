@@ -293,8 +293,8 @@
 		B3B2A236256ED4850052E6C8 /* Questionnarie */ = {
 			isa = PBXGroup;
 			children = (
-				B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */,
 				B341E22F257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift */,
+				B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */,
 				B3BB8F34258223E400D70628 /* QuestionnaireActivityViewController.swift */,
 				B3BB8F3A2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift */,
 				B3BB8F4025826FEB00D70628 /* QuestionnaireNutritionViewController.swift */,
