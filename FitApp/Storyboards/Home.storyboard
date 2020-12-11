@@ -341,12 +341,25 @@
         <!--Item-->
         <scene sceneID="gME-il-TgW">
             <objects>
-                <viewController id="kKO-sv-88B" sceneMemberID="viewController">
+                <viewController id="kKO-sv-88B" customClass="SettingsViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zO8-mr-jDo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pHc-EG-ScZ">
+                                <rect key="frame" x="186" y="433" width="42" height="30"/>
+                                <state key="normal" title="התנתק"/>
+                                <connections>
+                                    <action selector="logOutAction:" destination="kKO-sv-88B" eventType="touchUpInside" id="eoa-ca-6Rh"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6lB-vT-foh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pHc-EG-ScZ" firstAttribute="centerY" secondItem="zO8-mr-jDo" secondAttribute="centerY" id="6Gn-Lh-pEG"/>
+                            <constraint firstItem="pHc-EG-ScZ" firstAttribute="centerX" secondItem="zO8-mr-jDo" secondAttribute="centerX" id="uz3-wZ-tgn"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" image="gear" catalog="system" id="aOL-u8-b4d"/>
                 </viewController>

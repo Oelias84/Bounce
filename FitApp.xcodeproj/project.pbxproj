@@ -27,6 +27,7 @@
 		7C9B345E2583C5B400D30480 /* QuestionnaireSumUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */; };
 		7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */; };
 		7C9B34922583F84A00D30480 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B34912583F84A00D30480 /* StartViewController.swift */; };
+		7C9B349E2583F9E000D30480 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B349D2583F9E000D30480 /* SettingsViewController.swift */; };
 		B302982025793BBA00CF41F0 /* UserProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B302981F25793BBA00CF41F0 /* UserProgress.swift */; };
 		B330B87625757C1000BDB206 /* Exercises.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B330B87525757C1000BDB206 /* Exercises.storyboard */; };
 		B330B87F25757F1300BDB206 /* ExerciseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B330B87E25757F1300BDB206 /* ExerciseTableViewCell.xib */; };
@@ -101,6 +102,7 @@
 		7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSumUpViewController.swift; sourceTree = "<group>"; };
 		7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C9B34912583F84A00D30480 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		7C9B349D2583F9E000D30480 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		ACEF8473DFF1F8DE43E4AFF4 /* Pods-FitApp-FitAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp-FitAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-FitApp-FitAppUITests/Pods-FitApp-FitAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B0AE3B48B417514ACEE1ACAB /* Pods-FitAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitAppTests.release.xcconfig"; path = "Target Support Files/Pods-FitAppTests/Pods-FitAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		B302981F25793BBA00CF41F0 /* UserProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProgress.swift; sourceTree = "<group>"; };
@@ -299,13 +301,22 @@
 			children = (
 				B3B2A236256ED4850052E6C8 /* Questionnarie */,
 				B36B71852577BCE8001CD393 /* Exercise */,
+				7C9B34992583F95D00D30480 /* Login And Register */,
+				B3E36E74257285F3006CE558 /* HomeViewController.swift */,
+				B3E6E9B725714D5800958C48 /* MealPlanViewController.swift */,
+				7C9B349D2583F9E000D30480 /* SettingsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		7C9B34992583F95D00D30480 /* Login And Register */ = {
+			isa = PBXGroup;
+			children = (
 				7C9B34912583F84A00D30480 /* StartViewController.swift */,
 				7C89AA65256D704D009AD87C /* LoginViewController.swift */,
 				7C89AA80256D7342009AD87C /* RegisterViewController.swift */,
-				B3E36E74257285F3006CE558 /* HomeViewController.swift */,
-				B3E6E9B725714D5800958C48 /* MealPlanViewController.swift */,
 			);
-			path = Controllers;
+			name = "Login And Register";
 			sourceTree = "<group>";
 		};
 		B330B87D25757E8A00BDB206 /* ExerciseTabelViewCell */ = {
@@ -645,6 +656,7 @@
 				B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */,
 				B36B718C2577BDF3001CD393 /* ExerciseViewController.swift in Sources */,
 				7C9B345E2583C5B400D30480 /* QuestionnaireSumUpViewController.swift in Sources */,
+				7C9B349E2583F9E000D30480 /* SettingsViewController.swift in Sources */,
 				B3BB8F3B2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift in Sources */,
 				B330B88F257583D200BDB206 /* ExercisesTableViewController.swift in Sources */,
 				7C89AA61256D700F009AD87C /* UserProfile.swift in Sources */,
