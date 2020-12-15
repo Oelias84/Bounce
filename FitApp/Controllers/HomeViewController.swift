@@ -29,6 +29,11 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var fatTargateLabel: UILabel!
     @IBOutlet weak var carbsTargateLabel: UILabel!
     @IBOutlet weak var proteinTargateLabel: UILabel!
+	
+	var fatStartValue = 0
+	var carbsStartValue = 0
+	var proteinStartValue = 0
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +42,12 @@ class HomeViewController: UIViewController {
         configureProgress()
         setUpProgressTextFields()
     }
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		let displayLink = CADisplayLink(target: self, selector: #selector(handleUpdate))
+		displayLink.add(to: .main, forMode: .default)
+	}
     
     @IBAction func questionnaireStartButtonAction(_ sender: Any) {
         let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
@@ -50,9 +61,9 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
     
     func setUpProgressTextFields() {
-        fatCountLabel.text = "\(userProgress.fatProgress)"
-        carbsCountLabel.text = "\(userProgress.carbsProgress)"
-        proteinCountLabel.text = "\(userProgress.proteinProgress)"
+		fatCountLabel.text = "\(fatStartValue)"
+		carbsCountLabel.text = "\(carbsStartValue)"
+		proteinCountLabel.text = "\(proteinStartValue)"
         fatTargateLabel.text = "\(userProgress.fatTargate)"
         carbsTargateLabel.text = "\(userProgress.carbsTargate)"
         proteinTargateLabel.text = "\(userProgress.proteinTargate)"
@@ -87,12 +98,29 @@ extension HomeViewController {
 
     @objc func animateProgress() {
         let carbP = self.view.viewWithTag(100) as! CircularProgressView
-        carbP.setProgressWithAnimation(duration: 1.0, value: userProgress.carbsProgress / userProgress.carbsTargate)
-        
         let fatP = self.view.viewWithTag(101) as! CircularProgressView
-        fatP.setProgressWithAnimation(duration: 1.0, value: userProgress.fatProgress / userProgress.fatTargate)
-        
         let proteinP = self.view.viewWithTag(102) as! CircularProgressView
+
+
+        carbP.setProgressWithAnimation(duration: 1.0, value: userProgress.carbsProgress / userProgress.carbsTargate)
+        fatP.setProgressWithAnimation(duration: 1.0, value: userProgress.fatProgress / userProgress.fatTargate)
         proteinP.setProgressWithAnimation(duration: 1.0, value: userProgress.proteinProgress / userProgress.proteinTargate)
     }
+	@objc func handleUpdate(){
+		
+		if fatStartValue < Int(userProgress.fatProgress) {
+			fatStartValue += 1
+		}
+		if carbsStartValue < Int(userProgress.carbsProgress) {
+			carbsStartValue += 1
+		}
+		if proteinStartValue < Int(userProgress.proteinProgress) {
+			proteinStartValue += 1
+		}
+		
+		fatCountLabel.text = "\(fatStartValue)"
+		carbsCountLabel.text = "\(carbsStartValue)"
+		proteinCountLabel.text = "\(proteinStartValue)"
+		
+	}
 }
