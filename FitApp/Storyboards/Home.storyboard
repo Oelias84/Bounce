@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BvC-9T-Ubh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BvC-9T-Ubh">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -300,11 +300,11 @@
             </objects>
             <point key="canvasLocation" x="-428" y="1181"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="1CK-nm-WXs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nJB-tX-ghA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="bLi-MO-bJG"/>
+                    <tabBarItem key="tabBarItem" title="" id="bLi-MO-bJG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="hOm-GV-sig">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -319,11 +319,11 @@
             </objects>
             <point key="canvasLocation" x="314" y="749"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="HxQ-5K-cFd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zmZ-sf-tsA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="qyL-mB-qAR"/>
+                    <tabBarItem key="tabBarItem" title="" id="qyL-mB-qAR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="0wG-4h-Ua1">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -338,7 +338,7 @@
             </objects>
             <point key="canvasLocation" x="-429" y="749"/>
         </scene>
-        <!--Item-->
+        <!--Settings View Controller-->
         <scene sceneID="gME-il-TgW">
             <objects>
                 <viewController id="kKO-sv-88B" customClass="SettingsViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -361,7 +361,7 @@
                             <constraint firstItem="pHc-EG-ScZ" firstAttribute="centerX" secondItem="zO8-mr-jDo" secondAttribute="centerX" id="uz3-wZ-tgn"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="gear" catalog="system" id="aOL-u8-b4d"/>
+                    <tabBarItem key="tabBarItem" title="" image="ScaleIcon" id="aOL-u8-b4d"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HLt-g9-6ZW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -370,7 +370,7 @@
     </scenes>
     <resources>
         <image name="HomeIcon" width="26.5" height="26"/>
-        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="ScaleIcon" width="26" height="26"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
