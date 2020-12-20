@@ -10,6 +10,7 @@ import UIKit
 class QuestionnairePersonalDetailsViewController: UIViewController {
     
 	@IBOutlet weak var birthdayDatePicker: UIDatePicker!
+    @IBOutlet weak var userNameTextField: UITextView!
 	@IBOutlet weak var heightTextField: UITextField!
     @IBOutlet weak var weightTextField: UITextField!
 	
@@ -23,6 +24,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
     private var birthDate: Date?
     private var height: Int?
     private var weight: Double?
+    private var userName: String?
 	
 	private var weighWholeString: String?
 	private var weightFrictionString: String?
@@ -37,11 +39,12 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
     }
     
     @IBAction func nextButtonAction(_ sender: Any) {
-        if let birthDate = birthDate, let height = height, let weight = weight {
+        if let birthDate = birthDate, let name = userName, let height = height, let weight = weight {
             
-            UserProfile.shared.birthDate = birthDate
+            UserProfile.shared.name = name
             UserProfile.shared.height = height
             UserProfile.shared.weight = weight
+            UserProfile.shared.birthDate = birthDate
 			performSegue(withIdentifier: K.SegueId.moveToFatPercentage, sender: self)
         } else {
 			//show alert
@@ -111,6 +114,18 @@ extension QuestionnairePersonalDetailsViewController: UITextFieldDelegate {
         numberPicker.reloadInputViews()
     }
 	func textFieldDidEndEditing(_ textField: UITextField) {
+        if !(textField.text?.isEmpty ?? true){
+            switch textField {
+            case userNameTextField:
+                userName = textField.text
+            case heightTextField:
+                height = Int(textField.text!)
+            case weightTextField:
+                weight = Double(textField.text!)
+            default:
+                break
+            }
+        }
 		checkFieldsEmpty()
 	}
 }
