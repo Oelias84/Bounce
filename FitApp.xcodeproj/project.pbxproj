@@ -36,6 +36,10 @@
 		B341E230257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B341E22F257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift */; };
 		B341E236257FA6F500EE05A7 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B341E235257FA6F500EE05A7 /* Date+Extensions.swift */; };
 		B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B341E23A257FB3F400EE05A7 /* UITextField+Extensions.swift */; };
+		B34397A7258A7F720073A59B /* DishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B34397A6258A7F720073A59B /* DishView.xib */; };
+		B34397AD258A7FA50073A59B /* DishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34397AC258A7FA50073A59B /* DishView.swift */; };
+		B348420D25890CF800E0EF31 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B348420C25890CF800E0EF31 /* Meal.swift */; };
+		B348421525890E5D00E0EF31 /* DIsh.swift in Sources */ = {isa = PBXBuildFile; fileRef = B348421425890E5D00E0EF31 /* DIsh.swift */; };
 		B36B71872577BD99001CD393 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B71862577BD99001CD393 /* ExerciseDetailViewController.swift */; };
 		B36B718C2577BDF3001CD393 /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B718B2577BDF3001CD393 /* ExerciseViewController.swift */; };
 		B36B71922577BF0C001CD393 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B71912577BF0C001CD393 /* Exercise.swift */; };
@@ -113,6 +117,10 @@
 		B341E22F257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnairePersonalDetailsViewController.swift; sourceTree = "<group>"; };
 		B341E235257FA6F500EE05A7 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		B341E23A257FB3F400EE05A7 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
+		B34397A6258A7F720073A59B /* DishView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DishView.xib; sourceTree = "<group>"; };
+		B34397AC258A7FA50073A59B /* DishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishView.swift; sourceTree = "<group>"; };
+		B348420C25890CF800E0EF31 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		B348421425890E5D00E0EF31 /* DIsh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIsh.swift; sourceTree = "<group>"; };
 		B36B71862577BD99001CD393 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
 		B36B718B2577BDF3001CD393 /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
 		B36B71912577BF0C001CD393 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
@@ -328,6 +336,15 @@
 			name = ExerciseTabelViewCell;
 			sourceTree = "<group>";
 		};
+		B34397AB258A7F770073A59B /* DishView */ = {
+			isa = PBXGroup;
+			children = (
+				B34397A6258A7F720073A59B /* DishView.xib */,
+				B34397AC258A7FA50073A59B /* DishView.swift */,
+			);
+			name = DishView;
+			sourceTree = "<group>";
+		};
 		B36B71852577BCE8001CD393 /* Exercise */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,6 +360,8 @@
 			children = (
 				B36B71912577BF0C001CD393 /* Exercise.swift */,
 				B302981F25793BBA00CF41F0 /* UserProgress.swift */,
+				B348420C25890CF800E0EF31 /* Meal.swift */,
+				B348421425890E5D00E0EF31 /* DIsh.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -366,6 +385,7 @@
 				B330B87D25757E8A00BDB206 /* ExerciseTabelViewCell */,
 				B3E6E99E2571444000958C48 /* MealPlanTableViewCell */,
 				B3E6E99A2571443200958C48 /* QuestionnaireFatCollectionViewCell */,
+				B34397AB258A7F770073A59B /* DishView */,
 				B3CA0CE2258111FD00923902 /* CircularProgressView.swift */,
 			);
 			path = Views;
@@ -506,6 +526,7 @@
 				7C89AA02256D69CA009AD87C /* LoginRegister.storyboard in Resources */,
 				B330B87625757C1000BDB206 /* Exercises.storyboard in Resources */,
 				B330B87F25757F1300BDB206 /* ExerciseTableViewCell.xib in Resources */,
+				B34397A7258A7F720073A59B /* DishView.xib in Resources */,
 				7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */,
 				B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */,
 				B3E36E7025727F63006CE558 /* Home.storyboard in Resources */,
@@ -640,6 +661,8 @@
 				B330B88A257581AA00BDB206 /* ExerciseTableViewCell.swift in Sources */,
 				7C89AA81256D7342009AD87C /* RegisterViewController.swift in Sources */,
 				7C89AA77256D715F009AD87C /* UIView+Extensions.swift in Sources */,
+				B348421525890E5D00E0EF31 /* DIsh.swift in Sources */,
+				B348420D25890CF800E0EF31 /* Meal.swift in Sources */,
 				B3E6E9AD25714C1400958C48 /* MealPlanTableViewCell.swift in Sources */,
 				7C9B34922583F84A00D30480 /* StartViewController.swift in Sources */,
 				B341E230257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift in Sources */,
@@ -660,6 +683,7 @@
 				B3BB8F3B2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift in Sources */,
 				B330B88F257583D200BDB206 /* ExercisesTableViewController.swift in Sources */,
 				7C89AA61256D700F009AD87C /* UserProfile.swift in Sources */,
+				B34397AD258A7FA50073A59B /* DishView.swift in Sources */,
 				7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */,
 				7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */,
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
