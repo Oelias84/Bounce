@@ -7,9 +7,17 @@
 
 import UIKit
 
-class DishView: UIView {
+protocol DishViewDelegate {
+    func didCheck()
+}
 
-    let kCONTENT_XIB_NAME = "DishView"
+class DishView: UIView {
+    
+    var dish: Dish! {
+        didSet {
+            configureData()
+        }
+    }
     
     @IBOutlet weak var dishTypeLabel: UILabel!
     @IBOutlet weak var dishNameLabel: UILabel!
@@ -18,6 +26,7 @@ class DishView: UIView {
     
     @IBOutlet var view: UIView!
     
+    var delegate: DishViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,11 +39,20 @@ class DishView: UIView {
     }
     
     func commonInit() {
-        Bundle.main.loadNibNamed(kCONTENT_XIB_NAME, owner: self)
+        Bundle.main.loadNibNamed(K.NibName.dishView, owner: self)
         view.fixInView(self)
     }
     
-    @IBAction func checkBoxButtonAction(_ sender: Any) {
-        
+    @IBAction func checkBoxButtonAction(_ sender: UIButton) {
+        checkBoxButton.isSelected = !sender.isSelected
+        dish.isDishDone.toggle()
+        delegate?.didCheck()
+    }
+    
+    func configureData() {
+        dishTypeLabel.text = dish.type.rawValue
+        dishNameLabel.text = dish.dishName
+        amountLabel.text = "X\(dish.amount)"
+        checkBoxButton.isSelected = dish.isDishDone
     }
 }
