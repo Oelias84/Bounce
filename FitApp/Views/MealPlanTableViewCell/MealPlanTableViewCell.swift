@@ -14,16 +14,21 @@ import UIKit
 class MealPlanTableViewCell: UITableViewCell {
     
     var indexPath: IndexPath!
-
+    
+    var meal: Meal! {
+        didSet {
+            configureData()
+        }
+    }
+    
     @IBOutlet weak var cellBackgroundView: UIView!
     @IBOutlet weak var mealNameLabel: UILabel!
     @IBOutlet weak var mealDescriptionLabel: UILabel!
-    @IBOutlet weak var completeMealCheckMarkButton: UIButton!
-    @IBOutlet weak var mealDetailStackView: UIView!
+    @IBOutlet weak var mealIsDoneCheckMark: UIButton!
     
-    @IBOutlet weak var carbsCheckMark: UIButton!
-    @IBOutlet weak var proteinCheckMark: UIButton!
-    @IBOutlet weak var fatCheckMark: UIButton!
+    @IBOutlet weak var dishesHeadLineStackView: UIStackView!
+    @IBOutlet weak var dishStackView: UIStackView!
+    @IBOutlet weak var dishesStackViewHeight: NSLayoutConstraint!
     
     var delegate: MealPlanTableViewCellDelegate?
     
@@ -31,7 +36,7 @@ class MealPlanTableViewCell: UITableViewCell {
         super.awakeFromNib()
         setupView()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -41,32 +46,71 @@ class MealPlanTableViewCell: UITableViewCell {
     }
     @IBAction func completeMealCheckMarkAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        carbsCheckMark.isSelected.toggle()
-        proteinCheckMark.isSelected.toggle()
-        fatCheckMark.isSelected.toggle()
+        meal.isMealDone.toggle()
+        
+        dishStackView.arrangedSubviews.forEach {
+            dishesStackViewHeight.constant -= 40
+            $0.removeFromSuperview()
+        }
+        meal.dishes.forEach {
+            $0.isDishDone = sender.isSelected
+        }
+        configureData()
     }
     @IBAction func openDetailsAction(_ sender: UIButton) {
-        mealDetailStackView.isHidden.toggle()
         delegate?.detailTapped(cell: indexPath)
-    }
-    @IBAction func carbsCheckMarkAction(_ sender: UIButton) {
-        print("carbsCheckMarkAction")
-    }
-    @IBAction func proteinCheckMarkAction(_ sender: UIButton) {
-        print("proteinCheckMarkAction")
-    }
-    @IBAction func fatCheckMarkAction(_ sender: UIButton) {
-        print("fatCheckMarkAction")
     }
 }
 
 extension MealPlanTableViewCell {
     
-    func setupView() {
+    private func setupView() {
         cellBackgroundView.layer.cornerRadius = 10
         cellBackgroundView.layer.shadowOpacity = 0.18
         cellBackgroundView.layer.shadowColor = UIColor.systemBlue.cgColor
         cellBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 12)
-        cellBackgroundView.layer.shadowRadius = 16
+        cellBackgroundView.layer.shadowRadius = 12
+    }
+    private func configureData(isChecked: Bool = false){
+        var tag = 1
+        dishStackView.arrangedSubviews.forEach {
+            dishesStackViewHeight.constant -= 40
+            $0.removeFromSuperview()
+        }
+        mealNameLabel.text = meal.name
+        meal.dishes.forEach {
+            let view = DishView()
+            view.tag = tag
+            tag += 1
+            view.delegate = self
+            view.dish = $0
+            view.clipsToBounds = true
+            dishStackView.addArrangedSubview(view)
+            dishesStackViewHeight.constant += 40
+        }
+    }
+    private func checkDish(type: DishType){
+        meal.dishes.forEach {
+            if $0.type == type {
+                $0.isDishDone.toggle()
+            }
+        }
+    }
+}
+
+extension MealPlanTableViewCell: DishViewDelegate {
+    func didCheck() {
+        var allChecked = false
+        let isDishesChecked = meal.dishes.compactMap{ $0.isDishDone}
+        for isDone in isDishesChecked {
+            if !isDone {
+                allChecked = false
+                break
+            } else {
+                allChecked = true
+            }
+        }
+        mealIsDoneCheckMark.isSelected = allChecked
+        //Update Meal to Server
     }
 }
