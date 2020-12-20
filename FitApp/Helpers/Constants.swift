@@ -102,6 +102,7 @@ struct K {
         static let exerciseTableViewCell = "ExerciseTableViewCell"
         static let mealPlanTableViewCell = "MealPlanTableViewCell"
         static let questionnaireFatCollectionViewCell = "QuestionnaireFatCollectionViewCell"
+        static let dishView = "DishView"
     }
 	
 	struct Units {
