@@ -95,6 +95,7 @@ struct K {
         static let exerciseCell = "exerciseCell"
         static let mealCell = "mealCell"
         static let fanCell = "fanCell"
+        static let weightCell = "weightCell"
     }
 	
     struct NibName {
