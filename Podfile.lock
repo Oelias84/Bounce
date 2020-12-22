@@ -1,4 +1,5 @@
 PODS:
+  - BulletinBoard (5.0.0)
   - Firebase/Auth (6.29.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.7.1)
@@ -71,11 +72,13 @@ PODS:
   - PromisesObjC (1.2.9)
 
 DEPENDENCIES:
+  - BulletinBoard
   - Firebase/Auth
   - Firebase/Core
 
 SPEC REPOS:
   trunk:
+    - BulletinBoard
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -90,6 +93,7 @@ SPEC REPOS:
     - PromisesObjC
 
 SPEC CHECKSUMS:
+  BulletinBoard: dba77053c2a7b64953f63073f7534165af2edd21
   Firebase: 57957c8d6eb3d8b80a560b1dc58be24724b89ff2
   FirebaseAnalytics: aa522dce9fd93002ba1554467d23ce7092323000
   FirebaseAuth: a818d73466d51db897d3bf3c0f3baa3dae7fd4c0
@@ -103,6 +107,6 @@ SPEC CHECKSUMS:
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
 
-PODFILE CHECKSUM: 26beb9f28e6d77b5d983fdfbd0ef22f2189d5a3c
+PODFILE CHECKSUM: 8419228e7fd029ac640f9a9176121b9878416ff9
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3
