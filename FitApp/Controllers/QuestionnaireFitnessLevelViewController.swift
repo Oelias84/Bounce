@@ -19,8 +19,7 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 	@IBOutlet weak var weaklyWorkoutCheckFirst: UIButton!
 	@IBOutlet weak var weaklyWorkoutCheckSecond: UIButton!
 	@IBOutlet weak var weaklyWorkoutCheckThird: UIButton!
-	@IBOutlet weak var weaklyWorkoutCheckForth: UIButton!
-	
+    
 	@IBOutlet weak var nextButton: UIButton!
 	
 	override func viewDidLoad() {
@@ -68,21 +67,18 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 			if sender.isSelected{
 				weaklyWorkoutCheckSecond.isSelected = false
 				weaklyWorkoutCheckThird.isSelected = false
-				weaklyWorkoutCheckForth.isSelected = false
 			}
 		case 2:
 			weaklyWorkouts = 4
 			if sender.isSelected{
 				weaklyWorkoutCheckFirst.isSelected = false
 				weaklyWorkoutCheckThird.isSelected = false
-				weaklyWorkoutCheckForth.isSelected = false
 			}
 		case 3:
 			weaklyWorkouts = 5
 			if sender.isSelected{
 				weaklyWorkoutCheckFirst.isSelected = false
 				weaklyWorkoutCheckSecond.isSelected = false
-				weaklyWorkoutCheckForth.isSelected = false
 			}
 		case 4:
 			weaklyWorkouts = 6

@@ -10,7 +10,7 @@ import UIKit
 class QuestionnairePersonalDetailsViewController: UIViewController {
     
 	@IBOutlet weak var birthdayDatePicker: UIDatePicker!
-    @IBOutlet weak var userNameTextField: UITextView!
+    @IBOutlet weak var userNameTextField: UITextField!
 	@IBOutlet weak var heightTextField: UITextField!
     @IBOutlet weak var weightTextField: UITextField!
 	
@@ -138,6 +138,7 @@ extension QuestionnairePersonalDetailsViewController {
         weightTextField.inputView = numberPicker
         heightTextField.delegate = self
         weightTextField.delegate = self
+        userNameTextField.delegate = self
     }
     private func configurePicker() {
         numberPicker.delegate = self
