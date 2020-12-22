@@ -299,8 +299,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="I6j-J7-ygL" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="ScaleIcon" id="aOL-u8-b4d"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wdr-OP-lAS">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Wdr-OP-lAS">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -312,11 +312,11 @@
             </objects>
             <point key="canvasLocation" x="1753.6231884057972" y="748.66071428571422"/>
         </scene>
-        <!--WeightProgrece-->
+        <!--WeightViewController-->
         <scene sceneID="Kjo-tc-3yV">
             <objects>
-                <viewControllerPlaceholder storyboardName="WeightProgrece" id="Y1I-Pb-Zty" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="6uv-TZ-rMk"/>
+                <viewControllerPlaceholder storyboardName="WeightProgrece" referencedIdentifier="WeightViewController" id="Y1I-Pb-Zty" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="מעקב שקילה" largeTitleDisplayMode="always" id="6uv-TZ-rMk"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qu5-RW-7A7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -43,6 +43,7 @@ extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let mealData = mealArray[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.mealCell, for: indexPath) as! MealPlanTableViewCell
+        
         cell.meal = mealData
         cell.delegate = self
         cell.indexPath = indexPath

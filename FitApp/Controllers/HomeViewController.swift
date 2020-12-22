@@ -31,6 +31,10 @@ class HomeViewController: UIViewController {
     private var fatColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
     private var proteinColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
     
+    private var fatStartValue = 0
+    private var carbsStartValue = 0
+    private var proteinStartValue = 0
+    
     @IBOutlet weak var helloUserTextLabel: UILabel!
     @IBOutlet weak var userMotivationTextLabel: UILabel!
     
@@ -44,10 +48,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var fatTargateLabel: UILabel!
     @IBOutlet weak var carbsTargateLabel: UILabel!
     @IBOutlet weak var proteinTargateLabel: UILabel!
-	
-	var fatStartValue = 0
-	var carbsStartValue = 0
-	var proteinStartValue = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,6 +145,6 @@ extension HomeViewController {
         
         questionnaireVC.modalPresentationStyle = .fullScreen
         boardManager.dismissBulletin()
-        self.present(questionnaireVC, animated: true, completion: nil)
+//        self.present(questionnaireVC, animated: true, completion: nil)
     }
 }
