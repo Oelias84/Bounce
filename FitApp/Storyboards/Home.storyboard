@@ -315,7 +315,7 @@
         <!--WeightViewController-->
         <scene sceneID="Kjo-tc-3yV">
             <objects>
-                <viewControllerPlaceholder storyboardName="WeightProgrece" referencedIdentifier="WeightViewController" id="Y1I-Pb-Zty" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="WeightProgress" referencedIdentifier="WeightViewController" id="Y1I-Pb-Zty" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="מעקב שקילה" largeTitleDisplayMode="always" id="6uv-TZ-rMk"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qu5-RW-7A7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
