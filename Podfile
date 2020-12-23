@@ -10,6 +10,8 @@ target 'FitApp' do
 		pod 'Firebase/Core'
     
     pod 'BulletinBoard'
+    
+    pod 'DateToolsSwift'
 
   target 'FitAppTests' do
     inherit! :search_paths
