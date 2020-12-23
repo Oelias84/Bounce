@@ -48,7 +48,7 @@
 		B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */; };
 		B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */; };
 		B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B2A251256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib */; };
-		B3B7FCEF2590EFBC004BC2CD /* WeightProgrece.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3B7FCEE2590EFBC004BC2CD /* WeightProgrece.storyboard */; };
+		B3B7FCEF2590EFBC004BC2CD /* WeightProgress.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3B7FCEE2590EFBC004BC2CD /* WeightProgress.storyboard */; };
 		B3BB8F35258223E400D70628 /* QuestionnaireActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB8F34258223E400D70628 /* QuestionnaireActivityViewController.swift */; };
 		B3BB8F3B2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB8F3A2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift */; };
 		B3BB8F4125826FEB00D70628 /* QuestionnaireNutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB8F4025826FEB00D70628 /* QuestionnaireNutritionViewController.swift */; };
@@ -131,7 +131,7 @@
 		B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatPresentViewController.swift; sourceTree = "<group>"; };
 		B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatCollectionViewCell.swift; sourceTree = "<group>"; };
 		B3B2A251256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionnaireFatCollectionViewCell.xib; sourceTree = "<group>"; };
-		B3B7FCEE2590EFBC004BC2CD /* WeightProgrece.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WeightProgrece.storyboard; sourceTree = "<group>"; };
+		B3B7FCEE2590EFBC004BC2CD /* WeightProgress.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WeightProgress.storyboard; sourceTree = "<group>"; };
 		B3BB8F34258223E400D70628 /* QuestionnaireActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireActivityViewController.swift; sourceTree = "<group>"; };
 		B3BB8F3A2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFitnessLevelViewController.swift; sourceTree = "<group>"; };
 		B3BB8F4025826FEB00D70628 /* QuestionnaireNutritionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireNutritionViewController.swift; sourceTree = "<group>"; };
@@ -294,7 +294,7 @@
 				7C89AA00256D69CA009AD87C /* LoginRegister.storyboard */,
 				7C89AA90256D8286009AD87C /* Questionnaire.storyboard */,
 				B3E36E6F25727F63006CE558 /* Home.storyboard */,
-				B3B7FCEE2590EFBC004BC2CD /* WeightProgrece.storyboard */,
+				B3B7FCEE2590EFBC004BC2CD /* WeightProgress.storyboard */,
 				B3E6E98C257142CD00958C48 /* MealPlan.storyboard */,
 				B330B87525757C1000BDB206 /* Exercises.storyboard */,
 			);
@@ -529,7 +529,7 @@
 				B3E6E98D257142CD00958C48 /* MealPlan.storyboard in Resources */,
 				7C89AA91256D8286009AD87C /* Questionnaire.storyboard in Resources */,
 				B3E6E9A02571446E00958C48 /* MealPlanTableViewCell.xib in Resources */,
-				B3B7FCEF2590EFBC004BC2CD /* WeightProgrece.storyboard in Resources */,
+				B3B7FCEF2590EFBC004BC2CD /* WeightProgress.storyboard in Resources */,
 				7C89AA02256D69CA009AD87C /* LoginRegister.storyboard in Resources */,
 				B330B87625757C1000BDB206 /* Exercises.storyboard in Resources */,
 				B330B87F25757F1300BDB206 /* ExerciseTableViewCell.xib in Resources */,
