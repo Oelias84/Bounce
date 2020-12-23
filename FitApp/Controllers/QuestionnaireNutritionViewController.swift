@@ -16,17 +16,11 @@ class QuestionnaireNutritionViewController: UIViewController {
     @IBOutlet weak var mealCheckFirst: UIButton!
     @IBOutlet weak var mealCheckSecond: UIButton!
     @IBOutlet weak var mealCheckThird: UIButton!
-    @IBOutlet weak var mealCheckForth: UIButton!
     
     @IBOutlet weak var mostHungerCheckFirst: UIButton!
     @IBOutlet weak var mostHungerCheckSecond: UIButton!
     @IBOutlet weak var mostHungerCheckThird: UIButton!
     @IBOutlet weak var mostHungerCheckForth: UIButton!
-    
-    @IBOutlet weak var leastHungerCheckFirst: UIButton!
-    @IBOutlet weak var leastHungerCheckSecond: UIButton!
-    @IBOutlet weak var leastHungerCheckThird: UIButton!
-    @IBOutlet weak var leastHungerCheckForth: UIButton!
     
     @IBOutlet weak var nextButton: UIButton!
     
