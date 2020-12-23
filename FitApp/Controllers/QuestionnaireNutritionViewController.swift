@@ -46,21 +46,18 @@ class QuestionnaireNutritionViewController: UIViewController {
             if sender.isSelected {
                 mealCheckSecond.isSelected = false
                 mealCheckThird.isSelected = false
-                mealCheckForth.isSelected = false
             }
             numberOfMeals = 3
         case 2:
             if sender.isSelected {
                 mealCheckFirst.isSelected = false
                 mealCheckThird.isSelected = false
-                mealCheckForth.isSelected = false
             }
             numberOfMeals = 4
         case 3:
             if sender.isSelected {
                 mealCheckFirst.isSelected = false
                 mealCheckSecond.isSelected = false
-                mealCheckForth.isSelected = false
             }
             numberOfMeals = 5
         case 4:
@@ -111,42 +108,6 @@ class QuestionnaireNutritionViewController: UIViewController {
         }
 		if !sender.isSelected {
 			mostHunger = 0
-		}
-    }
-    @IBAction func leastHungryCheckBoxes(sender: UIButton) {
-        sender.isSelected = !sender.isSelected
-        leastHunger = sender.tag
-        
-        switch sender.tag {
-        case 1:
-            if sender.isSelected {
-                leastHungerCheckSecond.isSelected = false
-                leastHungerCheckThird.isSelected = false
-                leastHungerCheckForth.isSelected = false
-            }
-        case 2:
-            if sender.isSelected {
-                leastHungerCheckFirst.isSelected = false
-                leastHungerCheckThird.isSelected = false
-                leastHungerCheckForth.isSelected = false
-            }
-        case 3:
-            if sender.isSelected {
-                leastHungerCheckFirst.isSelected = false
-                leastHungerCheckSecond.isSelected = false
-                leastHungerCheckForth.isSelected = false
-            }
-        case 4:
-            if sender.isSelected {
-                leastHungerCheckFirst.isSelected = false
-                leastHungerCheckSecond.isSelected = false
-                leastHungerCheckThird.isSelected = false
-            }
-        default:
-            return
-        }
-		if !sender.isSelected {
-			leastHunger = 0
 		}
     }
 }
