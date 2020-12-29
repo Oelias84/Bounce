@@ -52,6 +52,7 @@ struct K {
 		static let loginRegister = "LoginRegister"
         static let MealPlan = "MealPlan"
         static let Exercises = "Exercises"
+        static let WeightProgress = "WeightProgress"
         static let Home = "Home"
 	}
 	
