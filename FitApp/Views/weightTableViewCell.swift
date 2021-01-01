@@ -18,10 +18,14 @@
             didSet{
                 switch timePeriod {
                 case .week:
+                    disclosureIndicatorImage.isHidden = true
                     dateTextLabel.text = weight.printWeightDay
                 case .month:
-                    dateTextLabel.text = "\(weight.date.startOfWeek!.displayDayInMonth)-\(weight.date.endOfWeek!.displayDayInMonth)"
+                    disclosureIndicatorImage.isHidden = false
+                    dateTextLabel.text =
+                        "\(weight.date.startOfWeek!.displayDayInMonth)-\(weight.date.endOfWeek!.displayDayInMonth)"
                 case .year:
+                    disclosureIndicatorImage.isHidden = false
                     dateTextLabel.text = "\(weight.date.displayMonth)"
                 default:
                     break
@@ -33,6 +37,7 @@
         @IBOutlet weak var differenceTextLabel: UILabel!
         @IBOutlet weak var changeTextLabel: UILabel!
         @IBOutlet weak var weightTextLabel: UILabel!
+        @IBOutlet weak var disclosureIndicatorImage: UIImageView!
         
         override func awakeFromNib() {
             super.awakeFromNib()

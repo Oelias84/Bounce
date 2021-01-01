@@ -38,7 +38,7 @@ class UserProfile {
             standard.set(height, forKey: K.User.UserBasicDetails.height)
         }
     }
-    //UserFatPrecdntage
+    //UserFatPercentage
     var fatPercentage: Double? {
         didSet {
             standard.set(fatPercentage, forKey: K.User.UserFatPercentage.fatPercentage)
