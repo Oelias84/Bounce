@@ -55,6 +55,10 @@
 		B3BB8F3B2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB8F3A2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift */; };
 		B3BB8F4125826FEB00D70628 /* QuestionnaireNutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB8F4025826FEB00D70628 /* QuestionnaireNutritionViewController.swift */; };
 		B3CA0CE3258111FD00923902 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CA0CE2258111FD00923902 /* CircularProgressView.swift */; };
+		B3DB750D259F4850002CF48B /* FloatingPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DB750C259F4850002CF48B /* FloatingPoint+Extensions.swift */; };
+		B3DB7513259F8270002CF48B /* MealViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DB7512259F8270002CF48B /* MealViewModel.swift */; };
+		B3DB751B259F8773002CF48B /* ConsumptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DB751A259F8773002CF48B /* ConsumptionManager.swift */; };
+		B3DB753525A09133002CF48B /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DB753425A09133002CF48B /* Double+Extensions.swift */; };
 		B3E36E7025727F63006CE558 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E36E6F25727F63006CE558 /* Home.storyboard */; };
 		B3E36E75257285F3006CE558 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E36E74257285F3006CE558 /* HomeViewController.swift */; };
 		B3E6E98D257142CD00958C48 /* MealPlan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E6E98C257142CD00958C48 /* MealPlan.storyboard */; };
@@ -140,6 +144,10 @@
 		B3BB8F3A2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFitnessLevelViewController.swift; sourceTree = "<group>"; };
 		B3BB8F4025826FEB00D70628 /* QuestionnaireNutritionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireNutritionViewController.swift; sourceTree = "<group>"; };
 		B3CA0CE2258111FD00923902 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		B3DB750C259F4850002CF48B /* FloatingPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extensions.swift"; sourceTree = "<group>"; };
+		B3DB7512259F8270002CF48B /* MealViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealViewModel.swift; sourceTree = "<group>"; };
+		B3DB751A259F8773002CF48B /* ConsumptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionManager.swift; sourceTree = "<group>"; };
+		B3DB753425A09133002CF48B /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		B3E36E6F25727F63006CE558 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		B3E36E74257285F3006CE558 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B3E6E98C257142CD00958C48 /* MealPlan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MealPlan.storyboard; sourceTree = "<group>"; };
@@ -229,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				B36B71902577BEFC001CD393 /* Models */,
+				B3DB7511259F8254002CF48B /* ViewModels */,
 				7C89AA35256D6D3D009AD87C /* Application */,
 				7C89AA6E256D7132009AD87C /* Storyboards */,
 				7C89AA8C256D817B009AD87C /* Controllers */,
@@ -278,6 +287,8 @@
 				B3B2A231256ED2A60052E6C8 /* UIImage+Extensions.swift */,
 				B341E235257FA6F500EE05A7 /* Date+Extensions.swift */,
 				B341E23A257FB3F400EE05A7 /* UITextField+Extensions.swift */,
+				B3DB750C259F4850002CF48B /* FloatingPoint+Extensions.swift */,
+				B3DB753425A09133002CF48B /* Double+Extensions.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -287,6 +298,7 @@
 			children = (
 				7C89AA58256D6FDB009AD87C /* Constants.swift */,
 				7C89AA60256D700F009AD87C /* UserProfile.swift */,
+				B3DB751A259F8773002CF48B /* ConsumptionManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -409,6 +421,14 @@
 				B3CA0CE2258111FD00923902 /* CircularProgressView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B3DB7511259F8254002CF48B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B3DB7512259F8270002CF48B /* MealViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		B3E6E99A2571443200958C48 /* QuestionnaireFatCollectionViewCell */ = {
@@ -680,6 +700,7 @@
 			files = (
 				B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */,
 				B330B88A257581AA00BDB206 /* ExerciseTableViewCell.swift in Sources */,
+				B3DB7513259F8270002CF48B /* MealViewModel.swift in Sources */,
 				7C89AA81256D7342009AD87C /* RegisterViewController.swift in Sources */,
 				7C89AA77256D715F009AD87C /* UIView+Extensions.swift in Sources */,
 				B348421525890E5D00E0EF31 /* DIsh.swift in Sources */,
@@ -694,8 +715,10 @@
 				B36B71922577BF0C001CD393 /* Exercise.swift in Sources */,
 				B36B71872577BD99001CD393 /* ExerciseDetailViewController.swift in Sources */,
 				B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */,
+				B3DB753525A09133002CF48B /* Double+Extensions.swift in Sources */,
 				7C89AA66256D704D009AD87C /* LoginViewController.swift in Sources */,
 				B341E236257FA6F500EE05A7 /* Date+Extensions.swift in Sources */,
+				B3DB750D259F4850002CF48B /* FloatingPoint+Extensions.swift in Sources */,
 				B3E36E75257285F3006CE558 /* HomeViewController.swift in Sources */,
 				B3B2A232256ED2A60052E6C8 /* UIImage+Extensions.swift in Sources */,
 				7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */,
@@ -713,6 +736,7 @@
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
 				B3E6E9B825714D5800958C48 /* MealPlanViewController.swift in Sources */,
 				B3BB8F35258223E400D70628 /* QuestionnaireActivityViewController.swift in Sources */,
+				B3DB751B259F8773002CF48B /* ConsumptionManager.swift in Sources */,
 				B3CA0CE3258111FD00923902 /* CircularProgressView.swift in Sources */,
 				7C89AA59256D6FDB009AD87C /* Constants.swift in Sources */,
 			);
