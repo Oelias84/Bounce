@@ -83,7 +83,7 @@ struct MealViewModel {
         return (dishesForMeal, reminder)
     }
     func populateMeals(hasPrefer: Int?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) -> [Meal] {
-        var dayMeals = [Meal(meaType: .breakfast, dishes: []), Meal(meaType: .lunch, dishes: []), Meal(meaType: .supper, dishes: [])]
+        var dayMeals = [Meal(mealType: .breakfast, dishes: []), Meal(mealType: .lunch, dishes: []), Meal(mealType: .supper, dishes: [])]
         let carbsForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil,
                                              numberOfDishes: numberOfDishes(numberOfMeals: numberOfMeals, dishType: .carbs, numberOfDishes: carbs))
         let proteinForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil,
@@ -110,9 +110,9 @@ struct MealViewModel {
             }
         }
         if numberOfMeals == 4 {
-            dayMeals.append(Meal(meaType: .middle1, dishes: [Dish(name: "ביצים", type: .carbs, amount: 1)]))
+            dayMeals.append(Meal(mealType: .middle1, dishes: [Dish(name: "ביצים", type: .carbs, amount: 1)]))
         } else if numberOfMeals == 5 {
-            dayMeals.append(Meal(meaType: .middle1, dishes: [Dish(name: "טונה", type: .protein, amount: 1), Dish(name: "ליה", type: .fat, amount: 0.5)]))
+            dayMeals.append(Meal(mealType: .middle1, dishes: [Dish(name: "טונה", type: .protein, amount: 1), Dish(name: "ליה", type: .fat, amount: 0.5)]))
         }
         return dayMeals.sorted()
     }
