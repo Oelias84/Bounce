@@ -71,12 +71,6 @@ extension MealPlanTableViewCell {
         cellBackgroundView.layer.shadowColor = UIColor.systemBlue.cgColor
         cellBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 12)
         cellBackgroundView.layer.shadowRadius = 12
-        
-//        cellBackgroundView.layer.cornerRadius = 20.0
-//        cellBackgroundView.layer.shadowColor = UIColor.systemBlue.cgColor
-//        cellBackgroundView.layer.shadowOffset = CGSize(width: 0.0, height: -1.0)
-//        cellBackgroundView.layer.shadowRadius = 12.0
-//        cellBackgroundView.layer.shadowOpacity = 0.2
     }
     private func configureData(isChecked: Bool = false) {
         var tag = 1

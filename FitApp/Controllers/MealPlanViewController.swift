@@ -20,7 +20,9 @@ class MealPlanViewController: UIViewController {
         super.viewDidLoad()
                 
         tableView.register(UINib(nibName: K.NibName.mealPlanTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.mealCell)
-        mealViewModel = MealViewModel(Prefer: userDate.mostHungry, numberOfMeals: userDate.mealsPerDay!,
+//        mealViewModel = MealViewModel(Prefer: userDate.mostHungry, numberOfMeals: userDate.mealsPerDay!, protein: manager.getDayProtein, carbs: manager.getDayCarbs, fat: manager.getDayFat)
+        
+        mealViewModel = MealViewModel(Prefer: .breakfast, numberOfMeals: 3,
                                       protein: manager.getDayProtein, carbs: manager.getDayCarbs, fat: manager.getDayFat)
     }
 }

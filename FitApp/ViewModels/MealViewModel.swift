@@ -11,24 +11,12 @@ struct MealViewModel {
     
     var meals: [Meal]!
     
-    init(Prefer: Int?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) {
+    init(Prefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) {
         
         self.meals = self.populateMeals(hasPrefer: Prefer, numberOfMeals: numberOfMeals, protein: protein, carbs: carbs, fat: fat)
     }
     
-    func roundHalfDown(_ x: Double) -> Double {
-        let friction = x.fraction
-        let whole = x.whole.nextDown.rounded()
-        
-        if friction > 0.0 && friction < 0.5 {
-            return whole
-        } else if friction > 0.5 && friction < whole+1 {
-            return whole + 0.5
-        }
-        return x
-    }
     func numberOfDishes(numberOfMeals: Int, dishType: DishType, numberOfDishes: Double) -> Double {
-        
         if numberOfMeals == 4 {
             switch dishType {
             case .carbs:
@@ -57,32 +45,22 @@ struct MealViewModel {
         var reminder = 0.0
         
         if hasPrefer {
-            switch numberOfMeals {
-            case 3:
-                if isDividable {
-                    let numberOfDishesLessOne = numberOfDishes-reducer
-                    dishesForMeal = roundHalfDown(numberOfDishesLessOne / Double(numberOfMeals))
-                    reminder = numberOfDishesLessOne - (dishesForMeal * Double(numberOfMeals)) + reducer
-                } else {
-                    dishesForMeal = roundHalfDown(numberOfDishes / Double(numberOfMeals))
-                    reminder = numberOfDishes - (dishesForMeal * Double(numberOfMeals))
-                }
-            default:
-                break
+            if isDividable {
+                let numberOfDishesLessOne = numberOfDishes-reducer
+                dishesForMeal = (numberOfDishesLessOne / Double(numberOfMeals)).roundHalfDown
+                reminder = numberOfDishesLessOne - (dishesForMeal * Double(numberOfMeals)) + reducer
+            } else {
+                dishesForMeal = (numberOfDishes / Double(numberOfMeals)).roundHalfDown
+                reminder = numberOfDishes - (dishesForMeal * Double(numberOfMeals))
             }
         } else {
             if isDividable { return (numberOfDishes/Double(numberOfMeals), reminder) }
-            switch numberOfMeals {
-            case 3:
-                dishesForMeal = roundHalfDown(numberOfDishes / Double(numberOfMeals))
-                reminder = numberOfDishes - (dishesForMeal * Double(numberOfMeals))
-            default:
-                break
-            }
+            dishesForMeal = (numberOfDishes / Double(numberOfMeals)).roundHalfDown
+            reminder = numberOfDishes - (dishesForMeal * Double(numberOfMeals))
         }
-        return (dishesForMeal, reminder)
+        return (dishesForMeal, reminder.roundHalfDown)
     }
-    func populateMeals(hasPrefer: Int?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) -> [Meal] {
+    func populateMeals(hasPrefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) -> [Meal] {
         var dayMeals = [Meal(mealType: .breakfast, dishes: []), Meal(mealType: .lunch, dishes: []), Meal(mealType: .supper, dishes: [])]
         let carbsForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil,
                                              numberOfDishes: numberOfDishes(numberOfMeals: numberOfMeals, dishType: .carbs, numberOfDishes: carbs))
@@ -98,8 +76,7 @@ struct MealViewModel {
             dayMeals[i].dishes = [carbsDish, proteinDish, fatDish]
         }
         if let prefer = hasPrefer {
-            let preferredMeal = MealType(rawValue: prefer)
-            if let addToPreferred = dayMeals.first(where: {$0.mealType == preferredMeal}) {
+            if let addToPreferred = dayMeals.first(where: {$0.mealType == prefer}) {
                 addToPreferred.dishes.forEach { dish in
                     switch dish.type {
                     case .carbs: dish.amount += carbsForMeal.1

@@ -19,12 +19,12 @@ class ConsumptionManager {
     private var proteinPortion: Double!
     
     init() {
-        let userData = UserProfile.shared
+//        let userData = UserProfile.shared
         
-        self.weight = userData.weight!
-        self.fatPercentage = userData.fatPercentage!
-        self.Kilometer = userData.kilometer!
-        self.numberOfTrainings = userData.weaklyWorkouts!
+        self.weight = 70.0//userData.weight!
+        self.fatPercentage = 20.0//userData.fatPercentage!
+        self.Kilometer = 10.0//userData.kilometer!
+        self.numberOfTrainings = 3//userData.weaklyWorkouts!
         configureData()
     }
     

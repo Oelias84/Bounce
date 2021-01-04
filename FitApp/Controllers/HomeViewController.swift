@@ -58,7 +58,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        boardManager.showBulletin(above: self)
+//        boardManager.showBulletin(above: self)
         boardManager.allowsSwipeInteraction = false
         configureProgress()
         setUpProgressTextFields()
@@ -145,6 +145,6 @@ extension HomeViewController {
         
         questionnaireVC.modalPresentationStyle = .fullScreen
         boardManager.dismissBulletin()
-//        self.present(questionnaireVC, animated: true, completion: nil)
+        self.present(questionnaireVC, animated: true, completion: nil)
     }
 }

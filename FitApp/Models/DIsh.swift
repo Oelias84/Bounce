@@ -14,10 +14,10 @@ enum DishType: String {
     case fat = "שומן"
 }
 
-class Dish: Comparable {
+class Dish {
 
-    let id: UUID
-    var dishName: String
+    private let id: UUID
+    private var dishName: String
     var type: DishType
     var amount: Double
     var isDishDone: Bool
@@ -29,14 +29,24 @@ class Dish: Comparable {
         self.amount = amount
         self.isDishDone = false
     }
+    
+    var getDishName: String {
+        self.dishName
+    }
+    var printAmount: String {
+        String(format: "%.2f", self.amount)
+    }
+    var printDishType: String {
+        self.type.rawValue
+    }
+}
+
+extension Dish: Comparable {
+
     static func < (lhs: Dish, rhs: Dish) -> Bool {
         false
     }
-    
     static func == (lhs: Dish, rhs: Dish) -> Bool {
         lhs.id == rhs.id
     }
-    
-    
-    
 }

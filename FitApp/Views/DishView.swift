@@ -50,8 +50,8 @@ class DishView: UIView {
     }
     
     func configureData() {
-        dishTypeLabel.text = dish.type.rawValue
-        dishNameLabel.text = dish.dishName
+        dishTypeLabel.text = dish.printDishType
+        dishNameLabel.text = dish.getDishName
         amountLabel.text = "X\(dish.amount)"
         checkBoxButton.isSelected = dish.isDishDone
     }

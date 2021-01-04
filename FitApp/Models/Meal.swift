@@ -14,7 +14,6 @@ enum MealType: Int{
     case lunch
     case middle2
     case supper
-    
 }
 
 class Meal: Comparable {
