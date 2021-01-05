@@ -9,7 +9,6 @@ target 'FitApp' do
 		pod 'Firebase/Auth'
 		pod 'Firebase/Core'
     pod 'Firebase/Analytics'
-    pod 'Firebase/Database'
     
     pod 'BulletinBoard'
     pod 'DateToolsSwift'
