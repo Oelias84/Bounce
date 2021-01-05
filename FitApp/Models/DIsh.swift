@@ -1,5 +1,5 @@
 //
-//  DIsh.swift
+//  Dish.swift
 //  FitApp
 //
 //  Created by iOS Bthere on 15/12/2020.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum DishType: String {
+enum DishType: String, Codable {
     
     case protein = "חלבון"
     case carbs = "פחממה"
     case fat = "שומן"
 }
 
-class Dish {
+class Dish: Codable  {
 
     private let id: UUID
     private var dishName: String

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MealType: Int{
+enum MealType: Int, Codable {
     
     case breakfast
     case middle1
@@ -16,7 +16,7 @@ enum MealType: Int{
     case supper
 }
 
-class Meal: Comparable {
+class Meal: Codable {
 
     let id: UUID
     let date: Date
@@ -47,12 +47,20 @@ class Meal: Comparable {
         self.dishes = dishes
         self.isMealDone = false
     }
+}
+
+extension Meal: Comparable {
     
     static func < (lhs: Meal, rhs: Meal) -> Bool {
         lhs.date < rhs.date
     }
-    
     static func == (lhs: Meal, rhs: Meal) -> Bool {
         lhs.id == rhs.id
     }
+}
+
+struct DailyMeal: Codable {
+    
+    let date: Date
+    let meals: [Meal]
 }

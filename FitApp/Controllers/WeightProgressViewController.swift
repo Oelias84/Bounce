@@ -43,7 +43,7 @@ class WeightProgressViewController: UIViewController {
     ]
     var filteredArray: [Weight]? {
         didSet {
-            weightDatesTableView.reloadData()
+            tableView.reloadData()
         }
     }
     var timePeriod: TimePeriod = .week
@@ -63,29 +63,37 @@ class WeightProgressViewController: UIViewController {
     @IBOutlet weak var dateTextLabel: UILabel!
     @IBOutlet weak var dateLeftButton: UIButton!
         
-    @IBOutlet weak var weightDatesTableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         selectedDate = Date()
         filteredArray = getWeekBy(selectedDate.startOfWeek!)
-        weightDatesTableView.sectionHeaderHeight = 46
+        tableView.sectionHeaderHeight = 46
     }
     
-    @IBAction func periodSegmentedControlAction(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            timePeriod = .week
-        case 1:
-            timePeriod = .month
-        case 2:
-            timePeriod = .year
-        default:
-            break
-        }
+    @IBAction func todayButtonAction(_ sender: Any) {
+        selectedDate = Date()
+        filteredArray = getWeekBy(selectedDate.startOfWeek!)
+        periodSegmentedControl.selectedSegmentIndex = 0
+        timePeriod = .week
         updateDateLabels()
         updateFiltersArray()
+    }
+    @IBAction func addWeightButtonAction(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "הזני משקל", message: "אנא הזיני את משקלך הנוחכי", preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in }
+        
+        alert.addAction(UIAlertAction(title: "אישור", style: .default, handler: { [weak alert] (_) in
+            let textField = alert!.textFields![0]
+            self.addWeight(textField: textField)
+        }))
+        alert.addAction(UIAlertAction(title: "ביטול", style: .cancel))
+        self.present(alert, animated: true, completion: nil)
+        
     }
     @IBAction func changeDateButtons(_ sender: UIButton) {
         
@@ -112,35 +120,19 @@ class WeightProgressViewController: UIViewController {
         updateDateLabels()
         updateFiltersArray()
     }
-    @IBAction func addWeightButtonAction(_ sender: Any) {
-        
-        let alert = UIAlertController(title: "הזני משקל", message: "אנא הזיני את משקלך הנוחכי", preferredStyle: .alert)
-        
-        alert.addTextField { (textField) in }
-        
-        alert.addAction(UIAlertAction(title: "אישור", style: .default, handler: { [weak alert] (_) in
-            let textField = alert!.textFields![0]
-            self.addWeight(textField: textField)
-        }))
-        alert.addAction(UIAlertAction(title: "ביטול", style: .cancel))
-        self.present(alert, animated: true, completion: nil)
-        
-    }
-    @IBAction func todayButtonAction(_ sender: Any) {
-        selectedDate = Date()
-        filteredArray = getWeekBy(selectedDate.startOfWeek!)
-        periodSegmentedControl.selectedSegmentIndex = 0
-        timePeriod = .week
+    @IBAction func periodSegmentedControlAction(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            timePeriod = .week
+        case 1:
+            timePeriod = .month
+        case 2:
+            timePeriod = .year
+        default:
+            break
+        }
         updateDateLabels()
         updateFiltersArray()
-    }
-    func addWeight(textField: UITextField) {
-        todayButtonAction(self)
-        if let weight = textField.text {
-            weightsArray.append(Weight(date: Date(), weight: Double(weight)!))
-            updateDateLabels()
-            updateFiltersArray()
-        }
     }
 }
 
@@ -151,7 +143,7 @@ extension WeightProgressViewController: UITableViewDelegate, UITableViewDataSour
         return filteredArray?.count ?? 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = weightDatesTableView.dequeueReusableCell(withIdentifier: K.CellId.weightCell) as! weightTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.weightCell) as! weightTableViewCell
         let weight = filteredArray?[indexPath.row]
         
         if indexPath.row == 0 {
@@ -337,6 +329,15 @@ extension WeightProgressViewController {
             filteredArray = getMonthBy(selectedDate)
         case .year:
             filteredArray = getYearBy(selectedDate)
+        }
+    }
+    
+    func addWeight(textField: UITextField) {
+        todayButtonAction(self)
+        if let weight = textField.text {
+            weightsArray.append(Weight(date: Date(), weight: Double(weight)!))
+            updateDateLabels()
+            updateFiltersArray()
         }
     }
 }

@@ -9,21 +9,35 @@ import UIKit
 
 class MealPlanViewController: UIViewController {
         
-    var mealViewModel: MealViewModel!
-    var manager = ConsumptionManager()
-    let userDate = UserProfile.shared
-    var selectedCellIndexPath: IndexPath?
+    private var mealViewModel: MealViewModel!
+    private var manager = ConsumptionManager()
+    private let userData = UserProfile.shared
+    private let date = Date()
+    private var selectedCellIndexPath: IndexPath?
+    
+    @IBOutlet weak var dateRightButton: UIButton!
+    @IBOutlet weak var dateTextLabel: UILabel!
+    @IBOutlet weak var dateLeftButton: UIButton!
 
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        tableView.register(UINib(nibName: K.NibName.mealPlanTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.mealCell)
-//        mealViewModel = MealViewModel(Prefer: userDate.mostHungry, numberOfMeals: userDate.mealsPerDay!, protein: manager.getDayProtein, carbs: manager.getDayCarbs, fat: manager.getDayFat)
         
+        tableView.register(UINib(nibName: K.NibName.mealPlanTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.mealCell)
         mealViewModel = MealViewModel(Prefer: .breakfast, numberOfMeals: 3,
-                                      protein: manager.getDayProtein, carbs: manager.getDayCarbs, fat: manager.getDayFat)
+                                      protein: manager.getDayProtein,   carbs: manager.getDayCarbs, fat: manager.getDayFat)
+    }
+    @IBAction func changeDateButtons(_ sender: UIButton) {
+        
+        switch sender {
+        case dateRightButton:
+            ""
+        case dateLeftButton:
+            ""
+        default:
+            break
+        }
     }
 }
 
@@ -55,7 +69,7 @@ extension MealPlanViewController: MealPlanTableViewCellDelegate  {
         selectedCellIndexPath = cell
         tableView.endUpdates()
         if selectedCellIndexPath != nil {
-            tableView.scrollToRow(at: cell, at: .none, animated: true)
+            tableView.scrollToRow(at: cell, at: .bottom, animated: true)
         }
     }
 }

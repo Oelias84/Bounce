@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,32 +18,98 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MealPlan" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="O91-Cs-Ywr">
-                                <rect key="frame" x="0.0" y="56" width="414" height="757"/>
+                                <rect key="frame" x="0.0" y="132" width="414" height="681"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="fmc-b1-oPE" id="yb8-II-2ae"/>
                                     <outlet property="delegate" destination="fmc-b1-oPE" id="lgs-oU-rau"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9C2-SA-efX" userLabel="Date Change View">
+                                <rect key="frame" x="12" y="56" width="390" height="64"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Fib-2p-Tck">
+                                        <rect key="frame" x="12" y="2" width="366" height="60"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yup-QA-yz2">
+                                                <rect key="frame" x="0.0" y="0.0" width="35" height="60"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal">
+                                                    <imageReference key="image" image="chevron.backward" catalog="system" symbolScale="large"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="changeDateButtons:" destination="fmc-b1-oPE" eventType="touchUpInside" id="jTz-xf-pmC"/>
+                                                    <action selector="todayButtonAction:" destination="fmc-b1-oPE" eventType="touchUpInside" id="Zrq-59-1Vi"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20/12 - 26/12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGH-MD-pcZ">
+                                                <rect key="frame" x="132.5" y="20" width="101" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="61q-6a-4FF">
+                                                <rect key="frame" x="331" y="0.0" width="35" height="60"/>
+                                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
+                                                <state key="normal">
+                                                    <imageReference key="image" image="chevron.forward" catalog="system" symbolScale="large"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="changeDateButtons:" destination="fmc-b1-oPE" eventType="touchUpInside" id="VTF-qi-7bb"/>
+                                                    <action selector="todayButtonAction:" destination="fmc-b1-oPE" eventType="touchUpInside" id="7AX-K8-KHb"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="61q-6a-4FF" secondAttribute="bottom" id="0wV-5a-ads"/>
+                                            <constraint firstItem="yup-QA-yz2" firstAttribute="top" secondItem="Fib-2p-Tck" secondAttribute="top" id="ZDO-l5-Fbi"/>
+                                            <constraint firstAttribute="bottom" secondItem="yup-QA-yz2" secondAttribute="bottom" id="ado-aB-S4X"/>
+                                            <constraint firstItem="61q-6a-4FF" firstAttribute="top" secondItem="Fib-2p-Tck" secondAttribute="top" id="qup-tU-Zg9"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.18633201720000001" green="0.6013119817" blue="0.92112988230000004" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Fib-2p-Tck" secondAttribute="trailing" constant="12" id="1hk-nX-eWb"/>
+                                    <constraint firstItem="Fib-2p-Tck" firstAttribute="top" secondItem="9C2-SA-efX" secondAttribute="top" constant="2" id="AHO-BU-ie5"/>
+                                    <constraint firstItem="Fib-2p-Tck" firstAttribute="leading" secondItem="9C2-SA-efX" secondAttribute="leading" constant="12" id="GcV-7g-wLM"/>
+                                    <constraint firstItem="Fib-2p-Tck" firstAttribute="centerX" secondItem="9C2-SA-efX" secondAttribute="centerX" id="ctc-nH-SDh"/>
+                                    <constraint firstAttribute="height" constant="64" id="dVI-YN-82p"/>
+                                    <constraint firstAttribute="bottom" secondItem="Fib-2p-Tck" secondAttribute="bottom" constant="2" id="gUg-Mo-6J6"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hBD-kG-JM6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="O91-Cs-Ywr" firstAttribute="top" secondItem="hBD-kG-JM6" secondAttribute="top" constant="12" id="ESc-ho-drf"/>
+                            <constraint firstItem="9C2-SA-efX" firstAttribute="top" secondItem="hBD-kG-JM6" secondAttribute="top" constant="12" id="ENE-VZ-Vah"/>
                             <constraint firstItem="hBD-kG-JM6" firstAttribute="trailing" secondItem="O91-Cs-Ywr" secondAttribute="trailing" id="EXr-d3-P9f"/>
                             <constraint firstItem="O91-Cs-Ywr" firstAttribute="leading" secondItem="hBD-kG-JM6" secondAttribute="leading" id="MDI-i7-ezq"/>
+                            <constraint firstItem="O91-Cs-Ywr" firstAttribute="top" secondItem="9C2-SA-efX" secondAttribute="bottom" constant="12" id="Njb-iE-6im"/>
+                            <constraint firstItem="hBD-kG-JM6" firstAttribute="trailing" secondItem="9C2-SA-efX" secondAttribute="trailing" constant="12" id="ckh-Mh-lNr"/>
                             <constraint firstItem="hBD-kG-JM6" firstAttribute="bottom" secondItem="O91-Cs-Ywr" secondAttribute="bottom" id="gDT-D0-Tt0"/>
+                            <constraint firstItem="9C2-SA-efX" firstAttribute="leading" secondItem="hBD-kG-JM6" secondAttribute="leading" constant="12" id="nby-Qb-Oze"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="MealIcon" id="NJE-LH-0cq"/>
                     <navigationItem key="navigationItem" title="ארוחות" largeTitleDisplayMode="always" id="gjj-b1-ZAD"/>
                     <connections>
+                        <outlet property="dateLeftButton" destination="yup-QA-yz2" id="POh-iT-4qi"/>
+                        <outlet property="dateRightButton" destination="61q-6a-4FF" id="kIQ-Xk-2qc"/>
+                        <outlet property="dateTextLabel" destination="rGH-MD-pcZ" id="Kmk-vU-DmS"/>
                         <outlet property="tableView" destination="O91-Cs-Ywr" id="e3u-d8-mkW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="st6-EG-pUn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="626.08695652173913" y="-117.1875"/>
+            <point key="canvasLocation" x="624.63768115942037" y="-117.1875"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="RFX-vh-QMg">
@@ -65,6 +132,8 @@
     </scenes>
     <resources>
         <image name="MealIcon" width="20.5" height="26"/>
+        <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="chevron.forward" catalog="system" width="96" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
