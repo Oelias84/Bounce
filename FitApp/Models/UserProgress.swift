@@ -9,12 +9,11 @@ import Foundation
 
 struct UserProgress {
     
-    let carbsTargate: Float
-    let proteinTargate: Float
-    let fatTargate: Float
+    let carbsTarget: Double
+    let proteinTarget: Double
+    let fatTarget: Double
     
-    var carbsProgress: Float
-    var proteinProgress: Float
-    var fatProgress: Float
-
+    var carbsProgress: Double
+    var proteinProgress: Double
+    var fatProgress: Double
 }

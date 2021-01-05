@@ -11,7 +11,8 @@ import BLTNBoard
 class HomeViewController: UIViewController {
     
     var userProgress: UserProgress!
-
+    let manager = ConsumptionManager()
+    
     private let carbsShapeLayer = CAShapeLayer()
     private let fatShapeLayer = CAShapeLayer()
     private let proteinShapeLayer = CAShapeLayer()
@@ -52,8 +53,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userProgress = UserProgress(carbsTargate: 100.0, proteinTargate: 100.0, fatTargate: 100.0,
-                                    carbsProgress: 75.0, proteinProgress: 50.0, fatProgress: 25.0)
+        userProgress = UserProgress(carbsTarget: manager.getDayCarbs, proteinTarget: manager.getDayProtein, fatTarget: manager.getDayFat,
+                                    carbsProgress: 1.0, proteinProgress: 2.0, fatProgress: 1.0)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -80,9 +81,9 @@ extension HomeViewController {
 		fatCountLabel.text = "\(fatStartValue)"
 		carbsCountLabel.text = "\(carbsStartValue)"
 		proteinCountLabel.text = "\(proteinStartValue)"
-        fatTargateLabel.text = "\(userProgress.fatTargate)"
-        carbsTargateLabel.text = "\(userProgress.carbsTargate)"
-        proteinTargateLabel.text = "\(userProgress.proteinTargate)"
+        fatTargateLabel.text = "\(userProgress.fatTarget)"
+        carbsTargateLabel.text = "\(userProgress.carbsTarget)"
+        proteinTargateLabel.text = "\(userProgress.proteinTarget)"
     }
     
     func configureProgress(){
@@ -120,9 +121,9 @@ extension HomeViewController {
         let fatP = self.view.viewWithTag(101) as! CircularProgressView
         let proteinP = self.view.viewWithTag(102) as! CircularProgressView
 
-        carbP.setProgressWithAnimation(duration: 1.0, value: userProgress.carbsProgress / userProgress.carbsTargate)
-        fatP.setProgressWithAnimation(duration: 1.0, value: userProgress.fatProgress / userProgress.fatTargate)
-        proteinP.setProgressWithAnimation(duration: 1.0, value: userProgress.proteinProgress / userProgress.proteinTargate)
+        carbP.setProgressWithAnimation(duration: 1.0, value: userProgress.carbsProgress / userProgress.carbsTarget)
+        fatP.setProgressWithAnimation(duration: 1.0, value: userProgress.fatProgress / userProgress.fatTarget)
+        proteinP.setProgressWithAnimation(duration: 1.0, value: userProgress.proteinProgress / userProgress.proteinTarget)
     }
 	@objc func handleUpdate(){
 		if fatStartValue < Int(userProgress.fatProgress) {

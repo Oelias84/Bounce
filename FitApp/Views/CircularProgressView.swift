@@ -52,7 +52,7 @@ class CircularProgressView: UIView {
         progressLayer.lineCap = .round
         layer.addSublayer(progressLayer)
     }
-    func setProgressWithAnimation(duration: TimeInterval, value: Float) {
+    func setProgressWithAnimation(duration: TimeInterval, value: Double) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.duration = duration
         animation.fromValue = 0
