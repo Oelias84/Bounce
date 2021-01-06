@@ -6,9 +6,11 @@ target 'FitApp' do
   use_frameworks!
 
   # Pods for FitApp
-		pod 'Firebase/Auth'
-		pod 'Firebase/Core'
+    pod 'Firebase/Auth'
+    pod 'Firebase/Core'
     pod 'Firebase/Analytics'
+    pod 'Firebase/Firestore'
+    pod 'FirebaseFirestoreSwift'
     
     pod 'BulletinBoard'
     pod 'DateToolsSwift'
