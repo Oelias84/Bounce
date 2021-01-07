@@ -7,6 +7,7 @@
 
 protocol MealPlanTableViewCellDelegate {
     func detailTapped(cell: IndexPath)
+    func update()
 }
 
 import UIKit
@@ -57,6 +58,7 @@ class MealPlanTableViewCell: UITableViewCell {
             $0.isDishDone = sender.isSelected
         }
         configureData()
+        delegate?.update()
     }
     @IBAction func openDetailsAction(_ sender: UIButton) {
         delegate?.detailTapped(cell: indexPath)
@@ -74,6 +76,7 @@ extension MealPlanTableViewCell {
     }
     private func configureData(isChecked: Bool = false) {
         var tag = 1
+        mealIsDoneCheckMark.isSelected = meal.isMealDone
         dishStackView.arrangedSubviews.forEach {
             dishesStackViewHeight.constant -= 40
             $0.removeFromSuperview()
@@ -90,16 +93,10 @@ extension MealPlanTableViewCell {
             dishesStackViewHeight.constant += 40
         }
     }
-    private func checkDish(type: DishType) {
-        meal.dishes.forEach {
-            if $0.type == type {
-                $0.isDishDone.toggle()
-            }
-        }
-    }
 }
 
 extension MealPlanTableViewCell: DishViewDelegate {
+    
     func didCheck() {
         var allChecked = false
         let isDishesChecked = meal.dishes.compactMap{ $0.isDishDone }
@@ -111,7 +108,8 @@ extension MealPlanTableViewCell: DishViewDelegate {
                 allChecked = true
             }
         }
+        meal.isMealDone = allChecked
         mealIsDoneCheckMark.isSelected = allChecked
-        //Update Meal to Server
+        delegate?.update()
     }
 }

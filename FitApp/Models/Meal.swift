@@ -61,6 +61,5 @@ extension Meal: Comparable {
 
 struct DailyMeal: Codable {
     
-    let date: Date
     let meals: [Meal]
 }

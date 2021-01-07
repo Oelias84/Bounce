@@ -40,7 +40,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="changeDateButtons:" destination="fmc-b1-oPE" eventType="touchUpInside" id="jTz-xf-pmC"/>
-                                                    <action selector="todayButtonAction:" destination="fmc-b1-oPE" eventType="touchUpInside" id="Zrq-59-1Vi"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20/12 - 26/12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGH-MD-pcZ">
@@ -58,7 +57,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="changeDateButtons:" destination="fmc-b1-oPE" eventType="touchUpInside" id="VTF-qi-7bb"/>
-                                                    <action selector="todayButtonAction:" destination="fmc-b1-oPE" eventType="touchUpInside" id="7AX-K8-KHb"/>
                                                 </connections>
                                             </button>
                                         </subviews>

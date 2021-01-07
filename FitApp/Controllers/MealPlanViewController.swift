@@ -7,36 +7,43 @@
 
 import UIKit
 
+
 class MealPlanViewController: UIViewController {
-        
+    
+    private var date = Date()
     private var mealViewModel: MealViewModel!
-    private var manager = ConsumptionManager()
     private let userData = UserProfile.shared
-    private let date = Date()
     private var selectedCellIndexPath: IndexPath?
     
-    @IBOutlet weak var dateRightButton: UIButton!
     @IBOutlet weak var dateTextLabel: UILabel!
     @IBOutlet weak var dateLeftButton: UIButton!
+    @IBOutlet weak var dateRightButton: UIButton!
 
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UINib(nibName: K.NibName.mealPlanTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.mealCell)
-        mealViewModel = MealViewModel(Prefer: .breakfast, numberOfMeals: 3,
-                                      protein: manager.getDayProtein,   carbs: manager.getDayCarbs, fat: manager.getDayFat)
+        dateTextLabel.text = date.dateStringDisplay
+        callToViewModelForUIUpdate()
     }
+    
     @IBAction func changeDateButtons(_ sender: UIButton) {
-        
+        showSpinner()
         switch sender {
         case dateRightButton:
-            ""
+            date = date.add(1.days)
+            mealViewModel.fetchMealsBy(date: date)
         case dateLeftButton:
-            ""
+            date = date.subtract(1.days)
+            mealViewModel.fetchMealsBy(date: date)
         default:
             break
+        }
+        dateTextLabel.text = date.dateStringDisplay
+        self.mealViewModel!.bindMealViewModelToController = {
+            self.stopSpinner()
+            self.updateDataSource()
         }
     }
 }
@@ -44,10 +51,14 @@ class MealPlanViewController: UIViewController {
 extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        mealViewModel.meals.count
+        if let meals = mealViewModel!.meals {
+            return meals.count
+        } else {
+            return 0
+        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let mealData = mealViewModel.meals[indexPath.row]
+        let mealData = mealViewModel?.meals?[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.mealCell, for: indexPath) as! MealPlanTableViewCell
         
         cell.meal = mealData
@@ -70,6 +81,26 @@ extension MealPlanViewController: MealPlanTableViewCellDelegate  {
         tableView.endUpdates()
         if selectedCellIndexPath != nil {
             tableView.scrollToRow(at: cell, at: .bottom, animated: true)
+        }
+    }
+    func update() {
+        mealViewModel.updateMeals(for: date)
+    }
+}
+
+extension MealPlanViewController {
+    
+    func updateDataSource() {
+        stopSpinner()
+        tableView.register(UINib(nibName: K.NibName.mealPlanTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.mealCell)
+        self.tableView.reloadData()
+    }
+    func callToViewModelForUIUpdate() {
+        showSpinner()
+        self.mealViewModel = MealViewModel()
+        
+        self.mealViewModel!.bindMealViewModelToController = {
+            self.updateDataSource()
         }
     }
 }
