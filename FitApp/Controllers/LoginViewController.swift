@@ -26,8 +26,9 @@ class LoginViewController: UIViewController {
 	}
 	
 	@IBAction func signInButtonAction(_ sender: Any) {
-		
-		Auth.auth().signIn(withEmail: emailTextfield.text!, password: passwordTextfield.text!) { (user, error) in
+        guard let email = emailTextfield.text, let password = passwordTextfield.text else { return }
+        
+		Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
 			if error == nil{
 				let storyboard = UIStoryboard(name: K.StoryboardName.Home, bundle: nil)
 				let homeVC = storyboard.instantiateViewController(identifier: K.StoryboardNameId.HomeTabBar)
@@ -36,7 +37,7 @@ class LoginViewController: UIViewController {
 				self.present(homeVC, animated: true)
 			} else {
 				let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
-				let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+				let defaultAction = UIAlertAction(title: "אישור", style: .cancel, handler: nil)
 				
 				alertController.addAction(defaultAction)
 				self.present(alertController, animated: true, completion: nil)
