@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Weight {
+struct Weight: Codable {
     
     let date: Date
     let weight: Double
@@ -21,4 +21,9 @@ struct Weight {
     var printWeight: String {
         return String(format: "%.1f", weight) + " ק״ג"
     }
+}
+
+struct Weights: Codable {
+    
+    let weights: [Weight]
 }

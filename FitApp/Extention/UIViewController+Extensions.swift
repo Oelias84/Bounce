@@ -37,7 +37,7 @@ extension UIViewController {
         view.endEditing(true)
     }
     
-    //Alerts
+    //MARK: - Alerts
     func presentOkAlert(withTitle title: String? = nil, withMessage message: String, buttonText: String = "אישור", completion: @escaping () -> Void) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: buttonText, style: .default){ action in

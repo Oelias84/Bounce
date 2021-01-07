@@ -42,6 +42,9 @@
 		B348420D25890CF800E0EF31 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B348420C25890CF800E0EF31 /* Meal.swift */; };
 		B348421525890E5D00E0EF31 /* DIsh.swift in Sources */ = {isa = PBXBuildFile; fileRef = B348421425890E5D00E0EF31 /* DIsh.swift */; };
 		B35111CA25962D41001B2B9B /* weightTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35111C925962D41001B2B9B /* weightTableViewCell.swift */; };
+		B368DF4F25A5F24E00BD1937 /* GoogleApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */; };
+		B368DFE025A6247600BD1937 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368DFDF25A6247600BD1937 /* SpinnerView.swift */; };
+		B368DFFB25A76A2C00BD1937 /* WeightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */; };
 		B36B71872577BD99001CD393 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B71862577BD99001CD393 /* ExerciseDetailViewController.swift */; };
 		B36B718C2577BDF3001CD393 /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B718B2577BDF3001CD393 /* ExerciseViewController.swift */; };
 		B36B71922577BF0C001CD393 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B71912577BF0C001CD393 /* Exercise.swift */; };
@@ -131,6 +134,9 @@
 		B348420C25890CF800E0EF31 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		B348421425890E5D00E0EF31 /* DIsh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIsh.swift; sourceTree = "<group>"; };
 		B35111C925962D41001B2B9B /* weightTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = weightTableViewCell.swift; sourceTree = "<group>"; };
+		B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApiManager.swift; sourceTree = "<group>"; };
+		B368DFDF25A6247600BD1937 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
+		B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightViewModel.swift; sourceTree = "<group>"; };
 		B36B71862577BD99001CD393 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
 		B36B718B2577BDF3001CD393 /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
 		B36B71912577BF0C001CD393 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
@@ -299,6 +305,7 @@
 				7C89AA58256D6FDB009AD87C /* Constants.swift */,
 				7C89AA60256D700F009AD87C /* UserProfile.swift */,
 				B3DB751A259F8773002CF48B /* ConsumptionManager.swift */,
+				B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -419,6 +426,7 @@
 				B3E6E99A2571443200958C48 /* QuestionnaireFatCollectionViewCell */,
 				B34397AB258A7F770073A59B /* DishView */,
 				B3CA0CE2258111FD00923902 /* CircularProgressView.swift */,
+				B368DFDF25A6247600BD1937 /* SpinnerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -427,6 +435,7 @@
 			isa = PBXGroup;
 			children = (
 				B3DB7512259F8270002CF48B /* MealViewModel.swift */,
+				B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -713,10 +722,13 @@
 				B302982025793BBA00CF41F0 /* UserProgress.swift in Sources */,
 				B3BB8F4125826FEB00D70628 /* QuestionnaireNutritionViewController.swift in Sources */,
 				B36B71922577BF0C001CD393 /* Exercise.swift in Sources */,
+				B368DF4F25A5F24E00BD1937 /* GoogleApiManager.swift in Sources */,
+				B368DFFB25A76A2C00BD1937 /* WeightViewModel.swift in Sources */,
 				B36B71872577BD99001CD393 /* ExerciseDetailViewController.swift in Sources */,
 				B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */,
 				B3DB753525A09133002CF48B /* Double+Extensions.swift in Sources */,
 				7C89AA66256D704D009AD87C /* LoginViewController.swift in Sources */,
+				B368DFE025A6247600BD1937 /* SpinnerView.swift in Sources */,
 				B341E236257FA6F500EE05A7 /* Date+Extensions.swift in Sources */,
 				B3DB750D259F4850002CF48B /* FloatingPoint+Extensions.swift in Sources */,
 				B3E36E75257285F3006CE558 /* HomeViewController.swift in Sources */,

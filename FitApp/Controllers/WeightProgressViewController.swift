@@ -17,35 +17,13 @@ enum TimePeriod {
 
 class WeightProgressViewController: UIViewController {
     
-    
-    var weightsArray = [
-        Weight(date: "2020-02-02".dateFromString!, weight: 73.26),
-        Weight(date: "2020-02-03".dateFromString!, weight: 71.55),
-        Weight(date: "2020-02-04".dateFromString!, weight: 70.55),
-        Weight(date: "2020-02-05".dateFromString!, weight: 69.96),
-        
-        Weight(date: "2020-02-10".dateFromString!, weight: 56.0),
-        
-        Weight(date: "2020-03-01".dateFromString!, weight: 56),
-        Weight(date: "2020-03-02".dateFromString!, weight: 56),
-        Weight(date: "2020-03-03".dateFromString!, weight: 56),
-        
-        Weight(date: "2020-12-08".dateFromString!, weight: 56),
-        Weight(date: "2020-12-09".dateFromString!, weight: 56),
-        Weight(date: "2020-12-10".dateFromString!, weight: 56),
-        Weight(date: "2020-12-30".dateFromString!, weight: 56),
-        
-        Weight(date: "2021-3-08".dateFromString!, weight: 56),
-        Weight(date: "2021-3-09".dateFromString!, weight: 56),
-        Weight(date: "2021-3-10".dateFromString!, weight: 56),
-        
-        Weight(date: "2021-3-30".dateFromString!, weight: 56)
-    ]
-    var filteredArray: [Weight]? {
-        didSet {
-            tableView.reloadData()
-        }
+    private var weightViewModel: WeightViewModel!
+    private var filteredArray: [Weight]? {
+    didSet {
+        tableView.reloadData()
     }
+}
+    
     var timePeriod: TimePeriod = .week
     var selectedDate: Date! {
         didSet {
@@ -69,13 +47,13 @@ class WeightProgressViewController: UIViewController {
         super.viewDidLoad()
         
         selectedDate = Date()
-        filteredArray = getWeekBy(selectedDate.startOfWeek!)
+        callToViewModelForUIUpdate()
         tableView.sectionHeaderHeight = 46
     }
     
     @IBAction func todayButtonAction(_ sender: Any) {
         selectedDate = Date()
-        filteredArray = getWeekBy(selectedDate.startOfWeek!)
+        filteredArray = weightViewModel.getWeekBy(selectedDate.startOfWeek!)
         periodSegmentedControl.selectedSegmentIndex = 0
         timePeriod = .week
         updateDateLabels()
@@ -140,7 +118,11 @@ class WeightProgressViewController: UIViewController {
 extension WeightProgressViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredArray?.count ?? 0
+        if let weights = filteredArray {
+            return weights.count
+        } else {
+            return 0
+        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.weightCell) as! weightTableViewCell
@@ -198,113 +180,6 @@ extension WeightProgressViewController: UITableViewDelegate, UITableViewDataSour
 //MARK: - Function
 extension WeightProgressViewController {
     
-    func getWeekBy(_ date: Date) -> [Weight] {
-        let weekArray = weightsArray.filter {
-            $0.date >= date.startOfWeek! && $0.date <= date.endOfWeek!
-        }
-        return weekArray
-    }
-    func getMonthBy(_ date: Date) -> [Weight] {
-        var weeksArray = [Weight]()
-        let weeks = splitToWeeksArray()!.filter { (weekArray) -> Bool in
-            weekArray.first?.date.month == date.month && weekArray.first?.date.year == date.year
-        }
-        if weeks.isEmpty { return [] }
-        for i in 0...weeks.count-1 {
-            let date = weeks[i].first!.date
-            var weight = 0.0
-            for j in 0...weeks[i].count-1 {
-                weight += weeks[i][j].weight
-            }
-            weight = weight / Double(weeks[i].count)
-            weeksArray.append(Weight(date: date, weight: weight))
-        }
-        return weeksArray
-    }
-    func getYearBy(_ date: Date) -> [Weight] {
-        var monthsArray = [Weight]()
-        if let year = splitToYearsArray()?.first(where: { $0.first?.date.year == date.year }), !year.isEmpty {
-            let yearMonths = splitToMonthsArray(weightsArray: year)!
-            
-            for month in yearMonths {
-                let monthDate = month.first!.date
-                var weight = 0.0
-                for day in month {
-                    weight += day.weight
-                }
-                monthsArray.append(Weight(date: monthDate, weight: weight / Double(month.count)))
-                weight = 0.0
-            }
-        }
-        return monthsArray
-    }
-    
-    func splitToWeeksArray() -> [[Weight]]? {
-        if weightsArray.isEmpty { return nil }
-        var weeksArray: [[Weight]]?
-        var date = weightsArray.first!.date
-        var section = 0
-        
-        for day in weightsArray {
-            if day.date >= date.startOfWeek! && day.date <= date.endOfWeek! {
-                if weeksArray == nil {
-                    weeksArray = [[day]]
-                } else {
-                    weeksArray?[section].append(day)
-                }
-            } else {
-                date = day.date
-                section += 1
-                weeksArray?.append([day])
-            }
-        }
-        return weeksArray
-    }
-    func splitToMonthsArray(weightsArray: [Weight]) -> [[Weight]]? {
-        if weightsArray.isEmpty { return nil }
-        var monthArray: [[Weight]] = [[Weight]()]
-
-        var month = weightsArray.first!.date
-        var section = 0
-        var weight = 0.0
-        var monthDays = 0.0
-            for day in weightsArray {
-                if day.date.month != month.month {
-                    monthArray[section].append(Weight(date: month, weight: weight / monthDays))
-                    monthArray.append([Weight]())
-                    section += 1
-                    month = day.date
-                    weight = day.weight
-                    monthDays = 0
-                } else if day.date.month == month.month {
-                    weight += day.weight
-                    monthDays += 1
-                }
-            }
-        monthArray[section].append(Weight(date: month, weight: weight / monthDays))
-        return monthArray
-    }
-    func splitToYearsArray() -> [[Weight]]? {
-        if weightsArray.isEmpty { return nil }
-        var yearArray: [[Weight]]?
-        var year = weightsArray.first!.date.year
-        var section = 0
-        
-        for i in 0...weightsArray.count-1 {
-            
-            if yearArray == nil {
-                yearArray = [[weightsArray[i]]]
-            } else if weightsArray[i].date.year == year {
-                yearArray![section].append(weightsArray[i])
-            } else {
-                yearArray?.append([])
-                section += 1
-                year = weightsArray[i].date.year
-            }
-        }
-        return yearArray
-    }
-    
     func updateDateLabels() {
         switch timePeriod {
         case .week:
@@ -324,20 +199,40 @@ extension WeightProgressViewController {
     func updateFiltersArray() {
         switch timePeriod {
         case .week:
-            filteredArray = getWeekBy(selectedDate)
+            filteredArray = weightViewModel.getWeekBy(selectedDate)
         case .month:
-            filteredArray = getMonthBy(selectedDate)
+            filteredArray = weightViewModel.getMonthBy(selectedDate)
         case .year:
-            filteredArray = getYearBy(selectedDate)
+            filteredArray = weightViewModel.getYearBy(selectedDate)
         }
     }
     
     func addWeight(textField: UITextField) {
         todayButtonAction(self)
         if let weight = textField.text {
-            weightsArray.append(Weight(date: Date(), weight: Double(weight)!))
+            let weight = Weight(date: Date(), weight: Double(weight)!)
+            weightViewModel.weights?.append(weight)
+            weightViewModel.addWeight()
             updateDateLabels()
             updateFiltersArray()
+        }
+    }
+}
+
+extension WeightProgressViewController {
+    
+    func updateDataSource() {
+        stopSpinner()
+        filteredArray = weightViewModel.getWeekBy(selectedDate.startOfWeek!)
+        self.tableView.reloadData()
+    }
+    func callToViewModelForUIUpdate() {
+        showSpinner()
+        self.weightViewModel = WeightViewModel()
+        
+        self.weightViewModel!.bindWeightViewModelToController = {
+
+            self.updateDataSource()
         }
     }
 }
