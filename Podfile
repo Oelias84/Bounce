@@ -14,7 +14,6 @@ target 'FitApp' do
     
     pod 'BulletinBoard'
     pod 'DateToolsSwift'
-    pod 'SVProgressHUD'
 
   target 'FitAppTests' do
     inherit! :search_paths
