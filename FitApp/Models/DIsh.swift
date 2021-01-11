@@ -12,6 +12,12 @@ enum DishType: String, Codable {
     case protein = "חלבון"
     case carbs = "פחממה"
     case fat = "שומן"
+    
+    enum CodingKeys: String, CodingKey {
+        case protein
+        case carbs
+        case fat
+    }
 }
 
 class Dish: Codable  {
@@ -37,7 +43,11 @@ class Dish: Codable  {
         String(format: "%.2f", self.amount)
     }
     var printDishType: String {
-        self.type.rawValue
+        return String(self.type.rawValue.first!)
+    }
+    
+    func setName(name: String) {
+        self.dishName = name
     }
 }
 

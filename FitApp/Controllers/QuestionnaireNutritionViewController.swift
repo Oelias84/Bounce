@@ -30,10 +30,9 @@ class QuestionnaireNutritionViewController: UIViewController {
     }
     
     @IBAction func nextButtonAction(_ sender: Any) {
-        if numberOfMeals != 0 && mostHunger != 0 && leastHunger != 0 {
-            UserProfile.shared.mealsPerDay = numberOfMeals
-            UserProfile.shared.mostHungry = mostHunger
-            UserProfile.shared.leastHungry = leastHunger
+        if numberOfMeals != 0 && mostHunger != 0 {
+            UserProfile.defaults.mealsPerDay = numberOfMeals
+            UserProfile.defaults.mostHungry = mostHunger
 			performSegue(withIdentifier: K.SegueId.moveToFitnessLevel, sender: self)
         }
     }

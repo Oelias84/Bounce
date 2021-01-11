@@ -17,14 +17,19 @@ class ConsumptionManager {
     private var calories: Double!
     private var fatPortion: Double!
     private var proteinPortion: Double!
+    private var carbsPortion: Double!
+    
+    private var fatProgress = 0.0
+    private var proteinProgress = 0.0
+    private var carbsProgress = 0.0
     
     init() {
-//        let userData = UserProfile.shared
+        let userData = UserProfile.defaults
         
-        self.weight = 70.0//userData.weight!
-        self.fatPercentage = 20.0//userData.fatPercentage!
-        self.Kilometer = 10.0//userData.kilometer!
-        self.numberOfTrainings = 3//userData.weaklyWorkouts!
+        self.weight = userData.weight ?? 0.0
+        self.fatPercentage = userData.fatPercentage ?? 0.0
+        self.Kilometer = userData.kilometer ?? 0.0
+        self.numberOfTrainings = userData.weaklyWorkouts ?? 0
         configureData()
     }
     
@@ -35,7 +40,17 @@ class ConsumptionManager {
         return fatPortion
     }
     var getDayCarbs: Double {
-        return portionCarbs(fatPortion: self.fatPortion, proteinPortion: self.proteinPortion, calories: calories)
+        return carbsPortion
+    }
+    
+    var getDayProteinProgress: Double {
+        return proteinProgress
+    }
+    var getDayFatProgress: Double {
+        return fatProgress
+    }
+    var getDayCarbsProgress: Double {
+        return carbsProgress
     }
 }
 
@@ -97,5 +112,6 @@ extension ConsumptionManager {
         self.calories = TDEE(weight: weight, fatPercentage: fatPercentage, Kilometer: Kilometer, numberOfTrainings: numberOfTrainings)
         self.fatPortion = portionFat(fatGrams: fatGrams(weight: weight))
         self.proteinPortion = proteinPortion(proteinGrams: proteinGrams(weight: weight))
+        self.carbsPortion = portionCarbs(fatPortion: self.fatPortion, proteinPortion: self.proteinPortion, calories: calories)
     }
 }

@@ -43,7 +43,7 @@ class QuestionnaireFatPresentViewController: UIViewController {
             default:
                 break
             }
-            UserProfile.shared.fatPercentage = fatPrecent
+            UserProfile.defaults.fatPercentage = fatPrecent
 			performSegue(withIdentifier: K.SegueId.moveToActivity, sender: self)
         } else {
 			//show alert

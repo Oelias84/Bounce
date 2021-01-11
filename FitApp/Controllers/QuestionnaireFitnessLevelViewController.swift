@@ -29,8 +29,8 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 	
 	@IBAction func nextButtonAction(_ sender: Any) {
 		if fitnessLevel != 0 && weaklyWorkouts != 0 {
-			UserProfile.shared.fitnessLevel = fitnessLevel
-			UserProfile.shared.weaklyWorkouts = weaklyWorkouts
+			UserProfile.defaults.fitnessLevel = fitnessLevel
+			UserProfile.defaults.weaklyWorkouts = weaklyWorkouts
 			performSegue(withIdentifier: K.SegueId.moveToSumup, sender: self)
 		} else {
 			//show alert

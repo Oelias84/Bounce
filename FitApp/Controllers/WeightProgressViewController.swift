@@ -206,10 +206,13 @@ extension WeightProgressViewController {
             filteredArray = weightViewModel.getYearBy(selectedDate)
         }
     }
-    
     func addWeight(textField: UITextField) {
         todayButtonAction(self)
-        if let weight = textField.text {
+        
+        if let weights = weightViewModel.weights, weights.contains(where: { $0.date.day == Date().day }) {
+            presentOkAlert(withMessage: "כבר נשקלת היום") {}
+            return
+        } else if let weight = textField.text {
             let weight = Weight(date: Date(), weight: Double(weight)!)
             weightViewModel.weights?.append(weight)
             weightViewModel.addWeight()
@@ -231,7 +234,6 @@ extension WeightProgressViewController {
         self.weightViewModel = WeightViewModel()
         
         self.weightViewModel!.bindWeightViewModelToController = {
-
             self.updateDataSource()
         }
     }

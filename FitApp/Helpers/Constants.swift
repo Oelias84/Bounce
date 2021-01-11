@@ -9,7 +9,7 @@ import Foundation
 
 struct K {
 	
-	struct User {
+    struct User {
 		
 		static let name = "userName"
 		static let id = "userId"

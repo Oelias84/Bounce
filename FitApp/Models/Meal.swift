@@ -59,6 +59,13 @@ extension Meal: Comparable {
     }
 }
 
+struct MealProgress: Codable {
+    
+    var carbs: Double
+    var fats: Double
+    var protein: Double
+}
+
 struct DailyMeal: Codable {
     
     let meals: [Meal]

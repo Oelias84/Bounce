@@ -32,9 +32,8 @@ extension UITextField {
         picker.backgroundColor = .white
         self.inputView = picker
     }
-
     
-    @objc private func pickerChanged(_ sender: UIDatePicker){
+    @objc private func pickerChanged(_ sender: UIDatePicker) {
         switch sender.datePickerMode {
         case .time:
             self.text = sender.date.timeString

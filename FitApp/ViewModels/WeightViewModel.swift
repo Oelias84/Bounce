@@ -25,7 +25,6 @@ class WeightViewModel: NSObject {
         fetchWeights()
     }
     
-    
     func getWeekBy(_ date: Date) -> [Weight] {
         guard let weights = self.weights else { return [] }
         let weekArray = weights.filter {
@@ -35,9 +34,11 @@ class WeightViewModel: NSObject {
     }
     func getMonthBy(_ date: Date) -> [Weight] {
         var weeksArray = [Weight]()
-        let weeks = splitToWeeksArray()!.filter { (weekArray) -> Bool in
+        guard var weeks = splitToWeeksArray() else { return [] }
+        weeks = weeks.filter { (weekArray) -> Bool in
             weekArray.first?.date.month == date.month && weekArray.first?.date.year == date.year
         }
+        
         if weeks.isEmpty { return [] }
         for i in 0...weeks.count-1 {
             let date = weeks[i].first!.date

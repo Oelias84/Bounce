@@ -34,13 +34,13 @@ class QuestionnaireActivityViewController: UIViewController {
     @IBAction func nextButtonAction(_ sender: Any) {
         if kilometersCheckBox.isSelected {
             if let kilometers = kilometersLabel.text?.split(separator: " ").first {
-                UserProfile.shared.kilometer = Double(kilometers)
-				UserProfile.shared.steps = nil
+                UserProfile.defaults.kilometer = Double(kilometers)
+				UserProfile.defaults.steps = nil
             }
         } else if stepsCheckBox.isSelected {
             if let steps = stepsLabel.text {
-                UserProfile.shared.steps = Int(steps)
-				UserProfile.shared.kilometer = nil
+                UserProfile.defaults.steps = Int(steps)
+				UserProfile.defaults.kilometer = nil
             }
         }
 		performSegue(withIdentifier: K.SegueId.moveToNutrition, sender: self)

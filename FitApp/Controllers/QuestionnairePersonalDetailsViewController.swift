@@ -41,10 +41,10 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
     @IBAction func nextButtonAction(_ sender: Any) {
         if let birthDate = birthDate, let name = userName, let height = height, let weight = weight {
             
-            UserProfile.shared.name = name
-            UserProfile.shared.height = height
-            UserProfile.shared.weight = weight
-            UserProfile.shared.birthDate = birthDate
+            UserProfile.defaults.name = name
+            UserProfile.defaults.height = height
+            UserProfile.defaults.weight = weight
+            UserProfile.defaults.birthDate = birthDate
 			performSegue(withIdentifier: K.SegueId.moveToFatPercentage, sender: self)
         } else {
 			//show alert

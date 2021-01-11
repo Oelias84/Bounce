@@ -9,6 +9,8 @@ import UIKit
 
 class QuestionnaireSumUpViewController: UIViewController {
 	
+    let manager = GoogleApiManager()
+    
 	@IBOutlet weak var ageLabel: UILabel!
 	@IBOutlet weak var weightLabel: UILabel!
 	@IBOutlet weak var heightLabel: UILabel!
@@ -24,17 +26,20 @@ class QuestionnaireSumUpViewController: UIViewController {
 	}
 
 	@IBAction func nextButtonAction(_ sender: Any) {
-		//send data to server
+        let userData = UserProfile.defaults
+        UserProfile.defaults.finishOnboarding = true
+        let data = ServerUserData(name: userData.name!, birthDate: userData.birthDate!, weight: userData.weight!, height: userData.height!, fatPercentage: userData.fatPercentage!, kilometer: userData.kilometer!, mealsPerDay: userData.mealsPerDay!, mostHungry: userData.mostHungry!, fitnessLevel: userData.fitnessLevel!, weaklyWorkouts: userData.weaklyWorkouts!, finishOnboarding: true)
+        
+        manager.updateUserData(userData: data)
 		dismiss(animated: true)
 	}
 }
 
 extension QuestionnaireSumUpViewController {
 	
-	private func configureLabels(){
-		let data = UserProfile.shared
-		if let weight = data.weight, let birthDate = data.birthDate,
-		   let height = data.height, let mealsPerDay = data.mealsPerDay, let weaklyWorkouts = data.weaklyWorkouts {
+	private func configureLabels() {
+		if let weight = UserProfile.defaults.weight, let birthDate = UserProfile.defaults.birthDate,
+		   let height = UserProfile.defaults.height, let mealsPerDay = UserProfile.defaults.mealsPerDay, let weaklyWorkouts = UserProfile.defaults.weaklyWorkouts {
 			
 			ageLabel.text = birthDate.age
 			weightLabel.text = "\(weight) " + K.Units.kilometers
@@ -42,9 +47,9 @@ extension QuestionnaireSumUpViewController {
 			numberOfMealsLabel.text = "\(mealsPerDay)"
 			numberOfWorkoutsLabel.text = "\(weaklyWorkouts)"
 		}
-		if let kilometer = data.kilometer {
+		if let kilometer = UserProfile.defaults.kilometer {
 			activityLevelLabel.text = "\(kilometer) " + K.Units.kilometers
-		} else if let steps = data.steps {
+		} else if let steps = UserProfile.defaults.steps {
 			activityLevelLabel.text = "\(steps) " + K.Units.steps
 		} else {
 			activityLevelLabel.text = K.Units.unknown

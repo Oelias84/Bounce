@@ -9,13 +9,16 @@ import Foundation
 
 class MealViewModel: NSObject {
     
+    static let shared = MealViewModel()
     var meals: [Meal]? {
         didSet {
             self.bindMealViewModelToController()
         }
     }
+    private var dishes: [[ServerDish]]?
+    
     private var manager: ConsumptionManager!
-    private var googleService: GoogleApiManager!
+    public var googleService: GoogleApiManager!
     
     var bindMealViewModelToController : (() -> ()) = {}
     
@@ -24,21 +27,48 @@ class MealViewModel: NSObject {
         
         manager = ConsumptionManager()
         googleService = GoogleApiManager()
+        
         fetchMealsForOrCreate(date: Date(), prefer: .breakfast, numberOfMeals: 3, protein: manager.getDayProtein, carbs: manager.getDayCarbs, fat: manager.getDayFat)
+        fetchDishes()
     }
     
+    //MARK: - Meals Progress
+    func getProgress() -> MealProgress {
+        var carbs = 0.0
+        var fats = 0.0
+        var protein = 0.0
+        
+        guard meals != nil else { return MealProgress(carbs: 0.0, fats: 0.0, protein: 0.0) }
+        for meal in meals! {
+            for dish in meal.dishes {
+                if dish.isDishDone {
+                    switch dish.type {
+                    case .carbs:
+                        carbs += dish.amount
+                    case .fat:
+                        fats += dish.amount
+                    case .protein:
+                        protein += dish.amount
+                    }
+                }
+            }
+        }
+        return MealProgress(carbs: carbs, fats: fats, protein: protein)
+    }
+    
+    //MARK: - Meals
     func updateMeals(for date: Date) {
         guard let meals = self.meals else { return }
         let dailyMeal = DailyMeal(meals: meals)
-        
         googleService.updateMealBy(date: date, dailyMeal: dailyMeal)
     }
-    func fetchMealsBy(date: Date) {
+    func fetchMealsBy(date: Date, completion: @escaping () -> ()) {
         googleService.getMealFor(date) { result in
             switch result {
-            case .success(let meals):
-                if let meals = meals {
-                    self.meals = meals
+            case .success(let dailyMeal):
+                if let dailyMeal = dailyMeal {
+                    self.meals = dailyMeal.meals
+                    completion()
                 } else {
                     self.meals = []
                 }
@@ -50,9 +80,9 @@ class MealViewModel: NSObject {
     func fetchMealsForOrCreate(date: Date, prefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) {
         googleService.getMealFor(date) { result in
             switch result {
-            case .success(let meals):
-                if let meals = meals {
-                    self.meals = meals
+            case .success(let dailyMeal):
+                if let dailyMeal = dailyMeal {
+                    self.meals = dailyMeal.meals
                 } else {
                     self.meals = self.populateMeals(hasPrefer: prefer, numberOfMeals: numberOfMeals, protein: protein, carbs: carbs, fat: fat)
                 }
@@ -62,6 +92,39 @@ class MealViewModel: NSObject {
         }
     }
     
+    //MARK: Dishes
+    func fetchDishes() {
+        if dishes != nil && dishes!.count > 0 { return }
+        
+        googleService.getDishes { result in
+            switch result {
+            case .success(let dishes):
+                if let dishes = dishes {
+                    self.dishes = dishes
+                } else {
+                    return
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    func getDishesFor(type: DishType) -> [ServerDish] {
+        var dishArray: [ServerDish] = []
+        guard let dishes = self.dishes else { return [] }
+        
+        switch type {
+        case .fat:
+            dishArray = dishes[0]
+        case .carbs:
+            dishArray = dishes[1]
+        case .protein:
+            dishArray = dishes[2]
+        }
+        return dishArray
+    }
+    
+    //MARK: - Meals Algorithm
     func mealDishesDivider(hasPrefer: Bool, numberOfDishes: Double) -> (Double, Double) {
         let reducer = 0.5
         let numberOfMeals = 3

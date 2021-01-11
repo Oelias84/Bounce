@@ -45,6 +45,10 @@
 		B368DF4F25A5F24E00BD1937 /* GoogleApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */; };
 		B368DFE025A6247600BD1937 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368DFDF25A6247600BD1937 /* SpinnerView.swift */; };
 		B368DFFB25A76A2C00BD1937 /* WeightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */; };
+		B368E04925A790D200BD1937 /* ServerDishs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368E04825A790D200BD1937 /* ServerDishs.swift */; };
+		B368E05C25A79BB700BD1937 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368E05B25A79BB700BD1937 /* Data+Extensions.swift */; };
+		B368E07F25A8819100BD1937 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368E07E25A8819100BD1937 /* Key.swift */; };
+		B368E08725A8820E00BD1937 /* PropertyListValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368E08625A8820E00BD1937 /* PropertyListValue.swift */; };
 		B36B71872577BD99001CD393 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B71862577BD99001CD393 /* ExerciseDetailViewController.swift */; };
 		B36B718C2577BDF3001CD393 /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B718B2577BDF3001CD393 /* ExerciseViewController.swift */; };
 		B36B71922577BF0C001CD393 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B71912577BF0C001CD393 /* Exercise.swift */; };
@@ -137,6 +141,10 @@
 		B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApiManager.swift; sourceTree = "<group>"; };
 		B368DFDF25A6247600BD1937 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightViewModel.swift; sourceTree = "<group>"; };
+		B368E04825A790D200BD1937 /* ServerDishs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDishs.swift; sourceTree = "<group>"; };
+		B368E05B25A79BB700BD1937 /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		B368E07E25A8819100BD1937 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		B368E08625A8820E00BD1937 /* PropertyListValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListValue.swift; sourceTree = "<group>"; };
 		B36B71862577BD99001CD393 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
 		B36B718B2577BDF3001CD393 /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
 		B36B71912577BF0C001CD393 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
@@ -287,14 +295,8 @@
 		7C89AA6C256D70E5009AD87C /* Extention */ = {
 			isa = PBXGroup;
 			children = (
-				7C89AA73256D715E009AD87C /* String+Extensions.swift */,
-				7C89AA74256D715F009AD87C /* UIView+Extensions.swift */,
-				7C89AA75256D715F009AD87C /* UIViewController+Extensions.swift */,
-				B3B2A231256ED2A60052E6C8 /* UIImage+Extensions.swift */,
-				B341E235257FA6F500EE05A7 /* Date+Extensions.swift */,
-				B341E23A257FB3F400EE05A7 /* UITextField+Extensions.swift */,
-				B3DB750C259F4850002CF48B /* FloatingPoint+Extensions.swift */,
-				B3DB753425A09133002CF48B /* Double+Extensions.swift */,
+				B368E04E25A79B7B00BD1937 /* Types */,
+				B368E04D25A79B5D00BD1937 /* Views */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -302,8 +304,8 @@
 		7C89AA6D256D70FE009AD87C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				B368E07D25A8816000BD1937 /* UserData  */,
 				7C89AA58256D6FDB009AD87C /* Constants.swift */,
-				7C89AA60256D700F009AD87C /* UserProfile.swift */,
 				B3DB751A259F8773002CF48B /* ConsumptionManager.swift */,
 				B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */,
 			);
@@ -375,6 +377,39 @@
 			name = DishView;
 			sourceTree = "<group>";
 		};
+		B368E04D25A79B5D00BD1937 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7C89AA74256D715F009AD87C /* UIView+Extensions.swift */,
+				7C89AA75256D715F009AD87C /* UIViewController+Extensions.swift */,
+				B3B2A231256ED2A60052E6C8 /* UIImage+Extensions.swift */,
+				B341E23A257FB3F400EE05A7 /* UITextField+Extensions.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B368E04E25A79B7B00BD1937 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				7C89AA73256D715E009AD87C /* String+Extensions.swift */,
+				B341E235257FA6F500EE05A7 /* Date+Extensions.swift */,
+				B3DB750C259F4850002CF48B /* FloatingPoint+Extensions.swift */,
+				B3DB753425A09133002CF48B /* Double+Extensions.swift */,
+				B368E05B25A79BB700BD1937 /* Data+Extensions.swift */,
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
+		B368E07D25A8816000BD1937 /* UserData  */ = {
+			isa = PBXGroup;
+			children = (
+				7C89AA60256D700F009AD87C /* UserProfile.swift */,
+				B368E07E25A8819100BD1937 /* Key.swift */,
+				B368E08625A8820E00BD1937 /* PropertyListValue.swift */,
+			);
+			path = "UserData ";
+			sourceTree = "<group>";
+		};
 		B36B71852577BCE8001CD393 /* Exercise */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,6 +428,7 @@
 				B348420C25890CF800E0EF31 /* Meal.swift */,
 				B348421425890E5D00E0EF31 /* DIsh.swift */,
 				B3833F38259364ED006776D5 /* Weight.swift */,
+				B368E04825A790D200BD1937 /* ServerDishs.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -710,6 +746,7 @@
 				B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */,
 				B330B88A257581AA00BDB206 /* ExerciseTableViewCell.swift in Sources */,
 				B3DB7513259F8270002CF48B /* MealViewModel.swift in Sources */,
+				B368E05C25A79BB700BD1937 /* Data+Extensions.swift in Sources */,
 				7C89AA81256D7342009AD87C /* RegisterViewController.swift in Sources */,
 				7C89AA77256D715F009AD87C /* UIView+Extensions.swift in Sources */,
 				B348421525890E5D00E0EF31 /* DIsh.swift in Sources */,
@@ -734,10 +771,13 @@
 				B3E36E75257285F3006CE558 /* HomeViewController.swift in Sources */,
 				B3B2A232256ED2A60052E6C8 /* UIImage+Extensions.swift in Sources */,
 				7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */,
+				B368E07F25A8819100BD1937 /* Key.swift in Sources */,
 				B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */,
+				B368E08725A8820E00BD1937 /* PropertyListValue.swift in Sources */,
 				B36B718C2577BDF3001CD393 /* ExerciseViewController.swift in Sources */,
 				7C9B345E2583C5B400D30480 /* QuestionnaireSumUpViewController.swift in Sources */,
 				7C9B349E2583F9E000D30480 /* SettingsViewController.swift in Sources */,
+				B368E04925A790D200BD1937 /* ServerDishs.swift in Sources */,
 				B3BB8F3B2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift in Sources */,
 				B35111CA25962D41001B2B9B /* weightTableViewCell.swift in Sources */,
 				B330B88F257583D200BDB206 /* ExercisesTableViewController.swift in Sources */,
@@ -858,7 +898,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -914,7 +954,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

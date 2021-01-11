@@ -10,12 +10,13 @@ import BLTNBoard
 
 class HomeViewController: UIViewController {
     
-    var userProgress: UserProgress!
-    let manager = ConsumptionManager()
+    private var userProgress: UserProgress!
+    private var mealViewModel: MealViewModel!
     
     private let carbsShapeLayer = CAShapeLayer()
     private let fatShapeLayer = CAShapeLayer()
     private let proteinShapeLayer = CAShapeLayer()
+    
     
     private lazy var boardManager: BLTNItemManager = {
         let item = BLTNPageItem(title: "שמחים שהצטרפת אלינו :)")
@@ -32,9 +33,9 @@ class HomeViewController: UIViewController {
     private var fatColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
     private var proteinColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
     
-    private var fatStartValue = 0
-    private var carbsStartValue = 0
-    private var proteinStartValue = 0
+    private var fatStartValue = 0.0
+    private var carbsStartValue = 0.0
+    private var proteinStartValue = 0.0
     
     @IBOutlet weak var helloUserTextLabel: UILabel!
     @IBOutlet weak var userMotivationTextLabel: UILabel!
@@ -44,49 +45,44 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var proteinCountLabel: UILabel!
     @IBOutlet weak var questionnaireStartButton: UIButton!
     @IBOutlet weak var circularProgress: UIView!
-
     
     @IBOutlet weak var fatTargateLabel: UILabel!
     @IBOutlet weak var carbsTargateLabel: UILabel!
     @IBOutlet weak var proteinTargateLabel: UILabel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userProgress = UserProgress(carbsTarget: manager.getDayCarbs, proteinTarget: manager.getDayProtein, fatTarget: manager.getDayFat,
-                                    carbsProgress: 1.0, proteinProgress: 2.0, fatProgress: 1.0)
+        mealViewModel = MealViewModel.shared
+        mealViewModel.bindMealViewModelToController = {
+            self.setupProgress()
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        boardManager.showBulletin(above: self)
-        boardManager.allowsSwipeInteraction = false
-        configureProgress()
-        setUpProgressTextFields()
+            setupProgress()
+        if !(UserProfile.defaults.finishOnboarding ?? false) {
+            boardManager.showBulletin(above: self)
+            boardManager.allowsSwipeInteraction = false
+        }
     }
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		
-		let displayLink = CADisplayLink(target: self, selector: #selector(handleUpdate))
-		displayLink.add(to: .main, forMode: .default)
-	}
 }
 
 extension HomeViewController {
     
-    func setUpProgressTextFields() {
-        helloUserTextLabel.text = "היי \(UserProfile.shared.name  ?? ""),"
+    private func setUpProgressTextFields() {
+        helloUserTextLabel.text = "היי \(UserProfile.defaults.name  ?? ""),"
         // change progress sentence
-//        userMotivationTextLabel.text = "\()"
-		fatCountLabel.text = "\(fatStartValue)"
-		carbsCountLabel.text = "\(carbsStartValue)"
-		proteinCountLabel.text = "\(proteinStartValue)"
+        //        userMotivationTextLabel.text = "\()"
+        fatCountLabel.text = "\(fatStartValue)"
+        carbsCountLabel.text = "\(carbsStartValue)"
+        proteinCountLabel.text = "\(proteinStartValue)"
         fatTargateLabel.text = "\(userProgress.fatTarget)"
         carbsTargateLabel.text = "\(userProgress.carbsTarget)"
         proteinTargateLabel.text = "\(userProgress.proteinTarget)"
     }
-    
-    func configureProgress(){
+    private func configureProgress(){
         circularProgress.subviews.forEach {
             $0.removeFromSuperview()
         }
@@ -113,33 +109,8 @@ extension HomeViewController {
         circularProgress.addSubview(fatCP)
         fatCP.center = viewCenter
         
-        self.perform(#selector(animateProgress), with: nil, afterDelay: 0.7)
+        self.perform(#selector(animateProgress), with: nil, afterDelay: 0.1)
     }
-
-    @objc func animateProgress() {
-        let carbP = self.view.viewWithTag(100) as! CircularProgressView
-        let fatP = self.view.viewWithTag(101) as! CircularProgressView
-        let proteinP = self.view.viewWithTag(102) as! CircularProgressView
-
-        carbP.setProgressWithAnimation(duration: 1.0, value: userProgress.carbsProgress / userProgress.carbsTarget)
-        fatP.setProgressWithAnimation(duration: 1.0, value: userProgress.fatProgress / userProgress.fatTarget)
-        proteinP.setProgressWithAnimation(duration: 1.0, value: userProgress.proteinProgress / userProgress.proteinTarget)
-    }
-	@objc func handleUpdate(){
-		if fatStartValue < Int(userProgress.fatProgress) {
-			fatStartValue += 1
-		}
-		if carbsStartValue < Int(userProgress.carbsProgress) {
-			carbsStartValue += 1
-		}
-		if proteinStartValue < Int(userProgress.proteinProgress) {
-			proteinStartValue += 1
-		}
-		
-		fatCountLabel.text = "\(fatStartValue)"
-		carbsCountLabel.text = "\(carbsStartValue)"
-		proteinCountLabel.text = "\(proteinStartValue)"
-	}
     private func startQuestionnaire(){
         let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
         let questionnaireVC = storyboard.instantiateViewController(identifier: K.StoryboardNameId.questionnaireNavigation)
@@ -147,5 +118,25 @@ extension HomeViewController {
         questionnaireVC.modalPresentationStyle = .fullScreen
         boardManager.dismissBulletin()
         self.present(questionnaireVC, animated: true, completion: nil)
+    }
+    private func setupProgress() {
+        let manager = ConsumptionManager()
+        let progress = mealViewModel.getProgress()
+        self.userProgress = UserProgress(carbsTarget: manager.getDayCarbs, proteinTarget: manager.getDayProtein, fatTarget: manager.getDayFat, carbsProgress: progress.carbs, proteinProgress: progress.protein, fatProgress: progress.fats)
+        self.configureProgress()
+        self.setUpProgressTextFields()
+        fatCountLabel.text = "\(progress.fats)"
+        carbsCountLabel.text = "\(progress.carbs)"
+        proteinCountLabel.text = "\(progress.protein)"
+    }
+
+    @objc func animateProgress() {
+        let carbP = self.view.viewWithTag(100) as! CircularProgressView
+        let fatP = self.view.viewWithTag(101) as! CircularProgressView
+        let proteinP = self.view.viewWithTag(102) as! CircularProgressView
+        
+        carbP.setProgressWithAnimation(duration: 1.0, value: userProgress.carbsProgress / userProgress.carbsTarget)
+        fatP.setProgressWithAnimation(duration: 1.0, value: userProgress.fatProgress / userProgress.fatTarget)
+        proteinP.setProgressWithAnimation(duration: 1.0, value: userProgress.proteinProgress / userProgress.proteinTarget)
     }
 }

@@ -6,11 +6,13 @@
 //
 
 protocol MealPlanTableViewCellDelegate {
+    
     func detailTapped(cell: IndexPath)
-    func update()
 }
 
 import UIKit
+
+import Foundation
 
 class MealPlanTableViewCell: UITableViewCell {
     
@@ -21,6 +23,7 @@ class MealPlanTableViewCell: UITableViewCell {
             configureData()
         }
     }
+    var mealViewModel: MealViewModel!
     
     @IBOutlet weak var cellBackgroundView: UIView!
     @IBOutlet weak var mealNameLabel: UILabel!
@@ -46,22 +49,22 @@ class MealPlanTableViewCell: UITableViewCell {
     @IBAction func downButtonAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
     }
-    @IBAction func completeMealCheckMarkAction(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
-        meal.isMealDone.toggle()
-        
-        dishStackView.arrangedSubviews.forEach {
-            dishesStackViewHeight.constant -= 40
-            $0.removeFromSuperview()
-        }
-        meal.dishes.forEach {
-            $0.isDishDone = sender.isSelected
-        }
-        configureData()
-        delegate?.update()
-    }
     @IBAction func openDetailsAction(_ sender: UIButton) {
         delegate?.detailTapped(cell: indexPath)
+    }
+    @IBAction func completeMealCheckMarkAction(_ sender: UIButton) {
+        if meal.isMealDone {
+            let alert = UIAlertController(title: "האם ברצונך להסיר את הסימון?", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "אישור", style: .default, handler: { _ in
+                sender.isSelected = !sender.isSelected
+                self.changeMealState(sender)
+            }))
+            alert.addAction(UIAlertAction(title: "ביטול", style: .cancel))
+            self.parentViewController?.present(alert, animated: true)
+        } else {
+            sender.isSelected = !sender.isSelected
+            self.changeMealState(sender)
+        }
     }
 }
 
@@ -73,6 +76,7 @@ extension MealPlanTableViewCell {
         cellBackgroundView.layer.shadowColor = UIColor.systemBlue.cgColor
         cellBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 12)
         cellBackgroundView.layer.shadowRadius = 12
+        
     }
     private func configureData(isChecked: Bool = false) {
         var tag = 1
@@ -88,6 +92,7 @@ extension MealPlanTableViewCell {
             tag += 1
             view.delegate = self
             view.dish = $0
+            view.dishes = mealViewModel.getDishesFor(type: $0.type)
             view.clipsToBounds = true
             dishStackView.addArrangedSubview(view)
             dishesStackViewHeight.constant += 40
@@ -97,8 +102,9 @@ extension MealPlanTableViewCell {
 
 extension MealPlanTableViewCell: DishViewDelegate {
     
-    func didCheck() {
+    func didCheck(dish: Dish) {
         var allChecked = false
+        
         let isDishesChecked = meal.dishes.compactMap{ $0.isDishDone }
         for isDone in isDishesChecked {
             if !isDone {
@@ -110,6 +116,23 @@ extension MealPlanTableViewCell: DishViewDelegate {
         }
         meal.isMealDone = allChecked
         mealIsDoneCheckMark.isSelected = allChecked
-        delegate?.update()
+        mealViewModel.updateMeals(for: Date())
+    }
+}
+
+extension MealPlanTableViewCell {
+    
+    func changeMealState(_ sender: UIButton) {
+        meal.isMealDone.toggle()
+        
+        dishStackView.arrangedSubviews.forEach {
+            dishesStackViewHeight.constant -= 40
+            $0.removeFromSuperview()
+        }
+        meal.dishes.forEach {
+            $0.isDishDone = sender.isSelected
+        }
+        configureData()
+        mealViewModel.updateMeals(for: Date())
     }
 }

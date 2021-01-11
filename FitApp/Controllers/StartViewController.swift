@@ -12,6 +12,7 @@ class StartViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
 		if Auth.auth().currentUser != nil {
 			let storyboard = UIStoryboard(name: K.StoryboardName.Home, bundle: nil)
 			let homeVC = storyboard.instantiateViewController(identifier: K.StoryboardNameId.HomeTabBar)

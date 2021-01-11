@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -61,10 +62,10 @@
                                                     <action selector="completeMealCheckMarkAction:" destination="Qj3-aL-DOE" eventType="touchUpInside" id="yyA-at-B66"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vg7-Sx-Hlr">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vg7-Sx-Hlr" colorLabel="IBBuiltInLabel-Red">
                                                 <rect key="frame" x="0.0" y="36" width="30" height="24"/>
                                                 <state key="normal">
-                                                    <imageReference key="image" image="chevron.down" catalog="system" symbolScale="small"/>
+                                                    <imageReference key="image" image="chevron.down" catalog="system" symbolScale="large"/>
                                                 </state>
                                                 <state key="selected">
                                                     <imageReference key="image" image="chevron.up" catalog="system" symbolScale="small"/>
@@ -84,37 +85,37 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zND-qr-Xa8">
                                 <rect key="frame" x="16" y="78" width="363" height="22"/>
                                 <subviews>
-                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="qYe-92-4Bb" userLabel="Dish Headline Stack View">
-                                        <rect key="frame" x="0.0" y="22" width="379" height="16"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qYe-92-4Bb" userLabel="Dish Headline Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="137.5" height="16"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FS0-wh-1EZ" userLabel="Spacer View">
-                                                <rect key="frame" x="0.0" y="0.0" width="64" height="16"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="16"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="64" id="ipK-tH-uLr"/>
+                                                    <constraint firstAttribute="width" constant="25" id="ipK-tH-uLr"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="שם מנה" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoB-kT-28o">
-                                                <rect key="frame" x="138.5" y="0.0" width="47" height="16"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="כמות" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JDP-CR-Dh2">
+                                                <rect key="frame" x="25" y="0.0" width="46" height="16"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="47" id="ZY0-2T-3sr"/>
+                                                    <constraint firstAttribute="width" constant="46" id="Wav-Rf-iLj"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <color key="textColor" red="0.18633201720000001" green="0.6013119817" blue="0.92112988230000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="כמות" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JDP-CR-Dh2">
-                                                <rect key="frame" x="260.5" y="0.0" width="32" height="16"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="שם מנה" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoB-kT-28o">
+                                                <rect key="frame" x="71" y="0.0" width="51.5" height="16"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="32" id="Wav-Rf-iLj"/>
+                                                    <constraint firstAttribute="width" constant="194" id="ZY0-2T-3sr"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <color key="textColor" red="0.18633201720000001" green="0.6013119817" blue="0.92112988230000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xoC-2q-Pml" userLabel="Spacer View">
-                                                <rect key="frame" x="367" y="0.0" width="12" height="16"/>
+                                                <rect key="frame" x="122.5" y="0.0" width="15" height="16"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="12" id="CvP-s1-QX1"/>
+                                                    <constraint firstAttribute="width" constant="15" id="CvP-s1-QX1"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -123,7 +124,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="z7Q-Cx-yY6">
-                                        <rect key="frame" x="0.0" y="22" width="379" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="379" height="0.0"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="Kab-Tj-oTd"/>
                                             <constraint firstAttribute="width" constant="379" id="ep2-RQ-GPx"/>
