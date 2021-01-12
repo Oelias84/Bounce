@@ -126,4 +126,29 @@ struct GoogleApiManager {
             }
         }
     }
+    
+    //MARK: - Articles
+    func getArticles(completion: @escaping (Result<[[Article]]?, Error>) -> Void) {
+        do {
+            db.collection("articles-data").document("articles").getDocument { (data, error) in
+                if let error = error {
+                    print(error)
+                } else if let data = data {
+                    do {
+                        var articles: [[Article]] = []
+                        
+                        if let decodedData = try data.data(as: ServerArticles.self) {
+                            
+                            articles = [decodedData.nutrition, decodedData.exercise, decodedData.recipes, decodedData.other]
+                        }
+                        completion(.success(articles))
+                    } catch {
+                        print(error)
+                        completion(.failure(error))
+                    }
+                }
+            }
+        }
+        
+    }
 }
