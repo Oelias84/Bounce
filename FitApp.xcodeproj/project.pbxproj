@@ -42,6 +42,13 @@
 		B348420D25890CF800E0EF31 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B348420C25890CF800E0EF31 /* Meal.swift */; };
 		B348421525890E5D00E0EF31 /* DIsh.swift in Sources */ = {isa = PBXBuildFile; fileRef = B348421425890E5D00E0EF31 /* DIsh.swift */; };
 		B35111CA25962D41001B2B9B /* weightTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35111C925962D41001B2B9B /* weightTableViewCell.swift */; };
+		B358222325AC930B00C91295 /* Articles.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B358222225AC930B00C91295 /* Articles.storyboard */; };
+		B358222825AC9A2F00C91295 /* ArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358222725AC9A2F00C91295 /* ArticlesViewController.swift */; };
+		B358223025AC9DA800C91295 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358222F25AC9DA800C91295 /* Article.swift */; };
+		B358227825ACA2F800C91295 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358227625ACA2F800C91295 /* ArticleTableViewCell.swift */; };
+		B358227925ACA2F800C91295 /* ArticleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B358227725ACA2F800C91295 /* ArticleTableViewCell.xib */; };
+		B358227F25ACA40D00C91295 /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358227E25ACA40D00C91295 /* ArticleViewModel.swift */; };
+		B35822A225ADA04300C91295 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35822A125ADA04300C91295 /* ArticleViewController.swift */; };
 		B368DF4F25A5F24E00BD1937 /* GoogleApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */; };
 		B368DFE025A6247600BD1937 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368DFDF25A6247600BD1937 /* SpinnerView.swift */; };
 		B368DFFB25A76A2C00BD1937 /* WeightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */; };
@@ -138,6 +145,13 @@
 		B348420C25890CF800E0EF31 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		B348421425890E5D00E0EF31 /* DIsh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIsh.swift; sourceTree = "<group>"; };
 		B35111C925962D41001B2B9B /* weightTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = weightTableViewCell.swift; sourceTree = "<group>"; };
+		B358222225AC930B00C91295 /* Articles.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Articles.storyboard; sourceTree = "<group>"; };
+		B358222725AC9A2F00C91295 /* ArticlesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesViewController.swift; sourceTree = "<group>"; };
+		B358222F25AC9DA800C91295 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		B358227625ACA2F800C91295 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
+		B358227725ACA2F800C91295 /* ArticleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleTableViewCell.xib; sourceTree = "<group>"; };
+		B358227E25ACA40D00C91295 /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
+		B35822A125ADA04300C91295 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApiManager.swift; sourceTree = "<group>"; };
 		B368DFDF25A6247600BD1937 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightViewModel.swift; sourceTree = "<group>"; };
@@ -319,6 +333,7 @@
 				7C89AA00256D69CA009AD87C /* LoginRegister.storyboard */,
 				7C89AA90256D8286009AD87C /* Questionnaire.storyboard */,
 				B3E36E6F25727F63006CE558 /* Home.storyboard */,
+				B358222225AC930B00C91295 /* Articles.storyboard */,
 				B3B7FCEE2590EFBC004BC2CD /* WeightProgress.storyboard */,
 				B3E6E98C257142CD00958C48 /* MealPlan.storyboard */,
 				B330B87525757C1000BDB206 /* Exercises.storyboard */,
@@ -344,6 +359,7 @@
 				B3E36E74257285F3006CE558 /* HomeViewController.swift */,
 				B3E6E9B725714D5800958C48 /* MealPlanViewController.swift */,
 				7C9B349D2583F9E000D30480 /* SettingsViewController.swift */,
+				B35822A025ADA01D00C91295 /* Articles */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -375,6 +391,24 @@
 				B34397AC258A7FA50073A59B /* DishView.swift */,
 			);
 			name = DishView;
+			sourceTree = "<group>";
+		};
+		B358227D25ACA2FE00C91295 /* ArticleTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B358227625ACA2F800C91295 /* ArticleTableViewCell.swift */,
+				B358227725ACA2F800C91295 /* ArticleTableViewCell.xib */,
+			);
+			name = ArticleTableViewCell;
+			sourceTree = "<group>";
+		};
+		B35822A025ADA01D00C91295 /* Articles */ = {
+			isa = PBXGroup;
+			children = (
+				B358222725AC9A2F00C91295 /* ArticlesViewController.swift */,
+				B35822A125ADA04300C91295 /* ArticleViewController.swift */,
+			);
+			name = Articles;
 			sourceTree = "<group>";
 		};
 		B368E04D25A79B5D00BD1937 /* Views */ = {
@@ -429,6 +463,7 @@
 				B348421425890E5D00E0EF31 /* DIsh.swift */,
 				B3833F38259364ED006776D5 /* Weight.swift */,
 				B368E04825A790D200BD1937 /* ServerDishs.swift */,
+				B358222F25AC9DA800C91295 /* Article.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -460,6 +495,7 @@
 				B330B87D25757E8A00BDB206 /* ExerciseTabelViewCell */,
 				B3E6E99E2571444000958C48 /* MealPlanTableViewCell */,
 				B3E6E99A2571443200958C48 /* QuestionnaireFatCollectionViewCell */,
+				B358227D25ACA2FE00C91295 /* ArticleTableViewCell */,
 				B34397AB258A7F770073A59B /* DishView */,
 				B3CA0CE2258111FD00923902 /* CircularProgressView.swift */,
 				B368DFDF25A6247600BD1937 /* SpinnerView.swift */,
@@ -472,6 +508,7 @@
 			children = (
 				B3DB7512259F8270002CF48B /* MealViewModel.swift */,
 				B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */,
+				B358227E25ACA40D00C91295 /* ArticleViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -606,12 +643,14 @@
 				7C89AA07256D69CB009AD87C /* LaunchScreen.storyboard in Resources */,
 				7C89AA04256D69CB009AD87C /* Assets.xcassets in Resources */,
 				B3E6E98D257142CD00958C48 /* MealPlan.storyboard in Resources */,
+				B358222325AC930B00C91295 /* Articles.storyboard in Resources */,
 				7C89AA91256D8286009AD87C /* Questionnaire.storyboard in Resources */,
 				B3E6E9A02571446E00958C48 /* MealPlanTableViewCell.xib in Resources */,
 				B3B7FCEF2590EFBC004BC2CD /* WeightProgress.storyboard in Resources */,
 				7C89AA02256D69CA009AD87C /* LoginRegister.storyboard in Resources */,
 				B330B87625757C1000BDB206 /* Exercises.storyboard in Resources */,
 				B330B87F25757F1300BDB206 /* ExerciseTableViewCell.xib in Resources */,
+				B358227925ACA2F800C91295 /* ArticleTableViewCell.xib in Resources */,
 				B34397A7258A7F720073A59B /* DishView.xib in Resources */,
 				7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */,
 				B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */,
@@ -753,6 +792,7 @@
 				B348420D25890CF800E0EF31 /* Meal.swift in Sources */,
 				B3833F39259364ED006776D5 /* Weight.swift in Sources */,
 				B3E6E9AD25714C1400958C48 /* MealPlanTableViewCell.swift in Sources */,
+				B358227825ACA2F800C91295 /* ArticleTableViewCell.swift in Sources */,
 				7C9B34922583F84A00D30480 /* StartViewController.swift in Sources */,
 				B341E230257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift in Sources */,
 				B30069D325926F090025FA0E /* WeightProgressViewController.swift in Sources */,
@@ -761,6 +801,7 @@
 				B36B71922577BF0C001CD393 /* Exercise.swift in Sources */,
 				B368DF4F25A5F24E00BD1937 /* GoogleApiManager.swift in Sources */,
 				B368DFFB25A76A2C00BD1937 /* WeightViewModel.swift in Sources */,
+				B358222825AC9A2F00C91295 /* ArticlesViewController.swift in Sources */,
 				B36B71872577BD99001CD393 /* ExerciseDetailViewController.swift in Sources */,
 				B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */,
 				B3DB753525A09133002CF48B /* Double+Extensions.swift in Sources */,
@@ -769,6 +810,7 @@
 				B341E236257FA6F500EE05A7 /* Date+Extensions.swift in Sources */,
 				B3DB750D259F4850002CF48B /* FloatingPoint+Extensions.swift in Sources */,
 				B3E36E75257285F3006CE558 /* HomeViewController.swift in Sources */,
+				B35822A225ADA04300C91295 /* ArticleViewController.swift in Sources */,
 				B3B2A232256ED2A60052E6C8 /* UIImage+Extensions.swift in Sources */,
 				7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */,
 				B368E07F25A8819100BD1937 /* Key.swift in Sources */,
@@ -782,10 +824,12 @@
 				B35111CA25962D41001B2B9B /* weightTableViewCell.swift in Sources */,
 				B330B88F257583D200BDB206 /* ExercisesTableViewController.swift in Sources */,
 				7C89AA61256D700F009AD87C /* UserProfile.swift in Sources */,
+				B358227F25ACA40D00C91295 /* ArticleViewModel.swift in Sources */,
 				B34397AD258A7FA50073A59B /* DishView.swift in Sources */,
 				7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */,
 				7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */,
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
+				B358223025AC9DA800C91295 /* Article.swift in Sources */,
 				B3E6E9B825714D5800958C48 /* MealPlanViewController.swift in Sources */,
 				B3BB8F35258223E400D70628 /* QuestionnaireActivityViewController.swift in Sources */,
 				B3DB751B259F8773002CF48B /* ConsumptionManager.swift in Sources */,
