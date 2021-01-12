@@ -68,7 +68,7 @@
                                                     <imageReference key="image" image="chevron.down" catalog="system" symbolScale="large"/>
                                                 </state>
                                                 <state key="selected">
-                                                    <imageReference key="image" image="chevron.up" catalog="system" symbolScale="small"/>
+                                                    <imageReference key="image" image="chevron.up" catalog="system" symbolScale="large"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="downButtonAction:" destination="Qj3-aL-DOE" eventType="touchUpInside" id="ges-zi-LDN"/>

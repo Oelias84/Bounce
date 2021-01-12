@@ -11,7 +11,6 @@ protocol MealPlanTableViewCellDelegate {
 }
 
 import UIKit
-
 import Foundation
 
 class MealPlanTableViewCell: UITableViewCell {
