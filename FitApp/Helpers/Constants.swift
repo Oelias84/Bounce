@@ -50,10 +50,11 @@ struct K {
 		static let questionnaire = "Questionnaire"
 		static let launchScreen = "LaunchScreen"
 		static let loginRegister = "LoginRegister"
-        static let MealPlan = "MealPlan"
-        static let Exercises = "Exercises"
-        static let WeightProgress = "WeightProgress"
-        static let Home = "Home"
+        static let mealPlan = "MealPlan"
+        static let exercises = "Exercises"
+        static let weightProgress = "WeightProgress"
+        static let home = "Home"
+        static let articles = "Articles"
 	}
 	
 	struct StoryboardNameId {
@@ -75,6 +76,9 @@ struct K {
         //Exercise
         static let exercisesTableViewController = "ExercisesTableViewController"
         static let exerciseViewController = "ExerciseViewController"
+        //Articles
+        static let articlesViewController = "ArticlesViewController"
+        static let articleViewController = "ArticleViewController"
 	}
     
     struct SegueId {
@@ -93,18 +97,20 @@ struct K {
     
     struct CellId {
         
-        static let exerciseCell = "exerciseCell"
         static let mealCell = "mealCell"
         static let fanCell = "fanCell"
         static let weightCell = "weightCell"
+        static let articleCell = "articleCell"
+        static let exerciseCell = "exerciseCell"
     }
 	
     struct NibName {
         
+        static let dishView = "DishView"
         static let exerciseTableViewCell = "ExerciseTableViewCell"
         static let mealPlanTableViewCell = "MealPlanTableViewCell"
+        static let articleTableViewCell = "ArticleTableViewCell"
         static let questionnaireFatCollectionViewCell = "QuestionnaireFatCollectionViewCell"
-        static let dishView = "DishView"
     }
 	
 	struct Units {

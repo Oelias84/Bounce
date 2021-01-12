@@ -39,7 +39,7 @@ class RegisterViewController: UIViewController {
         } else {
             Auth.auth().createUser(withEmail: emailTextfield.text!, password: passwordTextfield.text!){ (user, error) in
                 if error == nil {
-                    let storyboard = UIStoryboard(name: K.StoryboardName.Home, bundle: nil)
+                    let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
                     let homeVC = storyboard.instantiateViewController(identifier: K.StoryboardNameId.HomeTabBar)
                     
                     homeVC.modalPresentationStyle = .fullScreen
