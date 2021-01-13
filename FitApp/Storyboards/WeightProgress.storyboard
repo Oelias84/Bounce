@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Gc-gz-nR3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Mxh-5B-SBV">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -91,7 +91,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CkF-ZQ-fGy">
-                                <rect key="frame" x="0.0" y="216" width="414" height="503"/>
+                                <rect key="frame" x="0.0" y="216" width="414" height="552"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="weightCell" id="gEe-Ay-JCN" customClass="weightTableViewCell" customModule="FitApp" customModuleProvider="target">
@@ -167,7 +167,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRF-da-tSi">
-                                <rect key="frame" x="12" y="743" width="390" height="46"/>
+                                <rect key="frame" x="12" y="792" width="390" height="46"/>
                                 <color key="backgroundColor" systemColor="linkColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="gXO-Qx-4gM"/>
@@ -233,46 +233,8 @@
             </objects>
             <point key="canvasLocation" x="2067" y="-34"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="kVs-Gl-Guq">
-            <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="1Gc-gz-nR3" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rY1-l4-YNy">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="4Vh-Tx-lX1" kind="relationship" relationship="viewControllers" id="ojf-Fz-0i9"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UvK-1u-ynR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="510" y="-34"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="6Hl-t4-Pnu">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Vh-Tx-lX1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="ScaleIcon" id="VZO-30-QeS"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="7Vi-hN-tDy">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Mxh-5B-SBV" kind="relationship" relationship="rootViewController" id="LMz-mc-gWk"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kKs-nF-9aa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1281" y="-34"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="ScaleIcon" width="26" height="26"/>
         <image name="calendar" catalog="system" width="128" height="106"/>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
