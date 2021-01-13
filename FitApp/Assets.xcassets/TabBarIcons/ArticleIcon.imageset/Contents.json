@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "CurrentStatusIcon.png",
+      "filename" : "A 2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "CurrentStatusIcon@2x.png",
+      "filename" : "A@2x 2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "CurrentStatusIcon@3x.png",
+      "filename" : "A@3x 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
