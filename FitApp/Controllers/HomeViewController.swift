@@ -63,11 +63,12 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setupProgress()
         if !(UserProfile.defaults.finishOnboarding ?? false) {
             boardManager.showBulletin(above: self)
             boardManager.allowsSwipeInteraction = false
+
         }
+        setupProgress()
     }
     
     @IBAction func profileButtonAction(_ sender: Any) {
@@ -134,9 +135,9 @@ extension HomeViewController {
     private func setupProgress() {
         let manager = ConsumptionManager()
         let progress = mealViewModel.getProgress()
-        self.userProgress = UserProgress(carbsTarget: manager.getDayCarbs, proteinTarget: manager.getDayProtein, fatTarget: manager.getDayFat, carbsProgress: progress.carbs, proteinProgress: progress.protein, fatProgress: progress.fats)
-        self.configureProgress()
-        self.setUpProgressTextFields()
+        userProgress = UserProgress(carbsTarget: manager.getDayCarbs, proteinTarget: manager.getDayProtein, fatTarget: manager.getDayFat, carbsProgress: progress.carbs, proteinProgress: progress.protein, fatProgress: progress.fats)
+        configureProgress()
+        setUpProgressTextFields()
         fatCountLabel.text = "\(progress.fats)"
         carbsCountLabel.text = "\(progress.carbs)"
         proteinCountLabel.text = "\(progress.protein)"
@@ -151,7 +152,6 @@ extension HomeViewController {
         fatP.setProgressWithAnimation(duration: 1.0, value: userProgress.fatProgress / userProgress.fatTarget)
         proteinP.setProgressWithAnimation(duration: 1.0, value: userProgress.proteinProgress / userProgress.proteinTarget)
     }
-    
     @objc func profileTapped() {
         print("poop")
     }

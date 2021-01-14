@@ -43,9 +43,9 @@ struct GoogleApiManager {
     //MARK: - Meals
     func createDailyMeal(meals: [Meal]) {
         let currentDate = Date().dateStringForDB
-        
+        let dailyMeals = DailyMeal(meals: meals)
         do {
-            try db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("user-daily-meals").document("\(currentDate)").setData(from: meals)
+            try db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("user-daily-meals").document("\(currentDate)").setData(from: dailyMeals)
         } catch {
             print(error)
         }

@@ -27,20 +27,26 @@ class MealPlanViewController: UIViewController {
         callToViewModelForUIUpdate()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
     @IBAction func changeDateButtons(_ sender: UIButton) {
         showSpinner()
         switch sender {
         case dateRightButton:
             date = date.add(1.days)
-            mealViewModel.fetchMealsBy(date: date){}
+            mealViewModel.fetchMealsBy(date: date) { }
         case dateLeftButton:
             date = date.subtract(1.days)
-            mealViewModel.fetchMealsBy(date: date){}
+            mealViewModel.fetchMealsBy(date: date) { }
         default:
             break
         }
         dateTextLabel.text = date.dateStringDisplay
-        self.mealViewModel!.bindMealViewModelToController = {
+        
+        mealViewModel!.bindMealViewModelToController = {
             self.stopSpinner()
             self.updateDataSource()
         }
@@ -73,13 +79,16 @@ extension MealPlanViewController {
     func updateDataSource() {
         stopSpinner()
         tableView.register(UINib(nibName: K.NibName.mealPlanTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.mealCell)
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
     func callToViewModelForUIUpdate() {
         showSpinner()
         mealViewModel = MealViewModel.shared
-        self.updateDataSource()
-
+        
+        mealViewModel.fetchData()
+        mealViewModel.bindMealViewModelToController = {
+            self.updateDataSource()
+        }
     }
 }
 

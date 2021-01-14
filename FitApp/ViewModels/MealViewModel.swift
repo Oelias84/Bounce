@@ -27,7 +27,9 @@ class MealViewModel: NSObject {
         
         manager = ConsumptionManager()
         googleService = GoogleApiManager()
-        
+    }
+    
+    func fetchData() {
         fetchMealsForOrCreate(date: Date(), prefer: .breakfast, numberOfMeals: 3, protein: manager.getDayProtein, carbs: manager.getDayCarbs, fat: manager.getDayFat)
         fetchDishes()
     }
