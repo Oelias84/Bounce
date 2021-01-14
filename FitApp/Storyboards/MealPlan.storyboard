@@ -48,6 +48,9 @@
                                                     <imageReference key="image" image="chevron.forward" catalog="system" symbolScale="large"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="changeDateButtons:" destination="pjO-ox-C9x" eventType="touchUpInside" id="227-if-A5Z"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>

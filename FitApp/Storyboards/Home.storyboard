@@ -195,15 +195,31 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Wh-5z-5wO">
+                                <rect key="frame" x="359" y="56.5" width="35" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="BtJ-dT-0sf"/>
+                                    <constraint firstAttribute="width" constant="35" id="Dz4-Xk-535"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="-5" minY="-5" maxX="-5" maxY="-5"/>
+                                <state key="normal" backgroundImage="person.circle" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
+                                </state>
+                                <connections>
+                                    <action selector="profileButtonAction:" destination="65l-oX-bHe" eventType="touchUpInside" id="cLc-34-WdD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8pW-15-4q7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="0U1-yB-lxr" firstAttribute="top" secondItem="u82-fd-ybZ" secondAttribute="bottom" constant="34" id="3gh-Oo-ZHe"/>
                             <constraint firstItem="jfT-tk-bBc" firstAttribute="leading" secondItem="8pW-15-4q7" secondAttribute="leading" constant="24" id="AjE-Nm-9Il"/>
+                            <constraint firstItem="3Wh-5z-5wO" firstAttribute="top" secondItem="8pW-15-4q7" secondAttribute="top" constant="12" id="Akn-sn-i6o"/>
                             <constraint firstItem="jfT-tk-bBc" firstAttribute="top" secondItem="8pW-15-4q7" secondAttribute="top" constant="46" id="Qvl-2F-1Ph"/>
                             <constraint firstItem="0U1-yB-lxr" firstAttribute="centerX" secondItem="oXi-sI-Ov4" secondAttribute="centerX" id="Thm-Gf-TrH"/>
                             <constraint firstItem="u82-fd-ybZ" firstAttribute="top" secondItem="jfT-tk-bBc" secondAttribute="bottom" constant="24" id="eda-iS-M1l"/>
+                            <constraint firstItem="8pW-15-4q7" firstAttribute="trailing" secondItem="3Wh-5z-5wO" secondAttribute="trailing" constant="20" id="f7W-Oo-2WT"/>
                             <constraint firstItem="u82-fd-ybZ" firstAttribute="centerX" secondItem="oXi-sI-Ov4" secondAttribute="centerX" id="zkM-Qw-08U"/>
                         </constraints>
                     </view>
@@ -216,6 +232,7 @@
                         <outlet property="fatCountLabel" destination="aiS-TJ-dYx" id="Tci-qL-tEk"/>
                         <outlet property="fatTargateLabel" destination="ZBO-tA-KUF" id="R35-rL-8lR"/>
                         <outlet property="helloUserTextLabel" destination="9zR-Qj-feS" id="6Ux-Rs-ClA"/>
+                        <outlet property="profileButton" destination="3Wh-5z-5wO" id="72E-7Q-gXp"/>
                         <outlet property="proteinCountLabel" destination="pe4-yu-ZBb" id="JQp-Xu-AnU"/>
                         <outlet property="proteinTargateLabel" destination="VOb-3k-qut" id="eBt-Mz-DbU"/>
                         <outlet property="userMotivationTextLabel" destination="ime-qg-m1m" id="nVG-K1-UN3"/>
@@ -223,7 +240,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZmW-3o-guf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-417" y="763"/>
+            <point key="canvasLocation" x="-417.39130434782612" y="762.72321428571422"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ADI-1a-awp">
@@ -355,11 +372,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ArticleIcon" width="22" height="23.5"/>
+        <image name="ArticleIcon" width="24.5" height="26"/>
         <image name="HomeIcon" width="26.5" height="26"/>
         <image name="MealIcon" width="20.5" height="26"/>
         <image name="RunIcon" width="27" height="26.5"/>
         <image name="ScaleIcon" width="26" height="26"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
