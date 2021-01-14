@@ -16,9 +16,13 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 	@IBOutlet weak var intermediateButton: UIButton!
 	@IBOutlet weak var advancedButton: UIButton!
 	
-	@IBOutlet weak var weaklyWorkoutCheckFirst: UIButton!
-	@IBOutlet weak var weaklyWorkoutCheckSecond: UIButton!
-	@IBOutlet weak var weaklyWorkoutCheckThird: UIButton!
+	@IBOutlet weak var weeklyWorkoutCheckFirst: UIButton!
+	@IBOutlet weak var weeklyWorkoutCheckSecond: UIButton!
+	@IBOutlet weak var weeklyWorkoutCheckThird: UIButton!
+
+    @IBOutlet weak var weeklyWorkoutFirst: UIStackView!
+    @IBOutlet weak var weeklyWorkoutSecond: UIStackView!
+    @IBOutlet weak var weeklyWorkoutThird: UIStackView!
     
 	@IBOutlet weak var nextButton: UIButton!
 	
@@ -57,35 +61,36 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 		if !sender.isSelected {
 			fitnessLevel = 0
 		}
+        hideUnnecessaryWeeklySelectionOptions()
 	}
-	@IBAction func weaklyWorkoutsCheckBoxes(sender: UIButton) {
+	@IBAction func weeklyWorkoutsCheckBoxes(sender: UIButton) {
 		sender.isSelected = !sender.isSelected
 		
 		switch sender.tag {
 		case 1:
-			weaklyWorkouts = 3
+			weaklyWorkouts = 2
 			if sender.isSelected{
-				weaklyWorkoutCheckSecond.isSelected = false
-				weaklyWorkoutCheckThird.isSelected = false
+				weeklyWorkoutCheckSecond.isSelected = false
+				weeklyWorkoutCheckThird.isSelected = false
 			}
 		case 2:
-			weaklyWorkouts = 4
+			weaklyWorkouts = 3
 			if sender.isSelected{
-				weaklyWorkoutCheckFirst.isSelected = false
-				weaklyWorkoutCheckThird.isSelected = false
+				weeklyWorkoutCheckFirst.isSelected = false
+				weeklyWorkoutCheckThird.isSelected = false
 			}
 		case 3:
-			weaklyWorkouts = 5
+			weaklyWorkouts = 4
 			if sender.isSelected{
-				weaklyWorkoutCheckFirst.isSelected = false
-				weaklyWorkoutCheckSecond.isSelected = false
+				weeklyWorkoutCheckFirst.isSelected = false
+				weeklyWorkoutCheckSecond.isSelected = false
 			}
 		case 4:
-			weaklyWorkouts = 6
+			weaklyWorkouts = 5
 			if sender.isSelected{
-				weaklyWorkoutCheckFirst.isSelected = false
-				weaklyWorkoutCheckSecond.isSelected = false
-				weaklyWorkoutCheckThird.isSelected = false
+				weeklyWorkoutCheckFirst.isSelected = false
+				weeklyWorkoutCheckSecond.isSelected = false
+				weeklyWorkoutCheckThird.isSelected = false
 			}
 		default:
 			return
@@ -94,4 +99,49 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 			weaklyWorkouts = 0
 		}
 	}
+}
+
+extension QuestionnaireFitnessLevelViewController {
+    
+    func setupCheckMarks() {
+        let userData = UserProfile.defaults
+        
+        if let fitnessLevel = userData.fitnessLevel {
+            switch fitnessLevel {
+            case 1:
+                beginnerButton.isSelected = true
+            case 2:
+                intermediateButton.isSelected = true
+            case 3:
+                advancedButton.isSelected = true
+            default:
+                break
+            }
+        }
+        
+        if let weaklyWorkouts = userData.weaklyWorkouts {
+            switch weaklyWorkouts {
+            case 2:
+                weeklyWorkoutCheckFirst.isSelected = true
+            case 3:
+                weeklyWorkoutCheckSecond.isSelected = true
+            case 4:
+                weeklyWorkoutCheckThird.isSelected = true
+            default:
+                break
+            }
+        }
+        hideUnnecessaryWeeklySelectionOptions()
+    }
+    func hideUnnecessaryWeeklySelectionOptions() {
+        
+        if beginnerButton.isSelected {
+            weeklyWorkoutSecond.isHidden = true
+            weeklyWorkoutThird.isHidden = true
+        } else if intermediateButton.isSelected {
+            weeklyWorkoutThird.isHidden = true
+        } else if advancedButton.isSelected {
+            weeklyWorkoutFirst.isHidden = true
+        }
+    }
 }

@@ -9,14 +9,15 @@ import UIKit
 
 class QuestionnaireSumUpViewController: UIViewController {
 	
-    let manager = GoogleApiManager()
-    
-	@IBOutlet weak var ageLabel: UILabel!
-	@IBOutlet weak var weightLabel: UILabel!
-	@IBOutlet weak var heightLabel: UILabel!
-	@IBOutlet weak var activityLevelLabel: UILabel!
-	@IBOutlet weak var numberOfMealsLabel: UILabel!
-	@IBOutlet weak var numberOfWorkoutsLabel: UILabel!
+    private let manager = GoogleApiManager()
+    private let userData = UserProfile.defaults
+
+	@IBOutlet weak var ageLabel: UITextField!
+	@IBOutlet weak var weightLabel: UITextField!
+	@IBOutlet weak var heightLabel: UITextField!
+	@IBOutlet weak var activityLevelLabel: UITextField!
+	@IBOutlet weak var numberOfMealsLabel: UITextField!
+	@IBOutlet weak var numberOfWorkoutsLabel: UITextField!
 	
 
 	override func viewDidLoad() {
@@ -26,9 +27,9 @@ class QuestionnaireSumUpViewController: UIViewController {
 	}
 
 	@IBAction func nextButtonAction(_ sender: Any) {
-        let userData = UserProfile.defaults
+
         UserProfile.defaults.finishOnboarding = true
-        let data = ServerUserData(name: userData.name!, birthDate: userData.birthDate!, weight: userData.weight!, height: userData.height!, fatPercentage: userData.fatPercentage!, kilometer: userData.kilometer!, mealsPerDay: userData.mealsPerDay!, mostHungry: userData.mostHungry!, fitnessLevel: userData.fitnessLevel!, weaklyWorkouts: userData.weaklyWorkouts!, finishOnboarding: true)
+        let data = ServerUserData(name: userData.name!, birthDate: userData.birthDate!.dateStringForDB, weight: userData.weight!, height: userData.height!, fatPercentage: userData.fatPercentage!, kilometer: userData.kilometer!, mealsPerDay: userData.mealsPerDay!, mostHungry: userData.mostHungry!, fitnessLevel: userData.fitnessLevel!, weaklyWorkouts: userData.weaklyWorkouts!, finishOnboarding: true)
         
         manager.updateUserData(userData: data)
 		dismiss(animated: true)
@@ -38,8 +39,8 @@ class QuestionnaireSumUpViewController: UIViewController {
 extension QuestionnaireSumUpViewController {
 	
 	private func configureLabels() {
-		if let weight = UserProfile.defaults.weight, let birthDate = UserProfile.defaults.birthDate,
-		   let height = UserProfile.defaults.height, let mealsPerDay = UserProfile.defaults.mealsPerDay, let weaklyWorkouts = UserProfile.defaults.weaklyWorkouts {
+		if let weight = userData.weight, let birthDate = userData.birthDate,
+		   let height = userData.height, let mealsPerDay = userData.mealsPerDay, let weaklyWorkouts = userData.weaklyWorkouts {
 			
 			ageLabel.text = birthDate.age
 			weightLabel.text = "\(weight) " + K.Units.kilometers
@@ -47,7 +48,7 @@ extension QuestionnaireSumUpViewController {
 			numberOfMealsLabel.text = "\(mealsPerDay)"
 			numberOfWorkoutsLabel.text = "\(weaklyWorkouts)"
 		}
-		if let kilometer = UserProfile.defaults.kilometer {
+		if let kilometer = userData.kilometer {
 			activityLevelLabel.text = "\(kilometer) " + K.Units.kilometers
 		} else if let steps = UserProfile.defaults.steps {
 			activityLevelLabel.text = "\(steps) " + K.Units.steps
@@ -55,4 +56,8 @@ extension QuestionnaireSumUpViewController {
 			activityLevelLabel.text = K.Units.unknown
 		}
 	}
+    
+    func updateUserData() {
+        
+    }
 }

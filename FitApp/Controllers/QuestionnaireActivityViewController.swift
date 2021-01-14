@@ -8,8 +8,9 @@
 import UIKit
 
 class QuestionnaireActivityViewController: UIViewController {
-    
-    
+
+    let userData = UserProfile.defaults
+
     @IBOutlet weak var kilometresSlider: UISlider! {
         didSet {
             kilometresSlider.maximumValue = 100.00
@@ -30,6 +31,11 @@ class QuestionnaireActivityViewController: UIViewController {
         super.viewDidLoad()
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setUpTextfields()
+    }
     
     @IBAction func nextButtonAction(_ sender: Any) {
         if kilometersCheckBox.isSelected {
@@ -40,7 +46,6 @@ class QuestionnaireActivityViewController: UIViewController {
         } else if stepsCheckBox.isSelected {
             if let steps = stepsLabel.text {
                 UserProfile.defaults.steps = Int(steps)
-				UserProfile.defaults.kilometer = nil
             }
         }
 		performSegue(withIdentifier: K.SegueId.moveToNutrition, sender: self)
@@ -70,5 +75,20 @@ class QuestionnaireActivityViewController: UIViewController {
         (kilometersCheckBox.isSelected || stepsCheckBox.isSelected)
             ? nextButton.setTitle("הבא", for: .normal)
             : nextButton.setTitle("דלג", for: .normal)
+    }
+}
+
+extension QuestionnaireActivityViewController {
+
+    func setUpTextfields() {
+        let userData = UserProfile.defaults
+        
+        if let kilometers = userData.kilometer {
+            kilometersLabel.text = String(kilometers)
+            kilometersCheckBox.isSelected = true
+        } else if let steps = userData.steps {
+            stepsLabel.text = String(steps)
+            stepsCheckBox.isSelected = true
+        }
     }
 }

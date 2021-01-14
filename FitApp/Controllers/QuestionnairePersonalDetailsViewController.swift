@@ -37,6 +37,11 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
         configurePicker()
         addScreenTappGesture()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupTextfieldText()
+    }
     
     @IBAction func nextButtonAction(_ sender: Any) {
         if let birthDate = birthDate, let name = userName, let height = height, let weight = weight {
@@ -133,12 +138,22 @@ extension QuestionnairePersonalDetailsViewController: UITextFieldDelegate {
 extension QuestionnairePersonalDetailsViewController {
     
     private func configureTextFields() {
+        
 		birthdayDatePicker.addTarget(self, action: #selector(pickerChanged), for: .valueChanged)
         heightTextField.inputView = numberPicker
         weightTextField.inputView = numberPicker
         heightTextField.delegate = self
         weightTextField.delegate = self
         userNameTextField.delegate = self
+    }
+    
+    func setupTextfieldText() {
+        let userData = UserProfile.defaults
+
+        if let height = userData.height, let weight = userData.weight {
+            heightTextField.text = "\(height)"
+            weightTextField.text = "\(weight)"
+        }
     }
     private func configurePicker() {
         numberPicker.delegate = self

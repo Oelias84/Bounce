@@ -27,6 +27,7 @@ class QuestionnaireNutritionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupCheckCheckMark()
     }
     
     @IBAction func nextButtonAction(_ sender: Any) {
@@ -36,7 +37,6 @@ class QuestionnaireNutritionViewController: UIViewController {
 			performSegue(withIdentifier: K.SegueId.moveToFitnessLevel, sender: self)
         }
     }
-    
     @IBAction func mealsCheckBoxes(sender: UIButton) {
         sender.isSelected = !sender.isSelected
         
@@ -108,5 +108,39 @@ class QuestionnaireNutritionViewController: UIViewController {
 		if !sender.isSelected {
 			mostHunger = 0
 		}
+    }
+}
+
+extension QuestionnaireNutritionViewController {
+    
+    private func setupCheckCheckMark() {
+        let userData = UserProfile.defaults
+        
+        if let meals = userData.mealsPerDay {
+            switch meals {
+            case 3:
+                mealCheckFirst.isSelected = true
+            case 4:
+                mealCheckSecond.isSelected = true
+            case 5:
+                mealCheckThird.isSelected = true
+            default:
+                break
+            }
+        }
+        if let mostHungry = userData.mostHungry {
+            switch mostHungry {
+            case 1:
+                mostHungerCheckFirst.isSelected = true
+            case 2:
+                mostHungerCheckSecond.isSelected = true
+            case 3:
+                mostHungerCheckThird.isSelected = true
+            case 4:
+                mostHungerCheckForth.isSelected = true
+            default:
+                break
+            }
+        }
     }
 }

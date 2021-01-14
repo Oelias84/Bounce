@@ -23,8 +23,10 @@ class QuestionnaireFatPresentViewController: UIViewController {
     }
     
     @IBAction func nextButtonAction(_ sender: Any) {
+        
         if let fatPercentage = selectedPercentage {
             var fatPrecent: Double = 0.0
+            
             switch fatPercentage {
             case "Fat1":
                 fatPrecent = 10.0
@@ -67,3 +69,30 @@ extension QuestionnaireFatPresentViewController: UICollectionViewDelegate, UICol
     }
 }
 
+extension QuestionnaireFatPresentViewController {
+    
+    func setupSelectedImage() {
+        let userData = UserProfile.defaults
+        var index = 0
+        
+        switch userData.fatPercentage {
+        case 10.0:
+            index = 0
+        case 20.0:
+            index = 1
+        case 30.0:
+            index = 2
+        case 40.0:
+            index = 3
+        case 50.0:
+            index = 4
+        case 60.0:
+            index = 5
+        case 70.0:
+            index = 6
+        default:
+            break
+        }
+        collectionView.selectItem(at: [index], animated: true, scrollPosition: .centeredHorizontally)
+    }
+}
