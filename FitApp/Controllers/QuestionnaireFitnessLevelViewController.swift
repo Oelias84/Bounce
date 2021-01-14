@@ -65,7 +65,11 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 	}
 	@IBAction func weeklyWorkoutsCheckBoxes(sender: UIButton) {
 		sender.isSelected = !sender.isSelected
-		
+        if fitnessLevel == 0 {
+            presentOkAlert(withMessage: "יש לבחור קודם את רמת הכושר") {}
+            return
+        }
+        
 		switch sender.tag {
 		case 1:
 			weaklyWorkouts = 2
@@ -136,12 +140,17 @@ extension QuestionnaireFitnessLevelViewController {
     func hideUnnecessaryWeeklySelectionOptions() {
         
         if beginnerButton.isSelected {
+            weeklyWorkoutFirst.isHidden = false
             weeklyWorkoutSecond.isHidden = true
             weeklyWorkoutThird.isHidden = true
         } else if intermediateButton.isSelected {
+            weeklyWorkoutFirst.isHidden = false
+            weeklyWorkoutSecond.isHidden = false
             weeklyWorkoutThird.isHidden = true
         } else if advancedButton.isSelected {
             weeklyWorkoutFirst.isHidden = true
+            weeklyWorkoutSecond.isHidden = false
+            weeklyWorkoutThird.isHidden = false
         }
     }
 }
