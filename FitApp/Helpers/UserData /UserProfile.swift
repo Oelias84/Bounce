@@ -57,10 +57,30 @@ struct UserProfile {
     var weaklyWorkouts: Int?
 }
 
+extension UserProfile {
+    
+    func updateUserProfileData(_ data: ServerUserData, id: String) {
+        var userProfile = self
+        
+        userProfile.id = id
+        userProfile.finishOnboarding = data.finishOnboarding
+        userProfile.name = data.name
+        userProfile.birthDate = data.birthDate.dateFromString
+        userProfile.weight = data.weight
+        userProfile.height = data.height
+        userProfile.fatPercentage = data.fatPercentage
+        userProfile.kilometer = data.kilometer
+        userProfile.mealsPerDay = data.mealsPerDay
+        userProfile.mostHungry = data.mostHungry
+        userProfile.fitnessLevel = data.fitnessLevel
+        userProfile.weaklyWorkouts = data.weaklyWorkouts
+    }
+}
+
 struct ServerUserData: Codable {
     
     let name: String
-    let birthDate: Date
+    let birthDate: String
     let weight: Double
     let height: Int
     let fatPercentage: Double
@@ -72,6 +92,7 @@ struct ServerUserData: Codable {
     let finishOnboarding: Bool
 }
 
+//MARK: - UserDate Keys
 extension Key {
     
     static let id: Key = "id"

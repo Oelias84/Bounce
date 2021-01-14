@@ -7,6 +7,7 @@
 
 import UIKit
 import BLTNBoard
+import FirebaseAuth
 
 class HomeViewController: UIViewController {
     
@@ -43,12 +44,13 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var fatCountLabel: UILabel!
     @IBOutlet weak var carbsCountLabel: UILabel!
     @IBOutlet weak var proteinCountLabel: UILabel!
-    @IBOutlet weak var questionnaireStartButton: UIButton!
     @IBOutlet weak var circularProgress: UIView!
     
     @IBOutlet weak var fatTargateLabel: UILabel!
     @IBOutlet weak var carbsTargateLabel: UILabel!
     @IBOutlet weak var proteinTargateLabel: UILabel!
+    
+    @IBOutlet weak var profileButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,11 +63,21 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-            setupProgress()
+        setupProgress()
         if !(UserProfile.defaults.finishOnboarding ?? false) {
             boardManager.showBulletin(above: self)
             boardManager.allowsSwipeInteraction = false
         }
+    }
+    
+    @IBAction func profileButtonAction(_ sender: Any) {
+        UserDefaults.resetDefaults()
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("issue sigenout")
+        }
+        exit(0)
     }
 }
 
@@ -129,7 +141,7 @@ extension HomeViewController {
         carbsCountLabel.text = "\(progress.carbs)"
         proteinCountLabel.text = "\(progress.protein)"
     }
-
+    
     @objc func animateProgress() {
         let carbP = self.view.viewWithTag(100) as! CircularProgressView
         let fatP = self.view.viewWithTag(101) as! CircularProgressView
@@ -138,5 +150,9 @@ extension HomeViewController {
         carbP.setProgressWithAnimation(duration: 1.0, value: userProgress.carbsProgress / userProgress.carbsTarget)
         fatP.setProgressWithAnimation(duration: 1.0, value: userProgress.fatProgress / userProgress.fatTarget)
         proteinP.setProgressWithAnimation(duration: 1.0, value: userProgress.proteinProgress / userProgress.proteinTarget)
+    }
+    
+    @objc func profileTapped() {
+        print("poop")
     }
 }

@@ -12,6 +12,8 @@ class LoginViewController: UIViewController {
 	
 	@IBOutlet weak var emailTextfield: UITextField!
 	@IBOutlet weak var passwordTextfield: UITextField!
+    
+    private let googleManager = GoogleApiManager()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -26,16 +28,29 @@ class LoginViewController: UIViewController {
 	}
 	
 	@IBAction func signInButtonAction(_ sender: Any) {
+        view.endEditing(true)
         guard let email = emailTextfield.text, let password = passwordTextfield.text else { return }
-        
+        showSpinner()
 		Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
 			if error == nil{
-				let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
-				let homeVC = storyboard.instantiateViewController(identifier: K.StoryboardNameId.HomeTabBar)
-				
-				homeVC.modalPresentationStyle = .fullScreen
-				self.present(homeVC, animated: true)
+                self.googleManager.getUserData { result in
+                    self.stopSpinner()
+                    
+                    switch result {
+                    case .success(let userData):
+                        UserProfile.defaults.updateUserProfileData(userData!, id: user!.user.uid)
+                        let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
+                        let homeVC = storyboard.instantiateViewController(identifier: K.StoryboardNameId.HomeTabBar)
+                        
+                        homeVC.modalPresentationStyle = .fullScreen
+                        self.present(homeVC, animated: true)
+                    case .failure(let error):
+                        print("Error fetching user data: ", error)
+                    }
+                }
 			} else {
+                self.stopSpinner()
+
 				let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
 				let defaultAction = UIAlertAction(title: "אישור", style: .cancel, handler: nil)
 				
