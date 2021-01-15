@@ -29,7 +29,7 @@ class QuestionnaireSumUpViewController: UIViewController {
 	@IBAction func nextButtonAction(_ sender: Any) {
 
         UserProfile.defaults.finishOnboarding = true
-        let data = ServerUserData(name: userData.name!, birthDate: userData.birthDate!.dateStringForDB, weight: userData.weight!, height: userData.height!, fatPercentage: userData.fatPercentage!, kilometer: userData.kilometer!, mealsPerDay: userData.mealsPerDay!, mostHungry: userData.mostHungry!, fitnessLevel: userData.fitnessLevel!, weaklyWorkouts: userData.weaklyWorkouts!, finishOnboarding: true)
+        let data = ServerUserData(name: userData.name!, birthDate: userData.birthDate!.dateStringForDB, weight: userData.weight!, height: userData.height!, fatPercentage: userData.fatPercentage!, steps: userData.steps, kilometer: userData.kilometer, mealsPerDay: userData.mealsPerDay!, mostHungry: userData.mostHungry!, fitnessLevel: userData.fitnessLevel!, weaklyWorkouts: userData.weaklyWorkouts!, finishOnboarding: true)
         
         manager.updateUserData(userData: data)
 		dismiss(animated: true)

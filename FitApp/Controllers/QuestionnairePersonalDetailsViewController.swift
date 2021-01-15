@@ -30,6 +30,8 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	private var weightFrictionString: String?
 	private var weightString: String?
     
+    private let googleManager = GoogleApiManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,6 +52,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
             UserProfile.defaults.height = height
             UserProfile.defaults.weight = weight
             UserProfile.defaults.birthDate = birthDate
+            googleManager.updateWeights(weights: Weights(weights: [Weight(date: Date(), weight: weight)]))
 			performSegue(withIdentifier: K.SegueId.moveToFatPercentage, sender: self)
         } else {
 			//show alert
