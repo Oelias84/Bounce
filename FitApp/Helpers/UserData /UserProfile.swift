@@ -84,7 +84,8 @@ struct ServerUserData: Codable {
     let weight: Double
     let height: Int
     let fatPercentage: Double
-    let kilometer: Double
+    let steps: Int?
+    let kilometer: Double?
     let mealsPerDay: Int
     let mostHungry: Int
     let fitnessLevel: Int

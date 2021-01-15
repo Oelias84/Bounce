@@ -66,7 +66,8 @@ class HomeViewController: UIViewController {
         if !(UserProfile.defaults.finishOnboarding ?? false) {
             boardManager.showBulletin(above: self)
             boardManager.allowsSwipeInteraction = false
-
+        } else {
+            mealViewModel.fetchData()
         }
         setupProgress()
     }
@@ -138,9 +139,9 @@ extension HomeViewController {
         userProgress = UserProgress(carbsTarget: manager.getDayCarbs, proteinTarget: manager.getDayProtein, fatTarget: manager.getDayFat, carbsProgress: progress.carbs, proteinProgress: progress.protein, fatProgress: progress.fats)
         configureProgress()
         setUpProgressTextFields()
-        fatCountLabel.text = "\(progress.fats)"
-        carbsCountLabel.text = "\(progress.carbs)"
-        proteinCountLabel.text = "\(progress.protein)"
+        fatCountLabel.text = String(format: "%.1f", progress.fats)
+        carbsCountLabel.text = String(format: "%.1f", progress.carbs)
+        proteinCountLabel.text = String(format: "%.1f", progress.protein)
     }
     
     @objc func animateProgress() {

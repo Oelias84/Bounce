@@ -25,13 +25,29 @@ class MealViewModel: NSObject {
     override init() {
         super.init()
         
-        manager = ConsumptionManager()
         googleService = GoogleApiManager()
+        manager = ConsumptionManager()
+        fetchDishes()
     }
     
     func fetchData() {
-        fetchMealsForOrCreate(date: Date(), prefer: .breakfast, numberOfMeals: 3, protein: manager.getDayProtein, carbs: manager.getDayCarbs, fat: manager.getDayFat)
-        fetchDishes()
+        manager.calculateUserData()
+        if self.meals == nil {
+            let userData = UserProfile.defaults
+            var preferredMeal: MealType?
+            switch userData.mostHungry {
+            case 1:
+                preferredMeal = .breakfast
+            case 2:
+                preferredMeal = .lunch
+            case 3:
+                preferredMeal = .supper
+            default:
+                preferredMeal = nil
+            }
+
+            fetchMealsForOrCreate(date: Date(), prefer: preferredMeal, numberOfMeals: userData.mealsPerDay!, protein: manager.getDayProtein, carbs: manager.getDayCarbs, fat: manager.getDayFat)
+        }
     }
     
     //MARK: - Meals Progress
@@ -172,6 +188,7 @@ class MealViewModel: NSObject {
         }
     }
     func populateMeals(hasPrefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) -> [Meal] {
+
         var dayMeals = [Meal(mealType: .breakfast, dishes: []), Meal(mealType: .lunch, dishes: []), Meal(mealType: .supper, dishes: [])]
         let carbsForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil,
                                              numberOfDishes: numberOfDishes(numberOfMeals: numberOfMeals, dishType: .carbs, numberOfDishes: carbs))
@@ -181,14 +198,16 @@ class MealViewModel: NSObject {
                                            numberOfDishes: numberOfDishes(numberOfMeals: numberOfMeals, dishType: .fat, numberOfDishes: fat))
         
         for i in 0...2 {
-            let carbsDish = Dish(name: "טונה", type: .carbs, amount: carbsForMeal.0)
-            let proteinDish = Dish(name: "ביצים", type: .protein, amount: proteinForMeal.0)
-            let fatDish = Dish(name: "שוורמה", type: .fat, amount: fatForMeal.0)
+            let mealType: [MealType] = [.breakfast, .lunch, .supper]
+            let carbsDish = Dish(name: DishesGenerator.randomDishFor(mealType: mealType[i], .carbs), type: .carbs, amount: carbsForMeal.0)
+            let proteinDish = Dish(name: DishesGenerator.randomDishFor(mealType: mealType[i], .protein), type: .protein, amount: proteinForMeal.0)
+            let fatDish = Dish(name: DishesGenerator.randomDishFor(mealType: mealType[i], .fat), type: .fat, amount: fatForMeal.0)
             
             dayMeals[i].dishes = [carbsDish, proteinDish, fatDish]
         }
         if let prefer = hasPrefer {
             if let addToPreferred = dayMeals.first(where: {$0.mealType == prefer}) {
+                
                 addToPreferred.dishes.forEach { dish in
                     switch dish.type {
                     case .carbs:
@@ -202,11 +221,13 @@ class MealViewModel: NSObject {
             }
         }
         if numberOfMeals == 4 {
-            dayMeals.append(Meal(mealType: .middle1, dishes: [Dish(name: "ביצים", type: .carbs, amount: 1)]))
+            dayMeals.insert(Meal(mealType: .middle1, dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs), type: .carbs, amount: 1)]), at: 1)
         } else if numberOfMeals == 5 {
-            dayMeals.append(Meal(mealType: .middle1, dishes: [Dish(name: "טונה", type: .protein, amount: 1), Dish(name: "ליה", type: .fat, amount: 0.5)]))
+            dayMeals.insert(Meal(mealType: .middle1, dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs), type: .carbs, amount: 1)]), at: 1)
+            dayMeals.insert(Meal(mealType: .middle2, dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein), type: .protein, amount: 1),
+                                                              Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .fat), type: .fat, amount: 0.5)]), at: 3)
         }
-        googleService.createDailyMeal(meals: dayMeals.sorted())
-        return dayMeals.sorted()
+        googleService.createDailyMeal(meals: dayMeals)
+        return dayMeals
     }
 }

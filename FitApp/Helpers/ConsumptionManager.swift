@@ -52,11 +52,21 @@ class ConsumptionManager {
     var getDayCarbsProgress: Double {
         return carbsProgress
     }
+    
+    func calculateUserData(){
+        let userData = UserProfile.defaults
+        
+        self.weight = userData.weight ?? 0.0
+        self.fatPercentage = userData.fatPercentage ?? 0.0
+        self.Kilometer = userData.kilometer ?? 0.0
+        self.numberOfTrainings = userData.weaklyWorkouts ?? 0
+        configureData()
+    }
 }
 
 extension ConsumptionManager {
     
-    //lean body weight
+    //MARK: - lean body weight
     private func TDEE(weight: Double, fatPercentage: Double, Kilometer: Double, numberOfTrainings: Int) -> Double {
         let LBM = weight * ((100 - 32) / 100)
         let BMR = (LBM * 22.0) + 500.0
@@ -65,10 +75,12 @@ extension ConsumptionManager {
         
         return ((BMR * 1.1) + NIT + EAT) - 500
     }//= daily calories
-    //convert to grams
+    
+    //MARK: - convert to grams
     private func proteinGrams(weight: Double) -> Double {
         return weight * 1.5
     }//= Daily protein grams
+    
     private func proteinPortion(proteinGrams: Double) -> Double {
         let proteinPortion = proteinGrams / 20.0
         let truncatingRemainder = proteinPortion.fraction
@@ -83,10 +95,12 @@ extension ConsumptionManager {
             return proteinPortion
         }
     }//= Daily Protein portion dish
-    //Fat calculation
+    
+    //MARK: - Fat calculation
     private func fatGrams(weight: Double) -> Double {
         return weight * 0.5
     }//= Daily Fat grams
+    
     private func portionFat(fatGrams: Double) -> Double {
         let fatPortion = fatGrams / 11.0
         let truncatingRemainder = fatPortion.fraction
@@ -101,14 +115,15 @@ extension ConsumptionManager {
             return fatPortion
         }
     }//= Daily Fat portion dish
-    //Carbs calculation
+    
+    //MARK: - Carbs calculation
     private func portionCarbs(fatPortion: Double, proteinPortion: Double, calories: Double) -> Double {
         let caloriesCarbs = (fatPortion * 100) + (proteinPortion * 150)
         
         return caloriesCarbs / 100.0
     }
     
-    private func configureData(){
+    private func configureData() {
         self.calories = TDEE(weight: weight, fatPercentage: fatPercentage, Kilometer: Kilometer, numberOfTrainings: numberOfTrainings)
         self.fatPortion = portionFat(fatGrams: fatGrams(weight: weight))
         self.proteinPortion = proteinPortion(proteinGrams: proteinGrams(weight: weight))

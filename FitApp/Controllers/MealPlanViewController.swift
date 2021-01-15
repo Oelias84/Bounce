@@ -30,7 +30,6 @@ class MealPlanViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        tableView.reloadData()
     }
     @IBAction func changeDateButtons(_ sender: UIButton) {
         showSpinner()
@@ -84,11 +83,15 @@ extension MealPlanViewController {
     func callToViewModelForUIUpdate() {
         showSpinner()
         mealViewModel = MealViewModel.shared
-        
-        mealViewModel.fetchData()
-        mealViewModel.bindMealViewModelToController = {
-            self.updateDataSource()
+        if mealViewModel.meals == nil {
+            mealViewModel.fetchData()
+            mealViewModel.bindMealViewModelToController = {
+                self.updateDataSource()
+            }
+        } else {
+            updateDataSource()
         }
+        
     }
 }
 
