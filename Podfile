@@ -11,6 +11,7 @@ target 'FitApp' do
     pod 'Firebase/Analytics'
     pod 'Firebase/Firestore'
     pod 'FirebaseFirestoreSwift'
+    pod 'Firebase/Storage'
     
     pod 'BulletinBoard'
     pod 'DateToolsSwift'
