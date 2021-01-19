@@ -51,6 +51,8 @@
 		B35822A225ADA04300C91295 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35822A125ADA04300C91295 /* ArticleViewController.swift */; };
 		B367F14825B036CC00DF21D7 /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B367F14725B036CC00DF21D7 /* UserDefaults+Extensions.swift */; };
 		B367F17825B1BDF600DF21D7 /* DishesGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B367F17725B1BDF600DF21D7 /* DishesGenerator.swift */; };
+		B367F18025B1DE4F00DF21D7 /* DishesStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = B367F17F25B1DE4E00DF21D7 /* DishesStrings.strings */; };
+		B367F18825B1EEC200DF21D7 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B367F18725B1EEC200DF21D7 /* LocalNotificationManager.swift */; };
 		B368DF4F25A5F24E00BD1937 /* GoogleApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */; };
 		B368DFE025A6247600BD1937 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368DFDF25A6247600BD1937 /* SpinnerView.swift */; };
 		B368DFFB25A76A2C00BD1937 /* WeightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */; };
@@ -62,6 +64,9 @@
 		B36B718C2577BDF3001CD393 /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B718B2577BDF3001CD393 /* ExerciseViewController.swift */; };
 		B36B71922577BF0C001CD393 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B71912577BF0C001CD393 /* Exercise.swift */; };
 		B3833F39259364ED006776D5 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3833F38259364ED006776D5 /* Weight.swift */; };
+		B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38397ED25B4A12200154697 /* WorkoutTableViewController.swift */; };
+		B38397F625B4A1BE00154697 /* WorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38397F525B4A1BE00154697 /* WorkoutViewModel.swift */; };
+		B38397FB25B4A21F00154697 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38397FA25B4A21F00154697 /* Workout.swift */; };
 		B3B2A232256ED2A60052E6C8 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A231256ED2A60052E6C8 /* UIImage+Extensions.swift */; };
 		B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */; };
 		B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */; };
@@ -156,6 +161,8 @@
 		B35822A125ADA04300C91295 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		B367F14725B036CC00DF21D7 /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		B367F17725B1BDF600DF21D7 /* DishesGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishesGenerator.swift; sourceTree = "<group>"; };
+		B367F17F25B1DE4E00DF21D7 /* DishesStrings.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = DishesStrings.strings; sourceTree = "<group>"; };
+		B367F18725B1EEC200DF21D7 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApiManager.swift; sourceTree = "<group>"; };
 		B368DFDF25A6247600BD1937 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightViewModel.swift; sourceTree = "<group>"; };
@@ -167,6 +174,9 @@
 		B36B718B2577BDF3001CD393 /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
 		B36B71912577BF0C001CD393 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		B3833F38259364ED006776D5 /* Weight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weight.swift; sourceTree = "<group>"; };
+		B38397ED25B4A12200154697 /* WorkoutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewController.swift; sourceTree = "<group>"; };
+		B38397F525B4A1BE00154697 /* WorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewModel.swift; sourceTree = "<group>"; };
+		B38397FA25B4A21F00154697 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		B3B2A231256ED2A60052E6C8 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatPresentViewController.swift; sourceTree = "<group>"; };
 		B3B2A246256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFatCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -326,6 +336,7 @@
 				7C89AA58256D6FDB009AD87C /* Constants.swift */,
 				B3DB751A259F8773002CF48B /* ConsumptionManager.swift */,
 				B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */,
+				B367F18725B1EEC200DF21D7 /* LocalNotificationManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -446,6 +457,7 @@
 				7C89AA60256D700F009AD87C /* UserProfile.swift */,
 				B368E07E25A8819100BD1937 /* Key.swift */,
 				B368E08625A8820E00BD1937 /* PropertyListValue.swift */,
+				B367F17F25B1DE4E00DF21D7 /* DishesStrings.strings */,
 			);
 			path = "UserData ";
 			sourceTree = "<group>";
@@ -453,6 +465,7 @@
 		B36B71852577BCE8001CD393 /* Exercise */ = {
 			isa = PBXGroup;
 			children = (
+				B38397ED25B4A12200154697 /* WorkoutTableViewController.swift */,
 				B330B88E257583D200BDB206 /* ExercisesTableViewController.swift */,
 				B36B71862577BD99001CD393 /* ExerciseDetailViewController.swift */,
 				B36B718B2577BDF3001CD393 /* ExerciseViewController.swift */,
@@ -463,13 +476,14 @@
 		B36B71902577BEFC001CD393 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B36B71912577BF0C001CD393 /* Exercise.swift */,
 				B302981F25793BBA00CF41F0 /* UserProgress.swift */,
 				B348420C25890CF800E0EF31 /* Meal.swift */,
 				B348421425890E5D00E0EF31 /* DIsh.swift */,
-				B3833F38259364ED006776D5 /* Weight.swift */,
 				B368E04825A790D200BD1937 /* ServerDishs.swift */,
+				B3833F38259364ED006776D5 /* Weight.swift */,
 				B358222F25AC9DA800C91295 /* Article.swift */,
+				B38397FA25B4A21F00154697 /* Workout.swift */,
+				B36B71912577BF0C001CD393 /* Exercise.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -515,6 +529,7 @@
 				B3DB7512259F8270002CF48B /* MealViewModel.swift */,
 				B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */,
 				B358227E25ACA40D00C91295 /* ArticleViewModel.swift */,
+				B38397F525B4A1BE00154697 /* WorkoutViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -647,6 +662,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C89AA07256D69CB009AD87C /* LaunchScreen.storyboard in Resources */,
+				B367F18025B1DE4F00DF21D7 /* DishesStrings.strings in Resources */,
 				7C89AA04256D69CB009AD87C /* Assets.xcassets in Resources */,
 				B3E6E98D257142CD00958C48 /* MealPlan.storyboard in Resources */,
 				B358222325AC930B00C91295 /* Articles.storyboard in Resources */,
@@ -802,7 +818,9 @@
 				B358227825ACA2F800C91295 /* ArticleTableViewCell.swift in Sources */,
 				7C9B34922583F84A00D30480 /* StartViewController.swift in Sources */,
 				B341E230257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift in Sources */,
+				B38397F625B4A1BE00154697 /* WorkoutViewModel.swift in Sources */,
 				B30069D325926F090025FA0E /* WeightProgressViewController.swift in Sources */,
+				B367F18825B1EEC200DF21D7 /* LocalNotificationManager.swift in Sources */,
 				B302982025793BBA00CF41F0 /* UserProgress.swift in Sources */,
 				B3BB8F4125826FEB00D70628 /* QuestionnaireNutritionViewController.swift in Sources */,
 				B36B71922577BF0C001CD393 /* Exercise.swift in Sources */,
@@ -836,7 +854,9 @@
 				B34397AD258A7FA50073A59B /* DishView.swift in Sources */,
 				7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */,
 				7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */,
+				B38397FB25B4A21F00154697 /* Workout.swift in Sources */,
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
+				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
 				B358223025AC9DA800C91295 /* Article.swift in Sources */,
 				B3E6E9B825714D5800958C48 /* MealPlanViewController.swift in Sources */,
 				B3BB8F35258223E400D70628 /* QuestionnaireActivityViewController.swift in Sources */,
@@ -1029,6 +1049,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1049,6 +1070,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
