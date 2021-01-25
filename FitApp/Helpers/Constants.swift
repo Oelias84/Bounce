@@ -51,13 +51,14 @@ struct K {
 		static let launchScreen = "LaunchScreen"
 		static let loginRegister = "LoginRegister"
         static let mealPlan = "MealPlan"
-        static let exercises = "Exercises"
+        static let workout = "Workout"
         static let weightProgress = "WeightProgress"
         static let home = "Home"
         static let articles = "Articles"
+		static let settings = "Settings"
 	}
 	
-	struct StoryboardNameId {
+	struct ViewControllerId {
         
         //Home
         static let homeViewController = "HomeViewController"
@@ -73,12 +74,23 @@ struct K {
         static let questionnaireFifth = "QuestionnaireFifth"
         static let questionnaireSixth = "QuestionnaireSixth"
         static let questionnaireSeventh = "QuestionnaireSeventh"
-        //Exercise
+        //Workout
+        static let workoutTableViewController = "WorkoutTableViewController"
         static let exercisesTableViewController = "ExercisesTableViewController"
-        static let exerciseViewController = "ExerciseViewController"
+        static let exerciseDetailViewController = "ExerciseDetailViewController"
+        //Weight
+        static let weightViewController = "WeightViewController"
         //Articles
         static let articlesViewController = "ArticlesViewController"
         static let articleViewController = "ArticleViewController"
+		//Settings
+		static let SettingsViewController = "SettingsViewController"
+	}
+	
+	struct NavigationId {
+		
+		static let homeNavigation = "HomeNavigation"
+		static let QuestionnaireNavigation = "QuestionnaireNavigation"
 	}
     
     struct SegueId {
@@ -102,6 +114,7 @@ struct K {
         static let weightCell = "weightCell"
         static let articleCell = "articleCell"
         static let exerciseCell = "exerciseCell"
+        static let workoutCell = "workoutCell"
     }
 	
     struct NibName {
@@ -109,6 +122,7 @@ struct K {
         static let dishView = "DishView"
         static let exerciseTableViewCell = "ExerciseTableViewCell"
         static let mealPlanTableViewCell = "MealPlanTableViewCell"
+        static let workoutTableViewCell = "WorkoutTableViewCell"
         static let articleTableViewCell = "ArticleTableViewCell"
         static let questionnaireFatCollectionViewCell = "QuestionnaireFatCollectionViewCell"
     }

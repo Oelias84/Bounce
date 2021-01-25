@@ -16,19 +16,19 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	
 	@IBOutlet weak var nextButton: UIButton!
 	
-    private let heightNumberArray = Array(100...250)
+    private let numberPicker = UIPickerView()
 	private let weightNumberArray = Array(30...200)
     private let frictionNumberArray = Array(0...99)
-    private let numberPicker = UIPickerView()
-    
-    private var birthDate: Date?
+    private let heightNumberArray = Array(100...250)
+
     private var height: Int?
     private var weight: Double?
+    private var birthDate: Date?
     private var userName: String?
 	
+    private var weightString: String?
 	private var weighWholeString: String?
 	private var weightFrictionString: String?
-	private var weightString: String?
     
     private let googleManager = GoogleApiManager()
     
@@ -116,11 +116,6 @@ extension QuestionnairePersonalDetailsViewController: UIPickerViewDelegate, UIPi
 
 extension QuestionnairePersonalDetailsViewController: UITextFieldDelegate {
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-		numberPicker.selectRow(0, inComponent: 0, animated: false)
-        numberPicker.reloadAllComponents()
-        numberPicker.reloadInputViews()
-    }
 	func textFieldDidEndEditing(_ textField: UITextField) {
         if !(textField.text?.isEmpty ?? true){
             switch textField {
@@ -136,28 +131,15 @@ extension QuestionnairePersonalDetailsViewController: UITextFieldDelegate {
         }
 		checkFieldsEmpty()
 	}
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        numberPicker.selectRow(0, inComponent: 0, animated: false)
+        numberPicker.reloadAllComponents()
+        numberPicker.reloadInputViews()
+    }
 }
 
 extension QuestionnairePersonalDetailsViewController {
     
-    private func configureTextFields() {
-        
-		birthdayDatePicker.addTarget(self, action: #selector(pickerChanged), for: .valueChanged)
-        heightTextField.inputView = numberPicker
-        weightTextField.inputView = numberPicker
-        heightTextField.delegate = self
-        weightTextField.delegate = self
-        userNameTextField.delegate = self
-    }
-    
-    func setupTextfieldText() {
-        let userData = UserProfile.defaults
-
-        if let height = userData.height, let weight = userData.weight {
-            heightTextField.text = "\(height)"
-            weightTextField.text = "\(weight)"
-        }
-    }
     private func configurePicker() {
         numberPicker.delegate = self
         numberPicker.dataSource = self
@@ -171,4 +153,21 @@ extension QuestionnairePersonalDetailsViewController {
 			}
 		}
 	}
+    private func setupTextfieldText() {
+        let userData = UserProfile.defaults
+        
+        if let height = userData.height, let weight = userData.weight {
+            heightTextField.text = "\(height)"
+            weightTextField.text = "\(weight)"
+        }
+    }
+    private func configureTextFields() {
+        
+        birthdayDatePicker.addTarget(self, action: #selector(pickerChanged), for: .valueChanged)
+        heightTextField.inputView = numberPicker
+        weightTextField.inputView = numberPicker
+        heightTextField.delegate = self
+        weightTextField.delegate = self
+        userNameTextField.delegate = self
+    }
 }

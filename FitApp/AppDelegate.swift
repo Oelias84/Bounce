@@ -46,7 +46,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                     return
                 }
                 let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
-                let nav = storyboard.instantiateViewController(withIdentifier: K.StoryboardNameId.HomeTabBar) as? UITabBarController
+                let nav = storyboard.instantiateViewController(withIdentifier: K.ViewControllerId.HomeTabBar) as? UITabBarController
                 window.rootViewController = nav
                 window.makeKeyAndVisible()
 

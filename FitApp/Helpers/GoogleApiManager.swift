@@ -5,14 +5,15 @@
 //  Created by iOS Bthere on 06/01/2021.
 //
 
+import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import Foundation
 
 struct GoogleApiManager {
     
     let db = Firestore.firestore()
+    let storage = Storage.storage()
     
     //MARK: - UserData
     func updateUserData(userData: ServerUserData){
@@ -130,16 +131,16 @@ struct GoogleApiManager {
     //MARK: - Articles
     func getArticles(completion: @escaping (Result<[[Article]]?, Error>) -> Void) {
         do {
-            db.collection("articles-data").document("articles").getDocument { (data, error) in
+			db.collection("articles-data").document("articles").getDocument { (data, error) in
                 if let error = error {
                     print(error)
-                } else if let data = data {
+				} else if let data = data {
                     do {
                         var articles: [[Article]] = []
                         
-                        if let decodedData = try data.data(as: ServerArticles.self) {
+						if let decodedData = try data.data(as: ServerArticles.self) {
                             
-                            articles = [decodedData.nutrition, decodedData.exercise, decodedData.recipes, decodedData.other]
+							articles = [decodedData.nutrition, decodedData.exercise, decodedData.recipes, decodedData.other]
                         }
                         completion(.success(articles))
                     } catch {
@@ -149,6 +150,216 @@ struct GoogleApiManager {
                 }
             }
         }
-        
     }
+    
+    //MARK: - Workouts
+    func getWorkouts( forFitnessLevel: Int, completion: @escaping (Result<[Workout], Error>) -> Void) {
+        do {
+            db.collection("workouts-data").document("workouts").getDocument(source: .default, completion: { (data, error) in
+                if let error = error {
+                    print(error)
+                } else if let data = data {
+                    do {
+                        var workouts: [Workout] = []
+                        if let workoutsData = try data.data(as: Workouts.self) {
+                            
+                            switch forFitnessLevel {
+                            case 1:
+                                workouts = workoutsData.beginner
+								completion(.success(workouts))
+                            case 2:
+                                workouts = workoutsData.intermediate
+								completion(.success(workouts))
+                            case 3:
+                                workouts = workoutsData.advance
+								completion(.success(workouts))
+                            default:
+                                break
+                            }
+                        }
+                    } catch {
+                        print(error)
+                        completion(.failure(error))
+                    }
+                }
+            })
+        }
+    }
+    func getExerciseBy(completion: @escaping (Result<[Exercise], Error>) -> Void) {
+        do {
+            db.collection("workouts-data").document("exercises").getDocument(source: .default, completion: { (data, error) in
+                if let error = error {
+                    print(error)
+                } else if let data = data {
+                    do {
+                        if let decodedData = try data.data(as: ExerciseData.self) {
+                            completion(.success(decodedData.exercises))
+                        }
+                    } catch {
+                        print(error)
+                        completion(.failure(error))
+                    }
+                }
+            })
+        }
+    }
+    func getExerciseVideo(videoNumber: String, completion: @escaping (Result<URL?, Error>) -> Void) {
+		let number = videoNumber.split(separator: "/").last
+        let httpsReference = storage.reference(forURL: "https://firebasestorage.googleapis.com/b/gs://my-fit-app-a8595.appspot.com//o/\(number!).m4v")
+        
+        httpsReference.downloadURL { url, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(url))
+            }
+        }
+    }
+	
+	func getArticleText(videoNumber: String, completion: @escaping (Result<URL?, Error>) -> Void) {
+		
+//		let number = videoNumber.split(separator: "/").last
+		let httpsReference = storage.reference(forURL: "https://firebasestorage.googleapis.com/b/gs://my-fit-app-a8595.appspot.com/o/articles/1.rtf")
+		
+		httpsReference.downloadURL { url, error in
+			if let error = error {
+				completion(.failure(error))
+			} else {
+				completion(.success(url))
+			}
+		}
+	}
+
+    func updateDishes() {
+        let carb = [
+            ServerDish(name: "אורז לבן 75 גרם"),
+            ServerDish(name: "אורז בסמטי 70 גרם"),
+            ServerDish(name: "בורגול 125 גרם"),
+            ServerDish(name: "פסטה 60 גרם"),
+            ServerDish(name: "בטטה 130 גרם"),
+            ServerDish(name: "כוסמת 110 גרם"),
+            ServerDish(name: "קינואה 85 גרם"),
+            ServerDish(name: "קוסקוס 90 גרם"),
+            ServerDish(name: "פתיתים 60 גרם"),
+            ServerDish(name: "לחם לבן\\מלא 1 יחידות"),
+            ServerDish(name: "לחם קל 2 יחידות"),
+            ServerDish(name: "פיתה רגילה 0.5 יחידות"),
+            ServerDish(name: "פיתה קלה 1 יחידות"),
+            ServerDish(name: "פריכיות עד 100 קל"),
+            ServerDish(name: "עדשים 85 גרם"),
+            ServerDish(name: "אפונה 120 גרם"),
+            ServerDish(name: "תירס קל שימורים 200 גרם"),
+            ServerDish(name: "תירס מתוק שימורים 100 גרם"),
+            ServerDish(name: "שעועית לבנה\\אדומה\\שחורה 85 גרם"),
+            ServerDish(name: "גרגירי חומוס שימורים 85 גרם"),
+            ServerDish(name: "קוואקר 30 גרם"),
+            ServerDish(name: "פייבר וואן 45 גרם"),
+            ServerDish(name: "קורנפלקס אלופים"),
+            ServerDish(name: "ברנפלקס 40 גרם"),
+            ServerDish(name: "חלב סויה לייט מ\"ל"),
+            ServerDish(name: "חלב 3% 60 מיליטר"),
+            ServerDish(name: "פרי בגודל אגרוף 1 יחידות"),
+            ServerDish(name: "פירות יער 15 יחידות"),
+			  ServerDish(name: "מנגו 15 יחידות"),
+			  ServerDish(name: "אננס 15 יחידות"),
+			  ServerDish(name: "תותים 15 יחידות"),
+            ServerDish(name: "ענבים 10 יחידות"),
+            ServerDish(name: "אורז לבן 75 גרם"),
+            ServerDish(name: "אורז בסמטי 70 גרם"),
+            ServerDish(name: "בורגול 125 גרם"),
+            ServerDish(name: "פסטה 60 גרם"),
+            ServerDish(name: "תפוח אדמה 140 גרם"),
+            ServerDish(name: "בטטה 130 גרם"),
+            ServerDish(name: "כוסמת 110 גרם"),
+            ServerDish(name: "קינואה 85 גרם"),
+			  ServerDish(name: "דגני פיטנס שקדים\\דבש 30 גרם")
+
+        ]
+        let protein = [
+            ServerDish(name: "גבינה לבנה 5% 3/4 גביע"),
+            ServerDish(name: "גבינה לבנה 3% 3/4 גביע"),
+            ServerDish(name: "גבינת קוטג 5% 3/4 גביע"),
+            ServerDish(name: "גבינת קוטג 3% 3/4 גביע"),
+            ServerDish(name: "גבינת קוטג 1% גביע"),
+            ServerDish(name: "בולגרית 5% 150 גרם"),
+            ServerDish(name: "צפתית 5% 125 גרם"),
+            ServerDish(name: "לאבנה 5% 150 גרם"),
+            ServerDish(name: "לאבנה עזים 5% 150 גרם"),
+            ServerDish(name: "גבינת חמד לייט 5% 100 גרם"),
+            ServerDish(name: "גבינה צהובה 9-15% 3 יחידות"),
+            ServerDish(name: "משקה יוטבתה פרו דאבל זירו 250 מ\"ל"),
+            ServerDish(name: "משקה יופלה גו לייט 250 מ\"ל"),
+            ServerDish(name: "מעדן חלבון גביע"),
+            ServerDish(name: "מעדן חלבון לייט גביע"),
+            ServerDish(name: "טונה בשמן קופסה"),
+            ServerDish(name: "טונה במים קופסה"),
+            ServerDish(name: "פסטרמה 3% 6 יחידות"),
+            ServerDish(name: "פסטרמה 1% 7 יחידות"),
+            ServerDish(name: "חזה עוף 100 גרם"),
+            ServerDish(name: "בשר בקר סינטה 100 גרם"),
+            ServerDish(name: "בשר בקר כתף 100 גרם"),
+            ServerDish(name: "בשר בקר שייטל 100 גרם"),
+            ServerDish(name: "לברק 100 גרם"),
+            ServerDish(name: "דג בורי 100 גרם"),
+            ServerDish(name: "גד סול 100 גרם"),
+            ServerDish(name: "דג בקלה 100 גרם"),
+            ServerDish(name: "דג נילוס 100 גרם"),
+            ServerDish(name: "דג אמנון 100 גרם"),
+            ServerDish(name: "דג סלמון 100 גרם"),
+            ServerDish(name: "סלמון מעושן 100 גרם"),
+            ServerDish(name: "ביצים M 2 יחידות"),
+            ServerDish(name: "טופו 150 גרם"),
+            ServerDish(name: "טופו חומוס 200 גרם"),
+            ServerDish(name: "אבקת חלבון סקופ"),
+            ServerDish(name: "חטיף חלבון יחידה")
+        ]
+        let fat = [
+            ServerDish(name: "שמן זית\\קוקוס\\רגיל כף"),
+            ServerDish(name: "טחינה גולמית כף"),
+            ServerDish(name: "טחינה מוכנה 2 כפות"),
+            ServerDish(name: "חמאת בוטנים כף שטוחה"),
+            ServerDish(name: "1/3 אבוקדו"),
+            ServerDish(name: "שוקולד מרירי 70% 5 קוביות"),
+            ServerDish(name: "שוקולד מריר 70% 2 קוביות דגולות"),
+            ServerDish(name: "שקדים 15 יחידות"),
+            ServerDish(name: "אגוזי מלך 6 חצאים"),
+            ServerDish(name: "חמאה כף"),
+            ServerDish(name: "מיונז כף שטוחה"),
+            ServerDish(name: "מיונז לייט 2 כפות"),
+            ServerDish(name: "זיתים 15 זיתים קטנים"),
+            ServerDish(name: "חומוס מקופסה 2 כפות"),
+            ServerDish(name: "במבה 25 גרם שקית")
+
+        ]
+
+        do {
+            try db.collection("dishes-data").document("dishes").setData(from: ServerDishes(carbs: carb, fat: fat, protein: protein))
+        } catch {
+            print(error)
+        }
+    }
+    
+
+}
+
+
+struct Workouts: Codable {
+     
+    let advance: [Workout]
+    let beginner: [Workout]
+    let intermediate: [Workout]
+}
+
+struct ExerciseData: Codable {
+    
+    let exercises: [Exercise]
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case exercises = "exercise-data"
+    }
+}
+
+struct DishArray:Codable {
+    let protein: [String]
 }

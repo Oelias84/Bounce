@@ -7,8 +7,19 @@
 
 import Foundation
 
-struct Exercise {
+
+class WorkoutExercise: Codable {
+    
+    let exercise: String
+    let repeats: String
+    let sets: String
+    var exerciseToPresent: Exercise?
+}
+
+class Exercise: Codable {
     
     let name: String
-    let exerciseDescription: String
+    let videos: [String]
+	let title: String
+	let text: String
 }

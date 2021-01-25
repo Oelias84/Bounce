@@ -152,6 +152,7 @@
                     <constraint firstItem="rQU-3C-p22" firstAttribute="top" secondItem="cCt-2o-40j" secondAttribute="top" constant="12" id="xhW-lF-iZ6"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="cellBackgroundView" destination="rQU-3C-p22" id="Yeo-fD-HL1"/>
                 <outlet property="dishStackView" destination="z7Q-Cx-yY6" id="Zly-oX-gax"/>

@@ -7,9 +7,13 @@
 
 import Foundation
 
-struct ServerDish: Codable {
-    
+struct ServerDish: Codable, Comparable {
+
     let name: String
+
+	static func < (lhs: ServerDish, rhs: ServerDish) -> Bool {
+		lhs.name < rhs.name
+	}
 }
 
 struct ServerDishes: Codable {

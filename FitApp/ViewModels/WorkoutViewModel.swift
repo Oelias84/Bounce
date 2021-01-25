@@ -9,11 +9,7 @@ import Foundation
 
 class WorkoutViewModel: NSObject {
     
-    private var workouts: [Workout]! {
-        didSet {
-            bindWorkoutViewModelToController()
-        }
-    }
+    private var workouts: [Workout] = []
     private var exercises: [Exercise]!
     let googleManager = GoogleApiManager()
     
@@ -27,6 +23,13 @@ class WorkoutViewModel: NSObject {
                 self.addExerciseDataToWorkout()
             }
         }
+    }
+    
+    var workoutsCount: Int {
+        self.workouts.count
+    }
+    func getWorkout(for index: Int) -> Workout {
+        self.workouts[index]
     }
     
     func fetchWorkout(completion: @escaping () -> Void) {
@@ -88,5 +91,6 @@ class WorkoutViewModel: NSObject {
                 $0.exerciseToPresent = self.exercises[Int($0.exercise)!]
             }
         }
+        self.bindWorkoutViewModelToController()
     }
 }

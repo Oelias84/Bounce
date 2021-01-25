@@ -6,11 +6,11 @@
 //
 
 import Foundation
+import PDFKit
 
 struct Article: Codable {
     
     let title: String
-//    let description: String
     let text: String
 }
 

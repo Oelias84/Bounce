@@ -21,7 +21,7 @@ extension UIViewController {
         aView?.addSubview(ai)
         self.view.addSubview(aView!)
     }
-    
+	
     func stopSpinner() {
         aView?.removeFromSuperview()
         aView = nil

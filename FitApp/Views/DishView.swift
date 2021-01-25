@@ -54,11 +54,14 @@ class DishView: UIView {
         dishPickerView.dataSource = self
         dishNameTextField.inputView = dishPickerView
         dishNameTextField.delegate = self
+		dishNameTextField.layer.cornerRadius = 4
+		dishNameTextField.layer.borderWidth = 1
+		dishNameTextField.layer.borderColor = UIColor.systemBlue.cgColor
         dishPickerView.backgroundColor = .white
         setupToolBar()
     }
     func configureData() {
-        amountLabel.text = "\(dish.amount)"
+        amountLabel.text = "x\(dish.amount)"
         dishTypeLabel.text = dish.printDishType
         dishNameTextField.text = dish.getDishName
         checkBoxButton.isSelected = dish.isDishDone
@@ -78,19 +81,25 @@ extension DishView: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     func setupToolBar() {
         let toolBar = UIToolbar()
-        toolBar.sizeToFit()
-        let button = UIBarButtonItem(title: "אישור", style: .plain, target: self, action: #selector(close))
-        toolBar.setItems([button], animated: true)
+        let confirm = UIBarButtonItem(title: "אישור", style: .plain, target: self, action: #selector(confirmTapped))
+		let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+		let cancel = UIBarButtonItem(title: "ביטול", style: .done, target: self, action: #selector(closeTapped))
+		
+		toolBar.sizeToFit()
+        toolBar.setItems([confirm, spacer, cancel], animated: true)
         toolBar.isUserInteractionEnabled = true
         dishNameTextField.inputAccessoryView = toolBar
     }
-    @objc func close() {
+    @objc func confirmTapped() {
         dish.setName(name: dishes[dishPickerView.selectedRow(inComponent: 0)].name)
         dishNameTextField.text = dishes[dishPickerView.selectedRow(inComponent: 0)].name
         print(dish.getDishName)
         view.endEditing(true)
         delegate?.didCheck(dish: dish)
     }
+	@objc func closeTapped() {
+		view.endEditing(true)
+	}
 }
 
 extension DishView: UITextFieldDelegate {

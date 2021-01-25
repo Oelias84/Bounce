@@ -16,7 +16,6 @@ class MealViewModel: NSObject {
         }
     }
     private var dishes: [[ServerDish]]?
-    
     private var manager: ConsumptionManager!
     public var googleService: GoogleApiManager!
     
@@ -133,11 +132,11 @@ class MealViewModel: NSObject {
         
         switch type {
         case .fat:
-            dishArray = dishes[0]
+			dishArray = dishes[0].sorted()
         case .carbs:
-            dishArray = dishes[1]
+			dishArray = dishes[1].sorted()
         case .protein:
-            dishArray = dishes[2]
+			dishArray = dishes[2].sorted()
         }
         return dishArray
     }
@@ -203,7 +202,7 @@ class MealViewModel: NSObject {
             let proteinDish = Dish(name: DishesGenerator.randomDishFor(mealType: mealType[i], .protein), type: .protein, amount: proteinForMeal.0)
             let fatDish = Dish(name: DishesGenerator.randomDishFor(mealType: mealType[i], .fat), type: .fat, amount: fatForMeal.0)
             
-            dayMeals[i].dishes = [carbsDish, proteinDish, fatDish]
+            dayMeals[i].dishes = [proteinDish, carbsDish, fatDish]
         }
         if let prefer = hasPrefer {
             if let addToPreferred = dayMeals.first(where: {$0.mealType == prefer}) {

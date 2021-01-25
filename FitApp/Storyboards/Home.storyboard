@@ -223,8 +223,8 @@
                             <constraint firstItem="u82-fd-ybZ" firstAttribute="centerX" secondItem="oXi-sI-Ov4" secondAttribute="centerX" id="zkM-Qw-08U"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="HomeIcon" id="huH-1c-Qcl"/>
                     <navigationItem key="navigationItem" id="iKW-MR-WrV"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="carbsCountLabel" destination="oVv-Ky-GsP" id="IkM-u7-FI9"/>
                         <outlet property="carbsTargateLabel" destination="mar-kr-c7w" id="fl2-lI-kXy"/>
@@ -240,7 +240,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZmW-3o-guf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-417.39130434782612" y="762.72321428571422"/>
+            <point key="canvasLocation" x="-417" y="1505"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ADI-1a-awp">
@@ -250,10 +250,9 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MbM-6T-4Ry">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="65l-oX-bHe" kind="relationship" relationship="viewControllers" id="aa6-aT-idU"/>
+                        <segue destination="5vo-ly-MDw" kind="relationship" relationship="viewControllers" id="aa6-aT-idU"/>
                         <segue destination="nJB-tX-ghA" kind="relationship" relationship="viewControllers" id="rac-r4-k2O"/>
                         <segue destination="zmZ-sf-tsA" kind="relationship" relationship="viewControllers" id="8KR-2F-jie"/>
                         <segue destination="I6j-J7-ygL" kind="relationship" relationship="viewControllers" id="qgd-Sq-ljZ"/>
@@ -264,10 +263,10 @@
             </objects>
             <point key="canvasLocation" x="1021.7391304347827" y="-47.544642857142854"/>
         </scene>
-        <!--Exercises-->
+        <!--Workout-->
         <scene sceneID="hjH-1A-yQ9">
             <objects>
-                <viewControllerPlaceholder storyboardName="Exercises" id="vWk-db-Umz" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Workout" id="vWk-db-Umz" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="רגילים" id="bMp-hz-NjA"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nrr-gZ-zba" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -291,7 +290,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ooh-IB-Nhq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1022" y="763"/>
+            <point key="canvasLocation" x="1023" y="763"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HxQ-5K-cFd">
@@ -310,7 +309,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NwE-Hz-nir" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="291" y="763"/>
+            <point key="canvasLocation" x="290" y="763"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ixk-Ge-SU3">
@@ -369,6 +368,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t31-11-0ui" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2455" y="763"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MX8-hT-dT7">
+            <objects>
+                <navigationController restorationIdentifier="HomeNavigation" automaticallyAdjustsScrollViewInsets="NO" id="5vo-ly-MDw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="HomeIcon" id="huH-1c-Qcl"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Xn-2L-GKh">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="65l-oX-bHe" kind="relationship" relationship="rootViewController" id="31d-RI-vwQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vvx-nY-IHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-417.39130434782612" y="762.72321428571422"/>
         </scene>
     </scenes>
     <resources>

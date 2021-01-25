@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
-   uuid = "98CC8CD8-6573-4776-8D94-C493504F6ECF"
-   type = "1"
+   uuid = "B839530A-DCB8-4184-8CCB-19D0A136CA3D"
+   type = "0"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1CF3EFDD-6A90-4C88-94E5-80972A45E13B"
+            uuid = "A78A1D8C-4F43-49DE-93CC-945CC704FEDC"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FitApp/Controllers/QuestionnaireNutritionViewController.swift"
+            filePath = "FitApp/Models/UserProgress.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "mealsCheckBoxes(sender:)"
-            landmarkType = "7">
+            startingLineNumber = "4"
+            endingLineNumber = "4"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

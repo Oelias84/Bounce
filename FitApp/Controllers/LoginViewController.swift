@@ -40,7 +40,7 @@ class LoginViewController: UIViewController {
                     case .success(let userData):
                         UserProfile.defaults.updateUserProfileData(userData!, id: user!.user.uid)
                         let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
-                        let homeVC = storyboard.instantiateViewController(identifier: K.StoryboardNameId.HomeTabBar)
+                        let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar)
                         
                         homeVC.modalPresentationStyle = .fullScreen
                         self.present(homeVC, animated: true)

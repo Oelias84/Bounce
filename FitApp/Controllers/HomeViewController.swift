@@ -62,7 +62,8 @@ class HomeViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+		navigationController?.setNavigationBarHidden(true, animated: animated)
+
         if !(UserProfile.defaults.finishOnboarding ?? false) {
             boardManager.showBulletin(above: self)
             boardManager.allowsSwipeInteraction = false
@@ -70,17 +71,28 @@ class HomeViewController: UIViewController {
             mealViewModel.fetchData()
         }
         setupProgress()
+		
+		
     }
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		navigationController?.setNavigationBarHidden(false, animated: animated)
+	}
     
     @IBAction func profileButtonAction(_ sender: Any) {
-        UserDefaults.resetDefaults()
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print("issue sigenout")
-        }
-        exit(0)
-    }
+		let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
+		let settingsVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsViewController)
+		
+		self.navigationController!.pushViewController(settingsVC, animated: true)
+	}
+//	UserDefaults.resetDefaults()
+//	do {
+//		try Auth.auth().signOut()
+//		let stroryboard = UIStoryboard.init(name: K.StoryboardName.loginRegister, bundle: nil)
+//	} catch {
+//		print("issue sigenout")
+//	}
 }
 
 extension HomeViewController {
@@ -127,7 +139,7 @@ extension HomeViewController {
     }
     private func startQuestionnaire(){
         let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
-        let questionnaireVC = storyboard.instantiateViewController(identifier: K.StoryboardNameId.questionnaireNavigation)
+        let questionnaireVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation)
         
         questionnaireVC.modalPresentationStyle = .fullScreen
         boardManager.dismissBulletin()

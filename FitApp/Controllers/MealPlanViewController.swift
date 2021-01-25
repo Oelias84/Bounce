@@ -22,8 +22,9 @@ class MealPlanViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         dateTextLabel.text = date.dateStringDisplay
+//        tableView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.06)
         callToViewModelForUIUpdate()
     }
     
@@ -83,6 +84,7 @@ extension MealPlanViewController {
     func callToViewModelForUIUpdate() {
         showSpinner()
         mealViewModel = MealViewModel.shared
+//        mealViewModel.googleService.updateDishes()
         if mealViewModel.meals == nil {
             mealViewModel.fetchData()
             mealViewModel.bindMealViewModelToController = {
