@@ -13,11 +13,13 @@ class ArticleViewController: UIViewController {
     
     @IBOutlet weak var articleTitleLabel: UILabel!
     @IBOutlet weak var articleTextView: UILabel!
-    
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         
         articleTitleLabel.text = article.title
-        articleTextView.text = article.text
+		self.articleTextView.text = article.text.replacingOccurrences(of: "\\n", with: "\n")
+		
     }
+
 }

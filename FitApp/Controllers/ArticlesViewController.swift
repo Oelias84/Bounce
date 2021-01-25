@@ -70,7 +70,7 @@ extension ArticlesViewController {
     }
     func moveToArticleView(for article: Article) {
         let storyboard = UIStoryboard(name: K.StoryboardName.articles, bundle: nil)
-        let articleVC = storyboard.instantiateViewController(identifier: K.StoryboardNameId.articleViewController) as ArticleViewController
+        let articleVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.articleViewController) as ArticleViewController
         
         articleVC.title = articleTopic
         articleVC.article = article
