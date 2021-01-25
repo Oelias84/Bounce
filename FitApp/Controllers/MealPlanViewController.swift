@@ -26,6 +26,7 @@ class MealPlanViewController: UIViewController {
         dateTextLabel.text = date.dateStringDisplay
 //        tableView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.06)
         callToViewModelForUIUpdate()
+		addBarButtonIcon()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +96,20 @@ extension MealPlanViewController {
         }
         
     }
+	func addBarButtonIcon() {
+		let button = UIButton(type: .system)
+		let rightBarButton = UIBarButtonItem(customView: button)
+		
+		button.setTitle("הערות ", for: .normal)
+		button.setImage(UIImage(systemName: "info.circle.fill"), for: .normal)
+		button.addTarget(self, action: #selector(barButtonItemTapped), for: .touchUpInside)
+		button.sizeToFit()
+
+		self.navigationItem.rightBarButtonItem = rightBarButton
+	}
+	@objc func barButtonItemTapped(_ sender: UIBarButtonItem) {
+		print("doSomething!")
+	}
 }
 
 extension MealPlanViewController: MealPlanTableViewCellDelegate {

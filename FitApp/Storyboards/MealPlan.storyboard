@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBd-1e-NZn" userLabel="Date Change View">
-                                <rect key="frame" x="12" y="56" width="390" height="64"/>
+                                <rect key="frame" x="12" y="100" width="390" height="64"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NId-H0-hSQ">
                                         <rect key="frame" x="12" y="2" width="366" height="60"/>
@@ -77,7 +77,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MealPlan" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CMS-EQ-Utu">
-                                <rect key="frame" x="0.0" y="132" width="414" height="764"/>
+                                <rect key="frame" x="0.0" y="176" width="414" height="720"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="pjO-ox-C9x" id="QJM-2u-Uev"/>
@@ -98,6 +98,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="ארוחות" leftItemsSupplementBackButton="YES" id="ElR-4c-7nc"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="dateLeftButton" destination="HRy-y3-xmw" id="xfx-76-juo"/>
                         <outlet property="dateRightButton" destination="leQ-oj-hdP" id="ERF-2n-pDz"/>
@@ -107,7 +108,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AA9-Z0-acL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="497.10144927536237" y="-117.1875"/>
+            <point key="canvasLocation" x="1407.2463768115942" y="-117.1875"/>
         </scene>
     </scenes>
     <resources>
