@@ -14,6 +14,7 @@ class ExerciseViewController: UIViewController {
     private let googleManager = GoogleApiManager()
 	private var player: AVPlayer!
 	private var currentVideoUrl: URL!
+	@IBOutlet weak var containerView: UIView!
 	
 	private var activityIndicator: UIActivityIndicatorView = {
 		let aiv = UIActivityIndicatorView()
@@ -75,11 +76,11 @@ class ExerciseViewController: UIViewController {
 	private func setUpPlayerContainerView() {
 		playerContainerView = UIView()
 		playerContainerView.backgroundColor = .black
-		view.addSubview(playerContainerView)
+		containerView.addSubview(playerContainerView)
 		playerContainerView.translatesAutoresizingMaskIntoConstraints = false
-		playerContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-		playerContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-		playerContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3).isActive = true
+		playerContainerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+		playerContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+		playerContainerView.heightAnchor.constraint(equalTo: containerView.heightAnchor ).isActive = true
 			
 		if #available(iOS 11.0, *) {
 			playerContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -106,6 +107,7 @@ class ExerciseViewController: UIViewController {
 			player.play()
 		}
 		getProgress {
+			self.activityIndicator.stopAnimating()
 			self.playerContainerView.addSubview(self.fullScreenButton)
 			self.fullScreenButton.translatesAutoresizingMaskIntoConstraints = false
 			self.fullScreenButton.bottomAnchor.constraint(equalTo: self.playerContainerView.bottomAnchor, constant: -25).isActive = true
