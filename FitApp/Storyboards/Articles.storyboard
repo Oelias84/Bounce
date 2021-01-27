@@ -91,13 +91,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NT9-WG-P5w">
+                            <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NT9-WG-P5w">
                                 <rect key="frame" x="12" y="52" width="390" height="32"/>
                                 <segments>
                                     <segment title="תזונה"/>
                                     <segment title="אימונים"/>
                                     <segment title="מתכונים"/>
-                                    <segment title="שונות"/>
+                                    <segment title="אחר"/>
                                 </segments>
                                 <connections>
                                     <action selector="articlesSegmentedControlAction:" destination="56e-N1-VCD" eventType="valueChanged" id="rOL-Z7-92O"/>

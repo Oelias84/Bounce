@@ -17,7 +17,6 @@ class ArticleTableViewCell: UITableViewCell {
     }
     
     @IBOutlet weak var titleTextLabel: UILabel!
-    @IBOutlet weak var descriptionTextLabel: UILabel!
     @IBOutlet weak var cellBackgroundView: UIView!
     
     override func awakeFromNib() {
@@ -32,7 +31,6 @@ class ArticleTableViewCell: UITableViewCell {
     
     func setupCell() {
         titleTextLabel.text = article.title
-        descriptionTextLabel.text = "desc"
     }
     private func setupView() {
         
