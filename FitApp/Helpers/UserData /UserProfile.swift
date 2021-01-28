@@ -75,6 +75,25 @@ extension UserProfile {
         userProfile.fitnessLevel = data.fitnessLevel
         userProfile.weaklyWorkouts = data.weaklyWorkouts
     }
+	
+	static func updateServer() {
+		let googleManager = GoogleApiManager()
+		let data = ServerUserData(
+			name: defaults.name!,
+			birthDate: defaults.birthDate!.dateStringForDB,
+			weight: defaults.weight!,
+			height: defaults.height!,
+			fatPercentage: defaults.fatPercentage!,
+			steps: defaults.steps,
+			kilometer: defaults.kilometer,
+			mealsPerDay: defaults.mealsPerDay!,
+			mostHungry: defaults.mostHungry,
+			fitnessLevel: defaults.fitnessLevel!,
+			weaklyWorkouts: defaults.weaklyWorkouts!,
+			finishOnboarding: true
+		)
+		googleManager.updateUserData(userData: data)
+	}
 }
 
 struct ServerUserData: Codable {
@@ -87,7 +106,7 @@ struct ServerUserData: Codable {
     let steps: Int?
     let kilometer: Double?
     let mealsPerDay: Int
-    let mostHungry: Int
+    let mostHungry: Int?
     let fitnessLevel: Int
     let weaklyWorkouts: Int
     let finishOnboarding: Bool

@@ -701,6 +701,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="jdb-f3-5bF"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="currentPageLabel" destination="Kvg-ST-aPm" id="v8q-BQ-fbp"/>
                         <outlet property="kilometersCheckBox" destination="ltq-Y4-pYV" id="A3Y-UT-WL1"/>
                         <outlet property="kilometersLabel" destination="IrN-Y8-15L" id="LpN-0U-XJE"/>
                         <outlet property="kilometresSlider" destination="USf-0e-D4n" id="91a-3z-DfY"/>

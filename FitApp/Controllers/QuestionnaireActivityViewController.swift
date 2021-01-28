@@ -9,16 +9,16 @@ import UIKit
 
 class QuestionnaireActivityViewController: UIViewController {
 	
-	private var isFromQuestionnaire: Bool!
+	public var isFromSettings = false
 	
 	@IBOutlet weak var kilometresSlider: UISlider! {
 		didSet {
-			kilometresSlider.maximumValue = 100.00
+			kilometresSlider.maximumValue = 25.00
 		}
 	}
 	@IBOutlet weak var stepsSlider: UISlider! {
 		didSet {
-			stepsSlider.maximumValue = 10000.00
+			stepsSlider.maximumValue = 30000.00
 		}
 	}
 	@IBOutlet weak var currentPageLabel: UILabel!
@@ -32,7 +32,7 @@ class QuestionnaireActivityViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if !isFromQuestionnaire {
+		if isFromSettings {
 			nextButton.setTitle("אישור", for: .normal)
 			currentPageLabel.isHidden = true
 		}
@@ -41,34 +41,33 @@ class QuestionnaireActivityViewController: UIViewController {
 		super.viewWillAppear(animated)
 		
 		setUpTextfields()
-		isFromQuestionnaire = parent?.restorationIdentifier == K.NavigationId.QuestionnaireNavigation
 	}
 	
 	@IBAction func nextButtonAction(_ sender: Any) {
 		
-		
-			if kilometersCheckBox.isSelected {
-				if let kilometers = kilometersLabel.text?.split(separator: " ").first {
-					UserProfile.defaults.kilometer = Double(kilometers)
-					UserProfile.defaults.steps = nil
-				}
-				if isFromQuestionnaire {
-				
-				} else {
-					performSegue(withIdentifier: K.SegueId.moveToNutrition, sender: self)
-				}
-			} else if stepsCheckBox.isSelected {
-				if let steps = stepsLabel.text {
-					UserProfile.defaults.steps = Int(steps)
-				}
-				if isFromQuestionnaire {
-				
-				} else {
-					performSegue(withIdentifier: K.SegueId.moveToNutrition, sender: self)
-				}
-			} else {
-				navigationController?.popViewController(animated: true)
+		if kilometersCheckBox.isSelected {
+			if let kilometers = kilometersLabel.text?.split(separator: " ").first {
+				UserProfile.defaults.kilometer = Double(kilometers)
+				UserProfile.defaults.steps = nil
 			}
+			if isFromSettings {
+				updateServer()
+			} else {
+				performSegue(withIdentifier: K.SegueId.moveToNutrition, sender: self)
+			}
+		} else if stepsCheckBox.isSelected {
+			if let steps = stepsLabel.text {
+				UserProfile.defaults.steps = Int(steps)
+				UserProfile.defaults.kilometer = nil
+			}
+			if isFromSettings {
+				updateServer()
+			} else {
+				performSegue(withIdentifier: K.SegueId.moveToNutrition, sender: self)
+			}
+		} else {
+			navigationController?.popViewController(animated: true)
+		}
 	}
 	@IBAction func kilometersSliderAction(_ sender: UISlider) {
 		kilometersLabel.text = String(format: "%.1f", sender.value) + " " + K.Units.kilometers
@@ -83,18 +82,24 @@ class QuestionnaireActivityViewController: UIViewController {
 		case 1:
 			if sender.isSelected {
 				stepsCheckBox.isSelected = false
+				stepsSlider.isEnabled = false
+				kilometresSlider.isEnabled = true
 			}
 		case 2:
 			if sender.isSelected {
 				kilometersCheckBox.isSelected = false
+				stepsSlider.isEnabled = true
+				kilometresSlider.isEnabled = false
 			}
 		default:
 			return
 		}
 		
-		(kilometersCheckBox.isSelected || stepsCheckBox.isSelected)
-			? nextButton.setTitle("הבא", for: .normal)
-			: nextButton.setTitle("דלג", for: .normal)
+		if !isFromSettings {
+			(kilometersCheckBox.isSelected || stepsCheckBox.isSelected)
+				? nextButton.setTitle("הבא", for: .normal)
+				: nextButton.setTitle("דלג", for: .normal)
+		}
 	}
 }
 
@@ -106,17 +111,15 @@ extension QuestionnaireActivityViewController {
 		if let kilometers = userData.kilometer {
 			kilometersLabel.text = String(kilometers)
 			kilometersCheckBox.isSelected = true
+			stepsSlider.isEnabled = false
 		} else if let steps = userData.steps {
 			stepsLabel.text = String(steps)
 			stepsCheckBox.isSelected = true
+			kilometresSlider.isEnabled = false
 		}
 	}
-	
-	func updateData() {
-		let userData = UserProfile.defaults
-		let manager = GoogleApiManager()
-		let data = ServerUserData(name: userData.name!, birthDate: userData.birthDate!.dateStringForDB, weight: userData.weight!, height: userData.height!, fatPercentage: userData.fatPercentage!, steps: userData.steps, kilometer: userData.kilometer, mealsPerDay: userData.mealsPerDay!, mostHungry: userData.mostHungry!, fitnessLevel: userData.fitnessLevel!, weaklyWorkouts: userData.weaklyWorkouts!, finishOnboarding: true)
-		
-		manager.updateUserData(userData: data)
+	func updateServer() {
+		UserProfile.updateServer()
+		navigationController?.popViewController(animated: true)
 	}
 }

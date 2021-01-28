@@ -105,6 +105,8 @@ struct K {
         static let moveToNutrition = "moveToNutrition"
         static let moveToFitnessLevel = "moveToFitnessLevel"
         static let moveToSumup = "moveToSumup"
+		//Settings
+		static let moveToSettingsOptions = "moveToSettingsOptions"
     }
     
     struct CellId {
@@ -115,6 +117,7 @@ struct K {
         static let articleCell = "articleCell"
         static let exerciseCell = "exerciseCell"
         static let workoutCell = "workoutCell"
+		static let settingsOptionCell = "settingsOptionCell"
     }
 	
     struct NibName {

@@ -14,6 +14,13 @@ class WorkoutExercise: Codable {
     let repeats: String
     let sets: String
     var exerciseToPresent: Exercise?
+	
+	init(exercise: String, repeats: String, sets: String, exerciseToPresent: Exercise?) {
+		self.exercise = exercise
+		self.repeats = repeats
+		self.sets = sets
+		self.exerciseToPresent = exerciseToPresent
+	}
 }
 
 class Exercise: Codable {
@@ -22,4 +29,11 @@ class Exercise: Codable {
     let videos: [String]
 	let title: String
 	let text: String
+	
+	init(name: String, videos: [String], title: String, text: String) {
+		self.name = name
+		self.videos = videos
+		self.title = title
+		self.text = text
+	}
 }

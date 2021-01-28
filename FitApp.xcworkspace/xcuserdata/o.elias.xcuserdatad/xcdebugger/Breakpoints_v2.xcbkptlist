@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EDE0D84B-3A53-4A20-852C-25E45266D96A"
+            uuid = "4E539561-0F5E-4387-95FC-7756A4FD7C12"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FitApp/Helpers/GoogleApiManager.swift"
+            filePath = "FitApp/Controllers/SettingsOptionsTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "updateUserData(userData:)"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "fitnessLevelChange(fitnessLevel:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

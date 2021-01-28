@@ -26,7 +26,6 @@ class MealPlanTableViewCell: UITableViewCell {
     
     @IBOutlet weak var cellBackgroundView: UIView!
     @IBOutlet weak var mealNameLabel: UILabel!
-    @IBOutlet weak var mealDescriptionLabel: UILabel!
     @IBOutlet weak var mealIsDoneCheckMark: UIButton!
     
     @IBOutlet weak var dishesHeadLineStackView: UIStackView!

@@ -20,6 +20,9 @@ extension UIViewController {
         ai.startAnimating()
         aView?.addSubview(ai)
         self.view.addSubview(aView!)
+		
+		aView!.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+		aView!.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
 	
     func stopSpinner() {

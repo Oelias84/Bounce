@@ -15,13 +15,17 @@ class WorkoutTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.register(UINib(nibName: K.NibName.workoutTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.workoutCell)
-        workoutViewModel = WorkoutViewModel()
-		self.showSpinner()
-        workoutViewModel.bindWorkoutViewModelToController = {
-			self.stopSpinner()
-            self.tableView.reloadData()
-        }
     }
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		self.showSpinner()
+		workoutViewModel = WorkoutViewModel()
+		workoutViewModel.bindWorkoutViewModelToController = {
+			self.stopSpinner()
+			self.tableView.reloadData()
+		}
+	}
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

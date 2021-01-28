@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		13CF235DA08F341CFEB28805 /* Pods_FitApp_FitAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F92787D51B022DC3D3BE25 /* Pods_FitApp_FitAppUITests.framework */; };
 		1A1C4513AE7EF2FAD0F25C05 /* Pods_FitAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */; };
+		7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F4F3125C2D31300EE3758 /* SettingsOptionsTableViewController.swift */; };
 		7C5262B725BC756700694007 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C5262B625BC756700694007 /* Settings.storyboard */; };
 		7C5262BF25BC79B200694007 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5262BE25BC79B200694007 /* SettingsViewController.swift */; };
 		7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89A9FA256D69CA009AD87C /* AppDelegate.swift */; };
@@ -113,6 +114,7 @@
 /* Begin PBXFileReference section */
 		05D96098412DCEF72F6C4753 /* Pods-FitApp-FitAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp-FitAppUITests.release.xcconfig"; path = "Target Support Files/Pods-FitApp-FitAppUITests/Pods-FitApp-FitAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C3F4F3125C2D31300EE3758 /* SettingsOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOptionsTableViewController.swift; sourceTree = "<group>"; };
 		7C5262B625BC756700694007 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		7C5262BE25BC79B200694007 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7C8958EB95477BC016742433 /* Pods-FitApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp.release.xcconfig"; path = "Target Support Files/Pods-FitApp/Pods-FitApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -261,6 +263,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		7C3F4F3625C2D31900EE3758 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7C5262BE25BC79B200694007 /* SettingsViewController.swift */,
+				7C3F4F3125C2D31300EE3758 /* SettingsOptionsTableViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		7C89A9EE256D69CA009AD87C = {
 			isa = PBXGroup;
 			children = (
@@ -382,9 +393,9 @@
 				B36B71852577BCE8001CD393 /* Workouts */,
 				B3833F472593783B006776D5 /* Weight */,
 				B35822A025ADA01D00C91295 /* Articles */,
+				7C3F4F3625C2D31900EE3758 /* Settings */,
 				B3E36E74257285F3006CE558 /* HomeViewController.swift */,
 				B3E6E9B725714D5800958C48 /* MealPlanViewController.swift */,
-				7C5262BE25BC79B200694007 /* SettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -887,6 +898,7 @@
 				7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */,
 				7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */,
 				B38397FB25B4A21F00154697 /* Workout.swift in Sources */,
+				7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */,
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
 				B358223025AC9DA800C91295 /* Article.swift in Sources */,
