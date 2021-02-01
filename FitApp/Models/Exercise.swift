@@ -29,11 +29,4 @@ class Exercise: Codable {
     let videos: [String]
 	let title: String
 	let text: String
-	
-	init(name: String, videos: [String], title: String, text: String) {
-		self.name = name
-		self.videos = videos
-		self.title = title
-		self.text = text
-	}
 }

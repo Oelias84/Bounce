@@ -64,9 +64,100 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SpC-Gd-oIp">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="264"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QjN-iz-FHK">
+                                        <rect key="frame" x="0.0" y="214" width="50" height="50"/>
+                                        <subviews>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ouR-vy-sGq">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                                <state key="normal" image="chevron.backward" catalog="system"/>
+                                                <connections>
+                                                    <action selector="backwardsButtonAction:" destination="OF6-fl-RTm" eventType="touchUpInside" id="Xmd-hU-zET"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="ouR-vy-sGq" secondAttribute="trailing" id="2qX-KO-wwX"/>
+                                            <constraint firstAttribute="width" constant="50" id="Chh-eD-hYb"/>
+                                            <constraint firstItem="ouR-vy-sGq" firstAttribute="top" secondItem="QjN-iz-FHK" secondAttribute="top" id="HMG-lR-fig"/>
+                                            <constraint firstItem="ouR-vy-sGq" firstAttribute="leading" secondItem="QjN-iz-FHK" secondAttribute="leading" id="LjK-fa-hEc"/>
+                                            <constraint firstItem="ouR-vy-sGq" firstAttribute="centerY" secondItem="QjN-iz-FHK" secondAttribute="centerY" id="Yux-4j-cos"/>
+                                            <constraint firstAttribute="height" constant="50" id="fQo-HN-o6i"/>
+                                            <constraint firstItem="ouR-vy-sGq" firstAttribute="centerX" secondItem="QjN-iz-FHK" secondAttribute="centerX" id="mrE-o2-hOx"/>
+                                            <constraint firstAttribute="bottom" secondItem="ouR-vy-sGq" secondAttribute="bottom" id="sVy-pc-KYY"/>
+                                        </constraints>
+                                    </view>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wee-OS-ynv">
+                                        <rect key="frame" x="8" y="8" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="40o-Ua-OSL"/>
+                                            <constraint firstAttribute="width" constant="30" id="YTY-jU-f4y"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="arrow.up.backward.and.arrow.down.forward" catalog="system"/>
+                                        <connections>
+                                            <action selector="fullScreenButtonAction:" destination="OF6-fl-RTm" eventType="touchUpInside" id="yJ3-EB-KlI"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q8k-ss-haL">
+                                        <rect key="frame" x="187" y="112" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="JqD-Ao-hcN"/>
+                                            <constraint firstAttribute="height" constant="40" id="hI4-yC-b3s"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <inset key="imageEdgeInsets" minX="-20" minY="-20" maxX="-20" maxY="-20"/>
+                                        <state key="normal" image="play.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="playButtonAction:" destination="OF6-fl-RTm" eventType="touchUpInside" id="wDv-vW-oIj"/>
+                                        </connections>
+                                    </button>
+                                    <pageControl opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="9Se-H6-EaU">
+                                        <rect key="frame" x="146" y="225.5" width="122.5" height="27.5"/>
+                                    </pageControl>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FQi-hr-CuH">
+                                        <rect key="frame" x="364" y="214" width="50" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nCY-vs-e74">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                                <state key="normal" image="chevron.forward" catalog="system"/>
+                                                <connections>
+                                                    <action selector="forwardButtonAction:" destination="OF6-fl-RTm" eventType="touchUpInside" id="xHt-lt-YJD"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="nCY-vs-e74" firstAttribute="top" secondItem="FQi-hr-CuH" secondAttribute="top" id="ACM-td-aFM"/>
+                                            <constraint firstItem="nCY-vs-e74" firstAttribute="centerX" secondItem="FQi-hr-CuH" secondAttribute="centerX" id="MjE-GI-XOn"/>
+                                            <constraint firstAttribute="trailing" secondItem="nCY-vs-e74" secondAttribute="trailing" id="MzM-Po-5or"/>
+                                            <constraint firstAttribute="width" constant="50" id="XsY-hK-Dhu"/>
+                                            <constraint firstAttribute="height" constant="50" id="ZwT-KF-Fvd"/>
+                                            <constraint firstItem="nCY-vs-e74" firstAttribute="leading" secondItem="FQi-hr-CuH" secondAttribute="leading" id="iOv-2h-pLE"/>
+                                            <constraint firstAttribute="bottom" secondItem="nCY-vs-e74" secondAttribute="bottom" id="iWq-la-c7l"/>
+                                            <constraint firstItem="nCY-vs-e74" firstAttribute="centerY" secondItem="FQi-hr-CuH" secondAttribute="centerY" id="zRM-U1-Uad"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
+                                    <constraint firstItem="wee-OS-ynv" firstAttribute="leading" secondItem="SpC-Gd-oIp" secondAttribute="leading" constant="8" id="2PL-kU-nlR"/>
+                                    <constraint firstItem="9Se-H6-EaU" firstAttribute="centerY" secondItem="nCY-vs-e74" secondAttribute="centerY" id="4Wg-3q-kyv"/>
+                                    <constraint firstItem="9Se-H6-EaU" firstAttribute="centerX" secondItem="SpC-Gd-oIp" secondAttribute="centerX" id="8Gy-24-W5M"/>
+                                    <constraint firstAttribute="bottom" secondItem="FQi-hr-CuH" secondAttribute="bottom" id="F5p-Af-zoR"/>
+                                    <constraint firstItem="QjN-iz-FHK" firstAttribute="leading" secondItem="SpC-Gd-oIp" secondAttribute="leading" id="XbS-EH-lTB"/>
+                                    <constraint firstItem="wee-OS-ynv" firstAttribute="top" secondItem="SpC-Gd-oIp" secondAttribute="top" constant="8" id="adJ-m7-BJa"/>
+                                    <constraint firstAttribute="trailing" secondItem="FQi-hr-CuH" secondAttribute="trailing" id="bEw-Kd-ZJe"/>
                                     <constraint firstAttribute="height" constant="264" id="bZ8-f5-xF1"/>
+                                    <constraint firstAttribute="bottom" secondItem="QjN-iz-FHK" secondAttribute="bottom" id="hwd-GW-kRK"/>
+                                    <constraint firstItem="q8k-ss-haL" firstAttribute="centerX" secondItem="SpC-Gd-oIp" secondAttribute="centerX" id="tq8-Ah-N7N"/>
+                                    <constraint firstItem="q8k-ss-haL" firstAttribute="centerY" secondItem="SpC-Gd-oIp" secondAttribute="centerY" id="yJp-N1-shc"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQQ-cV-Bme">
@@ -142,18 +233,30 @@
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="GFp-Vq-UZN"/>
                     <connections>
+                        <outlet property="backwardsButton" destination="ouR-vy-sGq" id="RFL-0C-hZS"/>
                         <outlet property="containerView" destination="SpC-Gd-oIp" id="oX6-Cu-Qpp"/>
+                        <outlet property="forwardButton" destination="nCY-vs-e74" id="Ohv-0a-8eH"/>
+                        <outlet property="fullScreenButton" destination="wee-OS-ynv" id="Oj3-Cq-Sbh"/>
+                        <outlet property="playButton" destination="q8k-ss-haL" id="JZ9-6w-X3T"/>
                         <outlet property="textLabel" destination="FtX-pr-zMl" id="d6w-1u-wI3"/>
                         <outlet property="textTitleLabel" destination="rBc-13-RwI" id="cZW-Mt-etI"/>
+                        <outlet property="videoPageIndicator" destination="9Se-H6-EaU" id="cXc-MV-1yV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fTO-ts-PY9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1129" y="-48"/>
+            <point key="canvasLocation" x="1128.985507246377" y="-48.214285714285715"/>
         </scene>
     </scenes>
     <resources>
         <image name="RunIcon" width="27" height="26.5"/>
+        <image name="arrow.up.backward.and.arrow.down.forward" catalog="system" width="128" height="115"/>
+        <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="chevron.forward" catalog="system" width="96" height="128"/>
+        <image name="play.fill" catalog="system" width="116" height="128"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

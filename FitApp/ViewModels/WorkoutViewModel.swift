@@ -75,8 +75,6 @@ class WorkoutViewModel: NSObject {
         }
         self.bindWorkoutViewModelToController()
     }
-	
-	
 	func addWarmup() -> WorkoutExercise {
 		return WorkoutExercise(exercise: "13", repeats: "10", sets: "3", exerciseToPresent: nil)
 	}

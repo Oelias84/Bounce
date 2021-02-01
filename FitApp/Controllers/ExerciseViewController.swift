@@ -10,11 +10,22 @@ import AVKit
 
 class ExerciseViewController: UIViewController {
     
-	var exercise: Exercise!
-    private let googleManager = GoogleApiManager()
+	public var exercise: Exercise!
 	private var player: AVPlayer!
-	private var currentVideoUrl: URL!
+	private var urlVideos: [URL]!
+	private var currentVideoUrlIndex = 0
+	
+	private let googleManager = GoogleApiManager()
+
+	private var playerContainerView: UIView!
 	@IBOutlet weak var containerView: UIView!
+	
+	@IBOutlet weak var playButton: UIButton!
+	@IBOutlet weak var forwardButton: UIButton!
+	@IBOutlet weak var backwardsButton: UIButton!
+
+	@IBOutlet weak var fullScreenButton: UIButton!
+	@IBOutlet weak var videoPageIndicator: UIPageControl!
 	
 	private var activityIndicator: UIActivityIndicatorView = {
 		let aiv = UIActivityIndicatorView()
@@ -23,27 +34,7 @@ class ExerciseViewController: UIViewController {
 		aiv.color = .white
 		return aiv
 	}()
-	private var fullScreenButton: UIButton = {
-		let button = UIButton(frame: CGRect(x: 100, y: 100, width: 300,height: 300))
-		let image = UIImage(systemName: "arrow.up.left.and.arrow.down.right")?.withRenderingMode(.alwaysTemplate)
-		
-		button.translatesAutoresizingMaskIntoConstraints = false
-		
-		button.setTitle("", for: .normal)
-		button.imageView?.contentMode = .scaleAspectFit
-		button.imageEdgeInsets = UIEdgeInsets(top: 25.0, left: 25.0, bottom: 25.0, right: 25.0)
-		button.addTarget(self, action: #selector(playFull), for: .touchUpInside)
-		button.setImage(image, for: .normal)
-		button.tintColor = .white
-		return button
-	}()
 	
-	private var playerContainerView: UIView! {
-		didSet {
-			playerContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(screenTapped)))
-		}
-	}
-
 	@IBOutlet weak var textTitleLabel: UILabel!
 	@IBOutlet weak var textLabel: UILabel!
 	
@@ -53,7 +44,7 @@ class ExerciseViewController: UIViewController {
 	
 	setUpPlayerContainerView()
 	playActivity()
-	playVideo(userString: exercise.videos.first!)
+	playVideo(userString: exercise.videos)
 		
 		let title = exercise.title
 		let string = exercise.text.replacingOccurrences(of: "\\n", with: "\n")
@@ -61,22 +52,81 @@ class ExerciseViewController: UIViewController {
 		textLabel.text = string
 }
 	
-	private func playVideo(userString: String) {
+	@IBAction func fullScreenButtonAction(_ sender: Any) {
+		playFull()
+	}
+	@IBAction func forwardButtonAction(_ sender: Any) {
+		player.pause()
+		playButton.isHidden = true
+		activityIndicator.startAnimating()
+		
+		if currentVideoUrlIndex == urlVideos.count-1 {
+			return
+		}
+		
+		backwardsButton.isHidden = false
+		currentVideoUrlIndex += 1
+		videoPageIndicator.currentPage = currentVideoUrlIndex
+		play(urlVideos[currentVideoUrlIndex])
+	}
+	@IBAction func playButtonAction(_ sender: Any) {
+		playButton.isHidden = true
+		let playerTimescale = self.player.currentItem?.asset.duration.timescale ?? 1
+		let time =  CMTime(seconds: 1, preferredTimescale: playerTimescale)
+		player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) { (finished) in
+			DispatchQueue.main.async { [weak self] in
+				self?.player.play()
+			}
+		}
+	}
+	@IBAction func backwardsButtonAction(_ sender: Any) {
+		player.pause()
+		playButton.isHidden = true
+		activityIndicator.startAnimating()
+		
+		if currentVideoUrlIndex == 0 {
+			return
+		}
+		
+		backwardsButton.isHidden = false
+		currentVideoUrlIndex -= 1
+		if currentVideoUrlIndex == 0 { backwardsButton.isHidden = true }
+		videoPageIndicator.currentPage = currentVideoUrlIndex
+		play(urlVideos[currentVideoUrlIndex])
+	}
+}
 
+extension ExerciseViewController {
+	
+	private func playVideo(userString: [String]) {
+		playButton.isHidden = true
 		googleManager.getExerciseVideo(videoNumber: userString ) { result in
                 switch result {
-                case .success(let url):
-                    guard let url = url else { return }
-					self.play(url)
+                case .success(let urls):
+					self.urlVideos = urls
+					self.play(urls.first!)
                 case .failure(let error):
                     print(error)
             }
         }
     }
 	private func setUpPlayerContainerView() {
+		let buttonSize = UIEdgeInsets(top: 32, left: 32, bottom: 32, right: 32)
+
+		if exercise.videos.count == 1 {
+			forwardButton.isHidden = true
+		}
+		forwardButton.imageView?.contentMode = .scaleAspectFit
+		backwardsButton.imageView?.contentMode = .scaleAspectFit
+		forwardButton.imageEdgeInsets = buttonSize
+		backwardsButton.imageEdgeInsets = buttonSize
+		
+		videoPageIndicator.numberOfPages = exercise.videos.count
+		
 		playerContainerView = UIView()
 		playerContainerView.backgroundColor = .black
-		containerView.addSubview(playerContainerView)
+		containerView.insertSubview(playerContainerView, at: 0)
+		
 		playerContainerView.translatesAutoresizingMaskIntoConstraints = false
 		playerContainerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
 		playerContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
@@ -88,44 +138,40 @@ class ExerciseViewController: UIViewController {
 			playerContainerView.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor).isActive = true
 		}
 	}
-	private func play(_ url: URL? ) {
+	private func play(_ url: URL) {
+		playActivity()
 		
-		if let url = url {
-			//2. Create AVPlayer object
-			let asset = AVAsset(url: url)
-			let playerItem = AVPlayerItem(asset: asset)
-			player = AVPlayer(playerItem: playerItem)
-			//3. Create AVPlayerLayer object
-			let playerLayer = AVPlayerLayer(player: player)
-			playerLayer.frame = playerContainerView.bounds //bounds of the view in which AVPlayer should be displayed
-			playerLayer.videoGravity = .resizeAspectFill
-			
-			//4. Add playerLayer to view's layer
-			self.playerContainerView.layer.addSublayer(playerLayer)
-
-			//5. Play Video
-			player.play()
+		let asset = AVAsset(url: url)
+		player = AVPlayer(playerItem: AVPlayerItem(asset: asset))
+		
+		let playerLayer = AVPlayerLayer(player: player)
+		playerLayer.frame = playerContainerView.bounds
+		playerLayer.videoGravity = .resizeAspectFill
+		getProgress()
+		let playerTimescale = self.player.currentItem?.asset.duration.timescale ?? 1
+		let time =  CMTime(seconds: 1, preferredTimescale: playerTimescale)
+		self.player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) { (finished) in
+			DispatchQueue.main.async { [weak self] in
+				self?.player.play()
+			}
 		}
-		getProgress {
-			self.activityIndicator.stopAnimating()
-			self.playerContainerView.addSubview(self.fullScreenButton)
-			self.fullScreenButton.translatesAutoresizingMaskIntoConstraints = false
-			self.fullScreenButton.bottomAnchor.constraint(equalTo: self.playerContainerView.bottomAnchor, constant: -25).isActive = true
-			self.fullScreenButton.trailingAnchor.constraint(equalTo: self.playerContainerView.trailingAnchor, constant: -25).isActive = true
-		}
+		
+		self.playerContainerView.layer.addSublayer(playerLayer)
 	}
-	private func getProgress(completion: @escaping (() -> Void))  {
-		player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 2), queue: DispatchQueue.main) {[weak self] (progressTime) in
+	private func getProgress()  {
+		player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 10), queue: DispatchQueue.main) {[weak self] (progressTime) in
 			if let duration = self?.player.currentItem?.duration {
 				
 				let durationSeconds = CMTimeGetSeconds(duration)
 				let seconds = CMTimeGetSeconds(progressTime)
 				let progress = Float(seconds/durationSeconds)
-				
-				DispatchQueue.main.async {
-					if progress >= 0.6 && progress <= 0.61 {
-						completion()
-					}
+				print(progress)
+				if progress > 0.0 {
+					self?.activityIndicator.stopAnimating()
+					self?.fullScreenButton.isHidden = false
+				}
+				if progress >= 1.0 {
+					self?.playButton.isHidden = false
 				}
 			}
 		}
@@ -137,18 +183,18 @@ class ExerciseViewController: UIViewController {
 		activityIndicator.startAnimating()
 	}
 	
-	@objc func screenTapped() {
-		player.seek(to: .zero)
-		player.playImmediately(atRate: 1)
-	}
 	@objc func playFull() {
 		let vc = AVPlayerViewController()
 		vc.player = self.player
 
 		present(vc, animated: true) {
-			vc.player?.seek(to: .zero)
-			vc.player?.playImmediately(atRate: 1)
+			let playerTimescale = self.player.currentItem?.asset.duration.timescale ?? 1
+			let time =  CMTime(seconds: 1, preferredTimescale: playerTimescale)
+			vc.player!.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) { (finished) in
+				DispatchQueue.main.async {
+					vc.player!.play()
+				}
+			}
 		}
 	}
-
 }

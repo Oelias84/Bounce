@@ -203,22 +203,30 @@ struct GoogleApiManager {
             })
         }
     }
-    func getExerciseVideo(videoNumber: String, completion: @escaping (Result<URL?, Error>) -> Void) {
-		let number = videoNumber.split(separator: "/").last
-        let httpsReference = storage.reference(forURL: "https://firebasestorage.googleapis.com/b/gs://my-fit-app-a8595.appspot.com//o/\(number!).m4v")
+    func getExerciseVideo(videoNumber: [String], completion: @escaping (Result<[URL], Error>) -> Void) {
+		var urls = [URL]()
+		videoNumber.forEach { video in
+			let number = video.split(separator: "/").last
+			let httpsReference = storage.reference(forURL: "https://firebasestorage.googleapis.com/b/gs://my-fit-app-a8595.appspot.com//o/\(number!).m4v")
         
-        httpsReference.downloadURL { url, error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(url))
-            }
-        }
+        	httpsReference.downloadURL { url, error in
+        	    if let error = error {
+        	        print(error)
+					completion(.failure(error))
+        	    } else {
+					guard let url = url else { return }
+					urls.append(url)
+					if urls.count == videoNumber.count {
+						completion(.success(urls))
+					}
+        	    }
+        	}
+		}
+
     }
 	
 	func getArticleText(videoNumber: String, completion: @escaping (Result<URL?, Error>) -> Void) {
 		
-//		let number = videoNumber.split(separator: "/").last
 		let httpsReference = storage.reference(forURL: "https://firebasestorage.googleapis.com/b/gs://my-fit-app-a8595.appspot.com/o/articles/1.rtf")
 		
 		httpsReference.downloadURL { url, error in
