@@ -56,7 +56,7 @@ class ExerciseViewController: UIViewController {
 		playFull()
 	}
 	@IBAction func forwardButtonAction(_ sender: Any) {
-		player.pause()
+		player?.pause()
 		playButton.isHidden = true
 		activityIndicator.startAnimating()
 		
@@ -165,8 +165,8 @@ extension ExerciseViewController {
 				let durationSeconds = CMTimeGetSeconds(duration)
 				let seconds = CMTimeGetSeconds(progressTime)
 				let progress = Float(seconds/durationSeconds)
-				print(progress)
-				if progress > 0.0 {
+
+				if progress == 0.0 {
 					self?.activityIndicator.stopAnimating()
 					self?.fullScreenButton.isHidden = false
 				}
