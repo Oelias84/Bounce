@@ -14,13 +14,13 @@ class WorkoutTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		workoutViewModel = WorkoutViewModel()
-		self.showSpinner()
-
         tableView.register(UINib(nibName: K.NibName.workoutTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.workoutCell)
     }
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
+		self.showSpinner()
+		workoutViewModel.refreshDate()
 		workoutViewModel.bindWorkoutViewModelToController = {
 			self.stopSpinner()
 			self.tableView.reloadData()

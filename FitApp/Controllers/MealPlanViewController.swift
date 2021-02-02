@@ -28,11 +28,7 @@ class MealPlanViewController: UIViewController {
         callToViewModelForUIUpdate()
 		addBarButtonIcon()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
+	
     @IBAction func changeDateButtons(_ sender: UIButton) {
         showSpinner()
         switch sender {
@@ -85,7 +81,6 @@ extension MealPlanViewController {
     func callToViewModelForUIUpdate() {
         showSpinner()
         mealViewModel = MealViewModel.shared
-//        mealViewModel.googleService.updateDishes()
         if mealViewModel.meals == nil {
             mealViewModel.fetchData()
             mealViewModel.bindMealViewModelToController = {
@@ -94,7 +89,6 @@ extension MealPlanViewController {
         } else {
             updateDataSource()
         }
-        
     }
 	func addBarButtonIcon() {
 		let button = UIButton(type: .system)

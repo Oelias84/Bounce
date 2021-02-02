@@ -18,13 +18,7 @@ class WorkoutViewModel: NSObject {
 
     override init() {
         super.init()
-        
-        fetchExercise {
-            self.fetchWorkout {
-                self.addExerciseDataToWorkout()
-            }
-        }
-    }
+	}
     
     var workoutsCount: Int {
         self.workouts.count
@@ -32,6 +26,13 @@ class WorkoutViewModel: NSObject {
     func getWorkout(for index: Int) -> Workout {
         self.workouts[index]
     }
+	func refreshDate() {
+		fetchExercise {
+			self.fetchWorkout {
+				self.addExerciseDataToWorkout()
+			}
+		}
+	}
     
     func fetchWorkout(completion: @escaping () -> Void) {
 		workouts.removeAll()
