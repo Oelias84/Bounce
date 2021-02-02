@@ -52,7 +52,7 @@ class ExerciseTableViewCell: UITableViewCell {
     
     private func commonInit() {
         let bundle = Bundle(for: type(of: self))
-        let typeNib = UINib(nibName: "CarbIndicatorView", bundle: bundle).instantiate(withOwner: self, options: nil).first as! UIView
+        let typeNib = UINib(nibName: "FeetIndicatorView", bundle: bundle).instantiate(withOwner: self, options: nil).first as! UIView
         exerciseTypeView.layer.cornerRadius = 10
         exerciseTypeView.addSubview(typeNib)
     }

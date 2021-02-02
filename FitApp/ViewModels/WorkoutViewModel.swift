@@ -44,12 +44,11 @@ class WorkoutViewModel: NSObject {
 					workouts.forEach {
 						$0.exercises.insert(self.addWarmup(), at: 0)
 					}
-					
 					self.workouts.append(contentsOf: workouts.filter { $0.type == weeklyWorkout})
-                    completion()
                 case .failure(let error):
                     print("There was an issue getting workouts: ", error )
                 }
+				completion()
             }
         } else {
             print("Missing fitness user level")
