@@ -148,16 +148,14 @@ extension SettingsViewController {
 			}
 		}
 		fitnessLevelLabel.text = fitnessTitle
-		if let workouts = userData.weaklyWorkouts {
-			numberOfWorkoutsLabel.text = "\(workouts)"
-			workoutStepper.value = Double(workouts)
-		}
 	}
 	private func setupStepper() {
+		let userData = UserProfile.defaults
 		mealsStepper.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
 		workoutStepper.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
 		
-		switch UserProfile.defaults.fitnessLevel {
+
+		switch userData.fitnessLevel {
 		case 1:
 			workoutStepper.minimumValue = 2
 			workoutStepper.maximumValue = 2
@@ -169,6 +167,10 @@ extension SettingsViewController {
 			workoutStepper.maximumValue = 4
 		default:
 			break
+		}
+		if let workouts = userData.weaklyWorkouts {
+			self.workoutStepper.value = Double(workouts)
+			self.numberOfWorkoutsLabel.text = "\(workouts)"
 		}
 	}
 }

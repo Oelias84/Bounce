@@ -91,7 +91,7 @@ extension SettingsOptionsTableViewController {
 					UpdateAndPopViewController(fitnessLevel)
 				}
 			case 2:
-				if currentNumberOfWorkouts < 2 && currentNumberOfWorkouts > 3 {
+				if currentNumberOfWorkouts < 2 || currentNumberOfWorkouts > 3 {
 					presentFitnessAlert(fitnessLevel)
 				} else {
 					UpdateAndPopViewController(fitnessLevel)
