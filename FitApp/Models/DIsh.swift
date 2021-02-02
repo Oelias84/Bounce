@@ -43,7 +43,7 @@ class Dish: Codable  {
         String(format: "%.2f", self.amount)
     }
     var printDishType: String {
-        return String(self.type.rawValue.first!)
+		return self.type.rawValue
     }
     
     func setName(name: String) {
