@@ -93,7 +93,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="pgN-ey-J43">
-                                <rect key="frame" x="36" y="648" width="342" height="182"/>
+                                <rect key="frame" x="36" y="620" width="342" height="210"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="אימייל" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fUu-i7-zcc">
                                         <rect key="frame" x="0.0" y="0.0" width="342" height="50"/>
@@ -153,6 +153,16 @@
                                             <action selector="signInButtonAction:" destination="yBW-kw-QQl" eventType="touchUpInside" id="Ydl-iI-q78"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xK-ZN-8Vf">
+                                        <rect key="frame" x="0.0" y="198" width="342" height="12"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="12" id="lcb-HJ-DIx"/>
+                                        </constraints>
+                                        <state key="normal" title="שחכתי סיסמא"/>
+                                        <connections>
+                                            <segue destination="A2V-4T-b9J" kind="show" identifier="שיחזור סיסמא" id="esQ-2b-Qsi"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -173,6 +183,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CJD-Tw-XMm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1877" y="431"/>
+        </scene>
+        <!--שיחזור סיסמא-->
+        <scene sceneID="nqZ-8t-bfk">
+            <objects>
+                <viewController id="A2V-4T-b9J" customClass="ResetPasswordViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Hs-EW-fkk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="cix-HZ-KcK">
+                                <rect key="frame" x="36" y="712" width="342" height="116"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="אימייל" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wzc-lA-ZA0">
+                                        <rect key="frame" x="0.0" y="0.0" width="342" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="kiP-6h-NkL"/>
+                                        </constraints>
+                                        <color key="textColor" name="AccentColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" textContentType="email"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
+                                                <color key="value" red="0.43436774610000001" green="0.39554607870000003" blue="0.85887217520000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidthV">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VcD-9e-N7d">
+                                        <rect key="frame" x="0.0" y="66" width="342" height="50"/>
+                                        <color key="backgroundColor" red="0.43436774610000001" green="0.39554607870000003" blue="0.85887217520000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="ABl-x6-8GS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                        <state key="normal" title="שחזר סיסמא">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="resetButtonAction:" destination="A2V-4T-b9J" eventType="touchUpInside" id="HgW-Za-6S7"/>
+                                            <action selector="signInButtonAction:" destination="yBW-kw-QQl" eventType="touchUpInside" id="sE3-GU-fyY"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eMo-fK-W27"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eMo-fK-W27" firstAttribute="trailing" secondItem="cix-HZ-KcK" secondAttribute="trailing" constant="36" id="JWp-2x-mFv"/>
+                            <constraint firstItem="eMo-fK-W27" firstAttribute="bottom" secondItem="cix-HZ-KcK" secondAttribute="bottom" constant="34" id="a14-Ht-9gP"/>
+                            <constraint firstItem="cix-HZ-KcK" firstAttribute="leading" secondItem="eMo-fK-W27" secondAttribute="leading" constant="36" id="bzC-gY-Pdo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="שיחזור סיסמא" largeTitleDisplayMode="always" id="eyp-sz-P7x"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="Wzc-lA-ZA0" id="uIm-CS-Uh6"/>
+                        <outlet property="resetPasswordButton" destination="VcD-9e-N7d" id="4AQ-KO-GpR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7RE-NY-QBb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2613" y="431"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jki-yR-9Ax">
