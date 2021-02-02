@@ -78,7 +78,7 @@
 		B3BB8F35258223E400D70628 /* QuestionnaireActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB8F34258223E400D70628 /* QuestionnaireActivityViewController.swift */; };
 		B3BB8F3B2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB8F3A2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift */; };
 		B3BB8F4125826FEB00D70628 /* QuestionnaireNutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB8F4025826FEB00D70628 /* QuestionnaireNutritionViewController.swift */; };
-		B3C390F725B7700A00C7E23D /* CarbIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3C390F625B7700A00C7E23D /* CarbIndicatorView.xib */; };
+		B3C390F725B7700A00C7E23D /* FeetIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3C390F625B7700A00C7E23D /* FeetIndicatorView.xib */; };
 		B3CA0CE3258111FD00923902 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CA0CE2258111FD00923902 /* CircularProgressView.swift */; };
 		B3DB750D259F4850002CF48B /* FloatingPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DB750C259F4850002CF48B /* FloatingPoint+Extensions.swift */; };
 		B3DB7513259F8270002CF48B /* MealViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DB7512259F8270002CF48B /* MealViewModel.swift */; };
@@ -192,7 +192,7 @@
 		B3BB8F34258223E400D70628 /* QuestionnaireActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireActivityViewController.swift; sourceTree = "<group>"; };
 		B3BB8F3A2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFitnessLevelViewController.swift; sourceTree = "<group>"; };
 		B3BB8F4025826FEB00D70628 /* QuestionnaireNutritionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireNutritionViewController.swift; sourceTree = "<group>"; };
-		B3C390F625B7700A00C7E23D /* CarbIndicatorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarbIndicatorView.xib; sourceTree = "<group>"; };
+		B3C390F625B7700A00C7E23D /* FeetIndicatorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeetIndicatorView.xib; sourceTree = "<group>"; };
 		B3CA0CE2258111FD00923902 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		B3DB750C259F4850002CF48B /* FloatingPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extensions.swift"; sourceTree = "<group>"; };
 		B3DB7512259F8270002CF48B /* MealViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealViewModel.swift; sourceTree = "<group>"; };
@@ -554,7 +554,7 @@
 		B3C390FB25B774CE00C7E23D /* ExerciseTypeViews */ = {
 			isa = PBXGroup;
 			children = (
-				B3C390F625B7700A00C7E23D /* CarbIndicatorView.xib */,
+				B3C390F625B7700A00C7E23D /* FeetIndicatorView.xib */,
 			);
 			name = ExerciseTypeViews;
 			sourceTree = "<group>";
@@ -710,7 +710,7 @@
 				B330B87625757C1000BDB206 /* Workout.storyboard in Resources */,
 				B330B87F25757F1300BDB206 /* ExerciseTableViewCell.xib in Resources */,
 				B358227925ACA2F800C91295 /* ArticleTableViewCell.xib in Resources */,
-				B3C390F725B7700A00C7E23D /* CarbIndicatorView.xib in Resources */,
+				B3C390F725B7700A00C7E23D /* FeetIndicatorView.xib in Resources */,
 				B34397A7258A7F720073A59B /* DishView.xib in Resources */,
 				7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */,
 				B38068C725B7197E005C4A24 /* WorkoutTableViewCell.xib in Resources */,
