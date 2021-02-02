@@ -71,8 +71,6 @@ class HomeViewController: UIViewController {
             mealViewModel.fetchData()
         }
         setupProgress()
-		
-		
     }
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -86,13 +84,6 @@ class HomeViewController: UIViewController {
 		
 		self.navigationController!.pushViewController(settingsVC, animated: true)
 	}
-//	UserDefaults.resetDefaults()
-//	do {
-//		try Auth.auth().signOut()
-//		let stroryboard = UIStoryboard.init(name: K.StoryboardName.loginRegister, bundle: nil)
-//	} catch {
-//		print("issue sigenout")
-//	}
 }
 
 extension HomeViewController {
@@ -104,9 +95,9 @@ extension HomeViewController {
         fatCountLabel.text = "\(fatStartValue)"
         carbsCountLabel.text = "\(carbsStartValue)"
         proteinCountLabel.text = "\(proteinStartValue)"
-        fatTargateLabel.text = "\(userProgress.fatTarget)"
-        carbsTargateLabel.text = "\(userProgress.carbsTarget)"
-        proteinTargateLabel.text = "\(userProgress.proteinTarget)"
+		fatTargateLabel.text = "\(userProgress.fatTarget.roundHalfDown)"
+		carbsTargateLabel.text = "\(userProgress.carbsTarget.roundHalfDown)"
+		proteinTargateLabel.text = "\(userProgress.proteinTarget.roundHalfDown)"
     }
     private func configureProgress(){
         circularProgress.subviews.forEach {
@@ -161,11 +152,8 @@ extension HomeViewController {
         let fatP = self.view.viewWithTag(101) as! CircularProgressView
         let proteinP = self.view.viewWithTag(102) as! CircularProgressView
         
-        carbP.setProgressWithAnimation(duration: 1.0, value: userProgress.carbsProgress / userProgress.carbsTarget)
-        fatP.setProgressWithAnimation(duration: 1.0, value: userProgress.fatProgress / userProgress.fatTarget)
-        proteinP.setProgressWithAnimation(duration: 1.0, value: userProgress.proteinProgress / userProgress.proteinTarget)
-    }
-    @objc func profileTapped() {
-        print("poop")
+		carbP.setProgressWithAnimation(duration: 1.0, value: userProgress.carbsProgress / userProgress.carbsTarget.roundHalfDown)
+        fatP.setProgressWithAnimation(duration: 1.0, value: userProgress.fatProgress / userProgress.fatTarget.roundHalfDown)
+        proteinP.setProgressWithAnimation(duration: 1.0, value: userProgress.proteinProgress / userProgress.proteinTarget.roundHalfDown)
     }
 }
