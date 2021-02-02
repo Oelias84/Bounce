@@ -99,6 +99,7 @@ extension SettingsViewController {
 		signOutAlert.addAction(UIAlertAction(title: "אישור", style: .default) { _ in
 			do {
 				try Auth.auth().signOut()
+				UserDefaults.resetDefaults()
 				self.dismiss(animated: true)
 			} catch {
 				print("Something went Wrong...")

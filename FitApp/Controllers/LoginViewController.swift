@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
         guard let email = emailTextfield.text, let password = passwordTextfield.text else { return }
         showSpinner()
 		Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-			if error == nil{
+			if error == nil {
                 self.googleManager.getUserData { result in
                     self.stopSpinner()
                     
