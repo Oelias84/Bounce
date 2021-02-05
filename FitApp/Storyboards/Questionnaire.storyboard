@@ -525,8 +525,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="46" translatesAutoresizingMaskIntoConstraints="NO" id="c3r-Ua-q5F" userLabel="Prompt Stack View">
-                                <rect key="frame" x="32" y="333" width="350" height="230"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="c3r-Ua-q5F" userLabel="Prompt Stack View">
+                                <rect key="frame" x="32" y="254.5" width="350" height="387"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="nwF-WH-MMn">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="68.5"/>
@@ -585,14 +585,14 @@
                                         </subviews>
                                     </stackView>
                                     <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tk2-TT-3F9">
-                                        <rect key="frame" x="0.0" y="114.5" width="350" height="1"/>
+                                        <rect key="frame" x="0.0" y="80.5" width="350" height="1"/>
                                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="GAI-UH-x5k"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Gv9-Vp-bK9">
-                                        <rect key="frame" x="0.0" y="161.5" width="350" height="68.5"/>
+                                        <rect key="frame" x="0.0" y="93.5" width="350" height="68.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="צעדים" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="max-tb-ssq">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="26.5"/>
@@ -643,6 +643,141 @@
                                                             <action selector="checkBoxesWithSender:" destination="9J8-iP-E6D" eventType="touchUpInside" id="Zjb-fC-VSg"/>
                                                         </connections>
                                                     </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZj-sL-9rD">
+                                        <rect key="frame" x="0.0" y="174" width="350" height="1"/>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="7wE-0p-lp0"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7Se-YR-zHY" userLabel="Life Style Stack View">
+                                        <rect key="frame" x="0.0" y="187" width="350" height="200"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="במידה ואינכם יודעים מהי כמות הצעדים בחרו את אחת האופציות הבאות שמתארות את אורח חייכם בצורה הטובה ביותר." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeO-ec-X4O">
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="74"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="fOf-t9-IWg">
+                                                <rect key="frame" x="0.0" y="74" width="350" height="126"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="oWO-nI-8f7">
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="30"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="יושבני" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2N-cS-Zk9">
+                                                                <rect key="frame" x="0.0" y="0.0" width="318" height="30"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" systemColor="systemBlueColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UsO-oF-PUf">
+                                                                <rect key="frame" x="320" y="0.0" width="30" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="duD-hE-huL"/>
+                                                                    <constraint firstAttribute="width" constant="30" id="vgq-Gv-kNm"/>
+                                                                </constraints>
+                                                                <color key="tintColor" name="AccentColor"/>
+                                                                <state key="normal">
+                                                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
+                                                                </state>
+                                                                <state key="selected">
+                                                                    <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="5SR-FN-Fh1"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="A3h-ah-Kjx">
+                                                        <rect key="frame" x="0.0" y="32" width="350" height="30"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="פעיל מתון" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2c-uw-Q88">
+                                                                <rect key="frame" x="0.0" y="0.0" width="318" height="30"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" systemColor="systemBlueColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3V-d8-hmm">
+                                                                <rect key="frame" x="320" y="0.0" width="30" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="1ma-bW-PkQ"/>
+                                                                    <constraint firstAttribute="width" constant="30" id="FnF-NV-6ig"/>
+                                                                </constraints>
+                                                                <color key="tintColor" name="AccentColor"/>
+                                                                <state key="normal">
+                                                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
+                                                                </state>
+                                                                <state key="selected">
+                                                                    <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="cQy-SH-lhQ"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Ekb-BL-UnX">
+                                                        <rect key="frame" x="0.0" y="64" width="350" height="30"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="פעיל" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJG-fg-b1a">
+                                                                <rect key="frame" x="0.0" y="0.0" width="318" height="30"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" systemColor="systemBlueColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlh-0X-tgo">
+                                                                <rect key="frame" x="320" y="0.0" width="30" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="30" id="CRl-rt-fy5"/>
+                                                                    <constraint firstAttribute="height" constant="30" id="Lyh-qj-sc8"/>
+                                                                </constraints>
+                                                                <color key="tintColor" name="AccentColor"/>
+                                                                <state key="normal">
+                                                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
+                                                                </state>
+                                                                <state key="selected">
+                                                                    <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="Ekp-jy-rpa"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ccT-wx-o94">
+                                                        <rect key="frame" x="0.0" y="96" width="350" height="30"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="פעיל מאוד" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjl-Oc-dDR">
+                                                                <rect key="frame" x="0.0" y="0.0" width="318" height="30"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" systemColor="systemBlueColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ys2-hv-gV5">
+                                                                <rect key="frame" x="320" y="0.0" width="30" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="052-Ds-sdQ"/>
+                                                                    <constraint firstAttribute="width" constant="30" id="rR1-wQ-C0G"/>
+                                                                </constraints>
+                                                                <color key="tintColor" name="AccentColor"/>
+                                                                <state key="normal">
+                                                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
+                                                                </state>
+                                                                <state key="selected">
+                                                                    <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="yWA-In-9mO"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -1535,6 +1670,136 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GCH-Sz-wML" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" id="1F2-wA-PRD" userLabel="Most Hunger Stack View">
+                    <rect key="frame" x="0.0" y="0.0" width="350" height="72.5"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="באיזה זמן ביום אתה הכי רעב" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEe-Po-4xC">
+                            <rect key="frame" x="0.0" y="0.0" width="350" height="26.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ShX-d4-th4">
+                            <rect key="frame" x="0.0" y="42.5" width="350" height="30"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ARR-8y-7XA">
+                                    <rect key="frame" x="0.0" y="0.0" width="65.5" height="30"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="בוקר" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOU-FQ-iAh">
+                                            <rect key="frame" x="0.0" y="0.0" width="31.5" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" systemColor="systemBlueColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljU-b3-Ukw">
+                                            <rect key="frame" x="35.5" y="0.0" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="2HV-9o-DdM"/>
+                                                <constraint firstAttribute="height" constant="30" id="uNV-To-ysk"/>
+                                            </constraints>
+                                            <color key="tintColor" name="AccentColor"/>
+                                            <state key="normal">
+                                                <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
+                                            </state>
+                                            <state key="selected">
+                                                <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="BD4-yS-j8z"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="U9s-WS-tZ5">
+                                    <rect key="frame" x="86" y="0.0" width="80" height="30"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="צהריים" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rt3-jZ-MOK">
+                                            <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" systemColor="systemBlueColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srb-QO-2zC">
+                                            <rect key="frame" x="50" y="0.0" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="1ac-5f-CGM"/>
+                                                <constraint firstAttribute="height" constant="30" id="Vm9-7e-x1w"/>
+                                            </constraints>
+                                            <color key="tintColor" name="AccentColor"/>
+                                            <state key="normal">
+                                                <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
+                                            </state>
+                                            <state key="selected">
+                                                <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="xUs-yU-gcB"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="0hr-er-iJ9">
+                                    <rect key="frame" x="186.5" y="0.0" width="61" height="30"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="ערב" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="013-Cd-B1G">
+                                            <rect key="frame" x="0.0" y="0.0" width="27" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" systemColor="systemBlueColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5A-oT-jEs">
+                                            <rect key="frame" x="31" y="0.0" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="4yO-sH-pi3"/>
+                                                <constraint firstAttribute="width" constant="30" id="O1b-tZ-1bP"/>
+                                            </constraints>
+                                            <color key="tintColor" name="AccentColor"/>
+                                            <state key="normal">
+                                                <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
+                                            </state>
+                                            <state key="selected">
+                                                <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="DtR-4e-MYD"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="BQ0-d0-Sbj">
+                                    <rect key="frame" x="268" y="0.0" width="82" height="30"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="לא ידוע" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ca6-O8-lxM">
+                                            <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" systemColor="systemBlueColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yEx-ZX-fWe">
+                                            <rect key="frame" x="52" y="0.0" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="6lQ-ka-jte"/>
+                                                <constraint firstAttribute="height" constant="30" id="y33-5M-vrY"/>
+                                            </constraints>
+                                            <color key="tintColor" name="AccentColor"/>
+                                            <state key="normal">
+                                                <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
+                                            </state>
+                                            <state key="selected">
+                                                <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="rzq-f8-Q10"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="zRG-J4-rjo"/>
+                </stackView>
             </objects>
             <point key="canvasLocation" x="1131.8840579710145" y="-70.3125"/>
         </scene>
