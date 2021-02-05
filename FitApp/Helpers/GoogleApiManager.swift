@@ -6,7 +6,8 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseAuth
+import FirebaseStorage
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
@@ -346,8 +347,6 @@ struct GoogleApiManager {
             print(error)
         }
     }
-    
-
 }
 
 

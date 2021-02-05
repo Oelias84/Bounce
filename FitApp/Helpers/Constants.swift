@@ -97,7 +97,6 @@ struct K {
         
         static let moveToExerciseViewController = "moveToExerciseViewController"
         static let moveToExerciseDetailViewController = "moveToExerciseDetailViewController"
-        
         //Questionnaire Segue
         static let moveToPersonalDetails = "moveToPersonalDetails"
         static let moveToFatPercentage = "moveToFatPercentage"
