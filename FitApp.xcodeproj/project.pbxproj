@@ -13,6 +13,16 @@
 		7C3F4F8C25C9E2AF00EE3758 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F4F8B25C9E2AF00EE3758 /* ResetPasswordViewController.swift */; };
 		7C5262B725BC756700694007 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C5262B625BC756700694007 /* Settings.storyboard */; };
 		7C5262BF25BC79B200694007 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5262BE25BC79B200694007 /* SettingsViewController.swift */; };
+		7C7434EB25CD906500D33A9A /* MailComposerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7434EA25CD906500D33A9A /* MailComposerViewController.swift */; };
+		7C7434F025CD9D9D00D33A9A /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7434EF25CD9D9D00D33A9A /* ChatsViewController.swift */; };
+		7C7434F525CD9DD700D33A9A /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7434F425CD9DD700D33A9A /* ChatViewController.swift */; };
+		7C7434FB25CD9F0000D33A9A /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C7434FA25CD9F0000D33A9A /* Messages.storyboard */; };
+		7C74350325CDBAE900D33A9A /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74350225CDBAE900D33A9A /* MessagesViewModel.swift */; };
+		7C74350825CDBB4C00D33A9A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74350725CDBB4C00D33A9A /* Message.swift */; };
+		7C74350D25CDBBE900D33A9A /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74350C25CDBBE900D33A9A /* Sender.swift */; };
+		7C74352525CDC56300D33A9A /* NewChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74352425CDC56300D33A9A /* NewChatViewController.swift */; };
+		7C74352D25D056A900D33A9A /* GoogleStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74352C25D056A900D33A9A /* GoogleStorageManager.swift */; };
+		7C74353225D07DB800D33A9A /* GoogleDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74353125D07DB800D33A9A /* GoogleDatabaseManager.swift */; };
 		7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89A9FA256D69CA009AD87C /* AppDelegate.swift */; };
 		7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89A9FC256D69CA009AD87C /* SceneDelegate.swift */; };
 		7C89AA02256D69CA009AD87C /* LoginRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA00256D69CA009AD87C /* LoginRegister.storyboard */; };
@@ -118,6 +128,16 @@
 		7C3F4F8B25C9E2AF00EE3758 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		7C5262B625BC756700694007 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		7C5262BE25BC79B200694007 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		7C7434EA25CD906500D33A9A /* MailComposerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailComposerViewController.swift; sourceTree = "<group>"; };
+		7C7434EF25CD9D9D00D33A9A /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
+		7C7434F425CD9DD700D33A9A /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		7C7434FA25CD9F0000D33A9A /* Messages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
+		7C74350225CDBAE900D33A9A /* MessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
+		7C74350725CDBB4C00D33A9A /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		7C74350C25CDBBE900D33A9A /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
+		7C74352425CDC56300D33A9A /* NewChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewController.swift; sourceTree = "<group>"; };
+		7C74352C25D056A900D33A9A /* GoogleStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleStorageManager.swift; sourceTree = "<group>"; };
+		7C74353125D07DB800D33A9A /* GoogleDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleDatabaseManager.swift; sourceTree = "<group>"; };
 		7C8958EB95477BC016742433 /* Pods-FitApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp.release.xcconfig"; path = "Target Support Files/Pods-FitApp/Pods-FitApp.release.xcconfig"; sourceTree = "<group>"; };
 		7C89A9F7256D69CA009AD87C /* FitApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C89A9FA256D69CA009AD87C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -268,8 +288,38 @@
 			children = (
 				7C5262BE25BC79B200694007 /* SettingsViewController.swift */,
 				7C3F4F3125C2D31300EE3758 /* SettingsOptionsTableViewController.swift */,
+				7C7434EA25CD906500D33A9A /* MailComposerViewController.swift */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		7C7434F925CD9DDE00D33A9A /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				7C7434F425CD9DD700D33A9A /* ChatViewController.swift */,
+				7C7434EF25CD9D9D00D33A9A /* ChatsViewController.swift */,
+				7C74352425CDC56300D33A9A /* NewChatViewController.swift */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
+		7C74351125CDBBEF00D33A9A /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				7C74350725CDBB4C00D33A9A /* Message.swift */,
+				7C74350C25CDBBE900D33A9A /* Sender.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		7C74353925D07DBD00D33A9A /* GoogleServices */ = {
+			isa = PBXGroup;
+			children = (
+				B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */,
+				7C74352C25D056A900D33A9A /* GoogleStorageManager.swift */,
+				7C74353125D07DB800D33A9A /* GoogleDatabaseManager.swift */,
+			);
+			name = GoogleServices;
 			sourceTree = "<group>";
 		};
 		7C89A9EE256D69CA009AD87C = {
@@ -354,7 +404,6 @@
 				B368E07D25A8816000BD1937 /* UserData  */,
 				7C89AA58256D6FDB009AD87C /* Constants.swift */,
 				B3DB751A259F8773002CF48B /* ConsumptionManager.swift */,
-				B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */,
 				B367F18725B1EEC200DF21D7 /* LocalNotificationManager.swift */,
 			);
 			path = Helpers;
@@ -372,6 +421,7 @@
 				B3E6E98C257142CD00958C48 /* MealPlan.storyboard */,
 				B330B87525757C1000BDB206 /* Workout.storyboard */,
 				7C5262B625BC756700694007 /* Settings.storyboard */,
+				7C7434FA25CD9F0000D33A9A /* Messages.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -381,6 +431,7 @@
 			children = (
 				7C89AA03256D69CB009AD87C /* Assets.xcassets */,
 				B367F17725B1BDF600DF21D7 /* DishesGenerator.swift */,
+				7C74353925D07DBD00D33A9A /* GoogleServices */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -394,6 +445,7 @@
 				B3833F472593783B006776D5 /* Weight */,
 				B35822A025ADA01D00C91295 /* Articles */,
 				7C3F4F3625C2D31900EE3758 /* Settings */,
+				7C7434F925CD9DDE00D33A9A /* Chat */,
 				B3E36E74257285F3006CE558 /* HomeViewController.swift */,
 				B3E6E9B725714D5800958C48 /* MealPlanViewController.swift */,
 			);
@@ -505,6 +557,7 @@
 				B358222F25AC9DA800C91295 /* Article.swift */,
 				B38397FA25B4A21F00154697 /* Workout.swift */,
 				B36B71912577BF0C001CD393 /* Exercise.swift */,
+				7C74351125CDBBEF00D33A9A /* Chat */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -569,6 +622,7 @@
 				B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */,
 				B358227E25ACA40D00C91295 /* ArticleViewModel.swift */,
 				B38397F525B4A1BE00154697 /* WorkoutViewModel.swift */,
+				7C74350225CDBAE900D33A9A /* MessagesViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -718,6 +772,7 @@
 				7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */,
 				B38068C725B7197E005C4A24 /* WorkoutTableViewCell.xib in Resources */,
 				B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */,
+				7C7434FB25CD9F0000D33A9A /* Messages.storyboard in Resources */,
 				B3E36E7025727F63006CE558 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -846,8 +901,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C74352D25D056A900D33A9A /* GoogleStorageManager.swift in Sources */,
 				B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */,
 				B330B88A257581AA00BDB206 /* ExerciseTableViewCell.swift in Sources */,
+				7C7434EB25CD906500D33A9A /* MailComposerViewController.swift in Sources */,
 				B3DB7513259F8270002CF48B /* MealViewModel.swift in Sources */,
 				B367F17825B1BDF600DF21D7 /* DishesGenerator.swift in Sources */,
 				B368E05C25A79BB700BD1937 /* Data+Extensions.swift in Sources */,
@@ -864,10 +921,12 @@
 				B38397F625B4A1BE00154697 /* WorkoutViewModel.swift in Sources */,
 				B30069D325926F090025FA0E /* WeightProgressViewController.swift in Sources */,
 				B367F18825B1EEC200DF21D7 /* LocalNotificationManager.swift in Sources */,
+				7C74350D25CDBBE900D33A9A /* Sender.swift in Sources */,
 				B302982025793BBA00CF41F0 /* UserProgress.swift in Sources */,
 				B3BB8F4125826FEB00D70628 /* QuestionnaireNutritionViewController.swift in Sources */,
 				B36B71922577BF0C001CD393 /* Exercise.swift in Sources */,
 				B368DF4F25A5F24E00BD1937 /* GoogleApiManager.swift in Sources */,
+				7C7434F525CD9DD700D33A9A /* ChatViewController.swift in Sources */,
 				B368DFFB25A76A2C00BD1937 /* WeightViewModel.swift in Sources */,
 				B358222825AC9A2F00C91295 /* ArticlesViewController.swift in Sources */,
 				B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */,
@@ -877,12 +936,14 @@
 				B368DFE025A6247600BD1937 /* SpinnerView.swift in Sources */,
 				B341E236257FA6F500EE05A7 /* Date+Extensions.swift in Sources */,
 				B3DB750D259F4850002CF48B /* FloatingPoint+Extensions.swift in Sources */,
+				7C74353225D07DB800D33A9A /* GoogleDatabaseManager.swift in Sources */,
 				B3E36E75257285F3006CE558 /* HomeViewController.swift in Sources */,
 				B367F14825B036CC00DF21D7 /* UserDefaults+Extensions.swift in Sources */,
 				B35822A225ADA04300C91295 /* ArticleViewController.swift in Sources */,
 				B3B2A232256ED2A60052E6C8 /* UIImage+Extensions.swift in Sources */,
 				7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */,
 				B368E07F25A8819100BD1937 /* Key.swift in Sources */,
+				7C74350825CDBB4C00D33A9A /* Message.swift in Sources */,
 				B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */,
 				B368E08725A8820E00BD1937 /* PropertyListValue.swift in Sources */,
 				B36B718C2577BDF3001CD393 /* ExerciseViewController.swift in Sources */,
@@ -891,6 +952,7 @@
 				B368E04925A790D200BD1937 /* ServerDishs.swift in Sources */,
 				B3BB8F3B2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift in Sources */,
 				B35111CA25962D41001B2B9B /* weightTableViewCell.swift in Sources */,
+				7C74350325CDBAE900D33A9A /* MessagesViewModel.swift in Sources */,
 				B330B88F257583D200BDB206 /* ExercisesTableViewController.swift in Sources */,
 				7C89AA61256D700F009AD87C /* UserProfile.swift in Sources */,
 				B358227F25ACA40D00C91295 /* ArticleViewModel.swift in Sources */,
@@ -902,11 +964,13 @@
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
 				B358223025AC9DA800C91295 /* Article.swift in Sources */,
+				7C7434F025CD9D9D00D33A9A /* ChatsViewController.swift in Sources */,
 				B3E6E9B825714D5800958C48 /* MealPlanViewController.swift in Sources */,
 				B3BB8F35258223E400D70628 /* QuestionnaireActivityViewController.swift in Sources */,
 				B3DB751B259F8773002CF48B /* ConsumptionManager.swift in Sources */,
 				B3CA0CE3258111FD00923902 /* CircularProgressView.swift in Sources */,
 				7C89AA59256D6FDB009AD87C /* Constants.swift in Sources */,
+				7C74352525CDC56300D33A9A /* NewChatViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
