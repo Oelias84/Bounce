@@ -6,27 +6,25 @@
 //
 
 import Foundation
+import JGProgressHUD
 import UIKit
 
-fileprivate var aView: UIView?
-
-extension UIViewController {
-    
-    func showSpinner() {
-        aView = UIView(frame: self.view.bounds)
-        aView?.backgroundColor = UIColor(white: 1, alpha: 0.2)
-        let ai = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
-        ai.center = aView!.center
-        ai.startAnimating()
-        aView?.addSubview(ai)
-        self.view.addSubview(aView!)
-		
-		aView!.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-		aView!.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    }
+struct Spinner {
 	
-    func stopSpinner() {
-        aView?.removeFromSuperview()
-        aView = nil
-    }
+	static let shared = Spinner()
+	private var hud: JGProgressHUD!
+	
+	init() {
+		hud = JGProgressHUD()
+	}
+	
+	func show(_ view: UIView) {
+		hud.backgroundColor = #colorLiteral(red: 0.6394728422, green: 0.659519434, blue: 0.6805263758, alpha: 0.2546477665)
+		hud.textLabel.text = "טוען"
+		hud.show(in: view)
+	}
+	
+	func stop() {
+		hud.dismiss(afterDelay: 3.0)
+	}
 }

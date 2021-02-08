@@ -18,6 +18,8 @@ target 'FitApp' do
     
     pod 'BulletinBoard'
     pod 'DateToolsSwift'
+		pod 'CropViewController'
+		pod 'JGProgressHUD'
 
   target 'FitAppTests' do
     inherit! :search_paths

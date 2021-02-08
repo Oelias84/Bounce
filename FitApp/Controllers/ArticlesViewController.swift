@@ -55,14 +55,14 @@ extension ArticlesViewController: UITableViewDelegate, UITableViewDataSource {
 extension ArticlesViewController {
     
     func updateDataSource() {
-        stopSpinner()
+		Spinner.shared.stop()
         filteredArticles = articleViewModel.articles[0]
         articleTopic = articleViewModel.topics[0]
         self.tableView.reloadData()
     }
     func callToViewModelForUIUpdate() {
         tableView.register(UINib(nibName: K.NibName.articleTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.articleCell)
-        showSpinner()
+		Spinner.shared.show(self.view)
         articleViewModel = ArticleViewModel()
         articleViewModel.bindArticleViewModelToController = {
             self.updateDataSource()

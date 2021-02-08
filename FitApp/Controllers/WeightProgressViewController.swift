@@ -224,13 +224,13 @@ extension WeightProgressViewController {
 
 extension WeightProgressViewController {
     
-    func updateDataSource() {
-        stopSpinner()
+    private func updateDataSource() {
+		Spinner.shared.stop()
         filteredArray = weightViewModel.getWeekBy(selectedDate.startOfWeek!)
         self.tableView.reloadData()
     }
-    func callToViewModelForUIUpdate() {
-        showSpinner()
+    private func callToViewModelForUIUpdate() {
+		Spinner.shared.show(self.view)
         self.weightViewModel = WeightViewModel()
         
         self.weightViewModel!.bindWeightViewModelToController = {

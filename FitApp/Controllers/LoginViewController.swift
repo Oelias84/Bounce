@@ -30,12 +30,15 @@ class LoginViewController: UIViewController {
 	@IBAction func signInButtonAction(_ sender: Any) {
         view.endEditing(true)
         guard let email = emailTextfield.text, let password = passwordTextfield.text else { return }
-        showSpinner()
-		Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+		Spinner.shared.show(self.view)
+
+		Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
+			guard let self = self else { return }
+			
 			if error == nil {
                 self.googleManager.getUserData { result in
-                    self.stopSpinner()
-                    
+					Spinner.shared.stop()
+
                     switch result {
                     case .success(let userData):
                         UserProfile.defaults.updateUserProfileData(userData!, id: user!.user.uid)
@@ -49,7 +52,7 @@ class LoginViewController: UIViewController {
                     }
                 }
 			} else {
-                self.stopSpinner()
+				Spinner.shared.stop()
 
 				let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
 				let defaultAction = UIAlertAction(title: "אישור", style: .cancel, handler: nil)

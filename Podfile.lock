@@ -219,6 +219,7 @@ PODS:
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
   - BulletinBoard (5.0.0)
+  - CropViewController (2.6.0)
   - DateToolsSwift (5.0.0)
   - Firebase/Analytics (6.29.0):
     - Firebase/Core
@@ -342,6 +343,7 @@ PODS:
   - InputBarAccessoryView (5.2.3):
     - InputBarAccessoryView/Core (= 5.2.3)
   - InputBarAccessoryView/Core (5.2.3)
+  - JGProgressHUD (2.2)
   - leveldb-library (1.22)
   - MessageKit (3.5.0):
     - InputBarAccessoryView (~> 5.2.1)
@@ -354,6 +356,7 @@ PODS:
 
 DEPENDENCIES:
   - BulletinBoard
+  - CropViewController
   - DateToolsSwift
   - Firebase/Analytics
   - Firebase/Auth
@@ -362,6 +365,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Storage
   - FirebaseFirestoreSwift
+  - JGProgressHUD
   - MessageKit
 
 SPEC REPOS:
@@ -369,6 +373,7 @@ SPEC REPOS:
     - abseil
     - BoringSSL-GRPC
     - BulletinBoard
+    - CropViewController
     - DateToolsSwift
     - Firebase
     - FirebaseAnalytics
@@ -387,6 +392,7 @@ SPEC REPOS:
     - gRPC-Core
     - GTMSessionFetcher
     - InputBarAccessoryView
+    - JGProgressHUD
     - leveldb-library
     - MessageKit
     - nanopb
@@ -396,6 +402,7 @@ SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   BulletinBoard: dba77053c2a7b64953f63073f7534165af2edd21
+  CropViewController: 7093b39ec3cb508531b22d35773e06cecd7378d8
   DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
   Firebase: 57957c8d6eb3d8b80a560b1dc58be24724b89ff2
   FirebaseAnalytics: aa522dce9fd93002ba1554467d23ce7092323000
@@ -414,11 +421,12 @@ SPEC CHECKSUMS:
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   InputBarAccessoryView: f814a0317d47687fafc6bac9e4df6015eaf5b764
+  JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   MessageKit: fb539583599cd914e8e2d41fe7bdceb4bf686565
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
 
-PODFILE CHECKSUM: d9f54e77b0bf1f1fe7b0db5a75a10e0dbbec3259
+PODFILE CHECKSUM: 110574b31c964b62f266e5083d8f82ef245ba017
 
 COCOAPODS: 1.8.4

@@ -19,10 +19,10 @@ class WorkoutTableViewController: UITableViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		self.showSpinner()
+		Spinner.shared.show(self.view)
 		workoutViewModel.refreshDate()
 		workoutViewModel.bindWorkoutViewModelToController = {
-			self.stopSpinner()
+			Spinner.shared.stop()
 			self.tableView.reloadData()
 		}
 	}

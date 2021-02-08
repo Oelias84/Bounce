@@ -30,8 +30,9 @@ class MealPlanViewController: UIViewController {
     }
 	
     @IBAction func changeDateButtons(_ sender: UIButton) {
-        showSpinner()
-        switch sender {
+		Spinner.shared.show(self.view)
+		
+		switch sender {
         case dateRightButton:
             date = date.add(1.days)
             mealViewModel.fetchMealsBy(date: date) { }
@@ -44,7 +45,7 @@ class MealPlanViewController: UIViewController {
         dateTextLabel.text = date.dateStringDisplay
         
         mealViewModel!.bindMealViewModelToController = {
-            self.stopSpinner()
+			Spinner.shared.stop()
             self.updateDataSource()
         }
     }
@@ -74,21 +75,24 @@ extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
 extension MealPlanViewController {
     
     func updateDataSource() {
-        stopSpinner()
+		Spinner.shared.stop()
         tableView.register(UINib(nibName: K.NibName.mealPlanTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.mealCell)
         tableView.reloadData()
     }
     func callToViewModelForUIUpdate() {
-        showSpinner()
+		Spinner.shared.show(self.view)
+		
         mealViewModel = MealViewModel.shared
         if mealViewModel.meals == nil {
             mealViewModel.fetchData()
             mealViewModel.bindMealViewModelToController = {
+				Spinner.shared.stop()
                 self.updateDataSource()
             }
         } else {
+			Spinner.shared.stop()
             updateDataSource()
-        }
+		}
     }
 	func addBarButtonIcon() {
 		let button = UIButton(type: .system)

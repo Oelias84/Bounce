@@ -23,6 +23,7 @@
 		7C74352525CDC56300D33A9A /* NewChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74352425CDC56300D33A9A /* NewChatViewController.swift */; };
 		7C74352D25D056A900D33A9A /* GoogleStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74352C25D056A900D33A9A /* GoogleStorageManager.swift */; };
 		7C74353225D07DB800D33A9A /* GoogleDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74353125D07DB800D33A9A /* GoogleDatabaseManager.swift */; };
+		7C74357D25D0824D00D33A9A /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74357C25D0824D00D33A9A /* ChatUser.swift */; };
 		7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89A9FA256D69CA009AD87C /* AppDelegate.swift */; };
 		7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89A9FC256D69CA009AD87C /* SceneDelegate.swift */; };
 		7C89AA02256D69CA009AD87C /* LoginRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA00256D69CA009AD87C /* LoginRegister.storyboard */; };
@@ -138,6 +139,7 @@
 		7C74352425CDC56300D33A9A /* NewChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewController.swift; sourceTree = "<group>"; };
 		7C74352C25D056A900D33A9A /* GoogleStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleStorageManager.swift; sourceTree = "<group>"; };
 		7C74353125D07DB800D33A9A /* GoogleDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleDatabaseManager.swift; sourceTree = "<group>"; };
+		7C74357C25D0824D00D33A9A /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		7C8958EB95477BC016742433 /* Pods-FitApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp.release.xcconfig"; path = "Target Support Files/Pods-FitApp/Pods-FitApp.release.xcconfig"; sourceTree = "<group>"; };
 		7C89A9F7256D69CA009AD87C /* FitApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C89A9FA256D69CA009AD87C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 			children = (
 				7C74350725CDBB4C00D33A9A /* Message.swift */,
 				7C74350C25CDBBE900D33A9A /* Sender.swift */,
+				7C74357C25D0824D00D33A9A /* ChatUser.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -931,6 +934,7 @@
 				B358222825AC9A2F00C91295 /* ArticlesViewController.swift in Sources */,
 				B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */,
 				B3DB753525A09133002CF48B /* Double+Extensions.swift in Sources */,
+				7C74357D25D0824D00D33A9A /* ChatUser.swift in Sources */,
 				7C5262BF25BC79B200694007 /* SettingsViewController.swift in Sources */,
 				7C89AA66256D704D009AD87C /* LoginViewController.swift in Sources */,
 				B368DFE025A6247600BD1937 /* SpinnerView.swift in Sources */,
