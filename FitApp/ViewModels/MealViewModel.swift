@@ -209,10 +209,10 @@ class MealViewModel: NSObject {
                 
                 addToPreferred.dishes.forEach { dish in
                     switch dish.type {
+					case .protein:
+						dish.amount += proteinForMeal.1
                     case .carbs:
                         dish.amount += carbsForMeal.1
-                    case .protein:
-                        dish.amount += proteinForMeal.1
                     case .fat:
                         dish.amount += fatForMeal.1
                     }
