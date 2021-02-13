@@ -80,7 +80,7 @@
                                 <rect key="frame" x="16" y="78" width="363" height="22"/>
                                 <subviews>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qYe-92-4Bb" userLabel="Dish Headline Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="156.5" height="16"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="316.5" height="16"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FS0-wh-1EZ" userLabel="Spacer View">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="16"/>
@@ -88,17 +88,17 @@
                                                     <constraint firstAttribute="width" constant="25" id="ipK-tH-uLr"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="כמות" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JDP-CR-Dh2">
-                                                <rect key="frame" x="25" y="0.0" width="46" height="16"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="כמות מנה" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JDP-CR-Dh2">
+                                                <rect key="frame" x="25" y="0.0" width="63.5" height="16"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="46" id="Wav-Rf-iLj"/>
+                                                    <constraint firstAttribute="width" constant="64" id="Wav-Rf-iLj"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <color key="textColor" systemColor="systemBlueColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="שם מנה" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoB-kT-28o">
-                                                <rect key="frame" x="71" y="0.0" width="51.5" height="16"/>
+                                                <rect key="frame" x="88.5" y="0.0" width="194" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="194" id="ZY0-2T-3sr"/>
                                                 </constraints>
@@ -107,7 +107,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xoC-2q-Pml" userLabel="Spacer View">
-                                                <rect key="frame" x="122.5" y="0.0" width="34" height="16"/>
+                                                <rect key="frame" x="282.5" y="0.0" width="34" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="34" id="CvP-s1-QX1"/>
                                                 </constraints>
