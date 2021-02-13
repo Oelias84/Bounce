@@ -19,7 +19,9 @@ class WorkoutTableViewController: UITableViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		Spinner.shared.show(self.view)
+		if let navView = navigationController?.view {
+			Spinner.shared.show(navView)
+		}
 		workoutViewModel.refreshDate()
 		workoutViewModel.bindWorkoutViewModelToController = {
 			Spinner.shared.stop()
