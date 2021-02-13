@@ -43,7 +43,7 @@ class MealPlanViewController: UIViewController {
         default:
             break
         }
-		dateRightButton.isHidden = date.isLaterThanOrEqual(to: Date())
+		dateRightButton.isHidden = date.day >= Date().day
         dateTextLabel.text = date.dateStringDisplay
         
         mealViewModel!.bindMealViewModelToController = {

@@ -232,7 +232,7 @@
                         <outlet property="fatCountLabel" destination="aiS-TJ-dYx" id="Tci-qL-tEk"/>
                         <outlet property="fatTargateLabel" destination="ZBO-tA-KUF" id="R35-rL-8lR"/>
                         <outlet property="helloUserTextLabel" destination="9zR-Qj-feS" id="6Ux-Rs-ClA"/>
-                        <outlet property="profileButton" destination="3Wh-5z-5wO" id="72E-7Q-gXp"/>
+                        <outlet property="profileButton" destination="3Wh-5z-5wO" id="2vO-eQ-Re3"/>
                         <outlet property="proteinCountLabel" destination="pe4-yu-ZBb" id="JQp-Xu-AnU"/>
                         <outlet property="proteinTargateLabel" destination="VOb-3k-qut" id="eBt-Mz-DbU"/>
                         <outlet property="userMotivationTextLabel" destination="ime-qg-m1m" id="nVG-K1-UN3"/>
