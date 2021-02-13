@@ -21,54 +21,44 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBd-1e-NZn" userLabel="Date Change View">
                                 <rect key="frame" x="12" y="100" width="390" height="64"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NId-H0-hSQ">
-                                        <rect key="frame" x="12" y="2" width="366" height="60"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HRy-y3-xmw">
-                                                <rect key="frame" x="0.0" y="0.0" width="35" height="60"/>
-                                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal">
-                                                    <imageReference key="image" image="chevron.backward" catalog="system" symbolScale="large"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="changeDateButtons:" destination="pjO-ox-C9x" eventType="touchUpInside" id="i6X-wf-HMA"/>
-                                                </connections>
-                                            </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20/12 - 26/12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sry-xo-BPS">
-                                                <rect key="frame" x="132.5" y="20" width="101" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="leQ-oj-hdP">
-                                                <rect key="frame" x="331" y="0.0" width="35" height="60"/>
-                                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
-                                                <state key="normal">
-                                                    <imageReference key="image" image="chevron.forward" catalog="system" symbolScale="large"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="changeDateButtons:" destination="pjO-ox-C9x" eventType="touchUpInside" id="227-if-A5Z"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="leQ-oj-hdP" secondAttribute="bottom" id="7uh-1O-Jbg"/>
-                                            <constraint firstItem="HRy-y3-xmw" firstAttribute="top" secondItem="NId-H0-hSQ" secondAttribute="top" id="mVe-1x-Bgx"/>
-                                            <constraint firstItem="leQ-oj-hdP" firstAttribute="top" secondItem="NId-H0-hSQ" secondAttribute="top" id="orY-mw-BN9"/>
-                                            <constraint firstAttribute="bottom" secondItem="HRy-y3-xmw" secondAttribute="bottom" id="uxx-rk-fv1"/>
-                                        </constraints>
-                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HRy-y3-xmw">
+                                        <rect key="frame" x="16" y="21" width="35" height="22"/>
+                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="chevron.backward" catalog="system" symbolScale="large"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="changeDateButtons:" destination="pjO-ox-C9x" eventType="touchUpInside" id="i6X-wf-HMA"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20/12 - 26/12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sry-xo-BPS">
+                                        <rect key="frame" x="144.5" y="22" width="101" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="leQ-oj-hdP">
+                                        <rect key="frame" x="339" y="21" width="35" height="22"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="chevron.forward" catalog="system" symbolScale="large"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="changeDateButtons:" destination="pjO-ox-C9x" eventType="touchUpInside" id="227-if-A5Z"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.18633201720000001" green="0.6013119817" blue="0.92112988230000004" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="NId-H0-hSQ" firstAttribute="centerX" secondItem="eBd-1e-NZn" secondAttribute="centerX" id="6SZ-Xs-xcS"/>
-                                    <constraint firstAttribute="bottom" secondItem="NId-H0-hSQ" secondAttribute="bottom" constant="2" id="B0w-py-PhK"/>
-                                    <constraint firstItem="NId-H0-hSQ" firstAttribute="top" secondItem="eBd-1e-NZn" secondAttribute="top" constant="2" id="aWm-XP-xyz"/>
-                                    <constraint firstAttribute="trailing" secondItem="NId-H0-hSQ" secondAttribute="trailing" constant="12" id="eDx-7m-MxG"/>
+                                    <constraint firstItem="leQ-oj-hdP" firstAttribute="centerY" secondItem="eBd-1e-NZn" secondAttribute="centerY" id="Y1f-gZ-iHk"/>
+                                    <constraint firstAttribute="trailing" secondItem="leQ-oj-hdP" secondAttribute="trailing" constant="16" id="Yuk-42-0jZ"/>
+                                    <constraint firstItem="HRy-y3-xmw" firstAttribute="leading" secondItem="eBd-1e-NZn" secondAttribute="leading" constant="16" id="bIW-88-tFh"/>
+                                    <constraint firstItem="sry-xo-BPS" firstAttribute="centerX" secondItem="eBd-1e-NZn" secondAttribute="centerX" id="dAp-l1-Ihe"/>
+                                    <constraint firstItem="sry-xo-BPS" firstAttribute="centerY" secondItem="eBd-1e-NZn" secondAttribute="centerY" id="g2c-JW-F0P"/>
+                                    <constraint firstItem="HRy-y3-xmw" firstAttribute="centerY" secondItem="eBd-1e-NZn" secondAttribute="centerY" id="mdb-ix-eBc"/>
                                     <constraint firstAttribute="height" constant="64" id="txS-vR-Rst"/>
-                                    <constraint firstItem="NId-H0-hSQ" firstAttribute="leading" secondItem="eBd-1e-NZn" secondAttribute="leading" constant="12" id="wre-Uz-yxf"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">

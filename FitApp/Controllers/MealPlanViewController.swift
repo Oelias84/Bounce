@@ -22,8 +22,9 @@ class MealPlanViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		dateRightButton.isHidden = true
         dateTextLabel.text = date.dateStringDisplay
+		
 //        tableView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.06)
         callToViewModelForUIUpdate()
 		addBarButtonIcon()
@@ -35,13 +36,14 @@ class MealPlanViewController: UIViewController {
 		switch sender {
         case dateRightButton:
             date = date.add(1.days)
-            mealViewModel.fetchMealsBy(date: date) { }
+			mealViewModel.fetchMealsBy(date: date) { }
         case dateLeftButton:
             date = date.subtract(1.days)
             mealViewModel.fetchMealsBy(date: date) { }
         default:
             break
         }
+		dateRightButton.isHidden = date.isLaterThanOrEqual(to: Date())
         dateTextLabel.text = date.dateStringDisplay
         
         mealViewModel!.bindMealViewModelToController = {
