@@ -92,8 +92,6 @@ extension HomeViewController {
     
     private func setUpProgressTextFields() {
         helloUserTextLabel.text = "היי \(UserProfile.defaults.name  ?? ""),"
-        // change progress sentence
-        //        userMotivationTextLabel.text = "\()"
         fatCountLabel.text = "\(fatStartValue)"
         carbsCountLabel.text = "\(carbsStartValue)"
         proteinCountLabel.text = "\(proteinStartValue)"

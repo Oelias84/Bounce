@@ -117,7 +117,7 @@
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2GY-TG-9bW">
                                                         <rect key="frame" x="48.5" y="4" width="10" height="10"/>
-                                                        <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                                        <color key="backgroundColor" red="0.18633201720000001" green="0.6013119817" blue="0.92112988230000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="10" id="Dhz-Bv-oU7"/>
                                                             <constraint firstAttribute="width" constant="10" id="KLG-U0-Fyt"/>
@@ -240,7 +240,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZmW-3o-guf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-417" y="1505"/>
+            <point key="canvasLocation" x="-417.39130434782612" y="1504.6875"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ADI-1a-awp">
@@ -401,9 +401,6 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
