@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import CropViewController
 
 extension UIViewController {
 	
@@ -54,18 +56,57 @@ extension UIViewController {
         }
         self.present(alertController, animated: true, completion: nil)
     }
-    func presentActionSheet(withTitle title: String? = nil, withMessage message: String?, options: (String)..., completion: @escaping (Int) -> Void){
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
-        for (index, option) in options.enumerated() {
-            alertController.addAction(UIAlertAction.init(title: option, style: option == "ביטול" ? .destructive : .default, handler: { _ in
-                completion(index)
-            }))
-        }
-        if let popoverController = alertController.popoverPresentationController {
-            popoverController.sourceView = self.view
-            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-            popoverController.permittedArrowDirections = []
-        }
-        self.present(alertController, animated: true, completion: nil)
-    }
+	func presentLogoutAlert() {
+		
+		let signOutAlert = UIAlertController(title: "התנתקות", message: "האם ברצונך להתנתק מהמערכת?", preferredStyle: .alert)
+		
+		signOutAlert.addAction(UIAlertAction(title: "אישור", style: .default) { _ in
+			do {
+				try Auth.auth().signOut()
+				UserDefaults.resetDefaults()
+				self.dismiss(animated: true)
+			} catch {
+				print("Something went Wrong...")
+			}
+		})
+		signOutAlert.addAction(UIAlertAction(title: "ביטול", style: .cancel))
+		present(signOutAlert, animated: true)
+	}
+	
+	func presentActionSheet(withTitle title: String? = nil, withMessage message: String?, options: (String)..., completion: @escaping (Int) -> Void) {
+		let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+		for (index, option) in options.enumerated() {
+			alertController.addAction(UIAlertAction.init(title: option, style: option == "ביטול" ? .destructive : .default, handler: { _ in
+				completion(index)
+			}))
+		}
+		if let popoverController = alertController.popoverPresentationController {
+			popoverController.sourceView = self.view
+			popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+			popoverController.permittedArrowDirections = []
+		}
+		present(alertController, animated: true)
+	}
+	func presentImagePickerActionSheet(imagePicker: UIImagePickerController, completion: @escaping (Bool) -> Void) {
+		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+		alert.addAction(UIAlertAction(title: "מצלמה", style: .default, handler: { _ in
+			imagePicker.sourceType = .camera
+			self.present(imagePicker, animated: true)
+		}))
+		alert.addAction(UIAlertAction(title: "גלריה", style: .default, handler: { _ in
+			imagePicker.sourceType = .photoLibrary
+			self.present(imagePicker, animated: true)
+		}))
+		alert.addAction(UIAlertAction(title: "ביטול", style: .cancel))
+		present(alert, animated: true)
+	}
+	
+	func presentCropViewController(image: UIImage, type: CropViewCroppingStyle) {
+		let cropViewController = CropViewController(croppingStyle: type, image: image)
+		
+		cropViewController.doneButtonTitle = "סיים"
+		cropViewController.cancelButtonTitle = "ביטול"
+		cropViewController.delegate = self as? CropViewControllerDelegate
+		present(cropViewController, animated: true)
+	}
 }

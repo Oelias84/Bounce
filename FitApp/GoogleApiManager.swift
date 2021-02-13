@@ -15,7 +15,13 @@ struct GoogleApiManager {
     
     let db = Firestore.firestore()
     let storage = Storage.storage()
-    
+	
+	static func safeEmail(emailAddress: String) -> String {
+		var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
+		safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+		return safeEmail
+	}
+	
     //MARK: - UserData
     func updateUserData(userData: ServerUserData){
         do {

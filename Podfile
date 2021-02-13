@@ -20,6 +20,7 @@ target 'FitApp' do
     pod 'DateToolsSwift'
 		pod 'CropViewController'
 		pod 'JGProgressHUD'
+		pod 'SDWebImage', '~> 5.0'
 
   target 'FitAppTests' do
     inherit! :search_paths

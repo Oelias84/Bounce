@@ -94,20 +94,16 @@ extension SettingsViewController {
 		}
 	}
 	private func systemTappedAt(_ row: Int) {
-		let signOutAlert = UIAlertController(title: "התנתקות", message: "האם ברצונך להתנתק מהמערכת?", preferredStyle: .alert)
-		
-		signOutAlert.addAction(UIAlertAction(title: "אישור", style: .default) { _ in
-			do {
-				try Auth.auth().signOut()
-				UserDefaults.resetDefaults()
-				self.dismiss(animated: true)
-			} catch {
-				print("Something went Wrong...")
-			}
-		})
-		signOutAlert.addAction(UIAlertAction(title: "ביטול", style: .cancel))
-		present(signOutAlert, animated: true)
+		switch row {
+		case 0:
+			openChat()
+		case 1:
+			presentLogoutAlert()
+		default:
+			break
+		}
 	}
+
 	private func setupLabels() {
 		let userData = UserProfile.defaults
 		
@@ -154,7 +150,6 @@ extension SettingsViewController {
 		mealsStepper.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
 		workoutStepper.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
 		
-
 		switch userData.fitnessLevel {
 		case 1:
 			workoutStepper.minimumValue = 2
@@ -172,5 +167,19 @@ extension SettingsViewController {
 			self.workoutStepper.value = Double(workouts)
 			self.numberOfWorkoutsLabel.text = "\(workouts)"
 		}
+	}
+	private func sendSupportEmail() {
+		let subject = ""
+		let messageBody = "<h1>יש לכתוב כאן את ההודעה</h1>"
+		let mailVC = MailComposerViewController(recipients: ["Fitappsupport@gmail.com"], subject: subject, messageBody: messageBody, messageBodyIsHtml: true)
+		
+		present(mailVC, animated: true)
+	}
+	private func openChat() {
+		let chatStoryboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
+		let chatsVC = chatStoryboard.instantiateViewController(identifier: K.ViewControllerId.ChatsViewController)
+			as ChatsViewController
+		
+		self.navigationController?.pushViewController(chatsVC, animated: true)
 	}
 }

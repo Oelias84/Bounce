@@ -56,6 +56,7 @@ struct K {
         static let home = "Home"
         static let articles = "Articles"
 		static let settings = "Settings"
+		static let chat = "Chat"
 	}
 	
 	struct ViewControllerId {
@@ -85,6 +86,10 @@ struct K {
         static let articleViewController = "ArticleViewController"
 		//Settings
 		static let SettingsViewController = "SettingsViewController"
+		//Chat
+		static let ChatViewController = "ChatViewController"
+		static let ChatsViewController = "ChatsViewController"
+		static let NewChatViewController = "NewChatViewController"
 	}
 	
 	struct NavigationId {
@@ -117,6 +122,7 @@ struct K {
         static let exerciseCell = "exerciseCell"
         static let workoutCell = "workoutCell"
 		static let settingsOptionCell = "settingsOptionCell"
+		static let chatCell = "chatCell"
     }
 	
     struct NibName {
@@ -127,6 +133,7 @@ struct K {
         static let workoutTableViewCell = "WorkoutTableViewCell"
         static let articleTableViewCell = "ArticleTableViewCell"
         static let questionnaireFatCollectionViewCell = "QuestionnaireFatCollectionViewCell"
+		static let chatTableViewCell = "ChatTableViewCell"
     }
 	
 	struct Units {

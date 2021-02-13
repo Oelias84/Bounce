@@ -17,7 +17,16 @@ struct UserProfile {
     
     @UserDefault(key: .id)
 	var id: String?
-    
+	
+	@UserDefault(key: .email)
+	var email: String?
+	
+	@UserDefault(key: .profileImageImageUrl)
+	var profileImageImageUrl: String?
+	
+	@UserDefault(key: .lastWightImageUrl)
+	var lastWightImageUrl: String?
+	
     //UserBasicDetails
     @UserDefault(key: .name)
     var name: String?
@@ -59,12 +68,13 @@ struct UserProfile {
 
 extension UserProfile {
     
-    func updateUserProfileData(_ data: ServerUserData, id: String) {
+	func updateUserProfileData(_ data: ServerUserData, id: String) {
         var userProfile = self
         
         userProfile.id = id
+		userProfile.name = data.name
+		userProfile.email = data.email
         userProfile.finishOnboarding = data.finishOnboarding
-        userProfile.name = data.name
         userProfile.birthDate = data.birthDate.dateFromString
         userProfile.weight = data.weight
         userProfile.height = data.height
@@ -78,9 +88,11 @@ extension UserProfile {
 	
 	static func updateServer() {
 		let googleManager = GoogleApiManager()
-		let data = ServerUserData(
-			name: defaults.name!,
+		
+		let data = ServerUserData (
 			birthDate: defaults.birthDate!.dateStringForDB,
+			email: defaults.email!,
+			name: defaults.name!,
 			weight: defaults.weight!,
 			height: defaults.height!,
 			fatPercentage: defaults.fatPercentage!,
@@ -98,8 +110,9 @@ extension UserProfile {
 
 struct ServerUserData: Codable {
     
-    let name: String
     let birthDate: String
+	let email: String
+	let name: String
     let weight: Double
     let height: Int
     let fatPercentage: Double
@@ -117,6 +130,9 @@ extension Key {
     
     static let id: Key = "id"
     static let name: Key = "name"
+	static let email: Key = "email"
+	static let lastWightImageUrl: Key = "lastWightImageUrl"
+	static let profileImageImageUrl: Key = "profileImageImageUrl"
     static let birthDate: Key = "birthDate"
     static let weight: Key = "weight"
     static let height: Key = "height"

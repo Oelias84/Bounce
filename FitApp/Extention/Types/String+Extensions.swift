@@ -18,7 +18,7 @@ extension String {
 	}
 	var fullDateFromStringWithDash: Date? {
 		let formatter = DateFormatter()
-		formatter.dateFormat = "yyyy-MM-dd HH:mm"
+		formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 		formatter.locale = Locale(identifier: "en_GB")
 		formatter.timeZone = .current
 		return formatter.date(from: self)
@@ -50,6 +50,30 @@ extension String {
 		formatter.locale = Locale(identifier: "en_GB")
 		formatter.timeZone = .current
 		return formatter.date(from: self)
+	}
+	
+	//MARK: - String manipulation
+	var splitFullName: (String, String) {
+		let splitUserName = components(separatedBy: " ")
+		if splitUserName.count == 2 {
+			return (splitUserName[0], splitUserName[1])
+		} else {
+			return (splitUserName[0], "")
+		}
+	}
+	
+	//MARK: - Email format
+	var safeEmail: String {
+		var safeEmail = replacingOccurrences(of: ".", with: "-")
+		safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+		return safeEmail
+	}
+	//MARK: - Image from string
+	var showImage: UIImage? {
+		guard let url = URL(string: self) else { return nil }
+		let data = try? Data(contentsOf: url)
+		
+		return UIImage(data: data!)
 	}
 	
 	//MARK: - Validation

@@ -353,6 +353,9 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.9)
+  - SDWebImage (5.10.4):
+    - SDWebImage/Core (= 5.10.4)
+  - SDWebImage/Core (5.10.4)
 
 DEPENDENCIES:
   - BulletinBoard
@@ -367,6 +370,7 @@ DEPENDENCIES:
   - FirebaseFirestoreSwift
   - JGProgressHUD
   - MessageKit
+  - SDWebImage (~> 5.0)
 
 SPEC REPOS:
   trunk:
@@ -397,6 +401,7 @@ SPEC REPOS:
     - MessageKit
     - nanopb
     - PromisesObjC
+    - SDWebImage
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -426,7 +431,8 @@ SPEC CHECKSUMS:
   MessageKit: fb539583599cd914e8e2d41fe7bdceb4bf686565
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
 
-PODFILE CHECKSUM: 110574b31c964b62f266e5083d8f82ef245ba017
+PODFILE CHECKSUM: 101f58d0ca02d787a6bd2d31088c14f2ef1a95f8
 
 COCOAPODS: 1.8.4
