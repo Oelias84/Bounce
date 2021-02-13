@@ -24,14 +24,19 @@ class MealPlanTableViewCell: UITableViewCell {
     }
     var mealViewModel: MealViewModel!
     
-    @IBOutlet weak var cellBackgroundView: UIView!
+	@IBOutlet weak var cellBackgroundView: UIView! {
+		didSet {
+			cellBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cellTapped)))
+		}
+	}
     @IBOutlet weak var mealNameLabel: UILabel!
     @IBOutlet weak var mealIsDoneCheckMark: UIButton!
     
     @IBOutlet weak var dishesHeadLineStackView: UIStackView!
     @IBOutlet weak var dishStackView: UIStackView!
     @IBOutlet weak var dishesStackViewHeight: NSLayoutConstraint!
-    
+	@IBOutlet weak var downButton: UIButton!
+	
     var delegate: MealPlanTableViewCellDelegate?
     
     override func awakeFromNib() {
@@ -46,9 +51,7 @@ class MealPlanTableViewCell: UITableViewCell {
     
     @IBAction func downButtonAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-    }
-    @IBAction func openDetailsAction(_ sender: UIButton) {
-        delegate?.detailTapped(cell: indexPath)
+		delegate?.detailTapped(cell: indexPath)
     }
     @IBAction func completeMealCheckMarkAction(_ sender: UIButton) {
         if meal.isMealDone {
@@ -133,4 +136,9 @@ extension MealPlanTableViewCell {
         configureData()
         mealViewModel.updateMeals(for: Date())
     }
+	
+	@objc private func cellTapped() {
+		delegate?.detailTapped(cell: indexPath)
+		downButton.isSelected = !downButton.isSelected
+	}
 }

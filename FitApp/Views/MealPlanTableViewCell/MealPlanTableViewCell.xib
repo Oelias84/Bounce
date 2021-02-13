@@ -66,7 +66,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="downButtonAction:" destination="Qj3-aL-DOE" eventType="touchUpInside" id="ges-zi-LDN"/>
-                                                    <action selector="openDetailsAction:" destination="Qj3-aL-DOE" eventType="touchUpInside" id="ebZ-qQ-dHg"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -80,7 +79,7 @@
                                 <rect key="frame" x="16" y="78" width="363" height="22"/>
                                 <subviews>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qYe-92-4Bb" userLabel="Dish Headline Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="316.5" height="16"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="174.5" height="16"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FS0-wh-1EZ" userLabel="Spacer View">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="16"/>
@@ -89,7 +88,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="כמות מנה" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JDP-CR-Dh2">
-                                                <rect key="frame" x="25" y="0.0" width="63.5" height="16"/>
+                                                <rect key="frame" x="25" y="0.0" width="64" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="64" id="Wav-Rf-iLj"/>
                                                 </constraints>
@@ -98,7 +97,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="שם מנה" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LoB-kT-28o">
-                                                <rect key="frame" x="88.5" y="0.0" width="194" height="16"/>
+                                                <rect key="frame" x="89" y="0.0" width="51.5" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="194" id="ZY0-2T-3sr"/>
                                                 </constraints>
@@ -107,7 +106,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xoC-2q-Pml" userLabel="Spacer View">
-                                                <rect key="frame" x="282.5" y="0.0" width="34" height="16"/>
+                                                <rect key="frame" x="140.5" y="0.0" width="34" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="34" id="CvP-s1-QX1"/>
                                                 </constraints>
@@ -152,6 +151,7 @@
                 <outlet property="dishStackView" destination="z7Q-Cx-yY6" id="Zly-oX-gax"/>
                 <outlet property="dishesHeadLineStackView" destination="qYe-92-4Bb" id="sma-Du-AMV"/>
                 <outlet property="dishesStackViewHeight" destination="Kab-Tj-oTd" id="CO4-g5-J61"/>
+                <outlet property="downButton" destination="Vg7-Sx-Hlr" id="sEO-7t-foa"/>
                 <outlet property="mealIsDoneCheckMark" destination="QNl-Et-B8h" id="d03-5A-Vll"/>
                 <outlet property="mealNameLabel" destination="MLQ-l5-7vE" id="Vtu-qf-Rgg"/>
             </connections>
