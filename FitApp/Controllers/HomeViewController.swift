@@ -17,8 +17,7 @@ class HomeViewController: UIViewController {
     private let carbsShapeLayer = CAShapeLayer()
     private let fatShapeLayer = CAShapeLayer()
     private let proteinShapeLayer = CAShapeLayer()
-    
-    
+	
     private lazy var boardManager: BLTNItemManager = {
         let item = BLTNPageItem(title: "שמחים שהצטרפת אלינו :)")
         item.isDismissable = false
@@ -59,6 +58,9 @@ class HomeViewController: UIViewController {
         mealViewModel.bindMealViewModelToController = {
             self.setupProgress()
         }
+		if let image = UserProfile.defaults.profileImageImageUrl?.showImage {
+			profileButton.setImage( image.circleMasked, for: .normal)
+		}
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -140,8 +142,10 @@ extension HomeViewController {
         let manager = ConsumptionManager()
         let progress = mealViewModel.getProgress()
         userProgress = UserProgress(carbsTarget: manager.getDayCarbs, proteinTarget: manager.getDayProtein, fatTarget: manager.getDayFat, carbsProgress: progress.carbs, proteinProgress: progress.protein, fatProgress: progress.fats)
+		
         configureProgress()
         setUpProgressTextFields()
+		
         fatCountLabel.text = String(format: "%.1f", progress.fats)
         carbsCountLabel.text = String(format: "%.1f", progress.carbs)
         proteinCountLabel.text = String(format: "%.1f", progress.protein)

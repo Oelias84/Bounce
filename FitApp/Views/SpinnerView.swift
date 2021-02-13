@@ -25,6 +25,6 @@ struct Spinner {
 	}
 	
 	func stop() {
-		hud.dismiss(afterDelay: 3.0)
+		hud.dismiss()
 	}
 }

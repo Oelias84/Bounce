@@ -36,12 +36,15 @@ class LoginViewController: UIViewController {
 			guard let self = self else { return }
 			
 			if error == nil {
+				self.getUserImageProfileUrl(with: email)
                 self.googleManager.getUserData { result in
 					Spinner.shared.stop()
 
                     switch result {
                     case .success(let userData):
-                        UserProfile.defaults.updateUserProfileData(userData!, id: user!.user.uid)
+						if let user = user?.user {
+							UserProfile.defaults.updateUserProfileData(userData!, id: user.uid)
+						}
                         let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
                         let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar)
                         
@@ -59,6 +62,21 @@ class LoginViewController: UIViewController {
 				
 				alertController.addAction(defaultAction)
 				self.present(alertController, animated: true, completion: nil)
+			}
+		}
+	}
+	
+	func getUserImageProfileUrl(with email: String) {
+		let path = "\(email.safeEmail)_profile_picture.jpeg"
+		GoogleStorageManager.shared.downloadImageURL(from: .profileImage , path: path){ result in
+
+			switch result {
+			case .success(let url):
+				DispatchQueue.main.async {
+					UserProfile.defaults.profileImageImageUrl = url.absoluteString
+				}
+			case .failure(let error):
+				print("no image exist", error)
 			}
 		}
 	}
