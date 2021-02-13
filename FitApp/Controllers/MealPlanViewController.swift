@@ -80,8 +80,9 @@ extension MealPlanViewController {
         tableView.reloadData()
     }
     func callToViewModelForUIUpdate() {
-		Spinner.shared.show(self.view)
-		
+		if let navView = navigationController?.view {
+			Spinner.shared.show(navView)
+		}
         mealViewModel = MealViewModel.shared
         if mealViewModel.meals == nil {
             mealViewModel.fetchData()

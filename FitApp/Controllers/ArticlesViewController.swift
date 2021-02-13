@@ -62,8 +62,10 @@ extension ArticlesViewController {
     }
     func callToViewModelForUIUpdate() {
         tableView.register(UINib(nibName: K.NibName.articleTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.articleCell)
-		Spinner.shared.show(self.view)
-        articleViewModel = ArticleViewModel()
+		if let navView = navigationController?.view {
+			Spinner.shared.show(navView)
+		}
+		articleViewModel = ArticleViewModel()
         articleViewModel.bindArticleViewModelToController = {
             self.updateDataSource()
         }

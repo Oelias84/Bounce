@@ -24,8 +24,8 @@ class WeightProgressViewController: UIViewController {
     }
 }
     
-    var timePeriod: TimePeriod = .week
-    var selectedDate: Date! {
+    private var timePeriod: TimePeriod = .week
+    private var selectedDate: Date! {
         didSet {
             updateDateLabels()
         }
@@ -180,7 +180,7 @@ extension WeightProgressViewController: UITableViewDelegate, UITableViewDataSour
 //MARK: - Function
 extension WeightProgressViewController {
     
-    func updateDateLabels() {
+    private func updateDateLabels() {
         switch timePeriod {
         case .week:
             DispatchQueue.main.async {
@@ -196,7 +196,7 @@ extension WeightProgressViewController {
             }
         }
     }
-    func updateFiltersArray() {
+    private func updateFiltersArray() {
         switch timePeriod {
         case .week:
             filteredArray = weightViewModel.getWeekBy(selectedDate)
@@ -206,7 +206,7 @@ extension WeightProgressViewController {
             filteredArray = weightViewModel.getYearBy(selectedDate)
         }
     }
-    func addWeight(textField: UITextField) {
+    private func addWeight(textField: UITextField) {
         todayButtonAction(self)
         
         if let weights = weightViewModel.weights, weights.contains(where: { $0.date.day == Date().day }) {
@@ -230,8 +230,10 @@ extension WeightProgressViewController {
         self.tableView.reloadData()
     }
     private func callToViewModelForUIUpdate() {
-		Spinner.shared.show(self.view)
-        self.weightViewModel = WeightViewModel()
+		if let navView = navigationController?.view {
+			Spinner.shared.show(navView)
+		}
+		self.weightViewModel = WeightViewModel()
         
         self.weightViewModel!.bindWeightViewModelToController = {
             self.updateDataSource()
