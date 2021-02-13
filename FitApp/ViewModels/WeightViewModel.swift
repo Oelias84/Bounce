@@ -28,7 +28,7 @@ class WeightViewModel: NSObject {
     func getWeekBy(_ date: Date) -> [Weight] {
         guard let weights = self.weights else { return [] }
         let weekArray = weights.filter {
-            $0.date >= date.startOfWeek! && $0.date <= date.endOfWeek!
+			$0.date.day >= date.startOfWeek!.day && $0.date.day <= date.endOfWeek!.day
         }
         return weekArray
     }
@@ -36,18 +36,18 @@ class WeightViewModel: NSObject {
         var weeksArray = [Weight]()
         guard var weeks = splitToWeeksArray() else { return [] }
         weeks = weeks.filter { (weekArray) -> Bool in
-            weekArray.first?.date.month == date.month && weekArray.first?.date.year == date.year
+			weekArray.first?.date.month == date.month && weekArray.first?.date.year == date.year
         }
         
         if weeks.isEmpty { return [] }
         for i in 0...weeks.count-1 {
-            let date = weeks[i].first!.date
+			let date = weeks[i].first!.date
             var weight = 0.0
             for j in 0...weeks[i].count-1 {
                 weight += weeks[i][j].weight
             }
             weight = weight / Double(weeks[i].count)
-            weeksArray.append(Weight(date: date, weight: weight))
+			weeksArray.append(Weight(date: date, weight: weight))
         }
         return weeksArray
     }
@@ -73,11 +73,12 @@ class WeightViewModel: NSObject {
         guard let weights = self.weights else { return [] }
         if weights.isEmpty { return nil }
         var weeksArray: [[Weight]]?
-        var date = weights.first!.date
+		var date = weights.first!.date
         var section = 0
         
         for day in weights {
-            if day.date >= date.startOfWeek! && day.date <= date.endOfWeek! {
+			
+			if day.date.day >= date.startOfWeek!.day && day.date.day <= date.endOfWeek!.day {
                 if weeksArray == nil {
                     weeksArray = [[day]]
                 } else {
