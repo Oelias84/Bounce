@@ -13,7 +13,7 @@
         <!--Welcome View Controller-->
         <scene sceneID="iVp-xe-LE5">
             <objects>
-                <viewController title="Welcome View Controller" id="yWR-93-bCJ" customClass="StartViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StartViewController" title="Welcome View Controller" id="yWR-93-bCJ" customClass="StartViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sm6-Ub-KvP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -259,7 +259,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Jki-yR-9Ax">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zav-Me-cAG" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="StartNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="Zav-Me-cAG" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="fyD-Qy-1d6">
@@ -275,7 +275,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uwT-ZL-6w3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="95.652173913043484" y="87.723214285714278"/>
+            <point key="canvasLocation" x="235" y="88"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="UDo-YV-IA5">

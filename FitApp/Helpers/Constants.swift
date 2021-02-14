@@ -61,7 +61,10 @@ struct K {
 	
 	struct ViewControllerId {
         
-        //Home
+		//Login Register
+		static let startViewController = "StartViewController"
+		static let startNavigationViewController = "StartNavigationViewController"
+		//Home
         static let homeViewController = "HomeViewController"
 		static let HomeTabBar = "HomeTabBar"
         //Meal
