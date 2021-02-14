@@ -526,7 +526,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="c3r-Ua-q5F" userLabel="Prompt Stack View">
-                                <rect key="frame" x="32" y="250.5" width="350" height="395"/>
+                                <rect key="frame" x="32" y="360.5" width="350" height="175"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="nwF-WH-MMn">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="68.5"/>
@@ -654,17 +654,17 @@
                                             <constraint firstAttribute="height" constant="1" id="7wE-0p-lp0"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7Se-YR-zHY" userLabel="Life Style Stack View">
-                                        <rect key="frame" x="0.0" y="187" width="350" height="208"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7Se-YR-zHY" userLabel="Life Style Stack View">
+                                        <rect key="frame" x="0.0" y="175" width="350" height="134"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="במידה ואינכם יודעים מהי כמות הצעדים בחרו את אחת האופציות הבאות שמתארות את אורח חייכם בצורה הטובה ביותר." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeO-ec-X4O">
-                                                <rect key="frame" x="0.0" y="0.0" width="350" height="74"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="0.0"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="fOf-t9-IWg">
-                                                <rect key="frame" x="0.0" y="82" width="350" height="126"/>
+                                                <rect key="frame" x="0.0" y="8" width="350" height="126"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="oWO-nI-8f7">
                                                         <rect key="frame" x="0.0" y="0.0" width="350" height="30"/>

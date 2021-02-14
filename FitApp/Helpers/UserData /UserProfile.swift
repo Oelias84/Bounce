@@ -11,6 +11,9 @@ import Foundation
 struct UserProfile {
     
     static var defaults = UserProfile()
+	
+	@UserDefault(key: .motivation)
+	var motivation: Int?
     
     @UserDefault(key: .finishOnboarding)
     var finishOnboarding: Bool?
@@ -131,6 +134,7 @@ extension Key {
     static let id: Key = "id"
     static let name: Key = "name"
 	static let email: Key = "email"
+	static let motivation: Key = "motivation"
 	static let lastWightImageUrl: Key = "lastWightImageUrl"
 	static let profileImageImageUrl: Key = "profileImageImageUrl"
     static let birthDate: Key = "birthDate"

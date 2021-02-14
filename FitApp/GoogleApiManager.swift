@@ -15,6 +15,7 @@ struct GoogleApiManager {
     
     let db = Firestore.firestore()
     let storage = Storage.storage()
+	static let shared = GoogleApiManager()
 	
 	static func safeEmail(emailAddress: String) -> String {
 		var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
@@ -158,7 +159,26 @@ struct GoogleApiManager {
             }
         }
     }
-    
+	
+	//MARK: - Motivations
+	func getMotivations(completion: @escaping (Result<Motivations?, Error>) -> Void) {
+		do {
+			db.collection("motivation-sentences-data").document("sentences").getDocument { (data, error) in
+				if let error = error {
+					print(error)
+				} else if let data = data {
+					do {
+						if let decodedData = try data.data(as: Motivations.self) {
+							completion(.success(decodedData))
+						}
+					} catch {
+						print(error)
+						completion(.failure(error))
+					}
+				}
+			}
+		}
+	}
     //MARK: - Workouts
     func getWorkouts( forFitnessLevel: Int, completion: @escaping (Result<[Workout], Error>) -> Void) {
         do {
@@ -231,19 +251,6 @@ struct GoogleApiManager {
 		}
 
     }
-	
-	func getArticleText(videoNumber: String, completion: @escaping (Result<URL?, Error>) -> Void) {
-		
-		let httpsReference = storage.reference(forURL: "https://firebasestorage.googleapis.com/b/gs://my-fit-app-a8595.appspot.com/o/articles/1.rtf")
-		
-		httpsReference.downloadURL { url, error in
-			if let error = error {
-				completion(.failure(error))
-			} else {
-				completion(.success(url))
-			}
-		}
-	}
 
     func updateDishes() {
         let carb = [

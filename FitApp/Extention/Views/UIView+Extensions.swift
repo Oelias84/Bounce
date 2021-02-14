@@ -36,32 +36,54 @@ extension UIView {
 			layer.borderColor = newValue?.cgColor
 		}
 	}
-    
-    var parentViewController: UIViewController? {
-        var parentResponder: UIResponder? = self
-        while parentResponder != nil {
-            parentResponder = parentResponder!.next
-            if parentResponder is UIViewController {
-                return parentResponder as? UIViewController
-            }
-        }
-        return nil
-    }
-    
-    func fixInView(_ container: UIView!) -> Void {
-        self.translatesAutoresizingMaskIntoConstraints = false;
-        self.frame = container.frame;
-        container.addSubview(self);
-        NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal, toItem: container, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: self, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: container, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
-    }
-    func cellView() {
-        layer.cornerRadius = 10
-        layer.shadowOpacity = 0.18
-        layer.shadowColor = UIColor.systemBlue.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 12)
-        layer.shadowRadius = 12
-    }
+	
+	var parentViewController: UIViewController? {
+		var parentResponder: UIResponder? = self
+		while parentResponder != nil {
+			parentResponder = parentResponder!.next
+			if parentResponder is UIViewController {
+				return parentResponder as? UIViewController
+			}
+		}
+		return nil
+	}
+	
+	func fixInView(_ container: UIView!) -> Void {
+		self.translatesAutoresizingMaskIntoConstraints = false;
+		self.frame = container.frame;
+		container.addSubview(self);
+		NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal, toItem: container, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
+		NSLayoutConstraint(item: self, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
+		NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+		NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: container, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+	}
+	func cellView() {
+		layer.cornerRadius = 10
+		layer.shadowOpacity = 0.18
+		layer.shadowColor = UIColor.systemBlue.cgColor
+		layer.shadowOffset = CGSize(width: 0, height: 12)
+		layer.shadowRadius = 12
+	}
+	
+	// OUTPUT 1
+	func dropShadow(scale: Bool = true) {
+		layer.masksToBounds = false
+		layer.shadowColor = UIColor.systemBlue.cgColor
+		layer.shadowOpacity = 0.2
+		layer.shadowOffset = CGSize(width: 0, height: 12)
+		layer.shadowRadius = 12
+	}
+	
+	// OUTPUT 2
+	func dropShadow(color: UIColor, opacity: Float = 0.5, offSet: CGSize, radius: CGFloat = 1, scale: Bool = true) {
+		layer.masksToBounds = false
+		layer.shadowColor = color.cgColor
+		layer.shadowOpacity = opacity
+		layer.shadowOffset = offSet
+		layer.shadowRadius = radius
+		
+		layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+		layer.shouldRasterize = true
+		layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+	}
 }

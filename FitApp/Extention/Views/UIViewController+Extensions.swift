@@ -62,9 +62,16 @@ extension UIViewController {
 		
 		signOutAlert.addAction(UIAlertAction(title: "אישור", style: .default) { _ in
 			do {
+				guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
+					return
+				}
 				try Auth.auth().signOut()
 				UserDefaults.resetDefaults()
-				self.dismiss(animated: true)
+				let storyboard = UIStoryboard(name: K.StoryboardName.loginRegister, bundle: nil)
+				let startNav = storyboard.instantiateViewController(withIdentifier: K.ViewControllerId.startNavigationViewController)
+				
+				startNav.modalPresentationStyle = .fullScreen
+				window.rootViewController = startNav
 			} catch {
 				print("Something went Wrong...")
 			}
