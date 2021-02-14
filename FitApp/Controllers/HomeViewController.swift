@@ -36,7 +36,11 @@ class HomeViewController: UIViewController {
     private var fatStartValue = 0.0
     private var carbsStartValue = 0.0
     private var proteinStartValue = 0.0
-    
+	
+	@IBOutlet weak var tipContainerView: UIView!
+	@IBOutlet weak var progressWheelsContainerView: UIView!
+	@IBOutlet weak var progressDataContainerView: UIView!
+	
     @IBOutlet weak var helloUserTextLabel: UILabel!
     @IBOutlet weak var userMotivationTextLabel: UILabel!
     
@@ -61,7 +65,9 @@ class HomeViewController: UIViewController {
 		if let image = UserProfile.defaults.profileImageImageUrl?.showImage {
 			profileButton.setImage( image.circleMasked, for: .normal)
 		}
-    }
+		setupView()
+		changeMotivationText()
+	}
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 		navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -73,6 +79,7 @@ class HomeViewController: UIViewController {
             mealViewModel.fetchData()
         }
         setupProgress()
+		
     }
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -95,9 +102,9 @@ extension HomeViewController {
         fatCountLabel.text = "\(fatStartValue)"
         carbsCountLabel.text = "\(carbsStartValue)"
         proteinCountLabel.text = "\(proteinStartValue)"
-		fatTargateLabel.text = "\(userProgress.fatTarget.roundHalfDown)"
-		carbsTargateLabel.text = "\(userProgress.carbsTarget.roundHalfDown)"
-		proteinTargateLabel.text = "\(userProgress.proteinTarget.roundHalfDown)"
+		fatTargateLabel.text = "\(userProgress.fatTarget)"
+		carbsTargateLabel.text = "\(userProgress.carbsTarget)"
+		proteinTargateLabel.text = "\(userProgress.proteinTarget)"
     }
     private func configureProgress(){
         circularProgress.subviews.forEach {
@@ -139,15 +146,21 @@ extension HomeViewController {
     private func setupProgress() {
         let manager = ConsumptionManager()
         let progress = mealViewModel.getProgress()
+		
         userProgress = UserProgress(carbsTarget: manager.getDayCarbs, proteinTarget: manager.getDayProtein, fatTarget: manager.getDayFat, carbsProgress: progress.carbs, proteinProgress: progress.protein, fatProgress: progress.fats)
 		
         configureProgress()
         setUpProgressTextFields()
 		
-        fatCountLabel.text = String(format: "%.1f", progress.fats)
-        carbsCountLabel.text = String(format: "%.1f", progress.carbs)
-        proteinCountLabel.text = String(format: "%.1f", progress.protein)
+        fatCountLabel.text = "\(progress.fats)"
+        carbsCountLabel.text = "\(progress.carbs)"
+        proteinCountLabel.text = "\(progress.protein)"
     }
+	private func setupView() {
+		tipContainerView.dropShadow()
+		progressDataContainerView.dropShadow()
+		progressWheelsContainerView.dropShadow()
+	}
     
     @objc func animateProgress() {
         let carbP = self.view.viewWithTag(100) as! CircularProgressView
@@ -158,4 +171,20 @@ extension HomeViewController {
         fatP.setProgressWithAnimation(duration: 1.0, value: userProgress.fatProgress / userProgress.fatTarget.roundHalfDown)
         proteinP.setProgressWithAnimation(duration: 1.0, value: userProgress.proteinProgress / userProgress.proteinTarget.roundHalfDown)
     }
+	
+	private func changeMotivationText () {
+		GoogleApiManager.shared.getMotivations {
+			[weak self] result in
+			guard let self = self else { return }
+			
+			switch result {
+			case .success(let motivations):
+				if let motivations = motivations {
+					self.userMotivationTextLabel.text = motivations.text[Int.random(in:0..<31)]
+				}
+			case .failure(let error):
+				print(error)
+			}
+		}
+	}
 }
