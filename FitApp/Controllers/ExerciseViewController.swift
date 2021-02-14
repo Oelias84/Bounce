@@ -166,7 +166,7 @@ extension ExerciseViewController {
 				let seconds = CMTimeGetSeconds(progressTime)
 				let progress = Float(seconds/durationSeconds)
 
-				if progress == 0.0 {
+				if progress >= 0.0 {
 					self?.activityIndicator.stopAnimating()
 					self?.fullScreenButton.isHidden = false
 				}
