@@ -134,6 +134,7 @@ struct K {
         static let articleTableViewCell = "ArticleTableViewCell"
         static let questionnaireFatCollectionViewCell = "QuestionnaireFatCollectionViewCell"
 		static let chatTableViewCell = "ChatTableViewCell"
+		static let addWeightAlertView = "AddWeightAlertView"
     }
 	
 	struct Units {

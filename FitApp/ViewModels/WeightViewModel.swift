@@ -62,7 +62,7 @@ class WeightViewModel: NSObject {
                 for day in month {
                     weight += day.weight
                 }
-                monthsArray.append(Weight(date: monthDate, weight: weight / Double(month.count)))
+				monthsArray.append(Weight(date: monthDate, weight: weight / Double(month.count)))
                 weight = 0.0
             }
         }
@@ -102,7 +102,7 @@ class WeightViewModel: NSObject {
         var monthDays = 0.0
         for day in weightsArray {
             if day.date.month != month.month {
-                monthArray[section].append(Weight(date: month, weight: weight / monthDays))
+				monthArray[section].append(Weight(date: month, weight: weight / monthDays))
                 monthArray.append([Weight]())
                 section += 1
                 month = day.date
@@ -113,7 +113,7 @@ class WeightViewModel: NSObject {
                 monthDays += 1
             }
         }
-        monthArray[section].append(Weight(date: month, weight: weight / monthDays))
+		monthArray[section].append(Weight(date: month, weight: weight / monthDays))
         return monthArray
     }
     func splitToYearsArray() -> [[Weight]]? {
@@ -143,7 +143,7 @@ class WeightViewModel: NSObject {
             switch result {
             case .success(let weights):
                 if let weights = weights {
-                    self.weights = weights
+					self.weights = weights.sorted()
                 } else {
                     self.weights = []
                 }

@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Weight: Codable {
-    
+struct Weight: Codable, Comparable {
+	
     let date: Date
     let weight: Double
     
@@ -21,6 +21,10 @@ struct Weight: Codable {
     var printWeight: String {
         return String(format: "%.1f", weight) + " ק״ג"
     }
+	
+	static func < (lhs: Weight, rhs: Weight) -> Bool {
+		lhs.date < rhs.date
+	}
 }
 
 struct Weights: Codable {
