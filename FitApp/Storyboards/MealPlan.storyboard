@@ -116,16 +116,16 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n79-kT-YCh">
-                                            <rect key="frame" x="174.5" y="410" width="65.5" height="76.5"/>
+                                            <rect key="frame" x="174.5" y="406" width="65.5" height="84.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJu-0J-j8t">
-                                                    <rect key="frame" x="12" y="44" width="41.5" height="20.5"/>
+                                                    <rect key="frame" x="12" y="52" width="41.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ry-YD-suk">
-                                                    <rect key="frame" x="8" y="8" width="20" height="20"/>
+                                                    <rect key="frame" x="16" y="16" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="2XP-sP-Bjl"/>
                                                         <constraint firstAttribute="height" constant="20" id="iLa-zf-C4m"/>
@@ -139,11 +139,11 @@
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="aJu-0J-j8t" firstAttribute="leading" secondItem="n79-kT-YCh" secondAttribute="leading" constant="12" id="37G-5C-ZNE"/>
-                                                <constraint firstItem="0ry-YD-suk" firstAttribute="leading" secondItem="n79-kT-YCh" secondAttribute="leading" constant="8" id="OJD-4g-Xz6"/>
+                                                <constraint firstItem="0ry-YD-suk" firstAttribute="leading" secondItem="n79-kT-YCh" secondAttribute="leading" constant="16" id="OJD-4g-Xz6"/>
                                                 <constraint firstAttribute="trailing" secondItem="aJu-0J-j8t" secondAttribute="trailing" constant="12" id="QC2-G7-t40"/>
                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="264" id="R0B-uB-0cY"/>
                                                 <constraint firstItem="aJu-0J-j8t" firstAttribute="top" secondItem="0ry-YD-suk" secondAttribute="bottom" constant="16" id="XYq-Bi-bXo"/>
-                                                <constraint firstItem="0ry-YD-suk" firstAttribute="top" secondItem="n79-kT-YCh" secondAttribute="top" constant="8" id="nXG-Yi-2Q6"/>
+                                                <constraint firstItem="0ry-YD-suk" firstAttribute="top" secondItem="n79-kT-YCh" secondAttribute="top" constant="16" id="nXG-Yi-2Q6"/>
                                                 <constraint firstAttribute="bottom" secondItem="aJu-0J-j8t" secondAttribute="bottom" constant="12" id="w2U-b8-E9R"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
