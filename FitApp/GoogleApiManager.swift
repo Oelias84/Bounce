@@ -179,6 +179,27 @@ struct GoogleApiManager {
 			}
 		}
 	}
+	
+	//MARK: - Comments
+	func getComments(completion: @escaping (Result<Comments?, Error>) -> Void) {
+		do {
+			db.collection("comment-data").document("comments").getDocument { (data, error) in
+				if let error = error {
+					print(error)
+				} else if let data = data {
+					do {
+						if let decodedData = try data.data(as: Comments.self) {
+							completion(.success(decodedData))
+						}
+					} catch {
+						print(error)
+						completion(.failure(error))
+					}
+				}
+			}
+		}
+	}
+	
     //MARK: - Workouts
     func getWorkouts( forFitnessLevel: Int, completion: @escaping (Result<[Workout], Error>) -> Void) {
         do {

@@ -109,7 +109,7 @@ extension MealPlanViewController {
 		self.navigationItem.rightBarButtonItem = rightBarButton
 	}
 	@objc func barButtonItemTapped(_ sender: UIBarButtonItem) {
-		print("doSomething!")
+		performSegue(withIdentifier: "commentsView", sender: self)
 	}
 }
 

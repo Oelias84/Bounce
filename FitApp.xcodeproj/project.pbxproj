@@ -16,6 +16,8 @@
 		7C5262B725BC756700694007 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C5262B625BC756700694007 /* Settings.storyboard */; };
 		7C5262BF25BC79B200694007 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5262BE25BC79B200694007 /* SettingsViewController.swift */; };
 		7C658AA825D9873C00CA75B2 /* Motivations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658AA725D9873C00CA75B2 /* Motivations.swift */; };
+		7C658AB525D990EB00CA75B2 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658AB425D990EB00CA75B2 /* CommentViewController.swift */; };
+		7C658ABE25D992D200CA75B2 /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658ABD25D992D200CA75B2 /* Comments.swift */; };
 		7C71BB4725D869AC00FBEB96 /* AddWeightAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71BB4625D869AC00FBEB96 /* AddWeightAlertView.swift */; };
 		7C7434EB25CD906500D33A9A /* MailComposerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7434EA25CD906500D33A9A /* MailComposerViewController.swift */; };
 		7C7434F025CD9D9D00D33A9A /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7434EF25CD9D9D00D33A9A /* ChatsViewController.swift */; };
@@ -140,6 +142,8 @@
 		7C5262B625BC756700694007 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		7C5262BE25BC79B200694007 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7C658AA725D9873C00CA75B2 /* Motivations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motivations.swift; sourceTree = "<group>"; };
+		7C658AB425D990EB00CA75B2 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		7C658ABD25D992D200CA75B2 /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
 		7C71BB4625D869AC00FBEB96 /* AddWeightAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWeightAlertView.swift; sourceTree = "<group>"; };
 		7C7434EA25CD906500D33A9A /* MailComposerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailComposerViewController.swift; sourceTree = "<group>"; };
 		7C7434EF25CD9D9D00D33A9A /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
@@ -309,6 +313,15 @@
 				7C7434EA25CD906500D33A9A /* MailComposerViewController.swift */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		7C658AF325D9A49700CA75B2 /* Meals */ = {
+			isa = PBXGroup;
+			children = (
+				7C658AB425D990EB00CA75B2 /* CommentViewController.swift */,
+				B3E6E9B725714D5800958C48 /* MealPlanViewController.swift */,
+			);
+			name = Meals;
 			sourceTree = "<group>";
 		};
 		7C71BB4E25D869B400FBEB96 /* WeightViews */ = {
@@ -486,8 +499,8 @@
 				B35822A025ADA01D00C91295 /* Articles */,
 				7C3F4F3625C2D31900EE3758 /* Settings */,
 				7C7434F925CD9DDE00D33A9A /* Chat */,
+				7C658AF325D9A49700CA75B2 /* Meals */,
 				B3E36E74257285F3006CE558 /* HomeViewController.swift */,
-				B3E6E9B725714D5800958C48 /* MealPlanViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -598,6 +611,7 @@
 				B38397FA25B4A21F00154697 /* Workout.swift */,
 				B36B71912577BF0C001CD393 /* Exercise.swift */,
 				7C658AA725D9873C00CA75B2 /* Motivations.swift */,
+				7C658ABD25D992D200CA75B2 /* Comments.swift */,
 				7C74351125CDBBEF00D33A9A /* Chat */,
 			);
 			path = Models;
@@ -986,6 +1000,7 @@
 				7C74353225D07DB800D33A9A /* GoogleDatabaseManager.swift in Sources */,
 				B3E36E75257285F3006CE558 /* HomeViewController.swift in Sources */,
 				B367F14825B036CC00DF21D7 /* UserDefaults+Extensions.swift in Sources */,
+				7C658AB525D990EB00CA75B2 /* CommentViewController.swift in Sources */,
 				B35822A225ADA04300C91295 /* ArticleViewController.swift in Sources */,
 				7C7435DB25D31A0000D33A9A /* ChatTableViewCell.swift in Sources */,
 				B3B2A232256ED2A60052E6C8 /* UIImage+Extensions.swift in Sources */,
@@ -1011,6 +1026,7 @@
 				7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */,
 				7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */,
 				B38397FB25B4A21F00154697 /* Workout.swift in Sources */,
+				7C658ABE25D992D200CA75B2 /* Comments.swift in Sources */,
 				7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */,
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,

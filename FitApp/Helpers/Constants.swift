@@ -69,6 +69,7 @@ struct K {
 		static let HomeTabBar = "HomeTabBar"
         //Meal
         static let mealViewController = "MealViewController"
+		static let commentsViewController = "CommentsViewController"
 		//Questionnaire
         static let questionnaireNavigation = "QuestionnaireNavigation"
         static let questionnaireWelcome = "QuestionnaireWelcome"
