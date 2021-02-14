@@ -142,5 +142,9 @@ extension QuestionnaireNutritionViewController {
                 break
             }
         }
+		if let meals = userData.mealsPerDay, let hunger = userData.mostHungry{
+			self.mostHunger = hunger
+			self.numberOfMeals = meals
+		}
     }
 }

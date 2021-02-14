@@ -11,7 +11,9 @@ class ExercisesTableViewController: UITableViewController {
     
     var workout: Workout!
     var selectedExercise: Exercise?
-    
+	var numberOfExerciseSection: [String:Int] = ["legs":0, "chest":0, "stomach":0, "shoulders":0, "back":0]
+	var sectionCount: Int!
+	
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == K.SegueId.moveToExerciseDetailViewController {
             let controller = segue.destination as! ExerciseViewController
@@ -23,7 +25,12 @@ class ExercisesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+		
+		for exercise in workout.exercises {
+			numberOfExerciseSection.updateValue(+1, forKey: exercise.exerciseToPresent!.type)
+		}
+		sectionCount = numberOfExerciseSection.filter { $0.value != 0 }.count-1
+		
 		title = workout.name
         tableView.register(UINib(nibName: K.NibName.exerciseTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.exerciseCell)
     }

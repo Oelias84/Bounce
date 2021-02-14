@@ -21,6 +21,7 @@ class QuestionnaireFatPresentViewController: UIViewController {
 		
 		let imageNib = UINib(nibName: K.NibName.questionnaireFatCollectionViewCell, bundle: nil)
 		collectionView.register(imageNib, forCellWithReuseIdentifier: K.CellId.fanCell)
+		setupSelectedImage()
 	}
 	
 	@IBAction func nextButtonAction(_ sender: Any) {
@@ -97,6 +98,11 @@ extension QuestionnaireFatPresentViewController {
 		default:
 			break
 		}
-		collectionView.selectItem(at: [index], animated: true, scrollPosition: .centeredHorizontally)
+		if let _ = userData.fatPercentage {
+			selectedPercentage = pickerItems[index]
+		}
+		DispatchQueue.main.async {
+			self.collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
+		}
 	}
 }

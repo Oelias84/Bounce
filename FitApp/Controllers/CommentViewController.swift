@@ -21,8 +21,8 @@ class CommentViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		commonInit()
+		addScreenTappGesture()
 	}
-
 	
 	@IBAction func dismissButtonAction(_ sender: Any) {
 		self.dismiss(animated: true)

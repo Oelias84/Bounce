@@ -152,9 +152,13 @@ extension QuestionnairePersonalDetailsViewController {
     private func setupTextfieldText() {
         let userData = UserProfile.defaults
         
-        if let height = userData.height, let weight = userData.weight {
+		if let height = userData.height, let weight = userData.weight, let birthDate = userData.birthDate {
             heightTextField.text = "\(height)"
             weightTextField.text = "\(weight)"
+			
+			self.height = height
+			self.weight = weight
+			self.birthDate = birthDate
         }
     }
     private func configureTextFields() {
