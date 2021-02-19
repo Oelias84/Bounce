@@ -252,7 +252,7 @@ extension WeightProgressViewController {
 		}
 	}
 	
-	private func getImageUrl(complition: @escaping (String?) -> ()) {
+	private func getImageUrl(completion: @escaping (String?) -> ()) {
 		var weightImageUrl: String {
 			let userEmail = UserProfile.defaults.email!
 			return "\(userEmail.safeEmail)_\(Date().dateStringForDB)_weight_image.jpeg"
@@ -264,14 +264,14 @@ extension WeightProgressViewController {
 				
 				switch result {
 				case .success(let url):
-					complition(url)
+					completion(url)
 				case .failure(let error):
-					complition(nil)
+					completion(nil)
 					print(error)
 				}
 			}
 		} else {
-			complition(nil)
+			completion(nil)
 		}
 	}
 }
