@@ -11,6 +11,7 @@
 		1A1C4513AE7EF2FAD0F25C05 /* Pods_FitAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */; };
 		7C149C7925D817DD00B0864F /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */; };
 		7C149C8E25D85A7600B0864F /* AddWeightAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C149C8D25D85A7600B0864F /* AddWeightAlertView.xib */; };
+		7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */; };
 		7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F4F3125C2D31300EE3758 /* SettingsOptionsTableViewController.swift */; };
 		7C3F4F8C25C9E2AF00EE3758 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F4F8B25C9E2AF00EE3758 /* ResetPasswordViewController.swift */; };
 		7C5262B725BC756700694007 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C5262B625BC756700694007 /* Settings.storyboard */; };
@@ -137,6 +138,7 @@
 		4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
 		7C149C8D25D85A7600B0864F /* AddWeightAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddWeightAlertView.xib; sourceTree = "<group>"; };
+		7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSecondActivityViewController.swift; sourceTree = "<group>"; };
 		7C3F4F3125C2D31300EE3758 /* SettingsOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOptionsTableViewController.swift; sourceTree = "<group>"; };
 		7C3F4F8B25C9E2AF00EE3758 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		7C5262B625BC756700694007 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -640,6 +642,7 @@
 				B341E22F257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift */,
 				B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */,
 				B3BB8F34258223E400D70628 /* QuestionnaireActivityViewController.swift */,
+				7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */,
 				B3BB8F4025826FEB00D70628 /* QuestionnaireNutritionViewController.swift */,
 				B3BB8F3A2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift */,
 				7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */,
@@ -1030,6 +1033,7 @@
 				7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */,
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
+				7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */,
 				B358223025AC9DA800C91295 /* Article.swift in Sources */,
 				7C7434F025CD9D9D00D33A9A /* ChatsViewController.swift in Sources */,
 				B3E6E9B825714D5800958C48 /* MealPlanViewController.swift in Sources */,
@@ -1225,7 +1229,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
+				MARKETING_VERSION = 1.0.11;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1246,7 +1250,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
+				MARKETING_VERSION = 1.0.11;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

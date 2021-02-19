@@ -31,7 +31,7 @@ class QuestionnaireSumUpViewController: UIViewController {
         UserProfile.defaults.finishOnboarding = true
 		let data = ServerUserData(birthDate: userData.birthDate!.dateStringForDB, email: userData.email!, name: userData.name!,
 								  weight: userData.weight!, height: userData.height!, fatPercentage: userData.fatPercentage!,
-								  steps: userData.steps, kilometer: userData.kilometer, mealsPerDay: userData.mealsPerDay!,
+								  steps: userData.steps, kilometer: userData.kilometer, lifeStyle: userData.lifeStyle, mealsPerDay: userData.mealsPerDay!,
 								  mostHungry: userData.mostHungry!, fitnessLevel: userData.fitnessLevel!,
 								  weaklyWorkouts: userData.weaklyWorkouts!, finishOnboarding: true)
         

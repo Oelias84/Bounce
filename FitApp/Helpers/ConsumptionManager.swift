@@ -13,6 +13,7 @@ class ConsumptionManager {
     private var fatPercentage: Double
     private var Kilometer: Double
     private var numberOfTrainings: Int
+	private var lifeStyle: Double
     
     private var calories: Double!
     private var fatPortion: Double!
@@ -29,6 +30,7 @@ class ConsumptionManager {
         self.weight = userData.weight ?? 0.0
         self.fatPercentage = userData.fatPercentage ?? 0.0
         self.Kilometer = userData.kilometer ?? 0.0
+		self.lifeStyle = userData.lifeStyle ?? 0.0
         self.numberOfTrainings = userData.weaklyWorkouts ?? 0
         configureData()
     }
@@ -67,11 +69,18 @@ class ConsumptionManager {
 extension ConsumptionManager {
     
     //MARK: - lean body weight
-    private func TDEE(weight: Double, fatPercentage: Double, Kilometer: Double, numberOfTrainings: Int) -> Double {
+	private func TDEE(weight: Double, fatPercentage: Double, Kilometer: Double?, lifeStyle: Double?, numberOfTrainings: Int) -> Double {
+		
         let LBM = weight * ((100 - 32) / 100)
         let BMR = (LBM * 22.0) + 500.0
-        let NIT = (Kilometer * weight) * 0.93
-        let EAT = (150.0 * Double(numberOfTrainings)) / 7.0
+		var NIT: Double {
+			if let Kilometer = Kilometer {
+				return (Kilometer * weight) * 0.93
+			} else {
+				return BMR * lifeStyle!
+			}
+		}
+		let EAT = (150.0 * Double(numberOfTrainings)) / 7.0
         
         return ((BMR * 1.1) + NIT + EAT) - 500
     }//= daily calories
@@ -124,7 +133,7 @@ extension ConsumptionManager {
     }
     
     private func configureData() {
-        self.calories = TDEE(weight: weight, fatPercentage: fatPercentage, Kilometer: Kilometer, numberOfTrainings: numberOfTrainings)
+		self.calories = TDEE(weight: weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings)
         self.fatPortion = portionFat(fatGrams: fatGrams(weight: weight))
         self.proteinPortion = proteinPortion(proteinGrams: proteinGrams(weight: weight))
         self.carbsPortion = portionCarbs(fatPortion: self.fatPortion, proteinPortion: self.proteinPortion, calories: calories)

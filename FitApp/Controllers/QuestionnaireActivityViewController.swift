@@ -11,9 +11,10 @@ class QuestionnaireActivityViewController: UIViewController {
 	
 	public var isFromSettings = false
 	
-	@IBOutlet weak var kilometresSlider: UISlider! {
+	@IBOutlet weak var kilometersSlider: UISlider! {
 		didSet {
-			kilometresSlider.maximumValue = 25.00
+			kilometersSlider.value = 0.0
+			kilometersSlider.maximumValue = 25.00
 		}
 	}
 	@IBOutlet weak var stepsSlider: UISlider! {
@@ -66,7 +67,7 @@ class QuestionnaireActivityViewController: UIViewController {
 				performSegue(withIdentifier: K.SegueId.moveToNutrition, sender: self)
 			}
 		} else {
-			navigationController?.popViewController(animated: true)
+			performSegue(withIdentifier: K.SegueId.moveToSecondActivity, sender: self)
 		}
 	}
 	@IBAction func kilometersSliderAction(_ sender: UISlider) {
@@ -78,21 +79,19 @@ class QuestionnaireActivityViewController: UIViewController {
 	@IBAction func checkBoxes(sender: UIButton) {
 		sender.isSelected = !sender.isSelected
 		
-		switch sender.tag {
-		case 1:
-			if sender.isSelected {
+		if sender.isSelected {
+			switch sender.tag {
+			case 1:
 				stepsCheckBox.isSelected = false
 				stepsSlider.isEnabled = false
-				kilometresSlider.isEnabled = true
-			}
-		case 2:
-			if sender.isSelected {
+				kilometersSlider.isEnabled = true
+			case 2:
 				kilometersCheckBox.isSelected = false
 				stepsSlider.isEnabled = true
-				kilometresSlider.isEnabled = false
+				kilometersSlider.isEnabled = false
+			default:
+				return
 			}
-		default:
-			return
 		}
 		
 		if !isFromSettings {
@@ -105,7 +104,7 @@ class QuestionnaireActivityViewController: UIViewController {
 
 extension QuestionnaireActivityViewController {
 	
-	func setUpTextfields() {
+	private func setUpTextfields() {
 		let userData = UserProfile.defaults
 		
 		if let kilometers = userData.kilometer {
@@ -115,11 +114,18 @@ extension QuestionnaireActivityViewController {
 		} else if let steps = userData.steps {
 			stepsLabel.text = String(steps)
 			stepsCheckBox.isSelected = true
-			kilometresSlider.isEnabled = false
+			kilometersSlider.isEnabled = false
 		}
 	}
-	func updateServer() {
+	private func updateServer() {
 		UserProfile.updateServer()
 		navigationController?.popViewController(animated: true)
+	}
+	
+	private func stepsAndKilometersOff() {
+		kilometersCheckBox.isSelected = false
+		kilometersSlider.isEnabled = false
+		stepsCheckBox.isSelected = false
+		stepsSlider.isEnabled = false
 	}
 }
