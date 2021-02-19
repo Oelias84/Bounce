@@ -10,7 +10,7 @@ import Foundation
 enum DishType: String, Codable {
     
     case protein = "חלבון"
-    case carbs = "פחממה"
+    case carbs = "פחמימה"
     case fat = "שומן"
     
     enum CodingKeys: String, CodingKey {
