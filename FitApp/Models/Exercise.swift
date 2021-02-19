@@ -24,9 +24,10 @@ class WorkoutExercise: Codable {
 }
 
 class Exercise: Codable {
-    
-    let name: String
+
+	let name: String
     let videos: [String]
 	let title: String
 	let text: String
+	let type: String
 }

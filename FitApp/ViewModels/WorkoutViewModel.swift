@@ -47,10 +47,14 @@ class WorkoutViewModel: NSObject {
 					}
 					switch level {
 					case 2:
-						var count = 0
-						while count < 2 {
+						if weeklyWorkout == 2 {
+							var count = 0
+							while count < 2 {
+								self.workouts.append(contentsOf: workouts.filter { $0.type == weeklyWorkout})
+								count += 1
+							}
+						} else {
 							self.workouts.append(contentsOf: workouts.filter { $0.type == weeklyWorkout})
-							count += 1
 						}
 					default:
 						self.workouts.append(contentsOf: workouts.filter { $0.type == weeklyWorkout})
