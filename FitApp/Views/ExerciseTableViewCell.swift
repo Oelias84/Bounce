@@ -17,6 +17,7 @@ class ExerciseTableViewCell: UITableViewCell {
     var exerciseData: WorkoutExercise! {
         didSet {
             setupView()
+			setupCategoryView()
         }
     }
     var exerciseNumber: Int!
@@ -35,7 +36,6 @@ class ExerciseTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         cellBackgroundView.cellView()
-        commonInit()
     }
 
     @IBAction func detailButtonAction(_ sender: Any) {
@@ -43,17 +43,18 @@ class ExerciseTableViewCell: UITableViewCell {
     }
     
     private func setupView() {
-        
+        		
         exerciseNumberLabel.text = "תרגיל #\(exerciseNumber + 1)"
         titleLabel.text = exerciseData.exerciseToPresent?.name
         repeatsLabel.text = exerciseData.repeats
         setsLabel.text = "X" + exerciseData.sets
     }
     
-    private func commonInit() {
+    private func setupCategoryView() {
         let bundle = Bundle(for: type(of: self))
-        let typeNib = UINib(nibName: "FeetIndicatorView", bundle: bundle).instantiate(withOwner: self, options: nil).first as! UIView
+		let exerciseTypeNib = UINib(nibName: K.NibName.exerciseCategoryView, bundle: bundle).instantiate(withOwner: self, options: nil).first as! ExerciseCategoryView
+		exerciseTypeNib.type = exerciseData.exerciseToPresent?.type
         exerciseTypeView.layer.cornerRadius = 10
-        exerciseTypeView.addSubview(typeNib)
+        exerciseTypeView.addSubview(exerciseTypeNib)
     }
 }

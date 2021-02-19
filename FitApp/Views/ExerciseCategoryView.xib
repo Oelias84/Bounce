@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="KMG-gW-ig8">
+        <view contentMode="scaleToFill" id="KMG-gW-ig8" customClass="ExerciseCategoryView" customModule="FitApp" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="60" height="20"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -46,6 +46,10 @@
                 <constraint firstItem="gH1-h6-W6H" firstAttribute="bottom" secondItem="ueN-H8-F7a" secondAttribute="bottom" id="xuh-jt-YK1"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="exerciseCategoryBackgroundView" destination="ueN-H8-F7a" id="H2I-Yc-6nw"/>
+                <outlet property="exerciseCategoryTextLabel" destination="eFg-7B-JGQ" id="RZ9-O2-dOV"/>
+            </connections>
             <point key="canvasLocation" x="-318.84057971014494" y="358.25892857142856"/>
         </view>
     </objects>

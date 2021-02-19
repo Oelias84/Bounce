@@ -35,6 +35,7 @@
 		7C7435DB25D31A0000D33A9A /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7435D925D31A0000D33A9A /* ChatTableViewCell.swift */; };
 		7C7435DC25D31A0000D33A9A /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C7435DA25D31A0000D33A9A /* ChatTableViewCell.xib */; };
 		7C7435EB25D31F9A00D33A9A /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7435EA25D31F9A00D33A9A /* Chat.swift */; };
+		7C83152525E053B100335601 /* ExerciseCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83152425E053B100335601 /* ExerciseCategoryView.swift */; };
 		7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89A9FA256D69CA009AD87C /* AppDelegate.swift */; };
 		7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89A9FC256D69CA009AD87C /* SceneDelegate.swift */; };
 		7C89AA02256D69CA009AD87C /* LoginRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA00256D69CA009AD87C /* LoginRegister.storyboard */; };
@@ -101,7 +102,7 @@
 		B3BB8F35258223E400D70628 /* QuestionnaireActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB8F34258223E400D70628 /* QuestionnaireActivityViewController.swift */; };
 		B3BB8F3B2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB8F3A2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift */; };
 		B3BB8F4125826FEB00D70628 /* QuestionnaireNutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BB8F4025826FEB00D70628 /* QuestionnaireNutritionViewController.swift */; };
-		B3C390F725B7700A00C7E23D /* FeetIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3C390F625B7700A00C7E23D /* FeetIndicatorView.xib */; };
+		B3C390F725B7700A00C7E23D /* ExerciseCategoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3C390F625B7700A00C7E23D /* ExerciseCategoryView.xib */; };
 		B3CA0CE3258111FD00923902 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CA0CE2258111FD00923902 /* CircularProgressView.swift */; };
 		B3DB750D259F4850002CF48B /* FloatingPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DB750C259F4850002CF48B /* FloatingPoint+Extensions.swift */; };
 		B3DB7513259F8270002CF48B /* MealViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DB7512259F8270002CF48B /* MealViewModel.swift */; };
@@ -162,6 +163,7 @@
 		7C7435D925D31A0000D33A9A /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		7C7435DA25D31A0000D33A9A /* ChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
 		7C7435EA25D31F9A00D33A9A /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		7C83152425E053B100335601 /* ExerciseCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCategoryView.swift; sourceTree = "<group>"; };
 		7C8958EB95477BC016742433 /* Pods-FitApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp.release.xcconfig"; path = "Target Support Files/Pods-FitApp/Pods-FitApp.release.xcconfig"; sourceTree = "<group>"; };
 		7C89A9F7256D69CA009AD87C /* FitApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C89A9FA256D69CA009AD87C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -238,7 +240,7 @@
 		B3BB8F34258223E400D70628 /* QuestionnaireActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireActivityViewController.swift; sourceTree = "<group>"; };
 		B3BB8F3A2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireFitnessLevelViewController.swift; sourceTree = "<group>"; };
 		B3BB8F4025826FEB00D70628 /* QuestionnaireNutritionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireNutritionViewController.swift; sourceTree = "<group>"; };
-		B3C390F625B7700A00C7E23D /* FeetIndicatorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeetIndicatorView.xib; sourceTree = "<group>"; };
+		B3C390F625B7700A00C7E23D /* ExerciseCategoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseCategoryView.xib; sourceTree = "<group>"; };
 		B3CA0CE2258111FD00923902 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		B3DB750C259F4850002CF48B /* FloatingPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extensions.swift"; sourceTree = "<group>"; };
 		B3DB7512259F8270002CF48B /* MealViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealViewModel.swift; sourceTree = "<group>"; };
@@ -670,7 +672,8 @@
 		B3C390FB25B774CE00C7E23D /* ExerciseTypeViews */ = {
 			isa = PBXGroup;
 			children = (
-				B3C390F625B7700A00C7E23D /* FeetIndicatorView.xib */,
+				B3C390F625B7700A00C7E23D /* ExerciseCategoryView.xib */,
+				7C83152425E053B100335601 /* ExerciseCategoryView.swift */,
 			);
 			name = ExerciseTypeViews;
 			sourceTree = "<group>";
@@ -827,7 +830,7 @@
 				B330B87625757C1000BDB206 /* Workout.storyboard in Resources */,
 				B330B87F25757F1300BDB206 /* ExerciseTableViewCell.xib in Resources */,
 				B358227925ACA2F800C91295 /* ArticleTableViewCell.xib in Resources */,
-				B3C390F725B7700A00C7E23D /* FeetIndicatorView.xib in Resources */,
+				B3C390F725B7700A00C7E23D /* ExerciseCategoryView.xib in Resources */,
 				B34397A7258A7F720073A59B /* DishView.xib in Resources */,
 				7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */,
 				B38068C725B7197E005C4A24 /* WorkoutTableViewCell.xib in Resources */,
@@ -1032,6 +1035,7 @@
 				7C658ABE25D992D200CA75B2 /* Comments.swift in Sources */,
 				7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */,
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
+				7C83152525E053B100335601 /* ExerciseCategoryView.swift in Sources */,
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
 				7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */,
 				B358223025AC9DA800C91295 /* Article.swift in Sources */,
