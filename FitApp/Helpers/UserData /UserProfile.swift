@@ -42,6 +42,9 @@ struct UserProfile {
     
     @UserDefault(key: .height)
     var height: Int?
+	
+	@UserDefault(key: .lifeStyle)
+	var lifeStyle: Double?
     
     //UserFatPercentage
     @UserDefault(key: .fatPercentage)
@@ -84,6 +87,7 @@ extension UserProfile {
         userProfile.fatPercentage = data.fatPercentage
         userProfile.kilometer = data.kilometer
         userProfile.mealsPerDay = data.mealsPerDay
+		userProfile.lifeStyle = data.lifeStyle
         userProfile.mostHungry = data.mostHungry
         userProfile.fitnessLevel = data.fitnessLevel
         userProfile.weaklyWorkouts = data.weaklyWorkouts
@@ -101,6 +105,7 @@ extension UserProfile {
 			fatPercentage: defaults.fatPercentage!,
 			steps: defaults.steps,
 			kilometer: defaults.kilometer,
+			lifeStyle: defaults.lifeStyle,
 			mealsPerDay: defaults.mealsPerDay!,
 			mostHungry: defaults.mostHungry,
 			fitnessLevel: defaults.fitnessLevel!,
@@ -121,6 +126,7 @@ struct ServerUserData: Codable {
     let fatPercentage: Double
     let steps: Int?
     let kilometer: Double?
+	let lifeStyle: Double?
     let mealsPerDay: Int
     let mostHungry: Int?
     let fitnessLevel: Int
@@ -142,6 +148,7 @@ extension Key {
     static let height: Key = "height"
     static let fatPercentage: Key = "fatPercentage"
     static let kilometer: Key = "kilometer"
+	static let lifeStyle: Key = "lifeStyle"
     static let steps: Key = "steps"
     static let mealsPerDay: Key = "mealsPerDay"
     static let mostHungry: Key = "mostHungry"
