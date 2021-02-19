@@ -57,7 +57,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+		
+		Spinner.shared.stop()
         mealViewModel = MealViewModel.shared
         mealViewModel.bindMealViewModelToController = {
             self.setupProgress()

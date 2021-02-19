@@ -38,7 +38,6 @@ class LoginViewController: UIViewController {
 			if error == nil {
 				self.getUserImageProfileUrl(with: email)
                 self.googleManager.getUserData { result in
-					Spinner.shared.stop()
 
                     switch result {
                     case .success(let userData):
