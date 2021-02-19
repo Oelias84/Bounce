@@ -86,6 +86,7 @@ class weightTableViewCell: UITableViewCell {
 			case .success(let url):
 				DispatchQueue.main.async {
 					self.imageUrl = url
+					self.weightImageView.contentMode = .scaleToFill
 					self.weightImageView.sd_setImage(with: url)
 					self.dateImageStackView.spacing = 4
 				}
