@@ -717,10 +717,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="o5R-G9-aHx" userLabel="Prompt Stack View">
-                                <rect key="frame" x="32" y="284" width="350" height="328.5"/>
+                                <rect key="frame" x="32" y="267.5" width="350" height="361.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="0mB-lV-fTY">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="68.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="79.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מתחיל" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9Z-3p-Zu4">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="26.5"/>
@@ -729,24 +729,24 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="2xO-XM-2G7">
-                                                <rect key="frame" x="0.0" y="38.5" width="350" height="30"/>
+                                                <rect key="frame" x="0.0" y="38.5" width="350" height="41"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1D-ZK-yM3">
-                                                        <rect key="frame" x="0.0" y="9" width="6" height="12"/>
+                                                        <rect key="frame" x="0.0" y="14.5" width="6" height="12"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="12" id="Vbi-y5-p7R"/>
                                                             <constraint firstAttribute="width" constant="6" id="bfu-Jp-zK3"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="פעם ראשונה שאני מתחילה" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaO-J6-hSC">
-                                                        <rect key="frame" x="18" y="4.5" width="290" height="20.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מתאמנת עד חצי שנה או מעולם לא, הפסקה מאימוני כוח ב3 חודשים האחרונים" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaO-J6-hSC">
+                                                        <rect key="frame" x="18" y="0.0" width="290" height="41"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" systemColor="systemBlueColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQA-mm-po0">
-                                                        <rect key="frame" x="320" y="0.0" width="30" height="30"/>
+                                                        <rect key="frame" x="320" y="5.5" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="jrZ-4k-6PX"/>
                                                             <constraint firstAttribute="height" constant="30" id="nSo-D9-VT5"/>
@@ -767,14 +767,14 @@
                                         </subviews>
                                     </stackView>
                                     <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aH8-XN-xkb">
-                                        <rect key="frame" x="0.0" y="92.5" width="350" height="1"/>
+                                        <rect key="frame" x="0.0" y="103.5" width="350" height="1"/>
                                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="DZo-Ii-EY8"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="i2l-dS-rFQ">
-                                        <rect key="frame" x="0.0" y="117.5" width="350" height="68.5"/>
+                                        <rect key="frame" x="0.0" y="128.5" width="350" height="79.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ביניים" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6FY-K7-qhr">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="26.5"/>
@@ -783,24 +783,24 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="FS7-vt-lJV">
-                                                <rect key="frame" x="0.0" y="38.5" width="350" height="30"/>
+                                                <rect key="frame" x="0.0" y="38.5" width="350" height="41"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxG-RS-2gS">
-                                                        <rect key="frame" x="0.0" y="9" width="6" height="12"/>
+                                                        <rect key="frame" x="0.0" y="14.5" width="6" height="12"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="12" id="Itt-7L-ueo"/>
                                                             <constraint firstAttribute="width" constant="6" id="Kof-Gl-jjg"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="התאמנתי בעבר" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzK-Fh-hE8">
-                                                        <rect key="frame" x="18" y="4.5" width="290" height="20.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מתאמנת חצי שנה עד שנתיים, שליטה טובה בתרגילים מורכבים" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzK-Fh-hE8">
+                                                        <rect key="frame" x="18" y="0.0" width="290" height="41"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" systemColor="systemBlueColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uL2-4u-nYs">
-                                                        <rect key="frame" x="320" y="0.0" width="30" height="30"/>
+                                                        <rect key="frame" x="320" y="5.5" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="nuW-B7-5sX"/>
                                                             <constraint firstAttribute="height" constant="30" id="z5U-g1-Jhy"/>
@@ -821,14 +821,14 @@
                                         </subviews>
                                     </stackView>
                                     <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a3t-yr-DiZ">
-                                        <rect key="frame" x="0.0" y="210" width="350" height="1"/>
+                                        <rect key="frame" x="0.0" y="232" width="350" height="1"/>
                                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Efw-pd-4MI"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="4ok-oM-RpL">
-                                        <rect key="frame" x="0.0" y="235" width="350" height="68.5"/>
+                                        <rect key="frame" x="0.0" y="257" width="350" height="79.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מתקדם" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hui-jL-IFE">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="26.5"/>
@@ -837,24 +837,24 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="vrx-p0-b3a">
-                                                <rect key="frame" x="0.0" y="38.5" width="350" height="30"/>
+                                                <rect key="frame" x="0.0" y="38.5" width="350" height="41"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtD-Z2-9Rd">
-                                                        <rect key="frame" x="0.0" y="9" width="6" height="12"/>
+                                                        <rect key="frame" x="0.0" y="14.5" width="6" height="12"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="12" id="LYf-dg-khc"/>
                                                             <constraint firstAttribute="width" constant="6" id="weo-IV-zLe"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מתאמנת על בסיס קבוע" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mq1-xA-KvD">
-                                                        <rect key="frame" x="18" y="4.5" width="290" height="20.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מתאמנת מעל שנתיים, שליטה טובה מאוד בתרגילים מורכבים" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mq1-xA-KvD">
+                                                        <rect key="frame" x="18" y="0.0" width="290" height="41"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" systemColor="systemBlueColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NAA-nj-EzD">
-                                                        <rect key="frame" x="320" y="0.0" width="30" height="30"/>
+                                                        <rect key="frame" x="320" y="5.5" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="GCu-hM-4Ij"/>
                                                             <constraint firstAttribute="height" constant="30" id="nXF-O2-PGr"/>
@@ -875,7 +875,7 @@
                                         </subviews>
                                     </stackView>
                                     <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NyC-AE-Uki">
-                                        <rect key="frame" x="0.0" y="327.5" width="350" height="1"/>
+                                        <rect key="frame" x="0.0" y="360.5" width="350" height="1"/>
                                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="OjW-iS-tTj"/>
@@ -908,7 +908,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5r-t3-ADQ" userLabel="ביחרי את מספר האימונים שאת  מעוניינת לבצע בשבוע">
-                                <rect key="frame" x="32" y="624.5" width="350" height="41"/>
+                                <rect key="frame" x="32" y="641" width="350" height="41"/>
                                 <string key="text">ביחרי את מספר האימונים שאת 
 מעוניינת לבצע בשבוע</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -916,7 +916,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="l8n-xc-Zle">
-                                <rect key="frame" x="102" y="689.5" width="210" height="30"/>
+                                <rect key="frame" x="102" y="706" width="210" height="30"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="n9a-e6-hqk">
                                         <rect key="frame" x="0.0" y="0.0" width="42" height="30"/>
