@@ -9,7 +9,7 @@ import UIKit
 
 class QuestionnaireFatPresentViewController: UIViewController {
 	
-	private let pickerItems = ["Fat1", "Fat2", "Fat3", "Fat4", "Fat5", "Fat6", "Fat7"]
+	private let pickerItems = ["18", "20", "25", "30", "40", "45"]
 	private var cellScale: CGFloat = 0.6
 	private var selectedPercentage: String?
 	
@@ -31,20 +31,18 @@ class QuestionnaireFatPresentViewController: UIViewController {
 				var fatPrecent: Double = 0.0
 				
 				switch fatPercentage {
-				case "Fat1":
-					fatPrecent = 10.0
-				case "Fat2":
+				case "18":
+					fatPrecent = 18.0
+				case "20":
 					fatPrecent = 20.0
-				case "Fat3":
+				case "25":
+					fatPrecent = 25.0
+				case "30":
 					fatPrecent = 30.0
-				case "Fat4":
+				case "40":
 					fatPrecent = 40.0
-				case "Fat5":
-					fatPrecent = 50.0
-				case "Fat6":
-					fatPrecent = 60.0
-				case "Fat7":
-					fatPrecent = 70.0
+				case "45":
+					fatPrecent = 45.0
 				default:
 					break
 				}
