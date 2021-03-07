@@ -154,11 +154,16 @@ extension NewChatViewController: UISearchBarDelegate {
 	}
 	
 	private func addSupport() {
-		let support: [String:String] = [
-			"email":"support-mail-com",
-			"name":"תמיכה"
+		let nutritionSupport: [String:String] = [
+			"email": "support-mail-com",
+			"name": "תזונה"
 		]
-		self.results.append(support)
+		let fitnessSupport: [String:String] = [
+			"email": "support-mail-com",
+			"name": "כושר"
+		]
+		self.results.append(nutritionSupport)
+		self.results.append(fitnessSupport)
 		updateUI()
 	}
 }
