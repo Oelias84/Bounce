@@ -12,6 +12,7 @@ class ArticlesViewController: UIViewController {
     private var filteredArticles: [Article]?
     private var articleViewModel: ArticleViewModel!
     private var articleTopic: String!
+	public var openFromChat = false
 
     @IBOutlet weak var articlesSegmentedControl: UISegmentedControl! {
         didSet {
@@ -22,14 +23,18 @@ class ArticlesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        callToViewModelForUIUpdate()
+		callToViewModelForUIUpdate()
     }
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		if filteredArticles != nil {
+			checkTopic()
+		}
+	}
     
     @IBAction func articlesSegmentedControlAction(_ sender: UISegmentedControl) {
         let index = sender.selectedSegmentIndex
-        filteredArticles = articleViewModel.articles[index]
-        articleTopic = articleViewModel.topics[index]
-        tableView.reloadData()
+		moveTo(index)
     }
 }
 
@@ -54,13 +59,11 @@ extension ArticlesViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ArticlesViewController {
     
-    func updateDataSource() {
+    private func updateDataSource() {
 		Spinner.shared.stop()
-        filteredArticles = articleViewModel.articles[0]
-        articleTopic = articleViewModel.topics[0]
-        self.tableView.reloadData()
+		checkTopic()
     }
-    func callToViewModelForUIUpdate() {
+    private func callToViewModelForUIUpdate() {
         tableView.register(UINib(nibName: K.NibName.articleTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.articleCell)
 		if let navView = navigationController?.view {
 			Spinner.shared.show(navView)
@@ -70,7 +73,7 @@ extension ArticlesViewController {
             self.updateDataSource()
         }
     }
-    func moveToArticleView(for article: Article) {
+    private func moveToArticleView(for article: Article) {
         let storyboard = UIStoryboard(name: K.StoryboardName.articles, bundle: nil)
         let articleVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.articleViewController) as ArticleViewController
         
@@ -78,4 +81,18 @@ extension ArticlesViewController {
         articleVC.article = article
         navigationController?.pushViewController(articleVC, animated: true)
     }
+	private func moveTo(_ index: Int) {
+		filteredArticles = index == 3 ? articleViewModel.articles[index].reversed() : articleViewModel.articles[index]
+		articleTopic = articleViewModel.topics[index]
+		self.tableView.reloadData()
+		articlesSegmentedControl.selectedSegmentIndex = index
+	}
+	private func checkTopic() {
+		if openFromChat {
+			moveTo(3)
+			openFromChat = false
+		} else {
+			moveTo(0)
+		}
+	}
 }

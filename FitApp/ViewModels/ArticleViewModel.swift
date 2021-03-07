@@ -26,6 +26,7 @@ class ArticleViewModel: NSObject {
         googleService = GoogleApiManager()
         fetchArticles()
     }
+	
     
     func fetchArticles() {
         googleService.getArticles { result in

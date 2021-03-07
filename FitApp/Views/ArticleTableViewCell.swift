@@ -31,6 +31,11 @@ class ArticleTableViewCell: UITableViewCell {
     
     func setupCell() {
         titleTextLabel.text = article.title
+		if article.title.contains("שאלות") {
+			titleTextLabel.textColor = #colorLiteral(red: 0, green: 0.4640886188, blue: 1, alpha: 1)
+		} else {
+			titleTextLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+		}
     }
     private func setupView() {
         
