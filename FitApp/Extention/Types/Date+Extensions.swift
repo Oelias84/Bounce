@@ -96,4 +96,10 @@ extension Date {
 		guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
 		return gregorian.date(byAdding: .day, value: 6, to: sunday)
 	}
+	var onlyDate: Date {
+		let calender = Calendar.current
+		var dateComponents = calender.dateComponents([.year, .month, .day], from: self)
+		dateComponents.timeZone = NSTimeZone.system
+		return calender.date(from: dateComponents)!
+	}
 }
