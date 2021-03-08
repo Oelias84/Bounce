@@ -96,8 +96,6 @@ extension SettingsViewController {
 	private func systemTappedAt(_ row: Int) {
 		switch row {
 		case 0:
-			openChat()
-		case 1:
 			presentLogoutAlert()
 		default:
 			break
@@ -174,12 +172,5 @@ extension SettingsViewController {
 		let mailVC = MailComposerViewController(recipients: ["Fitappsupport@gmail.com"], subject: subject, messageBody: messageBody, messageBodyIsHtml: true)
 		
 		present(mailVC, animated: true)
-	}
-	private func openChat() {
-		let chatStoryboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
-		let chatsVC = chatStoryboard.instantiateViewController(identifier: K.ViewControllerId.ChatsViewController)
-			as ChatsViewController
-		
-		self.navigationController?.pushViewController(chatsVC, animated: true)
 	}
 }

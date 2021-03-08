@@ -193,28 +193,8 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="מערכת" id="d5h-LE-aJG">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="JgE-hL-2lK">
-                                        <rect key="frame" x="0.0" y="413.5" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JgE-hL-2lK" id="1UO-Pc-E3F">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="צור קשר" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ytE-jx-Qd3">
-                                                    <rect key="frame" x="20" y="11.5" width="55.5" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="ytE-jx-Qd3" firstAttribute="leading" secondItem="1UO-Pc-E3F" secondAttribute="leadingMargin" id="DAD-X3-vCN"/>
-                                                <constraint firstItem="ytE-jx-Qd3" firstAttribute="centerY" secondItem="1UO-Pc-E3F" secondAttribute="centerY" id="jBq-dA-rsW"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="dBR-m7-iP1">
-                                        <rect key="frame" x="0.0" y="457" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="413.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dBR-m7-iP1" id="4CI-1L-Scc">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
