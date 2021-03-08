@@ -31,7 +31,7 @@ class QuestionnaireFatCollectionViewCell: UICollectionViewCell {
         didSet {
             if isSelected {
                 layer.borderColor = UIColor.blue.cgColor
-                layer.borderWidth = 5
+                layer.borderWidth = 3
             } else {
                 layer.borderColor = nil
                 layer.borderWidth = 0

@@ -155,6 +155,7 @@ extension QuestionnairePersonalDetailsViewController {
 		if let height = userData.height, let weight = userData.weight, let birthDate = userData.birthDate {
             heightTextField.text = "\(height)"
             weightTextField.text = "\(weight)"
+			birthdayDatePicker.date = birthDate
 			
 			self.height = height
 			self.weight = weight
