@@ -16,21 +16,20 @@ class MealViewModel: NSObject {
         }
     }
     private var dishes: [[ServerDish]]?
-    private var manager: ConsumptionManager!
-    public var googleService: GoogleApiManager!
+	private var currentMealDate: Date?
     
     var bindMealViewModelToController : (() -> ()) = {}
     
     override init() {
         super.init()
-        
-        googleService = GoogleApiManager()
-        manager = ConsumptionManager()
-        fetchDishes()
+		
+		fetchDishes()
     }
     
     func fetchData() {
-        manager.calculateUserData()
+		let consumptionManager = ConsumptionManager.shared
+		consumptionManager.calculateUserData()
+		
         if self.meals == nil {
             let userData = UserProfile.defaults
             var preferredMeal: MealType?
@@ -44,8 +43,7 @@ class MealViewModel: NSObject {
             default:
                 preferredMeal = nil
             }
-
-            fetchMealsForOrCreate(date: Date(), prefer: preferredMeal, numberOfMeals: userData.mealsPerDay!, protein: manager.getDayProtein, carbs: manager.getDayCarbs, fat: manager.getDayFat)
+			fetchMealsForOrCreate(date: Date(), prefer: preferredMeal, numberOfMeals: userData.mealsPerDay!, protein: consumptionManager.getDayProtein, carbs: consumptionManager.getDayCarbs, fat: consumptionManager.getDayFat)
         }
     }
     
@@ -54,8 +52,8 @@ class MealViewModel: NSObject {
         var carbs = 0.0
         var fats = 0.0
         var protein = 0.0
-        
-        guard meals != nil else { return MealProgress(carbs: 0.0, fats: 0.0, protein: 0.0) }
+
+		guard meals != nil else { return MealProgress(carbs: 0.0, fats: 0.0, protein: 0.0) }
         for meal in meals! {
             for dish in meal.dishes {
                 if dish.isDishDone {
@@ -72,19 +70,23 @@ class MealViewModel: NSObject {
         }
         return MealProgress(carbs: carbs, fats: fats, protein: protein)
     }
+	func getMealDate() -> Date {
+		return currentMealDate ?? Date()
+	}
     
     //MARK: - Meals
     func updateMeals(for date: Date) {
         guard let meals = self.meals else { return }
         let dailyMeal = DailyMeal(meals: meals)
-        googleService.updateMealBy(date: date, dailyMeal: dailyMeal)
+		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal)
     }
     func fetchMealsBy(date: Date, completion: @escaping () -> ()) {
-        googleService.getMealFor(date) { result in
+		GoogleApiManager.shared.getMealFor(date) { result in
             switch result {
             case .success(let dailyMeal):
                 if let dailyMeal = dailyMeal {
                     self.meals = dailyMeal.meals
+					self.currentMealDate = date
                     completion()
                 } else {
                     self.meals = []
@@ -95,11 +97,12 @@ class MealViewModel: NSObject {
         }
     }
     func fetchMealsForOrCreate(date: Date, prefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) {
-        googleService.getMealFor(date) { result in
+		GoogleApiManager.shared.getMealFor(date) { result in
             switch result {
             case .success(let dailyMeal):
                 if let dailyMeal = dailyMeal {
                     self.meals = dailyMeal.meals
+					self.currentMealDate = date
                 } else {
                     self.meals = self.populateMeals(hasPrefer: prefer, numberOfMeals: numberOfMeals, protein: protein, carbs: carbs, fat: fat)
                 }
@@ -113,7 +116,7 @@ class MealViewModel: NSObject {
     func fetchDishes() {
         if dishes != nil && dishes!.count > 0 { return }
         
-        googleService.getDishes { result in
+		GoogleApiManager.shared.getDishes { result in
             switch result {
             case .success(let dishes):
                 if let dishes = dishes {
@@ -187,14 +190,15 @@ class MealViewModel: NSObject {
         }
     }
     func populateMeals(hasPrefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) -> [Meal] {
-
         var dayMeals = [Meal(mealType: .breakfast, dishes: []), Meal(mealType: .lunch, dishes: []), Meal(mealType: .supper, dishes: [])]
-        let carbsForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil,
-                                             numberOfDishes: numberOfDishes(numberOfMeals: numberOfMeals, dishType: .carbs, numberOfDishes: carbs))
-        let proteinForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil,
-                                               numberOfDishes: numberOfDishes(numberOfMeals: numberOfMeals, dishType: .protein, numberOfDishes: protein))
-        let fatForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil,
-                                           numberOfDishes: numberOfDishes(numberOfMeals: numberOfMeals, dishType: .fat, numberOfDishes: fat))
+		
+		let numberCarbsDish = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .carbs, numberOfDishes: carbs)
+		let numberProteinDish = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .protein, numberOfDishes: protein)
+		let numberFatDishes = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .fat, numberOfDishes: fat)
+		
+        let carbsForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil, numberOfDishes: numberCarbsDish)
+        let proteinForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil, numberOfDishes: numberProteinDish)
+        let fatForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil, numberOfDishes: numberFatDishes)
         
         for i in 0...2 {
             let mealType: [MealType] = [.breakfast, .lunch, .supper]
@@ -226,7 +230,7 @@ class MealViewModel: NSObject {
             dayMeals.insert(Meal(mealType: .middle2, dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein), type: .protein, amount: 1),
                                                               Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .fat), type: .fat, amount: 0.5)]), at: 3)
         }
-        googleService.createDailyMeal(meals: dayMeals)
+		GoogleApiManager.shared.createDailyMeal(meals: dayMeals)
         return dayMeals
     }
 }

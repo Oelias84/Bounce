@@ -8,6 +8,8 @@
 import Foundation
 
 class ConsumptionManager {
+	
+	static let shared = ConsumptionManager()
     
     private var weight: Double
     private var fatPercentage: Double
@@ -33,6 +35,16 @@ class ConsumptionManager {
 		self.lifeStyle = userData.lifeStyle ?? 0.0
         self.numberOfTrainings = userData.weaklyWorkouts ?? 0
         configureData()
+		
+//		let weight = 61.0
+
+//		let calo = TDEE(weight: weight, fatPercentage: 25, Kilometer: 7, lifeStyle: nil, numberOfTrainings: 2)
+//		print("TDEE:", calo)
+//		print("ProteinGrams:", proteinGrams(weight: weight))
+//		print("ProteinPortion:", proteinPortion(proteinGrams: proteinGrams(weight: weight)))
+//		print("fatGrams:", fatGrams(weight: weight))
+//		print("fatPortion:", portionFat(fatGrams: fatGrams(weight: weight)))
+//		print("carbsPortion:", portionCarbs(fatPortion: portionFat(fatGrams: fatGrams(weight: weight)), proteinPortion: proteinPortion(proteinGrams: proteinGrams(weight: weight)), calories: calo))
     }
     
     var getDayProtein: Double {
@@ -71,7 +83,7 @@ extension ConsumptionManager {
     //MARK: - lean body weight
 	private func TDEE(weight: Double, fatPercentage: Double, Kilometer: Double?, lifeStyle: Double?, numberOfTrainings: Int) -> Double {
 		
-        let LBM = weight * ((100 - 32) / 100)
+        let LBM = weight * ((100 - fatPercentage) / 100)
         let BMR = (LBM * 22.0) + 500.0
 		var NIT: Double {
 			if let Kilometer = Kilometer {
@@ -81,8 +93,13 @@ extension ConsumptionManager {
 			}
 		}
 		let EAT = (150.0 * Double(numberOfTrainings)) / 7.0
-        
-        return ((BMR * 1.1) + NIT + EAT) - 500
+        let result = Kilometer != nil ? ((BMR * 1.1) + NIT + EAT) - 500 : (NIT + EAT) - 500
+		
+		if result < 1200 {
+			return 1200
+		} else {
+			return result
+		}
     }//= daily calories
     
     //MARK: - convert to grams
@@ -94,15 +111,7 @@ extension ConsumptionManager {
         let proteinPortion = proteinGrams / 20.0
         let truncatingRemainder = proteinPortion.fraction
         
-        if (truncatingRemainder > 0.25 && truncatingRemainder < 0.5) || (truncatingRemainder < 0.75 && truncatingRemainder > 0.5) {
-            return proteinPortion.round(nearest: 0.5)
-        } else if truncatingRemainder < 0.25 {
-            return proteinPortion.rounded(.towardZero)
-        } else if  truncatingRemainder > 0.75 {
-            return proteinPortion.rounded()
-        } else {
-            return proteinPortion
-        }
+		return roundOrHalf(friction: truncatingRemainder, portion: proteinPortion)
     }//= Daily Protein portion dish
     
     //MARK: - Fat calculation
@@ -114,22 +123,16 @@ extension ConsumptionManager {
         let fatPortion = fatGrams / 11.0
         let truncatingRemainder = fatPortion.fraction
         
-        if (truncatingRemainder > 0.25 && truncatingRemainder < 0.5) || (truncatingRemainder < 0.75 && truncatingRemainder > 0.5) {
-            return fatPortion.round(nearest: 0.5)
-        } else if truncatingRemainder < 0.25 {
-            return fatPortion.rounded(.towardZero)
-        } else if  truncatingRemainder > 0.75 {
-            return fatPortion.rounded(.awayFromZero)
-        } else {
-            return fatPortion
-        }
+       return roundOrHalf(friction: truncatingRemainder, portion: fatPortion)
     }//= Daily Fat portion dish
     
     //MARK: - Carbs calculation
     private func portionCarbs(fatPortion: Double, proteinPortion: Double, calories: Double) -> Double {
-        let caloriesCarbs = (fatPortion * 100) + (proteinPortion * 150)
-        
-        return caloriesCarbs / 100.0
+        let caloriesCarbs = calories - ((fatPortion * 100) + (proteinPortion * 150))
+
+		let portion = caloriesCarbs / 100.0
+		let truncatingRemainder = portion.fraction
+		return roundOrHalf(friction: truncatingRemainder, portion: portion)
     }
     
     private func configureData() {
@@ -138,4 +141,16 @@ extension ConsumptionManager {
         self.proteinPortion = proteinPortion(proteinGrams: proteinGrams(weight: weight))
         self.carbsPortion = portionCarbs(fatPortion: self.fatPortion, proteinPortion: self.proteinPortion, calories: calories)
     }
+	
+	private func roundOrHalf(friction: Double, portion: Double) -> Double {
+		if (friction > 0.25 && friction < 0.5) || (friction < 0.75 && friction > 0.5) {
+			return portion.round(nearest: 0.5)
+		} else if friction <= 0.25 {
+			return portion.rounded(.towardZero)
+		} else if  friction >= 0.75 {
+			return portion.rounded(.awayFromZero)
+		} else {
+			return portion
+		}
+	}
 }
