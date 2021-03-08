@@ -25,7 +25,6 @@ class MealPlanViewController: UIViewController {
 		dateRightButton.isHidden = true
         dateTextLabel.text = date.dateStringDisplay
 		
-//        tableView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.06)
         callToViewModelForUIUpdate()
 		addBarButtonIcon()
     }
@@ -98,18 +97,37 @@ extension MealPlanViewController {
 		}
     }
 	func addBarButtonIcon() {
-		let button = UIButton(type: .system)
-		let rightBarButton = UIBarButtonItem(customView: button)
-		
-		button.setTitle("הערות ", for: .normal)
-		button.setImage(UIImage(systemName: "info.circle.fill"), for: .normal)
-		button.addTarget(self, action: #selector(barButtonItemTapped), for: .touchUpInside)
-		button.sizeToFit()
+		let comments = UIButton(type: .system)
+		let today = UIButton(type: .system)
+		let rightBarButton = UIBarButtonItem(customView: today)
+		let leftBarButton = UIBarButtonItem(customView: comments)
 
-		self.navigationItem.rightBarButtonItem = rightBarButton
+		
+		comments.setTitle("הערות ", for: .normal)
+		comments.setImage(UIImage(systemName: "info.circle.fill"), for: .normal)
+		comments.addTarget(self, action: #selector(barButtonItemTapped), for: .touchUpInside)
+		comments.sizeToFit()
+		
+		today.setTitle(" היום", for: .normal)
+		today.setImage(UIImage(systemName: "calendar"), for: .normal)
+		today.addTarget(self, action: #selector(todayBarButtonItemTapped), for: .touchUpInside)
+		today.semanticContentAttribute = .forceLeftToRight
+		today.sizeToFit()
+
+		navigationItem.rightBarButtonItem = rightBarButton
+		navigationItem.leftBarButtonItem = leftBarButton
 	}
 	@objc func barButtonItemTapped(_ sender: UIBarButtonItem) {
-		performSegue(withIdentifier: "commentsView", sender: self)
+		if let commentVC = storyboard?.instantiateViewController(identifier: K.ViewControllerId.commentsViewController) {
+			commentVC.modalPresentationStyle = .fullScreen
+			self.present(commentVC, animated: true)
+		}
+	}
+	@objc func todayBarButtonItemTapped(_ sender: UIBarButtonItem) {
+		date = Date()
+		mealViewModel.fetchMealsBy(date: date) {}
+		dateRightButton.isHidden = true
+		dateTextLabel.text = date.dateStringDisplay
 	}
 }
 

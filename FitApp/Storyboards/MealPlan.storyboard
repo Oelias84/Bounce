@@ -116,10 +116,10 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n79-kT-YCh">
-                                            <rect key="frame" x="174.5" y="406" width="65.5" height="84.5"/>
+                                            <rect key="frame" x="24" y="406" width="366" height="84.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJu-0J-j8t">
-                                                    <rect key="frame" x="12" y="52" width="41.5" height="20.5"/>
+                                                    <rect key="frame" x="12" y="52" width="342" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -141,7 +141,6 @@
                                                 <constraint firstItem="aJu-0J-j8t" firstAttribute="leading" secondItem="n79-kT-YCh" secondAttribute="leading" constant="12" id="37G-5C-ZNE"/>
                                                 <constraint firstItem="0ry-YD-suk" firstAttribute="leading" secondItem="n79-kT-YCh" secondAttribute="leading" constant="16" id="OJD-4g-Xz6"/>
                                                 <constraint firstAttribute="trailing" secondItem="aJu-0J-j8t" secondAttribute="trailing" constant="12" id="QC2-G7-t40"/>
-                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="264" id="R0B-uB-0cY"/>
                                                 <constraint firstItem="aJu-0J-j8t" firstAttribute="top" secondItem="0ry-YD-suk" secondAttribute="bottom" constant="16" id="XYq-Bi-bXo"/>
                                                 <constraint firstItem="0ry-YD-suk" firstAttribute="top" secondItem="n79-kT-YCh" secondAttribute="top" constant="16" id="nXG-Yi-2Q6"/>
                                                 <constraint firstAttribute="bottom" secondItem="aJu-0J-j8t" secondAttribute="bottom" constant="12" id="w2U-b8-E9R"/>
@@ -154,11 +153,13 @@
                                         </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="n79-kT-YCh" secondAttribute="trailing" constant="24" id="Gzj-yK-S7X"/>
+                                        <constraint firstItem="n79-kT-YCh" firstAttribute="leading" secondItem="rn8-PH-dg4" secondAttribute="leading" constant="24" id="hFK-8v-vbe"/>
                                         <constraint firstItem="n79-kT-YCh" firstAttribute="centerX" secondItem="rn8-PH-dg4" secondAttribute="centerX" id="lyr-RP-qfn"/>
                                         <constraint firstItem="n79-kT-YCh" firstAttribute="centerY" secondItem="rn8-PH-dg4" secondAttribute="centerY" id="q0y-FP-a36"/>
                                     </constraints>
                                 </view>
-                                <blurEffect style="systemUltraThinMaterial"/>
+                                <blurEffect style="extraLight"/>
                             </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="IvR-78-E2J"/>
@@ -173,7 +174,8 @@
                     <navigationItem key="navigationItem" id="hnp-vg-2WD"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="textLabel" destination="aJu-0J-j8t" id="try-VO-k9o"/>
+                        <outlet property="commentTextLabel" destination="aJu-0J-j8t" id="YgE-G4-P6L"/>
+                        <outlet property="commentView" destination="n79-kT-YCh" id="hCQ-eh-T8y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="txW-hm-VpF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
