@@ -56,6 +56,7 @@ class WeightProgressViewController: UIViewController {
 		
 		selectedDate = Date()
 		callToViewModelForUIUpdate()
+		dateRightButton.isHidden = true
 		tableView.sectionHeaderHeight = 46
 	}
 	
@@ -93,18 +94,21 @@ class WeightProgressViewController: UIViewController {
 			} else {
 				selectedDate = selectedDate.startOfWeek?.subtract(1.weeks)
 			}
+			dateRightButton.isHidden = selectedDate.onlyDate >= Date().startOfWeek!.onlyDate
 		case .month:
 			if sender == dateRightButton {
 				selectedDate = selectedDate.start(of: .month).add(1.months)
 			} else {
 				selectedDate = selectedDate.start(of: .month).subtract(1.months)
 			}
+			dateRightButton.isHidden = selectedDate.onlyDate >= Date().start(of: .month).onlyDate
 		case .year:
 			if sender == dateRightButton {
 				selectedDate = selectedDate.start(of: .year).add(1.years)
 			} else {
 				selectedDate = selectedDate.start(of: .year).subtract(1.years)
 			}
+			dateRightButton.isHidden = selectedDate.onlyDate >= Date().start(of: .year).onlyDate
 		}
 		updateDateLabels()
 		updateFiltersArray()
