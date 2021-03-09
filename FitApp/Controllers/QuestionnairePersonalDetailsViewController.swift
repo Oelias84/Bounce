@@ -50,8 +50,8 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
             UserProfile.defaults.height = height
             UserProfile.defaults.weight = weight
             UserProfile.defaults.birthDate = birthDate
-            googleManager.updateWeights(weights: Weights(weights: [Weight(date: Date(), weight: weight)]))
-			performSegue(withIdentifier: K.SegueId.moveToFatPercentage, sender: self)
+			googleManager.updateWeights(weights: Weights(weights: [Weight(date: Date(), weight: weight)]))
+			self.performSegue(withIdentifier: K.SegueId.moveToFatPercentage, sender: self)
         } else {
 			//show alert
             return

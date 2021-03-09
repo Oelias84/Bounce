@@ -637,6 +637,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="אם אינכם יודעים את התשובה המדויקת, תדלגו לשלב הבא!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="27V-1c-aSB">
+                                <rect key="frame" x="24" y="723" width="366" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Xwb-dn-Ubw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -645,7 +651,11 @@
                             <constraint firstItem="Xwb-dn-Ubw" firstAttribute="trailing" secondItem="c3r-Ua-q5F" secondAttribute="trailing" constant="32" id="CUW-Xp-dT8"/>
                             <constraint firstItem="Xwb-dn-Ubw" firstAttribute="trailing" secondItem="fY1-lp-rsq" secondAttribute="trailing" constant="84" id="GTm-bt-JMD"/>
                             <constraint firstItem="c3r-Ua-q5F" firstAttribute="leading" secondItem="Xwb-dn-Ubw" secondAttribute="leading" constant="32" id="K3b-Yd-gwS"/>
+                            <constraint firstItem="27V-1c-aSB" firstAttribute="leading" secondItem="Xwb-dn-Ubw" secondAttribute="leading" constant="24" id="O85-Db-AIU"/>
+                            <constraint firstItem="fY1-lp-rsq" firstAttribute="top" secondItem="27V-1c-aSB" secondAttribute="bottom" constant="16" id="OFD-3e-WXL"/>
+                            <constraint firstItem="27V-1c-aSB" firstAttribute="centerX" secondItem="7IV-jo-Rf7" secondAttribute="centerX" id="QnV-UN-9Lj"/>
                             <constraint firstItem="R2b-yB-RfJ" firstAttribute="leading" secondItem="Xwb-dn-Ubw" secondAttribute="leading" constant="46" id="SN3-nQ-s5b"/>
+                            <constraint firstItem="Xwb-dn-Ubw" firstAttribute="trailing" secondItem="27V-1c-aSB" secondAttribute="trailing" constant="24" id="VCg-nw-bvf"/>
                             <constraint firstItem="R2b-yB-RfJ" firstAttribute="top" secondItem="Xwb-dn-Ubw" secondAttribute="top" constant="16" id="adG-4Z-eix"/>
                             <constraint firstItem="fY1-lp-rsq" firstAttribute="leading" secondItem="Xwb-dn-Ubw" secondAttribute="leading" constant="84" id="heq-Xp-Cz1"/>
                             <constraint firstItem="Xwb-dn-Ubw" firstAttribute="bottom" secondItem="fY1-lp-rsq" secondAttribute="bottom" constant="32" id="j9O-Tp-Rnu"/>
@@ -867,7 +877,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5r-t3-ADQ" userLabel="ביחרי את מספר האימונים שאת  מעוניינת לבצע בשבוע">
                                 <rect key="frame" x="32" y="605" width="350" height="41"/>
-                                <string key="text">ביחרי את מספר האימונים שאת 
+                                <string key="text">בחרי את מספר האימונים שאת 
 מעוניינת לבצע בשבוע</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -1830,7 +1840,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qiK-vY-Riw"/>
+        <segue reference="3yk-Xy-vQY"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>

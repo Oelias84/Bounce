@@ -23,9 +23,6 @@ class RegisterViewController: UIViewController {
 	
 	private var profileImage: UIImage?
 	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-	}
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -69,7 +66,10 @@ class RegisterViewController: UIViewController {
 									switch success {
 									case true:
 										UserProfile.defaults.name = userName
-
+										UserProfile.defaults.email = email
+										
+										UserProfile.updateServer()
+										
 										if let image = self.profileImage {
 											GoogleStorageManager.shared.uploadImage(from: .profileImage, data: image.jpegData(compressionQuality: 8)!, fileName: user.profileImageUrl){
 												result in
@@ -142,5 +142,4 @@ extension RegisterViewController: CropViewControllerDelegate, UINavigationContro
 	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		picker.dismiss(animated: true)
 	}
-
 }

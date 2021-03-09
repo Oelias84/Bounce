@@ -41,8 +41,9 @@ class LoginViewController: UIViewController {
 
                     switch result {
                     case .success(let userData):
-						if let user = user?.user {
-							UserProfile.defaults.updateUserProfileData(userData!, id: user.uid)
+						UserProfile.defaults.email = email
+						if let user = user?.user, let data = userData {
+							UserProfile.defaults.updateUserProfileData(data, id: user.uid)
 						}
                         let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
                         let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar)

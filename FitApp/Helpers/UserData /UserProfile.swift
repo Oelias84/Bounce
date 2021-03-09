@@ -12,8 +12,20 @@ struct UserProfile {
     
     static var defaults = UserProfile()
 	
-	@UserDefault(key: .motivation)
-	var motivation: Int?
+	@UserDefault(key: .hasRunBefore)
+	var hasRunBefore: Bool?
+	
+	@UserDefault(key: .showQaAlert)
+	var showQaAlert: Bool?
+	
+	@UserDefault(key: .showMealNotFinishedAlert)
+	var showMealNotFinishedAlert: Bool?
+	
+	@UserDefault(key: .motivationText)
+	var motivationText: String?
+	
+	@UserDefault(key: .lastMotivationDate)
+	var lastMotivationDate: Date?
     
     @UserDefault(key: .finishOnboarding)
     var finishOnboarding: Bool?
@@ -81,7 +93,7 @@ extension UserProfile {
 		userProfile.name = data.name
 		userProfile.email = data.email
         userProfile.finishOnboarding = data.finishOnboarding
-        userProfile.birthDate = data.birthDate.dateFromString
+		userProfile.birthDate = data.birthDate?.dateFromString
         userProfile.weight = data.weight
         userProfile.height = data.height
         userProfile.fatPercentage = data.fatPercentage
@@ -97,20 +109,20 @@ extension UserProfile {
 		let googleManager = GoogleApiManager()
 		
 		let data = ServerUserData (
-			birthDate: defaults.birthDate!.dateStringForDB,
+			birthDate: defaults.birthDate?.dateStringForDB,
 			email: defaults.email!,
 			name: defaults.name!,
-			weight: defaults.weight!,
-			height: defaults.height!,
-			fatPercentage: defaults.fatPercentage!,
+			weight: defaults.weight,
+			height: defaults.height,
+			fatPercentage: defaults.fatPercentage,
 			steps: defaults.steps,
 			kilometer: defaults.kilometer,
 			lifeStyle: defaults.lifeStyle,
-			mealsPerDay: defaults.mealsPerDay!,
+			mealsPerDay: defaults.mealsPerDay,
 			mostHungry: defaults.mostHungry,
-			fitnessLevel: defaults.fitnessLevel!,
-			weaklyWorkouts: defaults.weaklyWorkouts!,
-			finishOnboarding: true
+			fitnessLevel: defaults.fitnessLevel,
+			weaklyWorkouts: defaults.weaklyWorkouts,
+			finishOnboarding: defaults.finishOnboarding
 		)
 		googleManager.updateUserData(userData: data)
 	}
@@ -118,29 +130,40 @@ extension UserProfile {
 
 struct ServerUserData: Codable {
     
-    let birthDate: String
+    let birthDate: String?
 	let email: String
 	let name: String
-    let weight: Double
-    let height: Int
-    let fatPercentage: Double
+    let weight: Double?
+    let height: Int?
+    let fatPercentage: Double?
     let steps: Int?
     let kilometer: Double?
 	let lifeStyle: Double?
-    let mealsPerDay: Int
+    let mealsPerDay: Int?
     let mostHungry: Int?
-    let fitnessLevel: Int
-    let weaklyWorkouts: Int
-    let finishOnboarding: Bool
+    let fitnessLevel: Int?
+    let weaklyWorkouts: Int?
+    let finishOnboarding: Bool?
 }
 
 //MARK: - UserDate Keys
 extension Key {
     
+	//check if app been used before
+	static let hasRunBefore: Key = "hasRunBefore"
+	
+	//show alerts
+	static let showQaAlert: Key = "showQaAlert"
+	static let showMealNotFinishedAlert: Key = "showMealNotFinishedAlert"
+
+	//motivations
+	static let lastMotivationDate: Key = "lastMotivationDate"
+	static let motivationText: Key = "motivationText"
+	
+	//user data
     static let id: Key = "id"
     static let name: Key = "name"
 	static let email: Key = "email"
-	static let motivation: Key = "motivation"
 	static let lastWightImageUrl: Key = "lastWightImageUrl"
 	static let profileImageImageUrl: Key = "profileImageImageUrl"
     static let birthDate: Key = "birthDate"
