@@ -17,18 +17,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
 		// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
-		Spinner.shared.show(window!)
-
-		if Auth.auth().currentUser != nil {
-			let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
-			let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar)
-
-			homeVC.modalPresentationStyle = .fullScreen
-			Spinner.shared.stop()
-			window!.rootViewController = homeVC
+		
+		if !(UserProfile.defaults.hasRunBefore ?? false) {
+			do {
+				try Auth.auth().signOut()
+			} catch {
+				print("could not signOut")
+			}
+			UserProfile.defaults.hasRunBefore = true
 		} else {
-			Spinner.shared.stop()
+			Spinner.shared.show(window!)
+			// Run code here for every other launch but the first
+			if Auth.auth().currentUser != nil {
+				let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
+				let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar)
+
+				homeVC.modalPresentationStyle = .fullScreen
+				Spinner.shared.stop()
+				window!.rootViewController = homeVC
+			} else {
+				Spinner.shared.stop()
+			}
 		}
+
+
 		
 		if #available(iOS 13.0, *) {
 			window?.overrideUserInterfaceStyle = .light
