@@ -74,7 +74,6 @@ class MealViewModel: NSObject {
 		return currentMealDate ?? Date()
 	}
 	func checkDailyMealIsDone(completion: @escaping (Bool) -> ()) {
-		fetchData()
 		let calendar = Calendar.current
 		let pastHour = calendar.dateComponents([.hour,.minute,.second], from: "22:30".timeFromString!)
 		let currentHour = calendar.dateComponents([.hour,.minute,.second], from: Date())
