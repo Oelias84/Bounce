@@ -14,7 +14,8 @@ protocol CommentViewDelegate {
 
 class CommentViewController: UIViewController {
 	
-	@IBOutlet weak var textLabel: UILabel!
+	@IBOutlet weak var commentTextLabel: UILabel!
+	@IBOutlet weak var commentView: UIView!
 	
 	var delegate: CommentViewDelegate?
 	
@@ -29,6 +30,8 @@ class CommentViewController: UIViewController {
 	}
 	
 	private func commonInit() {
+		commentView.dropShadow()
+		
 		GoogleApiManager.shared.getComments {
 			[weak self]
 			result in
@@ -44,7 +47,9 @@ class CommentViewController: UIViewController {
 						text.append(commentNumber + commentText + "\n\n")
 					}
 				}
-				self.textLabel.text = text
+				DispatchQueue.main.async {
+					self.commentTextLabel.text = text
+				}
 			case .failure(let error):
 				print(error)
 			}
