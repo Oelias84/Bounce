@@ -73,6 +73,21 @@ class MealViewModel: NSObject {
 	func getMealDate() -> Date {
 		return currentMealDate ?? Date()
 	}
+	func checkDailyMealIsDone(completion: @escaping (Bool) -> ()) {
+		fetchData()
+		let calendar = Calendar.current
+		let pastHour = calendar.dateComponents([.hour,.minute,.second], from: "22:30".timeFromString!)
+		let currentHour = calendar.dateComponents([.hour,.minute,.second], from: Date())
+		
+		guard pastHour.hour! <= currentHour.hour! && (UserProfile.defaults.showMealNotFinishedAlert ?? true) else {
+			completion(true)
+			return
+		}
+		
+		checkTodaysMeal { isMealsDone in
+			completion(isMealsDone)
+		}
+	}
     
     //MARK: - Meals
     func updateMeals(for date: Date) {
@@ -105,12 +120,32 @@ class MealViewModel: NSObject {
 					self.currentMealDate = date
                 } else {
                     self.meals = self.populateMeals(hasPrefer: prefer, numberOfMeals: numberOfMeals, protein: protein, carbs: carbs, fat: fat)
+					UserProfile.defaults.showMealNotFinishedAlert = true
                 }
             case .failure(let error):
                 print(error)
             }
         }
     }
+	func checkTodaysMeal(completion: @escaping (Bool) -> ()) {
+		GoogleApiManager.shared.getMealFor(Date()) { result in
+			switch result {
+			case .success(let dailyMeal):
+				if let dailyMeal = dailyMeal {
+					dailyMeal.meals.forEach { meal in
+						if meal.isMealDone != true {
+							completion(false)
+						} else {
+							completion(true)
+							UserProfile.defaults.showMealNotFinishedAlert = false
+						}
+					}
+				}
+			case .failure(let error):
+				print(error)
+			}
+		}
+	}
     
     //MARK: Dishes
     func fetchDishes() {

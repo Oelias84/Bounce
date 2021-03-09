@@ -84,9 +84,10 @@ class HomeViewController: UIViewController {
 		if let image = UserProfile.defaults.profileImageImageUrl?.showImage {
 			profileButton.setImage( image.circleMasked, for: .normal)
 		}
-
 		setupView()
 		setMotivationText()
+		checkAddWeight()
+		checkDidFinishDailyMeals()
 	}
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -241,5 +242,48 @@ extension HomeViewController {
 			as ChatsViewController
 		
 		self.navigationController?.pushViewController(chatsVC, animated: true)
+	}
+	private func checkAddWeight() {
+		WeightViewModel.checkAddWeight { showWeightAlert in
+			if showWeightAlert {
+				self.presentAlert(withTitle: "זמן להישקל", withMessage: "תזכורת קטנה לא לשכוח להישקל הבוקר לפני שאת מתחילה את היום :)", options: "עבור למסך שקילה", "ביטול") {
+					selection in
+					switch selection {
+					case 0:
+						if let navC = self.tabBarController?.viewControllers?[3] as? UINavigationController {
+							let weightVC = navC.viewControllers.last as! WeightProgressViewController
+							
+							self.tabBarController?.selectedIndex = 3
+							DispatchQueue.main.async {
+								weightVC.addWeightButtonAction(self)
+							}
+						}
+					case 1:
+						//turns weight tab bar icon to red for alerting the user
+						if let weightTab = self.tabBarController?.tabBar.items?[3] {
+							weightTab.image = UIImage(named:"ScaleIcon")?
+								.withTintColor(.red, renderingMode: .alwaysOriginal)
+						}
+					default:
+						break
+					}
+				}
+			}
+		}
+	}
+	private func checkDidFinishDailyMeals() {
+		mealViewModel.checkDailyMealIsDone { mealIsDone in
+			if !mealIsDone {
+				self.presentAlert(withTitle: "מעקב ארוחות", withMessage: "ראינו שלא השלמת את מעקב האורחות היומי שלך", options: "עבור למסך ארוחות", "ביטול") {
+					selection in
+					switch selection {
+					case 0:
+						self.tabBarController?.selectedIndex = 1
+					default:
+						break
+					}
+				}
+			}
+		}
 	}
 }
