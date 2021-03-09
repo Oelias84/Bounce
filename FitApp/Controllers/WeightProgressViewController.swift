@@ -79,7 +79,7 @@ class WeightProgressViewController: UIViewController {
 			weightAlert = AddWeightAlertView()
 			weightAlert?.delegate = self
 			weightAlert?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width,
-										height:  UIScreen.main.bounds.size.height)
+										height: UIScreen.main.bounds.size.height)
 			if let alert = weightAlert {
 				window?.addSubview(alert)
 			}
@@ -200,7 +200,7 @@ extension WeightProgressViewController {
 		switch timePeriod {
 		case .week:
 			DispatchQueue.main.async {
-				self.dateTextLabel.text = "\((self.selectedDate.startOfWeek?.displayDay)!) - \((self.selectedDate.endOfWeek?.displayDayInMonth)!)"
+				self.dateTextLabel.text = "\((self.selectedDate.startOfWeek?.displayDayInMonth)!) - \((self.selectedDate.endOfWeek?.displayDayInMonth)!)"
 			}
 		case .month:
 			DispatchQueue.main.async {
@@ -255,7 +255,6 @@ extension WeightProgressViewController {
 			self.updateDataSource()
 		}
 	}
-	
 	private func getImageUrl(completion: @escaping (String?) -> ()) {
 		var weightImageUrl: String {
 			let userEmail = UserProfile.defaults.email!
@@ -302,6 +301,9 @@ extension WeightProgressViewController: CropViewControllerDelegate, UINavigation
 extension WeightProgressViewController: AddWeightAlertViewDelegate {
 	
 	func confirmButtonAction(weight: String) {
+		if let weightTab = self.tabBarController?.tabBar.items?[3] {
+			weightTab.image = UIImage(named:"ScaleIcon")
+		}
 		addWeight(weight: weight, image: weightImage)
 		weightAlert?.removeFromSuperview()
 		weightAlert = nil
