@@ -145,18 +145,21 @@ extension ExerciseViewController {
 		player = AVPlayer(playerItem: AVPlayerItem(asset: asset))
 		
 		let playerLayer = AVPlayerLayer(player: player)
+		let playerTimescale = self.player.currentItem?.asset.duration.timescale ?? 1
+		let time = CMTime(seconds: 0, preferredTimescale: playerTimescale)
+		
 		playerLayer.frame = playerContainerView.bounds
 		playerLayer.videoGravity = .resizeAspectFill
+		playerContainerView.layer.addSublayer(playerLayer)
+		
 		getProgress()
-		let playerTimescale = self.player.currentItem?.asset.duration.timescale ?? 1
-		let time =  CMTime(seconds: 1, preferredTimescale: playerTimescale)
 		self.player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) { (finished) in
 			DispatchQueue.main.async { [weak self] in
-				self?.player.play()
+				guard let self = self else { return }
+				self.player.play()
 			}
 		}
 		
-		self.playerContainerView.layer.addSublayer(playerLayer)
 	}
 	private func getProgress()  {
 		player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 10), queue: DispatchQueue.main) {[weak self] (progressTime) in
