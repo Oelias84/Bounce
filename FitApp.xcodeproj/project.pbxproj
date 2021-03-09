@@ -289,6 +289,7 @@
 		1D0BA5DD105F01D9E5604CAD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7C89AA10256D69CB009AD87C /* FitAppTests */,
 				CDA4729A3DCD525258269BFC /* Pods_FitApp.framework */,
 				C9F92787D51B022DC3D3BE25 /* Pods_FitApp_FitAppUITests.framework */,
 				4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */,
@@ -382,7 +383,6 @@
 			isa = PBXGroup;
 			children = (
 				7C89A9F9256D69CA009AD87C /* FitApp */,
-				7C89AA10256D69CB009AD87C /* FitAppTests */,
 				7C89AA1B256D69CB009AD87C /* FitAppUITests */,
 				7C89A9F8256D69CA009AD87C /* Products */,
 				3818404CCC99D4DB7BF2032D /* Pods */,
@@ -1233,7 +1233,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.11;
+				MARKETING_VERSION = 1.0.15;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1254,7 +1254,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.11;
+				MARKETING_VERSION = 1.0.15;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

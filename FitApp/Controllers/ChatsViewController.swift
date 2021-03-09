@@ -22,12 +22,15 @@ class ChatsViewController: UITableViewController {
 		}
 		
 		chatsViewModel = ChatsViewModel()
+		alertForDirectingToQA()
+    }
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
 		chatsViewModel.bindChatsViewModelToController = {
 			Spinner.shared.stop()
 			self.updateUI()
 		}
-		alertForDirectingToQA()
-    }
+	}
 		
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return chatsViewModel.getChatsCount ?? 0

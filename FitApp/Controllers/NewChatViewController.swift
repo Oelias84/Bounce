@@ -105,6 +105,19 @@ extension NewChatViewController {
 		tableView.delegate = self
 		tableView.dataSource = self
 	}
+	private func addSupport() {
+		let nutritionSupport: [String:String] = [
+			"email": "support-mail-com",
+			"name": "תזונה"
+		]
+		let fitnessSupport: [String:String] = [
+			"email": "support-mail-com",
+			"name": "כושר"
+		]
+		self.results.append(nutritionSupport)
+		self.results.append(fitnessSupport)
+		updateUI()
+	}
 }
 
 extension NewChatViewController: UISearchBarDelegate {
@@ -153,19 +166,6 @@ extension NewChatViewController: UISearchBarDelegate {
 		updateUI()
 	}
 	
-	private func addSupport() {
-		let nutritionSupport: [String:String] = [
-			"email": "support-mail-com",
-			"name": "תזונה"
-		]
-		let fitnessSupport: [String:String] = [
-			"email": "support-mail-com",
-			"name": "כושר"
-		]
-		self.results.append(nutritionSupport)
-		self.results.append(fitnessSupport)
-		updateUI()
-	}
 }
 
 
