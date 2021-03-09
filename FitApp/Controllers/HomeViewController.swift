@@ -65,7 +65,7 @@ class HomeViewController: UIViewController {
 		let subtitleLabel = UILabel()
 		subtitleLabel.textAlignment = .center
 		subtitleLabel.text = ""
-		let stackView = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
+		let stackView = UIStackView(arrangedSubviews: [titleLabel])
 		stackView.spacing = 4
 		stackView.axis = .horizontal
 		return stackView
@@ -220,7 +220,7 @@ extension HomeViewController {
         fatCountLabel.text = "\(progress.fats)"
         carbsCountLabel.text = "\(progress.carbs)"
         proteinCountLabel.text = "\(progress.protein)"
-		if let view = titleStackView.subviews[1] as? UILabel {
+		if let view = titleStackView.subviews[0] as? UILabel {
 			view.text = mealViewModel.getMealDate().dateStringDisplay
 		}
     }
