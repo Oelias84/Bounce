@@ -10,11 +10,15 @@ import UIKit
 class ChatsViewController: UITableViewController {
 	
 	private var chatsViewModel: ChatsViewModel!
+	private var isManager = false
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		
 		tableView.register(UINib(nibName: K.NibName.chatTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.chatCell)
-		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(addChatDidTapped))
+		if isManager {
+			navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(addChatDidTapped))
+		}
 		navigationController?.navigationBar.prefersLargeTitles = true
 
 		if let navView = navigationController?.view {
@@ -26,12 +30,13 @@ class ChatsViewController: UITableViewController {
     }
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		
 		chatsViewModel.bindChatsViewModelToController = {
 			Spinner.shared.stop()
 			self.updateUI()
 		}
 	}
-		
+
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return chatsViewModel.getChatsCount ?? 0
 	}
@@ -47,6 +52,7 @@ class ChatsViewController: UITableViewController {
 		let chatData = chatsViewModel.getChatFor(row:indexPath.row)
 		
 		let chatCV = ChatViewController(with: chatData.otherUserEmail, id: chatData.id)
+		chatCV.isNewChat = chatsViewModel.isNewChat
 		chatCV.title = chatData.name
 		navigationController?.pushViewController(chatCV, animated: true)
 	}

@@ -14,6 +14,8 @@ class ChatsViewModel: NSObject {
 			self.bindChatsViewModelToController()
 		}
 	}
+	var isNewChat = false
+	
 	var bindChatsViewModelToController : (() -> ()) = {}
 
 	override init() {
@@ -31,6 +33,7 @@ class ChatsViewModel: NSObject {
 		return self.chats![row]
 	}
 	
+	
 	private func startListeningForChats() {
 		guard let email = UserProfile.defaults.email?.safeEmail else { return }
 		
@@ -39,12 +42,31 @@ class ChatsViewModel: NSObject {
 			
 			switch result {
 			case .success(let chats):
-				guard !chats.isEmpty else { return }
+				guard !chats.isEmpty else {
+					return
+				}
+				self.isNewChat = false
 				self.chats = chats
 			case .failure(let error):
-				self.bindChatsViewModelToController()
-				print(error)
+				if error == DatabaseError.noFetch {
+					self.isNewChat = true
+					self.chats = [self.addSupportUser()]
+				} else {
+					self.bindChatsViewModelToController()
+				}
 			}
 		}
+	}
+	private func addSupportUser() -> Chat {
+		let name = "דברי אלינו"
+		let otherUserEmail = "support-mail-com"
+		let userEmail = UserProfile.defaults.email!.safeEmail
+		let chatId = "\(userEmail)\(otherUserEmail)\(Date().dateStringForDB)"
+		
+		let latestMessage = LatestMessage (date: Date().dateStringForDB,
+										   text: "כיתבי לנו כאן ואנו מבטיחים לחזור אליך בהקדם האפשרי",
+										   isRead: false)
+
+		return Chat(id: chatId, name: name, otherUserEmail: otherUserEmail, latestMessage: latestMessage)
 	}
 }

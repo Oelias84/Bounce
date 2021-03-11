@@ -82,14 +82,11 @@ extension NewChatViewController: UITableViewDataSource, UITableViewDelegate {
 extension NewChatViewController {
 	
 	private func setupView() {
-		if isManager {
-			navigationController?.navigationBar.topItem?.titleView = searchBar
-		} else {
-			addSupport()
-		}
+		navigationController?.navigationBar.topItem?.titleView = searchBar
 		view.addSubview(noResultsLabel)
 		view.addSubview(tableView)
-		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelButtonAction))	}
+		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancelButtonAction))
+	}
 	private func updateUI() {
 		if results.isEmpty {
 			self.noResultsLabel.isHidden = false
@@ -165,7 +162,6 @@ extension NewChatViewController: UISearchBarDelegate {
 		self.results = results
 		updateUI()
 	}
-	
 }
 
 
