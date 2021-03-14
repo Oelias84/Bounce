@@ -62,12 +62,7 @@ class HomeViewController: UIViewController {
 		let titleLabel = UILabel()
 		titleLabel.textAlignment = .center
 		titleLabel.text = "מעקב שקילה"
-		let subtitleLabel = UILabel()
-		subtitleLabel.textAlignment = .center
-		subtitleLabel.text = ""
 		let stackView = UIStackView(arrangedSubviews: [titleLabel])
-		stackView.spacing = 4
-		stackView.axis = .horizontal
 		return stackView
 	}()
 
@@ -128,33 +123,32 @@ extension HomeViewController {
         circularProgress.subviews.forEach {
             $0.removeFromSuperview()
         }
-		let circleContainerHeight = circularProgress.frame.height
-		let circleContainerWidth = circularProgress.frame.width
+		let circleContainerHeight = circularProgress.bounds.height
+		let circleContainerWidth = circularProgress.bounds.width
 
         let viewCenter  = CGPoint(x: circleContainerHeight / 2, y: circleContainerWidth / 2)
-		proteinCP   = CircularProgressView(frame: CGRect(x: viewCenter.x, y: viewCenter.y,
-														 width: circleContainerWidth - 50.0, height: circleContainerWidth - 50.0))
-        fatCP       = CircularProgressView(frame: CGRect(x: viewCenter.x, y: viewCenter.y,
-														 width: circleContainerWidth - 100.0, height: circleContainerWidth - 100.0))
-        carbCP      = CircularProgressView(frame: CGRect(x: viewCenter.x, y: viewCenter.y,
-														 width: circleContainerWidth - 150.0, height: circleContainerWidth - 150.0))
-        
+		proteinCP = CircularProgressView(frame: CGRect(x: viewCenter.x, y: viewCenter.y,
+													   width: circleContainerWidth - 50.0, height: circleContainerWidth - 50.0))
+        fatCP = CircularProgressView(frame: CGRect(x: viewCenter.x, y: viewCenter.y,
+												   width: circleContainerWidth - 100.0, height: circleContainerWidth - 100.0))
+        carbCP = CircularProgressView(frame: CGRect(x: viewCenter.x, y: viewCenter.y,
+													width: circleContainerWidth - 150.0, height: circleContainerWidth - 150.0))
+		carbCP.tag = 100
         carbCP.trackColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 0.5189344393)
-        carbCP.progressColor = carbsColor
-        carbCP.tag = 100
 		carbCP.center = viewCenter
-        circularProgress.addSubview(carbCP)
+        carbCP.progressColor = carbsColor
+        circularProgress.addSubview(carbCP) 
         
+		proteinCP.tag = 102
         proteinCP.trackColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 0.5189344393)
-        proteinCP.progressColor = proteinColor
-        proteinCP.tag = 102
 		proteinCP.center = viewCenter
+        proteinCP.progressColor = proteinColor
         circularProgress.addSubview(proteinCP)
         
+		fatCP.tag = 101
         fatCP.trackColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 0.5189344393)
-        fatCP.progressColor = fatColor
-        fatCP.tag = 101
 		fatCP.center = viewCenter
+        fatCP.progressColor = fatColor
         circularProgress.addSubview(fatCP)
         
         self.perform(#selector(animateProgress), with: nil, afterDelay: 0.1)
