@@ -78,7 +78,7 @@ class MealViewModel: NSObject {
 		let pastHour = calendar.dateComponents([.hour,.minute,.second], from: "22:30".timeFromString!)
 		let currentHour = calendar.dateComponents([.hour,.minute,.second], from: Date())
 		
-		guard pastHour.hour! <= currentHour.hour! && (UserProfile.defaults.showMealNotFinishedAlert ?? true) else {
+		guard pastHour.hour! <= currentHour.hour! && pastHour.minute! <= currentHour.minute! && (UserProfile.defaults.showMealNotFinishedAlert ?? true) else {
 			completion(true)
 			return
 		}
