@@ -50,8 +50,9 @@ class ChatsViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 		let chatData = chatsViewModel.getChatFor(row:indexPath.row)
-		
 		let chatCV = ChatViewController(with: chatData.otherUserEmail, id: chatData.id)
+		
+		chatsViewModel.updateChatState(chat: chatData)
 		chatCV.isNewChat = chatsViewModel.isNewChat
 		chatCV.title = chatData.name
 		navigationController?.pushViewController(chatCV, animated: true)

@@ -32,7 +32,17 @@ class ChatsViewModel: NSObject {
 	func getChatFor(row: Int) -> Chat {
 		return self.chats![row]
 	}
-	
+	public func updateChatState(chat: Chat) {
+		GoogleDatabaseManager.shared.updateChat(chat: chat) { result in
+			
+			switch result {
+			case .success(_):
+				print("Chat was updated")
+			case .failure(_):
+				print("Chat isRead did not update")
+			}
+		}
+	}
 	
 	private func startListeningForChats() {
 		guard let email = UserProfile.defaults.email?.safeEmail else { return }

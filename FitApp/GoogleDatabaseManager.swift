@@ -11,6 +11,7 @@ import FirebaseDatabase
 
 enum DatabaseError: Error {
 	
+	case failedToUpdate
 	case failedToFetch
 	case noFetch
 	case isPrime
@@ -27,6 +28,7 @@ final class GoogleDatabaseManager {
 extension GoogleDatabaseManager {
 	
 	public func insertUser(with user: User, completion: @escaping (Bool) -> Void) {
+
 		database.child(user.safeEmail).setValue([
 			"first_name": user.firsName,
 			"last_name": user.lastName
@@ -194,6 +196,49 @@ extension GoogleDatabaseManager {
 				return Chat(id: chatId, name: name, otherUserEmail: otherUserEmail, latestMessage: latest)
 			}
 			completion(.success(chats))
+		}
+	}
+	public func updateChat(chat: Chat, completion: @escaping (Result<Bool,DatabaseError>) -> Void) {
+		guard let currentUserSafeEmail = UserProfile.defaults.email?.safeEmail else {
+			completion(.failure(.noFetch))
+			return
+		}
+		database.child("\(currentUserSafeEmail)/chats").observeSingleEvent(of:.value) { snapshot in
+			var databaseEntryChat = [[String:Any]]()
+
+			let updateValue: [String:Any] = [
+				"date": chat.latestMessage.date,
+				"is_read": true,
+				"message": chat.latestMessage.text
+			]
+			if var currentUserChats = snapshot.value as? [[String:Any]] {
+				var targetChat: [String:Any]?
+				var position = 0
+				
+				for chatDictionary in currentUserChats {
+					if let currentId = chatDictionary["id"] as? String, currentId == chat.id {
+						targetChat = chatDictionary
+						break
+					}
+					position += 1
+				}
+				
+				if var targetChat = targetChat {
+					targetChat["latest_message"] = updateValue
+					currentUserChats[position] = targetChat
+					databaseEntryChat = currentUserChats
+					
+					self.database.child("\(currentUserSafeEmail)/chats").setValue(databaseEntryChat) { error,_ in
+						guard error == nil else {
+							completion(.failure(.failedToUpdate))
+							return
+						}
+						completion(.success(true))
+					}
+				} else {
+					completion(.failure(.failedToUpdate))
+				}
+			}
 		}
 	}
 	public func getAllMessagesForChat(with id: String, completion: @escaping (Result<[Message],DatabaseError>) -> Void) {

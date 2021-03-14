@@ -20,6 +20,8 @@ class ChatTableViewCell: UITableViewCell {
 	@IBOutlet weak var userNameLabel: UILabel!
 	@IBOutlet weak var usrMessageLabel: UILabel!
 	
+	@IBOutlet weak var unreadMessageCounterView: UIView!
+	@IBOutlet weak var unreadMessageCounterLabel: UILabel!
 	override func awakeFromNib() {
 		super.awakeFromNib()
 	}
@@ -27,7 +29,9 @@ class ChatTableViewCell: UITableViewCell {
 	func setupCell() {
 		userNameLabel.text = chat.name
 		usrMessageLabel.text = chat.latestMessage.text
-		
+		unreadMessageCounterLabel.text = ""
+		unreadMessageCounterView.isHidden = chat.latestMessage.isRead
+
 		let path = "\(chat.otherUserEmail)_profile_picture.jpeg"
 		
 		GoogleStorageManager.shared.downloadImageURL(from: .profileImage, path: path) { [weak self] result in
