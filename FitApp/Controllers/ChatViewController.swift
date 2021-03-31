@@ -83,6 +83,7 @@ class ChatViewController: MessagesViewController {
 	}
 	private func setupController() {
 		navigationItem.largeTitleDisplayMode = .never
+		showMessageTimestampOnSwipeLeft = true
 		messagesCollectionView.messagesDataSource = self
 		messagesCollectionView.messagesLayoutDelegate = self
 		messagesCollectionView.messagesDisplayDelegate = self
@@ -94,11 +95,12 @@ class ChatViewController: MessagesViewController {
 		let button = InputBarButtonItem()
 		
 		button.setSize(CGSize(width: 35, height: 35), animated: false)
-		button.setImage(UIImage(systemName: "plus"), for: .normal)
+		button.setImage(UIImage(systemName: "camera"), for: .normal)
 		button.onTouchUpInside { [weak self] _ in
 			guard let self = self else { return }
 			self.presentImagePickerActionSheet(imagePicker: self.imagePickerController) {_ in}
 		}
+		messageInputBar.sendButton.title = "שלח"
 		messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
 		messageInputBar.setStackViewItems([button], forStack: .left, animated: true)
 	}
@@ -132,6 +134,10 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		default:
 			break
 		}
+	}
+
+	func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+		return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10), NSAttributedString.Key.foregroundColor: UIColor.darkGray])
 	}
 	func didTapImage(in cell: MessageCollectionViewCell) {
 		messagesCollectionView.endEditing(true)
