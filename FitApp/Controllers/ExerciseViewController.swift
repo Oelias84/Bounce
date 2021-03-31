@@ -100,11 +100,18 @@ extension ExerciseViewController {
 	
 	private func playVideo(userString: [String]) {
 		playButton.isHidden = true
-		googleManager.getExerciseVideo(videoNumber: userString ) { result in
+		googleManager.getExerciseVideo(videoNumber: userString) { result in
                 switch result {
                 case .success(let urls):
-					self.urlVideos = urls
-					self.play(urls.first!)
+					if self.exercise.name == "Push-Ups" {
+						let order = ["/17","/16","/22","/23","/44","/18"]
+						let orderUrls = order.compactMap({ order in urls.first(where: { $0.absoluteString.contains(order) })})
+						self.urlVideos = orderUrls
+						self.play(self.urlVideos.first!)
+					} else {
+						self.urlVideos = urls
+						self.play(self.urlVideos.first!)
+					}
                 case .failure(let error):
                     print(error)
             }
@@ -159,7 +166,6 @@ extension ExerciseViewController {
 				self.player.play()
 			}
 		}
-		
 	}
 	private func getProgress()  {
 		player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 10), queue: DispatchQueue.main) {[weak self] (progressTime) in
@@ -185,7 +191,6 @@ extension ExerciseViewController {
 		activityIndicator.centerXAnchor.constraint(equalTo: playerContainerView.centerXAnchor).isActive = true
 		activityIndicator.startAnimating()
 	}
-	
 	@objc func playFull() {
 		let vc = AVPlayerViewController()
 		vc.player = self.player
