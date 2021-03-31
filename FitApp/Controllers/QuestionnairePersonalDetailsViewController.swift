@@ -46,12 +46,17 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
         if let birthDate = birthDate, let height = height, let weight = weight {
-            
-            UserProfile.defaults.height = height
-            UserProfile.defaults.weight = weight
-            UserProfile.defaults.birthDate = birthDate
-			googleManager.updateWeights(weights: Weights(weights: [Weight(date: Date(), weight: weight)]))
-			self.performSegue(withIdentifier: K.SegueId.moveToFatPercentage, sender: self)
+			if birthDate.isLater(than: Date()) {
+				presentAlert(withMessage: "תאריך הלידה לא יכול גדול מהתאריך הנוחכי", options: "אישור") { _ in
+					self.birthdayDatePicker.becomeFirstResponder()
+				}
+			} else {
+				UserProfile.defaults.height = height
+				UserProfile.defaults.weight = weight
+				UserProfile.defaults.birthDate = birthDate
+				googleManager.updateWeights(weights: Weights(weights: [Weight(date: Date(), weight: weight)]))
+				self.performSegue(withIdentifier: K.SegueId.moveToFatPercentage, sender: self)
+			}
         } else {
 			//show alert
             return

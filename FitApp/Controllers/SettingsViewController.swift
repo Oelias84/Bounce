@@ -109,6 +109,8 @@ extension SettingsViewController {
 			activityLabel.text = "\(kilometers) ק״מ"
 		} else if let steps = userData.steps {
 			activityLabel.text = "\(steps) צעדים"
+		} else {
+			activityLabel.text = UserProfile.getLifeStyleText()
 		}
 		
 		if let meals = userData.mealsPerDay {

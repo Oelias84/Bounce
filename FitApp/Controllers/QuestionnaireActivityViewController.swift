@@ -22,21 +22,21 @@ class QuestionnaireActivityViewController: UIViewController {
 			stepsSlider.maximumValue = 30000.00
 		}
 	}
-	@IBOutlet weak var currentPageLabel: UILabel!
 	@IBOutlet weak var kilometersLabel: UILabel!
 	@IBOutlet weak var stepsLabel: UILabel!
 	@IBOutlet weak var kilometersCheckBox: UIButton!
 	@IBOutlet weak var stepsCheckBox: UIButton!
 	@IBOutlet weak var nextButton: UIButton!
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == K.SegueId.moveToSecondActivity {
+			let QuestionnaireSecondActivityVC = segue.destination as! QuestionnaireSecondActivityViewController
+			QuestionnaireSecondActivityVC.isFromSettings = isFromSettings
+		}
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		if isFromSettings {
-			nextButton.setTitle("אישור", for: .normal)
-			currentPageLabel.isHidden = true
-		}
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -49,6 +49,7 @@ class QuestionnaireActivityViewController: UIViewController {
 		if kilometersCheckBox.isSelected {
 			if let kilometers = kilometersLabel.text?.split(separator: " ").first {
 				UserProfile.defaults.kilometer = Double(kilometers)
+				UserProfile.defaults.lifeStyle = nil
 				UserProfile.defaults.steps = nil
 			}
 			if isFromSettings {
@@ -59,6 +60,7 @@ class QuestionnaireActivityViewController: UIViewController {
 		} else if stepsCheckBox.isSelected {
 			if let steps = stepsLabel.text {
 				UserProfile.defaults.steps = Int(steps)
+				UserProfile.defaults.lifeStyle = nil
 				UserProfile.defaults.kilometer = nil
 			}
 			if isFromSettings {
@@ -84,21 +86,21 @@ class QuestionnaireActivityViewController: UIViewController {
 			case 1:
 				stepsCheckBox.isSelected = false
 				stepsSlider.isEnabled = false
+				stepsLabel.text = "0"
 				kilometersSlider.isEnabled = true
 			case 2:
 				kilometersCheckBox.isSelected = false
 				stepsSlider.isEnabled = true
 				kilometersSlider.isEnabled = false
+				kilometersLabel.text =  "0 " + K.Units.kilometers
 			default:
 				return
 			}
 		}
 		
-		if !isFromSettings {
-			(kilometersCheckBox.isSelected || stepsCheckBox.isSelected)
-				? nextButton.setTitle("הבא", for: .normal)
-				: nextButton.setTitle("דלג", for: .normal)
-		}
+		(kilometersCheckBox.isSelected || stepsCheckBox.isSelected)
+			? nextButton.setTitle(isFromSettings ? "אישור" : "הבא", for: .normal)
+			: nextButton.setTitle("דלג", for: .normal)
 	}
 }
 
@@ -108,10 +110,12 @@ extension QuestionnaireActivityViewController {
 		let userData = UserProfile.defaults
 		
 		if let kilometers = userData.kilometer {
+			nextButton.setTitle(isFromSettings ? "אישור" : "הבא", for: .normal)
 			kilometersLabel.text = String(kilometers)
 			kilometersCheckBox.isSelected = true
 			stepsSlider.isEnabled = false
 		} else if let steps = userData.steps {
+			nextButton.setTitle(isFromSettings ? "אישור" : "הבא", for: .normal)
 			stepsLabel.text = String(steps)
 			stepsCheckBox.isSelected = true
 			kilometersSlider.isEnabled = false

@@ -9,31 +9,35 @@ import UIKit
 
 class QuestionnaireSecondActivityViewController: UIViewController {
 	
+	public var isFromSettings = false
+	private var lifeStyleSelection: Int?
+
 	@IBOutlet weak var sittingCheckBox: UIButton!
 	@IBOutlet weak var semiActiveCheckBox: UIButton!
 	@IBOutlet weak var activeCheckBox: UIButton!
 	@IBOutlet weak var veryActiveCheckBox: UIButton!
 	@IBOutlet weak var nextButton: UIButton!
 	
-	private var lifeStyleSelection: Int?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		
-    }
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		
 		setUpTextfields()
 	}
 	
 	@IBAction func nextButtonAction(_ sender: Any) {
 		
 		if let lifeStyle = lifeStyleSelection {
+			UserProfile.defaults.steps = nil
+			UserProfile.defaults.kilometer = nil
 			UserProfile.defaults.lifeStyle = getLifeStyle(for: lifeStyle)
-			performSegue(withIdentifier: K.SegueId.moveToNutrition, sender: self)
+			if isFromSettings {
+				updateServer()
+			} else {
+				performSegue(withIdentifier: K.SegueId.moveToNutrition, sender: self)
+			}
 		}
 	}
-	
 	@IBAction func checkBoxAction(_ sender: UIButton) {
 		sender.isSelected = !sender.isSelected
 		switch sender.tag {
@@ -63,12 +67,18 @@ class QuestionnaireSecondActivityViewController: UIViewController {
 
 extension QuestionnaireSecondActivityViewController {
 	
+	private func updateServer() {
+		UserProfile.updateServer()
+		if let firstViewController = self.navigationController?.viewControllers[1] {
+			self.navigationController?.popToViewController(firstViewController, animated: true)
+		}
+	}
 	private func setUpTextfields() {
+		nextButton.setTitle(isFromSettings ? "אישור" : "הבא", for: .normal)
 		if let lifeStyle = UserProfile.defaults.lifeStyle {
 			getLifeStyleCheckBox(for: lifeStyle)
 		}
 	}
-	
 	private func getLifeStyle(for lifestyle: Int) -> Double {
 		switch lifestyle {
 		case 1:
