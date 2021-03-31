@@ -258,7 +258,11 @@ class MealViewModel: NSObject {
             }
         }
         if numberOfMeals == 4 {
-            dayMeals.insert(Meal(mealType: .middle1, dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs), type: .carbs, amount: 1)]), at: 1)
+			if numberCarbsDish < 4 {
+				dayMeals.insert(Meal(mealType: .middle1, dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein), type: .protein, amount: 1)]), at: 1)
+			} else {
+				dayMeals.insert(Meal(mealType: .middle1, dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs), type: .carbs, amount: 1)]), at: 1)
+			}
         } else if numberOfMeals == 5 {
             dayMeals.insert(Meal(mealType: .middle1, dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs), type: .carbs, amount: 1)]), at: 1)
             dayMeals.insert(Meal(mealType: .middle2, dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein), type: .protein, amount: 1),
