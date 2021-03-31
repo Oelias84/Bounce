@@ -126,6 +126,22 @@ extension UserProfile {
 		)
 		googleManager.updateUserData(userData: data)
 	}
+	
+	static func getLifeStyleText() -> String {
+		
+		switch defaults.lifeStyle {
+		case 1.2:
+			return "אורח חיים יושבני"
+		case 1.3:
+			return "אורח חיים פעיל מתון"
+		case 1.5:
+			return "אורח חיים פעיל"
+		case 1.6:
+			return "אורח חיים פעיל מאוד"
+		default:
+			return ""
+		}
+	}
 }
 
 struct ServerUserData: Codable {
