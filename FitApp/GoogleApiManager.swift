@@ -51,17 +51,19 @@ struct GoogleApiManager {
     
     //MARK: - Meals
     func createDailyMeal(meals: [Meal]) {
+		guard !meals.isEmpty else { return }
         let currentDate = Date().dateStringForDB
-        let dailyMeals = DailyMeal(meals: meals)
+		let dailyMeals = DailyMeal(meals: meals)
+		
         do {
-            try db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("user-daily-meals").document("\(currentDate)").setData(from: dailyMeals)
+			try db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("user-daily-meals").document("\(currentDate)").setData(from: dailyMeals.self)
         } catch {
             print(error)
         }
     }
     func updateMealBy(date: Date, dailyMeal: DailyMeal) {
         do {
-            try db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("user-daily-meals").document("\(date.dateStringForDB)").setData(from: dailyMeal)
+			try db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("user-daily-meals").document("\(date.dateStringForDB)").setData(from: dailyMeal.self)
         } catch {
             print(error)
         }
