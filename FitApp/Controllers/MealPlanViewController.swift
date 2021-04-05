@@ -119,8 +119,7 @@ extension MealPlanViewController {
 	}
 	@objc func barButtonItemTapped(_ sender: UIBarButtonItem) {
 		if let commentVC = storyboard?.instantiateViewController(identifier: K.ViewControllerId.commentsViewController) {
-			commentVC.modalPresentationStyle = .fullScreen
-			self.present(commentVC, animated: true)
+			present(commentVC, animated: true)
 		}
 	}
 	@objc func todayBarButtonItemTapped(_ sender: UIBarButtonItem) {
