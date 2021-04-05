@@ -36,7 +36,10 @@ class ConsumptionManager {
         self.numberOfTrainings = userData.weaklyWorkouts ?? 0
         configureData()
     }
-    
+	
+	var getCalories: String {
+		return String(format: "%.0f", calories)
+	}
     var getDayProtein: Double {
         return proteinPortion
     }

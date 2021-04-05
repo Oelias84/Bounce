@@ -47,6 +47,7 @@ class HomeViewController: UIViewController {
 	
     @IBOutlet weak var userMotivationTextLabel: UILabel!
     
+	@IBOutlet weak var caloriesLabel: UILabel!
     @IBOutlet weak var fatCountLabel: UILabel!
     @IBOutlet weak var carbsCountLabel: UILabel!
     @IBOutlet weak var proteinCountLabel: UILabel!
@@ -115,9 +116,9 @@ extension HomeViewController {
         fatCountLabel.text = "\(fatStartValue)"
         carbsCountLabel.text = "\(carbsStartValue)"
         proteinCountLabel.text = "\(proteinStartValue)"
-		fatTargateLabel.text = "\(userProgress.fatTarget)"
-		carbsTargateLabel.text = "\(userProgress.carbsTarget)"
-		proteinTargateLabel.text = "\(userProgress.proteinTarget)"
+		fatTargateLabel.text = "מתוך \(userProgress.fatTarget)"
+		carbsTargateLabel.text = "מתוך \(userProgress.carbsTarget)"
+		proteinTargateLabel.text = "מתוך \(userProgress.proteinTarget)"
     }
     private func configureProgress() {
         circularProgress.subviews.forEach {
@@ -211,6 +212,7 @@ extension HomeViewController {
         configureProgress()
         setUpProgressTextFields()
 		
+		caloriesLabel.text = manager.getCalories
         fatCountLabel.text = "\(progress.fats)"
         carbsCountLabel.text = "\(progress.carbs)"
         proteinCountLabel.text = "\(progress.protein)"
