@@ -82,6 +82,10 @@ struct UserProfile {
     
     @UserDefault(key: .weaklyWorkouts)
     var weaklyWorkouts: Int?
+	
+	//MealData
+	@UserDefault(key: .otherDishes)
+	var otherDishes: [String]?
 }
 
 extension UserProfile {
@@ -194,6 +198,7 @@ extension Key {
     static let fitnessLevel: Key = "fitnessLevel"
     static let weaklyWorkouts: Key = "weaklyWorkouts"
     static let finishOnboarding: Key = "finishOnboarding"
+	static let otherDishes: Key = "otherDishes"
 }
 
 

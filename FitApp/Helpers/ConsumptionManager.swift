@@ -125,10 +125,10 @@ extension ConsumptionManager {
     //MARK: - Carbs calculation
     private func portionCarbs(fatPortion: Double, proteinPortion: Double, calories: Double) -> Double {
 		let caloriesCarbs = calories - ((fatPortion * 100) + (proteinPortion * 150))
-	 let portion = caloriesCarbs / 100.0
-	 let truncatingRemainder = portion.fraction
-	 
-	 return roundOrHalf(friction: truncatingRemainder, portion: portion)
+		let portion = caloriesCarbs / 100.0
+		let truncatingRemainder = portion.fraction
+		
+		return roundOrHalf(friction: truncatingRemainder, portion: portion)
  }
     
     private func configureData() {

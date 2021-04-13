@@ -70,6 +70,7 @@ struct K {
         //Meal
         static let mealViewController = "MealViewController"
 		static let commentsViewController = "CommentsViewController"
+		static let dishesListViewController = "DishesTableViewController"
 		//Questionnaire
         static let questionnaireNavigation = "QuestionnaireNavigation"
         static let questionnaireWelcome = "QuestionnaireWelcome"
@@ -129,6 +130,7 @@ struct K {
         static let workoutCell = "workoutCell"
 		static let settingsOptionCell = "settingsOptionCell"
 		static let chatCell = "chatCell"
+		static let dishesCell = "dishesCell"
     }
 	
     struct NibName {

@@ -39,77 +39,67 @@ class DishView: UIView {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
+	
     @IBAction func checkBoxButtonAction(_ sender: UIButton) {
         checkBoxButton.isSelected = !sender.isSelected
         dish.isDishDone.toggle()
         delegate?.didCheck(dish: dish)
     }
-    
-    func commonInit() {
-        Bundle.main.loadNibNamed(K.NibName.dishView, owner: self)
-        view.fixInView(self)
-        
-        dishPickerView.delegate = self
-        dishPickerView.dataSource = self
-        dishNameTextField.inputView = dishPickerView
-        dishNameTextField.delegate = self
-		dishNameTextField.layer.cornerRadius = 4
-		dishNameTextField.layer.borderWidth = 1
-		dishNameTextField.layer.borderColor = UIColor.systemBlue.cgColor
-        dishPickerView.backgroundColor = .white
-        setupToolBar()
-    }
-    func configureData() {
-        amountLabel.text = "x\(dish.amount)"
-        dishTypeLabel.text = dish.printDishType
-        dishNameTextField.text = dish.getDishName
-        checkBoxButton.isSelected = dish.isDishDone
-    }
 }
 
-extension DishView: UIPickerViewDataSource, UIPickerViewDelegate {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        1
-    }
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        dishes.count
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return dishes[row].name
-    }
-    func setupToolBar() {
-        let toolBar = UIToolbar()
-        let confirm = UIBarButtonItem(title: "אישור", style: .plain, target: self, action: #selector(confirmTapped))
-		let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-		let cancel = UIBarButtonItem(title: "ביטול", style: .done, target: self, action: #selector(closeTapped))
-		
-		toolBar.sizeToFit()
-        toolBar.setItems([confirm, spacer, cancel], animated: true)
-        toolBar.isUserInteractionEnabled = true
-        dishNameTextField.inputAccessoryView = toolBar
-    }
+extension DishView {
+	
     @objc func confirmTapped() {
         dish.setName(name: dishes[dishPickerView.selectedRow(inComponent: 0)].name)
         dishNameTextField.text = dishes[dishPickerView.selectedRow(inComponent: 0)].name
-        print(dish.getDishName)
+		
         view.endEditing(true)
         delegate?.didCheck(dish: dish)
     }
 	@objc func closeTapped() {
 		view.endEditing(true)
 	}
+	private func commonInit() {
+		Bundle.main.loadNibNamed(K.NibName.dishView, owner: self)
+		view.fixInView(self)
+		
+		dishNameTextField.delegate = self
+		dishNameTextField.layer.cornerRadius = 4
+		dishNameTextField.layer.borderWidth = 1
+		dishNameTextField.layer.borderColor = UIColor.systemBlue.cgColor
+		dishNameTextField.inputView = UIView()
+		dishPickerView.backgroundColor = .white
+	}
+	private func configureData() {
+		amountLabel.text = "x\(dish.amount)"
+		dishTypeLabel.text = dish.printDishType
+		dishNameTextField.text = dish.getDishName
+		checkBoxButton.isSelected = dish.isDishDone
+	}
 }
 
 extension DishView: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        let dishName = textField.text
-        if let arrayIndexForDishName = dishes.firstIndex(where: {$0.name == dishName}) {
-            dishPickerView.selectRow(arrayIndexForDishName, inComponent: 0, animated: false)
-        } else {
-            
-        }
+		let storyboard = UIStoryboard(name: K.StoryboardName.mealPlan, bundle: nil)
+		let dishesListVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.dishesListViewController) as DishesTableViewController
+		
+		dishesListVC.delegate = self
+		dishesListVC.dishes = self.dishes
+		dishesListVC.originalDish = dish
+		self.parentViewController?.present(dishesListVC, animated: true)
     }
+}
+
+extension DishView: DishesTableViewControllerDelegate {
+	
+	func didPickDish(name: String?) {
+		
+		if let name = name {
+			dish.setName(name: name)
+			dishNameTextField.text = name
+			delegate?.didCheck(dish: dish)
+		}
+		dishNameTextField.endEditing(true)
+	}
 }

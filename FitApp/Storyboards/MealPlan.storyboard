@@ -161,6 +161,85 @@
             </objects>
             <point key="canvasLocation" x="2153.6231884057975" y="-117.1875"/>
         </scene>
+        <!--Dishes Table View Controller-->
+        <scene sceneID="E96-54-ZAB">
+            <objects>
+                <viewController storyboardIdentifier="DishesTableViewController" id="NQt-sN-zou" customClass="DishesTableViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RGQ-o2-rUk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3o2-Oe-fBy">
+                                <rect key="frame" x="0.0" y="98" width="414" height="764"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dishesCell" id="0fb-u7-asH">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0fb-u7-asH" id="tea-OR-U9Q">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="NQt-sN-zou" id="7nL-Hi-PlH"/>
+                                    <outlet property="delegate" destination="NQt-sN-zou" id="3Ys-cT-8eo"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gvg-pm-H70">
+                                <rect key="frame" x="367" y="52" width="31" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="אחר"/>
+                                <connections>
+                                    <action selector="otherButtonAction:" destination="NQt-sN-zou" eventType="touchUpInside" id="DG6-qd-eVf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r9p-2i-eYZ">
+                                <rect key="frame" x="16" y="52" width="38" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="ביטול">
+                                    <color key="titleColor" systemColor="systemRedColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonAction:" destination="NQt-sN-zou" eventType="touchUpInside" id="wZZ-Jt-yQ6"/>
+                                </connections>
+                            </button>
+                            <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aNu-nX-w30">
+                                <rect key="frame" x="138" y="7" width="414" height="44"/>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="סוג מנה" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eL0-n5-slG">
+                                <rect key="frame" x="179.5" y="58.5" width="55" height="21.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3JB-6k-h3V"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Gvg-pm-H70" firstAttribute="top" secondItem="3JB-6k-h3V" secondAttribute="top" constant="8" id="BH5-V8-poR"/>
+                            <constraint firstItem="3JB-6k-h3V" firstAttribute="trailing" secondItem="3o2-Oe-fBy" secondAttribute="trailing" id="Ezb-CI-KAR"/>
+                            <constraint firstItem="3JB-6k-h3V" firstAttribute="trailing" secondItem="Gvg-pm-H70" secondAttribute="trailing" constant="16" id="JWw-cb-Xvs"/>
+                            <constraint firstItem="r9p-2i-eYZ" firstAttribute="leading" secondItem="3JB-6k-h3V" secondAttribute="leading" constant="16" id="K1Q-kD-DuR"/>
+                            <constraint firstItem="eL0-n5-slG" firstAttribute="centerX" secondItem="RGQ-o2-rUk" secondAttribute="centerX" id="LbC-aW-laC"/>
+                            <constraint firstItem="3o2-Oe-fBy" firstAttribute="top" secondItem="Gvg-pm-H70" secondAttribute="bottom" constant="12" id="Nde-hB-Yow"/>
+                            <constraint firstItem="3o2-Oe-fBy" firstAttribute="leading" secondItem="3JB-6k-h3V" secondAttribute="leading" id="NkE-wh-SOJ"/>
+                            <constraint firstItem="eL0-n5-slG" firstAttribute="top" secondItem="aNu-nX-w30" secondAttribute="bottom" constant="8" id="ffC-ez-fzA"/>
+                            <constraint firstItem="3JB-6k-h3V" firstAttribute="bottom" secondItem="3o2-Oe-fBy" secondAttribute="bottom" id="n6e-GB-mhX"/>
+                            <constraint firstItem="eL0-n5-slG" firstAttribute="centerY" secondItem="Gvg-pm-H70" secondAttribute="centerY" id="xYY-uk-7FQ"/>
+                            <constraint firstItem="r9p-2i-eYZ" firstAttribute="top" secondItem="3JB-6k-h3V" secondAttribute="top" constant="8" id="zK4-uU-SBe"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="3o2-Oe-fBy" id="sLp-uS-O0s"/>
+                        <outlet property="titleTextLabel" destination="eL0-n5-slG" id="jfb-im-1Uk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z71-E2-UDC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2884" y="-117"/>
+        </scene>
     </scenes>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
@@ -171,6 +250,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

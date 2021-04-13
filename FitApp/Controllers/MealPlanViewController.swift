@@ -75,28 +75,12 @@ extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MealPlanViewController {
     
-    func updateDataSource() {
+    private func updateDataSource() {
 		Spinner.shared.stop()
         tableView.register(UINib(nibName: K.NibName.mealPlanTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.mealCell)
         tableView.reloadData()
     }
-    func callToViewModelForUIUpdate() {
-		if let navView = navigationController?.view {
-			Spinner.shared.show(navView)
-		}
-        mealViewModel = MealViewModel.shared
-        if mealViewModel.meals == nil {
-            mealViewModel.fetchData()
-            mealViewModel.bindMealViewModelToController = {
-				Spinner.shared.stop()
-                self.updateDataSource()
-            }
-        } else {
-			Spinner.shared.stop()
-            updateDataSource()
-		}
-    }
-	func addBarButtonIcon() {
+	private func addBarButtonIcon() {
 		let comments = UIButton(type: .system)
 		let today = UIButton(type: .system)
 		let rightBarButton = UIBarButtonItem(customView: today)
@@ -116,6 +100,22 @@ extension MealPlanViewController {
 
 		navigationItem.rightBarButtonItem = rightBarButton
 		navigationItem.leftBarButtonItem = leftBarButton
+	}
+	private func callToViewModelForUIUpdate() {
+		if let navView = navigationController?.view {
+			Spinner.shared.show(navView)
+		}
+		mealViewModel = MealViewModel.shared
+		if mealViewModel.meals == nil {
+			mealViewModel.fetchData()
+			mealViewModel.bindMealViewModelToController = {
+				Spinner.shared.stop()
+				self.updateDataSource()
+			}
+		} else {
+			Spinner.shared.stop()
+			updateDataSource()
+		}
 	}
 	@objc func barButtonItemTapped(_ sender: UIBarButtonItem) {
 		if let commentVC = storyboard?.instantiateViewController(identifier: K.ViewControllerId.commentsViewController) {

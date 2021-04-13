@@ -54,6 +54,7 @@
 		7C9B345E2583C5B400D30480 /* QuestionnaireSumUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */; };
 		7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */; };
 		7C9B34922583F84A00D30480 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B34912583F84A00D30480 /* StartViewController.swift */; };
+		7CFFAD9C261DEF1000C05C66 /* DishesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFFAD9B261DEF1000C05C66 /* DishesTableViewController.swift */; };
 		B30069D325926F090025FA0E /* WeightProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30069D225926F090025FA0E /* WeightProgressViewController.swift */; };
 		B302982025793BBA00CF41F0 /* UserProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B302981F25793BBA00CF41F0 /* UserProgress.swift */; };
 		B330B87625757C1000BDB206 /* Workout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B330B87525757C1000BDB206 /* Workout.storyboard */; };
@@ -190,6 +191,7 @@
 		7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSumUpViewController.swift; sourceTree = "<group>"; };
 		7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C9B34912583F84A00D30480 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		7CFFAD9B261DEF1000C05C66 /* DishesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishesTableViewController.swift; sourceTree = "<group>"; };
 		ACEF8473DFF1F8DE43E4AFF4 /* Pods-FitApp-FitAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp-FitAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-FitApp-FitAppUITests/Pods-FitApp-FitAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B0AE3B48B417514ACEE1ACAB /* Pods-FitAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitAppTests.release.xcconfig"; path = "Target Support Files/Pods-FitAppTests/Pods-FitAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		B30069D225926F090025FA0E /* WeightProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightProgressViewController.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 			children = (
 				7C658AB425D990EB00CA75B2 /* CommentViewController.swift */,
 				B3E6E9B725714D5800958C48 /* MealPlanViewController.swift */,
+				7CFFAD9B261DEF1000C05C66 /* DishesTableViewController.swift */,
 			);
 			name = Meals;
 			sourceTree = "<group>";
@@ -1021,6 +1024,7 @@
 				7C3F4F8C25C9E2AF00EE3758 /* ResetPasswordViewController.swift in Sources */,
 				B368E04925A790D200BD1937 /* ServerDishs.swift in Sources */,
 				B3BB8F3B2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift in Sources */,
+				7CFFAD9C261DEF1000C05C66 /* DishesTableViewController.swift in Sources */,
 				7C7435EB25D31F9A00D33A9A /* Chat.swift in Sources */,
 				B35111CA25962D41001B2B9B /* weightTableViewCell.swift in Sources */,
 				7C74350325CDBAE900D33A9A /* ChatsViewModel.swift in Sources */,
