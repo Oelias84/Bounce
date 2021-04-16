@@ -66,7 +66,7 @@ extension DishView {
 		dishNameTextField.delegate = self
 		dishNameTextField.layer.cornerRadius = 4
 		dishNameTextField.layer.borderWidth = 1
-		dishNameTextField.layer.borderColor = UIColor.systemBlue.cgColor
+		dishNameTextField.layer.borderColor = UIColor.systemBlue.withAlphaComponent(0.1).cgColor
 		dishNameTextField.inputView = UIView()
 		dishPickerView.backgroundColor = .white
 	}

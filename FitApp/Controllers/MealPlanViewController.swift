@@ -14,35 +14,37 @@ class MealPlanViewController: UIViewController {
     private var mealViewModel: MealViewModel!
     private var selectedCellIndexPath: IndexPath?
     
-    @IBOutlet weak var dateTextLabel: UILabel!
-    @IBOutlet weak var dateLeftButton: UIButton!
-    @IBOutlet weak var dateRightButton: UIButton!
+	@IBOutlet weak var dateTextLabel: UILabel!
+	@IBOutlet weak var backwardDateButtonView: UIView!
+	@IBOutlet weak var backwardDateButton: UIButton!
+	@IBOutlet weak var forwardDateButtonView: UIView!
+    @IBOutlet weak var forwardDateButton: UIButton!
 
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-		dateRightButton.isHidden = true
-        dateTextLabel.text = date.dateStringDisplay
-		
-        callToViewModelForUIUpdate()
+
+		setupView()
 		addBarButtonIcon()
+        callToViewModelForUIUpdate()
     }
 	
     @IBAction func changeDateButtons(_ sender: UIButton) {
 		Spinner.shared.show(self.view)
 		
 		switch sender {
-        case dateRightButton:
+        case forwardDateButton:
             date = date.add(1.days)
-			mealViewModel.fetchMealsBy(date: date) { }
-        case dateLeftButton:
+			mealViewModel.fetchMealsBy(date: date)
+        case backwardDateButton:
             date = date.subtract(1.days)
-            mealViewModel.fetchMealsBy(date: date) { }
+            mealViewModel.fetchMealsBy(date: date)
         default:
             break
         }
-		dateRightButton.isHidden = date.day >= Date().day
+		forwardDateButton.isEnabled = date.onlyDate.isEarlier(than: Date().onlyDate)
+		forwardDateButton.alpha = forwardDateButton.isEnabled ? 1 : 0.2
         dateTextLabel.text = date.dateStringDisplay
         
         mealViewModel!.bindMealViewModelToController = {
@@ -117,6 +119,14 @@ extension MealPlanViewController {
 			updateDataSource()
 		}
 	}
+	private func setupView() {
+		forwardDateButton.isEnabled = false
+		dateTextLabel.text = date.dateStringDisplay
+		forwardDateButton.alpha = forwardDateButton.isEnabled ? 1 : 0.2
+
+		backwardDateButtonView.buttonShadow()
+		forwardDateButtonView.buttonShadow()
+	}
 	@objc func barButtonItemTapped(_ sender: UIBarButtonItem) {
 		if let commentVC = storyboard?.instantiateViewController(identifier: K.ViewControllerId.commentsViewController) {
 			present(commentVC, animated: true)
@@ -124,8 +134,7 @@ extension MealPlanViewController {
 	}
 	@objc func todayBarButtonItemTapped(_ sender: UIBarButtonItem) {
 		date = Date()
-		mealViewModel.fetchMealsBy(date: date) {}
-		dateRightButton.isHidden = true
+		mealViewModel.fetchMealsBy(date: date)
 		dateTextLabel.text = date.dateStringDisplay
 	}
 }

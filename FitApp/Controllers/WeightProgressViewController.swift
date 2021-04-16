@@ -69,7 +69,7 @@ class WeightProgressViewController: UIViewController {
 		updateFiltersArray()
 	}
 	@IBAction func addWeightButtonAction(_ sender: Any) {
-		if let weights = weightViewModel.weights, weights.contains(where: { $0.date.day == Date().day }) {
+		if let weights = weightViewModel.weights, weights.last!.date == Date() {
 			presentOkAlert(withMessage: "כבר נשקלת היום") {}
 			return
 		} else {

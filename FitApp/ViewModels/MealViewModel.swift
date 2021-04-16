@@ -94,14 +94,13 @@ class MealViewModel: NSObject {
         let dailyMeal = DailyMeal(meals: meals)
 		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal)
     }
-    func fetchMealsBy(date: Date, completion: @escaping () -> ()) {
+    func fetchMealsBy(date: Date) {
 		GoogleApiManager.shared.getMealFor(date) { result in
             switch result {
             case .success(let dailyMeal):
                 if let dailyMeal = dailyMeal {
                     self.meals = dailyMeal.meals
 					self.currentMealDate = date
-                    completion()
                 } else {
                     self.meals = []
                 }

@@ -72,11 +72,11 @@ class MealPlanTableViewCell: UITableViewCell {
 extension MealPlanTableViewCell {
     
     private func setupView() {
-        cellBackgroundView.layer.cornerRadius = 10
+        cellBackgroundView.layer.cornerRadius = 14
         cellBackgroundView.layer.shadowOpacity = 0.18
         cellBackgroundView.layer.shadowColor = UIColor.systemBlue.cgColor
-        cellBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 12)
-        cellBackgroundView.layer.shadowRadius = 12
+        cellBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 5)
+        cellBackgroundView.layer.shadowRadius = 14
         
     }
     private func configureData(isChecked: Bool = false) {
