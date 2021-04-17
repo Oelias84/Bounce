@@ -11,7 +11,7 @@ import UIKit
 class MealPlanViewController: UIViewController {
     
     private var date = Date()
-    private var mealViewModel: MealViewModel!
+	private var mealViewModel = MealViewModel.shared
     private var selectedCellIndexPath: IndexPath?
     
 	@IBOutlet weak var dateTextLabel: UILabel!
@@ -47,7 +47,7 @@ class MealPlanViewController: UIViewController {
 		forwardDateButton.alpha = forwardDateButton.isEnabled ? 1 : 0.2
         dateTextLabel.text = date.dateStringDisplay
         
-        mealViewModel!.bindMealViewModelToController = {
+        mealViewModel.bindMealViewModelToController = {
 			Spinner.shared.stop()
             self.updateDataSource()
         }
@@ -57,14 +57,14 @@ class MealPlanViewController: UIViewController {
 extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let meals = mealViewModel!.meals {
+        if let meals = mealViewModel.meals {
             return meals.count
         } else {
             return 0
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let mealData = mealViewModel?.meals?[indexPath.row]
+		let mealData = mealViewModel.meals?[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.mealCell, for: indexPath) as! MealPlanTableViewCell
         cell.mealViewModel = self.mealViewModel
         cell.meal = mealData
@@ -107,7 +107,6 @@ extension MealPlanViewController {
 		if let navView = navigationController?.view {
 			Spinner.shared.show(navView)
 		}
-		mealViewModel = MealViewModel.shared
 		if mealViewModel.meals == nil {
 			mealViewModel.fetchData()
 			mealViewModel.bindMealViewModelToController = {
@@ -116,7 +115,10 @@ extension MealPlanViewController {
 			}
 		} else {
 			Spinner.shared.stop()
-			updateDataSource()
+			self.updateDataSource()
+			mealViewModel.bindMealViewModelToController = {
+				self.tableView.reloadData()
+			}
 		}
 	}
 	private func setupView() {
@@ -142,15 +144,15 @@ extension MealPlanViewController {
 extension MealPlanViewController: MealPlanTableViewCellDelegate {
     
     func detailTapped(cell: IndexPath) {
-        let selectedCell = tableView.cellForRow(at: cell) as! MealPlanTableViewCell
-        
-        tableView.beginUpdates()
-        selectedCell.dishesHeadLineStackView.isHidden.toggle()
-        selectedCell.dishStackView.isHidden.toggle()
-        selectedCellIndexPath = cell
-        tableView.endUpdates()
-        if selectedCellIndexPath != nil {
-            tableView.scrollToRow(at: cell, at: .bottom, animated: true)
-        }
+//        let selectedCell = tableView.cellForRow(at: cell) as! MealPlanTableViewCell
+//        
+//        tableView.beginUpdates()
+//        selectedCell.dishesHeadLineStackView.isHidden.toggle()
+//        selectedCell.dishStackView.isHidden.toggle()
+//        selectedCellIndexPath = cell
+//        tableView.endUpdates()
+//        if selectedCellIndexPath != nil {
+//            tableView.scrollToRow(at: cell, at: .bottom, animated: true)
+//        }
     }
 }

@@ -144,6 +144,7 @@ struct K {
 		static let chatTableViewCell = "ChatTableViewCell"
 		static let addWeightAlertView = "AddWeightAlertView"
 		static let exerciseCategoryView = "ExerciseCategoryView"
+		static let moveDishView = "MoveDishView"
     }
 	
 	struct Units {

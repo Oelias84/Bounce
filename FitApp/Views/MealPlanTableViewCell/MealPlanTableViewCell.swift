@@ -16,14 +16,16 @@ import Foundation
 class MealPlanTableViewCell: UITableViewCell {
     
     var indexPath: IndexPath!
-    
+	
     var meal: Meal! {
         didSet {
             configureData()
         }
     }
+	var moveDishAlert: MoveDishView?
     var mealViewModel: MealViewModel!
-    
+	var dishToMove: Dish!
+
 	@IBOutlet weak var cellBackgroundView: UIView! {
 		didSet {
 			cellBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cellTapped)))
@@ -35,6 +37,7 @@ class MealPlanTableViewCell: UITableViewCell {
     @IBOutlet weak var dishesHeadLineStackView: UIStackView!
     @IBOutlet weak var dishStackView: UIStackView!
     @IBOutlet weak var dishesStackViewHeight: NSLayoutConstraint!
+	@IBOutlet weak var moveDishButton: UIButton!
 	@IBOutlet weak var downButton: UIButton!
 	
     var delegate: MealPlanTableViewCellDelegate?
@@ -48,9 +51,12 @@ class MealPlanTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
-    @IBAction func downButtonAction(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
+
+	@IBAction func moveDishButtonAction(_ sender: Any) {
+			presentMoveDishAlert()
+	}
+	@IBAction func downButtonAction(_ sender: UIButton) {
+		sender.isSelected = !sender.isSelected
 		delegate?.detailTapped(cell: indexPath)
     }
     @IBAction func completeMealCheckMarkAction(_ sender: UIButton) {
@@ -71,14 +77,23 @@ class MealPlanTableViewCell: UITableViewCell {
 
 extension MealPlanTableViewCell {
     
-    private func setupView() {
-        cellBackgroundView.layer.cornerRadius = 14
-        cellBackgroundView.layer.shadowOpacity = 0.18
-        cellBackgroundView.layer.shadowColor = UIColor.systemBlue.cgColor
-        cellBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 5)
-        cellBackgroundView.layer.shadowRadius = 14
-        
-    }
+	private func presentMoveDishAlert() {
+		moveDishAlert = MoveDishView()
+		moveDishAlert?.meal = meal
+		moveDishAlert?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width,
+									height: UIScreen.main.bounds.size.height)
+		if let alert = moveDishAlert {
+			window?.addSubview(alert)
+		}
+	}
+	private func setupView() {
+		cellBackgroundView.layer.cornerRadius = 14
+		cellBackgroundView.layer.shadowOpacity = 0.18
+		cellBackgroundView.layer.shadowColor = UIColor.systemBlue.cgColor
+		cellBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 5)
+		cellBackgroundView.layer.shadowRadius = 14
+		
+	}
     private func configureData(isChecked: Bool = false) {
         var tag = 1
         mealIsDoneCheckMark.isSelected = meal.isMealDone
@@ -98,6 +113,11 @@ extension MealPlanTableViewCell {
             dishStackView.addArrangedSubview(view)
             dishesStackViewHeight.constant += 40
         }
+		if meal.dishes.count == 1 && meal.dishes.first?.amount == 0.5 {
+			moveDishButton.isHidden = true
+		} else {
+			moveDishButton.isHidden = false
+		}
     }
 }
 
@@ -136,9 +156,8 @@ extension MealPlanTableViewCell {
         configureData()
         mealViewModel.updateMeals(for: Date())
     }
-	
 	@objc private func cellTapped() {
 		delegate?.detailTapped(cell: indexPath)
-		downButton.isSelected = !downButton.isSelected
+//		downButton.isSelected = !downButton.isSelected
 	}
 }

@@ -89,6 +89,30 @@ class MealViewModel: NSObject {
 	}
     
     //MARK: - Meals
+	func move(portion: Double, of dish: Dish, from meal: Meal, to destinationMeal: Meal) {
+		guard let meals = meals else { return }
+
+		if meals.first(where: {$0 == meal})?.dishes.first(where: {$0 == dish})?.amount == portion {
+			meals.first(where: {$0 == meal})?.dishes.removeAll(where: {$0 == dish})
+		} else {
+			meals.first(where: {$0 == meal})?.dishes.first(where: {$0 == dish})?.amount -= portion
+		}
+		
+		if meals.first(where: {$0 == destinationMeal})!.dishes.contains(where: {$0.type == dish.type}) {
+			meals.first(where: {$0 == destinationMeal})!.dishes.first(where: {$0.type == dish.type})?.amount += dish.amount
+		} else {
+			meals.first(where: {$0 == destinationMeal})!.dishes.append(dish)
+		}
+		
+		
+//		if meals[destinationMeal].dishes.contains(where: {$0.type == dish.type}) {
+//			meals[destinationMeal].dishes.first(where: {$0.type == dish.type})?.amount += dish.amount
+//		} else {
+//			meals[destinationMeal].dishes.append(dish)
+//		}
+		updateMeals(for: meal.date)
+		fetchMealsBy(date: meal.date)
+	}
     func updateMeals(for date: Date) {
         guard let meals = self.meals else { return }
         let dailyMeal = DailyMeal(meals: meals)

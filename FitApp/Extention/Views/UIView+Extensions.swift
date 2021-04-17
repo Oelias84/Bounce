@@ -73,6 +73,7 @@ extension UIView {
 		layer.shadowOffset = CGSize(width: 0, height: 12)
 		layer.shadowRadius = 12
 	}
+	// OUTPUT 2
 	func buttonShadow(scale: Bool = true) {
 		layer.masksToBounds = false
 		layer.shadowColor = UIColor.systemBlue.cgColor
@@ -80,8 +81,7 @@ extension UIView {
 		layer.shadowOffset = CGSize(width: 0, height: 3)
 		layer.shadowRadius = 4
 	}
-	
-	// OUTPUT 2
+	// OUTPUT 3
 	func dropShadow(color: UIColor, opacity: Float = 0.5, offSet: CGSize, radius: CGFloat = 1, scale: Bool = true) {
 		layer.masksToBounds = false
 		layer.shadowColor = color.cgColor
@@ -92,5 +92,33 @@ extension UIView {
 		layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
 		layer.shouldRasterize = true
 		layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+	}
+	
+	//MARK: - Keyboard Listener
+	func raiseScreenWhenKeyboardAppears() {
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+	}
+	func removeKeyboardListener() {
+		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: self)
+		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: self)
+	}
+	func addScreenTappGesture() {
+		addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissView)))
+	}
+	@objc func keyboardWillShow(notification: NSNotification) {
+		if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+			if frame.origin.y == 0 {
+				frame.origin.y -= keyboardSize.height
+			}
+		}
+	}
+	@objc func keyboardWillHide(notification: NSNotification) {
+		if frame.origin.y != 0 {
+			frame.origin.y = 0
+		}
+	}
+	@objc func dismissView() {
+		endEditing(true)
 	}
 }

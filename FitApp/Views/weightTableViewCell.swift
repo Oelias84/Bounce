@@ -58,12 +58,6 @@ class weightTableViewCell: UITableViewCell {
 	@IBOutlet weak var disclosureIndicatorImage: UIImageView!
 	@IBOutlet weak var weightImageView: UIImageView!
 
-	
-	override func awakeFromNib() {
-		super.awakeFromNib()
-		
-	}
-	
 	override func setSelected(_ selected: Bool, animated: Bool) {
 		super.setSelected(selected, animated: animated)
 	}
