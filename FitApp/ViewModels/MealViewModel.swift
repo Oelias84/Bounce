@@ -26,11 +26,11 @@ class MealViewModel: NSObject {
 		fetchDishes()
     }
     
-    func fetchData() {
+	func fetchData(date: Date? = Date()) {
 		let consumptionManager = ConsumptionManager.shared
 		consumptionManager.calculateUserData()
 		
-        if self.meals == nil {
+		if self.meals == nil || date?.onlyDate != Date().onlyDate {
             let userData = UserProfile.defaults
             var preferredMeal: MealType?
             switch userData.mostHungry {
@@ -43,7 +43,7 @@ class MealViewModel: NSObject {
             default:
                 preferredMeal = nil
             }
-			fetchMealsForOrCreate(date: Date(), prefer: preferredMeal, numberOfMeals: userData.mealsPerDay!, protein: consumptionManager.getDayProtein, carbs: consumptionManager.getDayCarbs, fat: consumptionManager.getDayFat)
+			fetchMealsForOrCreate(date: date!, prefer: preferredMeal, numberOfMeals: userData.mealsPerDay!, protein: consumptionManager.getDayProtein, carbs: consumptionManager.getDayCarbs, fat: consumptionManager.getDayFat)
         }
     }
     
@@ -103,30 +103,25 @@ class MealViewModel: NSObject {
 		} else {
 			meals.first(where: {$0 == destinationMeal})!.dishes.append(dish)
 		}
-		
-		
-//		if meals[destinationMeal].dishes.contains(where: {$0.type == dish.type}) {
-//			meals[destinationMeal].dishes.first(where: {$0.type == dish.type})?.amount += dish.amount
-//		} else {
-//			meals[destinationMeal].dishes.append(dish)
-//		}
 		updateMeals(for: meal.date)
-		fetchMealsBy(date: meal.date)
+		fetchMealsBy(date: meal.date) {_ in}
 	}
     func updateMeals(for date: Date) {
         guard let meals = self.meals else { return }
         let dailyMeal = DailyMeal(meals: meals)
 		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal)
     }
-    func fetchMealsBy(date: Date) {
+    func fetchMealsBy(date: Date, completion: @escaping (Bool) -> ()) {
 		GoogleApiManager.shared.getMealFor(date) { result in
             switch result {
             case .success(let dailyMeal):
                 if let dailyMeal = dailyMeal {
                     self.meals = dailyMeal.meals
 					self.currentMealDate = date
+					completion(true)
                 } else {
                     self.meals = []
+					completion(false)
                 }
             case .failure(let error):
                 print(error)
@@ -141,7 +136,7 @@ class MealViewModel: NSObject {
                     self.meals = dailyMeal.meals
 					self.currentMealDate = date
                 } else {
-                    self.meals = self.populateMeals(hasPrefer: prefer, numberOfMeals: numberOfMeals, protein: protein, carbs: carbs, fat: fat)
+					self.meals = self.populateMeals(date: date, hasPrefer: prefer, numberOfMeals: numberOfMeals, protein: protein, carbs: carbs, fat: fat)
 					UserProfile.defaults.showMealNotFinishedAlert = true
                 }
             case .failure(let error):
@@ -246,7 +241,7 @@ class MealViewModel: NSObject {
             return numberOfDishes
         }
     }
-    func populateMeals(hasPrefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) -> [Meal] {
+	func populateMeals(date: Date, hasPrefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) -> [Meal] {
         var dayMeals = [Meal(mealType: .breakfast, dishes: []), Meal(mealType: .lunch, dishes: []), Meal(mealType: .supper, dishes: [])]
 		
 		let numberCarbsDish = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .carbs, numberOfDishes: carbs)
@@ -291,7 +286,7 @@ class MealViewModel: NSObject {
             dayMeals.insert(Meal(mealType: .middle2, dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein), type: .protein, amount: 1),
                                                               Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .fat), type: .fat, amount: 0.5)]), at: 3)
         }
-		GoogleApiManager.shared.createDailyMeal(meals: dayMeals)
+		GoogleApiManager.shared.createDailyMeal(meals: dayMeals, date: date)
         return dayMeals
     }
 }

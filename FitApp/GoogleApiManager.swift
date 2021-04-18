@@ -50,9 +50,9 @@ struct GoogleApiManager {
     }
     
     //MARK: - Meals
-    func createDailyMeal(meals: [Meal]) {
+	func createDailyMeal(meals: [Meal], date: Date) {
 		guard !meals.isEmpty else { return }
-        let currentDate = Date().dateStringForDB
+        let currentDate = date.dateStringForDB
 		let dailyMeals = DailyMeal(meals: meals)
 		
         do {

@@ -47,7 +47,6 @@ class MoveDishView: UIView {
 		commonInit()
 		setupView()
 	}
-	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		commonInit()
@@ -76,35 +75,6 @@ class MoveDishView: UIView {
 	@IBAction func dishAmountStepper(_ sender: UIStepper) {
 		dishAmount = sender.value
 		dishAmountLabel.text = "\(sender.value)"
-	}
-	
-	private func setupView() {
-		mealViewModel = MealViewModel.shared
-
-		dishPickerView.delegate = self
-		dishPickerView.dataSource = self
-		destinationPickerView.delegate = self
-		destinationPickerView.dataSource = self
-		dishToMoveTextfield.delegate = self
-		destinationMealTextfield.delegate = self
-		dishToMoveTextfield.inputView = dishPickerView
-		destinationMealTextfield.inputView = destinationPickerView
-		dishToMoveTextfield.tintColor = .clear
-		destinationMealTextfield.tintColor = .clear
-		dishAmountStepper.minimumValue = 0.5
-		dishAmountStepper.stepValue = 0.5
-		dishToMoveTextfield.becomeFirstResponder()
-	}
-	private func commonInit() {
-		self.alpha = 0
-		Bundle.main.loadNibNamed(K.NibName.moveDishView, owner: self, options: nil)
-		addSubview(contentView)
-		contentView.frame = self.bounds
-		contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		UIView.animate(withDuration: 0.2) {
-			self.alpha = 1
-		}
-		raiseScreenWhenKeyboardAppears()
 	}
 }
 
@@ -136,22 +106,21 @@ extension MoveDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 			return nil
 		}
 	}
-	
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
-		switch pickerView {
-		case dishPickerView:
-			dishAmountStepper.value = 0.5
-			dishAmountStepper.maximumValue = meal.dishes[row].amount
-			dishToMoveTextfield.text = meal.dishes[row].getDishName
-			dishToMove = meal.dishes[row]
-		case destinationPickerView:
-			destinationMealTextfield.text = mealViewModel.meals!.filter{$0 != meal}[row].name
-			moveToMealIndex = mealViewModel.meals!.filter{$0 != meal}[row]
-		default:
-			break
-		}
+	switch pickerView {
+	case dishPickerView:
+		dishAmountStepper.value = 0.5
+		dishAmountStepper.maximumValue = meal.dishes[row].amount
+		dishToMoveTextfield.text = meal.dishes[row].getDishName
+		dishToMove = meal.dishes[row]
+	case destinationPickerView:
+		destinationMealTextfield.text = mealViewModel.meals!.filter{$0 != meal}[row].name
+		moveToMealIndex = mealViewModel.meals!.filter{$0 != meal}[row]
+	default:
+		break
 	}
+}
 }
 
 extension MoveDishView: UITextFieldDelegate {
@@ -176,5 +145,37 @@ extension MoveDishView: UITextFieldDelegate {
 		default:
 			break
 		}
+	}
+}
+
+extension MoveDishView {
+	
+	private func setupView() {
+		mealViewModel = MealViewModel.shared
+
+		dishPickerView.delegate = self
+		dishPickerView.dataSource = self
+		destinationPickerView.delegate = self
+		destinationPickerView.dataSource = self
+		dishToMoveTextfield.delegate = self
+		destinationMealTextfield.delegate = self
+		dishToMoveTextfield.inputView = dishPickerView
+		destinationMealTextfield.inputView = destinationPickerView
+		dishToMoveTextfield.tintColor = .clear
+		destinationMealTextfield.tintColor = .clear
+		dishAmountStepper.minimumValue = 0.5
+		dishAmountStepper.stepValue = 0.5
+		dishToMoveTextfield.becomeFirstResponder()
+	}
+	private func commonInit() {
+		self.alpha = 0
+		Bundle.main.loadNibNamed(K.NibName.moveDishView, owner: self, options: nil)
+		addSubview(contentView)
+		contentView.frame = self.bounds
+		contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		UIView.animate(withDuration: 0.2) {
+			self.alpha = 1
+		}
+		raiseScreenWhenKeyboardAppears()
 	}
 }

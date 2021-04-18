@@ -36,17 +36,25 @@ class MealPlanViewController: UIViewController {
 		switch sender {
         case forwardDateButton:
             date = date.add(1.days)
-			mealViewModel.fetchMealsBy(date: date)
+			mealViewModel.fetchMealsBy(date: date) {
+				[weak self] hasMeal in
+				guard let self = self else { return }
+				self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
+			}
         case backwardDateButton:
             date = date.subtract(1.days)
-            mealViewModel.fetchMealsBy(date: date)
+            mealViewModel.fetchMealsBy(date: date) {
+				[weak self] hasMeal in
+				guard let self = self else { return }
+				self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
+			}
         default:
             break
         }
 		forwardDateButton.isEnabled = date.onlyDate.isEarlier(than: Date().onlyDate)
 		forwardDateButton.alpha = forwardDateButton.isEnabled ? 1 : 0.2
-        dateTextLabel.text = date.dateStringDisplay
-        
+		dateTextLabel.text = date.displayDayName + " ה-" + date.dateStringDisplay
+
         mealViewModel.bindMealViewModelToController = {
 			Spinner.shared.stop()
             self.updateDataSource()
@@ -68,7 +76,6 @@ extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.mealCell, for: indexPath) as! MealPlanTableViewCell
         cell.mealViewModel = self.mealViewModel
         cell.meal = mealData
-        cell.delegate = self
         cell.indexPath = indexPath
         cell.selectionStyle = .none
         return cell
@@ -77,11 +84,14 @@ extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MealPlanViewController {
     
-    private func updateDataSource() {
-		Spinner.shared.stop()
-        tableView.register(UINib(nibName: K.NibName.mealPlanTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.mealCell)
-        tableView.reloadData()
-    }
+	private func setupView() {
+		forwardDateButton.isEnabled = false
+		dateTextLabel.text = date.displayDayName + " ה-" + date.dateStringDisplay
+		forwardDateButton.alpha = forwardDateButton.isEnabled ? 1 : 0.2
+
+		backwardDateButtonView.buttonShadow()
+		forwardDateButtonView.buttonShadow()
+	}
 	private func addBarButtonIcon() {
 		let comments = UIButton(type: .system)
 		let today = UIButton(type: .system)
@@ -103,6 +113,11 @@ extension MealPlanViewController {
 		navigationItem.rightBarButtonItem = rightBarButton
 		navigationItem.leftBarButtonItem = leftBarButton
 	}
+	private func updateDataSource() {
+		Spinner.shared.stop()
+		tableView.register(UINib(nibName: K.NibName.mealPlanTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.mealCell)
+		tableView.reloadData()
+	}
 	private func callToViewModelForUIUpdate() {
 		if let navView = navigationController?.view {
 			Spinner.shared.show(navView)
@@ -121,13 +136,12 @@ extension MealPlanViewController {
 			}
 		}
 	}
-	private func setupView() {
-		forwardDateButton.isEnabled = false
-		dateTextLabel.text = date.dateStringDisplay
-		forwardDateButton.alpha = forwardDateButton.isEnabled ? 1 : 0.2
-
-		backwardDateButtonView.buttonShadow()
-		forwardDateButtonView.buttonShadow()
+	private func presentEmptyTableViewBackground(_ date: Date) -> UIView {
+		let messageText = "לחצו כאן ליצירת תפריט תזונה לתאריך ה- \(date.dateStringDisplay)"
+		let noMealBackgroundView = TableViewEmptyView(text: messageText, hasTabBar: self.tabBarController?.tabBar.frame.size.height)
+		
+		noMealBackgroundView.delegate = self
+		return noMealBackgroundView
 	}
 	@objc func barButtonItemTapped(_ sender: UIBarButtonItem) {
 		if let commentVC = storyboard?.instantiateViewController(identifier: K.ViewControllerId.commentsViewController) {
@@ -136,23 +150,15 @@ extension MealPlanViewController {
 	}
 	@objc func todayBarButtonItemTapped(_ sender: UIBarButtonItem) {
 		date = Date()
-		mealViewModel.fetchMealsBy(date: date)
-		dateTextLabel.text = date.dateStringDisplay
+		mealViewModel.fetchMealsBy(date: date) {_ in}
+		dateTextLabel.text = date.displayDayName + " ה-" + date.dateStringDisplay
 	}
 }
 
-extension MealPlanViewController: MealPlanTableViewCellDelegate {
-    
-    func detailTapped(cell: IndexPath) {
-//        let selectedCell = tableView.cellForRow(at: cell) as! MealPlanTableViewCell
-//        
-//        tableView.beginUpdates()
-//        selectedCell.dishesHeadLineStackView.isHidden.toggle()
-//        selectedCell.dishStackView.isHidden.toggle()
-//        selectedCellIndexPath = cell
-//        tableView.endUpdates()
-//        if selectedCellIndexPath != nil {
-//            tableView.scrollToRow(at: cell, at: .bottom, animated: true)
-//        }
-    }
+extension MealPlanViewController: TableViewEmptyViewDelegate {
+
+	func buttonTapped() {
+		Spinner.shared.show(view)
+		mealViewModel.fetchData(date: date)
+	}
 }
