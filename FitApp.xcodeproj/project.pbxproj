@@ -333,8 +333,8 @@
 		7C658AF325D9A49700CA75B2 /* Meals */ = {
 			isa = PBXGroup;
 			children = (
-				7C658AB425D990EB00CA75B2 /* CommentViewController.swift */,
 				B3E6E9B725714D5800958C48 /* MealPlanViewController.swift */,
+				7C658AB425D990EB00CA75B2 /* CommentViewController.swift */,
 				7CFFAD9B261DEF1000C05C66 /* DishesTableViewController.swift */,
 			);
 			name = Meals;

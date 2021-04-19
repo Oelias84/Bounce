@@ -217,7 +217,7 @@ extension HomeViewController {
         carbsCountLabel.text = "\(progress.carbs)"
         proteinCountLabel.text = "\(progress.protein)"
 		if let view = titleStackView.subviews[0] as? UILabel {
-			view.text = mealViewModel.getMealDate().dateStringDisplay
+			view.text = mealViewModel.getMealDate()
 		}
     }
 	private func setupView() {

@@ -34,7 +34,7 @@ class Meal: Codable {
         case .lunch:
             return "ארוחת צהריים"
         case .middle2:
-            return "ארוחת ביניית 2"
+            return "ארוחת ביניים 2"
         case .supper:
             return "ארוחת ערב"
         }

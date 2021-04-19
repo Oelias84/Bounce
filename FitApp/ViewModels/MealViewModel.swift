@@ -70,9 +70,10 @@ class MealViewModel: NSObject {
         }
         return MealProgress(carbs: carbs, fats: fats, protein: protein)
     }
-	func getMealDate() -> Date {
-		return currentMealDate ?? Date()
+	func getMealDate() -> String {
+		return (currentMealDate ?? Date()).dateStringDisplay + " " + (currentMealDate ?? Date()).displayDayName
 	}
+	
 	func checkDailyMealIsDone(completion: @escaping (Bool) -> ()) {
 		let calendar = Calendar.current
 		let pastHour = calendar.dateComponents([.hour,.minute,.second], from: "22:30".timeFromString!)
@@ -95,14 +96,10 @@ class MealViewModel: NSObject {
 		if meals.first(where: {$0 == meal})?.dishes.first(where: {$0 == dish})?.amount == portion {
 			meals.first(where: {$0 == meal})?.dishes.removeAll(where: {$0 == dish})
 		} else {
-			meals.first(where: {$0 == meal})?.dishes.first(where: {$0 == dish})?.amount -= portion
+			meals.first(where: {$0 == meal})?.dishes.first(where: {$0.getDishName == dish.getDishName})?.amount -= portion
 		}
+		meals.first(where: {$0 == destinationMeal})!.dishes.append(dish)
 		
-		if meals.first(where: {$0 == destinationMeal})!.dishes.contains(where: {$0.type == dish.type}) {
-			meals.first(where: {$0 == destinationMeal})!.dishes.first(where: {$0.type == dish.type})?.amount += dish.amount
-		} else {
-			meals.first(where: {$0 == destinationMeal})!.dishes.append(dish)
-		}
 		updateMeals(for: meal.date)
 		fetchMealsBy(date: meal.date) {_ in}
 	}

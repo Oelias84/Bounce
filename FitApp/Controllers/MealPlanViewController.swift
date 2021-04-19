@@ -53,7 +53,7 @@ class MealPlanViewController: UIViewController {
         }
 		forwardDateButton.isEnabled = date.onlyDate.isEarlier(than: Date().onlyDate)
 		forwardDateButton.alpha = forwardDateButton.isEnabled ? 1 : 0.2
-		dateTextLabel.text = date.displayDayName + " ה-" + date.dateStringDisplay
+		dateTextLabel.text = date.dateStringDisplay + " " + date.displayDayName
 
         mealViewModel.bindMealViewModelToController = {
 			Spinner.shared.stop()
@@ -86,7 +86,7 @@ extension MealPlanViewController {
     
 	private func setupView() {
 		forwardDateButton.isEnabled = false
-		dateTextLabel.text = date.displayDayName + " ה-" + date.dateStringDisplay
+		dateTextLabel.text = date.dateStringDisplay + " " + date.displayDayName
 		forwardDateButton.alpha = forwardDateButton.isEnabled ? 1 : 0.2
 
 		backwardDateButtonView.buttonShadow()
@@ -151,7 +151,7 @@ extension MealPlanViewController {
 	@objc func todayBarButtonItemTapped(_ sender: UIBarButtonItem) {
 		date = Date()
 		mealViewModel.fetchMealsBy(date: date) {_ in}
-		dateTextLabel.text = date.displayDayName + " ה-" + date.dateStringDisplay
+		dateTextLabel.text = date.dateStringDisplay + " " + date.displayDayName
 	}
 }
 

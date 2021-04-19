@@ -89,7 +89,7 @@ extension MoveDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 		case dishPickerView:
 			return meal.dishes.count
 		case destinationPickerView:
-			return mealViewModel.meals!.filter{$0 != meal}.count
+			return mealViewModel.meals!.count
 		default:
 			return 0
 		}
@@ -101,7 +101,7 @@ extension MoveDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 			let dish = meal.dishes[row]
 			return dish.getDishName + " " + dish.type.rawValue
 		case destinationPickerView:
-			return mealViewModel.meals!.filter{$0 != meal}[row].name
+			return mealViewModel.meals![row].name
 		default:
 			return nil
 		}
@@ -115,8 +115,8 @@ extension MoveDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 		dishToMoveTextfield.text = meal.dishes[row].getDishName
 		dishToMove = meal.dishes[row]
 	case destinationPickerView:
-		destinationMealTextfield.text = mealViewModel.meals!.filter{$0 != meal}[row].name
-		moveToMealIndex = mealViewModel.meals!.filter{$0 != meal}[row]
+		destinationMealTextfield.text = mealViewModel.meals![row].name
+		moveToMealIndex = mealViewModel.meals![row]
 	default:
 		break
 	}
@@ -139,8 +139,8 @@ extension MoveDishView: UITextFieldDelegate {
 			if let mealNameIndex = mealViewModel.meals?.firstIndex(where: {$0.name == dishName }) {
 				dishPickerView.selectRow(mealNameIndex, inComponent: 0, animated: false)
 			} else {
-				textField.text = mealViewModel.meals!.filter{$0 != meal}.first?.name
-				moveToMealIndex = mealViewModel.meals!.filter{$0 != meal}.first
+				textField.text = mealViewModel.meals!.first?.name
+				moveToMealIndex = mealViewModel.meals!.first
 			}
 		default:
 			break
