@@ -34,6 +34,9 @@ class AddWeightAlertView: UIView {
 		commonInit()
 		setupView()
 	}
+	deinit {
+		removeKeyboardListener()
+	}
 	
 	@objc func cameraButtonAction() {
 		delegate?.cameraButtonTapped()
@@ -68,9 +71,11 @@ class AddWeightAlertView: UIView {
 			formatter.timeZone = .current
 			return formatter.string(from: Date())
 		}
+		
 		weightTextField.becomeFirstResponder()
 		weightTextField.layer.borderColor = UIColor.systemBlue.cgColor
 		dateLabel.text = dateStringDisplay
+		raiseScreenWhenKeyboardAppears()
 		weightImageButton.isUserInteractionEnabled = true
 		weightImageButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cameraButtonAction)))
 	}

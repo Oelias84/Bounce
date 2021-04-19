@@ -59,6 +59,9 @@ class WeightProgressViewController: UIViewController {
 		dateRightButton.isHidden = true
 		tableView.sectionHeaderHeight = 46
 	}
+	deinit {
+		removeKeyboardListener()
+	}
 	
 	@IBAction func todayButtonAction(_ sender: Any) {
 		selectedDate = Date()

@@ -152,7 +152,8 @@ extension MoveDishView {
 	
 	private func setupView() {
 		mealViewModel = MealViewModel.shared
-
+		
+		raiseScreenWhenKeyboardAppears()
 		dishPickerView.delegate = self
 		dishPickerView.dataSource = self
 		destinationPickerView.delegate = self
@@ -176,6 +177,5 @@ extension MoveDishView {
 		UIView.animate(withDuration: 0.2) {
 			self.alpha = 1
 		}
-		raiseScreenWhenKeyboardAppears()
 	}
 }

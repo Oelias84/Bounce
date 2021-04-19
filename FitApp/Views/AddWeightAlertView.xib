@@ -31,7 +31,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H4I-wN-WGu">
-                                <rect key="frame" x="57" y="200" width="300" height="300"/>
+                                <rect key="frame" x="57" y="554" width="300" height="300"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="הזנת משקל עדכני" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5sQ-Kx-DMg">
                                         <rect key="frame" x="88.5" y="16" width="123.5" height="20.5"/>
@@ -222,7 +222,7 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="H4I-wN-WGu" firstAttribute="centerX" secondItem="25b-si-PLG" secondAttribute="centerX" id="5Ye-Nr-ddt"/>
-                            <constraint firstItem="H4I-wN-WGu" firstAttribute="top" secondItem="25b-si-PLG" secondAttribute="top" constant="200" id="oDD-Y1-UKh"/>
+                            <constraint firstAttribute="bottom" secondItem="H4I-wN-WGu" secondAttribute="bottom" constant="42" id="95p-7C-H8Q"/>
                         </constraints>
                     </view>
                     <blurEffect style="systemUltraThinMaterialDark"/>
