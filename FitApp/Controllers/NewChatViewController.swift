@@ -71,7 +71,7 @@ extension NewChatViewController: UITableViewDataSource, UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 		let targetUserData = results[indexPath.row]
-
+		
 		dismiss(animated: true) { [weak self] in
 			guard let self = self else { return }
 			self.completion?(targetUserData)
@@ -94,7 +94,9 @@ extension NewChatViewController {
 		} else {
 			self.noResultsLabel.isHidden = true
 			self.tableView.isHidden = false
-			self.tableView.reloadData()
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
+			}
 		}
 	}
 	private func setDelegates() {
@@ -136,7 +138,7 @@ extension NewChatViewController: UISearchBarDelegate {
 		} else {
 			GoogleDatabaseManager.shared.getChatUsers { [weak self] results in
 				guard let self = self else { return }
-
+				
 				switch results {
 				case .success(let users):
 					self.chatUsers = users

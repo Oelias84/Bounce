@@ -70,7 +70,9 @@ class ChatViewController: MessagesViewController {
 				self.messages = messages
 				DispatchQueue.main.async {
 					if shouldScrollToBottom {
-						self.messagesCollectionView.reloadData()
+						DispatchQueue.main.async {
+							self.messagesCollectionView.reloadData()
+						}
 						self.messagesCollectionView.scrollToLastItem()
 					} else {
 						self.messagesCollectionView.reloadDataAndKeepOffset()
@@ -135,7 +137,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 			break
 		}
 	}
-
+	
 	func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
 		return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10), NSAttributedString.Key.foregroundColor: UIColor.darkGray])
 	}
@@ -161,17 +163,17 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 	func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
 		Spinner.shared.show(view)
 		inputBar.sendButton.isEnabled = false
-
+		
 		
 		guard !text.replacingOccurrences(of: " ", with: "").isEmpty,
-			let messageId = createMessageId(), let selfSender = selfSender else { return }
+			  let messageId = createMessageId(), let selfSender = selfSender else { return }
 		let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
-
+		
 		if isNewChat {
 			GoogleDatabaseManager.shared.createNewChat(with: otherUserEmail, name: title ?? "User", firstMessage: message) {
 				[weak self] success in
 				guard let self = self else { return }
-
+				
 				if success {
 					print("sent")
 					self.isNewChat = false

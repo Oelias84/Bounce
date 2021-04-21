@@ -25,7 +25,9 @@ class WorkoutTableViewController: UITableViewController {
 		workoutViewModel.refreshDate()
 		workoutViewModel.bindWorkoutViewModelToController = {
 			Spinner.shared.stop()
-			self.tableView.reloadData()
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
+			}
 		}
 	}
 

@@ -120,12 +120,14 @@ extension DishesTableViewController {
 		titleTextLabel.text = "מנות " + originalDish.printDishType
 		if let otherDishes = UserProfile.defaults.otherDishes {
 			self.otherDishes = otherDishes
-			self.tableView.reloadData()
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
+			}
 		}
 	}
 	private func changeDishAlert(indexPath: IndexPath?) {
 		guard let selectedDish = self.selectedDish else { return }
-
+		
 		presentAlert(withTitle: "החלפת מנה" ,withMessage: "האם ברצונך להחליף \nאת-\(self.originalDish.getDishName)\n ב-\(selectedDish)", options: "ביטול", "אישור") {
 			[weak self] (selection) in
 			guard let self = self else { return }

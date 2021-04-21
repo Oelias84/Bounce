@@ -22,7 +22,9 @@ class WeightProgressViewController: UIViewController {
 	private var weightViewModel: WeightViewModel!
 	private var filteredArray: [Weight]? {
 		didSet {
-			tableView.reloadData()
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
+			}
 		}
 	}
 	
@@ -246,7 +248,9 @@ extension WeightProgressViewController {
 	private func updateDataSource() {
 		Spinner.shared.stop()
 		filteredArray = weightViewModel.getWeekBy(selectedDate.startOfWeek!)
-		self.tableView.reloadData()
+		DispatchQueue.main.async {
+			self.tableView.reloadData()
+		}
 	}
 	private func callToViewModelForUIUpdate() {
 		if let navView = navigationController?.view {

@@ -20,12 +20,6 @@ class SettingsOptionsTableViewController: UITableViewController {
 	private var hungerArray = ["בוקר", "צהריים", "ערב", "לא ידוע"]
 	private var fitnessLevelArray = ["מתחיל", "בינוני", "מתקדם"]
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		
-		tableView.reloadData()
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

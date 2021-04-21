@@ -12,22 +12,22 @@ class ChatsViewController: UITableViewController {
 	private var chatsViewModel: ChatsViewModel!
 	private var isManager = false
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		
 		tableView.register(UINib(nibName: K.NibName.chatTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.chatCell)
 		if isManager {
 			navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(addChatDidTapped))
 		}
 		navigationController?.navigationBar.prefersLargeTitles = true
-
+		
 		if let navView = navigationController?.view {
 			Spinner.shared.show(navView)
 		}
 		
 		chatsViewModel = ChatsViewModel()
 		alertForDirectingToQA()
-    }
+	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
@@ -36,7 +36,7 @@ class ChatsViewController: UITableViewController {
 			self.updateUI()
 		}
 	}
-
+	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return chatsViewModel.getChatsCount ?? 0
 	}
@@ -58,13 +58,15 @@ class ChatsViewController: UITableViewController {
 		navigationController?.pushViewController(chatCV, animated: true)
 	}
 }
- 
+
 extension ChatsViewController {
 	
 	private func updateUI() {
 		DispatchQueue.main.async {
 			Spinner.shared.stop()
-			self.tableView.reloadData()
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
+			}
 		}
 	}
 	private func createNewChat(result: [String:String]) {
@@ -113,20 +115,20 @@ extension ChatsViewController {
 		present(nav, animated: true)
 	}
 	
-//	func createOfUser() {
-//		let user = User(firsName: "תמיכה", lastName: "", email: "support@mail.com")
-//
-//		GoogleDatabaseManager.shared.insertUser(with: user) {
-//			[weak self] success in
-//			guard let self = self else { return }
-//
-//			switch success {
-//			case true:
-//				print("yes")
-//
-//			case false:
-//				print("No")
-//			}
-//		}
-//	}
+	//	func createOfUser() {
+	//		let user = User(firsName: "תמיכה", lastName: "", email: "support@mail.com")
+	//
+	//		GoogleDatabaseManager.shared.insertUser(with: user) {
+	//			[weak self] success in
+	//			guard let self = self else { return }
+	//
+	//			switch success {
+	//			case true:
+	//				print("yes")
+	//
+	//			case false:
+	//				print("No")
+	//			}
+	//		}
+	//	}
 }
