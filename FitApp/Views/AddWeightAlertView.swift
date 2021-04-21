@@ -80,7 +80,8 @@ class AddWeightAlertView: UIView {
 		weightImageButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cameraButtonAction)))
 	}
 	func chageCheckMarkState() {
-		DispatchQueue.main.async {
+		DispatchQueue.main.async { [weak self] in
+			guard let self = self else { return }
 			self.checkMarkImageView.isHidden = false
 		}
 	}

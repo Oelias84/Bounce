@@ -94,7 +94,8 @@ extension NewChatViewController {
 		} else {
 			self.noResultsLabel.isHidden = true
 			self.tableView.isHidden = false
-			DispatchQueue.main.async {
+			DispatchQueue.main.async { [weak self] in
+				guard let self = self else { return }
 				self.tableView.reloadData()
 			}
 		}

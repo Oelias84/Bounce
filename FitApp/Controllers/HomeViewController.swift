@@ -193,11 +193,13 @@ extension HomeViewController {
 			if lastMotivationDate == nil || lastMotivationDate!.onlyDate > Date().onlyDate {
 				UserProfile.defaults.lastMotivationDate = Date()
 				UserProfile.defaults.motivationText = motivation
-				DispatchQueue.main.async {
+				DispatchQueue.main.async { [weak self] in
+					guard let self = self else { return }
 					self.userMotivationTextLabel.text = UserProfile.defaults.motivationText
 				}
 			} else {
-				DispatchQueue.main.async {
+				DispatchQueue.main.async { [weak self] in
+					guard let self = self else { return }
 					self.userMotivationTextLabel.text = UserProfile.defaults.motivationText
 				}
 			}
@@ -250,7 +252,8 @@ extension HomeViewController {
 							let weightVC = navC.viewControllers.last as! WeightProgressViewController
 							
 							self.tabBarController?.selectedIndex = 3
-							DispatchQueue.main.async {
+							DispatchQueue.main.async { [weak self] in
+								guard let self = self else { return }
 								weightVC.addWeightButtonAction(self)
 							}
 						}

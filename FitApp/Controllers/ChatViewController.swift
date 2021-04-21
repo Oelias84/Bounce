@@ -68,11 +68,10 @@ class ChatViewController: MessagesViewController {
 					return
 				}
 				self.messages = messages
-				DispatchQueue.main.async {
+				DispatchQueue.main.async { [weak self] in
+					guard let self = self else { return }
 					if shouldScrollToBottom {
-						DispatchQueue.main.async {
-							self.messagesCollectionView.reloadData()
-						}
+						self.messagesCollectionView.reloadData()
 						self.messagesCollectionView.scrollToLastItem()
 					} else {
 						self.messagesCollectionView.reloadDataAndKeepOffset()

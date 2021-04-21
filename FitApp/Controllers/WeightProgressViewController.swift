@@ -22,7 +22,8 @@ class WeightProgressViewController: UIViewController {
 	private var weightViewModel: WeightViewModel!
 	private var filteredArray: [Weight]? {
 		didSet {
-			DispatchQueue.main.async {
+			DispatchQueue.main.async { [weak self] in
+				guard let self = self else { return }
 				self.tableView.reloadData()
 			}
 		}
@@ -204,15 +205,18 @@ extension WeightProgressViewController {
 	private func updateDateLabels() {
 		switch timePeriod {
 		case .week:
-			DispatchQueue.main.async {
+			DispatchQueue.main.async { [weak self] in
+				guard let self = self else { return }
 				self.dateTextLabel.text = "\((self.selectedDate.startOfWeek?.displayDayInMonth)!) - \((self.selectedDate.endOfWeek?.displayDayInMonth)!)"
 			}
 		case .month:
-			DispatchQueue.main.async {
+			DispatchQueue.main.async { [weak self] in
+				guard let self = self else { return }
 				self.dateTextLabel.text = "\((self.selectedDate.displayMonth))"
 			}
 		case .year:
-			DispatchQueue.main.async {
+			DispatchQueue.main.async { [weak self] in
+				guard let self = self else { return }
 				self.dateTextLabel.text = "\((self.selectedDate.year))"
 			}
 		}
@@ -248,7 +252,8 @@ extension WeightProgressViewController {
 	private func updateDataSource() {
 		Spinner.shared.stop()
 		filteredArray = weightViewModel.getWeekBy(selectedDate.startOfWeek!)
-		DispatchQueue.main.async {
+		DispatchQueue.main.async { [weak self] in
+			guard let self = self else { return }
 			self.tableView.reloadData()
 		}
 	}

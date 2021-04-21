@@ -45,7 +45,8 @@ class CommentViewController: UIViewController {
 						text.append(commentNumber + commentText + "\n\n")
 					}
 				}
-				DispatchQueue.main.async {
+				DispatchQueue.main.async { [weak self] in
+					guard let self = self else { return }
 					self.commentTextView.text = text
 				}
 			case .failure(let error):

@@ -120,7 +120,8 @@ extension DishesTableViewController {
 		titleTextLabel.text = "מנות " + originalDish.printDishType
 		if let otherDishes = UserProfile.defaults.otherDishes {
 			self.otherDishes = otherDishes
-			DispatchQueue.main.async {
+			DispatchQueue.main.async { [weak self] in
+				guard let self = self else { return }
 				self.tableView.reloadData()
 			}
 		}

@@ -39,11 +39,13 @@ class ChatTableViewCell: UITableViewCell {
 
 			switch result {
 			case .success(let url):
-				DispatchQueue.main.async {
+				DispatchQueue.main.async { [weak self] in
+					guard let self = self else { return }
 					self.userImageView.sd_setImage(with: url)
 				}
 			case .failure(let error):
-				DispatchQueue.main.async {
+				DispatchQueue.main.async { [weak self] in
+					guard let self = self else { return }
 					self.userImageView.image = UIImage().imageWith(name: self.chat.name)
 				}
 				print("fail to get image url", error)

@@ -97,7 +97,8 @@ extension QuestionnaireFatPresentViewController {
 		if let _ = userData.fatPercentage {
 			selectedPercentage = pickerItems[index]
 		}
-		DispatchQueue.main.async {
+		DispatchQueue.main.async { [weak self] in
+			guard let self = self else { return }
 			self.collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
 		}
 	}

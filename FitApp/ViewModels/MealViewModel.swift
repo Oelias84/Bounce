@@ -29,7 +29,6 @@ class MealViewModel: NSObject {
 	func fetchData(date: Date? = Date()) {
 		let consumptionManager = ConsumptionManager.shared
 		consumptionManager.calculateUserData()
-		
 		if self.meals == nil || date?.onlyDate != Date().onlyDate {
             let userData = UserProfile.defaults
             var preferredMeal: MealType?
@@ -73,7 +72,19 @@ class MealViewModel: NSObject {
 	func getMealDate() -> String {
 		return (currentMealDate ?? Date()).dateStringDisplay + " " + (currentMealDate ?? Date()).displayDayName
 	}
-	
+	func getMealCaloriesSum(dishes: [Dish]) -> String {
+		var mealCalorieSum: Double = 0.0
+		
+		dishes.forEach {
+			switch $0.type {
+			case .protein:
+				mealCalorieSum += $0.amount * 150.0
+			case .carbs, .fat:
+				mealCalorieSum += $0.amount * 100
+			}
+		}
+		return String(format: "%.0f", mealCalorieSum)
+	}
 	func checkDailyMealIsDone(completion: @escaping (Bool) -> ()) {
 		let calendar = Calendar.current
 		let pastHour = calendar.dateComponents([.hour,.minute,.second], from: "22:30".timeFromString!)

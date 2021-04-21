@@ -116,7 +116,8 @@ extension MealPlanViewController {
 	private func updateDataSource() {
 		Spinner.shared.stop()
 		tableView.register(UINib(nibName: K.NibName.mealPlanTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.mealCell)
-		DispatchQueue.main.async {
+		DispatchQueue.main.async { [weak self] in
+			guard let self = self else { return }
 			self.tableView.reloadData()
 		}
 	}
@@ -134,7 +135,8 @@ extension MealPlanViewController {
 			Spinner.shared.stop()
 			self.updateDataSource()
 			mealViewModel.bindMealViewModelToController = {
-				DispatchQueue.main.async {
+				DispatchQueue.main.async { [weak self] in
+					guard let self = self else { return }
 					self.tableView.reloadData()
 				}
 			}

@@ -75,7 +75,8 @@ class ExerciseViewController: UIViewController {
 		let time =  CMTime(seconds: 1, preferredTimescale: playerTimescale)
 		player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) { (finished) in
 			DispatchQueue.main.async { [weak self] in
-				self?.player.play()
+				guard let self = self else { return }
+				self.player.play()
 			}
 		}
 	}

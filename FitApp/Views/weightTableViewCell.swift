@@ -78,14 +78,16 @@ class weightTableViewCell: UITableViewCell {
 
 			switch result {
 			case .success(let url):
-				DispatchQueue.main.async {
+				DispatchQueue.main.async { [weak self] in
+					guard let self = self else { return }
 					self.imageUrl = url
 					self.weightImageView.contentMode = .scaleToFill
 					self.weightImageView.sd_setImage(with: url)
 					self.dateImageStackView.spacing = 4
 				}
 			case .failure(let error):
-				DispatchQueue.main.async {
+				DispatchQueue.main.async { [weak self] in
+					guard let self = self else { return }
 					self.weightImageView.image = UIImage().imageWith(name: "N A")
 					self.dateImageStackView.spacing = 6  
 				}
