@@ -414,9 +414,9 @@
 		7C89A9F9256D69CA009AD87C /* FitApp */ = {
 			isa = PBXGroup;
 			children = (
+				7C89AA35256D6D3D009AD87C /* Application */,
 				B36B71902577BEFC001CD393 /* Models */,
 				B3DB7511259F8254002CF48B /* ViewModels */,
-				7C89AA35256D6D3D009AD87C /* Application */,
 				7C89AA6E256D7132009AD87C /* Storyboards */,
 				7C89AA8C256D817B009AD87C /* Controllers */,
 				B3B2A245256EDDCA0052E6C8 /* Views */,
