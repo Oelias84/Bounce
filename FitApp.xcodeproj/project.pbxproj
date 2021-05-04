@@ -168,6 +168,7 @@
 		7C7435D925D31A0000D33A9A /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		7C7435DA25D31A0000D33A9A /* ChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
 		7C7435EA25D31F9A00D33A9A /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		7C74AF9B26414449001D0F5D /* FitApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitApp.entitlements; sourceTree = "<group>"; };
 		7C83152425E053B100335601 /* ExerciseCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCategoryView.swift; sourceTree = "<group>"; };
 		7C857BA4262C4D68006AB0BD /* TableViewEmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewEmptyView.xib; sourceTree = "<group>"; };
 		7C8958EB95477BC016742433 /* Pods-FitApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp.release.xcconfig"; path = "Target Support Files/Pods-FitApp/Pods-FitApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -414,6 +415,7 @@
 		7C89A9F9256D69CA009AD87C /* FitApp */ = {
 			isa = PBXGroup;
 			children = (
+				7C74AF9B26414449001D0F5D /* FitApp.entitlements */,
 				7C89AA35256D6D3D009AD87C /* Application */,
 				B36B71902577BEFC001CD393 /* Models */,
 				B3DB7511259F8254002CF48B /* ViewModels */,
@@ -1262,6 +1264,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FitApp/FitApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KMHWK7748S;
 				INFOPLIST_FILE = FitApp/Info.plist;
@@ -1283,6 +1286,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FitApp/FitApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KMHWK7748S;
 				INFOPLIST_FILE = FitApp/Info.plist;
