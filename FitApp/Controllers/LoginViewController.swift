@@ -7,6 +7,9 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseAnalytics
+
+import FirebaseDatabase
 
 class LoginViewController: UIViewController {
 	
@@ -20,8 +23,8 @@ class LoginViewController: UIViewController {
 	
 	@IBOutlet weak var emailTextfield: UITextField!
 	@IBOutlet weak var passwordTextfield: UITextField!
-    
-    private let googleManager = GoogleApiManager()
+	
+	private let googleManager = GoogleApiManager()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -36,7 +39,7 @@ class LoginViewController: UIViewController {
 	}
 	
 	@IBAction func signInButtonAction(_ sender: Any) {
-        view.endEditing(true)
+		view.endEditing(true)
 		
 		do {
 			try login()
@@ -69,21 +72,21 @@ extension LoginViewController {
 		guard let email = emailTextfield.text else {
 			throw LoginError.emptyEmail
 		}
-
+		
 		guard let password = passwordTextfield.text else {
 			throw LoginError.emptyPassword
 		}
-
+		
 		if !email.isValidEmail {
 			throw LoginError.invalidEmail
 		}
-
+		
 		if password.count != 6 {
 			throw LoginError.incorrectPasswordLength
 		}
-			
+		
 		Spinner.shared.show(self.view)
-
+		
 		Auth.auth().signIn(withEmail: email, password: password) {
 			[weak self] (user, error) in
 			guard let self = self else { return }
@@ -91,13 +94,19 @@ extension LoginViewController {
 			if error == nil {
 				self.getUserImageProfileUrl(with: email)
 				self.googleManager.getUserData { result in
-
+					
 					switch result {
 					case .success(let userData):
 						UserProfile.defaults.email = email
 						if let user = user?.user, let data = userData {
 							UserProfile.defaults.updateUserProfileData(data, id: user.uid)
+							if let token =  UserProfile.defaults.fcmToken {
+								let userName = data.name.splitFullName
+								GoogleDatabaseManager.shared.add(token: token, for: User(firsName: userName.0, lastName: userName.1, email: data.email, deviceToken: token))
+							}
 						}
+						
+						Analytics.logEvent(AnalyticsEventLogin, parameters: ["USER_EMAIL": email])
 						let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
 						let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar)
 						
@@ -109,7 +118,7 @@ extension LoginViewController {
 				}
 			} else {
 				Spinner.shared.stop()
-
+				
 				let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
 				let defaultAction = UIAlertAction(title: "אישור", style: .cancel, handler: nil)
 				
@@ -121,7 +130,7 @@ extension LoginViewController {
 	private func getUserImageProfileUrl(with email: String) {
 		let path = "\(email.safeEmail)_profile_picture.jpeg"
 		GoogleStorageManager.shared.downloadImageURL(from: .profileImage , path: path){ result in
-
+			
 			switch result {
 			case .success(let url):
 				DispatchQueue.main.async {

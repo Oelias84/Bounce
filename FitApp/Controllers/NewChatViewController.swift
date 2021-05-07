@@ -9,12 +9,12 @@ import UIKit
 
 class NewChatViewController: UIViewController {
 	
-	private var chatUsers = [[String:String]]()
-	private var results = [[String:String]]()
+	private var chatUsers = [ChatUser]()
+	private var results = [ChatUser]()
 	private var isManager = false
 	private var hasFetched = false
 	
-	public var completion: (([String:String]) -> Void)?
+	public var completion: ((ChatUser) -> Void)?
 	
 	private let searchBar: UISearchBar = {
 		let searchBar = UISearchBar()
@@ -65,7 +65,8 @@ extension NewChatViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-		cell.textLabel?.text = results[indexPath.row]["name"]
+		
+		cell.textLabel?.text = results[indexPath.row].name as? String
 		return cell
 	}
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -105,19 +106,14 @@ extension NewChatViewController {
 		tableView.delegate = self
 		tableView.dataSource = self
 	}
-	private func addSupport() {
-		let nutritionSupport: [String:String] = [
-			"email": "support-mail-com",
-			"name": "תזונה"
-		]
-		let fitnessSupport: [String:String] = [
-			"email": "support-mail-com",
-			"name": "כושר"
-		]
-		self.results.append(nutritionSupport)
-		self.results.append(fitnessSupport)
-		updateUI()
-	}
+//	private func addSupport() {
+//		let nutritionSupport: [String:String] = [
+//			"email": "support-mail-com",
+//			"name": "תזונה"
+//		]
+//		self.results.append(nutritionSupport)
+//		updateUI()
+//	}
 }
 
 extension NewChatViewController: UISearchBarDelegate {
@@ -156,10 +152,8 @@ extension NewChatViewController: UISearchBarDelegate {
 			return
 		}
 		Spinner.shared.stop()
-		let results: [[String:String]] = self.chatUsers.filter({
-			guard let name = $0["name"]?.lowercased() else {
-				return false
-			}
+		let results = self.chatUsers.filter({
+			let name = $0.name.lowercased()
 			return name.hasPrefix(term.lowercased())
 		})
 		self.results = results

@@ -12,6 +12,7 @@ struct User: Codable {
 	let firsName: String
 	let lastName: String
 	let email: String
+	var deviceToken: String?
 	
 	var safeEmail: String {
 		return email.safeEmail

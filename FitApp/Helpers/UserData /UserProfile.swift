@@ -33,6 +33,9 @@ struct UserProfile {
     @UserDefault(key: .id)
 	var id: String?
 	
+	@UserDefault(key: .fcmToken)
+	var fcmToken: String?
+	
 	@UserDefault(key: .email)
 	var email: String?
 	
@@ -181,6 +184,7 @@ extension Key {
 	static let motivationText: Key = "motivationText"
 	
 	//user data
+	static let fcmToken: Key = "fcmToken"
     static let id: Key = "id"
     static let name: Key = "name"
 	static let email: Key = "email"

@@ -13,6 +13,7 @@ struct K {
 		
 		static let name = "userName"
 		static let id = "userId"
+		static let serverKey = "AAAArNkTRhE:APA91bGVqhqX37ZiH-Q_lARYwTRw-Y8Tii46jrLckItPkilLvNsYkHZ_s5Gc5PiLXHdmFiKr7O0EfzAC6JwZMUpNOlxD9hdnZRVHRjAJ0jEC3wjgLZU5eISfzyoradZ3HQ5s7zelluPM"
         
         struct UserBasicDetails {
 			

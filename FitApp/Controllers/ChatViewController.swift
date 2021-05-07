@@ -13,13 +13,14 @@ import InputBarAccessoryView
 
 class ChatViewController: MessagesViewController {
 	
-	private let chatId: String?
 	public var isNewChat = false
+	
+	private let chatId: String?
 	private let otherUserEmail: String
+	private var otherTokens: [String]?
 	
 	private let imagePickerController = UIImagePickerController()
-	
-	var messages = [Message]()
+	private var messages = [Message]()
 	
 	private var selfSender: Sender? = {
 		guard let email = UserProfile.defaults.email,
@@ -29,9 +30,10 @@ class ChatViewController: MessagesViewController {
 		return Sender(senderId: email.safeEmail, displayName: name)
 	}()
 	
-	init(with email: String, id: String?) {
-		self.otherUserEmail = email
+	init(with email: String, id: String?, token: [String]? = nil) {
 		self.chatId = id
+		self.otherUserEmail = email
+		self.otherTokens = token
 		super.init(nibName: nil, bundle: nil)
 	}
 	required init?(coder: NSCoder) {
@@ -51,59 +53,6 @@ class ChatViewController: MessagesViewController {
 		if let chatId = chatId {
 			self.listenToMessages(id: chatId, shouldScrollToBottom: true)
 		}
-	}
-	
-	private func createMessageId() -> String? {
-		guard let currentUserEmail = UserProfile.defaults.email else { return nil }
-		let identifier = "\(otherUserEmail)_\(currentUserEmail.safeEmail)_\(Date().fullDateStringForDB)"
-		return identifier
-	}
-	private func listenToMessages(id: String, shouldScrollToBottom: Bool) {
-		GoogleDatabaseManager.shared.getAllMessagesForChat(with: id) { [weak self] result in
-			guard let self = self else { return }
-			
-			switch result {
-			case .success(let messages):
-				if messages.isEmpty {
-					return
-				}
-				self.messages = messages
-				DispatchQueue.main.async { [weak self] in
-					guard let self = self else { return }
-					if shouldScrollToBottom {
-						self.messagesCollectionView.reloadData()
-						self.messagesCollectionView.scrollToLastItem()
-					} else {
-						self.messagesCollectionView.reloadDataAndKeepOffset()
-					}
-				}
-			case .failure(let error):
-				print("faild to fetch messages:", error)
-			}
-		}
-	}
-	private func setupController() {
-		navigationItem.largeTitleDisplayMode = .never
-		showMessageTimestampOnSwipeLeft = true
-		messagesCollectionView.messagesDataSource = self
-		messagesCollectionView.messagesLayoutDelegate = self
-		messagesCollectionView.messagesDisplayDelegate = self
-		messagesCollectionView.messageCellDelegate = self
-		messageInputBar.delegate = self
-		imagePickerController.delegate = self
-	}
-	private func setupInputButton() {
-		let button = InputBarButtonItem()
-		
-		button.setSize(CGSize(width: 35, height: 35), animated: false)
-		button.setImage(UIImage(systemName: "camera"), for: .normal)
-		button.onTouchUpInside { [weak self] _ in
-			guard let self = self else { return }
-			self.presentImagePickerActionSheet(imagePicker: self.imagePickerController) {_ in}
-		}
-		messageInputBar.sendButton.title = "שלח"
-		messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
-		messageInputBar.setStackViewItems([button], forStack: .left, animated: true)
 	}
 }
 
@@ -162,14 +111,14 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 	func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
 		Spinner.shared.show(view)
 		inputBar.sendButton.isEnabled = false
-		
+
 		
 		guard !text.replacingOccurrences(of: " ", with: "").isEmpty,
 			  let messageId = createMessageId(), let selfSender = selfSender else { return }
 		let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
 		
 		if isNewChat {
-			GoogleDatabaseManager.shared.createNewChat(with: otherUserEmail, name: title ?? "User", firstMessage: message) {
+			GoogleDatabaseManager.shared.createNewChat(with: otherUserEmail, otherUserTokens: otherTokens, name: title ?? "User", firstMessage: message) {
 				[weak self] success in
 				guard let self = self else { return }
 				
@@ -178,6 +127,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 					self.isNewChat = false
 					self.messageInputBar.inputTextView.text = ""
 					self.messagesCollectionView.scrollToLastItem()
+					self.sendNotification(with: text)
 					self.navigationController?.popViewController(animated: true)
 				} else {
 					print("not sent")
@@ -194,6 +144,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 					print("sent")
 					self.messageInputBar.inputTextView.text = ""
 					self.messagesCollectionView.scrollToLastItem()
+					self.sendNotification(with: text)
 				} else {
 					print("not sent")
 				}
@@ -253,6 +204,72 @@ extension ChatViewController: CropViewControllerDelegate, UINavigationController
 				case .failure(let error):
 					print("message photo upload error:", error)
 				}
+			}
+		}
+	}
+}
+
+//MARK: - Functions
+extension ChatViewController {
+	
+	private func createMessageId() -> String? {
+		guard let currentUserEmail = UserProfile.defaults.email else { return nil }
+		let identifier = "\(otherUserEmail)_\(currentUserEmail.safeEmail)_\(Date().fullDateStringForDB)"
+		return identifier
+	}
+	private func listenToMessages(id: String, shouldScrollToBottom: Bool) {
+		GoogleDatabaseManager.shared.getAllMessagesForChat(with: id) { [weak self] result in
+			guard let self = self else { return }
+			
+			switch result {
+			case .success(let messages):
+				if messages.isEmpty {
+					return
+				}
+				self.messages = messages
+				DispatchQueue.main.async { [weak self] in
+					guard let self = self else { return }
+					if shouldScrollToBottom {
+						self.messagesCollectionView.reloadData()
+						self.messagesCollectionView.scrollToLastItem()
+					} else {
+						self.messagesCollectionView.reloadDataAndKeepOffset()
+					}
+				}
+			case .failure(let error):
+				print("faild to fetch messages:", error)
+			}
+		}
+	}
+	private func setupController() {
+		navigationItem.largeTitleDisplayMode = .never
+		showMessageTimestampOnSwipeLeft = true
+		messagesCollectionView.messagesDataSource = self
+		messagesCollectionView.messagesLayoutDelegate = self
+		messagesCollectionView.messagesDisplayDelegate = self
+		messagesCollectionView.messageCellDelegate = self
+		messageInputBar.delegate = self
+		imagePickerController.delegate = self
+	}
+	private func setupInputButton() {
+		let button = InputBarButtonItem()
+		
+		button.setSize(CGSize(width: 35, height: 35), animated: false)
+		button.setImage(UIImage(systemName: "camera"), for: .normal)
+		button.onTouchUpInside { [weak self] _ in
+			guard let self = self else { return }
+			self.presentImagePickerActionSheet(imagePicker: self.imagePickerController) {_ in}
+		}
+		messageInputBar.sendButton.title = "שלח"
+		messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
+		messageInputBar.setStackViewItems([button], forStack: .left, animated: true)
+	}
+	private func sendNotification(with text: String) {
+		let notification = PushNotificationSender()
+		
+		if let tokens = self.otherTokens {
+			tokens.forEach {
+				notification.sendPushNotification(to: $0, title: "הודעה נשלחה מ-" + (self.title ?? "User"), body: text)
 			}
 		}
 	}

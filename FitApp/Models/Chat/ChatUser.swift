@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct ChatUser:Codable {
+struct ChatUser: Codable {
 	
 	let email: String
 	let name: String
+	var tokens: [String]?
 }

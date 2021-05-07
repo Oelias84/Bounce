@@ -60,23 +60,48 @@ class ChatsViewModel: NSObject {
 			case .failure(let error):
 				if error == DatabaseError.noFetch {
 					self.isNewChat = true
-					self.chats = [self.addSupportUser()]
+					self.addSupportUser { chat in
+						if let chat = chat {
+							self.chats = [chat]
+						} else {
+							self.bindChatsViewModelToController()
+						}
+					}
 				} else {
 					self.bindChatsViewModelToController()
 				}
 			}
 		}
 	}
-	private func addSupportUser() -> Chat {
-		let name = "דברי אלינו"
-		let otherUserEmail = "support-mail-com"
-		let userEmail = UserProfile.defaults.email!.safeEmail
-		let chatId = "\(userEmail)\(otherUserEmail)\(Date().dateStringForDB)"
+	private func addSupportUser(completion: @escaping (Chat?) -> Void) {
+		let database = GoogleDatabaseManager.shared
+		var chat: Chat?
 		
-		let latestMessage = LatestMessage (date: Date().dateStringForDB,
-										   text: "כיתבי לנו כאן ואנו מבטיחים לחזור אליך בהקדם האפשרי",
-										   isRead: false)
-
-		return Chat(id: chatId, name: name, otherUserEmail: otherUserEmail, latestMessage: latestMessage)
+		database.getChatUsers { result in
+			switch result {
+			case .success(let users):
+				
+				for user in users {
+					if user.email == "support-mail-com" {
+						
+						let userEmail = UserProfile.defaults.email!.safeEmail
+						
+						let name = "דברי אלינו"
+						let otherUserEmail = user.email
+						let tokens = user.tokens
+						let chatId = "\(userEmail)_\(otherUserEmail)_\(Date().dateStringForDB)"
+						let latestMessage = LatestMessage (date: Date().dateStringForDB,
+														   text: "כיתבי לנו כאן ואנו מבטיחים לחזור אליך בהקדם האפשרי",
+														   isRead: false)
+						
+						chat = Chat(id: chatId, name: name, otherUserEmail: otherUserEmail, otherUserTokens: tokens, latestMessage: latestMessage)
+						completion(chat)
+					}
+				}
+			case .failure(let error):
+				print(error.localizedDescription)
+				completion(chat)
+			}
+		}
 	}
 }

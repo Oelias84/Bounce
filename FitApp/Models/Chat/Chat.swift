@@ -12,6 +12,7 @@ struct Chat {
 	let id: String
 	let name: String
 	let otherUserEmail: String
+	let otherUserTokens: [String]?
 	let latestMessage: LatestMessage
 }
 

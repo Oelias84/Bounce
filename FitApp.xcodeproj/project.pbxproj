@@ -35,6 +35,7 @@
 		7C7435DB25D31A0000D33A9A /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7435D925D31A0000D33A9A /* ChatTableViewCell.swift */; };
 		7C7435DC25D31A0000D33A9A /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C7435DA25D31A0000D33A9A /* ChatTableViewCell.xib */; };
 		7C7435EB25D31F9A00D33A9A /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7435EA25D31F9A00D33A9A /* Chat.swift */; };
+		7C74AF9E264336EA001D0F5D /* PushNotificationSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74AF9D264336EA001D0F5D /* PushNotificationSender.swift */; };
 		7C83152525E053B100335601 /* ExerciseCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83152425E053B100335601 /* ExerciseCategoryView.swift */; };
 		7C857BA5262C4D68006AB0BD /* TableViewEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C857BA4262C4D68006AB0BD /* TableViewEmptyView.xib */; };
 		7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89A9FA256D69CA009AD87C /* AppDelegate.swift */; };
@@ -169,6 +170,7 @@
 		7C7435DA25D31A0000D33A9A /* ChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
 		7C7435EA25D31F9A00D33A9A /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		7C74AF9C26414913001D0F5D /* FitApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitApp.entitlements; sourceTree = "<group>"; };
+		7C74AF9D264336EA001D0F5D /* PushNotificationSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationSender.swift; sourceTree = "<group>"; };
 		7C83152425E053B100335601 /* ExerciseCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCategoryView.swift; sourceTree = "<group>"; };
 		7C857BA4262C4D68006AB0BD /* TableViewEmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewEmptyView.xib; sourceTree = "<group>"; };
 		7C8958EB95477BC016742433 /* Pods-FitApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp.release.xcconfig"; path = "Target Support Files/Pods-FitApp/Pods-FitApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 				B3DB751A259F8773002CF48B /* ConsumptionManager.swift */,
 				B367F18725B1EEC200DF21D7 /* LocalNotificationManager.swift */,
 				7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */,
+				7C74AF9D264336EA001D0F5D /* PushNotificationSender.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1019,6 +1022,7 @@
 				B358227825ACA2F800C91295 /* ArticleTableViewCell.swift in Sources */,
 				7C9B34922583F84A00D30480 /* StartViewController.swift in Sources */,
 				B341E230257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift in Sources */,
+				7C74AF9E264336EA001D0F5D /* PushNotificationSender.swift in Sources */,
 				B38397F625B4A1BE00154697 /* WorkoutViewModel.swift in Sources */,
 				B30069D325926F090025FA0E /* WeightProgressViewController.swift in Sources */,
 				B367F18825B1EEC200DF21D7 /* LocalNotificationManager.swift in Sources */,

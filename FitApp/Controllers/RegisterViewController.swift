@@ -40,7 +40,7 @@ class RegisterViewController: UIViewController {
 		presentImagePickerActionSheet(imagePicker: imagePickerController) { _ in }
 	}
 	@IBAction func singUpButtonAction(_ sender: Any) {
-		if let userName = userNameTextfield.text, let email = emailTextfield.text, let password = passwordTextfield.text, let confirmedEmail = confirmPasswordTextfield.text {
+		if var userName = userNameTextfield.text, let email = emailTextfield.text, let password = passwordTextfield.text, let confirmedEmail = confirmPasswordTextfield.text {
 			Spinner.shared.show(self.view)
 			if password != confirmedEmail {
 				presentOkAlert(withTitle: "סיסמה שגויה", withMessage: "אנא נסי שוב") {}
@@ -56,8 +56,11 @@ class RegisterViewController: UIViewController {
 							guard let self = self else { return }
 							
 							if error == nil {
+								while userName.last?.isWhitespace == true {
+									userName = String(userName.dropLast())
+								}
 								let splitUserName = userName.splitFullName
-								let user = User(firsName: splitUserName.0, lastName: splitUserName.1, email: email)
+								let user = User(firsName: splitUserName.0, lastName: splitUserName.1, email: email, deviceToken: UserProfile.defaults.fcmToken)
 								
 								GoogleDatabaseManager.shared.insertUser(with: user) {
 									[weak self] success in

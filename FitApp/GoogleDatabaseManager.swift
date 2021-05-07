@@ -13,6 +13,8 @@ enum DatabaseError: Error {
 	
 	case failedToUpdate
 	case failedToFetch
+	case failedToDecodeData
+	case dataIsEmpty
 	case noFetch
 	case isPrime
 }
@@ -28,7 +30,7 @@ final class GoogleDatabaseManager {
 extension GoogleDatabaseManager {
 	
 	public func insertUser(with user: User, completion: @escaping (Bool) -> Void) {
-
+		
 		database.child(user.safeEmail).setValue([
 			"first_name": user.firsName,
 			"last_name": user.lastName
@@ -41,9 +43,11 @@ extension GoogleDatabaseManager {
 			}
 			
 			self.database.child("chat_users").observeSingleEvent(of: .value) { snapshot in
-				let newElement = ["name": user.firsName + " " + user.lastName, "email": user.safeEmail]
+				let newElement = ["name": user.firsName + " " + user.lastName,
+								  "email": user.safeEmail,
+								  "tokens": [user.deviceToken]] as [String : Any]
 				
-				if var usersCollection = snapshot.value as? [[String:String]] {
+				if var usersCollection = snapshot.value as? [[String:Any]] {
 					usersCollection.append(newElement)
 					self.database.child("chat_users").setValue(usersCollection) { error, data in
 						guard error == nil else {
@@ -53,7 +57,7 @@ extension GoogleDatabaseManager {
 						completion(true)
 					}
 				} else {
-					let newCollection: [[String:String]] = [newElement]
+					let newCollection: [[String:Any]] = [newElement]
 					self.database.child("chat_users").setValue(newCollection) { error, data in
 						guard error == nil else {
 							completion(false)
@@ -75,14 +79,62 @@ extension GoogleDatabaseManager {
 			completion(true)
 		}
 	}
-	public func getChatUsers(completion: @escaping (Result<[[String:String]], Error>) -> Void) {
+	public func getChatUsers(completion: @escaping (Result<[ChatUser], DatabaseError>) -> Void) {
 		database.child("chat_users").observeSingleEvent(of: .value) { snapshot in
-			guard let value = snapshot.value as? [[String:String]] else {
-				
-				completion(.failure(DatabaseError.failedToFetch))
+			guard snapshot.value != nil else {
+				completion(.failure(.failedToFetch))
 				return
 			}
-			completion(.success(value))
+			
+			if let data = snapshot.data {
+				do {
+					let users = try JSONDecoder().decode([ChatUser].self, from: data)
+					if users.isEmpty {
+						completion(.failure(.dataIsEmpty))
+					} else {
+						completion(.success(users))
+					}
+				} catch {
+					completion(.failure(.failedToDecodeData))
+					print(error.localizedDescription)
+				}
+			}
+		}
+	}
+	func add(token: String, for user: User) {
+		self.database.child("chat_users").observeSingleEvent(of: .value) { snapshot in
+			
+			let updateData = ["name": user.firsName + " " + user.lastName,
+							  "email": user.safeEmail,
+							  "tokens": [user.deviceToken ?? ""] as [String]] as [String : Any]
+			
+			if var usersCollection = snapshot.value as? [[String : Any]] {
+				for i in 0...usersCollection.count-1 {
+					let user = usersCollection[i]
+					
+					if updateData["email"] as! String == "support-mail-com" {
+						if user["tokens"] == nil {
+							usersCollection[i] = updateData
+							break
+						} else {
+							var tokenCollection = (usersCollection[i]["tokens"] as! [String])
+							tokenCollection.append(token)
+							usersCollection[i]["tokens"] = tokenCollection
+							break
+						}
+					} else if user["email"] as! String == updateData["email"] as! String {
+						usersCollection[i] = updateData
+						break
+					}
+				}
+				self.database.child("chat_users").setValue(usersCollection) { error, data in
+					guard error == nil else {
+						print(error!.localizedDescription)
+						return
+					}
+					print("chat user was update")
+				}
+			}
 		}
 	}
 }
@@ -90,16 +142,17 @@ extension GoogleDatabaseManager {
 //MARK: - Chat functionality
 extension GoogleDatabaseManager {
 	
-	public func createNewChat(with otherUserEmail: String, name: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
+	public func createNewChat(with otherUserEmail: String, otherUserTokens: [String]?, name: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
 		guard let currentEmail = UserProfile.defaults.email , let currentName = UserProfile.defaults.name else {
 			completion(false)
 			return
 		}
 		let safeEmail = currentEmail.safeEmail
+		let selfToken = UserProfile.defaults.fcmToken
 		let ref = database.child(safeEmail)
 		
 		ref.observeSingleEvent(of: .value) { [weak self] snapshot in
-			guard let self = self, var userNode = snapshot.value as? [String:  Any] else {
+			guard let self = self, var userNode = snapshot.value as? [String : Any] else {
 				completion(false)
 				return
 			}
@@ -117,6 +170,7 @@ extension GoogleDatabaseManager {
 			let newChat: [String: Any] = [
 				"id": chatId,
 				"other_user_email": otherUserEmail,
+				"other_user_tokens": (otherUserTokens ?? nil) as [String]? as Any,
 				"name": name,
 				"latest_message": [
 					"date": firstMessage.sentDate.fullDateStringForDB,
@@ -128,6 +182,7 @@ extension GoogleDatabaseManager {
 			let recipientNewChat: [String: Any] = [
 				"id": chatId,
 				"other_user_email": safeEmail,
+				"other_user_tokens": (selfToken != nil ? [selfToken!] : nil) as [String]? as Any,
 				"name": currentName,
 				"latest_message": [
 					"date": firstMessage.sentDate.fullDateStringForDB,
@@ -191,9 +246,10 @@ extension GoogleDatabaseManager {
 					  let isRead = latestMessages["is_read"] as? Bool else {
 					return nil
 				}
+				let otherUserTokens = dictionary["other_user_tokens"] as? [String]?
 				
 				let latest = LatestMessage(date: sent, text: message, isRead: isRead)
-				return Chat(id: chatId, name: name, otherUserEmail: otherUserEmail, latestMessage: latest)
+				return Chat(id: chatId, name: name, otherUserEmail: otherUserEmail, otherUserTokens: otherUserTokens ?? nil, latestMessage: latest)
 			}
 			completion(.success(chats))
 		}
@@ -205,7 +261,7 @@ extension GoogleDatabaseManager {
 		}
 		database.child("\(currentUserSafeEmail)/chats").observeSingleEvent(of:.value) { snapshot in
 			var databaseEntryChat = [[String:Any]]()
-
+			
 			let updateValue: [String:Any] = [
 				"date": chat.latestMessage.date,
 				"is_read": true,
@@ -479,4 +535,17 @@ extension GoogleDatabaseManager {
 			completion(true)
 		}
 	}
+}
+
+extension DataSnapshot {
+	
+	var data: Data? {
+		guard let value = value, !(value is NSNull) else { return nil }
+		return try? JSONSerialization.data(withJSONObject: value)
+	}
+	var json: String? { data?.string }
+}
+extension Data {
+	
+	var string: String? { String(data: self, encoding: .utf8) }
 }

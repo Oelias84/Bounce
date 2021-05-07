@@ -50,7 +50,7 @@ class ChatsViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 		let chatData = chatsViewModel.getChatFor(row:indexPath.row)
-		let chatCV = ChatViewController(with: chatData.otherUserEmail, id: chatData.id)
+		let chatCV = ChatViewController(with: chatData.otherUserEmail, id: chatData.id, token: chatData.otherUserTokens)
 		
 		chatsViewModel.updateChatState(chat: chatData)
 		chatCV.isNewChat = chatsViewModel.isNewChat
@@ -70,11 +70,10 @@ extension ChatsViewController {
 			}
 		}
 	}
-	private func createNewChat(result: [String:String]) {
-		guard let name = result["name"], let email = result["email"] else {
-			return
-		}
-		let chatVC = ChatViewController(with: email, id: nil)
+	private func createNewChat(result: ChatUser) {
+		let name = result.name
+		let email = result.email
+		let chatVC = ChatViewController(with: email, id: nil, token: result.tokens)
 		
 		chatVC.isNewChat = true
 		chatVC.title = name
@@ -100,7 +99,6 @@ extension ChatsViewController {
 			}
 		}
 	}
-	
 	@objc private func addChatDidTapped() {
 		let chatVC = storyboard?.instantiateViewController(identifier: K.ViewControllerId.NewChatViewController) as! NewChatViewController
 		let nav = UINavigationController(rootViewController: chatVC)
@@ -115,21 +113,4 @@ extension ChatsViewController {
 		nav.modalPresentationStyle = .fullScreen
 		present(nav, animated: true)
 	}
-	
-	//	func createOfUser() {
-	//		let user = User(firsName: "תמיכה", lastName: "", email: "support@mail.com")
-	//
-	//		GoogleDatabaseManager.shared.insertUser(with: user) {
-	//			[weak self] success in
-	//			guard let self = self else { return }
-	//
-	//			switch success {
-	//			case true:
-	//				print("yes")
-	//
-	//			case false:
-	//				print("No")
-	//			}
-	//		}
-	//	}
 }

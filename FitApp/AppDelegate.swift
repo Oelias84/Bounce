@@ -51,9 +51,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 	func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 
 		let id = notification.request.identifier
-		
+
 		print("Received notification with IDluhh = \(id)")
-		completionHandler([.sound, .alert, .badge])
+		
+		if presentMessageNotifications {
+			completionHandler([.sound, .alert, .badge])
+		}
 	}
 	func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
 		
@@ -97,5 +100,15 @@ extension AppDelegate: MessagingDelegate {
 		
 		UserProfile.defaults.fcmToken = tokenDict["token"]
 		NotificationCenter.default.post(name: NSNotification.Name("FCMToken"), object: nil, userInfo: tokenDict)
+	}
+}
+
+extension AppDelegate {
+	
+	var presentMessageNotifications: Bool {
+		if let firstVC = (UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.rootViewController?.topMostViewController()) {
+			return !(firstVC.isKind(of: ChatsViewController.self) || firstVC.isKind(of: ChatViewController.self))
+		}
+		return true
 	}
 }
