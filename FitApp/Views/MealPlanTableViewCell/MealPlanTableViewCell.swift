@@ -29,7 +29,7 @@ class MealPlanTableViewCell: UITableViewCell {
 	@IBOutlet weak var dishStackView: UIStackView!
 	@IBOutlet weak var dishesStackViewHeight: NSLayoutConstraint!
 	@IBOutlet weak var moveDishButton: UIButton!
-	@IBOutlet weak var downButton: UIButton!
+	@IBOutlet weak var mealCaloriesSumLabel: UILabel!
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -103,6 +103,7 @@ extension MealPlanTableViewCell {
 		} else {
 			moveDishButton.isHidden = false
 		}
+		mealCaloriesSumLabel.text = "כ- \(mealViewModel.getMealCaloriesSum(dishes: meal.dishes)) קל׳"
 	}
 }
 
