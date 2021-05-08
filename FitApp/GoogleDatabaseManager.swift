@@ -112,7 +112,7 @@ extension GoogleDatabaseManager {
 				for i in 0...usersCollection.count-1 {
 					let user = usersCollection[i]
 					
-					if updateData["email"] as! String == "support-mail-com" {
+					if user["email"] as! String == "support-mail-com" {
 						if user["tokens"] == nil {
 							usersCollection[i] = updateData
 							break
@@ -125,6 +125,8 @@ extension GoogleDatabaseManager {
 					} else if user["email"] as! String == updateData["email"] as! String {
 						usersCollection[i] = updateData
 						break
+					} else {
+						usersCollection.append(updateData)
 					}
 				}
 				self.database.child("chat_users").setValue(usersCollection) { error, data in

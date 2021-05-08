@@ -102,7 +102,7 @@ extension LoginViewController {
 							UserProfile.defaults.updateUserProfileData(data, id: user.uid)
 							if let token =  UserProfile.defaults.fcmToken {
 								let userName = data.name.splitFullName
-								GoogleDatabaseManager.shared.add(token: token, for: User(firsName: userName.0, lastName: userName.1, email: data.email, deviceToken: token))
+								GoogleDatabaseManager.shared.add(token: token, for: User(firsName: userName.0, lastName: userName.1, email: user.email!, deviceToken: token))
 							}
 						}
 						
