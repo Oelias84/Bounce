@@ -28,6 +28,13 @@ class HomeViewController: UIViewController {
         }
         return BLTNItemManager(rootItem: item)
     }()
+	private lazy var titleStackView: UIStackView = {
+		let titleLabel = UILabel()
+		titleLabel.textAlignment = .center
+		titleLabel.text = "מעקב שקילה"
+		let stackView = UIStackView(arrangedSubviews: [titleLabel])
+		return stackView
+	}()
     
     private var carbsColor = #colorLiteral(red: 0.1863320172, green: 0.6013119817, blue: 0.9211298823, alpha: 1)
     private var fatColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
@@ -58,16 +65,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var proteinTargateLabel: UILabel!
 		
     @IBOutlet weak var profileButton: UIButton!
-    
-	lazy var titleStackView: UIStackView = {
-		let titleLabel = UILabel()
-		titleLabel.textAlignment = .center
-		titleLabel.text = "מעקב שקילה"
-		let stackView = UIStackView(arrangedSubviews: [titleLabel])
-		return stackView
-	}()
 
-	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
