@@ -20,7 +20,6 @@ extension UITextField {
     
     func setupDatePicker(){
         let picker = configurePicker()
-        picker.datePickerMode = .date
         if #available(iOS 13.4, *) {
             picker.preferredDatePickerStyle = .wheels
             picker.sizeToFit()
@@ -28,10 +27,23 @@ extension UITextField {
         if let textFieldTime = self.text?.timeFromString {
             picker.date = textFieldTime
         }
-        picker.datePickerMode = UIDatePicker.Mode.date
+		picker.datePickerMode = .date
         picker.backgroundColor = .white
         self.inputView = picker
     }
+	func setupTimePicker(){
+		let picker = configurePicker()
+		if #available(iOS 13.4, *) {
+			picker.preferredDatePickerStyle = .wheels
+			picker.sizeToFit()
+		}
+		if let textFieldTime = self.text?.timeFromString {
+			picker.date = textFieldTime
+		}
+		picker.datePickerMode = .time
+		picker.backgroundColor = .white
+		self.inputView = picker
+	}
     
     @objc private func pickerChanged(_ sender: UIDatePicker) {
         switch sender.datePickerMode {

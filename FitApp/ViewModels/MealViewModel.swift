@@ -67,6 +67,11 @@ class MealViewModel: NSObject {
                 }
             }
         }
+		if (carbs + fats + protein) == 0 {
+			UserProfile.defaults.showMealNotFinishedAlert = true
+		} else {
+			UserProfile.defaults.showMealNotFinishedAlert = false
+		}
         return MealProgress(carbs: carbs, fats: fats, protein: protein)
     }
 	func getMealDate() -> String {
@@ -101,6 +106,12 @@ class MealViewModel: NSObject {
 	}
     
     //MARK: - Meals
+	func updateMeals(for date: Date) {
+		guard let meals = self.meals else { return }
+		let dailyMeal = DailyMeal(meals: meals)
+		getProgress()
+		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal)
+	}
 	func move(portion: Double, of dish: Dish, from meal: Meal, to destinationMeal: Meal) {
 		guard let meals = meals else { return }
 
@@ -114,11 +125,6 @@ class MealViewModel: NSObject {
 		updateMeals(for: meal.date)
 		fetchMealsBy(date: meal.date) {_ in}
 	}
-    func updateMeals(for date: Date) {
-        guard let meals = self.meals else { return }
-        let dailyMeal = DailyMeal(meals: meals)
-		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal)
-    }
     func fetchMealsBy(date: Date, completion: @escaping (Bool) -> ()) {
 		GoogleApiManager.shared.getMealFor(date) { result in
             switch result {
@@ -136,7 +142,7 @@ class MealViewModel: NSObject {
             }
         }
     }
-    func fetchMealsForOrCreate(date: Date, prefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) {
+	private func fetchMealsForOrCreate(date: Date, prefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) {
 		GoogleApiManager.shared.getMealFor(date) { result in
             switch result {
             case .success(let dailyMeal):
@@ -152,7 +158,7 @@ class MealViewModel: NSObject {
             }
         }
     }
-	func checkTodaysMeal(completion: @escaping (Bool) -> ()) {
+	private func checkTodaysMeal(completion: @escaping (Bool) -> ()) {
 		GoogleApiManager.shared.getMealFor(Date()) { result in
 			switch result {
 			case .success(let dailyMeal):

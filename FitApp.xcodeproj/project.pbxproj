@@ -12,6 +12,7 @@
 		7C149C7925D817DD00B0864F /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */; };
 		7C149C8E25D85A7600B0864F /* AddWeightAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C149C8D25D85A7600B0864F /* AddWeightAlertView.xib */; };
 		7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */; };
+		7C33B65F26690A3800E16A1C /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C33B65E26690A3800E16A1C /* Notification.swift */; };
 		7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F4F3125C2D31300EE3758 /* SettingsOptionsTableViewController.swift */; };
 		7C3F4F8C25C9E2AF00EE3758 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F4F8B25C9E2AF00EE3758 /* ResetPasswordViewController.swift */; };
 		7C5262B725BC756700694007 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C5262B625BC756700694007 /* Settings.storyboard */; };
@@ -57,6 +58,9 @@
 		7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */; };
 		7C9B34922583F84A00D30480 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B34912583F84A00D30480 /* StartViewController.swift */; };
 		7CCC0E67262B2E79006E2E35 /* TableViewEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC0E66262B2E79006E2E35 /* TableViewEmptyView.swift */; };
+		7CD1817B2647E80F0054DB9C /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */; };
+		7CD1817C2647E80F0054DB9C /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */; };
+		7CD1817E26481E5D0054DB9C /* SettingTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */; };
 		7CFA5FF7262A0F5800A3F401 /* MoveDishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */; };
 		7CFA5FFF262A10E600A3F401 /* MoveDishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */; };
 		7CFFAD9C261DEF1000C05C66 /* DishesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFFAD9B261DEF1000C05C66 /* DishesTableViewController.swift */; };
@@ -146,6 +150,7 @@
 		7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
 		7C149C8D25D85A7600B0864F /* AddWeightAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddWeightAlertView.xib; sourceTree = "<group>"; };
 		7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSecondActivityViewController.swift; sourceTree = "<group>"; };
+		7C33B65E26690A3800E16A1C /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		7C3F4F3125C2D31300EE3758 /* SettingsOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOptionsTableViewController.swift; sourceTree = "<group>"; };
 		7C3F4F8B25C9E2AF00EE3758 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		7C5262B625BC756700694007 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -200,6 +205,9 @@
 		7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C9B34912583F84A00D30480 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		7CCC0E66262B2E79006E2E35 /* TableViewEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEmptyView.swift; sourceTree = "<group>"; };
+		7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
+		7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewModel.swift; sourceTree = "<group>"; };
 		7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoveDishView.xib; sourceTree = "<group>"; };
 		7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDishView.swift; sourceTree = "<group>"; };
 		7CFFAD9B261DEF1000C05C66 /* DishesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishesTableViewController.swift; sourceTree = "<group>"; };
@@ -545,6 +553,15 @@
 			name = EmptyTabelViewView;
 			sourceTree = "<group>";
 		};
+		7CD181782647E7B30054DB9C /* NotificationViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */,
+				7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */,
+			);
+			name = NotificationViewCell;
+			sourceTree = "<group>";
+		};
 		7CFA5FF5262A0F1C00A3F401 /* MoveDishView */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,6 +667,7 @@
 				B36B71912577BF0C001CD393 /* Exercise.swift */,
 				7C658AA725D9873C00CA75B2 /* Motivations.swift */,
 				7C658ABD25D992D200CA75B2 /* Comments.swift */,
+				7C33B65E26690A3800E16A1C /* Notification.swift */,
 				7C74351125CDBBEF00D33A9A /* Chat */,
 			);
 			path = Models;
@@ -689,6 +707,7 @@
 		B3B2A245256EDDCA0052E6C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7CD181782647E7B30054DB9C /* NotificationViewCell */,
 				7CCC0E65262B2E2D006E2E35 /* EmptyTabelViewView */,
 				B38068CE25B71988005C4A24 /* WorkoutTableViewCell */,
 				B330B87D25757E8A00BDB206 /* ExerciseTabelViewCell */,
@@ -722,6 +741,7 @@
 				B358227E25ACA40D00C91295 /* ArticleViewModel.swift */,
 				B38397F525B4A1BE00154697 /* WorkoutViewModel.swift */,
 				7C74350225CDBAE900D33A9A /* ChatsViewModel.swift */,
+				7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -853,6 +873,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CD1817C2647E80F0054DB9C /* NotificationTableViewCell.xib in Resources */,
 				7C89AA07256D69CB009AD87C /* LaunchScreen.storyboard in Resources */,
 				B367F18025B1DE4F00DF21D7 /* DishesStrings.strings in Resources */,
 				7C89AA04256D69CB009AD87C /* Assets.xcassets in Resources */,
@@ -1062,7 +1083,9 @@
 				B368E04925A790D200BD1937 /* ServerDishs.swift in Sources */,
 				B3BB8F3B2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift in Sources */,
 				7CFFAD9C261DEF1000C05C66 /* DishesTableViewController.swift in Sources */,
+				7CD1817E26481E5D0054DB9C /* SettingTableViewModel.swift in Sources */,
 				7C7435EB25D31F9A00D33A9A /* Chat.swift in Sources */,
+				7C33B65F26690A3800E16A1C /* Notification.swift in Sources */,
 				B35111CA25962D41001B2B9B /* weightTableViewCell.swift in Sources */,
 				7C74350325CDBAE900D33A9A /* ChatsViewModel.swift in Sources */,
 				7CCC0E67262B2E79006E2E35 /* TableViewEmptyView.swift in Sources */,
@@ -1080,6 +1103,7 @@
 				7C83152525E053B100335601 /* ExerciseCategoryView.swift in Sources */,
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
 				7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */,
+				7CD1817B2647E80F0054DB9C /* NotificationTableViewCell.swift in Sources */,
 				B358223025AC9DA800C91295 /* Article.swift in Sources */,
 				7C7434F025CD9D9D00D33A9A /* ChatsViewController.swift in Sources */,
 				B3E6E9B825714D5800958C48 /* MealPlanViewController.swift in Sources */,

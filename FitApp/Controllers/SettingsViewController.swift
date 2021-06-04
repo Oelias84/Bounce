@@ -96,6 +96,9 @@ extension SettingsViewController {
 	private func systemTappedAt(_ row: Int) {
 		switch row {
 		case 0:
+			optionContentType = .notifications
+			performSegue(withIdentifier: K.SegueId.moveToSettingsOptions, sender: self)
+		case 1:
 			presentLogoutAlert()
 		default:
 			break

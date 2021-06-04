@@ -8,7 +8,6 @@
 import UIKit
 import FirebaseAuth
 import FirebaseAnalytics
-
 import FirebaseDatabase
 
 class LoginViewController: UIViewController {
@@ -97,6 +96,11 @@ extension LoginViewController {
 					
 					switch result {
 					case .success(let userData):
+						Analytics.logEvent(AnalyticsEventLogin, parameters: ["USER_EMAIL": email])
+						
+						#warning("Remove this after users update")
+						LocalNotificationManager.shared.setMealNotification()
+
 						UserProfile.defaults.email = email
 						if let user = user?.user, let data = userData {
 							UserProfile.defaults.updateUserProfileData(data, id: user.uid)
@@ -105,8 +109,6 @@ extension LoginViewController {
 								GoogleDatabaseManager.shared.add(token: token, for: User(firsName: userName.0, lastName: userName.1, email: user.email!, deviceToken: token))
 							}
 						}
-						
-						Analytics.logEvent(AnalyticsEventLogin, parameters: ["USER_EMAIL": email])
 						let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
 						let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar)
 						

@@ -130,6 +130,7 @@ struct K {
         static let exerciseCell = "exerciseCell"
         static let workoutCell = "workoutCell"
 		static let settingsOptionCell = "settingsOptionCell"
+		static let notificationCell = "notificationCell"
 		static let chatCell = "chatCell"
 		static let dishesCell = "dishesCell"
     }
@@ -147,6 +148,7 @@ struct K {
 		static let exerciseCategoryView = "ExerciseCategoryView"
 		static let moveDishView = "MoveDishView"
 		static let tableViewEmptyView = "TableViewEmptyView"
+		static let notificationTableViewCell = "NotificationTableViewCell"
     }
 	
 	struct Units {
@@ -155,5 +157,13 @@ struct K {
 		static let centimeter = "ס״מ"
 		static let steps = "צעדים"
 		static let unknown = "לא ידוע"
+	}
+	
+	struct Notifications {
+		
+		static let alertWaterTitle = "קביעת תזכורת שתיה"
+		static let alertWeterMessage = "באיזה שעה תרצי לקבוע תזכורת שתיה?"
+		static let alertWeightTitle = "קביעת תזכורת שקילה"
+		static let alertWeightMessage = "באיזה שעה תרצי לקבוע תזכורת לשקילה?"
 	}
 }

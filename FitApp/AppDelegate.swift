@@ -15,6 +15,8 @@ import UserNotifications
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	
+	var window: UIWindow?
+	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		
 		FirebaseApp.configure()
@@ -51,40 +53,40 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 	func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 
 		let id = notification.request.identifier
-
-		print("Received notification with IDluhh = \(id)")
+		print("Will present notification with ID = \(id)")
 		
-		if presentMessageNotifications {
-			completionHandler([.sound, .alert, .badge])
+		switch id {
+		case NotificationTypes.mealNotification.rawValue:
+			if (UserProfile.defaults.showMealNotFinishedAlert ?? true) {
+				completionHandler([.sound, .alert, .badge])
+			}
+		default:
+			if presentMessageNotifications {
+				completionHandler([.sound, .alert, .badge])
+			}
 		}
 	}
 	func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
 		
 		let id = response.notification.request.identifier
-		
-		print("Received notification with IDkjhk = \(id)")
+		print("Did receive notification with ID = \(id)")
 
 		if response.notification.request.content.categoryIdentifier == "REMAINDER_INVITATION" {
-			
 			switch response.actionIdentifier {
-			case "ACCEPT_ACTION":
-				
-				guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
-					return
-				}
-				let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
-				let nav = storyboard.instantiateViewController(withIdentifier: K.ViewControllerId.HomeTabBar) as? UITabBarController
-				
-				window.rootViewController = nav
-				window.makeKeyAndVisible()
-				break
 			case "DECLINE_ACTION":
 				break
-			case UNNotificationDefaultActionIdentifier, UNNotificationDismissActionIdentifier:
-				break
 			default:
-				break
+				switch id {
+				case NotificationTypes.mealNotification.rawValue:
+					moveTo(storyboardId: K.StoryboardName.mealPlan, vcId: K.ViewControllerId.mealViewController)
+				case NotificationTypes.weightNotification.rawValue:
+					moveTo(storyboardId: K.StoryboardName.weightProgress, vcId: K.ViewControllerId.weightViewController)
+				default:
+					return
+				}
 			}
+		} else {
+			moveTo(storyboardId: K.StoryboardName.chat, vcId: K.ViewControllerId.ChatsViewController)
 		}
 		completionHandler()
 	}
@@ -105,10 +107,41 @@ extension AppDelegate: MessagingDelegate {
 
 extension AppDelegate {
 	
-	var presentMessageNotifications: Bool {
+	private var presentMessageNotifications: Bool {
 		if let firstVC = (UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.rootViewController?.topMostViewController()) {
 			return !(firstVC.isKind(of: ChatsViewController.self) || firstVC.isKind(of: ChatViewController.self))
 		}
 		return true
+	}
+	
+	private func mainView() {
+		let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
+		let nav = storyboard.instantiateViewController(withIdentifier: K.ViewControllerId.HomeTabBar)
+		
+		window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window
+		window!.rootViewController = nav
+		window!.makeKeyAndVisible()
+	}
+	private func moveTo(storyboardId: String, vcId: String ) {
+		mainView()
+		let storyboard = UIStoryboard(name: storyboardId, bundle: nil)
+		let toVc = storyboard.instantiateViewController(withIdentifier: vcId)
+		
+		if let tabBar = window?.rootViewController as? UITabBarController {
+			switch vcId {
+			case K.ViewControllerId.weightViewController:
+				tabBar.selectedIndex = 3
+			case K.ViewControllerId.mealViewController:
+				tabBar.selectedIndex = 1
+			default:
+				tabBar.selectedIndex = 0
+				if let nav = tabBar.viewControllers?.first as? UINavigationController {
+					let homeVc = nav.viewControllers.first { vc in
+						vc is HomeViewController
+					}
+					homeVc?.navigationController?.pushViewController(toVc, animated: true)
+				}
+			}
+		}
 	}
 }

@@ -8,102 +8,150 @@
 import UIKit
 import UserNotifications
 
-struct Notification {
-    
-    var id: String
-    var title: String
-    var body: String
-    var dateTime: DateComponents
+enum NotificationTypes: String {
+	
+	case waterNotification
+	case weightNotification
+	case mealNotification
 }
 
 class LocalNotificationManager {
-    
-    var notifications = [Notification]()
-    var delegate: UIViewController?
-    
-    init(_ viewController: UIViewController) {
-        self.delegate = viewController
-    }
+	
+	static let shared = LocalNotificationManager()
+	
+	private var currentNotification: [Notification]? {
+		didSet {
+			bindNotificationsManagerToController()
+		}
+	}
+	private var postNotifications = [Notification]()
+	
+	var bindNotificationsManagerToController: (() -> ()) = {}
+	
+	private init() {
+		
+		getScheduledNotifications()
+		setMealNotification()
+	}
+	
+	func getNotifications() -> [Notification]? {
+		return currentNotification
+	}
+	func removeNotification(_ notification: Notification) {
+		UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [notification.id])
+		getScheduledNotifications()
+	}
+	
+	func setMealNotification() {
+		guard let time = "17:00".timeFromString else { return }
+		var dateComponents = DateComponents()
+		
+		dateComponents.hour = time.hour
+		dateComponents.minute = time.minute
+		dateComponents.second = time.second
+		
+		self.postNotifications.append(Notification(id: NotificationTypes.mealNotification.rawValue, title: "אופס", body: "נראה ששחכת לעדכן את הארוחות היום, לחצי כאן כדי לעבור למסך הארוחות", dateTime: dateComponents))
+		self.schedule()
+	}
+	func showNotificationAlert(withTitle: String, withMessage: String, type: NotificationTypes, vc: UIViewController) {
+		let alert = UIAlertController(title: withTitle, message: withMessage, preferredStyle: .alert)
+		
+		alert.addTextField { textField in
+			textField.textAlignment = .center
+			textField.setupTimePicker()
+		}
+		
+		alert.addAction(UIAlertAction(title: "אישור", style: .default, handler: { _ in
+			let textField = alert.textFields![0] as UITextField
+			
+			if let text = textField.text, let time = text.timeFromString {
+				
+				var dateComponents = DateComponents()
+				dateComponents.hour = time.hour
+				dateComponents.minute = time.minute
+				dateComponents.second = time.second
+				
+				switch type {
+				case .waterNotification:
+					self.postNotifications.append(Notification(title: "זמן לישתות", body: "נראה שהגיע הזמן לישתות", dateTime: dateComponents))
+				case .weightNotification:
+					self.postNotifications.append(Notification(id: NotificationTypes.weightNotification.rawValue, title: "זמן להישקל", body: "לחצי כאן בכדי להזין את השקילה היומית שלך", dateTime: dateComponents))
+				case .mealNotification:
+					break
+				}
+				self.schedule()
+			}
+		}))
+		alert.addAction(UIAlertAction(title: "ביטול", style: .cancel))
+		vc.present(alert, animated: true)
+	}
+}
 
-    func listScheduledNotifications() {
-        UNUserNotificationCenter.current().getPendingNotificationRequests { notifications in
-            
-            for notification in notifications {
-                print(notification)
-            }
-        }
-    }
-    private func requestAuthorization() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
-            
-            if granted == true && error == nil {
-                self.scheduleNotifications()
-            }
-        }
-    }
-    func schedule() {
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-            
-            switch settings.authorizationStatus {
-            case .notDetermined:
-                self.requestAuthorization()
-            case .authorized, .provisional:
-                self.scheduleNotifications()
-            default:
-                break
-            }
-        }
-    }
-    private func scheduleNotifications() {
-        for notification in notifications {
-            
-            let ok = UNNotificationAction(identifier: "ACCEPT_ACTION", title: "אישור", options: [])
-            let cancel = UNNotificationAction(identifier: "DECLINE_ACTION", title: "ביטול",  options: [])
-            let category = UNNotificationCategory(identifier: "REMAINDER_INVITATION", actions: [ok, cancel],
-                                                  intentIdentifiers: [], options: .customDismissAction)
-            
-            UNUserNotificationCenter.current().setNotificationCategories([category])
-            
-            let content = UNMutableNotificationContent()
-            content.categoryIdentifier = "REMAINDER_INVITATION"
-            content.title = notification.title
-            content.sound = .default
-                        
-            let trigger = UNCalendarNotificationTrigger(dateMatching: notification.dateTime, repeats: true)
-            let request = UNNotificationRequest(identifier: "REMAINDER_INVITATION", content: content, trigger: trigger)
-            
-            UNUserNotificationCenter.current().add(request) { error in
-                
-                guard error == nil else { return }
-                
-                print("Notification scheduled! --- ID = \(notification.id)")
-            }
-        }
-    }
-    func showNotificationAlert() {
-        let alert = UIAlertController(title: "קביעת תיזכורת שקילה", message: "באיזה שעה תרצי לקבוע תזכורת שקילה?", preferredStyle: .alert)
-
-        alert.addTextField { textField in
-            textField.textAlignment = .center
-        }
-        
-        alert.addAction(UIAlertAction(title: "אישור", style: .default, handler: { _ in
-            let textField = alert.textFields![0] as UITextField
-            
-            if let text = textField.text, let time = text.timeFromString {
-                
-                var dateComponents = DateComponents()
-                dateComponents.hour = time.hour
-                dateComponents.minute = time.minute
-                dateComponents.second = time.second
-                
-                self.notifications = [Notification(id: "reminder", title: "זמן להישקל", body: "לחצי כאן בכדי להזין את השקילה היומית שלך", dateTime: dateComponents)]
-                self.schedule()
-            }
-        }))
-        alert.addAction(UIAlertAction(title: "ביטול", style: .cancel, handler: { _ in
-            
-        }))
-        delegate?.present(alert, animated: true)
-    }
+//MARK: - Class Functions
+extension LocalNotificationManager {
+	
+	private func requestAuthorization() {
+		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+			
+			if granted == true && error == nil {
+				self.scheduleNotifications()
+			}
+		}
+	}
+	private func scheduleNotifications() {
+		for notification in postNotifications {
+			addNotification(notification: notification)
+		}
+		postNotifications.removeAll()
+	}
+	private func getScheduledNotifications() {
+		var notifications = [Notification]()
+		UNUserNotificationCenter.current().getPendingNotificationRequests { notificationsItems in
+			
+			notifications = notificationsItems.map {
+				let content = $0.content
+				let trigger = $0.trigger as! UNCalendarNotificationTrigger
+				return Notification(id: $0.identifier, title: content.title, body: content.body, dateTime: trigger.dateComponents)
+			}
+			self.currentNotification = notifications.filter { $0.id != NotificationTypes.mealNotification.rawValue }
+													.sorted(by: { $0.title < $1.title })
+		}
+	}
+	private func addNotification(notification: Notification) {
+		let ok = UNNotificationAction(identifier: "ACCEPT_ACTION", title: "אישור", options: [])
+		let cancel = UNNotificationAction(identifier: "DECLINE_ACTION", title: "ביטול",  options: [])
+		let category = UNNotificationCategory(identifier: "REMAINDER_INVITATION", actions: [ok, cancel],
+											  intentIdentifiers: [], options: .customDismissAction)
+		
+		UNUserNotificationCenter.current().setNotificationCategories([category])
+		
+		let content = UNMutableNotificationContent()
+		content.categoryIdentifier = "REMAINDER_INVITATION"
+		content.title = notification.title
+		content.body = notification.body
+		content.sound = .default
+		
+		let trigger = UNCalendarNotificationTrigger(dateMatching: notification.dateTime, repeats: true)
+		let request = UNNotificationRequest(identifier: notification.id, content: content, trigger: trigger)
+		
+		UNUserNotificationCenter.current().add(request) { error in
+			
+			guard error == nil else { return }
+			print("Notification scheduled! --- ID = \(notification.id)")
+			self.getScheduledNotifications()
+		}
+	}
+	private func schedule() {
+		UNUserNotificationCenter.current().getNotificationSettings { settings in
+			
+			switch settings.authorizationStatus {
+			case .notDetermined:
+				self.requestAuthorization()
+			case .authorized, .provisional:
+				self.scheduleNotifications()
+			default:
+				break
+			}
+		}
+	}
 }
