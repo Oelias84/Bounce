@@ -70,7 +70,8 @@ struct K {
 		static let HomeTabBar = "HomeTabBar"
         //Meal
         static let mealViewController = "MealViewController"
-		static let commentsViewController = "CommentsViewController"
+		static let commentViewController = "CommentViewController"
+		static let commentsTableViewController = "CommentsTableViewController"
 		static let dishesListViewController = "DishesTableViewController"
 		//Questionnaire
         static let questionnaireNavigation = "QuestionnaireNavigation"
@@ -127,6 +128,7 @@ struct K {
         static let fanCell = "fanCell"
         static let weightCell = "weightCell"
         static let articleCell = "articleCell"
+		static let commentCell = "commentCell"
         static let exerciseCell = "exerciseCell"
         static let workoutCell = "workoutCell"
 		static let settingsOptionCell = "settingsOptionCell"
@@ -142,6 +144,7 @@ struct K {
         static let mealPlanTableViewCell = "MealPlanTableViewCell"
         static let workoutTableViewCell = "WorkoutTableViewCell"
         static let articleTableViewCell = "ArticleTableViewCell"
+		static let commentTableViewCell = "CommentTableViewCell"
         static let questionnaireFatCollectionViewCell = "QuestionnaireFatCollectionViewCell"
 		static let chatTableViewCell = "ChatTableViewCell"
 		static let addWeightAlertView = "AddWeightAlertView"

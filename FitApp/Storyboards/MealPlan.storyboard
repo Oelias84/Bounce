@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pjO-ox-C9x">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pjO-ox-C9x">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -144,72 +144,77 @@
                         <outlet property="forwardDateButton" destination="leQ-oj-hdP" id="Xk5-Sb-N03"/>
                         <outlet property="forwardDateButtonView" destination="ujP-T1-4IC" id="OcM-2T-ObP"/>
                         <outlet property="tableView" destination="CMS-EQ-Utu" id="au5-8h-cph"/>
-                        <segue destination="TBS-Iu-ztd" kind="presentation" identifier="commentsView" modalPresentationStyle="overCurrentContext" id="cg7-gr-ePI"/>
+                        <segue destination="Qlv-VD-Cd8" kind="show" id="ZV0-of-a4E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AA9-Z0-acL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1407.2463768115942" y="-117.1875"/>
         </scene>
-        <!--Comment View Controller-->
-        <scene sceneID="L3m-1V-IlR">
+        <!--הערות-->
+        <scene sceneID="0Ij-QK-IdA">
             <objects>
-                <viewController storyboardIdentifier="CommentsViewController" id="TBS-Iu-ztd" customClass="CommentViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ftA-7a-IPI">
+                <tableViewController storyboardIdentifier="CommentsTableViewController" id="Qlv-VD-Cd8" customClass="CommentsTableViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="jwp-wb-hkJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Qlv-VD-Cd8" id="uLJ-W4-TiO"/>
+                            <outlet property="delegate" destination="Qlv-VD-Cd8" id="nhK-eC-VgE"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="הערות" largeTitleDisplayMode="always" id="JzY-Nm-8wf"/>
+                    <connections>
+                        <segue destination="qU7-kB-rAR" kind="show" id="kiO-pz-Ivt"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tbl-A2-ATR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2164" y="-117"/>
+        </scene>
+        <!--Comment View Controller-->
+        <scene sceneID="OoB-am-gVJ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gYR-2B-W6X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="CommentViewController" id="qU7-kB-rAR" customClass="CommentViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tzU-ee-E4v">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYE-6a-mll">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Bf9-fz-mCh">
+                                <rect key="frame" x="16" y="88" width="382" height="808"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Jba-3x-eTX">
-                                        <rect key="frame" x="16" y="62" width="382" height="834"/>
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="azz-iI-TjD">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="0.0"/>
+                                    </imageView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Jba-3x-eTX">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="808"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAg-uq-dyB">
-                                        <rect key="frame" x="368" y="16.5" width="30" height="29"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="VUe-fO-LwQ"/>
-                                            <constraint firstAttribute="width" constant="30" id="x8h-lB-XtA"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="xmark.circle" catalog="system"/>
-                                        <connections>
-                                            <action selector="dismissButtonAction:" destination="TBS-Iu-ztd" eventType="touchUpInside" id="Mpy-pv-jiL"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstItem="Jba-3x-eTX" firstAttribute="leading" secondItem="IYE-6a-mll" secondAttribute="leading" constant="16" id="D1n-8D-rNX"/>
-                                    <constraint firstItem="KAg-uq-dyB" firstAttribute="top" secondItem="IYE-6a-mll" secondAttribute="top" constant="16" id="Oa4-jx-nHR"/>
-                                    <constraint firstItem="Jba-3x-eTX" firstAttribute="top" secondItem="KAg-uq-dyB" secondAttribute="bottom" constant="16" id="Vhu-a3-xfZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="KAg-uq-dyB" secondAttribute="trailing" constant="16" id="tdc-I8-Fsj"/>
-                                    <constraint firstAttribute="bottom" secondItem="Jba-3x-eTX" secondAttribute="bottom" id="zxW-Qt-I1w"/>
-                                    <constraint firstAttribute="trailing" secondItem="Jba-3x-eTX" secondAttribute="trailing" constant="16" id="zyG-Em-noa"/>
-                                </constraints>
-                            </view>
+                            </stackView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="IvR-78-E2J"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="VEd-9J-c6T"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="IYE-6a-mll" firstAttribute="top" secondItem="ftA-7a-IPI" secondAttribute="top" id="6KQ-fc-iWj"/>
-                            <constraint firstAttribute="bottom" secondItem="IYE-6a-mll" secondAttribute="bottom" id="Hft-mX-mGO"/>
-                            <constraint firstItem="IYE-6a-mll" firstAttribute="leading" secondItem="IvR-78-E2J" secondAttribute="leading" id="HjR-LI-rFm"/>
-                            <constraint firstAttribute="trailing" secondItem="IYE-6a-mll" secondAttribute="trailing" id="TkF-EL-f8j"/>
+                            <constraint firstItem="Bf9-fz-mCh" firstAttribute="top" secondItem="VEd-9J-c6T" secondAttribute="top" id="T0X-eb-EAE"/>
+                            <constraint firstItem="Bf9-fz-mCh" firstAttribute="leading" secondItem="tzU-ee-E4v" secondAttribute="leading" constant="16" id="UUI-gB-XfF"/>
+                            <constraint firstAttribute="trailing" secondItem="Bf9-fz-mCh" secondAttribute="trailing" constant="16" id="hxv-hE-IAh"/>
+                            <constraint firstAttribute="bottom" secondItem="Bf9-fz-mCh" secondAttribute="bottom" id="q3R-un-qfh"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="hnp-vg-2WD"/>
-                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationItem key="navigationItem" id="shI-aj-XBB"/>
                     <connections>
-                        <outlet property="commentTextView" destination="Jba-3x-eTX" id="xrD-Ae-4kk"/>
+                        <outlet property="commentImageView" destination="azz-iI-TjD" id="Ugi-TH-Nro"/>
+                        <outlet property="commentTextView" destination="Jba-3x-eTX" id="Gui-Ji-Cfk"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="txW-hm-VpF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2153.6231884057975" y="-117.1875"/>
+            <point key="canvasLocation" x="2889.8550724637685" y="-117.1875"/>
         </scene>
         <!--Dishes Table View Controller-->
         <scene sceneID="E96-54-ZAB">
@@ -224,7 +229,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dishesCell" id="0fb-u7-asH">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0fb-u7-asH" id="tea-OR-U9Q">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -255,9 +260,6 @@
                                     <action selector="cancelButtonAction:" destination="NQt-sN-zou" eventType="touchUpInside" id="wZZ-Jt-yQ6"/>
                                 </connections>
                             </button>
-                            <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aNu-nX-w30">
-                                <rect key="frame" x="138" y="6.5" width="414" height="44"/>
-                            </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="סוג מנה" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eL0-n5-slG">
                                 <rect key="frame" x="179.5" y="58.5" width="55" height="21.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -275,7 +277,6 @@
                             <constraint firstItem="eL0-n5-slG" firstAttribute="centerX" secondItem="RGQ-o2-rUk" secondAttribute="centerX" id="LbC-aW-laC"/>
                             <constraint firstItem="3o2-Oe-fBy" firstAttribute="top" secondItem="Gvg-pm-H70" secondAttribute="bottom" constant="12" id="Nde-hB-Yow"/>
                             <constraint firstItem="3o2-Oe-fBy" firstAttribute="leading" secondItem="3JB-6k-h3V" secondAttribute="leading" id="NkE-wh-SOJ"/>
-                            <constraint firstItem="eL0-n5-slG" firstAttribute="top" secondItem="aNu-nX-w30" secondAttribute="bottom" constant="8" id="ffC-ez-fzA"/>
                             <constraint firstItem="3JB-6k-h3V" firstAttribute="bottom" secondItem="3o2-Oe-fBy" secondAttribute="bottom" id="n6e-GB-mhX"/>
                             <constraint firstItem="eL0-n5-slG" firstAttribute="centerY" secondItem="Gvg-pm-H70" secondAttribute="centerY" id="xYY-uk-7FQ"/>
                             <constraint firstItem="r9p-2i-eYZ" firstAttribute="top" secondItem="3JB-6k-h3V" secondAttribute="top" constant="8" id="zK4-uU-SBe"/>
@@ -288,13 +289,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z71-E2-UDC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2884" y="-117"/>
+            <point key="canvasLocation" x="1407" y="-792"/>
         </scene>
     </scenes>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
-        <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -101,7 +101,7 @@ extension MealPlanViewController {
 		
 		comments.setTitle("הערות ", for: .normal)
 		comments.setImage(UIImage(systemName: "info.circle.fill"), for: .normal)
-		comments.addTarget(self, action: #selector(barButtonItemTapped), for: .touchUpInside)
+		comments.addTarget(self, action: #selector(commentsBarButtonItemTapped), for: .touchUpInside)
 		comments.sizeToFit()
 		
 		today.setTitle(" היום", for: .normal)
@@ -149,9 +149,9 @@ extension MealPlanViewController {
 		noMealBackgroundView.delegate = self
 		return noMealBackgroundView
 	}
-	@objc func barButtonItemTapped(_ sender: UIBarButtonItem) {
-		if let commentVC = storyboard?.instantiateViewController(identifier: K.ViewControllerId.commentsViewController) {
-			present(commentVC, animated: true)
+	@objc func commentsBarButtonItemTapped(_ sender: UIBarButtonItem) {
+		if let commentVC = storyboard?.instantiateViewController(identifier: K.ViewControllerId.commentsTableViewController) {
+			self.navigationController?.pushViewController(commentVC, animated: true)
 		}
 	}
 	@objc func todayBarButtonItemTapped(_ sender: UIBarButtonItem) {

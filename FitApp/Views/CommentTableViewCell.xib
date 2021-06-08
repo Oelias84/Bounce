@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentCell" rowHeight="152" id="gPw-UB-SjI" userLabel="commentCell" customClass="CommentTableViewCell" customModule="FitApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="371" height="128"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gPw-UB-SjI" id="7tF-6j-DLA">
+                <rect key="frame" x="0.0" y="0.0" width="371" height="128"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pry-GL-Fsg" userLabel="Cell Background">
+                        <rect key="frame" x="12" y="12" width="347" height="92"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="RA2-FC-0AU">
+                                <rect key="frame" x="16" y="16" width="315" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rkB-FM-urU" userLabel="Article Title">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="RA2-FC-0AU" secondAttribute="bottom" constant="16" id="QNX-XY-tjh"/>
+                            <constraint firstItem="RA2-FC-0AU" firstAttribute="leading" secondItem="Pry-GL-Fsg" secondAttribute="leading" constant="16" id="RCy-02-Vbo"/>
+                            <constraint firstAttribute="trailing" secondItem="RA2-FC-0AU" secondAttribute="trailing" constant="16" id="bVC-oN-Y7j"/>
+                            <constraint firstItem="RA2-FC-0AU" firstAttribute="top" secondItem="Pry-GL-Fsg" secondAttribute="top" constant="16" id="xOH-LB-mgH"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Pry-GL-Fsg" secondAttribute="bottom" constant="24" id="64h-KX-s7R"/>
+                    <constraint firstItem="Pry-GL-Fsg" firstAttribute="leading" secondItem="7tF-6j-DLA" secondAttribute="leading" constant="12" id="ADB-LF-9hK"/>
+                    <constraint firstItem="Pry-GL-Fsg" firstAttribute="top" secondItem="7tF-6j-DLA" secondAttribute="top" constant="12" id="GYC-tT-h7w"/>
+                    <constraint firstAttribute="trailing" secondItem="Pry-GL-Fsg" secondAttribute="trailing" constant="12" id="QD0-fu-TZk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="swL-Bv-Bcq"/>
+            <connections>
+                <outlet property="cellBackgroundView" destination="Pry-GL-Fsg" id="LOb-wx-4Ei"/>
+                <outlet property="titleTextLabel" destination="rkB-FM-urU" id="dJl-WD-zyr"/>
+            </connections>
+            <point key="canvasLocation" x="-302.17391304347831" y="166.07142857142856"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
