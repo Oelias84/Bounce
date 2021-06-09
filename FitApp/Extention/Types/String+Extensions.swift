@@ -23,6 +23,13 @@ extension String {
 		formatter.timeZone = .current
 		return formatter.date(from: self)
 	}
+	var fullDateFromStringWithDay: Date? {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "dd/MM/yy EEEE"
+		formatter.timeZone = .current
+		return formatter.date(from: self)
+	}
+	
 	var fullDateFromString: Date? {
 		let formatter = DateFormatter()
 		formatter.dateFormat = "dd/MM/yyyy HH:mm"

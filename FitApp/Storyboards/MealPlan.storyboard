@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,90 +24,10 @@
                                     <constraint firstAttribute="height" constant="1" id="vXs-he-HTU"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBd-1e-NZn" userLabel="Date Change View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBd-1e-NZn" userLabel="Date Change View" customClass="ChangeDateView" customModule="FitApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="88" width="414" height="74"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="a0R-xw-0qG">
-                                        <rect key="frame" x="24" y="17" width="366" height="40"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="967-dv-6tG">
-                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HRy-y3-xmw">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                        <inset key="contentEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                        <state key="normal">
-                                                            <imageReference key="image" image="chevron.backward" catalog="system" symbolScale="large"/>
-                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="changeDateButtons:" destination="pjO-ox-C9x" eventType="touchUpInside" id="i6X-wf-HMA"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="35x-qc-cII"/>
-                                                    <constraint firstAttribute="trailing" secondItem="HRy-y3-xmw" secondAttribute="trailing" id="CBv-hB-8Wi"/>
-                                                    <constraint firstItem="HRy-y3-xmw" firstAttribute="top" secondItem="967-dv-6tG" secondAttribute="top" id="Clq-a7-f2Q"/>
-                                                    <constraint firstAttribute="bottom" secondItem="HRy-y3-xmw" secondAttribute="bottom" id="Jk1-WZ-K0Q"/>
-                                                    <constraint firstAttribute="width" secondItem="967-dv-6tG" secondAttribute="height" multiplier="1:1" id="mHi-r4-Wja"/>
-                                                    <constraint firstItem="HRy-y3-xmw" firstAttribute="leading" secondItem="967-dv-6tG" secondAttribute="leading" id="mcj-IY-t47"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
-                                                        <real key="value" value="20"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10/10/10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sry-xo-BPS">
-                                                <rect key="frame" x="144" y="0.0" width="78" height="40"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujP-T1-4IC">
-                                                <rect key="frame" x="326" y="0.0" width="40" height="40"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="leQ-oj-hdP">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="6" maxY="0.0"/>
-                                                        <state key="normal" image="chevron.forward" catalog="system">
-                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="changeDateButtons:" destination="pjO-ox-C9x" eventType="touchUpInside" id="227-if-A5Z"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstItem="leQ-oj-hdP" firstAttribute="leading" secondItem="ujP-T1-4IC" secondAttribute="leading" id="AJi-Zc-Ixp"/>
-                                                    <constraint firstAttribute="bottom" secondItem="leQ-oj-hdP" secondAttribute="bottom" id="C2h-o7-mBZ"/>
-                                                    <constraint firstAttribute="height" constant="40" id="Irg-CZ-Djr"/>
-                                                    <constraint firstItem="leQ-oj-hdP" firstAttribute="top" secondItem="ujP-T1-4IC" secondAttribute="top" id="K9B-LT-KtL"/>
-                                                    <constraint firstAttribute="width" secondItem="ujP-T1-4IC" secondAttribute="height" multiplier="1:1" id="L95-rj-OBC"/>
-                                                    <constraint firstAttribute="trailing" secondItem="leQ-oj-hdP" secondAttribute="trailing" id="pdA-S4-252"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
-                                                        <real key="value" value="20"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="sry-xo-BPS" firstAttribute="centerX" secondItem="a0R-xw-0qG" secondAttribute="centerX" id="pPY-g4-lLP"/>
-                                        </constraints>
-                                    </stackView>
-                                </subviews>
                                 <constraints>
-                                    <constraint firstItem="a0R-xw-0qG" firstAttribute="leading" secondItem="eBd-1e-NZn" secondAttribute="leading" constant="24" id="21O-7X-iyj"/>
-                                    <constraint firstAttribute="trailing" secondItem="a0R-xw-0qG" secondAttribute="trailing" constant="24" id="MEG-q3-WIb"/>
                                     <constraint firstAttribute="height" constant="74" id="QtY-Bb-I7y"/>
-                                    <constraint firstItem="a0R-xw-0qG" firstAttribute="centerY" secondItem="eBd-1e-NZn" secondAttribute="centerY" id="rC2-Tv-0ia"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MealPlan" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CMS-EQ-Utu">
@@ -138,11 +57,7 @@
                     <navigationItem key="navigationItem" title="ארוחות" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="always" id="ElR-4c-7nc"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="backwardDateButton" destination="HRy-y3-xmw" id="xfx-76-juo"/>
-                        <outlet property="backwardDateButtonView" destination="967-dv-6tG" id="6ee-qQ-ieW"/>
-                        <outlet property="dateTextLabel" destination="sry-xo-BPS" id="CMY-mP-K8O"/>
-                        <outlet property="forwardDateButton" destination="leQ-oj-hdP" id="Xk5-Sb-N03"/>
-                        <outlet property="forwardDateButtonView" destination="ujP-T1-4IC" id="OcM-2T-ObP"/>
+                        <outlet property="changeDateView" destination="eBd-1e-NZn" id="UY0-7i-NzK"/>
                         <outlet property="tableView" destination="CMS-EQ-Utu" id="au5-8h-cph"/>
                         <segue destination="Qlv-VD-Cd8" kind="show" id="ZV0-of-a4E"/>
                     </connections>
@@ -176,7 +91,6 @@
         <!--Comment View Controller-->
         <scene sceneID="OoB-am-gVJ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gYR-2B-W6X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="CommentViewController" id="qU7-kB-rAR" customClass="CommentViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tzU-ee-E4v">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -213,6 +127,7 @@
                         <outlet property="commentTextView" destination="Jba-3x-eTX" id="Gui-Ji-Cfk"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gYR-2B-W6X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2889.8550724637685" y="-117.1875"/>
         </scene>
@@ -293,8 +208,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
-        <image name="chevron.forward" catalog="system" width="96" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

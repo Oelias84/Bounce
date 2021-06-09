@@ -14,6 +14,8 @@
 		7C1ACCE7266F8D19008079C9 /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ACCE6266F8D19008079C9 /* CommentsTableViewController.swift */; };
 		7C1ACCEB266F8F8F008079C9 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ACCE9266F8F8F008079C9 /* CommentTableViewCell.swift */; };
 		7C1ACCEC266F8F8F008079C9 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1ACCEA266F8F8F008079C9 /* CommentTableViewCell.xib */; };
+		7C1ACCF5266FCBC6008079C9 /* ChangeDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ACCF4266FCBC6008079C9 /* ChangeDateView.swift */; };
+		7C1ACCF7266FD6A5008079C9 /* ChangeDateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1ACCF6266FD6A5008079C9 /* ChangeDateView.xib */; };
 		7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */; };
 		7C33B65F26690A3800E16A1C /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C33B65E26690A3800E16A1C /* Notification.swift */; };
 		7C33B661266A587D00E16A1C /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C33B660266A587D00E16A1C /* CommentsViewModel.swift */; };
@@ -156,6 +158,8 @@
 		7C1ACCE6266F8D19008079C9 /* CommentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
 		7C1ACCE9266F8F8F008079C9 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		7C1ACCEA266F8F8F008079C9 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
+		7C1ACCF4266FCBC6008079C9 /* ChangeDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDateView.swift; sourceTree = "<group>"; };
+		7C1ACCF6266FD6A5008079C9 /* ChangeDateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeDateView.xib; sourceTree = "<group>"; };
 		7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSecondActivityViewController.swift; sourceTree = "<group>"; };
 		7C33B65E26690A3800E16A1C /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		7C33B660266A587D00E16A1C /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
@@ -346,6 +350,15 @@
 				7C1ACCEA266F8F8F008079C9 /* CommentTableViewCell.xib */,
 			);
 			name = CommentsTableViewCell;
+			sourceTree = "<group>";
+		};
+		7C1ACCEF266FCA97008079C9 /* CahngeDateView */ = {
+			isa = PBXGroup;
+			children = (
+				7C1ACCF4266FCBC6008079C9 /* ChangeDateView.swift */,
+				7C1ACCF6266FD6A5008079C9 /* ChangeDateView.xib */,
+			);
+			name = CahngeDateView;
 			sourceTree = "<group>";
 		};
 		7C3F4F3625C2D31900EE3758 /* Settings */ = {
@@ -725,6 +738,7 @@
 		B3B2A245256EDDCA0052E6C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7C1ACCEF266FCA97008079C9 /* CahngeDateView */,
 				7C1ACCE8266F8F2C008079C9 /* CommentsTableViewCell */,
 				7CD181782647E7B30054DB9C /* NotificationViewCell */,
 				7CCC0E65262B2E2D006E2E35 /* EmptyTabelViewView */,
@@ -919,6 +933,7 @@
 				7C149C8E25D85A7600B0864F /* AddWeightAlertView.xib in Resources */,
 				B3E36E7025727F63006CE558 /* Home.storyboard in Resources */,
 				7C7435DC25D31A0000D33A9A /* ChatTableViewCell.xib in Resources */,
+				7C1ACCF7266FD6A5008079C9 /* ChangeDateView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1076,6 +1091,7 @@
 				7C7434F525CD9DD700D33A9A /* ChatViewController.swift in Sources */,
 				B368DFFB25A76A2C00BD1937 /* WeightViewModel.swift in Sources */,
 				7C33B661266A587D00E16A1C /* CommentsViewModel.swift in Sources */,
+				7C1ACCF5266FCBC6008079C9 /* ChangeDateView.swift in Sources */,
 				B358222825AC9A2F00C91295 /* ArticlesViewController.swift in Sources */,
 				B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */,
 				B3DB753525A09133002CF48B /* Double+Extensions.swift in Sources */,

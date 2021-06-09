@@ -84,8 +84,7 @@ extension ArticlesViewController {
 	private func moveTo(_ index: Int) {
 		filteredArticles = index == 3 ? articleViewModel.articles[index].reversed() : articleViewModel.articles[index]
 		articleTopic = articleViewModel.topics[index]
-		DispatchQueue.main.async { [weak self] in
-			guard let self = self else { return }
+		DispatchQueue.main.async {
 			self.tableView.reloadData()
 		}
 		articlesSegmentedControl.selectedSegmentIndex = index
