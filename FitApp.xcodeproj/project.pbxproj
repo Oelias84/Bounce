@@ -16,6 +16,8 @@
 		7C1ACCEC266F8F8F008079C9 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1ACCEA266F8F8F008079C9 /* CommentTableViewCell.xib */; };
 		7C1ACCF5266FCBC6008079C9 /* ChangeDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ACCF4266FCBC6008079C9 /* ChangeDateView.swift */; };
 		7C1ACCF7266FD6A5008079C9 /* ChangeDateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1ACCF6266FD6A5008079C9 /* ChangeDateView.xib */; };
+		7C1ACD042670C25B008079C9 /* AddingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ACD022670C25B008079C9 /* AddingTableViewCell.swift */; };
+		7C1ACD052670C25B008079C9 /* AddingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1ACD032670C25B008079C9 /* AddingTableViewCell.xib */; };
 		7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */; };
 		7C33B65F26690A3800E16A1C /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C33B65E26690A3800E16A1C /* Notification.swift */; };
 		7C33B661266A587D00E16A1C /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C33B660266A587D00E16A1C /* CommentsViewModel.swift */; };
@@ -160,6 +162,8 @@
 		7C1ACCEA266F8F8F008079C9 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		7C1ACCF4266FCBC6008079C9 /* ChangeDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDateView.swift; sourceTree = "<group>"; };
 		7C1ACCF6266FD6A5008079C9 /* ChangeDateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeDateView.xib; sourceTree = "<group>"; };
+		7C1ACD022670C25B008079C9 /* AddingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingTableViewCell.swift; sourceTree = "<group>"; };
+		7C1ACD032670C25B008079C9 /* AddingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddingTableViewCell.xib; sourceTree = "<group>"; };
 		7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSecondActivityViewController.swift; sourceTree = "<group>"; };
 		7C33B65E26690A3800E16A1C /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		7C33B660266A587D00E16A1C /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
@@ -352,13 +356,22 @@
 			name = CommentsTableViewCell;
 			sourceTree = "<group>";
 		};
-		7C1ACCEF266FCA97008079C9 /* CahngeDateView */ = {
+		7C1ACCEF266FCA97008079C9 /* ChangeDateView */ = {
 			isa = PBXGroup;
 			children = (
 				7C1ACCF4266FCBC6008079C9 /* ChangeDateView.swift */,
 				7C1ACCF6266FD6A5008079C9 /* ChangeDateView.xib */,
 			);
-			name = CahngeDateView;
+			name = ChangeDateView;
+			sourceTree = "<group>";
+		};
+		7C1ACD072670C648008079C9 /* AddingTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7C1ACD022670C25B008079C9 /* AddingTableViewCell.swift */,
+				7C1ACD032670C25B008079C9 /* AddingTableViewCell.xib */,
+			);
+			name = AddingTableViewCell;
 			sourceTree = "<group>";
 		};
 		7C3F4F3625C2D31900EE3758 /* Settings */ = {
@@ -738,7 +751,7 @@
 		B3B2A245256EDDCA0052E6C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7C1ACCEF266FCA97008079C9 /* CahngeDateView */,
+				7C1ACCEF266FCA97008079C9 /* ChangeDateView */,
 				7C1ACCE8266F8F2C008079C9 /* CommentsTableViewCell */,
 				7CD181782647E7B30054DB9C /* NotificationViewCell */,
 				7CCC0E65262B2E2D006E2E35 /* EmptyTabelViewView */,
@@ -750,6 +763,7 @@
 				B3E6E99A2571443200958C48 /* QuestionnaireFatCollectionViewCell */,
 				B358227D25ACA2FE00C91295 /* ArticleTableViewCell */,
 				7C7435E025D31A0600D33A9A /* ChatTabelViewCell */,
+				7C1ACD072670C648008079C9 /* AddingTableViewCell */,
 				7C71BB4E25D869B400FBEB96 /* WeightViews */,
 				B3CA0CE2258111FD00923902 /* CircularProgressView.swift */,
 				B368DFDF25A6247600BD1937 /* SpinnerView.swift */,
@@ -927,6 +941,7 @@
 				7C1ACCEC266F8F8F008079C9 /* CommentTableViewCell.xib in Resources */,
 				B34397A7258A7F720073A59B /* DishView.xib in Resources */,
 				7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */,
+				7C1ACD052670C25B008079C9 /* AddingTableViewCell.xib in Resources */,
 				B38068C725B7197E005C4A24 /* WorkoutTableViewCell.xib in Resources */,
 				B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */,
 				7C7434FB25CD9F0000D33A9A /* Chat.storyboard in Resources */,
@@ -1136,6 +1151,7 @@
 				B34397AD258A7FA50073A59B /* DishView.swift in Sources */,
 				7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */,
 				7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */,
+				7C1ACD042670C25B008079C9 /* AddingTableViewCell.swift in Sources */,
 				B38397FB25B4A21F00154697 /* Workout.swift in Sources */,
 				7C658ABE25D992D200CA75B2 /* Comments.swift in Sources */,
 				7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */,

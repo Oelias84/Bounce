@@ -106,6 +106,9 @@ class MealViewModel: NSObject {
 	}
     
     //MARK: - Meals
+	func getMealsCount() -> Int {
+		meals?.count ?? 0
+	}
 	func updateMeals(for date: Date) {
 		guard let meals = self.meals else { return }
 		let dailyMeal = DailyMeal(meals: meals)

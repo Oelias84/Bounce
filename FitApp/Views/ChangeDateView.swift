@@ -68,7 +68,7 @@ class ChangeDateView: UIView {
 		addDatePickerWithToolBar()
 	}
 	private func commonInit() {
-		Bundle.main.loadNibNamed("ChangeDateView", owner: self, options: nil)
+		Bundle.main.loadNibNamed(K.NibName.changeDateView, owner: self, options: nil)
 		addSubview(contentView)
 		contentView.frame = self.bounds
 		contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]

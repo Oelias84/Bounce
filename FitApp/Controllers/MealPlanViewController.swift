@@ -10,6 +10,7 @@ import UIKit
 
 class MealPlanViewController: UIViewController {
 	
+	
 	private var date = Date()
 	private var mealViewModel = MealViewModel.shared
 	private var selectedCellIndexPath: IndexPath?
@@ -21,6 +22,7 @@ class MealPlanViewController: UIViewController {
 		super.viewDidLoad()
 		
 		changeDateView.delegate = self
+		tableView.register(UINib(nibName: K.NibName.addingTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.addingCell)
 		addBarButtonIcon()
 		callToViewModelForUIUpdate()
 	}
@@ -30,19 +32,25 @@ extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if let meals = mealViewModel.meals {
-			return meals.count
+			return meals.count + 1
 		} else {
 			return 0
 		}
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let mealData = mealViewModel.meals?[indexPath.row]
-		let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.mealCell, for: indexPath) as! MealPlanTableViewCell
-		cell.mealViewModel = self.mealViewModel
-		cell.meal = mealData
-		cell.indexPath = indexPath
-		cell.selectionStyle = .none
-		return cell
+		if indexPath.row == mealViewModel.getMealsCount() {
+			let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.addingCell, for: indexPath) as! AddingTableViewCell
+			cell.delegate = self
+			return cell
+		} else {
+			let mealData = mealViewModel.meals?[indexPath.row]
+			let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.mealCell, for: indexPath) as! MealPlanTableViewCell
+			cell.mealViewModel = self.mealViewModel
+			cell.meal = mealData
+			cell.indexPath = indexPath
+			cell.selectionStyle = .none
+			return cell
+		}
 	}
 }
 
@@ -123,6 +131,9 @@ extension MealPlanViewController {
 			self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
 		}
 	}
+	@objc func buttonAction(_ sender: UIButton) {
+		print("pressed")
+	}
 }
 
 //MARK: - Delegates
@@ -144,5 +155,11 @@ extension MealPlanViewController: TableViewEmptyViewDelegate {
 	func buttonTapped() {
 		Spinner.shared.show(view)
 		mealViewModel.fetchData(date: date)
+	}
+}
+extension MealPlanViewController: AddingTableViewCellDelegate {
+	
+	func didTapped() {
+		print("pressed")
 	}
 }

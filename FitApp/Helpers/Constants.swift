@@ -135,23 +135,28 @@ struct K {
 		static let notificationCell = "notificationCell"
 		static let chatCell = "chatCell"
 		static let dishesCell = "dishesCell"
+		static let addingCell = "addingCell"
     }
 	
     struct NibName {
-        
-        static let dishView = "DishView"
-        static let exerciseTableViewCell = "ExerciseTableViewCell"
-        static let mealPlanTableViewCell = "MealPlanTableViewCell"
+        //Cells
+		static let chatTableViewCell = "ChatTableViewCell"
+		static let addingTableViewCell = "AddingTableViewCell"
         static let workoutTableViewCell = "WorkoutTableViewCell"
         static let articleTableViewCell = "ArticleTableViewCell"
 		static let commentTableViewCell = "CommentTableViewCell"
-        static let questionnaireFatCollectionViewCell = "QuestionnaireFatCollectionViewCell"
-		static let chatTableViewCell = "ChatTableViewCell"
+		static let exerciseTableViewCell = "ExerciseTableViewCell"
+		static let mealPlanTableViewCell = "MealPlanTableViewCell"
+		static let notificationTableViewCell = "NotificationTableViewCell"
+		static let questionnaireFatCollectionViewCell = "QuestionnaireFatCollectionViewCell"
+
+		//Views
+		static let dishView = "DishView"
+		static let moveDishView = "MoveDishView"
+		static let changeDateView = "ChangeDateView"
+		static let tableViewEmptyView = "TableViewEmptyView"
 		static let addWeightAlertView = "AddWeightAlertView"
 		static let exerciseCategoryView = "ExerciseCategoryView"
-		static let moveDishView = "MoveDishView"
-		static let tableViewEmptyView = "TableViewEmptyView"
-		static let notificationTableViewCell = "NotificationTableViewCell"
     }
 	
 	struct Units {
