@@ -374,6 +374,22 @@
 			name = AddingTableViewCell;
 			sourceTree = "<group>";
 		};
+		7C1ACD082670C9D2008079C9 /* CellViews */ = {
+			isa = PBXGroup;
+			children = (
+				7C1ACCE8266F8F2C008079C9 /* CommentsTableViewCell */,
+				7CD181782647E7B30054DB9C /* NotificationViewCell */,
+				B38068CE25B71988005C4A24 /* WorkoutTableViewCell */,
+				B330B87D25757E8A00BDB206 /* ExerciseTabelViewCell */,
+				B3E6E99E2571444000958C48 /* MealPlanTableViewCell */,
+				B3E6E99A2571443200958C48 /* QuestionnaireFatCollectionViewCell */,
+				B358227D25ACA2FE00C91295 /* ArticleTableViewCell */,
+				7C7435E025D31A0600D33A9A /* ChatTabelViewCell */,
+				7C1ACD072670C648008079C9 /* AddingTableViewCell */,
+			);
+			name = CellViews;
+			sourceTree = "<group>";
+		};
 		7C3F4F3625C2D31900EE3758 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -564,7 +580,7 @@
 		7C89AA8C256D817B009AD87C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7C9B34992583F95D00D30480 /* Login And Register */,
+				7C9B34992583F95D00D30480 /* LoginAndRegister */,
 				B3B2A236256ED4850052E6C8 /* Questionnarie */,
 				B36B71852577BCE8001CD393 /* Workouts */,
 				B3833F472593783B006776D5 /* Weight */,
@@ -577,7 +593,7 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		7C9B34992583F95D00D30480 /* Login And Register */ = {
+		7C9B34992583F95D00D30480 /* LoginAndRegister */ = {
 			isa = PBXGroup;
 			children = (
 				7C9B34912583F84A00D30480 /* StartViewController.swift */,
@@ -585,7 +601,7 @@
 				7C89AA80256D7342009AD87C /* RegisterViewController.swift */,
 				7C3F4F8B25C9E2AF00EE3758 /* ResetPasswordViewController.swift */,
 			);
-			name = "Login And Register";
+			name = LoginAndRegister;
 			sourceTree = "<group>";
 		};
 		7CCC0E65262B2E2D006E2E35 /* EmptyTabelViewView */ = {
@@ -751,19 +767,11 @@
 		B3B2A245256EDDCA0052E6C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7C1ACCEF266FCA97008079C9 /* ChangeDateView */,
-				7C1ACCE8266F8F2C008079C9 /* CommentsTableViewCell */,
-				7CD181782647E7B30054DB9C /* NotificationViewCell */,
+				7C1ACD082670C9D2008079C9 /* CellViews */,
 				7CCC0E65262B2E2D006E2E35 /* EmptyTabelViewView */,
-				B38068CE25B71988005C4A24 /* WorkoutTableViewCell */,
-				B330B87D25757E8A00BDB206 /* ExerciseTabelViewCell */,
-				B3E6E99E2571444000958C48 /* MealPlanTableViewCell */,
 				B34397AB258A7F770073A59B /* DishView */,
 				7CFA5FF5262A0F1C00A3F401 /* MoveDishView */,
-				B3E6E99A2571443200958C48 /* QuestionnaireFatCollectionViewCell */,
-				B358227D25ACA2FE00C91295 /* ArticleTableViewCell */,
-				7C7435E025D31A0600D33A9A /* ChatTabelViewCell */,
-				7C1ACD072670C648008079C9 /* AddingTableViewCell */,
+				7C1ACCEF266FCA97008079C9 /* ChangeDateView */,
 				7C71BB4E25D869B400FBEB96 /* WeightViews */,
 				B3CA0CE2258111FD00923902 /* CircularProgressView.swift */,
 				B368DFDF25A6247600BD1937 /* SpinnerView.swift */,
