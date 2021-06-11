@@ -136,7 +136,7 @@ extension HomeViewController {
         carbCP.trackColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 0.5189344393)
 		carbCP.center = viewCenter
         carbCP.progressColor = carbsColor
-        circularProgress.addSubview(carbCP) 
+        circularProgress.addSubview(carbCP)
         
 		proteinCP.tag = 102
         proteinCP.trackColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 0.5189344393)
@@ -217,7 +217,7 @@ extension HomeViewController {
         carbsCountLabel.text = "\(progress.carbs)"
         proteinCountLabel.text = "\(progress.protein)"
 		if let view = titleStackView.subviews[0] as? UILabel {
-			view.text = mealViewModel.getMealDate()
+			view.text = mealViewModel.getMealStringDate()
 		}
     }
 	private func setupView() {

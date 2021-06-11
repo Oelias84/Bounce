@@ -137,4 +137,14 @@ extension String {
 		let predicate = NSPredicate(format:"SELF MATCHES %@", argumentArray:[regEx])
 		return predicate.evaluate(with: self)
 	}
+	//Decimal
+	var toDecimalDouble: Double {
+		let formatter = NumberFormatter()
+		formatter.generatesDecimalNumbers = true
+		formatter.numberStyle = NumberFormatter.Style.decimal
+		if let formattedNumber = formatter.number(from: self) as? NSDecimalNumber  {
+			return Double(truncating: formattedNumber)
+		}
+		return 0.0
+	}
 }

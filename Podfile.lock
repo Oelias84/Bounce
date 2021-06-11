@@ -363,6 +363,7 @@ PODS:
   - leveldb-library (1.22)
   - MessageKit (3.5.0):
     - InputBarAccessoryView (~> 5.2.1)
+  - MKRingProgressView (2.2.3)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
     - nanopb/encode (= 1.30905.0)
@@ -388,6 +389,7 @@ DEPENDENCIES:
   - FirebaseFirestoreSwift
   - JGProgressHUD
   - MessageKit
+  - MKRingProgressView
   - SDWebImage (~> 5.0)
 
 SPEC REPOS:
@@ -419,6 +421,7 @@ SPEC REPOS:
     - JGProgressHUD
     - leveldb-library
     - MessageKit
+    - MKRingProgressView
     - nanopb
     - PromisesObjC
     - Protobuf
@@ -452,11 +455,12 @@ SPEC CHECKSUMS:
   JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   MessageKit: fb539583599cd914e8e2d41fe7bdceb4bf686565
+  MKRingProgressView: 404b3157e7a533ab8668d29ec20042c35d12ca1d
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
 
-PODFILE CHECKSUM: 584a0d3eeddb8200819ff83957a8f0229c9ff8c2
+PODFILE CHECKSUM: bc260a2d2b9c15538cbf59a6170eb1d3ecdef011
 
 COCOAPODS: 1.8.4

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,11 +21,11 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" restorationIdentifier="MoveDishView" id="iN0-l3-epB">
+        <view autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="MoveDishView" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wtC-FH-kBT">
+                <visualEffectView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wtC-FH-kBT">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="x8j-LK-UAV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -146,7 +146,7 @@
                                         </constraints>
                                     </view>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Paz-wj-T0W">
-                                        <rect key="frame" x="149.5" y="241.5" width="1" height="22"/>
+                                        <rect key="frame" x="149.5" y="241.5" width="1" height="42"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="1" id="Gux-La-UU6"/>
@@ -160,7 +160,7 @@
                                     <constraint firstItem="QSk-Es-6gE" firstAttribute="leading" secondItem="EFW-De-x2O" secondAttribute="leading" constant="16" id="7ea-uv-HfU"/>
                                     <constraint firstItem="7B6-3Z-kzY" firstAttribute="centerX" secondItem="EFW-De-x2O" secondAttribute="centerX" id="DHK-Xl-hRs"/>
                                     <constraint firstAttribute="bottom" secondItem="B4n-U1-u71" secondAttribute="bottom" id="Dsa-KY-JRi"/>
-                                    <constraint firstAttribute="bottom" secondItem="Paz-wj-T0W" secondAttribute="bottom" constant="20" symbolic="YES" id="VZc-xM-gmy"/>
+                                    <constraint firstAttribute="bottom" secondItem="Paz-wj-T0W" secondAttribute="bottom" id="VZc-xM-gmy"/>
                                     <constraint firstItem="Paz-wj-T0W" firstAttribute="centerX" secondItem="EFW-De-x2O" secondAttribute="centerX" id="Wfo-kV-MMA"/>
                                     <constraint firstItem="B4n-U1-u71" firstAttribute="leading" secondItem="EFW-De-x2O" secondAttribute="leading" id="Xd8-8a-1fF"/>
                                     <constraint firstItem="G4K-27-dj5" firstAttribute="top" secondItem="QSk-Es-6gE" secondAttribute="bottom" constant="32" id="XiJ-VE-TiA"/>
@@ -179,16 +179,18 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="EFW-De-x2O" secondAttribute="bottom" constant="42" id="Tp8-L1-pR6"/>
                             <constraint firstItem="EFW-De-x2O" firstAttribute="centerX" secondItem="x8j-LK-UAV" secondAttribute="centerX" id="oXQ-4F-ZcG"/>
                         </constraints>
                     </view>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <blurEffect style="systemUltraThinMaterialDark"/>
                 </visualEffectView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="wtC-FH-kBT" secondAttribute="bottom" id="JUH-0k-ZyY"/>
                 <constraint firstItem="wtC-FH-kBT" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Zq7-Zn-KAJ"/>

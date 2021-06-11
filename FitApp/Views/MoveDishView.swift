@@ -41,7 +41,7 @@ class MoveDishView: UIView {
 	@IBOutlet weak var dishAmountStepper: UIStepper!
 	@IBOutlet weak var dishAmountLabel: UILabel!
 	@IBOutlet weak var bottomViewConstrain: NSLayoutConstraint!
-		
+	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		commonInit()
@@ -55,7 +55,7 @@ class MoveDishView: UIView {
 	deinit {
 		removeKeyboardListener()
 	}
-
+	
 	@IBAction func confirmButtonAction(_ sender: Any) {
 		
 		if let dish = dishToMove, let portion = dishAmount, let toMeal = moveToMealIndex {
@@ -107,27 +107,27 @@ extension MoveDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 		}
 	}
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
-	switch pickerView {
-	case dishPickerView:
-		dishAmountStepper.value = 0.5
-		dishAmountStepper.maximumValue = meal.dishes[row].amount
-		dishToMoveTextfield.text = meal.dishes[row].getDishName
-		dishToMove = meal.dishes[row]
-	case destinationPickerView:
-		destinationMealTextfield.text = mealViewModel.meals![row].name
-		moveToMealIndex = mealViewModel.meals![row]
-	default:
-		break
+		
+		switch pickerView {
+		case dishPickerView:
+			dishAmountStepper.value = 0.5
+			dishAmountStepper.maximumValue = meal.dishes[row].amount
+			dishToMoveTextfield.text = meal.dishes[row].getDishName
+			dishToMove = meal.dishes[row]
+		case destinationPickerView:
+			destinationMealTextfield.text = mealViewModel.meals![row].name
+			moveToMealIndex = mealViewModel.meals![row]
+		default:
+			break
+		}
 	}
-}
 }
 
 extension MoveDishView: UITextFieldDelegate {
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
 		let dishName = textField.text
-
+		
 		switch textField {
 		case dishToMoveTextfield:
 			if let dishNameIndex = meal.dishes.firstIndex(where: {$0.getDishName == dishName }) {

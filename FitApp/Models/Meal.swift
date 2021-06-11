@@ -14,6 +14,7 @@ enum MealType: Int, Codable {
     case lunch
     case middle2
     case supper
+	case other
 }
 
 class Meal: Codable {
@@ -37,13 +38,15 @@ class Meal: Codable {
             return "ארוחת ביניים 2"
         case .supper:
             return "ארוחת ערב"
+		case .other:
+			return "ארוחת חריגה"
         }
     }
     
-    init(mealType: MealType, dishes: [Dish]) {
+	init(mealType: MealType, dishes: [Dish], date: Date = Date()) {
         self.id = UUID()
         self.mealType = mealType
-        self.date = Date()
+        self.date = date
         self.dishes = dishes
         self.isMealDone = false
     }

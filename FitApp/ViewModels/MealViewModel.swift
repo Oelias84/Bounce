@@ -10,20 +10,19 @@ import Foundation
 class MealViewModel: NSObject {
     
     static let shared = MealViewModel()
+	
     var meals: [Meal]? {
         didSet {
             self.bindMealViewModelToController()
         }
     }
-    private var dishes: [[ServerDish]]?
 	private var currentMealDate: Date?
+	let mealManager = MealManager.shared
     
     var bindMealViewModelToController : (() -> ()) = {}
     
-    override init() {
+    private override init() {
         super.init()
-		
-		fetchDishes()
     }
     
 	func fetchData(date: Date? = Date()) {
@@ -74,7 +73,10 @@ class MealViewModel: NSObject {
 		}
         return MealProgress(carbs: carbs, fats: fats, protein: protein)
     }
-	func getMealDate() -> String {
+	func getMealDate() -> Date {
+		return meals!.first!.date
+	}
+	func getMealStringDate() -> String {
 		return (currentMealDate ?? Date()).dateStringDisplay + " " + (currentMealDate ?? Date()).displayDayName
 	}
 	func getMealCaloriesSum(dishes: [Dish]) -> String {
@@ -107,7 +109,10 @@ class MealViewModel: NSObject {
     
     //MARK: - Meals
 	func getMealsCount() -> Int {
-		meals?.count ?? 0
+		if meals?.first(where: {$0.mealType == .other}) == nil {
+			return (meals?.count ?? 0) + 1
+		}
+		return meals?.count ?? 0
 	}
 	func updateMeals(for date: Date) {
 		guard let meals = self.meals else { return }
@@ -180,38 +185,6 @@ class MealViewModel: NSObject {
 			}
 		}
 	}
-    
-    //MARK: Dishes
-    func fetchDishes() {
-        if dishes != nil && dishes!.count > 0 { return }
-        
-		GoogleApiManager.shared.getDishes { result in
-            switch result {
-            case .success(let dishes):
-                if let dishes = dishes {
-                    self.dishes = dishes
-                } else {
-                    return
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    func getDishesFor(type: DishType) -> [ServerDish] {
-        var dishArray: [ServerDish] = []
-        guard let dishes = self.dishes else { return [] }
-        
-        switch type {
-        case .fat:
-			dishArray = dishes[0].sorted()
-        case .carbs:
-			dishArray = dishes[1].sorted()
-        case .protein:
-			dishArray = dishes[2].sorted()
-        }
-        return dishArray
-    }
     
     //MARK: - Meals Algorithm
     func mealDishesDivider(hasPrefer: Bool, numberOfDishes: Double) -> (Double, Double) {

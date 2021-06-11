@@ -85,7 +85,6 @@ extension DishView: UITextFieldDelegate {
 		let dishesListVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.dishesListViewController) as DishesTableViewController
 		
 		dishesListVC.delegate = self
-		dishesListVC.dishes = self.dishes
 		dishesListVC.originalDish = dish
 		self.parentViewController?.present(dishesListVC, animated: true)
     }

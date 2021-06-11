@@ -93,7 +93,7 @@ extension MealPlanTableViewCell {
 			tag += 1
 			view.delegate = self
 			view.dish = $0
-			view.dishes = mealViewModel.getDishesFor(type: $0.type)
+			view.dishes = mealViewModel.mealManager.getDishesFor(type: $0.type)
 			view.clipsToBounds = true
 			dishStackView.addArrangedSubview(view)
 			dishesStackViewHeight.constant += 40
@@ -123,7 +123,7 @@ extension MealPlanTableViewCell: DishViewDelegate {
 		}
 		meal.isMealDone = allChecked
 		mealIsDoneCheckMark.isSelected = allChecked
-		mealViewModel.updateMeals(for: Date())
+		mealViewModel.updateMeals(for: meal.date)
 	}
 }
 
@@ -140,6 +140,6 @@ extension MealPlanTableViewCell {
 			$0.isDishDone = sender.isSelected
 		}
 		configureData()
-		mealViewModel.updateMeals(for: Date())
+		mealViewModel.updateMeals(for: meal.date)
 	}
 }

@@ -139,6 +139,7 @@ struct K {
     }
 	
     struct NibName {
+		
         //Cells
 		static let chatTableViewCell = "ChatTableViewCell"
 		static let addingTableViewCell = "AddingTableViewCell"
@@ -157,6 +158,8 @@ struct K {
 		static let tableViewEmptyView = "TableViewEmptyView"
 		static let addWeightAlertView = "AddWeightAlertView"
 		static let exerciseCategoryView = "ExerciseCategoryView"
+		static let addMealAlertView = "AddMealAlertView"
+		static let addMealAlertDishView = "AddMealAlertDishView"
     }
 	
 	struct Units {

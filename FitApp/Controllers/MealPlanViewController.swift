@@ -10,7 +10,6 @@ import UIKit
 
 class MealPlanViewController: UIViewController {
 	
-	
 	private var date = Date()
 	private var mealViewModel = MealViewModel.shared
 	private var selectedCellIndexPath: IndexPath?
@@ -31,14 +30,10 @@ class MealPlanViewController: UIViewController {
 extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if let meals = mealViewModel.meals {
-			return meals.count + 1
-		} else {
-			return 0
-		}
+		mealViewModel.getMealsCount()
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		if indexPath.row == mealViewModel.getMealsCount() {
+		if indexPath.row == mealViewModel.meals!.count {
 			let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.addingCell, for: indexPath) as! AddingTableViewCell
 			cell.delegate = self
 			return cell
@@ -114,13 +109,16 @@ extension MealPlanViewController {
 		noMealBackgroundView.delegate = self
 		return noMealBackgroundView
 	}
-	
-	@objc func commentsBarButtonItemTapped(_ sender: UIBarButtonItem) {
-		if let commentVC = storyboard?.instantiateViewController(identifier: K.ViewControllerId.commentsTableViewController) {
-			self.navigationController?.pushViewController(commentVC, animated: true)
-		}
+	private func presentAddMealAlert() {
+		let addMealAlert = AddMealAlertView()
+		addMealAlert.delegate = self
+		addMealAlert.mealDate = date
+		addMealAlert.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width,
+									  height: UIScreen.main.bounds.size.height)
+		view.addSubview(addMealAlert)
 	}
-	@objc func todayBarButtonItemTapped(_ sender: UIBarButtonItem) {
+	
+	@objc private func todayBarButtonItemTapped(_ sender: UIBarButtonItem) {
 		date = Date()
 		Spinner.shared.show(self.view)
 		changeDateView.changeToCurrentDate()
@@ -131,8 +129,10 @@ extension MealPlanViewController {
 			self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
 		}
 	}
-	@objc func buttonAction(_ sender: UIButton) {
-		print("pressed")
+	@objc private func commentsBarButtonItemTapped(_ sender: UIBarButtonItem) {
+		if let commentVC = storyboard?.instantiateViewController(identifier: K.ViewControllerId.commentsTableViewController) {
+			self.navigationController?.pushViewController(commentVC, animated: true)
+		}
 	}
 }
 
@@ -160,6 +160,21 @@ extension MealPlanViewController: TableViewEmptyViewDelegate {
 extension MealPlanViewController: AddingTableViewCellDelegate {
 	
 	func didTapped() {
-		print("pressed")
+		presentAlert(withTitle: "הוספת ארוחה", withMessage: "האם ברצונך להוסיף ארוחה לתפריט היום?", options: "אישור", "ביטול") { selection in
+			switch selection {
+			case 0:
+				self.presentAddMealAlert()
+			default:
+				break
+			}
+		}
+	}
+}
+extension MealPlanViewController: AddMealAlertViewDelegate {
+	
+	func didFinish(with: Meal) {
+		
+		mealViewModel.meals?.append(with)
+		mealViewModel.updateMeals(for: date)
 	}
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DishType: String, Codable {
+enum DishType: String, CaseIterable, Codable {
     
     case protein = "חלבון"
     case carbs = "פחמימה"

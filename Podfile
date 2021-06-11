@@ -22,6 +22,7 @@ target 'FitApp' do
 		pod 'CropViewController'
 		pod 'JGProgressHUD'
 		pod 'SDWebImage', '~> 5.0'
+		pod 'MKRingProgressView'
 
   target 'FitAppTests' do
     inherit! :search_paths

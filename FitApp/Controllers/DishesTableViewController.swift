@@ -14,11 +14,12 @@ protocol DishesTableViewControllerDelegate {
 
 class DishesTableViewController: UIViewController {
 	
-	var dishes: [ServerDish]!
-	private var otherDishes: [String]?
 	var originalDish: Dish!
+	private var dishes: [ServerDish]!
+	private var otherDishes: [String]?
 	private var selectedDish: String?
-	
+	private let mealViewModel = MealViewModel.shared
+
 	var delegate: DishesTableViewControllerDelegate?
 	
 	@IBOutlet weak var titleTextLabel: UILabel!
@@ -117,6 +118,8 @@ extension DishesTableViewController: UITableViewDataSource, UITableViewDelegate 
 extension DishesTableViewController {
 	
 	private func configure() {
+		dishes = mealViewModel.mealManager.getDishesFor(type: originalDish.type)
+		
 		titleTextLabel.text = "מנות " + originalDish.printDishType
 		if let otherDishes = UserProfile.defaults.otherDishes {
 			self.otherDishes = otherDishes
