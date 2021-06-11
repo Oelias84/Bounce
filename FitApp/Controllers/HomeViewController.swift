@@ -8,15 +8,16 @@
 import UIKit
 import BLTNBoard
 import FirebaseAuth
+import MKRingProgressView
 
 class HomeViewController: UIViewController {
     
     private var userProgress: UserProgress!
     private var mealViewModel: MealViewModel!
     
-    private let carbsShapeLayer = CAShapeLayer()
-    private let fatShapeLayer = CAShapeLayer()
-    private let proteinShapeLayer = CAShapeLayer()
+	private var carbsRingLayer: RingProgressView!
+	private var fatRingLayer: RingProgressView!
+	private var proteinRingLayer: RingProgressView!
 	
     private lazy var boardManager: BLTNItemManager = {
         let item = BLTNPageItem(title: "שמחים שהצטרפת אלינו :)")
@@ -36,17 +37,13 @@ class HomeViewController: UIViewController {
 		return stackView
 	}()
     
-    private var carbsColor = #colorLiteral(red: 0.1863320172, green: 0.6013119817, blue: 0.9211298823, alpha: 1)
-    private var fatColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
-    private var proteinColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
+    private var carbsColor = #colorLiteral(red: 0.4980392157, green: 0.4980392157, blue: 0.8352941176, alpha: 1)
+    private var fatColor = #colorLiteral(red: 0.9450980392, green: 0.1529411765, blue: 0.06666666667, alpha: 1)
+    private var proteinColor = #colorLiteral(red: 0.1411764706, green: 0.9960784314, blue: 0.2549019608, alpha: 1)
     
     private var fatStartValue = 0.0
     private var carbsStartValue = 0.0
     private var proteinStartValue = 0.0
-	
-	private var proteinCP: CircularProgressView!
-	private var fatCP: CircularProgressView!
-	private var carbCP: CircularProgressView!
 	
 	@IBOutlet weak var tipContainerView: UIView!
 	@IBOutlet weak var progressWheelsContainerView: UIView!
@@ -70,17 +67,16 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 		
 		navigationItem.titleView = titleStackView
+		
 		Spinner.shared.stop()
         mealViewModel = MealViewModel.shared
         mealViewModel.bindMealViewModelToController = {
-            self.setupProgress()
+            self.setupProgressLebels()
         }
-		if let image = UserProfile.defaults.profileImageImageUrl?.showImage {
-			profileButton.setImage( image.circleMasked, for: .normal)
-		}
+		
 		setupView()
-		setMotivationText()
 		checkAddWeight()
+		setMotivationText()
 		checkDidFinishDailyMeals()
 	}
     override func viewWillAppear(_ animated: Bool) {
@@ -92,7 +88,7 @@ class HomeViewController: UIViewController {
         } else {
             mealViewModel.fetchData()
         }
-        setupProgress()
+        setupProgressLebels()
     }
     
 	@IBAction func chatButtonAction(_ sender: Any) {
@@ -107,7 +103,38 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController {
-    
+	
+	private func setupView() {
+		tipContainerView.dropShadow()
+		progressDataContainerView.dropShadow()
+		progressWheelsContainerView.dropShadow()
+		if let image = UserProfile.defaults.profileImageImageUrl?.showImage {
+			profileButton.setImage( image.circleMasked, for: .normal)
+		}
+	}
+	private func setMotivationText() {
+		let lastMotivationDate = UserProfile.defaults.lastMotivationDate
+		
+		getMotivationText() { [weak self] motivation in
+			guard let self = self else { return }
+
+			if lastMotivationDate == nil || lastMotivationDate!.onlyDate > Date().onlyDate {
+				UserProfile.defaults.lastMotivationDate = Date()
+				UserProfile.defaults.motivationText = motivation
+				DispatchQueue.main.async { [weak self] in
+					guard let self = self else { return }
+					self.userMotivationTextLabel.text = UserProfile.defaults.motivationText
+				}
+			} else {
+				DispatchQueue.main.async { [weak self] in
+					guard let self = self else { return }
+					self.userMotivationTextLabel.text = UserProfile.defaults.motivationText
+				}
+			}
+		}
+	}
+
+	
     private func setUpProgressTextFields() {
 		
 		navigationItem.title = "היי \(UserProfile.defaults.name  ?? ""),"
@@ -118,40 +145,25 @@ extension HomeViewController {
 		carbsTargateLabel.text = "מתוך \(userProgress.carbsTarget)"
 		proteinTargateLabel.text = "מתוך \(userProgress.proteinTarget)"
     }
-    private func configureProgress() {
-        circularProgress.subviews.forEach {
-            $0.removeFromSuperview()
-        }
-		let circleContainerHeight = circularProgress.bounds.height
-		let circleContainerWidth = circularProgress.bounds.width
+	private func setupProgressLebels() {
+		let manager = ConsumptionManager.shared
+		let progress = mealViewModel.getProgress()
+		
+		userProgress = UserProgress(carbsTarget: manager.getDayCarbs, proteinTarget: manager.getDayProtein, fatTarget: manager.getDayFat, carbsProgress: progress.carbs, proteinProgress: progress.protein, fatProgress: progress.fats)
+		
+		configureProgress()
+		setUpProgressTextFields()
+		
+		caloriesLabel.text = manager.getCalories
+		fatCountLabel.text = "\(progress.fats)"
+		carbsCountLabel.text = "\(progress.carbs)"
+		proteinCountLabel.text = "\(progress.protein)"
+		
+		if let view = titleStackView.subviews[0] as? UILabel {
+			view.text = mealViewModel.getMealStringDate()
+		}
+	}
 
-        let viewCenter  = CGPoint(x: circleContainerHeight / 2, y: circleContainerWidth / 2)
-		proteinCP = CircularProgressView(frame: CGRect(x: viewCenter.x, y: viewCenter.y,
-													   width: circleContainerWidth - 50.0, height: circleContainerWidth - 50.0))
-        fatCP = CircularProgressView(frame: CGRect(x: viewCenter.x, y: viewCenter.y,
-												   width: circleContainerWidth - 100.0, height: circleContainerWidth - 100.0))
-        carbCP = CircularProgressView(frame: CGRect(x: viewCenter.x, y: viewCenter.y,
-													width: circleContainerWidth - 150.0, height: circleContainerWidth - 150.0))
-		carbCP.tag = 100
-        carbCP.trackColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 0.5189344393)
-		carbCP.center = viewCenter
-        carbCP.progressColor = carbsColor
-        circularProgress.addSubview(carbCP)
-        
-		proteinCP.tag = 102
-        proteinCP.trackColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 0.5189344393)
-		proteinCP.center = viewCenter
-        proteinCP.progressColor = proteinColor
-        circularProgress.addSubview(proteinCP)
-        
-		fatCP.tag = 101
-        fatCP.trackColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 0.5189344393)
-		fatCP.center = viewCenter
-        fatCP.progressColor = fatColor
-        circularProgress.addSubview(fatCP)
-        
-        self.perform(#selector(animateProgress), with: nil, afterDelay: 0.1)
-    }
     private func startQuestionnaire() {
         let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
         let questionnaireVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation)
@@ -182,54 +194,53 @@ extension HomeViewController {
 			}
 		}
 	}
-	private func setMotivationText() {
-		let lastMotivationDate = UserProfile.defaults.lastMotivationDate
-		
-		getMotivationText() { [weak self] motivation in
-			guard let self = self else { return }
 
-			if lastMotivationDate == nil || lastMotivationDate!.onlyDate > Date().onlyDate {
-				UserProfile.defaults.lastMotivationDate = Date()
-				UserProfile.defaults.motivationText = motivation
-				DispatchQueue.main.async { [weak self] in
-					guard let self = self else { return }
-					self.userMotivationTextLabel.text = UserProfile.defaults.motivationText
-				}
-			} else {
-				DispatchQueue.main.async { [weak self] in
-					guard let self = self else { return }
-					self.userMotivationTextLabel.text = UserProfile.defaults.motivationText
-				}
-			}
-		}
+	private func configureProgress() {
+        circularProgress.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+		let circleContainerHeight = circularProgress.bounds.height
+		let circleContainerWidth = circularProgress.bounds.width
+		
+		let ringWitdth: CGFloat = 30
+		let proteinRingMeasure: CGFloat = 20.0
+		let carbsRingMeasure: CGFloat = 100.0
+		let fatinRingMeasure: CGFloat = 180.0
+		
+		proteinRingLayer = RingProgressView(frame: CGRect(x: proteinRingMeasure/2, y: proteinRingMeasure/2,
+														  width: circleContainerWidth - proteinRingMeasure, height: circleContainerHeight - proteinRingMeasure))
+		proteinRingLayer.startColor = proteinColor
+		proteinRingLayer.endColor = #colorLiteral(red: 0.9921568627, green: 0.9882352941, blue: 0.2784313725, alpha: 1)
+		proteinRingLayer.ringWidth = ringWitdth
+		proteinRingLayer.progress = 0.0
+		
+		carbsRingLayer = RingProgressView(frame: CGRect(x: carbsRingMeasure/2, y: carbsRingMeasure/2,
+														width: circleContainerWidth - carbsRingMeasure, height: circleContainerHeight - carbsRingMeasure))
+		carbsRingLayer.startColor = carbsColor
+		carbsRingLayer.endColor = #colorLiteral(red: 0.568627451, green: 0.9176470588, blue: 0.8941176471, alpha: 1)
+		carbsRingLayer.ringWidth = ringWitdth
+		carbsRingLayer.progress = 0.0
+		
+		fatRingLayer = RingProgressView(frame: CGRect(x: fatinRingMeasure/2, y: fatinRingMeasure/2,
+													  width: circleContainerWidth - fatinRingMeasure, height: circleContainerHeight - fatinRingMeasure))
+		fatRingLayer.startColor = fatColor
+		fatRingLayer.endColor = #colorLiteral(red: 0.9607843137, green: 0.6862745098, blue: 0.09803921569, alpha: 1)
+		fatRingLayer.ringWidth = ringWitdth
+		fatRingLayer.progress = 0.0
+		
+		circularProgress.addSubview(proteinRingLayer)
+		circularProgress.addSubview(carbsRingLayer)
+		circularProgress.addSubview(fatRingLayer)
+		
+		perform(#selector(animateProgress), with: nil, afterDelay: 0.1)
 	}
-    private func setupProgress() {
-		let manager = ConsumptionManager.shared
-        let progress = mealViewModel.getProgress()
-		
-        userProgress = UserProgress(carbsTarget: manager.getDayCarbs, proteinTarget: manager.getDayProtein, fatTarget: manager.getDayFat, carbsProgress: progress.carbs, proteinProgress: progress.protein, fatProgress: progress.fats)
-		
-        configureProgress()
-        setUpProgressTextFields()
-		
-		caloriesLabel.text = manager.getCalories
-        fatCountLabel.text = "\(progress.fats)"
-        carbsCountLabel.text = "\(progress.carbs)"
-        proteinCountLabel.text = "\(progress.protein)"
-		if let view = titleStackView.subviews[0] as? UILabel {
-			view.text = mealViewModel.getMealStringDate()
-		}
-    }
-	private func setupView() {
-		tipContainerView.dropShadow()
-		progressDataContainerView.dropShadow()
-		progressWheelsContainerView.dropShadow()
-	}
-    
+
     @objc func animateProgress() {
-		carbCP.setProgressWithAnimation(duration: 1.0, value: userProgress.carbsProgress / userProgress.carbsTarget)
-        fatCP.setProgressWithAnimation(duration: 1.0, value: userProgress.fatProgress / userProgress.fatTarget)
-        proteinCP.setProgressWithAnimation(duration: 1.0, value: userProgress.proteinProgress / userProgress.proteinTarget)
+		UIView.animate(withDuration: 1.0) {
+			self.proteinRingLayer.progress = (self.userProgress.proteinProgress / self.userProgress.proteinTarget)
+			self.carbsRingLayer.progress = (self.userProgress.carbsProgress / self.userProgress.carbsTarget)
+			self.fatRingLayer.progress = (self.userProgress.fatProgress / self.userProgress.fatTarget)
+		}
     }
 	
 	private func openChat() {
