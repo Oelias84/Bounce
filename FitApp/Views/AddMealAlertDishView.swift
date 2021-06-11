@@ -51,6 +51,7 @@ class AddMealAlertDishView: UIView {
 		dishAmountTextField.setupToolBar(cancelButtonName: "אישור")
 		dishTypeTextField.setupToolBar(cancelButtonName: "אישור")
 		
+		dishNameTextField.inputView = UIView()
 		dishTypeTextField.inputView = dishTypePicker
 		dishTypeTextField.text = dish.type.rawValue
 	}

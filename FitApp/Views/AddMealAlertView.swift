@@ -58,13 +58,6 @@ class AddMealAlertView: UIView {
 		removeFromSuperview()
 	}
 	
-	private func commonInit() {
-		alpha = 0
-		Bundle.main.loadNibNamed(K.NibName.addMealAlertView, owner: self, options: nil)
-		addSubview(contentView)
-		contentView.frame = self.bounds
-		contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-	}
 	private func addDish() {
 		if dishStackView.arrangedSubviews.count > 2 { return }
 		let newDish = AddMealAlertDishView()
@@ -79,6 +72,13 @@ class AddMealAlertView: UIView {
 				self.shouldHideButtons()
 			}
 		}
+	}
+	private func commonInit() {
+		alpha = 0
+		Bundle.main.loadNibNamed(K.NibName.addMealAlertView, owner: self, options: nil)
+		addSubview(contentView)
+		contentView.frame = self.bounds
+		contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 	}
 	private func removeDish() {
 		if dishStackView.arrangedSubviews.count == 1 { return }
@@ -99,7 +99,7 @@ class AddMealAlertView: UIView {
 			viewCounter += 1
 		}
 	}
-	func shouldHideButtons() {
+	private func shouldHideButtons() {
 		let stackCount = self.dishStackView.arrangedSubviews.count
 		UIView.animate(withDuration: 0.3) { [unowned self] in
 			self.addButton.isHidden = (stackCount == 3)
