@@ -121,14 +121,17 @@ class MealViewModel: NSObject {
 		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal)
 	}
 	func move(portion: Double, of dish: Dish, from meal: Meal, to destinationMeal: Meal) {
-		guard let meals = meals else { return }
-
-		if meals.first(where: {$0 == meal})?.dishes.first(where: {$0 == dish})?.amount == portion {
-			meals.first(where: {$0 == meal})?.dishes.removeAll(where: {$0 == dish})
-		} else {
-			meals.first(where: {$0 == meal})?.dishes.first(where: {$0.getDishName == dish.getDishName})?.amount -= portion
+		if let dishToSubtract = meal.dishes.first(where: { $0 == dish }) {
+			if dishToSubtract.amount == portion {
+				//Remove original dish if from its meal if portion equals to dish amount
+				meal.dishes.removeAll(where: { $0 == dish })
+			} else {
+				//Subtract portion from the original dish
+				dishToSubtract.amount -= portion
+			}
 		}
-		meals.first(where: {$0 == destinationMeal})!.dishes.append(dish)
+		//Append the dish with the desire portion to the destinationMeal
+		destinationMeal.dishes.append(Dish(name: dish.getDishName, type: dish.type, amount: portion))
 		
 		updateMeals(for: meal.date)
 		fetchMealsBy(date: meal.date) {_ in}
