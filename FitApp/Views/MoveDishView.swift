@@ -15,6 +15,7 @@ class MoveDishView: UIView {
 			dishAmountStepper.maximumValue = meal.dishes[0].amount
 			dishAmount = 0.5
 			dishToMove = meal.dishes[0]
+			updateAmountLabel()
 		}
 	}
 	private var dishPickerView: UIPickerView = {
@@ -52,6 +53,12 @@ class MoveDishView: UIView {
 		commonInit()
 		setupView()
 	}
+	override func draw(_ rect: CGRect) {
+		super.draw(rect)
+		UIView.animate(withDuration: 0.2) {
+			self.alpha = 1
+		}
+	}
 	deinit {
 		removeKeyboardListener()
 	}
@@ -74,7 +81,7 @@ class MoveDishView: UIView {
 	}
 	@IBAction func dishAmountStepper(_ sender: UIStepper) {
 		dishAmount = sender.value
-		dishAmountLabel.text = "\(sender.value)"
+		updateAmountLabel()
 	}
 }
 
@@ -114,6 +121,7 @@ extension MoveDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 			dishAmountStepper.maximumValue = meal.dishes[row].amount
 			dishToMoveTextfield.text = meal.dishes[row].getDishName
 			dishToMove = meal.dishes[row]
+			updateAmountLabel()
 		case destinationPickerView:
 			destinationMealTextfield.text = mealViewModel.meals![row].name
 			moveToMealIndex = mealViewModel.meals![row]
@@ -174,8 +182,9 @@ extension MoveDishView {
 		addSubview(contentView)
 		contentView.frame = self.bounds
 		contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		UIView.animate(withDuration: 0.2) {
-			self.alpha = 1
-		}
+	}
+	private func updateAmountLabel() {
+		dishAmountLabel.text = "\(dishToMove!.amount) / \(dishAmount!)"
 	}
 }
+ 
