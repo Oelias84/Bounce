@@ -62,12 +62,10 @@ class ChatsViewController: UITableViewController {
 extension ChatsViewController {
 	
 	private func updateUI() {
-		DispatchQueue.main.async { [weak self] in
+		DispatchQueue.main.async {
+			[unowned self] in
 			Spinner.shared.stop()
-			DispatchQueue.main.async { [weak self] in
-				guard let self = self else { return }
-				self.tableView.reloadData()
-			}
+			self.tableView.reloadData()
 		}
 	}
 	private func createNewChat(result: ChatUser) {
