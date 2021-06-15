@@ -151,14 +151,12 @@ class SettingTableViewModel {
 		
 		switch row {
 		case 0:
-			notificationManager.showNotificationAlert(withTitle: K.Notifications.alertWeightTitle,
-													  withMessage: K.Notifications.alertWeightMessage, type: .weightNotification, vc: vc)
+			addWeightNotificationCell()
 		case 1:
 			addWaterNotificationCell()
 		default:
 			break
 		}
-//		UserProfile.updateServer()
 		vc.navigationController?.popViewController(animated: true)
 	}
 	func fitnessLevelChange(at fitnessLevel: Int) {
@@ -204,12 +202,12 @@ class SettingTableViewModel {
 		UserProfile.updateServer()
 		vc.navigationController?.popViewController(animated: true)
 	}
+	private func addWeightNotificationCell() {
+		notificationManager.showNotificationAlert(withTitle: K.Notifications.alertWeightTitle,
+												  withMessage: K.Notifications.alertWeightMessage, type: .weightNotification, vc: vc)
+	}
 	private func addWaterNotificationCell() {
-		notificationManager.showNotificationAlert(withTitle: K.Notifications.alertWaterTitle, withMessage: K.Notifications.alertWeterMessage, type: .waterNotification, vc: vc)
-		// Add Animation Here
-		
-//		vc.tableView.beginUpdates()
-//		vc.tableView.insertRows(at: [IndexPath(row: self.notificationsArray!.count-1, section: 1)], with: .automatic)
-//		vc.tableView.endUpdates()
+		notificationManager.showNotificationAlert(withTitle: K.Notifications.alertWaterTitle,
+												  withMessage: K.Notifications.alertWeterMessage, type: .waterNotification, vc: vc)
 	}
 }
