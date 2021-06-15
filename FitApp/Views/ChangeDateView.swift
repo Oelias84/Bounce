@@ -50,7 +50,6 @@ class ChangeDateView: UIView {
 		default:
 			break
 		}
-		forwardDateButtonEnable()
 		dateTextField.text = date.dateStringDisplay + " " + date.displayDayName
 	}
 
@@ -59,9 +58,7 @@ class ChangeDateView: UIView {
 		dateTextField.delegate = self
 		dateTextField.tintColor = .clear
 
-		forwardDateButton.isEnabled = false
 		dateTextField.text = date.dateStringDisplay + " " + date.displayDayName
-		forwardDateButton.alpha = forwardDateButton.isEnabled ? 1 : 0.2
 		
 		backwardDateButtonView.buttonShadow()
 		forwardDateButtonView.buttonShadow()
@@ -76,12 +73,11 @@ class ChangeDateView: UIView {
 	
 	func changeToCurrentDate() {
 		date = Date()
-		forwardDateButtonEnable()
 		dateTextField.text = date.dateStringDisplay + " " + date.displayDayName
 	}
 	private func forwardDateButtonEnable() {
 		forwardDateButton.isEnabled = date.onlyDate.isEarlier(than: Date().onlyDate)
-		forwardDateButton.alpha = forwardDateButton.isEnabled ? 1 : 0.2
+
 	}
 	private func addDatePickerWithToolBar() {
 		let toolBar = UIToolbar()
