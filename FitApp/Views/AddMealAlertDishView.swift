@@ -68,6 +68,7 @@ class AddMealAlertDishView: UIView {
 		
 		dishesListVC.delegate = self
 		dishesListVC.originalDish = dish
+		dishesListVC.state = .exceptional
 		self.parentViewController?.present(dishesListVC, animated: true, completion: nil)
 	}
 }

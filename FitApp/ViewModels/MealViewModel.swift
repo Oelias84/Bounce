@@ -92,7 +92,7 @@ class MealViewModel: NSObject {
 		}
 		return String(format: "%.0f", mealCalorieSum)
 	}
-	func checkDailyMealIsDone(completion: @escaping (Bool) -> ()) {
+	func checkDailyMealIsDoneBeforeHour(completion: @escaping (Bool) -> ()) {
 		let calendar = Calendar.current
 		let pastHour = calendar.dateComponents([.hour,.minute,.second], from: "22:30".timeFromString!)
 		let currentHour = calendar.dateComponents([.hour,.minute,.second], from: Date())
@@ -109,8 +109,8 @@ class MealViewModel: NSObject {
     
     //MARK: - Meals
 	func getMealsCount() -> Int {
-		if meals?.first(where: {$0.mealType == .other}) == nil {
-			return (meals?.count ?? 0) + 1
+		if let meals = meals, meals.first(where: {$0.mealType == .other}) == nil, !meals.isEmpty {
+			return (meals.count) + 1
 		}
 		return meals?.count ?? 0
 	}
@@ -187,6 +187,13 @@ class MealViewModel: NSObject {
 				print(error)
 			}
 		}
+	}
+	func checkIfCurrentMealIsDone() -> Bool {
+		
+		if let meals = meals {
+			if (meals.first(where: {!$0.isMealDone}) != nil) { return false }
+		}
+		return true
 	}
     
     //MARK: - Meals Algorithm

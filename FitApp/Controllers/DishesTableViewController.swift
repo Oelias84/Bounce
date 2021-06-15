@@ -7,6 +7,12 @@
 
 import UIKit
 
+enum DishesState {
+	
+	case normal
+	case exceptional
+}
+
 protocol DishesTableViewControllerDelegate {
 	
 	func didPickDish(name: String?)
@@ -14,12 +20,14 @@ protocol DishesTableViewControllerDelegate {
 
 class DishesTableViewController: UIViewController {
 	
+	var state: DishesState!
+	
 	var originalDish: Dish!
 	private var dishes: [ServerDish]!
 	private var otherDishes: [String]?
 	private var selectedDish: String?
 	private let mealViewModel = MealViewModel.shared
-
+	
 	var delegate: DishesTableViewControllerDelegate?
 	
 	@IBOutlet weak var titleTextLabel: UILabel!
@@ -123,8 +131,8 @@ extension DishesTableViewController {
 		titleTextLabel.text = "מנות " + originalDish.printDishType
 		if let otherDishes = UserProfile.defaults.otherDishes {
 			self.otherDishes = otherDishes
-			DispatchQueue.main.async { [weak self] in
-				guard let self = self else { return }
+			DispatchQueue.main.async {
+				[unowned self] in
 				self.tableView.reloadData()
 			}
 		}
@@ -132,21 +140,27 @@ extension DishesTableViewController {
 	private func changeDishAlert(indexPath: IndexPath?) {
 		guard let selectedDish = self.selectedDish else { return }
 		
-		presentAlert(withTitle: "החלפת מנה" ,withMessage: "האם ברצונך להחליף \nאת-\(self.originalDish.getDishName)\n ב-\(selectedDish)", options: "ביטול", "אישור") {
-			[weak self] (selection) in
-			guard let self = self else { return }
-			
-			switch selection {
-			case 0:
-				self.selectedDish = nil
-				if let indexPath = indexPath {
-					self.tableView.deselectRow(at: indexPath, animated: true)
+		switch state {
+		case .normal:
+			presentAlert(withTitle: "החלפת מנה" , withMessage: "האם ברצונך להחליף \nאת-\(self.originalDish.getDishName)\n ב-\(selectedDish)", options: "ביטול", "אישור") {
+				[unowned self] (selection) in
+				
+				switch selection {
+				case 0:
+					self.selectedDish = nil
+					if let indexPath = indexPath {
+						self.tableView.deselectRow(at: indexPath, animated: true)
+					}
+				case 1:
+					self.dismiss(animated: true)
+				default:
+					break
 				}
-			case 1:
-				self.dismiss(animated: true)
-			default:
-				break
 			}
+		case .exceptional:
+			self.dismiss(animated: true)
+		default:
+			break
 		}
 	}
 	private func changeOtherDishAlert() {

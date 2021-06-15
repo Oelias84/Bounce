@@ -86,6 +86,7 @@ extension DishView: UITextFieldDelegate {
 		
 		dishesListVC.delegate = self
 		dishesListVC.originalDish = dish
+		dishesListVC.state = .normal
 		self.parentViewController?.present(dishesListVC, animated: true)
     }
 }
