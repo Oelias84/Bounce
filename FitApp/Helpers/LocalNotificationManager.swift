@@ -75,7 +75,7 @@ class LocalNotificationManager {
 				case .waterNotification:
 					self.postNotifications.append(Notification(title: "זמן לישתות", body: "נראה שהגיע הזמן לישתות", dateTime: dateComponents))
 				case .weightNotification:
-					self.postNotifications.append(Notification(id: NotificationTypes.weightNotification.rawValue, title: "זמן להישקל", body: "לחצי כאן בכדי להזין את השקילה היומית שלך", dateTime: dateComponents))
+					self.postNotifications.append(Notification(title: "זמן להישקל", body: "לחצי כאן בכדי להזין את השקילה היומית שלך", dateTime: dateComponents))
 				case .mealNotification:
 					break
 				}
