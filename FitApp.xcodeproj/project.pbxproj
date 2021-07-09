@@ -70,6 +70,9 @@
 		7C9B345E2583C5B400D30480 /* QuestionnaireSumUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */; };
 		7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */; };
 		7C9B34922583F84A00D30480 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B34912583F84A00D30480 /* StartViewController.swift */; };
+		7CB9ADE5268B12290009B42A /* ChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE4268B12290009B42A /* ChartFormatter.swift */; };
+		7CB9ADE7268CB7140009B42A /* ChartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE6268CB7140009B42A /* ChartView.xib */; };
+		7CB9ADE9268CB72B0009B42A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE8268CB72B0009B42A /* ChartView.swift */; };
 		7CCC0E67262B2E79006E2E35 /* TableViewEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC0E66262B2E79006E2E35 /* TableViewEmptyView.swift */; };
 		7CD1817B2647E80F0054DB9C /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */; };
 		7CD1817C2647E80F0054DB9C /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */; };
@@ -230,6 +233,9 @@
 		7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSumUpViewController.swift; sourceTree = "<group>"; };
 		7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C9B34912583F84A00D30480 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		7CB9ADE4268B12290009B42A /* ChartFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFormatter.swift; sourceTree = "<group>"; };
+		7CB9ADE6268CB7140009B42A /* ChartView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartView.xib; sourceTree = "<group>"; };
+		7CB9ADE8268CB72B0009B42A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		7CCC0E66262B2E79006E2E35 /* TableViewEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEmptyView.swift; sourceTree = "<group>"; };
 		7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
@@ -642,6 +648,16 @@
 			name = LoginAndRegister;
 			sourceTree = "<group>";
 		};
+		7CB9ADEA268CB72F0009B42A /* ChartView */ = {
+			isa = PBXGroup;
+			children = (
+				7CB9ADE6268CB7140009B42A /* ChartView.xib */,
+				7CB9ADE8268CB72B0009B42A /* ChartView.swift */,
+				7CB9ADE4268B12290009B42A /* ChartFormatter.swift */,
+			);
+			name = ChartView;
+			sourceTree = "<group>";
+		};
 		7CCC0E65262B2E2D006E2E35 /* EmptyTabelViewView */ = {
 			isa = PBXGroup;
 			children = (
@@ -806,6 +822,7 @@
 		B3B2A245256EDDCA0052E6C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7CB9ADEA268CB72F0009B42A /* ChartView */,
 				7C1ACD082670C9D2008079C9 /* CellViews */,
 				7CCC0E65262B2E2D006E2E35 /* EmptyTabelViewView */,
 				7CFA5FF5262A0F1C00A3F401 /* MoveDishView */,
@@ -878,6 +895,8 @@
 			dependencies = (
 			);
 			name = FitApp;
+			packageProductDependencies = (
+			);
 			productName = FitApp;
 			productReference = 7C89A9F7256D69CA009AD87C /* FitApp.app */;
 			productType = "com.apple.product-type.application";
@@ -953,6 +972,8 @@
 				he,
 			);
 			mainGroup = 7C89A9EE256D69CA009AD87C;
+			packageReferences = (
+			);
 			productRefGroup = 7C89A9F8256D69CA009AD87C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -981,6 +1002,7 @@
 				B3E6E9A02571446E00958C48 /* MealPlanTableViewCell.xib in Resources */,
 				B3B7FCEF2590EFBC004BC2CD /* WeightProgress.storyboard in Resources */,
 				7CFA5FF7262A0F5800A3F401 /* MoveDishView.xib in Resources */,
+				7CB9ADE7268CB7140009B42A /* ChartView.xib in Resources */,
 				7C8F51362671F9E3001FF0EE /* AddMealAlertDishView.xib in Resources */,
 				7C89AA02256D69CA009AD87C /* LoginRegister.storyboard in Resources */,
 				B330B87625757C1000BDB206 /* Workout.storyboard in Resources */,
@@ -1177,6 +1199,7 @@
 				B3B2A232256ED2A60052E6C8 /* UIImage+Extensions.swift in Sources */,
 				7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */,
 				B368E07F25A8819100BD1937 /* Key.swift in Sources */,
+				7CB9ADE5268B12290009B42A /* ChartFormatter.swift in Sources */,
 				7C74350825CDBB4C00D33A9A /* Message.swift in Sources */,
 				B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */,
 				B368E08725A8820E00BD1937 /* PropertyListValue.swift in Sources */,
@@ -1184,6 +1207,7 @@
 				7C9B345E2583C5B400D30480 /* QuestionnaireSumUpViewController.swift in Sources */,
 				7CFA5FFF262A10E600A3F401 /* MoveDishView.swift in Sources */,
 				7C8F51382671FAE0001FF0EE /* AddMealAlertDishView.swift in Sources */,
+				7CB9ADE9268CB72B0009B42A /* ChartView.swift in Sources */,
 				7C7435CF25D1EF8300D33A9A /* ChatUser.swift in Sources */,
 				7C3F4F8C25C9E2AF00EE3758 /* ResetPasswordViewController.swift in Sources */,
 				B368E04925A790D200BD1937 /* ServerDishs.swift in Sources */,

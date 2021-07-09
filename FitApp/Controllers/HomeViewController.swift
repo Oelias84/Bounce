@@ -68,10 +68,10 @@ class HomeViewController: UIViewController {
 		
 		navigationItem.titleView = titleStackView
 		
-		Spinner.shared.stop()
         mealViewModel = MealViewModel.shared
         mealViewModel.bindMealViewModelToController = {
-            self.setupProgressLebels()
+			Spinner.shared.stop()
+            self.setupProgressLabels()
         }
 		
 		setupView()
@@ -88,7 +88,7 @@ class HomeViewController: UIViewController {
         } else {
             mealViewModel.fetchData()
         }
-        setupProgressLebels()
+        setupProgressLabels()
     }
     
 	@IBAction func chatButtonAction(_ sender: Any) {
@@ -145,7 +145,7 @@ extension HomeViewController {
 		carbsTargateLabel.text = "מתוך \(userProgress.carbsTarget)"
 		proteinTargateLabel.text = "מתוך \(userProgress.proteinTarget)"
     }
-	private func setupProgressLebels() {
+	private func setupProgressLabels() {
 		let manager = ConsumptionManager.shared
 		let progress = mealViewModel.getProgress()
 		
@@ -280,7 +280,7 @@ extension HomeViewController {
 		}
 	}
 	private func checkDidFinishDailyMeals() {
-		mealViewModel.checkDailyMealIsDone { mealIsDone in
+		mealViewModel.checkDailyMealIsDoneBeforeHour { mealIsDone in
 			if !mealIsDone {
 				self.presentAlert(withTitle: "מעקב ארוחות", withMessage: "ראינו שלא השלמת את מעקב האורחות היומי שלך", options: "עבור למסך ארוחות", "ביטול") {
 					selection in

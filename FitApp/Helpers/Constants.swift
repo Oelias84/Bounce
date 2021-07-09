@@ -153,6 +153,7 @@ struct K {
 
 		//Views
 		static let dishView = "DishView"
+		static let chartView = "ChartView"
 		static let moveDishView = "MoveDishView"
 		static let changeDateView = "ChangeDateView"
 		static let tableViewEmptyView = "TableViewEmptyView"

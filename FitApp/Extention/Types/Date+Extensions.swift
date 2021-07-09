@@ -62,6 +62,13 @@ extension Date {
 		formatter.timeZone = .current
 		return formatter.string(from: self)
 	}
+	var displayYear: String {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "MM/yy"
+		formatter.locale = Locale(identifier: "en_Us")
+		formatter.timeZone = .current
+		return formatter.string(from: self)
+	}
 	var displayDay: String {
 		let formatter = DateFormatter()
 		formatter.dateFormat = "dd"

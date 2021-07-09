@@ -9,9 +9,9 @@ import UIKit
 
 protocol AddWeightAlertViewDelegate {
 	
-	func confirmButtonAction(weight: String)
 	func cancelButtonAction()
 	func cameraButtonTapped()
+	func confirmButtonAction(weight: String)
 }
 
 class AddWeightAlertView: UIView {

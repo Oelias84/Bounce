@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Mxh-5B-SBV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Mxh-5B-SBV">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0AR-6a-gI9" userLabel="Date Change View">
-                                <rect key="frame" x="12" y="138" width="390" height="64"/>
+                                <rect key="frame" x="12" y="146" width="390" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqJ-n8-SiV">
                                         <rect key="frame" x="16" y="21" width="35" height="22"/>
@@ -62,30 +62,16 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
-                                        <real key="value" value="10"/>
+                                        <real key="value" value="12"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ejU-3d-xFB">
-                                <rect key="frame" x="12" y="96" width="390" height="33"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="0gG-eY-DTG"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="שבוע"/>
-                                    <segment title="חודש"/>
-                                    <segment title="שנה"/>
-                                </segments>
-                                <connections>
-                                    <action selector="periodSegmentedControlAction:" destination="Mxh-5B-SBV" eventType="valueChanged" id="zZL-Ym-xDz"/>
-                                </connections>
-                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CkF-ZQ-fGy">
-                                <rect key="frame" x="0.0" y="216" width="414" height="552"/>
+                                <rect key="frame" x="0.0" y="376" width="414" height="416"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="weightCell" rowHeight="64" id="gEe-Ay-JCN" customClass="weightTableViewCell" customModule="FitApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="64"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gEe-Ay-JCN" id="hSg-aY-ftb">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
@@ -176,8 +162,37 @@
                                     <outlet property="delegate" destination="Mxh-5B-SBV" id="trx-wI-gVJ"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vc1-z7-vmc">
+                                <rect key="frame" x="16" y="218" width="382" height="150"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sbm-f2-dKc">
+                                        <rect key="frame" x="9" y="8" width="365" height="134"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="134" id="NsQ-6e-3fl"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                <real key="value" value="13"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="sbm-f2-dKc" secondAttribute="trailing" constant="8" id="7BD-hx-2jV"/>
+                                    <constraint firstItem="sbm-f2-dKc" firstAttribute="leading" secondItem="vc1-z7-vmc" secondAttribute="leading" constant="9" id="9sz-6H-fHy"/>
+                                    <constraint firstAttribute="bottom" secondItem="sbm-f2-dKc" secondAttribute="bottom" constant="8" id="U0g-2U-KpF"/>
+                                    <constraint firstItem="sbm-f2-dKc" firstAttribute="top" secondItem="vc1-z7-vmc" secondAttribute="top" constant="8" id="gDe-lc-wup"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRF-da-tSi">
-                                <rect key="frame" x="12" y="792" width="390" height="46"/>
+                                <rect key="frame" x="12" y="804" width="390" height="46"/>
                                 <color key="backgroundColor" systemColor="linkColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="gXO-Qx-4gM"/>
@@ -195,6 +210,20 @@
                                     <action selector="addWeightButtonAction:" destination="Mxh-5B-SBV" eventType="touchUpInside" id="ArA-3Y-HfQ"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ejU-3d-xFB">
+                                <rect key="frame" x="12" y="104" width="390" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="0gG-eY-DTG"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="שבוע"/>
+                                    <segment title="חודש"/>
+                                    <segment title="שנה"/>
+                                </segments>
+                                <connections>
+                                    <action selector="periodSegmentedControlAction:" destination="Mxh-5B-SBV" eventType="valueChanged" id="zZL-Ym-xDz"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wzd-di-cCp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -202,16 +231,19 @@
                             <constraint firstItem="wzd-di-cCp" firstAttribute="trailing" secondItem="CkF-ZQ-fGy" secondAttribute="trailing" id="61k-MY-9Lw"/>
                             <constraint firstItem="wzd-di-cCp" firstAttribute="trailing" secondItem="ejU-3d-xFB" secondAttribute="trailing" constant="12" id="7oz-qi-be8"/>
                             <constraint firstItem="wzd-di-cCp" firstAttribute="trailing" secondItem="0AR-6a-gI9" secondAttribute="trailing" constant="12" id="Bt9-Cq-sXR"/>
-                            <constraint firstItem="wzd-di-cCp" firstAttribute="bottom" secondItem="mRF-da-tSi" secondAttribute="bottom" constant="24" id="EIs-6P-UJ4"/>
+                            <constraint firstItem="vc1-z7-vmc" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" constant="16" id="DAt-sK-cT1"/>
+                            <constraint firstItem="wzd-di-cCp" firstAttribute="bottom" secondItem="mRF-da-tSi" secondAttribute="bottom" constant="12" id="EIs-6P-UJ4"/>
                             <constraint firstItem="mRF-da-tSi" firstAttribute="centerX" secondItem="ra4-ZC-RFT" secondAttribute="centerX" id="IFi-Lb-2d2"/>
-                            <constraint firstItem="CkF-ZQ-fGy" firstAttribute="top" secondItem="0AR-6a-gI9" secondAttribute="bottom" constant="14" id="Ozv-Ob-rNv"/>
-                            <constraint firstItem="ejU-3d-xFB" firstAttribute="top" secondItem="wzd-di-cCp" secondAttribute="top" constant="8" id="VEn-hL-3SG"/>
+                            <constraint firstItem="wzd-di-cCp" firstAttribute="trailing" secondItem="vc1-z7-vmc" secondAttribute="trailing" constant="16" id="KQ4-Dr-MNg"/>
+                            <constraint firstItem="vc1-z7-vmc" firstAttribute="top" secondItem="0AR-6a-gI9" secondAttribute="bottom" constant="8" id="Stb-1G-VeW"/>
+                            <constraint firstItem="ejU-3d-xFB" firstAttribute="top" secondItem="wzd-di-cCp" secondAttribute="top" constant="16" id="Wep-74-lyC"/>
                             <constraint firstItem="ejU-3d-xFB" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" constant="12" id="XXw-9f-4Lu"/>
                             <constraint firstItem="wzd-di-cCp" firstAttribute="trailing" secondItem="mRF-da-tSi" secondAttribute="trailing" constant="12" id="Y2W-r3-MFJ"/>
                             <constraint firstItem="mRF-da-tSi" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" constant="12" id="bSs-eb-lql"/>
+                            <constraint firstItem="CkF-ZQ-fGy" firstAttribute="top" secondItem="vc1-z7-vmc" secondAttribute="bottom" constant="8" id="gj7-cE-u3x"/>
                             <constraint firstItem="0AR-6a-gI9" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" constant="12" id="hZo-oL-ERq"/>
                             <constraint firstItem="ejU-3d-xFB" firstAttribute="centerX" secondItem="ra4-ZC-RFT" secondAttribute="centerX" id="qAh-PN-5av"/>
-                            <constraint firstItem="mRF-da-tSi" firstAttribute="top" secondItem="CkF-ZQ-fGy" secondAttribute="bottom" constant="24" id="rVW-h3-HBU"/>
+                            <constraint firstItem="mRF-da-tSi" firstAttribute="top" secondItem="CkF-ZQ-fGy" secondAttribute="bottom" constant="12" id="rVW-h3-HBU"/>
                             <constraint firstItem="0AR-6a-gI9" firstAttribute="top" secondItem="ejU-3d-xFB" secondAttribute="bottom" constant="10" id="rbG-W7-gh0"/>
                             <constraint firstItem="CkF-ZQ-fGy" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" id="sOy-Gh-EHh"/>
                         </constraints>
@@ -232,6 +264,8 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="chartView" destination="sbm-f2-dKc" id="plI-bd-gLK"/>
+                        <outlet property="chartViewContainer" destination="vc1-z7-vmc" id="T7J-Ob-N7p"/>
                         <outlet property="dateLeftButton" destination="wqJ-n8-SiV" id="H8J-A5-Xil"/>
                         <outlet property="dateRightButton" destination="jeO-8z-dpu" id="o2c-Lq-M7j"/>
                         <outlet property="dateTextLabel" destination="bFi-c4-6al" id="Qau-uG-ZmJ"/>

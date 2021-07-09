@@ -5,6 +5,7 @@
 //  Created by iOS Bthere on 07/01/2021.
 //
 
+import Charts
 import Foundation
 
 class WeightViewModel: NSObject {
@@ -14,6 +15,17 @@ class WeightViewModel: NSObject {
             self.bindWeightViewModelToController()
         }
     }
+	var chartData: [ChartDataEntry] = [
+		ChartDataEntry(x: 1, y: 60),
+		ChartDataEntry(x: 2, y: 20),
+		ChartDataEntry(x: 3, y: 12),
+		ChartDataEntry(x: 4, y: 23),
+		ChartDataEntry(x: 5, y: 13),
+		ChartDataEntry(x: 6, y: 15),
+		ChartDataEntry(x: 7, y: 2),
+		ChartDataEntry(x: 8, y: 90),
+		ChartDataEntry(x: 9, y: 10)
+	]
     private var googleService: GoogleApiManager!
     
     var bindWeightViewModelToController : (() -> ()) = {}
@@ -71,9 +83,10 @@ class WeightViewModel: NSObject {
         return monthsArray
     }
     
-    func splitToWeeksArray() -> [[Weight]]? {
+    private func splitToWeeksArray() -> [[Weight]]? {
         guard let weights = self.weights else { return [] }
         if weights.isEmpty { return nil }
+		
         var weeksArray: [[Weight]]?
 		var date = weights.first!.date
         var section = 0
@@ -95,7 +108,7 @@ class WeightViewModel: NSObject {
         }
         return weeksArray
     }
-    func splitToMonthsArray(weightsArray: [Weight]) -> [[Weight]]? {
+    private func splitToMonthsArray(weightsArray: [Weight]) -> [[Weight]]? {
         if weightsArray.isEmpty { return nil }
         var monthArray: [[Weight]] = [[Weight]()]
         
@@ -119,9 +132,10 @@ class WeightViewModel: NSObject {
 		monthArray[section].append(Weight(date: month, weight: weight / monthDays))
         return monthArray
     }
-    func splitToYearsArray() -> [[Weight]]? {
+    private func splitToYearsArray() -> [[Weight]]? {
         guard let weights = self.weights else { return [] }
         if weights.isEmpty { return nil }
+		
         var yearArray: [[Weight]]?
         var year = weights.first!.date.year
         var section = 0
@@ -141,6 +155,12 @@ class WeightViewModel: NSObject {
         return yearArray
     }
     
+	func addWeight() {
+		guard let weights = self.weights else { return }
+		let weightsModel = Weights(weights: weights)
+		
+		googleService.updateWeights(weights: weightsModel)
+	}
     func fetchWeights() {
         googleService.getWeights { result in
             switch result {
@@ -155,12 +175,15 @@ class WeightViewModel: NSObject {
             }
         }
     }
-	func addWeight() {
-        guard let weights = self.weights else { return }
-        let weightsModel = Weights(weights: weights)
-        
-		googleService.updateWeights(weights: weightsModel)
-    }
+	func getChartData(weights: [Weight]?) -> [ChartDataEntry] {
+		if let weights = weights {
+			let chartItems = weights.map {
+				return ChartDataEntry(x: $0.weight, y: $0.weight, data: Date() )
+			}
+			return chartItems
+		}
+		return []
+	}
 	static func checkAddWeight(completion: @escaping (Bool) -> ()) {
 		let calendar = Calendar.current
 		let startHour = calendar.dateComponents([.hour,.minute,.second], from: "05:00".timeFromString!)
@@ -174,7 +197,6 @@ class WeightViewModel: NSObject {
 		
 		GoogleApiManager.shared.getWeights { result in
 			switch result {
-			
 			case .success(let weights):
 				if let weights = weights {
 					var shouldWeight = false

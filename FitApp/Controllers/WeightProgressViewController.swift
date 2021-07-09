@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Charts
+import SDWebImage
 import Foundation
 import DateToolsSwift
 import CropViewController
-import SDWebImage
 
 enum TimePeriod {
+	
 	case week
 	case month
 	case year
@@ -22,14 +24,15 @@ class WeightProgressViewController: UIViewController {
 	private var weightViewModel: WeightViewModel!
 	private var filteredArray: [Weight]? {
 		didSet {
-			DispatchQueue.main.async { [weak self] in
-				guard let self = self else { return }
-				self.tableView.reloadData()
+			DispatchQueue.main.async {
+				[unowned self] in
+				populateChart()
+				addChartView()
+				tableView.reloadData()
 			}
 		}
 	}
 	
-	private var timePeriod: TimePeriod = .week
 	private var selectedDate: Date! {
 		didSet {
 			updateDateLabels()
@@ -40,8 +43,16 @@ class WeightProgressViewController: UIViewController {
 	private var weightAlert: AddWeightAlertView?
 	private let imagePickerController = UIImagePickerController()
 	
-	var bindToController: (() -> ()) = {}
-	
+	internal var values = [Double]()
+	internal var timeLinePeriod = [Date]()
+	internal var timePeriod: TimePeriod = .week
+
+	@IBOutlet weak var chartView: UIView!
+	@IBOutlet weak var chartViewContainer: UIView! {
+		didSet {
+			chartViewContainer.buttonShadow()
+		}
+	}
 	@IBOutlet weak var periodSegmentedControl: UISegmentedControl! {
 		didSet {
 			periodSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)], for: .normal)
@@ -54,6 +65,10 @@ class WeightProgressViewController: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
 	
+	deinit {
+		removeKeyboardListener()
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -62,8 +77,8 @@ class WeightProgressViewController: UIViewController {
 		dateRightButton.isHidden = true
 		tableView.sectionHeaderHeight = 46
 	}
-	deinit {
-		removeKeyboardListener()
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
 	}
 	
 	@IBAction func todayButtonAction(_ sender: Any) {
@@ -75,7 +90,7 @@ class WeightProgressViewController: UIViewController {
 		updateFiltersArray()
 	}
 	@IBAction func addWeightButtonAction(_ sender: Any) {
-		if let weights = weightViewModel.weights, weights.last!.date == Date() {
+		if let weights = weightViewModel.weights, !weights.isEmpty, weights.last!.date == Date() {
 			presentOkAlert(withMessage: "כבר נשקלת היום") {}
 			return
 		} else {
@@ -135,7 +150,7 @@ class WeightProgressViewController: UIViewController {
 	}
 }
 
-//MARK: - Delegates
+//MARK: - TableView
 extension WeightProgressViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -199,7 +214,7 @@ extension WeightProgressViewController: UITableViewDelegate, UITableViewDataSour
 	}
 }
 
-//MARK: - Function
+//MARK: - Class Function
 extension WeightProgressViewController {
 	
 	private func updateDateLabels() {
@@ -252,8 +267,8 @@ extension WeightProgressViewController {
 	private func updateDataSource() {
 		Spinner.shared.stop()
 		filteredArray = weightViewModel.getWeekBy(selectedDate.startOfWeek!)
-		DispatchQueue.main.async { [weak self] in
-			guard let self = self else { return }
+		DispatchQueue.main.async {
+			[unowned self] in
 			self.tableView.reloadData()
 		}
 	}
@@ -264,6 +279,7 @@ extension WeightProgressViewController {
 		self.weightViewModel = WeightViewModel()
 		
 		self.weightViewModel!.bindWeightViewModelToController = {
+			[unowned self] in
 			self.updateDataSource()
 		}
 	}
@@ -290,7 +306,28 @@ extension WeightProgressViewController {
 		}
 	}
 }
+//MARK: - Chart functions
+extension WeightProgressViewController {
+	
+	private func addChartView() {
+		let lineChat = ChartView(frame: CGRect(x: 0, y: 0, width: chartView.frame.width, height: chartView.frame.height))
+		lineChat.delegate = self
 
+		chartView.addSubview(lineChat)
+	}
+	private func populateChart() {
+		if let dataArray = filteredArray {
+			let weights = dataArray.map { $0.weight }
+			let weightsDates = dataArray.map { $0.date }
+			
+			values = weights
+			timeLinePeriod = weightsDates
+			getChartData()
+		}
+	}
+}
+
+//MARK: - Delegates
 extension WeightProgressViewController: CropViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 	
 	func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
@@ -312,6 +349,13 @@ extension WeightProgressViewController: CropViewControllerDelegate, UINavigation
 
 extension WeightProgressViewController: AddWeightAlertViewDelegate {
 	
+	func cancelButtonAction() {
+		weightAlert?.removeFromSuperview()
+		weightAlert = nil
+	}
+	func cameraButtonTapped() {
+		presentImagePickerActionSheet(imagePicker: imagePickerController) {_ in}
+	}
 	func confirmButtonAction(weight: String) {
 		if let weightTab = self.tabBarController?.tabBar.items?[3] {
 			weightTab.image = UIImage(named:"ScaleIcon")
@@ -319,13 +363,6 @@ extension WeightProgressViewController: AddWeightAlertViewDelegate {
 		addWeight(weight: weight, image: weightImage)
 		weightAlert?.removeFromSuperview()
 		weightAlert = nil
-	}
-	func cancelButtonAction() {
-		weightAlert?.removeFromSuperview()
-		weightAlert = nil
-	}
-	func cameraButtonTapped() {
-		presentImagePickerActionSheet(imagePicker: imagePickerController) {_ in}
 	}
 }
 
@@ -335,4 +372,9 @@ extension WeightProgressViewController: weightTableViewCellDelegate {
 		let photoViewr = PhotoViewerViewController(with: url)
 		present(photoViewr, animated: true)
 	}
+}
+
+extension WeightProgressViewController: ChartViewDelegate {
+	
+	func getChartData() {}
 }
