@@ -44,10 +44,11 @@ extension UIViewController {
 		let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 		alertController.addAction(UIAlertAction(title: buttonText, style: .default){ action in
 			completion()
+			Spinner.shared.stop()
 		})
 		present(alertController, animated: true)
 	}
-	func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., completion: @escaping (Int) -> Void) {
+	func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., completion: @escaping (Int) -> (Void)) {
 		let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 		for (index, option) in options.enumerated() {
 			alertController.addAction(UIAlertAction.init(title: option, style: option == "ביטול" ? .destructive : .default, handler: { _ in
