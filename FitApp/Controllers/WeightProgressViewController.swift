@@ -90,9 +90,8 @@ class WeightProgressViewController: UIViewController {
 		updateFiltersArray()
 	}
 	@IBAction func addWeightButtonAction(_ sender: Any) {
-		if let weights = weightViewModel.weights, !weights.isEmpty, weights.last!.date == Date() {
-			presentOkAlert(withMessage: "כבר נשקלת היום") {}
-			return
+		if let weights = weightViewModel.weights, !weights.isEmpty, weights.last!.date.onlyDate == Date().onlyDate {
+			presentOkAlert(withMessage: "כבר נשקלת היום") { 	return }
 		} else {
 			let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
 			
