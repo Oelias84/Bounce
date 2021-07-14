@@ -31,11 +31,15 @@ class LocalNotificationManager {
 	private init() {
 		
 		getScheduledNotifications()
-		setMealNotification()
 	}
 	
 	func getNotifications() -> [Notification]? {
 		return currentNotification
+	}
+	
+	func removeMealsNotification() {
+		UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [NotificationTypes.mealNotification.rawValue])
+		getScheduledNotifications()
 	}
 	func removeNotification(_ notification: Notification) {
 		UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [notification.id])
@@ -90,6 +94,19 @@ class LocalNotificationManager {
 //MARK: - Class Functions
 extension LocalNotificationManager {
 	
+	private func schedule() {
+		UNUserNotificationCenter.current().getNotificationSettings { settings in
+			
+			switch settings.authorizationStatus {
+			case .notDetermined:
+				self.requestAuthorization()
+			case .authorized, .provisional:
+				self.scheduleNotifications()
+			default:
+				break
+			}
+		}
+	}
 	private func requestAuthorization() {
 		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
 			
@@ -139,19 +156,6 @@ extension LocalNotificationManager {
 			guard error == nil else { return }
 			print("Notification scheduled! --- ID = \(notification.id)")
 			self.getScheduledNotifications()
-		}
-	}
-	private func schedule() {
-		UNUserNotificationCenter.current().getNotificationSettings { settings in
-			
-			switch settings.authorizationStatus {
-			case .notDetermined:
-				self.requestAuthorization()
-			case .authorized, .provisional:
-				self.scheduleNotifications()
-			default:
-				break
-			}
 		}
 	}
 }

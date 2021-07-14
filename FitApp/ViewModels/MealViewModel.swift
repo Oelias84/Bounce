@@ -51,7 +51,11 @@ class MealViewModel: NSObject {
         var fats = 0.0
         var protein = 0.0
 
-		guard meals != nil else { return MealProgress(carbs: 0.0, fats: 0.0, protein: 0.0) }
+		guard meals != nil else {
+			LocalNotificationManager.shared.setMealNotification()
+			return MealProgress(carbs: 0.0, fats: 0.0, protein: 0.0)
+		}
+		
         for meal in meals! {
             for dish in meal.dishes {
                 if dish.isDishDone {
@@ -66,10 +70,13 @@ class MealViewModel: NSObject {
                 }
             }
         }
-		if (carbs + fats + protein) == 0 {
-			UserProfile.defaults.showMealNotFinishedAlert = true
+		
+		let minNotificationSetTime = "17:00".timeFromString!.onlyTime
+
+		if (carbs + fats + protein) == 0 || (Date().onlyTime.isLater(than: minNotificationSetTime)) {
+			LocalNotificationManager.shared.setMealNotification()
 		} else {
-			UserProfile.defaults.showMealNotFinishedAlert = false
+			LocalNotificationManager.shared.removeMealsNotification()
 		}
         return MealProgress(carbs: carbs, fats: fats, protein: protein)
     }

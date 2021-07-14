@@ -108,4 +108,10 @@ extension Date {
 		dateComponents.timeZone = NSTimeZone.system
 		return calender.date(from: dateComponents)!
 	}
+	var onlyTime: Date {
+		let calender = Calendar.current
+		var dateComponents = calender.dateComponents([.hour,.minute], from: self)
+		dateComponents.timeZone = NSTimeZone.system
+		return calender.date(from: dateComponents)!
+	}
 }

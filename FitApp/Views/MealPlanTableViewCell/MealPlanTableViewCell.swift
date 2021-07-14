@@ -56,6 +56,7 @@ class MealPlanTableViewCell: UITableViewCell {
 		} else {
 			sender.isSelected = !sender.isSelected
 			self.changeMealState(sender)
+			mealViewModel.getProgress()
 		}
 	}
 }
@@ -121,6 +122,7 @@ extension MealPlanTableViewCell: DishViewDelegate {
 				allChecked = true
 			}
 		}
+		mealViewModel.getProgress()
 		meal.isMealDone = allChecked
 		mealIsDoneCheckMark.isSelected = allChecked
 		mealViewModel.updateMeals(for: meal.date)

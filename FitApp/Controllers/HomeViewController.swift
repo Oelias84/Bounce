@@ -251,7 +251,10 @@ extension HomeViewController {
 		self.navigationController?.pushViewController(chatsVC, animated: true)
 	}
 	private func checkAddWeight() {
-		WeightViewModel.checkAddWeight { showWeightAlert in
+		WeightViewModel.checkAddWeight {
+			[weak self] showWeightAlert in
+			guard let self = self else { return }
+
 			if showWeightAlert {
 				self.presentAlert(withTitle: "זמן להישקל", withMessage: "תזכורת קטנה לא לשכוח להישקל הבוקר לפני שאת מתחילה את היום :)", options: "עבור למסך שקילה", "ביטול") {
 					selection in
