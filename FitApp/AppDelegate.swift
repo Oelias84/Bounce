@@ -26,18 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		  UNUserNotificationCenter.current().delegate = self
 
 		  let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-		  UNUserNotificationCenter.current().requestAuthorization(
-			options: authOptions,
-			completionHandler: {_, _ in })
+		  UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { _, _ in })
 		} else {
-		  let settings: UIUserNotificationSettings =
-		  UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+		  let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
 		  application.registerUserNotificationSettings(settings)
 		}
 		application.registerForRemoteNotifications()
 
 		Messaging.messaging().delegate = self
-		
 		return true
 	}
 	

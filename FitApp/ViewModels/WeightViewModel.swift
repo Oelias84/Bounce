@@ -15,17 +15,6 @@ class WeightViewModel: NSObject {
             self.bindWeightViewModelToController()
         }
     }
-	var chartData: [ChartDataEntry] = [
-		ChartDataEntry(x: 1, y: 60),
-		ChartDataEntry(x: 2, y: 20),
-		ChartDataEntry(x: 3, y: 12),
-		ChartDataEntry(x: 4, y: 23),
-		ChartDataEntry(x: 5, y: 13),
-		ChartDataEntry(x: 6, y: 15),
-		ChartDataEntry(x: 7, y: 2),
-		ChartDataEntry(x: 8, y: 90),
-		ChartDataEntry(x: 9, y: 10)
-	]
     private var googleService: GoogleApiManager!
     
     var bindWeightViewModelToController : (() -> ()) = {}
