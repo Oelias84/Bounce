@@ -41,8 +41,6 @@ class LoginViewModel {
 					switch result {
 					case .success(let userData):
 						Analytics.logEvent(AnalyticsEventLogin, parameters: ["USER_EMAIL": email])
-						
-						#warning("Remove this after users update")
 						LocalNotificationManager.shared.setMealNotification()
 
 						UserProfile.defaults.email = email
