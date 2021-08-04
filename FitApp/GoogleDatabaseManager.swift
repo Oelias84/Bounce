@@ -9,17 +9,6 @@ import Foundation
 import MessageKit
 import FirebaseDatabase
 
-enum DatabaseError: Error {
-	
-	case failedToUpdate
-	case failedToFetch
-	case failedToDecodeData
-	case dataIsEmpty
-	case noFetch
-	case isPrime
-}
-
-
 final class GoogleDatabaseManager {
 	
 	static let shared = GoogleDatabaseManager()
@@ -72,14 +61,12 @@ extension GoogleDatabaseManager {
 	public func userExists(with email: String, completion: @escaping ((Bool) -> Void)) {
 		
 		database.child(email.safeEmail).observeSingleEvent(of: .value) { snapshot in
-			guard snapshot.value as? String != nil else {
-				completion(false)
-				return
-			}
-			completion(true)
+			guard snapshot.value as? String == nil else { return }
+			
+			completion(snapshot.exists())
 		}
 	}
-	public func getChatUsers(completion: @escaping (Result<[ChatUser], DatabaseError>) -> Void) {
+	public func getChatUsers(completion: @escaping (Result<[ChatUser], ErrorManager.DatabaseError>) -> Void) {
 		database.child("chat_users").observeSingleEvent(of: .value) { snapshot in
 			guard snapshot.value != nil else {
 				completion(.failure(.failedToFetch))
@@ -228,7 +215,7 @@ extension GoogleDatabaseManager {
 			}
 		}
 	}
-	public func getAllChats(for email: String, completion: @escaping (Result<[Chat],DatabaseError>) -> Void) {
+	public func getAllChats(for email: String, completion: @escaping (Result<[Chat], ErrorManager.DatabaseError>) -> Void) {
 		
 		database.child("\(email)/chats").observe(.value) { snapshot in
 			
@@ -256,7 +243,7 @@ extension GoogleDatabaseManager {
 			completion(.success(chats))
 		}
 	}
-	public func updateChat(chat: Chat, completion: @escaping (Result<Bool,DatabaseError>) -> Void) {
+	public func updateChat(chat: Chat, completion: @escaping (Result<Bool, ErrorManager.DatabaseError>) -> Void) {
 		guard let currentUserSafeEmail = UserProfile.defaults.email?.safeEmail else {
 			completion(.failure(.noFetch))
 			return
@@ -299,7 +286,7 @@ extension GoogleDatabaseManager {
 			}
 		}
 	}
-	public func getAllMessagesForChat(with id: String, completion: @escaping (Result<[Message],DatabaseError>) -> Void) {
+	public func getAllMessagesForChat(with id: String, completion: @escaping (Result<[Message], ErrorManager.DatabaseError>) -> Void) {
 		database.child("\(id)/messages").observe(.value) { snapshot in
 			guard let value = snapshot.value as? [[String:Any]] else {
 				completion(.failure(.noFetch))

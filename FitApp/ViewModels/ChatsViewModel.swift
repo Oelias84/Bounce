@@ -58,7 +58,7 @@ class ChatsViewModel: NSObject {
 				self.isNewChat = false
 				self.chats = chats
 			case .failure(let error):
-				if error == DatabaseError.noFetch {
+				if error == ErrorManager.DatabaseError.noFetch {
 					self.isNewChat = true
 					self.addSupportUser { chat in
 						if let chat = chat {

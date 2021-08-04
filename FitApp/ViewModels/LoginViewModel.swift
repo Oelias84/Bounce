@@ -16,28 +16,30 @@ class LoginViewModel {
 
 	func login(email: String?, password: String?, completion: @escaping (Bool, String?) -> () ) throws {
 		
-		guard let email = email else {
+		guard let email = email, !email.isEmpty, email != "" else {
 			throw ErrorManager.LoginError.emptyEmail
 		}
-		guard let password = password else {
+		guard let password = password, !password.isEmpty, password != "" else {
 			throw ErrorManager.LoginError.emptyPassword
 		}
 		if !email.isValidEmail {
 			throw ErrorManager.LoginError.invalidEmail
 		}
 		if password.count != 6 {
-			throw ErrorManager.LoginError.incorrectPasswordLength
+			throw ErrorManager.LoginError.incorrectPassword
 		}
-		
 		
 		Auth.auth().signIn(withEmail: email, password: password) {
 			[weak self] (user, error) in
 			guard let self = self else { return }
 			
-			if error == nil {
+			if let error = error {
+				completion(false, error.localizedDescription)
+			} else {
 				self.getUserImageProfileUrl(with: email)
+				
 				self.googleManager.getUserData { result in
-					
+
 					switch result {
 					case .success(let userData):
 						Analytics.logEvent(AnalyticsEventLogin, parameters: ["USER_EMAIL": email])
@@ -56,8 +58,6 @@ class LoginViewModel {
 						print("Error fetching user data: ", error)
 					}
 				}
-			} else {
-				completion(false, error?.localizedDescription)
 			}
 		}
 	}

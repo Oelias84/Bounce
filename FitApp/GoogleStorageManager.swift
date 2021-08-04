@@ -15,8 +15,6 @@ final class GoogleStorageManager {
 	static let shared = GoogleStorageManager()
 	private let storage = Storage.storage().reference()
 	
-	public typealias UploadPictureCompletion = (Result<String, Error>) -> Void
-
 	enum ChildType: CustomStringConvertible {
 		
 		case profileImage
@@ -32,7 +30,7 @@ final class GoogleStorageManager {
 		}
 	}
 	
-	public func uploadImage(from child: ChildType, data: Data, fileName: String, completion: @escaping UploadPictureCompletion) {
+	public func uploadImage(from child: ChildType, data: Data, fileName: String, completion: @escaping (Result<String, Error>) -> Void) {
 		
 		storage.child("\(child)/\(fileName)").putData(data, metadata: nil) { metadata, error in
 			if let error = error {
@@ -53,6 +51,7 @@ final class GoogleStorageManager {
 		}
 	}
 	public func downloadImageURL(from child: ChildType, path: String, completion: @escaping (Result<URL, Error>) -> Void ) {
+		
 	self.storage.child("\(child)/\(path)").downloadURL { url, error in
 		guard error == nil, let url = url else {
 			completion(.failure(error!))

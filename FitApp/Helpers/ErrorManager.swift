@@ -7,14 +7,40 @@
 
 import Foundation
 
-struct ErrorManager {
+struct ErrorManager: Error {
 	
 	enum LoginError: Error {
 		
 		case emptyEmail
-		case emptyPassword
 		case invalidEmail
-		case incorrectPasswordLength
+		case emailNotExist
+		case emptyPassword
+		case incorrectPassword
 	}
 	
+	enum RegisterError: Error {
+		
+		case failToRegister
+		case userNotSaved
+		case emptyUserName
+		case userNameNotFullName
+		case emptyEmail
+		case incorrectEmail
+		case emailExist
+		case emptyPassword
+		case shortPassword
+		case emptyConfirmPassword
+		case confirmPasswordDoNotMatch
+	}
+	
+	enum DatabaseError: Error {
+		
+		case failedToUpdate
+		case failedToFetch
+		case failedToDecodeData
+		case dataIsEmpty
+		case userExist
+		case noFetch
+		case isPrime
+	}
 }

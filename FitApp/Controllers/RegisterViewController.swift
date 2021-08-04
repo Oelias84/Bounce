@@ -6,22 +6,20 @@
 //
 
 import UIKit
-import FirebaseAuth
 import CropViewController
 
 class RegisterViewController: UIViewController {
 	
+	private let viewModel = RegisterViewModel()
 	private let imagePickerController = UIImagePickerController()
+	private var profileImage: UIImage?
 	
 	@IBOutlet weak var userNameTextfield: UITextField!
 	@IBOutlet weak var emailTextfield: UITextField!
 	@IBOutlet weak var passwordTextfield: UITextField!
 	@IBOutlet weak var confirmPasswordTextfield: UITextField!
-	
 	@IBOutlet weak var profileImageButton: UIButton!
 	@IBOutlet weak var profileImageView: UIImageView!
-	
-	private var profileImage: UIImage?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -40,84 +38,86 @@ class RegisterViewController: UIViewController {
 		presentImagePickerActionSheet(imagePicker: imagePickerController) { _ in }
 	}
 	@IBAction func singUpButtonAction(_ sender: Any) {
-		if var userName = userNameTextfield.text, let email = emailTextfield.text, let password = passwordTextfield.text, let confirmedEmail = confirmPasswordTextfield.text {
-			Spinner.shared.show(self.view)
-			if password != confirmedEmail {
-				presentOkAlert(withTitle: "סיסמה שגויה", withMessage: "אנא נסי שוב") {}
-				return
-			} else {
-				GoogleDatabaseManager.shared.userExists(with: email) { [weak self] doesExist in
-					guard let self = self else { return }
-					
-					if !doesExist {
-						UserProfile.defaults.email = email
-						Auth.auth().createUser(withEmail: email, password: password){
-							[weak self] (user, error) in
-							guard let self = self else { return }
-							
-							if error == nil {
-								while userName.last?.isWhitespace == true {
-									userName = String(userName.dropLast())
-								}
-								let splitUserName = userName.splitFullName
-								let user = User(firsName: splitUserName.0, lastName: splitUserName.1, email: email, deviceToken: UserProfile.defaults.fcmToken)
-								
-								GoogleDatabaseManager.shared.insertUser(with: user) {
-									[weak self] success in
-									guard let self = self else { return }
-
-									switch success {
-									case true:
-										UserProfile.defaults.name = userName
-										UserProfile.defaults.email = email
-										
-										UserProfile.updateServer()
-										
-										if let image = self.profileImage {
-											GoogleStorageManager.shared.uploadImage(from: .profileImage, data: image.jpegData(compressionQuality: 8)!, fileName: user.profileImageUrl){
-												result in
-												
-												switch result {
-												case .success(let imageUrl):
-													UserProfile.defaults.profileImageImageUrl = imageUrl
-												case .failure(let error):
-													print(error)
-												}
-												self.moveToHomeViewController()
-											}
-										} else {
-											self.moveToHomeViewController()
-										}
-									case false:
-										self.presentAlert(withTitle: "שגיאה", withMessage: "ההרשמה נכשלה אנא נסה שנית", options: "אוקיי") {
-											_ in
-											
-											self.passwordTextfield.text?.removeAll()
-											self.confirmPasswordTextfield.text?.removeAll()
-										}
-									}
-								}
-							} else {
-								Spinner.shared.stop()
-								self.presentOkAlert(withTitle: "שגיאה", withMessage: error!.localizedDescription) {}
-							}
-						}
-					} else {
+		Spinner.shared.show(self.view)
+		
+		do {
+			try viewModel.register(userName: userNameTextfield.text, email: emailTextfield.text, password: passwordTextfield.text, confirmPassword: confirmPasswordTextfield.text, userImage: profileImage) {
+				[weak self] result in
+				guard let self = self else { return }
+				Spinner.shared.stop()
+				
+				switch result {
+				case .success(_):
+					self.moveToHomeViewController()
+				case .failure(let error):
+					switch error {
+					case ErrorManager.RegisterError.emailExist:
+						
 						Spinner.shared.stop()
-						self.presentOkAlert(withTitle: "משתמש קיים", withMessage: "אנא נסי שוב") {
+						self.presentOkAlert(withTitle: "שמשתמש קיים", withMessage: "נראה שכתובת האימייל שהזנת כבר קיימת במערכת, אנא נסי שנית") {
 							self.userNameTextfield.text?.removeAll()
 							self.emailTextfield.text?.removeAll()
 							self.passwordTextfield.text?.removeAll()
 							self.confirmPasswordTextfield.text?.removeAll()
-							
 						}
-						return
+					case ErrorManager.RegisterError.failToRegister:
+						Spinner.shared.stop()
+						self.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה ביצירת המשתמש, אנא נסה שנית מאוחר יותר") { }
+					case ErrorManager.RegisterError.userNotSaved:
+						Spinner.shared.stop()
+						self.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה ביצירת המשתמש \(error.localizedDescription)") { }
+					default:
+						Spinner.shared.stop()
+						self.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה: \(error.localizedDescription)") { }
 					}
 				}
 			}
+			
+		} catch ErrorManager.RegisterError.emptyUserName {
+			Spinner.shared.stop()
+			presentOkAlert(withTitle: "אופס",withMessage: "נראה ששחכת להזין שם משתמש") {
+				self.userNameTextfield.becomeFirstResponder()
+			}
+		} catch ErrorManager.RegisterError.emptyEmail {
+			Spinner.shared.stop()
+			presentOkAlert(withTitle: "אופס",withMessage: "נראה ששחכת להזין כתובת אימייל") {
+				self.emailTextfield.becomeFirstResponder()
+			}
+		} catch ErrorManager.RegisterError.emptyPassword {
+			Spinner.shared.stop()
+			presentOkAlert(withTitle: "אופס",withMessage: "נראה ששחכת להזין סיסמא") {
+				self.passwordTextfield.becomeFirstResponder()
+			}
+		} catch ErrorManager.RegisterError.emptyConfirmPassword {
+			Spinner.shared.stop()
+			presentOkAlert(withTitle: "אופס",withMessage: "נראה ששחכת להזין את אישור הסיסמא") {
+				self.confirmPasswordTextfield.becomeFirstResponder()
+			}
+		} catch ErrorManager.RegisterError.userNameNotFullName {
+			Spinner.shared.stop()
+			presentOkAlert(withTitle: "אופס",withMessage: "יש להזין שם ושם משפחה") {
+				self.userNameTextfield.becomeFirstResponder()
+			}
+		} catch ErrorManager.RegisterError.incorrectEmail {
+			Spinner.shared.stop()
+			presentOkAlert(withTitle: "אופס",withMessage: "נראה כי כתובת האימייל שגויה") {
+				self.emailTextfield.becomeFirstResponder()
+			}
+		} catch ErrorManager.RegisterError.shortPassword {
+			Spinner.shared.stop()
+			presentOkAlert(withTitle: "אופס",withMessage: "הסיסמא חייבת לכלול רק 6 תווים") {
+				self.passwordTextfield.becomeFirstResponder()
+			}
+		} catch ErrorManager.RegisterError.confirmPasswordDoNotMatch {
+			Spinner.shared.stop()
+			presentOkAlert(withTitle: "אופס",withMessage: "הסיסמא אינה תואמת, אנא נסי שנית") {
+				self.confirmPasswordTextfield.becomeFirstResponder()
+			}
+		} catch {
+			print("Something went wrong!")
 		}
 	}
-
+	
 	func moveToHomeViewController() {
 		let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
 		let homeVC = storyboard.instantiateViewController(withIdentifier: K.ViewControllerId.HomeTabBar)

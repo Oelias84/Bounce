@@ -35,18 +35,27 @@ class LoginViewController: UIViewController {
 				guard let self = self else { return }
 				Spinner.shared.stop()
 
-				if login {
+				if let error = error {
+					var message = ""
+					if error.contains("There is no user record corresponding to this identifier") {
+						message = "נראה שהיוזר לא נמצא"
+					} else if error.contains("The password is invalid") {
+						message = "הסיסמא שהכנסת שגויה"
+					} else if error.contains("Access to this account has been temporarily disabled due to many failed login attempts"){
+						message = "החשבון נחסם זמנית, בעכבות יותר מידיי ניסיונות כושלים. את יכולה לאפס סיסמא או שנית במועד מאוחר יותר"
+					}
+					
+					self.presentAlert(withTitle: "לא מצליח להתחבר", withMessage: message, options: "אישור") { _ in }
+				} else {
 					let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
 					let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar)
 					
 					homeVC.modalPresentationStyle = .fullScreen
 					self.present(homeVC, animated: true)
-				} else {
-					self.presentAlert(withTitle: "Error", withMessage: error!, options: "אישור") { _ in }
 				}
 			}
 		} catch ErrorManager.LoginError.emptyEmail {
-			presentOkAlert(withTitle: "אופס", withMessage: "נראה ששכחת למלא את כתובת האמייל") {
+			presentOkAlert(withTitle: "אופס", withMessage: "נראה ששכחת להזין כתובת האמייל") {
 				self.emailTextfield.becomeFirstResponder()
 			}
 		} catch ErrorManager.LoginError.emptyPassword {
@@ -57,7 +66,7 @@ class LoginViewController: UIViewController {
 			presentOkAlert(withTitle: "אופס", withMessage: "נראה שכתובת האמייל שגויה") {
 				self.emailTextfield.becomeFirstResponder()
 			}
-		} catch ErrorManager.LoginError.incorrectPasswordLength {
+		} catch ErrorManager.LoginError.incorrectPassword {
 			presentOkAlert(withTitle: "אופס", withMessage: "אורך הסיסמא חייב להיות בעל 6 תווים") {
 				self.passwordTextfield.becomeFirstResponder()
 			}

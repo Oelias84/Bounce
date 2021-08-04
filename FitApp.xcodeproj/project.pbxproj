@@ -30,6 +30,7 @@
 		7C5262BF25BC79B200694007 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5262BE25BC79B200694007 /* SettingsViewController.swift */; };
 		7C54164B269D923800C22859 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54164A269D923800C22859 /* ErrorManager.swift */; };
 		7C54164D269D951C00C22859 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54164C269D951C00C22859 /* LoginViewModel.swift */; };
+		7C54164F26AACC9900C22859 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54164E26AACC9900C22859 /* RegisterViewModel.swift */; };
 		7C658AA825D9873C00CA75B2 /* Motivations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658AA725D9873C00CA75B2 /* Motivations.swift */; };
 		7C658AB525D990EB00CA75B2 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658AB425D990EB00CA75B2 /* CommentViewController.swift */; };
 		7C658ABE25D992D200CA75B2 /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658ABD25D992D200CA75B2 /* Comments.swift */; };
@@ -186,6 +187,7 @@
 		7C5262BE25BC79B200694007 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7C54164A269D923800C22859 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		7C54164C269D951C00C22859 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		7C54164E26AACC9900C22859 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		7C658AA725D9873C00CA75B2 /* Motivations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motivations.swift; sourceTree = "<group>"; };
 		7C658AB425D990EB00CA75B2 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		7C658ABD25D992D200CA75B2 /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
@@ -853,6 +855,7 @@
 			isa = PBXGroup;
 			children = (
 				7C54164C269D951C00C22859 /* LoginViewModel.swift */,
+				7C54164E26AACC9900C22859 /* RegisterViewModel.swift */,
 				B3DB7512259F8270002CF48B /* MealViewModel.swift */,
 				B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */,
 				B358227E25ACA40D00C91295 /* ArticleViewModel.swift */,
@@ -1222,6 +1225,7 @@
 				7C1ACCEB266F8F8F008079C9 /* CommentTableViewCell.swift in Sources */,
 				7CD1817E26481E5D0054DB9C /* SettingTableViewModel.swift in Sources */,
 				7C7435EB25D31F9A00D33A9A /* Chat.swift in Sources */,
+				7C54164F26AACC9900C22859 /* RegisterViewModel.swift in Sources */,
 				7C33B65F26690A3800E16A1C /* Notification.swift in Sources */,
 				7C1ACD0C2670D170008079C9 /* AddMealAlertView.swift in Sources */,
 				B35111CA25962D41001B2B9B /* weightTableViewCell.swift in Sources */,
