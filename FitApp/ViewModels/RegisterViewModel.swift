@@ -60,6 +60,7 @@ class RegisterViewModel {
 							if success {
 								// Save User name and update server
 								UserProfile.defaults.name = userName
+								UserProfile.defaults.email = email
 								UserProfile.updateServer()
 								
 								// If contain User image upload to server
@@ -77,6 +78,8 @@ class RegisterViewModel {
 											completion(.failure(error))
 										}
 									}
+								} else {
+									completion(.success(true))
 								}
 							} else {
 								completion(.failure(ErrorManager.RegisterError.userNotSaved))

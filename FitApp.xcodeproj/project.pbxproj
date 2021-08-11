@@ -82,6 +82,7 @@
 		7CD1817E26481E5D0054DB9C /* SettingTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */; };
 		7CFA5FF7262A0F5800A3F401 /* MoveDishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */; };
 		7CFA5FFF262A10E600A3F401 /* MoveDishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */; };
+		7CFCAF4726BD58DA008A24F8 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFCAF4626BD58DA008A24F8 /* HomeViewModel.swift */; };
 		7CFFAD9C261DEF1000C05C66 /* DishesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFFAD9B261DEF1000C05C66 /* DishesTableViewController.swift */; };
 		B30069D325926F090025FA0E /* WeightProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30069D225926F090025FA0E /* WeightProgressViewController.swift */; };
 		B302982025793BBA00CF41F0 /* UserProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B302981F25793BBA00CF41F0 /* UserProgress.swift */; };
@@ -248,6 +249,7 @@
 		7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewModel.swift; sourceTree = "<group>"; };
 		7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoveDishView.xib; sourceTree = "<group>"; };
 		7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDishView.swift; sourceTree = "<group>"; };
+		7CFCAF4626BD58DA008A24F8 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		7CFFAD9B261DEF1000C05C66 /* DishesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishesTableViewController.swift; sourceTree = "<group>"; };
 		ACEF8473DFF1F8DE43E4AFF4 /* Pods-FitApp-FitAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp-FitAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-FitApp-FitAppUITests/Pods-FitApp-FitAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B0AE3B48B417514ACEE1ACAB /* Pods-FitAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitAppTests.release.xcconfig"; path = "Target Support Files/Pods-FitAppTests/Pods-FitAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -863,6 +865,7 @@
 				7C74350225CDBAE900D33A9A /* ChatsViewModel.swift */,
 				7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */,
 				7C33B660266A587D00E16A1C /* CommentsViewModel.swift */,
+				7CFCAF4626BD58DA008A24F8 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1242,6 +1245,7 @@
 				7C54164B269D923800C22859 /* ErrorManager.swift in Sources */,
 				B38397FB25B4A21F00154697 /* Workout.swift in Sources */,
 				7C658ABE25D992D200CA75B2 /* Comments.swift in Sources */,
+				7CFCAF4726BD58DA008A24F8 /* HomeViewModel.swift in Sources */,
 				7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */,
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
 				7C83152525E053B100335601 /* ExerciseCategoryView.swift in Sources */,
