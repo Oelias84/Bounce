@@ -11,62 +11,55 @@ class ConsumptionManager {
 	
 	static let shared = ConsumptionManager()
     
-    private var weight: Double
-    private var fatPercentage: Double
-    private var Kilometer: Double
-    private var numberOfTrainings: Int
-	private var lifeStyle: Double
+    private var weight: Double?
+    private var fatPercentage: Double?
+    private var Kilometer: Double?
+    private var numberOfTrainings: Int?
+	private var lifeStyle: Double?
     
-    private var calories: Double!
-    private var fatPortion: Double!
-    private var proteinPortion: Double!
-    private var carbsPortion: Double!
+    private var dailyCalories: Double?
+    private var dailyFatPortion: Double?
+    private var dailyProteinPortion: Double?
+    private var dailyCarbsPortion: Double?
     
     private var fatProgress = 0.0
     private var proteinProgress = 0.0
     private var carbsProgress = 0.0
-    
-    init() {
-        let userData = UserProfile.defaults
-        
-        self.weight = userData.weight ?? 0.0
-        self.fatPercentage = userData.fatPercentage ?? 0.0
-        self.Kilometer = userData.kilometer ?? 0.0
-		self.lifeStyle = userData.lifeStyle ?? 0.0
-        self.numberOfTrainings = userData.weaklyWorkouts ?? 0
-        configureData()
-    }
 	
-	var getCalories: String {
-		return String(format: "%.0f", calories)
+	//MARK: - Getters
+	func getCalories() -> String {
+		return String(format: "%.0f", dailyCalories ?? 0)
 	}
-    var getDayProtein: Double {
-        return proteinPortion
+	
+    func getDailyProtein() -> Double {
+        return dailyProteinPortion ?? 0
     }
-    var getDayFat: Double {
-        return fatPortion
+    func getDailyFat() -> Double {
+        return dailyFatPortion ?? 0
     }
-    var getDayCarbs: Double {
-        return carbsPortion
+    func getDailyCarbs() -> Double {
+        return dailyCarbsPortion ?? 0
     }
     
-    var getDayProteinProgress: Double {
+    func getDayProteinProgress() -> Double {
         return proteinProgress
     }
-    var getDayFatProgress: Double {
+    func getDayFatProgress() -> Double {
         return fatProgress
     }
-    var getDayCarbsProgress: Double {
+    func getDayCarbsProgress() -> Double {
         return carbsProgress
     }
     
-    func calculateUserData(){
+    func calculateUserData() {
         let userData = UserProfile.defaults
         
-        self.weight = userData.weight ?? 0.0
-        self.fatPercentage = userData.fatPercentage ?? 0.0
-        self.Kilometer = userData.kilometer ?? 0.0
-        self.numberOfTrainings = userData.weaklyWorkouts ?? 0
+        self.weight = userData.weight
+        self.fatPercentage = userData.fatPercentage
+        self.Kilometer = userData.kilometer
+		self.lifeStyle = userData.lifeStyle
+        self.numberOfTrainings = userData.weaklyWorkouts
+		
         configureData()
     }
 }
@@ -74,53 +67,56 @@ class ConsumptionManager {
 extension ConsumptionManager {
     
     //MARK: - lean body weight
-	private func TDEE(weight: Double, fatPercentage: Double, Kilometer: Double, lifeStyle: Double?, numberOfTrainings: Int) -> Double {
+	//= daily calories
+	private func TDEE(weight: Double, fatPercentage: Double, Kilometer: Double?, lifeStyle: Double?, numberOfTrainings: Int) -> Double {
 		
         let LBM = weight * ((100 - fatPercentage) / 100)
         let BMR = (LBM * 22.0) + 500.0
 		var NIT: Double {
-			if Kilometer > 0 {
-				return (Kilometer * weight) * 0.93
+			if let lifeStyle = lifeStyle {
+				return BMR * lifeStyle
 			} else {
-				return BMR * lifeStyle!
+				return (Kilometer! * weight) * 0.93
 			}
 		}
 		let EAT = (150.0 * Double(numberOfTrainings)) / 7.0
-        let result = Kilometer > 0 ? ((BMR * 1.1) + NIT + EAT) - 500 : (NIT + EAT) - 500
+        let result = Kilometer != 0 ? ((BMR * 1.1) + NIT + EAT) - 500 : (NIT + EAT) - 500
 		
 		if result < 1200 {
 			return 1200
 		} else {
 			return result
 		}
-    }//= daily calories
+    }
     
     //MARK: - convert to grams
+	//Calculate Daily protein grams
 	func proteinGrams(weight: Double, fatPercentage: Double) -> Double {
 		let LBM = weight * ((100 - fatPercentage) / 100)
 		
 		return LBM * 2.1
-	}//= Daily protein grams
-    
+	}
+	//Calculate Daily Protein portion dish
 	func proteinPortion(proteinGrams: Double) -> Double {
 		let proteinPortion = proteinGrams / 20.0
 		let truncatingRemainder = proteinPortion.fraction
 		
 		return roundOrHalf(friction: truncatingRemainder, portion: proteinPortion)
-	}//= Daily Protein portion dish
+	}
     
     //MARK: - Fat calculation
+	//Calculate Daily Fat grams
     private func fatGrams(weight: Double) -> Double {
         return weight * 0.5
-    }//= Daily Fat grams
-    
+    }
+	//Calculate Daily Fat portion dish
 	private func portionFat(tdee: Double) -> Double {
 		let fatCalories = tdee * 0.15
 		let portionFat = fatCalories / 100
 		let truncatingRemainder = portionFat.fraction
 		
 		return roundOrHalf(friction: truncatingRemainder, portion: portionFat)
-	}//= Daily Fat portion dish
+	}
     
     //MARK: - Carbs calculation
     private func portionCarbs(fatPortion: Double, proteinPortion: Double, calories: Double) -> Double {
@@ -132,10 +128,12 @@ extension ConsumptionManager {
  }
     
     private func configureData() {
-		self.calories = TDEE(weight: weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings)
-		self.fatPortion = portionFat(tdee: calories)
-		self.proteinPortion = proteinPortion(proteinGrams: proteinGrams(weight: weight, fatPercentage: fatPercentage))
-        self.carbsPortion = portionCarbs(fatPortion: self.fatPortion, proteinPortion: self.proteinPortion, calories: calories)
+		guard let weight = weight, let fatPercentage = fatPercentage, let numberOfTrainings = numberOfTrainings else { return }
+
+		self.dailyCalories = TDEE(weight: weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings)
+		self.dailyFatPortion = portionFat(tdee: dailyCalories!)
+		self.dailyProteinPortion = proteinPortion(proteinGrams: proteinGrams(weight: weight, fatPercentage: fatPercentage))
+        self.dailyCarbsPortion = portionCarbs(fatPortion: self.dailyFatPortion!, proteinPortion: self.dailyProteinPortion!, calories: dailyCalories!)
     }
 	
 	private func roundOrHalf(friction: Double, portion: Double) -> Double {

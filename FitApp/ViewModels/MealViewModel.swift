@@ -10,7 +10,8 @@ import Foundation
 class MealViewModel: NSObject {
     
     static let shared = MealViewModel()
-	
+	private let consumptionManager = ConsumptionManager.shared
+
     var meals: [Meal]? {
         didSet {
             self.bindMealViewModelToController()
@@ -19,14 +20,13 @@ class MealViewModel: NSObject {
 	private var currentMealDate: Date?
 	let mealManager = MealManager.shared
     
-    var bindMealViewModelToController : (() -> ()) = {}
+    var bindMealViewModelToController: (() -> ()) = {}
     
     private override init() {
         super.init()
     }
     
 	func fetchData(date: Date? = Date()) {
-		let consumptionManager = ConsumptionManager.shared
 		consumptionManager.calculateUserData()
 		if self.meals == nil || date?.onlyDate != Date().onlyDate {
             let userData = UserProfile.defaults
@@ -41,35 +41,38 @@ class MealViewModel: NSObject {
             default:
                 preferredMeal = nil
             }
-			fetchMealsForOrCreate(date: date!, prefer: preferredMeal, numberOfMeals: userData.mealsPerDay!, protein: consumptionManager.getDayProtein, carbs: consumptionManager.getDayCarbs, fat: consumptionManager.getDayFat)
+			fetchMealsForOrCreate(date: date!, prefer: preferredMeal, numberOfMeals: userData.mealsPerDay!, protein: consumptionManager.getDailyProtein(), carbs: consumptionManager.getDailyCarbs(), fat: consumptionManager.getDailyFat())
         }
     }
     
     //MARK: - Meals Progress
-    func getProgress() -> MealProgress {
-        var carbs = 0.0
-        var fats = 0.0
-        var protein = 0.0
-
-		guard meals != nil else {
+	func getMealDate() -> Date {
+		return meals!.first!.date
+	}
+	func getProgress() -> MealProgress {
+		var carbs = 0.0
+		var fats = 0.0
+		var protein = 0.0
+		
+		guard let meals = meals else {
 			LocalNotificationManager.shared.setMealNotification()
 			return MealProgress(carbs: 0.0, fats: 0.0, protein: 0.0)
 		}
 		
-        for meal in meals! {
-            for dish in meal.dishes {
-                if dish.isDishDone {
-                    switch dish.type {
-                    case .carbs:
-                        carbs += dish.amount
-                    case .fat:
-                        fats += dish.amount
-                    case .protein:
-                        protein += dish.amount
-                    }
-                }
-            }
-        }
+		for meal in meals {
+			for dish in meal.dishes {
+				if dish.isDishDone {
+					switch dish.type {
+					case .carbs:
+						carbs += dish.amount
+					case .fat:
+						fats += dish.amount
+					case .protein:
+						protein += dish.amount
+					}
+				}
+			}
+		}
 		
 		let minNotificationSetTime = "17:00".timeFromString!.onlyTime
 
@@ -78,10 +81,7 @@ class MealViewModel: NSObject {
 		} else {
 			LocalNotificationManager.shared.removeMealsNotification()
 		}
-        return MealProgress(carbs: carbs, fats: fats, protein: protein)
-    }
-	func getMealDate() -> Date {
-		return meals!.first!.date
+		return MealProgress(carbs: carbs, fats: fats, protein: protein)
 	}
 	func getMealStringDate() -> String {
 		return (currentMealDate ?? Date()).dateStringDisplay + " " + (currentMealDate ?? Date()).displayDayName
@@ -127,22 +127,6 @@ class MealViewModel: NSObject {
 		getProgress()
 		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal)
 	}
-	func move(portion: Double, of dish: Dish, from meal: Meal, to destinationMeal: Meal) {
-		if let dishToSubtract = meal.dishes.first(where: { $0 == dish }) {
-			if dishToSubtract.amount == portion {
-				//Remove original dish if from its meal if portion equals to dish amount
-				meal.dishes.removeAll(where: { $0 == dish })
-			} else {
-				//Subtract portion from the original dish
-				dishToSubtract.amount -= portion
-			}
-		}
-		//Append the dish with the desire portion to the destinationMeal
-		destinationMeal.dishes.append(Dish(name: dish.getDishName, type: dish.type, amount: portion))
-		
-		updateMeals(for: meal.date)
-		fetchMealsBy(date: meal.date) {_ in}
-	}
     func fetchMealsBy(date: Date, completion: @escaping (Bool) -> ()) {
 		GoogleApiManager.shared.getMealFor(date) { result in
             switch result {
@@ -160,6 +144,23 @@ class MealViewModel: NSObject {
             }
         }
     }
+	func move(portion: Double, of dish: Dish, from meal: Meal, to destinationMeal: Meal) {
+		if let dishToSubtract = meal.dishes.first(where: { $0 == dish }) {
+			if dishToSubtract.amount == portion {
+				//Remove original dish if from its meal if portion equals to dish amount
+				meal.dishes.removeAll(where: { $0 == dish })
+			} else {
+				//Subtract portion from the original dish
+				dishToSubtract.amount -= portion
+			}
+		}
+		//Append the dish with the desire portion to the destinationMeal
+		destinationMeal.dishes.append(Dish(name: dish.getDishName, type: dish.type, amount: portion))
+		
+		updateMeals(for: meal.date)
+		fetchMealsBy(date: meal.date) {_ in}
+	}
+	
 	private func fetchMealsForOrCreate(date: Date, prefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) {
 		GoogleApiManager.shared.getMealFor(date) { result in
             switch result {

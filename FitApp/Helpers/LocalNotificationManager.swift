@@ -45,7 +45,10 @@ class LocalNotificationManager {
 		UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [notification.id])
 		getScheduledNotifications()
 	}
-	
+	func removeAllNotifications() {
+		UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+		UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+	}
 	func setMealNotification() {
 		guard let time = "17:00".timeFromString else { return }
 		var dateComponents = DateComponents()

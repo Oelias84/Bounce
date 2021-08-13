@@ -102,4 +102,36 @@ extension QuestionnaireFatPresentViewController {
 			self.collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
 		}
 	}
+	
+	//MARK: - CollectionView CompositionalLayout
+	func layout(_ collectionView: UICollectionView, callBack: @escaping (Int)->()) {
+		
+		let layout = UICollectionViewCompositionalLayout { sectionIndex, environment -> NSCollectionLayoutSection? in
+			
+			let itemSize = NSCollectionLayoutSize(
+				widthDimension: .fractionalWidth(1.0),
+				heightDimension: .fractionalHeight(1.0))
+			
+			let item = NSCollectionLayoutItem(layoutSize: itemSize)
+			
+			let groupSize = NSCollectionLayoutSize(
+				widthDimension: .fractionalWidth(1.0),
+				heightDimension: .fractionalHeight(1.0))
+			let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+			
+			let section = NSCollectionLayoutSection(group: group)
+			section.orthogonalScrollingBehavior = .paging
+			
+			var rowToCompare = 0
+			section.visibleItemsInvalidationHandler = { items, contentOffset, environment in
+				let currentPage = Int(max(0, round(contentOffset.x / environment.container.contentSize.width)))
+				if rowToCompare != currentPage {
+					callBack(currentPage)
+					rowToCompare = currentPage
+				}
+			}
+			return section
+		}
+		collectionView.collectionViewLayout = layout
+	}
 }

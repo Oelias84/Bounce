@@ -16,7 +16,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	@IBOutlet weak var nextButton: UIButton!
 	
     private let numberPicker = UIPickerView()
-	private let weightNumberArray = Array(30...200)
+	private let weightNumberArray = Array(30...150)
     private let frictionNumberArray = Array(0...99)
     private let heightNumberArray = Array(100...250)
 
