@@ -23,6 +23,9 @@ class MealPlanViewController: UIViewController {
 		changeDateView.delegate = self
 		tableView.register(UINib(nibName: K.NibName.addingTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.addingCell)
 		addBarButtonIcon()
+	}
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
 		callToViewModelForUIUpdate()
 	}
 }
@@ -151,7 +154,7 @@ extension MealPlanViewController: ChangeDateViewDelegate {
 }
 extension MealPlanViewController: TableViewEmptyViewDelegate {
 	
-	func buttonTapped() {
+	func createNewMealButtonTapped() {
 		Spinner.shared.show(view)
 		tableView.backgroundView = nil
 		mealViewModel.fetchData(date: date)

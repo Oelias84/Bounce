@@ -250,7 +250,7 @@ class MealViewModel: NSObject {
         }
     }
 	func populateMeals(date: Date, hasPrefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) -> [Meal] {
-        var dayMeals = [Meal(mealType: .breakfast, dishes: []), Meal(mealType: .lunch, dishes: []), Meal(mealType: .supper, dishes: [])]
+		var dayMeals = [Meal(mealType: .breakfast, dishes: [], date: date), Meal(mealType: .lunch, dishes: [], date: date), Meal(mealType: .supper, dishes: [], date: date)]
 		
 		let numberCarbsDish = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .carbs, numberOfDishes: carbs)
 		let numberProteinDish = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .protein, numberOfDishes: protein)
@@ -285,14 +285,21 @@ class MealViewModel: NSObject {
         }
         if numberOfMeals == 4 {
 			if numberCarbsDish < 4 {
-				dayMeals.insert(Meal(mealType: .middle1, dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein), type: .protein, amount: 1)]), at: 1)
+				dayMeals.insert(Meal(mealType: .middle1,
+									 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein),type: .protein, amount: 1)],
+									 date: date), at: 1)
 			} else {
-				dayMeals.insert(Meal(mealType: .middle1, dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs), type: .carbs, amount: 1)]), at: 1)
+				dayMeals.insert(Meal(mealType: .middle1,
+									 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs),type: .carbs, amount: 1)],
+									 date: date), at: 1)
 			}
         } else if numberOfMeals == 5 {
-            dayMeals.insert(Meal(mealType: .middle1, dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs), type: .carbs, amount: 1)]), at: 1)
-            dayMeals.insert(Meal(mealType: .middle2, dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein), type: .protein, amount: 1),
-                                                              Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .fat), type: .fat, amount: 0.5)]), at: 3)
+            dayMeals.insert(Meal(mealType: .middle1,
+								 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs), type: .carbs, amount: 1)],
+								 date: date),at: 1)
+            dayMeals.insert(Meal(mealType: .middle2,
+								 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein),type: .protein, amount: 1), Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .fat), type: .fat, amount: 0.5)],
+								 date: date), at: 3)
         }
 		GoogleApiManager.shared.createDailyMeal(meals: dayMeals, date: date)
         return dayMeals

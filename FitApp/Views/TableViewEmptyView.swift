@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TableViewEmptyViewDelegate {
-	func buttonTapped()
+	func createNewMealButtonTapped()
 }
 
 class TableViewEmptyView: UIView {
@@ -44,7 +44,7 @@ class TableViewEmptyView: UIView {
 			guard let self = self else { return }
 			switch selection {
 			case 0:
-				self.delegate?.buttonTapped()
+				self.delegate?.createNewMealButtonTapped()
 			case 1:
 				self.removeFromSuperview()
 			default:
