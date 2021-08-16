@@ -15,6 +15,7 @@ class TableViewEmptyView: UIView {
 	
 	private var buttonText: String!
 	private var parentHasTabBar: CGFloat?
+	private var presentingVC: UIViewController?
 	
 	@IBOutlet var contentView: UIView!
 	@IBOutlet weak var button: UIButton!
@@ -31,8 +32,9 @@ class TableViewEmptyView: UIView {
 		commonInit()
 		setup()
 	}
-	required init(text: String, hasTabBar: CGFloat?) {
+	required init(text: String, hasTabBar: CGFloat?, presentingVC: UIViewController) {
 		super.init(frame: CGRect.zero)
+		self.presentingVC = presentingVC
 		parentHasTabBar = hasTabBar
 		buttonText = text
 		commonInit()
@@ -40,7 +42,8 @@ class TableViewEmptyView: UIView {
 	}
 	
 	@IBAction func buttonAction(_ sender: Any) {
-		window?.rootViewController?.presentAlert(withMessage: "האם ברצונך לבצע פעולה זו?", options: "אישור", "ביטול", completion: { [weak self] selection in
+		presentingVC?.presentAlert(withMessage: "האם ברצונך לבצע פעולה זו?", options: "אישור", "ביטול", completion: {
+			[weak self] selection in
 			guard let self = self else { return }
 			switch selection {
 			case 0:

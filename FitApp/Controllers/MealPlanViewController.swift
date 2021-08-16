@@ -106,7 +106,7 @@ extension MealPlanViewController {
 	}
 	private func presentEmptyTableViewBackground(_ date: Date) -> UIView {
 		let messageText = "לחצו כאן ליצירת תפריט תזונה לתאריך ה- \(date.dateStringDisplay)"
-		let noMealBackgroundView = TableViewEmptyView(text: messageText, hasTabBar: self.tabBarController?.tabBar.frame.size.height)
+		let noMealBackgroundView = TableViewEmptyView(text: messageText, hasTabBar: self.tabBarController?.tabBar.frame.size.height, presentingVC: self)
 		
 		noMealBackgroundView.delegate = self
 		return noMealBackgroundView
