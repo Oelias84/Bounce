@@ -18,6 +18,8 @@ class HomeViewController: UIViewController {
 	private var fatRingLayer: RingProgressView!
 	private var proteinRingLayer: RingProgressView!
 	
+	private var hasProgressView = false
+	
 	private lazy var boardManager: BLTNItemManager = {
 		let item = BLTNPageItem(title: "שמחים שהצטרפת אלינו :)")
 		item.isDismissable = false
@@ -46,7 +48,11 @@ class HomeViewController: UIViewController {
 	@IBOutlet weak var fatCountLabel: UILabel!
 	@IBOutlet weak var carbsCountLabel: UILabel!
 	@IBOutlet weak var proteinCountLabel: UILabel!
-	@IBOutlet weak var circularProgress: UIView!
+	@IBOutlet weak var circularProgress: UIView! {
+		didSet {
+			print(circularProgress.bounds.width)
+		}
+	}
 	
 	@IBOutlet weak var fatTargateLabel: UILabel!
 	@IBOutlet weak var carbsTargateLabel: UILabel!
@@ -56,31 +62,40 @@ class HomeViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		navigationItem.titleView = titleStackView
-		
-		setupView()
-		setupMotivationText()
+		Spinner.shared.show(self.view)
 
-		checkMealsState()
-		checkWeightState()
-	}
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		
-		if !(UserProfile.defaults.finishOnboarding ?? false) {
-			boardManager.showBulletin(above: self)
-			boardManager.allowsSwipeInteraction = false
-		} else {
+		if (UserProfile.defaults.finishOnboarding ?? false) {
 			viewModel.fetchMeals()
 			viewModel.bindToMealViewModel {
 				[unowned self] in
 				Spinner.shared.stop()
-				setupProgressLabels()
+				self.setupProgressLabels()
+				self.updateWheels()
 			}
 		}
-		self.setupProgressLabels()
+		setupMotivationText()
+		setupView()
 	}
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+
+		if !(UserProfile.defaults.finishOnboarding ?? false) {
+			boardManager.showBulletin(above: self)
+			boardManager.allowsSwipeInteraction = false
+		}
+		navigationItem.titleView = titleStackView
+		
+		setUpProgressTextFields()
+		checkWeightState()
+		checkMealsState()
+	}
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		setUpProgressView()
+		updateWheels()
+	}
+	
 	
 	@IBAction func chatButtonAction(_ sender: Any) {
 		openChat()
@@ -95,6 +110,22 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
 	
+	private func openChat() {
+		let chatStoryboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
+		let chatsVC = chatStoryboard.instantiateViewController(identifier: K.ViewControllerId.ChatsViewController)
+			as ChatsViewController
+		
+		self.navigationController?.pushViewController(chatsVC, animated: true)
+	}
+	private func startQuestionnaire() {
+		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
+		let questionnaireVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation)
+		
+		questionnaireVC.modalPresentationStyle = .fullScreen
+		boardManager.dismissBulletin()
+		self.present(questionnaireVC, animated: true, completion: nil)
+	}
+	
 	private func setupView() {
 		tipContainerView.dropShadow()
 		progressDataContainerView.dropShadow()
@@ -103,43 +134,58 @@ extension HomeViewController {
 			profileButton.setImage( image.circleMasked, for: .normal)
 		}
 	}
+	private func updateWheels() {
+		DispatchQueue.main.async {
+			[unowned self] in
+			perform(#selector(animateProgress), with: nil, afterDelay: 0)
+		}
+	}
+
 	private func setUpProgressView() {
 		
-		circularProgress.subviews.forEach {
-			$0.removeFromSuperview()
-		}
-		let circleContainerHeight = circularProgress.bounds.height
-		let circleContainerWidth = circularProgress.bounds.width
+		if hasProgressView { return }
+		hasProgressView = true
+		let circleContainerWidth = circularProgress.frame.width
 		
 		let ringWitdth: CGFloat = 30
-		let proteinRingMeasure: CGFloat = 20.0
-		let carbsRingMeasure: CGFloat = 100.0
-		let fatinRingMeasure: CGFloat = 180.0
+		let proteinRingMeasure: CGFloat = 0.0
+		let carbsRingMeasure: CGFloat = proteinRingMeasure + 80.0
+		let fatinRingMeasure: CGFloat = carbsRingMeasure + 80.0
 		
-		proteinRingLayer = RingProgressView(frame: CGRect(x: proteinRingMeasure/2, y: proteinRingMeasure/2,
-														  width: circleContainerWidth - proteinRingMeasure, height: circleContainerHeight - proteinRingMeasure))
+		proteinRingLayer = RingProgressView(frame: CGRect(x: 0, y: 0,
+														  width: circleContainerWidth, height: circleContainerWidth))
 		proteinRingLayer.startColor = viewModel.getProteinColor
 		proteinRingLayer.endColor = #colorLiteral(red: 0.9921568627, green: 0.9882352941, blue: 0.2784313725, alpha: 1)
 		proteinRingLayer.ringWidth = ringWitdth
 		proteinRingLayer.progress = 0.0
-		
+		proteinRingLayer.alpha = 0
+
 		carbsRingLayer = RingProgressView(frame: CGRect(x: carbsRingMeasure/2, y: carbsRingMeasure/2,
-														width: circleContainerWidth - carbsRingMeasure, height: circleContainerHeight - carbsRingMeasure))
+														width: circleContainerWidth - carbsRingMeasure, height: circleContainerWidth - carbsRingMeasure))
 		carbsRingLayer.startColor = viewModel.getCarbsColor
 		carbsRingLayer.endColor = #colorLiteral(red: 0.568627451, green: 0.9176470588, blue: 0.8941176471, alpha: 1)
 		carbsRingLayer.ringWidth = ringWitdth
 		carbsRingLayer.progress = 0.0
-		
+		carbsRingLayer.alpha = 0
+
 		fatRingLayer = RingProgressView(frame: CGRect(x: fatinRingMeasure/2, y: fatinRingMeasure/2,
-													  width: circleContainerWidth - fatinRingMeasure, height: circleContainerHeight - fatinRingMeasure))
+													  width: circleContainerWidth - fatinRingMeasure, height: circleContainerWidth - fatinRingMeasure))
 		fatRingLayer.startColor = viewModel.getFatColor
 		fatRingLayer.endColor = #colorLiteral(red: 0.9607843137, green: 0.6862745098, blue: 0.09803921569, alpha: 1)
 		fatRingLayer.ringWidth = ringWitdth
 		fatRingLayer.progress = 0.0
+		fatRingLayer.alpha = 0
 		
-		circularProgress.addSubview(proteinRingLayer)
-		circularProgress.addSubview(carbsRingLayer)
-		circularProgress.addSubview(fatRingLayer)
+		self.circularProgress.addSubview(self.proteinRingLayer)
+		self.circularProgress.addSubview(self.carbsRingLayer)
+		self.circularProgress.addSubview(self.fatRingLayer)
+		
+		UIView.animate(withDuration: 0.6) {
+			self.proteinRingLayer.alpha = 1
+			self.carbsRingLayer.alpha = 1
+			self.fatRingLayer.alpha = 1
+		}
+
 		
 		DispatchQueue.main.async {
 			[unowned self] in
@@ -149,21 +195,24 @@ extension HomeViewController {
 
 	}
 	private func setupProgressLabels() {
-		
-		setUpProgressView()
-		setUpProgressTextFields()
-		
-		caloriesLabel.text = viewModel.getUserCalories
-		fatCountLabel.text = viewModel.getFatCurrentValue
-		carbsCountLabel.text = viewModel.getCarbsCurrentValue
-		proteinCountLabel.text = viewModel.getProteinCurrentValue
-
-		if let view = titleStackView.subviews[0] as? UILabel {
-			view.text = viewModel.getMealDate
+		DispatchQueue.main.async {
+			[unowned self] in
+			
+			setUpProgressTextFields()
+			
+			caloriesLabel.text = viewModel.getUserCalories
+			fatCountLabel.text = viewModel.getFatCurrentValue
+			carbsCountLabel.text = viewModel.getCarbsCurrentValue
+			proteinCountLabel.text = viewModel.getProteinCurrentValue
+			
+			if let view = titleStackView.subviews[0] as? UILabel {
+				view.text = viewModel.getMealDate
+			}
 		}
 	}
 	private func setupMotivationText() {
-		
+		self.userMotivationTextLabel.text = UserProfile.defaults.motivationText ?? "..."
+
 		viewModel.getMotivationText() {
 			[weak self] motivation in
 			guard let self = self else { return }
@@ -192,33 +241,7 @@ extension HomeViewController {
 		carbsTargateLabel.text = "מתוך \(viewModel.getCarbsTargateValue)"
 		proteinTargateLabel.text = "מתוך \(viewModel.getProteinTargateValue)"
 	}
-	private func checkWeightState() {
-		viewModel.checkAddWeight {
-			self.presentAlert(withTitle: "זמן להישקל", withMessage: "תזכורת קטנה לא לשכוח להישקל הבוקר לפני שאת מתחילה את היום :)", options: "עבור למסך שקילה", "ביטול") {
-				selection in
-				switch selection {
-				case 0:
-					if let navC = self.tabBarController?.viewControllers?[3] as? UINavigationController {
-						let weightVC = navC.viewControllers.last as! WeightProgressViewController
-						
-						self.tabBarController?.selectedIndex = 3
-						DispatchQueue.main.async { [weak self] in
-							guard let self = self else { return }
-							weightVC.addWeightButtonAction(self)
-						}
-					}
-				case 1:
-					//turns weight tab bar icon to red for alerting the user
-					if let weightTab = self.tabBarController?.tabBar.items?[3] {
-						weightTab.image = UIImage(named:"ScaleIcon")?
-							.withTintColor(.red, renderingMode: .alwaysOriginal)
-					}
-				default:
-					break
-				}
-			}
-		}
-	}
+	
 	private func checkMealsState() {
 		viewModel.checkDidFinishDailyMeals {
 			[unowned self] in
@@ -234,21 +257,35 @@ extension HomeViewController {
 			}
 		}
 	}
-	private func openChat() {
-		let chatStoryboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
-		let chatsVC = chatStoryboard.instantiateViewController(identifier: K.ViewControllerId.ChatsViewController)
-			as ChatsViewController
-		
-		self.navigationController?.pushViewController(chatsVC, animated: true)
+	private func checkWeightState() {
+		viewModel.checkAddWeight {
+			self.presentAlert(withTitle: "זמן להישקל", withMessage: "תזכורת קטנה לא לשכוח להישקל הבוקר לפני שאת מתחילה את היום :)", options: "עבור למסך שקילה", "ביטול") {
+				[weak self] selection in
+				guard let self = self else { return }
+				
+				switch selection {
+				case 0:
+					if let navC = self.tabBarController?.viewControllers?[3] as? UINavigationController {
+						let weightVC = navC.viewControllers.last as! WeightProgressViewController
+						
+						self.tabBarController?.selectedIndex = 3
+						DispatchQueue.main.async {
+							weightVC.addWeightButtonAction(self)
+						}
+					}
+				case 1:
+					//turns weight tab bar icon to red for alerting the user
+					if let weightTab = self.tabBarController?.tabBar.items?[3] {
+						weightTab.image = UIImage(named:"ScaleIcon")?
+							.withTintColor(.red, renderingMode: .alwaysOriginal)
+					}
+				default:
+					break
+				}
+			}
+		}
 	}
-	private func startQuestionnaire() {
-		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
-		let questionnaireVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation)
-		
-		questionnaireVC.modalPresentationStyle = .fullScreen
-		boardManager.dismissBulletin()
-		self.present(questionnaireVC, animated: true, completion: nil)
-	}
+	
 	@objc func animateProgress() {
 		DispatchQueue.main.async {
 			[unowned self] in

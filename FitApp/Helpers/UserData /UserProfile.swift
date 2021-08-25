@@ -93,25 +93,6 @@ struct UserProfile {
 
 extension UserProfile {
     
-	func updateUserProfileData(_ data: ServerUserData, id: String) {
-        var userProfile = self
-        
-        userProfile.id = id
-		userProfile.name = data.name
-		userProfile.email = data.email
-        userProfile.finishOnboarding = data.finishOnboarding
-		userProfile.birthDate = data.birthDate?.dateFromString
-        userProfile.weight = data.weight
-        userProfile.height = data.height
-        userProfile.fatPercentage = data.fatPercentage
-        userProfile.kilometer = data.kilometer
-        userProfile.mealsPerDay = data.mealsPerDay
-		userProfile.lifeStyle = data.lifeStyle
-        userProfile.mostHungry = data.mostHungry
-        userProfile.fitnessLevel = data.fitnessLevel
-        userProfile.weaklyWorkouts = data.weaklyWorkouts
-    }
-	
 	static func updateServer() {
 		let googleManager = GoogleApiManager()
 		
@@ -133,7 +114,6 @@ extension UserProfile {
 		)
 		googleManager.updateUserData(userData: data)
 	}
-	
 	static func getLifeStyleText() -> String {
 		
 		switch defaults.lifeStyle {
@@ -148,6 +128,42 @@ extension UserProfile {
 		default:
 			return ""
 		}
+	}
+	func updateUserProfileData(_ data: ServerUserData, id: String) {
+		var userProfile = self
+		
+		userProfile.id = id
+		userProfile.name = data.name
+		userProfile.email = data.email
+		userProfile.finishOnboarding = data.finishOnboarding
+		userProfile.birthDate = data.birthDate?.dateFromString
+		userProfile.weight = data.weight
+		userProfile.height = data.height
+		userProfile.fatPercentage = data.fatPercentage
+		userProfile.kilometer = data.kilometer
+		userProfile.mealsPerDay = data.mealsPerDay
+		userProfile.lifeStyle = data.lifeStyle
+		userProfile.mostHungry = data.mostHungry
+		userProfile.fitnessLevel = data.fitnessLevel
+		userProfile.weaklyWorkouts = data.weaklyWorkouts
+	}
+	func resetUserProfileData() {
+		var userProfile = UserProfile.defaults
+		
+		userProfile.id = nil
+		userProfile.name = nil
+		userProfile.email = nil
+		userProfile.finishOnboarding = nil
+		userProfile.birthDate = nil
+		userProfile.weight = nil
+		userProfile.height = nil
+		userProfile.fatPercentage = nil
+		userProfile.kilometer = nil
+		userProfile.mealsPerDay = nil
+		userProfile.lifeStyle = nil
+		userProfile.mostHungry = nil
+		userProfile.fitnessLevel = nil
+		userProfile.weaklyWorkouts = nil
 	}
 }
 

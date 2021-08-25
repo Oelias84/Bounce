@@ -31,7 +31,7 @@ class HomeViewModel {
 		return "\(getUserMealProgress.carbsProgress)"
 	}
 	var getProteinCurrentValue: String {
-		return "\(getUserMealProgress.carbsProgress)"
+		return "\(getUserMealProgress.proteinProgress)"
 	}
 	var getFatTargateValue: String {
 		return "\(getUserMealProgress.fatTarget)"

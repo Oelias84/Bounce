@@ -68,6 +68,9 @@ extension UIViewController {
 				}
 				try Auth.auth().signOut()
 				UserDefaults.resetDefaults()
+				UserProfile.defaults.resetUserProfileData()
+				ConsumptionManager.shared.resetConsumptionManager()
+				
 				let storyboard = UIStoryboard(name: K.StoryboardName.loginRegister, bundle: nil)
 				let startNav = storyboard.instantiateViewController(withIdentifier: K.ViewControllerId.startNavigationViewController)
 				

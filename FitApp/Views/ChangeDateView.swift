@@ -75,17 +75,12 @@ class ChangeDateView: UIView {
 		date = Date()
 		dateTextField.text = date.dateStringDisplay + " " + date.displayDayName
 	}
-	private func forwardDateButtonEnable() {
-		forwardDateButton.isEnabled = date.onlyDate.isEarlier(than: Date().onlyDate)
-
-	}
 	private func addDatePickerWithToolBar() {
 		let toolBar = UIToolbar()
 
 		if #available(iOS 13.4, *) {
 			picker.preferredDatePickerStyle = .wheels
 		}
-		picker.maximumDate = Date()
 		picker.datePickerMode = .date
 		picker.backgroundColor = .white
 		
@@ -109,7 +104,6 @@ class ChangeDateView: UIView {
 		date = picker.date
 		delegate?.dateDidChange(date)
 		dateTextField.text = picker.date.dateStringDisplay + " " + picker.date.displayDayName
-		forwardDateButtonEnable()
 		dismissView()
 	}
 	@objc private func toolBarCancelTapped(_ sender: UIBarButtonItem) {

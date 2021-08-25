@@ -48,6 +48,13 @@ extension UIView {
 		return nil
 	}
 	
+	func positionIn(view: UIView) -> CGRect {
+		if let superview = superview {
+			return superview.convert(frame, to: view)
+		}
+		return frame
+	}
+	
 	func fixInView(_ container: UIView!) -> Void {
 		self.translatesAutoresizingMaskIntoConstraints = false;
 		self.frame = container.frame;

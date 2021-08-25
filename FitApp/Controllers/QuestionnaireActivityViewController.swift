@@ -13,7 +13,8 @@ class QuestionnaireActivityViewController: UIViewController {
 	
 	@IBOutlet weak var kilometersSlider: UISlider! {
 		didSet {
-			kilometersSlider.value = 0.0
+			kilometersSlider.value = 1.0
+			kilometersSlider.minimumValue = 1.0
 			kilometersSlider.maximumValue = 25.00
 		}
 	}
@@ -35,9 +36,6 @@ class QuestionnaireActivityViewController: UIViewController {
 		}
 	}
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
@@ -52,22 +50,14 @@ class QuestionnaireActivityViewController: UIViewController {
 				UserProfile.defaults.lifeStyle = nil
 				UserProfile.defaults.steps = nil
 			}
-			if isFromSettings {
-				updateServer()
-			} else {
-				performSegue(withIdentifier: K.SegueId.moveToNutrition, sender: self)
-			}
+			shouldMoveToNutrition()
 		} else if stepsCheckBox.isSelected {
 			if let steps = stepsLabel.text {
 				UserProfile.defaults.steps = Int(steps)
 				UserProfile.defaults.lifeStyle = nil
 				UserProfile.defaults.kilometer = nil
 			}
-			if isFromSettings {
-				updateServer()
-			} else {
-				performSegue(withIdentifier: K.SegueId.moveToNutrition, sender: self)
-			}
+			shouldMoveToNutrition()
 		} else {
 			performSegue(withIdentifier: K.SegueId.moveToSecondActivity, sender: self)
 		}
@@ -119,13 +109,21 @@ extension QuestionnaireActivityViewController {
 			stepsLabel.text = String(steps)
 			stepsCheckBox.isSelected = true
 			kilometersSlider.isEnabled = false
+		} else {
+			kilometersLabel.text = "1.0"
 		}
 	}
 	private func updateServer() {
 		UserProfile.updateServer()
 		navigationController?.popViewController(animated: true)
 	}
-	
+	private func shouldMoveToNutrition() {
+		if isFromSettings {
+			updateServer()
+		} else {
+			performSegue(withIdentifier: K.SegueId.moveToNutrition, sender: self)
+		}
+	}
 	private func stepsAndKilometersOff() {
 		kilometersCheckBox.isSelected = false
 		kilometersSlider.isEnabled = false
