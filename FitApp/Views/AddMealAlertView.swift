@@ -50,6 +50,24 @@ class AddMealAlertView: UIView {
 		removeDish()
 	}
 	@IBAction func confirmButtonAction(_ sender: Any) {
+		let dishWithoutName = dishes.first(where: {$0.getDishName == ""})
+		let dishWithoutAmount = dishes.first(where: {$0.amount == 0})
+		
+		if dishWithoutName != nil {
+			let alert = UIAlertController(title: "אופס", message: "נראה ששחכת לבחור במנה", preferredStyle: .alert)
+			alert.addAction(UIAlertAction(title: "הבנתי", style: .cancel))
+			self.parentViewController?.present(alert, animated: true)
+			return
+		}
+		if let dish = dishWithoutAmount {
+			let alert = UIAlertController(title: "אופס",
+										  message: "נראה כי במנת ה-\(dish.getDishName) חסר כמות המנה",
+										  preferredStyle: .alert)
+			alert.addAction(UIAlertAction(title: "הבנתי", style: .cancel))
+			self.parentViewController?.present(alert, animated: true)
+			return
+		}
+		
 		let meal = Meal(mealType: .other, dishes: dishes, date: mealDate)
 		delegate?.didFinish(with: meal)
 		removeFromSuperview()
