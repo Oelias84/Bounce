@@ -138,7 +138,7 @@ extension HomeViewController {
 	private func updateWheels() {
 		DispatchQueue.main.async {
 			[unowned self] in
-			perform(#selector(animateProgress), with: nil, afterDelay: 0)
+			perform(#selector(animateProgress), with: nil, afterDelay: 1)
 		}
 	}
 
