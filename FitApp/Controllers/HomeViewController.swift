@@ -67,6 +67,7 @@ class HomeViewController: UIViewController {
 				[unowned self] in
 				Spinner.shared.stop()
 				self.setupProgressLabels()
+				self.setUpProgressView()
 			}
 		}
 		setupMotivationText()
@@ -74,18 +75,17 @@ class HomeViewController: UIViewController {
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		
+		navigationItem.titleView = titleStackView
 
 		if !(UserProfile.defaults.finishOnboarding ?? false) {
-			
 			boardManager.showBulletin(above: self)
 			boardManager.allowsSwipeInteraction = false
 		} else if didFinishOnboarding {
-			
 			didFinishOnboarding = false
 			self.setupProgressLabels()
 		}
-		navigationItem.titleView = titleStackView
-
+		
 		setUpProgressTextFields()
 		checkWeightState()
 		checkMealsState()
@@ -138,7 +138,7 @@ extension HomeViewController {
 	private func updateWheels() {
 		DispatchQueue.main.async {
 			[unowned self] in
-			perform(#selector(animateProgress), with: nil, afterDelay: 1)
+			perform(#selector(animateProgress), with: nil, afterDelay: 0.5)
 		}
 	}
 
