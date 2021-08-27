@@ -24,6 +24,12 @@ class HomeViewModel {
 	var getUserCalories: String {
 		return userConsumption.getCalories()
 	}
+	var getUserExceptionalCalories: NSAttributedString? {
+		if let exCalories = mealViewModel.getExceptionalCalories() {
+			return "(\(exCalories))".colorText
+		}
+		return nil
+	}
 	var getFatCurrentValue: String {
 		return "\(getUserMealProgress.fatProgress)"
 	}

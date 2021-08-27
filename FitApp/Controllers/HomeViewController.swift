@@ -46,6 +46,7 @@ class HomeViewController: UIViewController {
 	@IBOutlet weak var userMotivationTextLabel: UILabel!
 	
 	@IBOutlet weak var caloriesLabel: UILabel!
+	@IBOutlet weak var exceptionalCaloriesLabel: UILabel!
 	@IBOutlet weak var fatCountLabel: UILabel!
 	@IBOutlet weak var carbsCountLabel: UILabel!
 	@IBOutlet weak var proteinCountLabel: UILabel!
@@ -81,12 +82,9 @@ class HomeViewController: UIViewController {
 		if !(UserProfile.defaults.finishOnboarding ?? false) {
 			boardManager.showBulletin(above: self)
 			boardManager.allowsSwipeInteraction = false
-		} else if didFinishOnboarding {
-			didFinishOnboarding = false
-			self.setupProgressLabels()
 		}
-		
 		setUpProgressTextFields()
+		setupProgressLabels()
 		checkWeightState()
 		checkMealsState()
 	}
@@ -198,6 +196,8 @@ extension HomeViewController {
 			setUpProgressTextFields()
 			
 			caloriesLabel.text = viewModel.getUserCalories
+			exceptionalCaloriesLabel.attributedText = viewModel.getUserExceptionalCalories
+			
 			fatCountLabel.text = viewModel.getFatCurrentValue
 			carbsCountLabel.text = viewModel.getCarbsCurrentValue
 			proteinCountLabel.text = viewModel.getProteinCurrentValue

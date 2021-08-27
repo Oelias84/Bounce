@@ -68,7 +68,12 @@ extension String {
 			return (splitUserName[0], "")
 		}
 	}
-	
+	var colorText: NSAttributedString {
+		let myAttribute = [ NSAttributedString.Key.foregroundColor: UIColor.red ]
+		let myAttrString = NSAttributedString(string: self, attributes: myAttribute)
+
+		return myAttrString
+	}
 	//MARK: - Email format
 	var safeEmail: String {
 		var safeEmail = replacingOccurrences(of: ".", with: "-")
