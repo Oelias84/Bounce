@@ -165,6 +165,7 @@ struct K {
 	
 	struct Units {
 		
+		static let Kilograms = "ק״ג"
 		static let kilometers = "ק״מ"
 		static let centimeter = "ס״מ"
 		static let steps = "צעדים"

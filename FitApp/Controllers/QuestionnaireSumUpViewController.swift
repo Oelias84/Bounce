@@ -55,7 +55,7 @@ extension QuestionnaireSumUpViewController {
 		   let height = userData.height, let mealsPerDay = userData.mealsPerDay, let weaklyWorkouts = userData.weaklyWorkouts {
 			
 			ageLabel.text = birthDate.age
-			weightLabel.text = "\(weight) " + K.Units.kilometers
+			weightLabel.text = "\(weight) " + K.Units.Kilograms
 			heightLabel.text = "\(height) " + K.Units.centimeter
 			numberOfMealsLabel.text = "\(mealsPerDay)"
 			numberOfWorkoutsLabel.text = "\(weaklyWorkouts)"
