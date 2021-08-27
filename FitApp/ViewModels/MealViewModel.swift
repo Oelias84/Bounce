@@ -131,6 +131,14 @@ class MealViewModel: NSObject {
 		getProgress()
 		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal)
 	}
+	func removeExceptionalMeal(for date: Date) {
+		guard var meals = self.meals else { return }
+		meals.removeAll(where: { $0.name == "ארוחת חריגה" })
+		let dailyMeal = DailyMeal(meals: meals)
+		getProgress()
+		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal)
+		fetchMealsBy(date: date) {_ in}
+	}
     func fetchMealsBy(date: Date, completion: @escaping (Bool) -> ()) {
 		GoogleApiManager.shared.getMealFor(date) { result in
             switch result {

@@ -61,17 +61,33 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3w-mq-7gL">
-                                        <rect key="frame" x="330" y="2" width="25" height="25"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="1vk-60-U5u"/>
-                                            <constraint firstAttribute="width" secondItem="Y3w-mq-7gL" secondAttribute="height" multiplier="1:1" id="E6f-5N-NfS"/>
-                                        </constraints>
-                                        <state key="normal" image="arrow.2.squarepath" catalog="system"/>
-                                        <connections>
-                                            <action selector="moveDishButtonAction:" destination="Qj3-aL-DOE" eventType="touchUpInside" id="omC-Ki-oiU"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="4kT-x2-zNf">
+                                        <rect key="frame" x="299" y="2" width="56" height="25"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3w-mq-7gL">
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="1vk-60-U5u"/>
+                                                    <constraint firstAttribute="width" secondItem="Y3w-mq-7gL" secondAttribute="height" multiplier="1:1" id="E6f-5N-NfS"/>
+                                                </constraints>
+                                                <state key="normal" image="arrow.2.squarepath" catalog="system"/>
+                                                <connections>
+                                                    <action selector="moveDishButtonAction:" destination="Qj3-aL-DOE" eventType="touchUpInside" id="omC-Ki-oiU"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ain-D9-Sjf">
+                                                <rect key="frame" x="31" y="0.0" width="25" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Ain-D9-Sjf" secondAttribute="height" multiplier="1:1" id="QHY-TU-pUz"/>
+                                                </constraints>
+                                                <color key="tintColor" red="0.99819165470000004" green="0.2335231602" blue="0.18818339710000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal" image="trash" catalog="system"/>
+                                                <connections>
+                                                    <action selector="mealTrashButtonAction:" destination="Qj3-aL-DOE" eventType="touchUpInside" id="15m-su-3sK"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="8DR-DP-qT8" firstAttribute="leading" secondItem="QNl-Et-B8h" secondAttribute="trailing" constant="4" id="23L-JS-jf9"/>
@@ -144,6 +160,7 @@
                 <outlet property="mealCaloriesSumLabel" destination="h6R-HU-Wb7" id="L6L-F9-ilW"/>
                 <outlet property="mealIsDoneCheckMark" destination="QNl-Et-B8h" id="d03-5A-Vll"/>
                 <outlet property="mealNameLabel" destination="dTv-9n-yir" id="8fr-qx-Mb5"/>
+                <outlet property="mealTrashButton" destination="Ain-D9-Sjf" id="fYu-H5-0dg"/>
                 <outlet property="moveDishButton" destination="Y3w-mq-7gL" id="2hd-cJ-QUb"/>
             </connections>
             <point key="canvasLocation" x="1841.304347826087" y="-292.63392857142856"/>
@@ -153,6 +170,7 @@
         <image name="arrow.2.squarepath" catalog="system" width="128" height="89"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="circle" catalog="system" width="128" height="121"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

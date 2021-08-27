@@ -29,6 +29,7 @@ class MealPlanTableViewCell: UITableViewCell {
 	@IBOutlet weak var dishStackView: UIStackView!
 	@IBOutlet weak var dishesStackViewHeight: NSLayoutConstraint!
 	@IBOutlet weak var moveDishButton: UIButton!
+	@IBOutlet weak var mealTrashButton: UIButton!
 	@IBOutlet weak var mealCaloriesSumLabel: UILabel!
 	
 	override func awakeFromNib() {
@@ -43,6 +44,9 @@ class MealPlanTableViewCell: UITableViewCell {
 	
 	@IBAction func moveDishButtonAction(_ sender: Any) {
 		presentMoveDishAlert()
+	}
+	@IBAction func mealTrashButtonAction(_ sender: Any) {
+		presentTrashingMealAlert()
 	}
 	@IBAction func completeMealCheckMarkAction(_ sender: UIButton) {
 		if meal.isMealDone {
@@ -69,7 +73,14 @@ extension MealPlanTableViewCell {
 		cellBackgroundView.layer.shadowColor = UIColor.systemBlue.cgColor
 		cellBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 5)
 		cellBackgroundView.layer.shadowRadius = 14
-		
+	}
+	private func presentTrashingMealAlert() {
+		let alert = UIAlertController(title: "הסרת ארוחת חריגה", message: "האם ברצונך להסיר ארוחה זאת?", preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "אישור", style: .default, handler: { _ in
+			self.mealViewModel.removeExceptionalMeal(for: self.meal.date)
+		}))
+		alert.addAction(UIAlertAction(title: "ביטול", style: .cancel))
+		self.parentViewController?.present(alert, animated: true)
 	}
 	private func presentMoveDishAlert() {
 		moveDishAlert = MoveDishView()
@@ -105,6 +116,7 @@ extension MealPlanTableViewCell {
 			moveDishButton.isHidden = false
 		}
 		mealCaloriesSumLabel.text = "כ- \(mealViewModel.getMealCaloriesSum(dishes: meal.dishes)) קל׳"
+		mealTrashButton.isHidden = meal.name != "ארוחת חריגה"
 	}
 }
 
