@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
 	private var proteinRingLayer: RingProgressView!
 	
 	private var hasProgressView = false
+	private var didFinishOnboarding = false
 	
 	private lazy var boardManager: BLTNItemManager = {
 		let item = BLTNPageItem(title: "שמחים שהצטרפת אלינו :)")
@@ -48,11 +49,7 @@ class HomeViewController: UIViewController {
 	@IBOutlet weak var fatCountLabel: UILabel!
 	@IBOutlet weak var carbsCountLabel: UILabel!
 	@IBOutlet weak var proteinCountLabel: UILabel!
-	@IBOutlet weak var circularProgress: UIView! {
-		didSet {
-			print(circularProgress.bounds.width)
-		}
-	}
+	@IBOutlet weak var circularProgress: UIView!
 	
 	@IBOutlet weak var fatTargateLabel: UILabel!
 	@IBOutlet weak var carbsTargateLabel: UILabel!
@@ -70,7 +67,6 @@ class HomeViewController: UIViewController {
 				[unowned self] in
 				Spinner.shared.stop()
 				self.setupProgressLabels()
-				self.updateWheels()
 			}
 		}
 		setupMotivationText()
@@ -80,11 +76,16 @@ class HomeViewController: UIViewController {
 		super.viewWillAppear(animated)
 
 		if !(UserProfile.defaults.finishOnboarding ?? false) {
+			
 			boardManager.showBulletin(above: self)
 			boardManager.allowsSwipeInteraction = false
+		} else if didFinishOnboarding {
+			
+			didFinishOnboarding = false
+			self.setupProgressLabels()
 		}
 		navigationItem.titleView = titleStackView
-		
+
 		setUpProgressTextFields()
 		checkWeightState()
 		checkMealsState()
@@ -93,7 +94,6 @@ class HomeViewController: UIViewController {
 		super.viewDidAppear(animated)
 		
 		setUpProgressView()
-		updateWheels()
 	}
 	
 	
@@ -123,6 +123,7 @@ extension HomeViewController {
 		
 		questionnaireVC.modalPresentationStyle = .fullScreen
 		boardManager.dismissBulletin()
+		didFinishOnboarding = true
 		self.present(questionnaireVC, animated: true, completion: nil)
 	}
 	
@@ -143,7 +144,10 @@ extension HomeViewController {
 
 	private func setUpProgressView() {
 		
-		if hasProgressView { return }
+		if hasProgressView {
+			updateWheels()
+			return
+		}
 		hasProgressView = true
 		let circleContainerWidth = circularProgress.frame.width
 		
@@ -180,19 +184,12 @@ extension HomeViewController {
 		self.circularProgress.addSubview(self.carbsRingLayer)
 		self.circularProgress.addSubview(self.fatRingLayer)
 		
-		UIView.animate(withDuration: 0.6) {
+		UIView.animate(withDuration: 0.2) {
 			self.proteinRingLayer.alpha = 1
 			self.carbsRingLayer.alpha = 1
 			self.fatRingLayer.alpha = 1
+			self.updateWheels()
 		}
-
-		
-		DispatchQueue.main.async {
-			[unowned self] in
-			
-			perform(#selector(animateProgress), with: nil, afterDelay: 0.1)
-		}
-
 	}
 	private func setupProgressLabels() {
 		DispatchQueue.main.async {

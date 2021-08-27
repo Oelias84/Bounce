@@ -71,6 +71,7 @@ extension UIViewController {
 				UserProfile.defaults.resetUserProfileData()
 				ConsumptionManager.shared.resetConsumptionManager()
 				
+				UserProfile.defaults.hasRunBefore = true
 				let storyboard = UIStoryboard(name: K.StoryboardName.loginRegister, bundle: nil)
 				let startNav = storyboard.instantiateViewController(withIdentifier: K.ViewControllerId.startNavigationViewController)
 				

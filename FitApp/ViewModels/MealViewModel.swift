@@ -50,14 +50,18 @@ class MealViewModel: NSObject {
 		return meals!.first!.date
 	}
 	func getProgress() -> MealProgress {
-		var carbs = 0.0
-		var fats = 0.0
-		var protein = 0.0
+		var carbs: Double
+		var fats: Double
+		var protein: Double
 		
 		guard let meals = meals else {
 			LocalNotificationManager.shared.setMealNotification()
 			return MealProgress(carbs: 0.0, fats: 0.0, protein: 0.0)
 		}
+		
+		carbs = 0
+		fats = 0
+		protein = 0
 		
 		for meal in meals {
 			for dish in meal.dishes {
