@@ -21,7 +21,7 @@ class QuestionnaireSecondActivityViewController: UIViewController {
 
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		
+		UserProfile.defaults.lifeStyle = nil
 		setUpTextfields()
 	}
 	
@@ -35,6 +35,10 @@ class QuestionnaireSecondActivityViewController: UIViewController {
 				updateServer()
 			} else {
 				performSegue(withIdentifier: K.SegueId.moveToNutrition, sender: self)
+			}
+		} else {
+			presentOkAlert(withTitle: "אופס",withMessage: "נראה כי לא נעשתה בחירה, יש לבחור ברמת הפעילות המתאימה לך", buttonText: "הבנתי") {
+				return
 			}
 		}
 	}

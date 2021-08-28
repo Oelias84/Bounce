@@ -553,7 +553,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XOJ-5S-VPS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3530" y="-70"/>
+            <point key="canvasLocation" x="3412" y="-70"/>
         </scene>
         <!--Questionnaire Activity Level-->
         <scene sceneID="XAe-vc-W2W">
@@ -747,7 +747,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pog-fA-5eY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2745" y="-70"/>
+            <point key="canvasLocation" x="2628" y="-70"/>
         </scene>
         <!--Questionnaire Fitness Level-->
         <scene sceneID="nYF-El-OUd">
@@ -1085,7 +1085,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p3Q-UZ-soW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4272" y="-70"/>
+            <point key="canvasLocation" x="4156" y="-70"/>
         </scene>
         <!--Questionnaire Summary-->
         <scene sceneID="cws-RR-hkw">
@@ -1359,7 +1359,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pZ5-Yr-Rju" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5017" y="-70"/>
+            <point key="canvasLocation" x="4900" y="-70"/>
         </scene>
         <!--Questionnaire Personal Details-->
         <scene sceneID="Tpq-gB-7sP">
@@ -1915,7 +1915,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qe3-Bc-T4L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2745" y="615.84507042253517"/>
+            <point key="canvasLocation" x="3412" y="-771"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
