@@ -23,11 +23,13 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
     @IBOutlet weak var weeklyWorkoutFirst: UIStackView!
     @IBOutlet weak var weeklyWorkoutSecond: UIStackView!
     @IBOutlet weak var weeklyWorkoutThird: UIStackView!
-    
+	@IBOutlet weak var weeklyWorkoutStack: UIStackView!
+	
 	@IBOutlet weak var nextButton: UIButton!
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		
 		
 		setupCheckMarks()
 	}
@@ -47,6 +49,7 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 	@IBAction func levelCheckBoxes(sender: UIButton) {
 		sender.isSelected = !sender.isSelected
 		fitnessLevel = sender.tag
+		weeklyWorkoutStack.isHidden = false
 		
 		switch sender.tag {
 		case 1:
@@ -82,6 +85,9 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 		sender.isSelected = !sender.isSelected
         if fitnessLevel == 0 {
             presentOkAlert(withMessage: "יש לבחור קודם את רמת הכושר") {}
+			weeklyWorkoutCheckFirst.isSelected = false
+			weeklyWorkoutCheckSecond.isSelected = false
+			weeklyWorkoutCheckThird.isSelected = false
             return
         }
         
@@ -127,6 +133,7 @@ extension QuestionnaireFitnessLevelViewController {
         
         if let fitnessLevel = userData.fitnessLevel {
 			self.fitnessLevel = fitnessLevel
+			weeklyWorkoutStack.isHidden = false
 			
             switch fitnessLevel {
             case 1:

@@ -47,16 +47,21 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
     @IBAction func nextButtonAction(_ sender: Any) {
 		
         if let birthDate = birthDate, let height = height, let weight = weight {
+			if birthDate == nil {
+				presentAlert(withTitle: "אופס", withMessage: "יש ליבחור תאריך לידה", options: "אישור") { _ in
+					self.birthdayDatePicker.becomeFirstResponder()
+				}
+			}
 			if birthDate.isLater(than: Date()) {
-				presentAlert(withMessage: "תאריך הלידה לא יכול גדול מהתאריך הנוחכי", options: "אישור") { _ in
+				presentAlert(withTitle: "אופס", withMessage: "תאריך הלידה לא יכול גדול מהתאריך הנוחכי", options: "אישור") { _ in
 					self.birthdayDatePicker.becomeFirstResponder()
 				}
 			} else if height<100 {
-				presentAlert(withMessage: "גובה שגויי אנא בדקי את הנתונים שהזנת", options: "אישור") { _ in
+				presentAlert(withTitle: "אופס", withMessage: "גובה שגויי אנא בדקי את הנתונים שהזנת", options: "אישור") { _ in
 					self.heightTextField.becomeFirstResponder()
 				}
 			} else if weight<30.0 {
-				presentAlert(withMessage: "משקל שגויי אנא בדקי את הנתונים שהזנת", options: "אישור") { _ in
+				presentAlert(withTitle: "אופס", withMessage: "משקל שגויי אנא בדקי את הנתונים שהזנת", options: "אישור") { _ in
 					self.weightTextField.becomeFirstResponder()
 				}
 			} else {
@@ -67,7 +72,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 				self.performSegue(withIdentifier: K.SegueId.moveToFatPercentage, sender: self)
 			}
         } else {
-			presentAlert(withMessage: "יש למלא את כל השדות", options: "אישור") { _ in
+			presentAlert(withTitle: "אופס", withMessage: "יש למלא את כל השדות", options: "אישור") { _ in
 				self.birthdayDatePicker.becomeFirstResponder()
 			}
 			return
