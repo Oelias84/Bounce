@@ -34,8 +34,8 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureTextFields()
         configurePicker()
+		configureTextFields()
         addScreenTappGesture()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -144,7 +144,8 @@ extension QuestionnairePersonalDetailsViewController: UITextFieldDelegate {
 		checkFieldsEmpty()
 	}
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        numberPicker.selectRow(0, inComponent: 0, animated: false)
+		
+		numberPicker.selectRow(getIndex(textField: textField), inComponent: 0, animated: true)
         numberPicker.reloadAllComponents()
         numberPicker.reloadInputViews()
     }
@@ -152,6 +153,30 @@ extension QuestionnairePersonalDetailsViewController: UITextFieldDelegate {
 
 extension QuestionnairePersonalDetailsViewController {
     
+	private func getIndex(textField: UITextField) -> Int {
+		var text: String
+		
+		switch textField {
+		case weightTextField:
+			text = textField.text ?? "30"
+		case heightTextField:
+			text = textField.text ?? "100"
+		default:
+			return 0
+		}
+		
+		let floatText = Float(text)
+		let intNum = Int(floatText!)
+		
+		switch textField {
+		case weightTextField:
+			return weightNumberArray.firstIndex(of: intNum)!
+		case heightTextField:
+			return heightNumberArray.firstIndex(of: intNum)!
+		default:
+			return 0
+		}
+	}
     private func configurePicker() {
         numberPicker.delegate = self
         numberPicker.dataSource = self
@@ -181,9 +206,16 @@ extension QuestionnairePersonalDetailsViewController {
     private func configureTextFields() {
         
         birthdayDatePicker.addTarget(self, action: #selector(pickerChanged), for: .valueChanged)
+		heightTextField.text = String(100.0)
+		weightTextField.text = String(30.0)
+		height = 100
+		weight = 30.0
         heightTextField.inputView = numberPicker
         weightTextField.inputView = numberPicker
+		heightTextField.setupToolBar(cancelButtonName: "אישור")
+		weightTextField.setupToolBar(cancelButtonName: "אישור")
         heightTextField.delegate = self
         weightTextField.delegate = self
     }
+
 }

@@ -10,17 +10,21 @@ import UIKit
 class QuestionnaireActivityViewController: UIViewController {
 	
 	public var isFromSettings = false
+	private var minimumKilometers: Float = 0.1
+	private var minimumSteps: Int = 100
 	
 	@IBOutlet weak var kilometersSlider: UISlider! {
 		didSet {
-			kilometersSlider.value = 1.0
-			kilometersSlider.minimumValue = 1.0
+			kilometersSlider.value = minimumKilometers
+			kilometersSlider.minimumValue = minimumKilometers
 			kilometersSlider.maximumValue = 25.00
 		}
 	}
 	@IBOutlet weak var stepsSlider: UISlider! {
 		didSet {
-			stepsSlider.maximumValue = 30000.00
+			stepsSlider.value = minimumKilometers
+			stepsSlider.minimumValue = Float(minimumSteps)
+			stepsSlider.maximumValue = 30000.0
 		}
 	}
 	@IBOutlet weak var kilometersLabel: UILabel!
@@ -76,13 +80,13 @@ class QuestionnaireActivityViewController: UIViewController {
 			case 1:
 				stepsCheckBox.isSelected = false
 				stepsSlider.isEnabled = false
-				stepsLabel.text = "0"
+				stepsLabel.text = String(minimumSteps)
 				kilometersSlider.isEnabled = true
 			case 2:
 				kilometersCheckBox.isSelected = false
 				stepsSlider.isEnabled = true
 				kilometersSlider.isEnabled = false
-				kilometersLabel.text =  "0 " + K.Units.kilometers
+				kilometersLabel.text =  String(minimumKilometers) + " " + K.Units.kilometers
 			default:
 				return
 			}
@@ -110,7 +114,8 @@ extension QuestionnaireActivityViewController {
 			stepsCheckBox.isSelected = true
 			kilometersSlider.isEnabled = false
 		} else {
-			kilometersLabel.text = "1.0"
+			kilometersLabel.text = String(minimumKilometers) + " " + K.Units.kilometers
+			stepsLabel.text = String(minimumSteps)
 		}
 	}
 	private func updateServer() {

@@ -61,14 +61,15 @@ extension UITextField {
 		picker.backgroundColor = .white
 		self.inputView = picker
 	}
-	func setupToolBar(doneButtonName: String? = nil, cancelButtonName: String, doneAction: Selector? = nil) {
+	func setupToolBar(doneButtonName: String? = nil, cancelButtonName: String, doneAction: Selector? = nil, selector: Selector? = nil) {
 		let toolBar = UIToolbar()
 		
 		toolBar.backgroundColor = .white
 		toolBar.sizeToFit()
 
 		let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-		let cancelButton = UIBarButtonItem(title: cancelButtonName, style: .plain, target: self, action: #selector(toolBarCancelTapped))
+		let cancelButton = UIBarButtonItem(title: cancelButtonName, style: .plain, target: self,
+										   action: selector ?? #selector(toolBarCancelTapped))
 		toolBar.setItems([cancelButton, spaceButton], animated: false)
 
 		toolBar.isUserInteractionEnabled = true

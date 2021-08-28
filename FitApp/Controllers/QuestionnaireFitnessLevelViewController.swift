@@ -26,19 +26,22 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
     
 	@IBOutlet weak var nextButton: UIButton!
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
 		
+		setupCheckMarks()
 	}
 	
 	@IBAction func nextButtonAction(_ sender: Any) {
+		
 		if fitnessLevel != 0 && weaklyWorkouts != 0 {
 			UserProfile.defaults.fitnessLevel = fitnessLevel
 			UserProfile.defaults.weaklyWorkouts = weaklyWorkouts
 			performSegue(withIdentifier: K.SegueId.moveToSumup, sender: self)
 		} else {
-			//show alert
-			return
+			presentOkAlert(withTitle: "אופס",withMessage: "נראה כי לא נעשתה בחירה, יש לבחור רמת קושי ולאחר מכן מספר אימונים", buttonText: "הבנתי") {
+				return
+			}
 		}
 	}
 	@IBAction func levelCheckBoxes(sender: UIButton) {
@@ -49,10 +52,22 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 		case 1:
 			intermediateButton.isSelected = false
 			advancedButton.isSelected = false
+			
+			weaklyWorkouts = 2
+			weeklyWorkoutCheckFirst.isSelected = sender.isSelected
+			
+			weeklyWorkoutCheckSecond.isSelected = false
+			weeklyWorkoutCheckThird.isSelected = false
 		case 2:
+			weaklyWorkouts = 0
+			weeklyWorkoutCheckFirst.isSelected = false
+			
 			beginnerButton.isSelected = false
 			advancedButton.isSelected = false
 		case 3:
+			weaklyWorkouts = 0
+			weeklyWorkoutCheckFirst.isSelected = false
+
 			beginnerButton.isSelected = false
 			intermediateButton.isSelected = false
 		default:
@@ -111,8 +126,11 @@ extension QuestionnaireFitnessLevelViewController {
         let userData = UserProfile.defaults
         
         if let fitnessLevel = userData.fitnessLevel {
+			self.fitnessLevel = fitnessLevel
+			
             switch fitnessLevel {
             case 1:
+				weaklyWorkouts = 2
                 beginnerButton.isSelected = true
             case 2:
                 intermediateButton.isSelected = true

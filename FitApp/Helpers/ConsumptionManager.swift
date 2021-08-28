@@ -148,7 +148,7 @@ extension ConsumptionManager {
 	}
 	
 	private func configureData() {
-		guard let weight = weight, let fatPercentage = fatPercentage, let numberOfTrainings = numberOfTrainings else { return }
+		guard let weight = weight, let fatPercentage = fatPercentage, let Kilometer = Kilometer, let numberOfTrainings = numberOfTrainings else { return }
 		
 		self.dailyCalories = TDEE(weight: weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings)
 		self.dailyFatPortion = portionFat(tdee: dailyCalories!)
