@@ -12,16 +12,19 @@ class QuestionnaireFatPresentViewController: UIViewController {
 	private let pickerItems = ["18", "20", "25", "30", "40", "45"]
 	private var cellScale: CGFloat = 0.6
 	private var selectedPercentage: String?
+	private var isFirstLoad = true
+	private var index: Int?
 	
 	@IBOutlet weak var collectionView: UICollectionView!
-
+	@IBOutlet weak var pageControl: UIPageControl!
+	
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let imageNib = UINib(nibName: K.NibName.questionnaireFatCollectionViewCell, bundle: nil)
-		collectionView.register(imageNib, forCellWithReuseIdentifier: K.CellId.fanCell)
 		setupSelectedImage()
+		setUpCollectionView()
 	}
 	
 	@IBAction func nextButtonAction(_ sender: Any) {
@@ -50,21 +53,26 @@ class QuestionnaireFatPresentViewController: UIViewController {
 				performSegue(withIdentifier: K.SegueId.moveToActivity, sender: self)
 				
 			} else {
-				//show alert
-				return
+				presentOkAlert(withTitle: "אופס",withMessage: "נראה כי לא נעשתה בחירה, יש לבחור בתמונה שהכי משקפת אתת הנראות שלך", buttonText: "הבנתי") {
+					return
+				}
 			}
-		
 	}
 }
 
 extension QuestionnaireFatPresentViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 	
+	func numberOfSections(in collectionView: UICollectionView) -> Int {
+		1
+	}
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		pickerItems.count
 	}
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CellId.fanCell, for: indexPath) as! QuestionnaireFatCollectionViewCell
+		
 		cell.fatImageString = pickerItems[indexPath.row]
+		cell.setFatPresentLabel(for: indexPath.row)
 		return cell
 	}
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -76,7 +84,6 @@ extension QuestionnaireFatPresentViewController {
 	
 	func setupSelectedImage() {
 		let userData = UserProfile.defaults
-		var index = 0
 		
 		switch userData.fatPercentage {
 		case 18.0:
@@ -95,14 +102,22 @@ extension QuestionnaireFatPresentViewController {
 			break
 		}
 		if let _ = userData.fatPercentage {
-			selectedPercentage = pickerItems[index]
+			selectedPercentage = pickerItems[index!]
 		}
-		DispatchQueue.main.async { [weak self] in
-			guard let self = self else { return }
-			self.collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
+		DispatchQueue.main.async {
+			[unowned self] in
+			self.collectionView.scrollToItem(at: IndexPath(item: index!, section: 0), at: .centeredHorizontally, animated: true)
 		}
 	}
-	
+	private func setUpCollectionView() {
+		collectionView.isUserInteractionEnabled = true
+		layout(collectionView){
+			[weak self] row in
+			guard let self = self else { return }
+			self.pageControl.currentPage = row
+		}
+	}
+
 	//MARK: - CollectionView CompositionalLayout
 	func layout(_ collectionView: UICollectionView, callBack: @escaping (Int)->()) {
 		
