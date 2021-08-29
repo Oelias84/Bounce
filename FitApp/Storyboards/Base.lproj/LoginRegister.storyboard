@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -285,8 +286,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="mqO-Gd-3Q3">
-                                <rect key="frame" x="36" y="572" width="342" height="264"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Y9R-ZU-Ham" userLabel="Terms of use Stack View">
+                                <rect key="frame" x="135.5" y="796" width="143" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLH-QE-QzF" userLabel="Terms View Button">
+                                        <rect key="frame" x="0.0" y="5" width="103" height="30"/>
+                                        <state key="normal" title="תקנון תנאי שימוש"/>
+                                        <connections>
+                                            <action selector="termsOfUseViewButtonAction:" destination="kJX-hb-JXs" eventType="touchUpInside" id="0bR-Vh-eUC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgS-lQ-1Qd" userLabel="Terrms Checkbox">
+                                        <rect key="frame" x="103" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="xGh-gQ-pkC"/>
+                                            <constraint firstAttribute="height" constant="40" id="xrg-bE-27x"/>
+                                        </constraints>
+                                        <color key="tintColor" name="AccentColor"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="square" catalog="system" symbolScale="large"/>
+                                        </state>
+                                        <state key="disabled" image="square" catalog="system"/>
+                                        <state key="selected">
+                                            <imageReference key="image" image="checkmark.square" catalog="system" symbolScale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="termsOfUseCheckMarkButtonAction:" destination="kJX-hb-JXs" eventType="touchUpInside" id="VtT-8Q-9Qm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="mqO-Gd-3Q3">
+                                <rect key="frame" x="36" y="556" width="342" height="224"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="שם מלא" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pmz-ex-yAp" userLabel="UserName Textfield">
                                         <rect key="frame" x="0.0" y="0.0" width="342" height="40"/>
@@ -308,7 +339,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="אימייל" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gVo-Zh-GMf">
-                                        <rect key="frame" x="0.0" y="56" width="342" height="40"/>
+                                        <rect key="frame" x="0.0" y="46" width="342" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Y8u-Rw-AjE"/>
                                         </constraints>
@@ -327,7 +358,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="סיסמא" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xhf-DR-8Bq">
-                                        <rect key="frame" x="0.0" y="112" width="342" height="40"/>
+                                        <rect key="frame" x="0.0" y="92" width="342" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="vzV-kF-Crb"/>
                                         </constraints>
@@ -346,7 +377,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="אשר סיסמא" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9qU-45-iWy" userLabel="Confirm Password textfield">
-                                        <rect key="frame" x="0.0" y="168" width="342" height="40"/>
+                                        <rect key="frame" x="0.0" y="138" width="342" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="ULt-Df-0UP"/>
                                         </constraints>
@@ -365,7 +396,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zG6-JT-QKT">
-                                        <rect key="frame" x="0.0" y="224" width="342" height="40"/>
+                                        <rect key="frame" x="0.0" y="184" width="342" height="40"/>
                                         <color key="backgroundColor" red="0.43436774610000001" green="0.39554607870000003" blue="0.85887217520000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="hGS-sP-uEh"/>
@@ -386,7 +417,7 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="JSX-ne-XUd">
-                                <rect key="frame" x="107" y="308.5" width="200" height="199"/>
+                                <rect key="frame" x="107" y="292.5" width="200" height="199"/>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="1ip-gn-yRU"/>
@@ -394,7 +425,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xc-FG-bbk">
-                                <rect key="frame" x="249" y="450" width="50" height="50"/>
+                                <rect key="frame" x="249" y="434" width="50" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="4Co-Sb-JoE"/>
@@ -421,12 +452,14 @@
                         <viewLayoutGuide key="safeArea" id="H0R-Yd-ehb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="H0R-Yd-ehb" firstAttribute="bottom" secondItem="mqO-Gd-3Q3" secondAttribute="bottom" constant="26" id="2vj-UI-sJU"/>
+                            <constraint firstItem="H0R-Yd-ehb" firstAttribute="bottom" secondItem="Y9R-ZU-Ham" secondAttribute="bottom" constant="26" id="4bD-cS-Ij2"/>
                             <constraint firstItem="H0R-Yd-ehb" firstAttribute="trailing" secondItem="mqO-Gd-3Q3" secondAttribute="trailing" constant="36" id="7EP-Zn-FA7"/>
                             <constraint firstItem="mqO-Gd-3Q3" firstAttribute="leading" secondItem="H0R-Yd-ehb" secondAttribute="leading" constant="36" id="Dgm-RT-bUS"/>
+                            <constraint firstItem="Y9R-ZU-Ham" firstAttribute="top" secondItem="mqO-Gd-3Q3" secondAttribute="bottom" constant="16" id="Hq4-wW-HWi"/>
                             <constraint firstItem="3Xc-FG-bbk" firstAttribute="top" secondItem="JSX-ne-XUd" secondAttribute="bottom" constant="-58" id="NoN-k3-eAI"/>
                             <constraint firstItem="3Xc-FG-bbk" firstAttribute="leading" secondItem="JSX-ne-XUd" secondAttribute="trailing" constant="-58" id="RDr-Ou-iGS"/>
                             <constraint firstItem="JSX-ne-XUd" firstAttribute="centerX" secondItem="3GK-hU-JGU" secondAttribute="centerX" id="fV6-Ze-Sc6"/>
+                            <constraint firstItem="Y9R-ZU-Ham" firstAttribute="centerX" secondItem="3GK-hU-JGU" secondAttribute="centerX" id="gUY-KY-ryB"/>
                             <constraint firstItem="mqO-Gd-3Q3" firstAttribute="top" secondItem="JSX-ne-XUd" secondAttribute="bottom" constant="64" id="pR1-Kj-XNH"/>
                         </constraints>
                     </view>
@@ -437,17 +470,21 @@
                         <outlet property="passwordTextfield" destination="xhf-DR-8Bq" id="1qt-W2-FAz"/>
                         <outlet property="profileImageButton" destination="3Xc-FG-bbk" id="2GS-L9-3Z4"/>
                         <outlet property="profileImageView" destination="JSX-ne-XUd" id="0Cu-lL-peS"/>
+                        <outlet property="termsOfUseCheckMarkButton" destination="tgS-lQ-1Qd" id="I1f-tb-FPU"/>
+                        <outlet property="termsOfUseViewButton" destination="aLH-QE-QzF" id="fwc-mB-EHS"/>
                         <outlet property="userNameTextfield" destination="pmz-ex-yAp" id="oug-gD-hkx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10Y-mR-Khy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1877" y="-254"/>
+            <point key="canvasLocation" x="1876.8115942028987" y="-254.46428571428569"/>
         </scene>
     </scenes>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
+        <image name="checkmark.square" catalog="system" width="128" height="114"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="square" catalog="system" width="128" height="114"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

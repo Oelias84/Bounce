@@ -12,6 +12,9 @@ struct UserProfile {
     
     static var defaults = UserProfile()
 	
+	@UserDefault(key: .checkedTermsOfUse)
+	var checkedTermsOfUse: Bool?
+	
 	@UserDefault(key: .hasRunBefore)
 	var hasRunBefore: Bool?
 	
@@ -97,6 +100,7 @@ extension UserProfile {
 		let googleManager = GoogleApiManager()
 		
 		let data = ServerUserData (
+			checkedTermsOfUse: defaults.checkedTermsOfUse,
 			birthDate: defaults.birthDate?.dateStringForDB,
 			email: defaults.email!,
 			name: defaults.name!,
@@ -132,6 +136,7 @@ extension UserProfile {
 	func updateUserProfileData(_ data: ServerUserData, id: String) {
 		var userProfile = self
 		
+		userProfile.checkedTermsOfUse = data.checkedTermsOfUse
 		userProfile.id = id
 		userProfile.name = data.name
 		userProfile.email = data.email
@@ -150,6 +155,7 @@ extension UserProfile {
 	func resetUserProfileData() {
 		var userProfile = UserProfile.defaults
 		
+		userProfile.checkedTermsOfUse = nil
 		userProfile.id = nil
 		userProfile.name = nil
 		userProfile.email = nil
@@ -169,6 +175,7 @@ extension UserProfile {
 
 struct ServerUserData: Codable {
     
+	let checkedTermsOfUse: Bool?
     let birthDate: String?
 	let email: String
 	let name: String
@@ -200,6 +207,7 @@ extension Key {
 	static let motivationText: Key = "motivationText"
 	
 	//user data
+	static let checkedTermsOfUse: Key = "checkedTermsOfUse"
 	static let fcmToken: Key = "fcmToken"
     static let id: Key = "id"
     static let name: Key = "name"

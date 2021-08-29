@@ -20,13 +20,15 @@ final class GoogleStorageManager {
 		case profileImage
 		case weightImage
 		case messagesImage
+		case pdf
 		
 		var description : String {
-		  switch self {
-		  case .profileImage: return "images"
-		  case .weightImage: return "weight"
-		  case .messagesImage: return "message_images"
-		  }
+			switch self {
+			case .profileImage: return "images"
+			case .weightImage: return "weight"
+			case .pdf: return "pdf"
+			case .messagesImage: return "message_images"
+			}
 		}
 	}
 	
@@ -52,14 +54,14 @@ final class GoogleStorageManager {
 	}
 	public func downloadImageURL(from child: ChildType, path: String, completion: @escaping (Result<URL, Error>) -> Void ) {
 		
-	self.storage.child("\(child)/\(path)").downloadURL { url, error in
-		guard error == nil, let url = url else {
-			completion(.failure(error!))
-			return
+		self.storage.child("\(child)/\(path)").downloadURL { url, error in
+			guard error == nil, let url = url else {
+				completion(.failure(error!))
+				return
+			}
+			
+			print("download url returned: \(url)")
+			completion(.success(url))
 		}
-		
-		print("download url returned: \(url)")
-		completion(.success(url))
 	}
-}
 }

@@ -20,6 +20,7 @@ struct ErrorManager: Error {
 	
 	enum RegisterError: Error {
 		
+		case termsOfUse
 		case failToRegister
 		case userNotSaved
 		case emptyUserName

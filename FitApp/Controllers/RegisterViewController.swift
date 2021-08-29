@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PDFKit
 import CropViewController
 
 class RegisterViewController: UIViewController {
@@ -13,6 +14,7 @@ class RegisterViewController: UIViewController {
 	private let viewModel = RegisterViewModel()
 	private let imagePickerController = UIImagePickerController()
 	private var profileImage: UIImage?
+	private var userHasCheckedTermOfUse = false
 	
 	@IBOutlet weak var userNameTextfield: UITextField!
 	@IBOutlet weak var emailTextfield: UITextField!
@@ -20,6 +22,19 @@ class RegisterViewController: UIViewController {
 	@IBOutlet weak var confirmPasswordTextfield: UITextField!
 	@IBOutlet weak var profileImageButton: UIButton!
 	@IBOutlet weak var profileImageView: UIImageView!
+	
+	@IBOutlet weak var termsOfUseViewButton: UIButton!
+	@IBOutlet weak var termsOfUseCheckMarkButton: UIButton!
+	
+	private lazy var pdfView: PDFView = {
+		let pdfView = PDFView(frame: self.view.bounds)
+		pdfView.translatesAutoresizingMaskIntoConstraints = false
+		pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		view.addSubview(pdfView)
+		pdfView.autoScales = true
+
+		return pdfView
+	}()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -34,6 +49,14 @@ class RegisterViewController: UIViewController {
 		removeKeyboardListener()
 	}
 	
+	@IBAction func termsOfUseViewButtonAction(_ sender: UIButton) {
+		showTermsOfUse()
+	}
+	@IBAction func termsOfUseCheckMarkButtonAction(_ sender: UIButton) {
+		sender.isSelected = !sender.isSelected
+		userHasCheckedTermOfUse = sender.isSelected
+	}
+	
 	@IBAction func profileImageButtonAction(_ sender: UIButton) {
 		presentImagePickerActionSheet(imagePicker: imagePickerController) { _ in }
 	}
@@ -41,7 +64,7 @@ class RegisterViewController: UIViewController {
 		Spinner.shared.show(self.view)
 		
 		do {
-			try viewModel.register(userName: userNameTextfield.text, email: emailTextfield.text, password: passwordTextfield.text, confirmPassword: confirmPasswordTextfield.text, userImage: profileImage) {
+			try viewModel.register(userName: userNameTextfield.text, email: emailTextfield.text, password: passwordTextfield.text, confirmPassword: confirmPasswordTextfield.text, userImage: profileImage, termsOfUse: userHasCheckedTermOfUse) {
 				[weak self] result in
 				guard let self = self else { return }
 				Spinner.shared.stop()
@@ -50,9 +73,9 @@ class RegisterViewController: UIViewController {
 				case .success(_):
 					self.moveToHomeViewController()
 				case .failure(let error):
+					
 					switch error {
 					case ErrorManager.RegisterError.emailExist:
-						
 						Spinner.shared.stop()
 						self.presentOkAlert(withTitle: "שמשתמש קיים", withMessage: "נראה שכתובת האימייל שהזנת כבר קיימת במערכת, אנא נסי שנית") {
 							self.userNameTextfield.text?.removeAll()
@@ -113,12 +136,37 @@ class RegisterViewController: UIViewController {
 			presentOkAlert(withTitle: "אופס",withMessage: "הסיסמא אינה תואמת, אנא נסי שנית") {
 				self.confirmPasswordTextfield.becomeFirstResponder()
 			}
+		} catch ErrorManager.RegisterError.termsOfUse {
+			Spinner.shared.stop()
+			presentOkAlert(withTitle: "תנאי השירות לא אושרו", withMessage: "נראה כי לא אשרת את תנאי השירות, בכדי להמשיך בהרשמה אנא סמני את התיבה שמאשרת את תנאי השימוש.") {}
 		} catch {
-			print("Something went wrong!")
+			Spinner.shared.stop()
+			presentOkAlert(withTitle: "אופס", withMessage: "נראה שמשהו לא צפוי קרה, אנא נסי להרשם יותר מאוחר") {}
 		}
 	}
+}
+
+//MARK: - Functions
+extension RegisterViewController {
 	
-	func moveToHomeViewController() {
+	private func showTermsOfUse() {
+		Spinner.shared.show(self.view)
+		GoogleStorageManager.shared.downloadImageURL(from: .pdf, path: "terms_of_use.pdf") {
+			[weak self] result in
+			guard let self = self else { return }
+			Spinner.shared.stop()
+
+			switch result {
+			case .success(let url):
+				if let document = PDFDocument(url: url) {
+					self.pdfView.document = document
+				}
+			case .failure(let error):
+				print(error)
+			}
+		}
+	}
+	private func moveToHomeViewController() {
 		let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
 		let homeVC = storyboard.instantiateViewController(withIdentifier: K.ViewControllerId.HomeTabBar)
 		
@@ -126,8 +174,10 @@ class RegisterViewController: UIViewController {
 		self.present(homeVC, animated: true)
 		Spinner.shared.stop()
 	}
+
 }
 
+//MARK: - Delegates
 extension RegisterViewController: CropViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 	
 	func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {

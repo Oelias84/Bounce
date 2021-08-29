@@ -10,7 +10,7 @@ import FirebaseAuth
 
 class RegisterViewModel {
 	
-	func register(userName: String?, email: String?, password: String?, confirmPassword: String?, userImage: UIImage?, completion: @escaping (Result<Bool, Error>) -> Void) throws {
+	func register(userName: String?, email: String?, password: String?, confirmPassword: String?, userImage: UIImage?, termsOfUse: Bool?, completion: @escaping (Result<Bool, Error>) -> Void) throws {
 		
 		guard var userName = userName, !userName.isEmpty, userName != "" else {
 			throw ErrorManager.RegisterError.emptyUserName
@@ -30,12 +30,14 @@ class RegisterViewModel {
 		guard let confirmPassword = confirmPassword, !confirmPassword.isEmpty, confirmPassword != "" else {
 			throw ErrorManager.RegisterError.emptyConfirmPassword
 		}
+		guard let termsOfUse = termsOfUse, termsOfUse != false else {
+			throw ErrorManager.RegisterError.termsOfUse
+		}
 		
 		// Check if email dose exist in database
 		GoogleDatabaseManager.shared.userExists(with: email) { exist in
 			
 			if exist {
-				print("true")
 				// The email is taken, show error
 				completion(.failure(ErrorManager.RegisterError.emailExist))
 			} else {
@@ -59,6 +61,7 @@ class RegisterViewModel {
 							
 							if success {
 								// Save User name and update server
+								UserProfile.defaults.checkedTermsOfUse = termsOfUse
 								UserProfile.defaults.name = userName
 								UserProfile.defaults.email = email
 								UserProfile.updateServer()
