@@ -96,35 +96,62 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Bf9-fz-mCh">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" directionalLockEnabled="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mtg-qs-4hU">
                                 <rect key="frame" x="16" y="88" width="382" height="808"/>
                                 <subviews>
-                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="azz-iI-TjD">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="0.0"/>
-                                    </imageView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Jba-3x-eTX">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="808"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <color key="textColor" systemColor="labelColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dBr-Mx-cUg">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="1150"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aNO-j3-xbe">
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="1150"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1150" id="20H-S1-aLd"/>
+                                                </constraints>
+                                            </imageView>
+                                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fSV-AX-UIT">
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="0.0"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="300" constant="200" id="mhr-QS-ch2"/>
+                                                </constraints>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="aNO-j3-xbe" secondAttribute="trailing" id="IT7-de-ULv"/>
+                                            <constraint firstItem="aNO-j3-xbe" firstAttribute="leading" secondItem="dBr-Mx-cUg" secondAttribute="leading" id="qPN-qE-GEc"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
-                            </stackView>
+                                <constraints>
+                                    <constraint firstItem="dBr-Mx-cUg" firstAttribute="centerX" secondItem="Mtg-qs-4hU" secondAttribute="centerX" id="66c-et-cem"/>
+                                    <constraint firstItem="dBr-Mx-cUg" firstAttribute="leading" secondItem="Lic-OB-EWf" secondAttribute="leading" id="IQT-YX-3oG"/>
+                                    <constraint firstItem="dBr-Mx-cUg" firstAttribute="trailing" secondItem="Lic-OB-EWf" secondAttribute="trailing" id="crZ-Ct-lin"/>
+                                    <constraint firstItem="dBr-Mx-cUg" firstAttribute="top" secondItem="Lic-OB-EWf" secondAttribute="top" id="jQm-Jz-emo"/>
+                                    <constraint firstItem="dBr-Mx-cUg" firstAttribute="bottom" secondItem="Lic-OB-EWf" secondAttribute="bottom" id="ugv-iH-vPW"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Lic-OB-EWf"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="mbN-9k-VSn"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VEd-9J-c6T"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Bf9-fz-mCh" firstAttribute="top" secondItem="VEd-9J-c6T" secondAttribute="top" id="T0X-eb-EAE"/>
-                            <constraint firstItem="Bf9-fz-mCh" firstAttribute="leading" secondItem="tzU-ee-E4v" secondAttribute="leading" constant="16" id="UUI-gB-XfF"/>
-                            <constraint firstAttribute="trailing" secondItem="Bf9-fz-mCh" secondAttribute="trailing" constant="16" id="hxv-hE-IAh"/>
-                            <constraint firstAttribute="bottom" secondItem="Bf9-fz-mCh" secondAttribute="bottom" id="q3R-un-qfh"/>
+                            <constraint firstAttribute="bottom" secondItem="Mtg-qs-4hU" secondAttribute="bottom" id="F8I-vl-CBo"/>
+                            <constraint firstItem="VEd-9J-c6T" firstAttribute="trailing" secondItem="Mtg-qs-4hU" secondAttribute="trailing" constant="16" id="Qjw-um-Rvv"/>
+                            <constraint firstItem="Mtg-qs-4hU" firstAttribute="centerX" secondItem="tzU-ee-E4v" secondAttribute="centerX" id="eHH-5X-BwN"/>
+                            <constraint firstItem="Mtg-qs-4hU" firstAttribute="leading" secondItem="VEd-9J-c6T" secondAttribute="leading" constant="16" id="k1C-5W-2XZ"/>
+                            <constraint firstItem="Mtg-qs-4hU" firstAttribute="top" secondItem="VEd-9J-c6T" secondAttribute="top" id="lSX-xW-0CZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="shI-aj-XBB"/>
                     <connections>
-                        <outlet property="commentImageView" destination="azz-iI-TjD" id="Ugi-TH-Nro"/>
-                        <outlet property="commentTextView" destination="Jba-3x-eTX" id="Gui-Ji-Cfk"/>
+                        <outlet property="commentImageHeight" destination="20H-S1-aLd" id="fJb-bQ-EKb"/>
+                        <outlet property="commentImageView" destination="aNO-j3-xbe" id="aNr-RI-L3D"/>
+                        <outlet property="commentScrollView" destination="Mtg-qs-4hU" id="A5b-E1-ia0"/>
+                        <outlet property="commentTextView" destination="fSV-AX-UIT" id="UUc-TG-W1h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gYR-2B-W6X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -181,16 +181,15 @@ struct GoogleApiManager {
 			}
 		}
 	}
-	#warning("Change here and in data base")
 	//MARK: - Comments
-	func getComments(completion: @escaping (Result<newComments?, Error>) -> Void) {
+	func getComments(completion: @escaping (Result<CommentsData?, Error>) -> Void) {
 		do {
 			db.collection("comment-data").document("newComment").getDocument { (data, error) in
 				if let error = error {
 					print(error)
 				} else if let data = data {
 					do {
-						if let decodedData = try data.data(as: newComments.self) {
+						if let decodedData = try data.data(as: CommentsData.self) {
 							completion(.success(decodedData))
 						}
 					} catch {

@@ -438,8 +438,8 @@
 			children = (
 				B3E6E9B725714D5800958C48 /* MealPlanViewController.swift */,
 				7CFFAD9B261DEF1000C05C66 /* DishesTableViewController.swift */,
-				7C658AB425D990EB00CA75B2 /* CommentViewController.swift */,
 				7C1ACCE6266F8D19008079C9 /* CommentsTableViewController.swift */,
+				7C658AB425D990EB00CA75B2 /* CommentViewController.swift */,
 			);
 			name = Meals;
 			sourceTree = "<group>";

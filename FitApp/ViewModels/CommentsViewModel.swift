@@ -11,7 +11,7 @@ import SDWebImage
 class CommentsViewModel {
 	
 	
-	var comments: newComments? {
+	var comments: CommentsData? {
 		didSet {
 			bindNotificationViewModelToController()
 		}
@@ -33,24 +33,23 @@ class CommentsViewModel {
 		return comments!.comments[index]
 	}
 	func getCommentsText(at index: Int) -> [String] {
-		return comments!.comments[index].text
+		return comments!.comments[index].text ?? []
 	}
-//	func getCommentImage(for index: Int, completion: (UIImageView?) -> ()) {
-//		var imageView: UIImageView?
-//		
-//		if let urlString = comments.comments[index].image, let url = URL(string: urlString) {
-//			imageView = UIImageView()
-//			imageView!.sd_setImage(with: url)
-//			completion(imageView)
-//		}
-//		completion(imageView)
-//	}
+	func getCommentImage(for index: Int, completion: (UIImageView?) -> ()) {
+		var imageView: UIImageView?
+
+		if let urlString = comments?.comments[index].image, let url = URL(string: urlString) {
+			imageView = UIImageView()
+			imageView!.sd_setImage(with: url)
+			completion(imageView)
+		}
+		completion(imageView)
+	}
 	
 	private func fetchComments() {
 		
 		GoogleApiManager.shared.getComments {
-			[weak self]
-			result in
+			[weak self] result in
 			guard let self = self else { return }
 			Spinner.shared.stop()
 			switch result {
