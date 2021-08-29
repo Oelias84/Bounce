@@ -29,19 +29,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 			Spinner.shared.show(window!)
 			// Run code here for every other launch but the first
 			if Auth.auth().currentUser != nil {
-				let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
-				let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar)
+				//Check if the user is approved in data base
+				GoogleApiManager.shared.checkUserApproved(userEmail: UserProfile.defaults.email!) {
+					result in
+					
+					switch result {
+					case .success(let isApproved):
+						if isApproved {
+							
+							let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
+							let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar)
 
-				homeVC.modalPresentationStyle = .fullScreen
-				Spinner.shared.stop()
-				window!.rootViewController = homeVC
+							homeVC.modalPresentationStyle = .fullScreen
+							Spinner.shared.stop()
+							self.window!.rootViewController = homeVC
+						} else {
+							Spinner.shared.stop()
+							self.window!.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "אין באפשרוך להתחבר, אנא צרי איתנו קשר") { }
+						}
+					case .failure(let error):
+						self.window!.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה: \(error.localizedDescription)") { }
+					}
+				}
 			} else {
 				Spinner.shared.stop()
 			}
 		}
-
-
-		
 		if #available(iOS 13.0, *) {
 			window?.overrideUserInterfaceStyle = .light
 		}

@@ -24,3 +24,8 @@ struct User: Codable {
 		return "\(safeEmail)_\(Date().dateStringForDB)_weight_image.jpeg"
 	}
 }
+
+struct approvedUser: Codable {
+	
+	let emails: [String]
+}

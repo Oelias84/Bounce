@@ -42,7 +42,7 @@ class RegisterViewModel {
 				completion(.failure(ErrorManager.RegisterError.emailExist))
 			} else {
 				
-				// User not exist, Register new User
+				// User not exist, Authenticate new User
 				self.registerUser(email: email, password: password) {
 					[weak self] result in
 					guard let self = self else { return }
@@ -76,13 +76,42 @@ class RegisterViewModel {
 										case .success(let imageUrl):
 											// Saves image url to user defaults
 											UserProfile.defaults.profileImageImageUrl = imageUrl
-											completion(.success(true))
+											
+											//Check if the user is approved in data base
+											GoogleApiManager.shared.checkUserApproved(userEmail: email) {
+												result in
+												
+												switch result {
+												case .success(let isApproved):
+													if isApproved {
+														completion(.success(true))
+													} else {
+														completion(.failure(ErrorManager.RegisterError.userNotApproved))
+													}
+												case .failure(let error):
+													completion(.failure(error))
+												}
+											}
 										case .failure(let error):
 											completion(.failure(error))
 										}
 									}
 								} else {
-									completion(.success(true))
+									//Check if the user is approved in data base
+									GoogleApiManager.shared.checkUserApproved(userEmail: email) {
+										result in
+										
+										switch result {
+										case .success(let isApproved):
+											if isApproved {
+												completion(.success(true))
+											} else {
+												completion(.failure(ErrorManager.RegisterError.userNotApproved))
+											}
+										case .failure(let error):
+											completion(.failure(error))
+										}
+									}
 								}
 							} else {
 								completion(.failure(ErrorManager.RegisterError.userNotSaved))

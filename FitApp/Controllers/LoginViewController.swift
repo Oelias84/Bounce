@@ -41,8 +41,10 @@ class LoginViewController: UIViewController {
 						message = "נראה שהיוזר לא נמצא"
 					} else if error.contains("The password is invalid") {
 						message = "הסיסמא שהכנסת שגויה"
-					} else if error.contains("Access to this account has been temporarily disabled due to many failed login attempts"){
+					} else if error.contains("Access to this account has been temporarily disabled due to many failed login attempts") {
 						message = "החשבון נחסם זמנית, בעכבות יותר מידיי ניסיונות כושלים. את יכולה לאפס סיסמא או שנית במועד מאוחר יותר"
+					} else {
+						message = error
 					}
 					
 					self.presentAlert(withTitle: "לא מצליח להתחבר", withMessage: message, options: "אישור") { _ in }

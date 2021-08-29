@@ -83,6 +83,9 @@ class RegisterViewController: UIViewController {
 							self.passwordTextfield.text?.removeAll()
 							self.confirmPasswordTextfield.text?.removeAll()
 						}
+					case ErrorManager.RegisterError.userNotApproved:
+						Spinner.shared.stop()
+						self.presentOkAlert(withTitle: "אופס",withMessage: "אין באפשרוך להתחבר, אנא צרי איתנו קשר") { }
 					case ErrorManager.RegisterError.failToRegister:
 						Spinner.shared.stop()
 						self.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה ביצירת המשתמש, אנא נסה שנית מאוחר יותר") { }
@@ -95,7 +98,6 @@ class RegisterViewController: UIViewController {
 					}
 				}
 			}
-			
 		} catch ErrorManager.RegisterError.emptyUserName {
 			Spinner.shared.stop()
 			presentOkAlert(withTitle: "אופס",withMessage: "נראה ששחכת להזין שם משתמש") {

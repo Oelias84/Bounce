@@ -22,6 +22,7 @@ struct ErrorManager: Error {
 		
 		case termsOfUse
 		case failToRegister
+		case userNotApproved
 		case userNotSaved
 		case emptyUserName
 		case userNameNotFullName

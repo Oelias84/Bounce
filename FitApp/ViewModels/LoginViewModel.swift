@@ -36,26 +36,41 @@ class LoginViewModel {
 			if let error = error {
 				completion(false, error.localizedDescription)
 			} else {
-				self.getUserImageProfileUrl(with: email)
 				
-				self.googleManager.getUserData { result in
-
+				//Check if the user is approved in data base
+				GoogleApiManager.shared.checkUserApproved(userEmail: email) {
+					result in
+					
 					switch result {
-					case .success(let userData):
-						Analytics.logEvent(AnalyticsEventLogin, parameters: ["USER_EMAIL": email])
-						LocalNotificationManager.shared.setMealNotification()
+					case .success(let isApproved):
+						if isApproved {
+							self.getUserImageProfileUrl(with: email)
+							
+							self.googleManager.getUserData { result in
 
-						UserProfile.defaults.email = email
-						if let user = user?.user, let data = userData {
-							UserProfile.defaults.updateUserProfileData(data, id: user.uid)
-							if let token =  UserProfile.defaults.fcmToken {
-								let userName = data.name.splitFullName
-								GoogleDatabaseManager.shared.add(token: token, for: User(firsName: userName.0, lastName: userName.1, email: user.email!, deviceToken: token))
+								switch result {
+								case .success(let userData):
+									Analytics.logEvent(AnalyticsEventLogin, parameters: ["USER_EMAIL": email])
+									LocalNotificationManager.shared.setMealNotification()
+
+									UserProfile.defaults.email = email
+									if let user = user?.user, let data = userData {
+										UserProfile.defaults.updateUserProfileData(data, id: user.uid)
+										if let token =  UserProfile.defaults.fcmToken {
+											let userName = data.name.splitFullName
+											GoogleDatabaseManager.shared.add(token: token, for: User(firsName: userName.0, lastName: userName.1, email: user.email!, deviceToken: token))
+										}
+									}
+									completion(true, nil)
+								case .failure(let error):
+									print("Error fetching user data: ", error)
+								}
 							}
+						} else {
+							completion(false, "אין באפשרוך להתחבר, אנא צרי איתנו קשר")
 						}
-						completion(true, nil)
 					case .failure(let error):
-						print("Error fetching user data: ", error)
+						completion(false, "נראה שיש בעיה: \(error.localizedDescription)")
 					}
 				}
 			}
