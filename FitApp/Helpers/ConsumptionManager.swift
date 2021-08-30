@@ -83,18 +83,21 @@ extension ConsumptionManager {
 	
 	//MARK: - lean body weight
 	//= daily calories
-	private func TDEE(weight: Double, fatPercentage: Double, Kilometer: Double?, lifeStyle: Double?, numberOfTrainings: Int) -> Double {
+	private func TDEE(weight: Double, fatPercentage: Double, Kilometer: Double?, lifeStyle: Double?, numberOfTrainings: Int) -> Double? {
 		
 		let LBM = weight * ((100 - fatPercentage) / 100)
 		let BMR = (LBM * 22.0) + 500.0
 		let EAT = (150.0 * Double(numberOfTrainings)) / 7.0
+		var NIT: Double!
 		
-		var NIT: Double {
-			if let lifeStyle = lifeStyle {
-				return BMR * lifeStyle
-			}
-			return (Kilometer! * weight) * 0.93
+		if let Kilometer = Kilometer {
+			NIT = (Kilometer * weight) * 0.93
+		} else if let lifeStyle = lifeStyle {
+			NIT = BMR * lifeStyle
+		} else {
+			return nil
 		}
+		
 		var result: Double {
 			if lifeStyle != nil {
 				return (NIT + EAT) - 500
@@ -148,9 +151,9 @@ extension ConsumptionManager {
 	}
 	
 	private func configureData() {
-		guard let weight = weight, let fatPercentage = fatPercentage, let Kilometer = Kilometer, let numberOfTrainings = numberOfTrainings else { return }
-		
-		self.dailyCalories = TDEE(weight: weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings)
+		guard let weight = weight, let fatPercentage = fatPercentage, let numberOfTrainings = numberOfTrainings,
+			  let calculatedCalories = TDEE(weight: weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings) else { return }
+		self.dailyCalories = calculatedCalories
 		self.dailyFatPortion = portionFat(tdee: dailyCalories!)
 		self.dailyProteinPortion = proteinPortion(proteinGrams: proteinGrams(weight: weight, fatPercentage: fatPercentage))
 		self.dailyCarbsPortion = portionCarbs(fatPortion: self.dailyFatPortion!, proteinPortion: self.dailyProteinPortion!, calories: dailyCalories!)
