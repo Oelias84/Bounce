@@ -175,7 +175,7 @@ extension ChatViewController: CropViewControllerDelegate, UINavigationController
 				  let chatId = self.chatId,
 				  let name = self.title else { return }
 			
-			let fileName = "photo_message_" + messageId.replacingOccurrences(of: " ", with: "-") + ".jepg"
+			let fileName = "photo_message_" + messageId.replacingOccurrences(of: " ", with: "-") + ".jpeg"
 			
 			GoogleStorageManager.shared.uploadImage(from: .messagesImage, data: image.jpegData(compressionQuality: 8)!, fileName: fileName) {
 				[weak self] result in
