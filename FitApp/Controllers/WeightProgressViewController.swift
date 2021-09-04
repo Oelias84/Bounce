@@ -77,9 +77,6 @@ class WeightProgressViewController: UIViewController {
 		dateRightButton.isHidden = true
 		tableView.sectionHeaderHeight = 46
 	}
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewWillDisappear(animated)
-	}
 	
 	@IBAction func todayButtonAction(_ sender: Any) {
 		selectedDate = Date()
@@ -93,16 +90,7 @@ class WeightProgressViewController: UIViewController {
 		if let weights = weightViewModel.weights, !weights.isEmpty, weights.last!.date.onlyDate == Date().onlyDate {
 			presentOkAlert(withMessage: "כבר נשקלת היום") { 	return }
 		} else {
-			let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-			
-			imagePickerController.delegate = self
-			weightAlert = AddWeightAlertView()
-			weightAlert?.delegate = self
-			weightAlert?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width,
-										height: UIScreen.main.bounds.size.height)
-			if let alert = weightAlert {
-				window?.addSubview(alert)
-			}
+			presentAddWeightAlert()
 		}
 	}
 	@IBAction func changeDateButtons(_ sender: UIButton) {
@@ -197,7 +185,7 @@ extension WeightProgressViewController: UITableViewDelegate, UITableViewDataSour
 		if let cell = filteredArray?[indexPath.row] {
 			switch timePeriod {
 			case .week:
-				break
+				presentAddWeightAlert(weight: cell)
 			case .month:
 				selectedDate = cell.date
 				periodSegmentedControl.selectedSegmentIndex = 0
@@ -238,21 +226,34 @@ extension WeightProgressViewController {
 	private func updateFiltersArray() {
 		switch timePeriod {
 		case .week:
-			filteredArray = weightViewModel.getWeekBy(selectedDate)
+			filteredArray = weightViewModel.getWeekBy(selectedDate).sorted()
 		case .month:
-			filteredArray = weightViewModel.getMonthBy(selectedDate)
+			filteredArray = weightViewModel.getMonthBy(selectedDate).sorted()
 		case .year:
-			filteredArray = weightViewModel.getYearBy(selectedDate)
+			filteredArray = weightViewModel.getYearBy(selectedDate).sorted()
 		}
 	}
-	private func addWeight(weight: String, image: UIImage?) {
-		todayButtonAction(self)
+	private func presentAddWeightAlert(weight: Weight? = nil) {
+		let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
 		
-		getImageUrl {
+		imagePickerController.delegate = self
+		weightAlert = AddWeightAlertView(weight: weight)
+		weightAlert?.delegate = self
+		weightAlert?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width,
+									height: UIScreen.main.bounds.size.height)
+		if let alert = weightAlert {
+			window?.addSubview(alert)
+		}
+	}
+	private func addWeight(weight: String, image: UIImage?, date: Date? = nil) {
+		todayButtonAction(self)
+		let weight = Weight(date: date ?? Date(), weight: Double(weight)!)
+
+		getImageUrl(weightDate: weight.date) {
 			[weak self] image in
 			guard let self = self else { return }
 			
-			let weight = Weight(date: Date(), weight: Double(weight)!)
+			self.weightViewModel.weights?.removeAll(where: { $0.date.onlyDate == date?.onlyDate })
 			self.weightViewModel.weights?.append(weight)
 			self.weightViewModel.addWeight()
 			self.updateDateLabels()
@@ -282,14 +283,14 @@ extension WeightProgressViewController {
 			self.updateDataSource()
 		}
 	}
-	private func getImageUrl(completion: @escaping (String?) -> ()) {
+	private func getImageUrl(weightDate: Date?, completion: @escaping (String?) -> ()) {
 		var weightImageUrl: String {
 			let userEmail = UserProfile.defaults.email!
-			return "\(userEmail.safeEmail)_\(Date().dateStringForDB)_weight_image.jpeg"
+			return "\(userEmail.safeEmail)_\((weightDate ?? Date()).dateStringForDB)_weight_image.jpeg"
 		}
 		
 		if let image = self.weightImage {
-			GoogleStorageManager.shared.uploadImage(from: .weightImage, data: image.jpegData(compressionQuality: 8)!, fileName: weightImageUrl){
+			GoogleStorageManager.shared.uploadImage(from: .weightImage, data: image.jpegData(compressionQuality: 3)!, fileName: weightImageUrl){
 				result in
 				
 				switch result {
@@ -355,11 +356,11 @@ extension WeightProgressViewController: AddWeightAlertViewDelegate {
 	func cameraButtonTapped() {
 		presentImagePickerActionSheet(imagePicker: imagePickerController) {_ in}
 	}
-	func confirmButtonAction(weight: String) {
+	func confirmButtonAction(weight: String, date: Date?) {
 		if let weightTab = self.tabBarController?.tabBar.items?[3] {
 			weightTab.image = UIImage(named:"ScaleIcon")
 		}
-		addWeight(weight: weight, image: weightImage)
+		addWeight(weight: weight, image: weightImage, date: date)
 		weightAlert?.removeFromSuperview()
 		weightAlert = nil
 	}

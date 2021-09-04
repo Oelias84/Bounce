@@ -11,10 +11,16 @@ protocol AddWeightAlertViewDelegate {
 	
 	func cancelButtonAction()
 	func cameraButtonTapped()
-	func confirmButtonAction(weight: String)
+	func confirmButtonAction(weight: String, date: Date?)
 }
 
 class AddWeightAlertView: UIView {
+	
+	var editWeight: Weight? {
+		didSet {
+			print("edit weight")
+		}
+	}
 	
 	@IBOutlet var contentView: UIView!
 	@IBOutlet weak var dateLabel: UILabel!
@@ -29,11 +35,17 @@ class AddWeightAlertView: UIView {
 		commonInit()
 		setupView()
 	}
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
+	required init?(weight: Weight?) {
+		self.editWeight = weight
+		super.init(frame: CGRect.zero)
 		commonInit()
 		setupView()
 	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
 	deinit {
 		removeKeyboardListener()
 	}
@@ -42,8 +54,11 @@ class AddWeightAlertView: UIView {
 		delegate?.cameraButtonTapped()
 	}
 	@IBAction func confirmButtonAction(_ sender: Any) {
+		if let perentVC = parentViewController {
+			Spinner.shared.show(perentVC.view)
+		}
 		if let weight = weightTextField.text, !weight.isEmpty {
-			delegate?.confirmButtonAction(weight: weight)
+			delegate?.confirmButtonAction(weight: weight, date: editWeight?.date)
 		} else {
 			weightTextField.becomeFirstResponder()
 			weightTextField.layer.borderColor = UIColor.red.cgColor
@@ -64,19 +79,17 @@ class AddWeightAlertView: UIView {
 		}
 	}
 	private func setupView() {
-		var dateStringDisplay: String {
-			let formatter = DateFormatter()
-			formatter.dateFormat = "dd/MM/yy"
-			formatter.locale = Locale(identifier: "en_Us")
-			formatter.timeZone = .current
-			return formatter.string(from: Date())
+
+		if let weight = editWeight {
+			weightTextField.text = String(weight.weight)
+			dateLabel.text = weight.date.dateStringDisplay
+		} else {
+			dateLabel.text = Date().dateStringDisplay
 		}
-		
-		weightTextField.becomeFirstResponder()
-		weightTextField.layer.borderColor = UIColor.systemBlue.cgColor
-		dateLabel.text = dateStringDisplay
 		raiseScreenWhenKeyboardAppears()
+		weightTextField.becomeFirstResponder()
 		weightImageButton.isUserInteractionEnabled = true
+		weightTextField.layer.borderColor = UIColor.systemBlue.cgColor
 		weightImageButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cameraButtonAction)))
 	}
 	func chageCheckMarkState() {

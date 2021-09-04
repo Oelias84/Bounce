@@ -10,7 +10,7 @@ import Foundation
 struct Weight: Codable, Comparable {
 	
     let date: Date
-    let weight: Double
+    var weight: Double
     
     var printWeightFullDate: String {
         return date.dateStringDisplay
