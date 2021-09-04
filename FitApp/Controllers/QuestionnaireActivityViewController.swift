@@ -59,7 +59,12 @@ class QuestionnaireActivityViewController: UIViewController {
 			if let steps = stepsLabel.text {
 				UserProfile.defaults.steps = Int(steps)
 				UserProfile.defaults.lifeStyle = nil
-				UserProfile.defaults.kilometer = nil
+				if self.isFromSettings {
+					let userData = UserProfile.defaults
+					UserProfile.defaults.kilometer = ConsumptionManager.shared.stepsToKilometers(steps: userData.steps! , height: userData.height!)
+				} else {
+					UserProfile.defaults.kilometer = nil
+				}
 			}
 			shouldMoveToNutrition()
 		} else {
@@ -103,16 +108,16 @@ extension QuestionnaireActivityViewController {
 	private func setUpTextfields() {
 		let userData = UserProfile.defaults
 		
-		if let kilometers = userData.kilometer {
-			nextButton.setTitle(isFromSettings ? "אישור" : "הבא", for: .normal)
-			kilometersLabel.text = String(kilometers)
-			kilometersCheckBox.isSelected = true
-			stepsSlider.isEnabled = false
-		} else if let steps = userData.steps {
+		if let steps = userData.steps {
 			nextButton.setTitle(isFromSettings ? "אישור" : "הבא", for: .normal)
 			stepsLabel.text = String(steps)
 			stepsCheckBox.isSelected = true
 			kilometersSlider.isEnabled = false
+		} else if let kilometers = userData.kilometer {
+			nextButton.setTitle(isFromSettings ? "אישור" : "הבא", for: .normal)
+			kilometersLabel.text = String(kilometers)
+			kilometersCheckBox.isSelected = true
+			stepsSlider.isEnabled = false
 		} else {
 			kilometersLabel.text = String(minimumKilometers) + " " + K.Units.kilometers
 			stepsLabel.text = String(minimumSteps)

@@ -69,9 +69,9 @@ class HomeViewController: UIViewController {
 				Spinner.shared.stop()
 				self.setupProgressLabels()
 				self.setUpProgressView()
+				self.setupMotivationText()
 			}
 		}
-		setupMotivationText()
 		setupView()
 	}
 	override func viewWillAppear(_ animated: Bool) {
@@ -208,7 +208,7 @@ extension HomeViewController {
 		}
 	}
 	private func setupMotivationText() {
-		self.userMotivationTextLabel.text = UserProfile.defaults.motivationText ?? "..."
+		self.userMotivationTextLabel.text = UserProfile.defaults.motivationText
 
 		viewModel.getMotivationText() {
 			[weak self] motivation in

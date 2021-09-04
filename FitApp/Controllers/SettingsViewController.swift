@@ -108,10 +108,10 @@ extension SettingsViewController {
 	private func setupLabels() {
 		let userData = UserProfile.defaults
 		
-		if let kilometers = userData.kilometer {
+		if let steps = userData.steps {
+		   activityLabel.text = "\(steps) צעדים"
+		} else if let kilometers = userData.kilometer {
 			activityLabel.text = "\(kilometers) ק״מ"
-		} else if let steps = userData.steps {
-			activityLabel.text = "\(steps) צעדים"
 		} else {
 			activityLabel.text = UserProfile.getLifeStyleText()
 		}

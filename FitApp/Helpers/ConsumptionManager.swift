@@ -151,8 +151,10 @@ extension ConsumptionManager {
 	}
 	
 	private func configureData() {
-		guard let weight = weight, let fatPercentage = fatPercentage, let numberOfTrainings = numberOfTrainings,
+		guard let weight = weight,
+			  let fatPercentage = fatPercentage, let numberOfTrainings = numberOfTrainings,
 			  let calculatedCalories = TDEE(weight: weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings) else { return }
+		
 		self.dailyCalories = calculatedCalories
 		self.dailyFatPortion = portionFat(tdee: dailyCalories!)
 		self.dailyProteinPortion = proteinPortion(proteinGrams: proteinGrams(weight: weight, fatPercentage: fatPercentage))
@@ -160,7 +162,7 @@ extension ConsumptionManager {
 	}
 	
 	private func roundOrHalf(friction: Double, portion: Double) -> Double {
-		
+
 		if (friction > 0.25 && friction < 0.5) || (friction < 0.75 && friction > 0.5) {
 			return portion.round(nearest: 0.5)
 		} else if friction <= 0.25 {
@@ -170,5 +172,12 @@ extension ConsumptionManager {
 		} else {
 			return portion
 		}
+	}
+	func stepsToKilometers(steps: Int, height: Int) -> Double {
+		let stepsLengthForMeter = (Double(height) * 0.413) / 100
+		let stepsForOneKilometer = 1000 / stepsLengthForMeter
+		let Kilometer = Double(steps) / stepsForOneKilometer
+		
+		return Kilometer
 	}
 }
