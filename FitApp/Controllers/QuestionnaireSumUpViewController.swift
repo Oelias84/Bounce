@@ -37,7 +37,7 @@ class QuestionnaireSumUpViewController: UIViewController {
 			userData.kilometer = Kilometer
 		}
 		
-		let data = ServerUserData(checkedTermsOfUse: userData.checkedTermsOfUse, birthDate: userData.birthDate!.dateStringForDB, email: userData.email!, name: userData.name!,
+		let data = ServerUserData(isManager: userData.isManager, checkedTermsOfUse: userData.checkedTermsOfUse, birthDate: userData.birthDate!.dateStringForDB, email: userData.email!, name: userData.name!,
 								  weight: userData.weight!, height: userData.height!, fatPercentage: userData.fatPercentage!,
 								  steps: userData.steps, kilometer: userData.kilometer, lifeStyle: userData.lifeStyle, mealsPerDay: userData.mealsPerDay!,
 								  mostHungry: userData.mostHungry!, fitnessLevel: userData.fitnessLevel!,

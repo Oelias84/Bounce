@@ -37,7 +37,7 @@ struct GoogleApiManager {
 							
 							approvedEmails = decodedData.emails
 							
-							if approvedEmails.contains(where: { $0 == userEmail }) {
+							if approvedEmails.contains(where: { $0.lowercased() == userEmail.lowercased() }) {
 								completion(.success(true))
 							} else {
 								completion(.success(false))

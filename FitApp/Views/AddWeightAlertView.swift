@@ -16,11 +16,7 @@ protocol AddWeightAlertViewDelegate {
 
 class AddWeightAlertView: UIView {
 	
-	var editWeight: Weight? {
-		didSet {
-			print("edit weight")
-		}
-	}
+	var editWeight: Weight?
 	
 	@IBOutlet var contentView: UIView!
 	@IBOutlet weak var dateLabel: UILabel!

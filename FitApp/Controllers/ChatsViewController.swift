@@ -10,7 +10,7 @@ import UIKit
 class ChatsViewController: UITableViewController {
 	
 	private var chatsViewModel: ChatsViewModel!
-	private var isManager = false
+	private var isManager = UserProfile.defaults.isManager ?? false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()

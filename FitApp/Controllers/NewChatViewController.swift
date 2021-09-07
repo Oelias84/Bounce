@@ -11,7 +11,7 @@ class NewChatViewController: UIViewController {
 	
 	private var chatUsers = [ChatUser]()
 	private var results = [ChatUser]()
-	private var isManager = false
+	private var isManager = UserProfile.defaults.isManager ?? false
 	private var hasFetched = false
 	
 	public var completion: ((ChatUser) -> Void)?
