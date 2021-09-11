@@ -24,7 +24,7 @@ class LocalNotificationManager {
 			bindNotificationsManagerToController()
 		}
 	}
-	private var postNotifications = [Notification]()
+	private var postNotifications: Set<Notification> = []
 	
 	var bindNotificationsManagerToController: (() -> ()) = {}
 	
@@ -57,7 +57,7 @@ class LocalNotificationManager {
 		dateComponents.minute = time.minute
 		dateComponents.second = time.second
 		
-		self.postNotifications.append(Notification(id: NotificationTypes.mealNotification.rawValue, title: "אופס", body: "נראה ששחכת לעדכן את הארוחות היום, לחצי כאן כדי לעבור למסך הארוחות", dateTime: dateComponents))
+		self.postNotifications.insert(Notification(id: NotificationTypes.mealNotification.rawValue, title: "אופס", body: "נראה ששחכת לעדכן את הארוחות היום, לחצי כאן כדי לעבור למסך הארוחות", dateTime: dateComponents))
 		self.schedule()
 	}
 	func showNotificationAlert(withTitle: String, withMessage: String, type: NotificationTypes, vc: UIViewController) {
@@ -80,9 +80,9 @@ class LocalNotificationManager {
 				
 				switch type {
 				case .waterNotification:
-					self.postNotifications.append(Notification(title: "זמן לישתות", body: "נראה שהגיע הזמן לישתות", dateTime: dateComponents))
+					self.postNotifications.insert(Notification(title: "זמן לישתות", body: "נראה שהגיע הזמן לישתות", dateTime: dateComponents))
 				case .weightNotification:
-					self.postNotifications.append(Notification(title: "זמן להישקל", body: "לחצי כאן בכדי להזין את השקילה היומית שלך", dateTime: dateComponents))
+					self.postNotifications.insert(Notification(title: "זמן להישקל", body: "לחצי כאן בכדי להזין את השקילה היומית שלך", dateTime: dateComponents))
 				case .mealNotification:
 					break
 				}
@@ -157,7 +157,6 @@ extension LocalNotificationManager {
 		UNUserNotificationCenter.current().add(request) { error in
 			
 			guard error == nil else { return }
-			print("Notification scheduled! --- ID = \(notification.id)")
 			self.getScheduledNotifications()
 		}
 	}
