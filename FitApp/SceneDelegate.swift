@@ -38,8 +38,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 						if isApproved {
 							
 							let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
-							let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar)
-
+							let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar) as! UITabBarController
+							homeVC.selectedIndex = 0
+							
 							homeVC.modalPresentationStyle = .fullScreen
 							Spinner.shared.stop()
 							self.window!.rootViewController = homeVC

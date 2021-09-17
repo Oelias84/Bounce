@@ -64,12 +64,14 @@ class HomeViewController: UIViewController {
 
 		if (UserProfile.defaults.finishOnboarding ?? false) {
 			viewModel.fetchMeals()
+			setupMotivationText()
+			checkUserProgress()
+			
 			viewModel.bindToMealViewModel {
 				[unowned self] in
 				Spinner.shared.stop()
 				self.setupProgressLabels()
 				self.setUpProgressView()
-				self.setupMotivationText()
 			}
 		}
 		setupView()
@@ -281,6 +283,9 @@ extension HomeViewController {
 				}
 			}
 		}
+	}
+	private func checkUserProgress() {
+		WeightAlertsManager.shared
 	}
 	
 	@objc func animateProgress() {

@@ -24,7 +24,7 @@ class LocalNotificationManager {
 			bindNotificationsManagerToController()
 		}
 	}
-	private var postNotifications: Set<Notification> = []
+	private var postNotifications: Set<Notification> = Set<Notification>()
 	
 	var bindNotificationsManagerToController: (() -> ()) = {}
 	
