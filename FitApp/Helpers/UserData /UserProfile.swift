@@ -27,6 +27,12 @@ struct UserProfile {
 	@UserDefault(key: .showMealNotFinishedAlert)
 	var showMealNotFinishedAlert: Bool?
 	
+	@UserDefault(key: .shouldShowCaloriesCheckAlert)
+	var shouldShowCaloriesCheckAlert: Bool?
+	
+	@UserDefault(key: .lastCaloriesCheckDate)
+	var lastCaloriesCheckDate: Date?
+	
 	@UserDefault(key: .motivationText)
 	var motivationText: String?
 	
@@ -105,6 +111,7 @@ extension UserProfile {
 		let data = ServerUserData (
 			isManager: defaults.isManager,
 			checkedTermsOfUse: defaults.checkedTermsOfUse,
+			lastCaloriesCheckDate: defaults.lastCaloriesCheckDate,
 			birthDate: defaults.birthDate?.dateStringForDB,
 			email: defaults.email!,
 			name: defaults.name!,
@@ -142,6 +149,7 @@ extension UserProfile {
 		
 		userProfile.isManager = data.isManager
 		userProfile.checkedTermsOfUse = data.checkedTermsOfUse
+		userProfile.lastCaloriesCheckDate = data.lastCaloriesCheckDate
 		userProfile.id = id
 		userProfile.name = data.name
 		userProfile.email = data.email
@@ -162,6 +170,7 @@ extension UserProfile {
 		
 		userProfile.isManager = nil
 		userProfile.checkedTermsOfUse = nil
+		userProfile.lastCaloriesCheckDate = nil
 		userProfile.id = nil
 		userProfile.name = nil
 		userProfile.email = nil
@@ -183,7 +192,8 @@ struct ServerUserData: Codable {
 	
 	let isManager: Bool?
 	let checkedTermsOfUse: Bool?
-    let birthDate: String?
+	let lastCaloriesCheckDate: Date?
+	let birthDate: String?
 	let email: String
 	let name: String
     let weight: Double?
@@ -208,10 +218,14 @@ extension Key {
 	//show alerts
 	static let showQaAlert: Key = "showQaAlert"
 	static let showMealNotFinishedAlert: Key = "showMealNotFinishedAlert"
+	static let shouldShowCaloriesCheckAlert: Key = "shouldShowCaloriesCheckAlert"
 
 	//motivations
 	static let lastMotivationDate: Key = "lastMotivationDate"
 	static let motivationText: Key = "motivationText"
+	
+	//User Calories Check Data
+	static let lastCaloriesCheckDate: Key = "lastCaloriesCheckDate"
 	
 	//user data
 	static let isManager: Key = "isManager"

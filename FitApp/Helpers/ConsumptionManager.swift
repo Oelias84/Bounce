@@ -27,7 +27,10 @@ class ConsumptionManager {
 	private var carbsProgress = 0.0
 	
 	//MARK: - Getters
-	func getCalories() -> String {
+	func getCalories() -> Double {
+		return dailyCalories ?? 0
+	}
+	func getCaloriesString() -> String {
 		return String(format: "%.0f", dailyCalories ?? 0)
 	}
 	

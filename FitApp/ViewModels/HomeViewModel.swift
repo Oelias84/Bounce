@@ -22,7 +22,7 @@ class HomeViewModel {
 		return mealViewModel.getMealStringDate()
 	}
 	var getUserCalories: String {
-		return userConsumption.getCalories()
+		return userConsumption.getCaloriesString()
 	}
 	var getUserExceptionalCalories: NSAttributedString? {
 		if let exCalories = mealViewModel.getExceptionalCalories() {
@@ -93,7 +93,7 @@ class HomeViewModel {
 	
 	// Check user current status
 	func checkAddWeight(completion: @escaping ()->()) {
-		WeightViewModel.checkAddWeight {
+		WeightsManager.shared.checkAddWeight {
 			showWeightAlert in
 			if showWeightAlert {
 				completion()

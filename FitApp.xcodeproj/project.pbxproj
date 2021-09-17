@@ -83,6 +83,10 @@
 		7CD1817E26481E5D0054DB9C /* SettingTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */; };
 		7CFA5FF7262A0F5800A3F401 /* MoveDishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */; };
 		7CFA5FFF262A10E600A3F401 /* MoveDishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */; };
+		7CFA85CB26ECDEA000296B53 /* WeightAlertsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */; };
+		7CFA85CD26ED02CE00296B53 /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA85CC26ED02CE00296B53 /* UIAlertController+Extensions.swift */; };
+		7CFA85CF26ED1A8A00296B53 /* WeightsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA85CE26ED1A8A00296B53 /* WeightsManager.swift */; };
+		7CFA85D126EE055700296B53 /* DailyMealManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA85D026EE055700296B53 /* DailyMealManager.swift */; };
 		7CFCAF4726BD58DA008A24F8 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFCAF4626BD58DA008A24F8 /* HomeViewModel.swift */; };
 		7CFFAD9C261DEF1000C05C66 /* DishesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFFAD9B261DEF1000C05C66 /* DishesTableViewController.swift */; };
 		B30069D325926F090025FA0E /* WeightProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30069D225926F090025FA0E /* WeightProgressViewController.swift */; };
@@ -251,6 +255,10 @@
 		7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewModel.swift; sourceTree = "<group>"; };
 		7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoveDishView.xib; sourceTree = "<group>"; };
 		7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDishView.swift; sourceTree = "<group>"; };
+		7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightAlertsManager.swift; sourceTree = "<group>"; };
+		7CFA85CC26ED02CE00296B53 /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
+		7CFA85CE26ED1A8A00296B53 /* WeightsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsManager.swift; sourceTree = "<group>"; };
+		7CFA85D026EE055700296B53 /* DailyMealManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyMealManager.swift; sourceTree = "<group>"; };
 		7CFCAF4626BD58DA008A24F8 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		7CFFAD9B261DEF1000C05C66 /* DishesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishesTableViewController.swift; sourceTree = "<group>"; };
 		ACEF8473DFF1F8DE43E4AFF4 /* Pods-FitApp-FitAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp-FitAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-FitApp-FitAppUITests/Pods-FitApp-FitAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -577,12 +585,15 @@
 			children = (
 				B368E07D25A8816000BD1937 /* UserData  */,
 				7C89AA58256D6FDB009AD87C /* Constants.swift */,
+				7C54164A269D923800C22859 /* ErrorManager.swift */,
 				B3DB751A259F8773002CF48B /* ConsumptionManager.swift */,
 				B367F18725B1EEC200DF21D7 /* LocalNotificationManager.swift */,
-				7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */,
-				7C74AF9D264336EA001D0F5D /* PushNotificationSender.swift */,
+				7CFA85CE26ED1A8A00296B53 /* WeightsManager.swift */,
+				7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */,
 				7C2BD80F267212C7006A1736 /* MealManager.swift */,
-				7C54164A269D923800C22859 /* ErrorManager.swift */,
+				7CFA85D026EE055700296B53 /* DailyMealManager.swift */,
+				7C74AF9D264336EA001D0F5D /* PushNotificationSender.swift */,
+				7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -783,6 +794,7 @@
 				B3DB753425A09133002CF48B /* Double+Extensions.swift */,
 				B368E05B25A79BB700BD1937 /* Data+Extensions.swift */,
 				B367F14725B036CC00DF21D7 /* UserDefaults+Extensions.swift */,
+				7CFA85CC26ED02CE00296B53 /* UIAlertController+Extensions.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -1215,6 +1227,7 @@
 				B3BB8F4125826FEB00D70628 /* QuestionnaireNutritionViewController.swift in Sources */,
 				B36B71922577BF0C001CD393 /* Exercise.swift in Sources */,
 				B368DF4F25A5F24E00BD1937 /* GoogleApiManager.swift in Sources */,
+				7CFA85CF26ED1A8A00296B53 /* WeightsManager.swift in Sources */,
 				7C7434F525CD9DD700D33A9A /* ChatViewController.swift in Sources */,
 				B368DFFB25A76A2C00BD1937 /* WeightViewModel.swift in Sources */,
 				7C33B661266A587D00E16A1C /* CommentsViewModel.swift in Sources */,
@@ -1254,6 +1267,7 @@
 				B3BB8F3B2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift in Sources */,
 				7CFFAD9C261DEF1000C05C66 /* DishesTableViewController.swift in Sources */,
 				7C1ACCEB266F8F8F008079C9 /* CommentTableViewCell.swift in Sources */,
+				7CFA85D126EE055700296B53 /* DailyMealManager.swift in Sources */,
 				7CD1817E26481E5D0054DB9C /* SettingTableViewModel.swift in Sources */,
 				7C7435EB25D31F9A00D33A9A /* Chat.swift in Sources */,
 				7C54164F26AACC9900C22859 /* RegisterViewModel.swift in Sources */,
@@ -1269,6 +1283,7 @@
 				B34397AD258A7FA50073A59B /* DishView.swift in Sources */,
 				7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */,
 				7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */,
+				7CFA85CB26ECDEA000296B53 /* WeightAlertsManager.swift in Sources */,
 				7C1ACD042670C25B008079C9 /* AddingTableViewCell.swift in Sources */,
 				7C54164B269D923800C22859 /* ErrorManager.swift in Sources */,
 				B38397FB25B4A21F00154697 /* Workout.swift in Sources */,

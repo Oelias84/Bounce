@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Notification {
+struct Notification: Hashable {
 	
 	var id = UUID().uuidString
 	var title: String

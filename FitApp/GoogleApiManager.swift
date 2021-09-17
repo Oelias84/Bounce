@@ -114,6 +114,25 @@ struct GoogleApiManager {
 				}
 			})
 	}
+	func getAllMeals(completion: @escaping (Result<[DailyMeal]?, Error>) -> Void) {
+		
+		db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("user-daily-meals").getDocuments {
+			data, error in
+			
+			if let error = error {
+				print(error)
+			} else if let data = data {
+				do {
+					var dailyMeal: [DailyMeal]? = nil
+					dailyMeal = try data.documents.map { try $0.data(as: DailyMeal.self)! }
+					completion(.success(dailyMeal))
+				} catch {
+					print(error)
+					completion(.failure(error))
+				}
+			}
+		}
+	}
 	
 	//MARK: - Weights
 	func updateWeights(weights: Weights) {
@@ -219,6 +238,7 @@ struct GoogleApiManager {
 			}
 		}
 	}
+	
 	//MARK: - Comments
 	func getComments(completion: @escaping (Result<CommentsData?, Error>) -> Void) {
 		do {
