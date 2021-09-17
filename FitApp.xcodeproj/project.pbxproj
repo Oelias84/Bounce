@@ -70,6 +70,7 @@
 		7C89AA91256D8286009AD87C /* Questionnaire.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA90256D8286009AD87C /* Questionnaire.storyboard */; };
 		7C8F51362671F9E3001FF0EE /* AddMealAlertDishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8F51352671F9E3001FF0EE /* AddMealAlertDishView.xib */; };
 		7C8F51382671FAE0001FF0EE /* AddMealAlertDishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8F51372671FAE0001FF0EE /* AddMealAlertDishView.swift */; };
+		7C98731E26F4A7C8000E5299 /* CaloriesProgressState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98731D26F4A7C8000E5299 /* CaloriesProgressState.swift */; };
 		7C9B345E2583C5B400D30480 /* QuestionnaireSumUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */; };
 		7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */; };
 		7C9B34922583F84A00D30480 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B34912583F84A00D30480 /* StartViewController.swift */; };
@@ -237,6 +238,7 @@
 		7C89AA90256D8286009AD87C /* Questionnaire.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Questionnaire.storyboard; sourceTree = "<group>"; };
 		7C8F51352671F9E3001FF0EE /* AddMealAlertDishView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMealAlertDishView.xib; sourceTree = "<group>"; };
 		7C8F51372671FAE0001FF0EE /* AddMealAlertDishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealAlertDishView.swift; sourceTree = "<group>"; };
+		7C98731D26F4A7C8000E5299 /* CaloriesProgressState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesProgressState.swift; sourceTree = "<group>"; };
 		7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSumUpViewController.swift; sourceTree = "<group>"; };
 		7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C9B34912583F84A00D30480 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -1217,6 +1219,7 @@
 				B368DFFB25A76A2C00BD1937 /* WeightViewModel.swift in Sources */,
 				7C33B661266A587D00E16A1C /* CommentsViewModel.swift in Sources */,
 				7C1ACCF5266FCBC6008079C9 /* ChangeDateView.swift in Sources */,
+				7C98731E26F4A7C8000E5299 /* CaloriesProgressState.swift in Sources */,
 				B358222825AC9A2F00C91295 /* ArticlesViewController.swift in Sources */,
 				B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */,
 				B3DB753525A09133002CF48B /* Double+Extensions.swift in Sources */,

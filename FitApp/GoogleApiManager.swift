@@ -143,6 +143,15 @@ struct GoogleApiManager {
 		}
 	}
 	
+	//MARK: - User Calories Progress Sate
+	func updateCaloriesProgressState(data: CaloriesProgressState) {
+		do {
+			try db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("user-calories-progress").document(data.date.dateStringForDB).setData(from: data.self)
+		} catch {
+			print(error)
+		}
+	}
+	
 	//MARK: - Dishes
 	func getDishes(completion: @escaping (Result<[[ServerDish]]?, Error>) -> Void) {
 		do {
@@ -231,7 +240,7 @@ struct GoogleApiManager {
 	}
 	
 	//MARK: - Workouts
-	func getWorkouts( forFitnessLevel: Int, completion: @escaping (Result<[Workout], Error>) -> Void) {
+	func getWorkouts(forFitnessLevel: Int, completion: @escaping (Result<[Workout], Error>) -> Void) {
 		do {
 			db.collection("workouts-data").document("workouts").getDocument(source: .default, completion: { (data, error) in
 				if let error = error {
