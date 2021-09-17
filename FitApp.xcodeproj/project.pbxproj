@@ -646,6 +646,35 @@
 			name = MealView;
 			sourceTree = "<group>";
 		};
+		7C98731F26F4A985000E5299 /* Meal */ = {
+			isa = PBXGroup;
+			children = (
+				B348420C25890CF800E0EF31 /* Meal.swift */,
+				B348421425890E5D00E0EF31 /* DIsh.swift */,
+				B368E04825A790D200BD1937 /* ServerDishs.swift */,
+			);
+			path = Meal;
+			sourceTree = "<group>";
+		};
+		7C98732026F4A9DB000E5299 /* Workout */ = {
+			isa = PBXGroup;
+			children = (
+				B38397FA25B4A21F00154697 /* Workout.swift */,
+				B36B71912577BF0C001CD393 /* Exercise.swift */,
+			);
+			path = Workout;
+			sourceTree = "<group>";
+		};
+		7C98732126F4A9FA000E5299 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				B3833F38259364ED006776D5 /* Weight.swift */,
+				B302981F25793BBA00CF41F0 /* UserProgress.swift */,
+				7C98731D26F4A7C8000E5299 /* CaloriesProgressState.swift */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
 		7C9B34992583F95D00D30480 /* LoginAndRegister */ = {
 			isa = PBXGroup;
 			children = (
@@ -781,18 +810,14 @@
 			isa = PBXGroup;
 			children = (
 				7C74357C25D0824D00D33A9A /* User.swift */,
-				B302981F25793BBA00CF41F0 /* UserProgress.swift */,
-				B348420C25890CF800E0EF31 /* Meal.swift */,
-				B348421425890E5D00E0EF31 /* DIsh.swift */,
-				B368E04825A790D200BD1937 /* ServerDishs.swift */,
-				B3833F38259364ED006776D5 /* Weight.swift */,
 				B358222F25AC9DA800C91295 /* Article.swift */,
-				B38397FA25B4A21F00154697 /* Workout.swift */,
-				B36B71912577BF0C001CD393 /* Exercise.swift */,
 				7C658AA725D9873C00CA75B2 /* Motivations.swift */,
 				7C658ABD25D992D200CA75B2 /* Comments.swift */,
 				7C33B65E26690A3800E16A1C /* Notification.swift */,
+				7C98731F26F4A985000E5299 /* Meal */,
 				7C74351125CDBBEF00D33A9A /* Chat */,
+				7C98732026F4A9DB000E5299 /* Workout */,
+				7C98732126F4A9FA000E5299 /* Progress */,
 			);
 			path = Models;
 			sourceTree = "<group>";
