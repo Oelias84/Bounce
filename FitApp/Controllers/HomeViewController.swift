@@ -8,6 +8,7 @@
 import UIKit
 import BLTNBoard
 import FirebaseAuth
+import JGProgressHUD
 import MKRingProgressView
 
 class HomeViewController: UIViewController {
@@ -23,6 +24,9 @@ class HomeViewController: UIViewController {
 	
 	private var hasProgressView = false
 	private var didFinishOnboarding = false
+	
+	let shared = Spinner()
+	var hud = JGProgressHUD()
 	
 	private lazy var boardManager: BLTNItemManager = {
 		let item = BLTNPageItem(title: "שמחים שהצטרפת אלינו :)")
@@ -63,15 +67,15 @@ class HomeViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		Spinner.shared.show(self.view)
-
+		show()
+		
 		if (UserProfile.defaults.finishOnboarding ?? false) {
 			viewModel.fetchMeals()
 			setupMotivationText()
 			
 			viewModel.bindToMealViewModel {
 				[unowned self] in
-				Spinner.shared.stop()
+				self.stop()
 				self.setupProgressLabels()
 				self.setUpProgressView()
 			}
@@ -295,5 +299,14 @@ extension HomeViewController {
 				self.fatRingLayer.progress = self.viewModel.fatPercentage
 			}
 		}
+	}
+	
+	func show() {
+		hud.backgroundColor = #colorLiteral(red: 0.6394728422, green: 0.659519434, blue: 0.6805263758, alpha: 0.2546477665)
+		hud.textLabel.text = "טוען"
+		hud.show(in: self.view)
+	}
+	func stop() {
+		hud.dismiss()
 	}
 }

@@ -87,6 +87,9 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="7cx-O7-2gd">
                         <barButtonItem key="backBarButtonItem" title=" " id="u6S-Pr-wTe"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="buttonsStackView" destination="66b-I2-iGr" id="aDR-nP-pba"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TRr-vi-Nfh" sceneMemberID="firstResponder"/>
             </objects>

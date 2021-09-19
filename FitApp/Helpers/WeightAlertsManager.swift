@@ -404,7 +404,12 @@ extension WeightAlertsManager {
 	private func userInRangeAlert(caloriesConsumed: CaloriesAlertsState) {
 		
 		let weightAlert = UIAlertController(title: "כל הכבוד עמדת ביעדים! עבודה יפה, המשיכי ככה!", message: nil, preferredStyle: .alert)
-		
+		let neutralMessage =
+			"""
+
+אנו רואים שגופך מגיב מעולה לכן לא נעשה שינוי בכמות הקלוריות.
+
+"""
 		//Calorie State
 		switch caloriesConsumed {
 		case .smallerThen:
@@ -423,12 +428,7 @@ extension WeightAlertsManager {
 """
 		case .inRange:
 			
-			weightAlert.message =
-				"""
-
-אנו רואים שגופך מגיב מעולה לכן לא נעשה שינוי בכמות הקלוריות.
-
-"""
+			weightAlert.message = neutralMessage
 		case .biggerThen:
 			
 			weightAlert.message =
@@ -450,6 +450,9 @@ extension WeightAlertsManager {
 		weightAlert.addAction(UIAlertAction(title: "הבנתי, אל תציג לי שוב", style: .default) { _ in
 			self.updateUserCaloriesProgress()
 			self.shouldShowAlertToUser = false
+			if let text = weightAlert.message, text != neutralMessage {
+				self.sendNotificationToManager(title: "לא ירדת לפי המתוכנן", text: text)
+			}
 			UserProfile.defaults.shouldShowCaloriesCheckAlert = self.shouldShowAlertToUser
 		})
 		weightAlert.addAction(UIAlertAction(title: "לא כרגע", style: .cancel) { _ in

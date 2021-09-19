@@ -42,7 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 							homeVC.selectedIndex = 0
 							
 							homeVC.modalPresentationStyle = .fullScreen
-							Spinner.shared.stop()
+//							Spinner.shared.stop()
 							self.window!.rootViewController = homeVC
 						} else {
 							Spinner.shared.stop()

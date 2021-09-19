@@ -10,7 +10,18 @@ import FirebaseAuth
 
 class StartViewController: UIViewController {
 
-    override func viewDidLoad() {
+	@IBOutlet weak var buttonsStackView: UIStackView!
+	
+	override func viewDidLoad() {
         super.viewDidLoad()
     }
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		if Auth.auth().currentUser != nil {
+			buttonsStackView.isHidden = true
+		} else {
+			buttonsStackView.isHidden = false
+		}
+	}
 }
