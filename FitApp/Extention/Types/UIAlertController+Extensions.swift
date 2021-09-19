@@ -8,19 +8,17 @@
 import UIKit
 import Foundation
 
-public extension UIAlertController {
+extension UIAlertController {
 	
-	func show() {
+	func showAlert() {
 		let keyWindow = UIApplication.shared.connectedScenes
 				.filter({$0.activationState == .foregroundActive})
 				.compactMap({$0 as? UIWindowScene})
 				.first?.windows
 				.filter({$0.isKeyWindow}).first
 		
-		
 		DispatchQueue.main.async {
 			keyWindow!.rootViewController?.present(self, animated: true, completion: nil)
 		}
-
 	}
 }

@@ -146,7 +146,6 @@ class WeightsManager {
 			completion(false)
 			return
 		}
-		
 		GoogleApiManager.shared.getWeights { result in
 			switch result {
 			case .success(let weights):

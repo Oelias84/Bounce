@@ -50,15 +50,15 @@ class LocalNotificationManager {
 		UNUserNotificationCenter.current().removeAllDeliveredNotifications()
 	}
 	func setMealNotification() {
-		guard let time = "17:00".timeFromString else { return }
-		var dateComponents = DateComponents()
-		
-		dateComponents.hour = time.hour
-		dateComponents.minute = time.minute
-		dateComponents.second = time.second
-		
-		self.postNotifications.insert(Notification(id: NotificationTypes.mealNotification.rawValue, title: "אופס", body: "נראה ששחכת לעדכן את הארוחות היום, לחצי כאן כדי לעבור למסך הארוחות", dateTime: dateComponents))
-		self.schedule()
+//		guard let time = "17:00".timeFromString else { return }
+//		var dateComponents = DateComponents()
+//		
+//		dateComponents.hour = time.hour
+//		dateComponents.minute = time.minute
+//		dateComponents.second = time.second
+//		
+//		self.postNotifications.insert(Notification(id: NotificationTypes.mealNotification.rawValue, title: "אופס", body: "נראה ששחכת לעדכן את הארוחות היום, לחצי כאן כדי לעבור למסך הארוחות", dateTime: dateComponents))
+//		self.schedule()
 	}
 	func showNotificationAlert(withTitle: String, withMessage: String, type: NotificationTypes, vc: UIViewController) {
 		let alert = UIAlertController(title: withTitle, message: withMessage, preferredStyle: .alert)

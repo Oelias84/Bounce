@@ -13,6 +13,9 @@ import MKRingProgressView
 class HomeViewController: UIViewController {
 	
 	private var viewModel = HomeViewModel()
+	private let weightAlertsManager = WeightAlertsManager()
+
+	private var caloriesAlertCheck: WeightAlertsManager!
 	
 	private var carbsRingLayer: RingProgressView!
 	private var fatRingLayer: RingProgressView!
@@ -65,7 +68,6 @@ class HomeViewController: UIViewController {
 		if (UserProfile.defaults.finishOnboarding ?? false) {
 			viewModel.fetchMeals()
 			setupMotivationText()
-			checkUserProgress()
 			
 			viewModel.bindToMealViewModel {
 				[unowned self] in
@@ -95,7 +97,6 @@ class HomeViewController: UIViewController {
 		
 		setUpProgressView()
 	}
-	
 	
 	@IBAction func chatButtonAction(_ sender: Any) {
 		openChat()
@@ -283,9 +284,6 @@ extension HomeViewController {
 				}
 			}
 		}
-	}
-	private func checkUserProgress() {
-		WeightAlertsManager.shared
 	}
 	
 	@objc func animateProgress() {

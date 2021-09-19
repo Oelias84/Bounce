@@ -222,7 +222,7 @@ class MealViewModel: NSObject {
 					}
 				}
 			case .failure(let error):
-				print(error)
+			print(error)
 			}
 		}
 	}

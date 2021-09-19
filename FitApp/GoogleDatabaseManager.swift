@@ -126,6 +126,11 @@ extension GoogleDatabaseManager {
 			}
 		}
 	}
+//	public func getManagerTokens() -> [String] {
+//		self.database.child("chat_users").observeSingleEvent(of: .value) { snapshot in
+//		
+//		}
+//	}
 }
 
 //MARK: - Chat functionality

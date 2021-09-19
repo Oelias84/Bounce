@@ -31,6 +31,7 @@
 		7C54164B269D923800C22859 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54164A269D923800C22859 /* ErrorManager.swift */; };
 		7C54164D269D951C00C22859 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54164C269D951C00C22859 /* LoginViewModel.swift */; };
 		7C54164F26AACC9900C22859 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54164E26AACC9900C22859 /* RegisterViewModel.swift */; };
+		7C62181026F4F2F20019FD25 /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C62180F26F4F2F20019FD25 /* UIAlertController+Extensions.swift */; };
 		7C658AA825D9873C00CA75B2 /* Motivations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658AA725D9873C00CA75B2 /* Motivations.swift */; };
 		7C658AB525D990EB00CA75B2 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658AB425D990EB00CA75B2 /* CommentViewController.swift */; };
 		7C658ABE25D992D200CA75B2 /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658ABD25D992D200CA75B2 /* Comments.swift */; };
@@ -84,7 +85,6 @@
 		7CFA5FF7262A0F5800A3F401 /* MoveDishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */; };
 		7CFA5FFF262A10E600A3F401 /* MoveDishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */; };
 		7CFA85CB26ECDEA000296B53 /* WeightAlertsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */; };
-		7CFA85CD26ED02CE00296B53 /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA85CC26ED02CE00296B53 /* UIAlertController+Extensions.swift */; };
 		7CFA85CF26ED1A8A00296B53 /* WeightsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA85CE26ED1A8A00296B53 /* WeightsManager.swift */; };
 		7CFA85D126EE055700296B53 /* DailyMealManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA85D026EE055700296B53 /* DailyMealManager.swift */; };
 		7CFCAF4726BD58DA008A24F8 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFCAF4626BD58DA008A24F8 /* HomeViewModel.swift */; };
@@ -194,6 +194,7 @@
 		7C54164A269D923800C22859 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		7C54164C269D951C00C22859 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		7C54164E26AACC9900C22859 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		7C62180F26F4F2F20019FD25 /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
 		7C658AA725D9873C00CA75B2 /* Motivations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motivations.swift; sourceTree = "<group>"; };
 		7C658AB425D990EB00CA75B2 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		7C658ABD25D992D200CA75B2 /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
@@ -256,7 +257,6 @@
 		7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoveDishView.xib; sourceTree = "<group>"; };
 		7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDishView.swift; sourceTree = "<group>"; };
 		7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightAlertsManager.swift; sourceTree = "<group>"; };
-		7CFA85CC26ED02CE00296B53 /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
 		7CFA85CE26ED1A8A00296B53 /* WeightsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsManager.swift; sourceTree = "<group>"; };
 		7CFA85D026EE055700296B53 /* DailyMealManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyMealManager.swift; sourceTree = "<group>"; };
 		7CFCAF4626BD58DA008A24F8 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -794,7 +794,7 @@
 				B3DB753425A09133002CF48B /* Double+Extensions.swift */,
 				B368E05B25A79BB700BD1937 /* Data+Extensions.swift */,
 				B367F14725B036CC00DF21D7 /* UserDefaults+Extensions.swift */,
-				7CFA85CC26ED02CE00296B53 /* UIAlertController+Extensions.swift */,
+				7C62180F26F4F2F20019FD25 /* UIAlertController+Extensions.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -1241,6 +1241,7 @@
 				7C1ACCE7266F8D19008079C9 /* CommentsTableViewController.swift in Sources */,
 				7C89AA66256D704D009AD87C /* LoginViewController.swift in Sources */,
 				B368DFE025A6247600BD1937 /* SpinnerView.swift in Sources */,
+				7C62181026F4F2F20019FD25 /* UIAlertController+Extensions.swift in Sources */,
 				B341E236257FA6F500EE05A7 /* Date+Extensions.swift in Sources */,
 				B3DB750D259F4850002CF48B /* FloatingPoint+Extensions.swift in Sources */,
 				7C74353225D07DB800D33A9A /* GoogleDatabaseManager.swift in Sources */,
