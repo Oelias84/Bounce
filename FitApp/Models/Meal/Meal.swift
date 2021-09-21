@@ -69,6 +69,13 @@ struct MealProgress: Codable {
     var protein: Double
 }
 
+struct MealTarget: Codable {
+	
+	var carbs: Double
+	var fats: Double
+	var protein: Double
+}
+
 struct DailyMeal: Codable {
     
     let meals: [Meal]

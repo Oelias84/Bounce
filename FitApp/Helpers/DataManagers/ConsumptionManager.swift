@@ -15,6 +15,7 @@ class ConsumptionManager {
 	private var fatPercentage: Double?
 	private var Kilometer: Double?
 	private var numberOfTrainings: Int?
+	private var externalNumberOfTraining: Int?
 	private var lifeStyle: Double?
 	
 	private var dailyCalories: Double?
@@ -62,6 +63,7 @@ class ConsumptionManager {
 		self.Kilometer = userData.kilometer
 		self.lifeStyle = userData.lifeStyle
 		self.numberOfTrainings = userData.weaklyWorkouts
+		self.externalNumberOfTraining = userData.externalWorkout
 		
 		configureData()
 	}
@@ -154,9 +156,9 @@ extension ConsumptionManager {
 	}
 	
 	private func configureData() {
-		guard let weight = weight,
-			  let fatPercentage = fatPercentage, let numberOfTrainings = numberOfTrainings,
-			  let calculatedCalories = TDEE(weight: weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings) else { return }
+		guard let weight = weight, let fatPercentage = fatPercentage, var numberOfTrainings = numberOfTrainings else { return }
+		if let externalTraining = externalNumberOfTraining { numberOfTrainings += externalTraining }
+		guard let calculatedCalories = TDEE(weight: weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings) else { return }
 		
 		self.dailyCalories = calculatedCalories
 		self.dailyFatPortion = portionFat(tdee: dailyCalories!)

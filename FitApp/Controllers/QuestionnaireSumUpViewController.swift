@@ -41,7 +41,7 @@ class QuestionnaireSumUpViewController: UIViewController {
 								  weight: userData.weight!, height: userData.height!, fatPercentage: userData.fatPercentage!,
 								  steps: userData.steps, kilometer: userData.kilometer, lifeStyle: userData.lifeStyle, mealsPerDay: userData.mealsPerDay!,
 								  mostHungry: userData.mostHungry!, fitnessLevel: userData.fitnessLevel!,
-								  weaklyWorkouts: userData.weaklyWorkouts!, finishOnboarding: userData.finishOnboarding!)
+								  weaklyWorkouts: userData.weaklyWorkouts!, externalWorkout: userData.externalWorkout!, finishOnboarding: userData.finishOnboarding!)
         
         manager.updateUserData(userData: data)
 		dismiss(animated: true)

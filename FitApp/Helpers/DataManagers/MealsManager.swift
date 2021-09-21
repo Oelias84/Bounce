@@ -1,36 +1,38 @@
 //
-//  MealViewModel.swift
+//  MealsManager.swift
 //  FitApp
 //
-//  Created by iOS Bthere on 01/01/2021.
+//  Created by Ofir Elias on 21/09/2021.
 //
 
+import Combine
 import Foundation
 
-class MealViewModel: NSObject {
+class MealsManager {
 	
-	static let shared = MealViewModel()
+	static let shared = MealsManager()
 	private let consumptionManager = ConsumptionManager.shared
-	
-	var meals: [Meal]? {
-		didSet {
-			self.bindMealViewModelToController()
-		}
-	}
-	private var currentMealDate: Date?
-	let mealManager = MealManager.shared
+
+	private var dailyMeals: [Meal]?
+	private var currentMealDate: Date!
+	private var dailyMealsProgress: MealProgress!
 	
 	var bindMealViewModelToController: (() -> ()) = {}
-	
-	private override init() {
-		super.init()
+
+	private init() {
+		
 	}
+}
+
+extension MealsManager {
 	
-	func fetchData(date: Date? = Date()) {
-		consumptionManager.calculateUserData()
-		if self.meals == nil || date?.onlyDate != Date().onlyDate {
+	//MARK: - Fetch / Create Meals
+	private func fetchData(date: Date? = Date(), completion: @escaping ()->()) {
+		
+		if self.dailyMeals == nil || date?.onlyDate != Date().onlyDate {
 			let userData = UserProfile.defaults
 			var preferredMeal: MealType?
+			
 			switch userData.mostHungry {
 			case 1:
 				preferredMeal = .breakfast
@@ -41,49 +43,51 @@ class MealViewModel: NSObject {
 			default:
 				preferredMeal = nil
 			}
+			
 			fetchMealsForOrCreate(date: date!, prefer: preferredMeal, numberOfMeals: userData.mealsPerDay!, protein: consumptionManager.getDailyProtein(), carbs: consumptionManager.getDailyCarbs(), fat: consumptionManager.getDailyFat())
 		}
 	}
-	
-	//MARK: - Meals Progress
-	func getMealDate() -> Date {
-		return meals!.first!.date
+	private func fetchMealsForOrCreate(date: Date, prefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) {
+		GoogleApiManager.shared.getMealFor(date) { result in
+			switch result {
+			case .success(let dailyMeal):
+				if let dailyMeal = dailyMeal {
+					self.dailyMeals = dailyMeal.meals
+					self.currentMealDate = date
+				} else {
+					self.dailyMeals = self.populateMeals(date: date, hasPrefer: prefer, numberOfMeals: numberOfMeals, protein: protein, carbs: carbs, fat: fat)
+					UserProfile.defaults.showMealNotFinishedAlert = true
+				}
+			case .failure(let error):
+				print(error)
+			}
+		}
 	}
-	func getProgress() -> (MealProgress, MealTarget) {
+	
+	//MARK: - Getters
+	func getMealsCount() -> Int {
+		if let meals = dailyMeals, meals.first(where: {$0.mealType == .other}) == nil, !meals.isEmpty {
+			return (meals.count) + 1
+		}
+		return dailyMeals?.count ?? 0
+	}
+	func getTodaysProgress() {
 		var carbs: Double
 		var fats: Double
 		var protein: Double
 		
-		var carbsTarget: Double
-		var fatsTarget: Double
-		var proteinTarget: Double
-		
-		guard let meals = meals else {
+		guard let dailyMeals = dailyMeals else {
 			LocalNotificationManager.shared.setMealNotification()
-			return (MealProgress(carbs: 0.0, fats: 0.0, protein: 0.0), MealTarget(carbs: 0.0, fats: 0.0, protein: 0.0))
+			dailyMealsProgress = MealProgress(carbs: 0.0, fats: 0.0, protein: 0.0)
+			return
 		}
 		
 		carbs = 0
 		fats = 0
 		protein = 0
 		
-		carbsTarget = 0
-		fatsTarget = 0
-		proteinTarget = 0
-		
-		
-		for meal in meals {
+		for meal in dailyMeals {
 			for dish in meal.dishes {
-				
-				switch dish.type {
-				case .carbs:
-					carbsTarget += dish.amount
-				case .fat:
-					fatsTarget += dish.amount
-				case .protein:
-					proteinTarget += dish.amount
-				}
-				
 				if dish.isDishDone {
 					switch dish.type {
 					case .carbs:
@@ -104,92 +108,22 @@ class MealViewModel: NSObject {
 		} else {
 			LocalNotificationManager.shared.removeMealsNotification()
 		}
-		return (MealProgress(carbs: carbs, fats: fats, protein: protein), MealTarget(carbs: carbsTarget, fats: fatsTarget, protein: proteinTarget))
-	}
-	
-	func getMealStringDate() -> String {
-		return (currentMealDate ?? Date()).dateStringDisplay + " " + (currentMealDate ?? Date()).displayDayName
-	}
-	func getExceptionalCalories() -> String? {
-		if let meals = meals, meals.contains(where: {$0.mealType == .other}) {
-			var mealCalorieSum: Double = 0.0
-			
-			meals.forEach {
-				$0.dishes.forEach {
-					switch $0.type {
-					case .protein:
-						mealCalorieSum += $0.amount * 150.0
-					case .carbs, .fat:
-						mealCalorieSum += $0.amount * 100
-					}
-				}
-			}
-			return String(format: "%.0f", mealCalorieSum)
-		}
-		return nil
-	}
-	func getCurrentMealCalories() -> String {
-		var mealCalorieSum: Double = 0.0
-		
-		meals?.forEach {
-			$0.dishes.forEach {
-				switch $0.type {
-				case .protein:
-					mealCalorieSum += $0.amount * 150.0
-				case .carbs, .fat:
-					mealCalorieSum += $0.amount * 100
-				}
-			}
-		}
-		return "\(mealCalorieSum)"
-	}
-	func getMealCaloriesSum(dishes: [Dish]) -> String {
-		var mealCalorieSum: Double = 0.0
-		
-		dishes.forEach {
-			switch $0.type {
-			case .protein:
-				mealCalorieSum += $0.amount * 150.0
-			case .carbs, .fat:
-				mealCalorieSum += $0.amount * 100
-			}
-		}
-		return String(format: "%.0f", mealCalorieSum)
-	}
-	func checkDailyMealIsDoneBeforeHour(completion: @escaping (Bool) -> ()) {
-		let calendar = Calendar.current
-		let pastHour = calendar.dateComponents([.hour,.minute,.second], from: "22:30".timeFromString!)
-		let currentHour = calendar.dateComponents([.hour,.minute,.second], from: Date())
-		
-		guard pastHour.hour! <= currentHour.hour! && pastHour.minute! <= currentHour.minute! && (UserProfile.defaults.showMealNotFinishedAlert ?? true) else {
-			completion(true)
-			return
-		}
-		
-		checkTodaysMeal { isMealsDone in
-			completion(isMealsDone)
-		}
-	}
-	
-	//MARK: - Meals
-	func getMealsCount() -> Int {
-		if let meals = meals, meals.first(where: {$0.mealType == .other}) == nil, !meals.isEmpty {
-			return (meals.count) + 1
-		}
-		return meals?.count ?? 0
+		dailyMealsProgress = MealProgress(carbs: carbs, fats: fats, protein: protein)
 	}
 	func updateMeals(for date: Date) {
-		guard let meals = self.meals else { return }
-		let dailyMeal = DailyMeal(meals: meals)
-		getProgress()
-		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal)
+		guard let dailyMeal = self.dailyMeals else { return }
+		let data = DailyMeal(meals: dailyMeal)
+		
+		getTodaysProgress()
+		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: data)
 	}
 	func removeExceptionalMeal(for date: Date) {
-		guard var meals = self.meals else { return }
-		meals.removeAll(where: { $0.name == "ארוחת חריגה" })
-		let dailyMeal = DailyMeal(meals: meals)
-		getProgress()
-		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal)
+		guard var dailyMeals = self.dailyMeals else { return }
+		dailyMeals.removeAll(where: { $0.name == "ארוחת חריגה" })
+		let data = DailyMeal(meals: dailyMeals)
+		
+		getTodaysProgress()
+		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: data)
 		fetchMealsBy(date: date) {_ in}
 	}
 	func fetchMealsBy(date: Date, completion: @escaping (Bool) -> ()) {
@@ -197,11 +131,11 @@ class MealViewModel: NSObject {
 			switch result {
 			case .success(let dailyMeal):
 				if let dailyMeal = dailyMeal {
-					self.meals = dailyMeal.meals
+					self.dailyMeals = dailyMeal.meals
 					self.currentMealDate = date
 					completion(true)
 				} else {
-					self.meals = []
+					self.dailyMeals = []
 					completion(false)
 				}
 			case .failure(let error):
@@ -224,49 +158,6 @@ class MealViewModel: NSObject {
 		
 		updateMeals(for: meal.date)
 		fetchMealsBy(date: meal.date) {_ in}
-	}
-	
-	private func fetchMealsForOrCreate(date: Date, prefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) {
-		GoogleApiManager.shared.getMealFor(date) { result in
-			switch result {
-			case .success(let dailyMeal):
-				if let dailyMeal = dailyMeal {
-					self.meals = dailyMeal.meals
-					self.currentMealDate = date
-				} else {
-					self.meals = self.populateMeals(date: date, hasPrefer: prefer, numberOfMeals: numberOfMeals, protein: protein, carbs: carbs, fat: fat)
-					UserProfile.defaults.showMealNotFinishedAlert = true
-				}
-			case .failure(let error):
-				print(error)
-			}
-		}
-	}
-	private func checkTodaysMeal(completion: @escaping (Bool) -> ()) {
-		GoogleApiManager.shared.getMealFor(Date()) { result in
-			switch result {
-			case .success(let dailyMeal):
-				if let dailyMeal = dailyMeal {
-					dailyMeal.meals.forEach { meal in
-						if meal.isMealDone != true {
-							completion(false)
-						} else {
-							completion(true)
-							UserProfile.defaults.showMealNotFinishedAlert = false
-						}
-					}
-				}
-			case .failure(let error):
-			print(error)
-			}
-		}
-	}
-	func checkIfCurrentMealIsDone() -> Bool {
-		
-		if let meals = meals {
-			if (meals.first(where: {!$0.isMealDone}) != nil) { return false }
-		}
-		return true
 	}
 	
 	//MARK: - Meals Algorithm

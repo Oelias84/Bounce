@@ -223,10 +223,6 @@ extension WeightAlertsManager {
 		userCaloriesBetweenConsumedAndGiven = consumedCalories - userExpectedDailyCalories
 		userConsumedCalories = consumedCalories
 	}
-	private func calculatePercentage(value: Double ,percentageVal: Double) -> Double {
-		let val = value * percentageVal
-		return val / 100.0
-	}
 	
 	//MARK: - Notification
 	private func sendNotificationToManager(title: String, text: String) {
@@ -322,7 +318,7 @@ extension WeightAlertsManager {
 	}
 	
 	private func notEnoughDataAlert() {
-		let weightAlert = UIAlertController(title:  "חישוב צריכה קלורית תקופתי אינו זמין", message: "מצטערים, אך נראה שלא הזנת מספיק נתונים בכדי שנוכל לבצע את הבידקה התקופתית", preferredStyle: .alert)
+		let weightAlert = UIAlertController(title: "חישוב צריכה קלורית תקופתי אינו זמין" ,message: "מצטערים, אך נראה שלא הזנת מספיק שקילות בכדי שנוכל לבצע את הבדיקה התקופתית", preferredStyle: .alert)
 		
 		weightAlert.addAction(UIAlertAction(title: "הבנתי, אל תציג לי שוב", style: .default) { _ in
 			self.shouldShowAlertToUser = false
@@ -335,7 +331,7 @@ extension WeightAlertsManager {
 		weightAlert.showAlert()
 	}
 	private func userLostWeightAlert(caloriesConsumed: CaloriesAlertsState) {
-		let weightAlert = UIAlertController(title:  "לא ירדת לפי המתוכנן, לא קרה כלום- מתחילים שבוע חדש!", message: nil, preferredStyle: .alert)
+		let weightAlert = UIAlertController(title: "לא ירדת לפי המתוכנן, לא קרה כלום- מתחילים שבוע חדש!", message: nil, preferredStyle: .alert)
 		
 		//Calorie State
 		switch caloriesConsumed {

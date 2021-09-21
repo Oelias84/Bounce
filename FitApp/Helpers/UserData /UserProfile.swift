@@ -98,6 +98,9 @@ struct UserProfile {
     @UserDefault(key: .weaklyWorkouts)
     var weaklyWorkouts: Int?
 	
+	@UserDefault(key: .externalWorkout)
+	var externalWorkout: Int?
+	
 	//MealData
 	@UserDefault(key: .otherDishes)
 	var otherDishes: [String]?
@@ -125,6 +128,7 @@ extension UserProfile {
 			mostHungry: defaults.mostHungry,
 			fitnessLevel: defaults.fitnessLevel,
 			weaklyWorkouts: defaults.weaklyWorkouts,
+			externalWorkout: defaults.externalWorkout,
 			finishOnboarding: defaults.finishOnboarding
 		)
 		googleManager.updateUserData(userData: data)
@@ -164,6 +168,7 @@ extension UserProfile {
 		userProfile.mostHungry = data.mostHungry
 		userProfile.fitnessLevel = data.fitnessLevel
 		userProfile.weaklyWorkouts = data.weaklyWorkouts
+		userProfile.externalWorkout = data.externalWorkout
 	}
 	func resetUserProfileData() {
 		var userProfile = UserProfile.defaults
@@ -185,6 +190,7 @@ extension UserProfile {
 		userProfile.mostHungry = nil
 		userProfile.fitnessLevel = nil
 		userProfile.weaklyWorkouts = nil
+		userProfile.externalWorkout = nil
 	}
 }
 
@@ -206,6 +212,7 @@ struct ServerUserData: Codable {
     let mostHungry: Int?
     let fitnessLevel: Int?
     let weaklyWorkouts: Int?
+	let externalWorkout: Int?
     let finishOnboarding: Bool?
 }
 
@@ -247,6 +254,7 @@ extension Key {
     static let mostHungry: Key = "mostHungry"
     static let fitnessLevel: Key = "fitnessLevel"
     static let weaklyWorkouts: Key = "weaklyWorkouts"
+	static let externalWorkout: Key = "externalWorkout"
     static let finishOnboarding: Key = "finishOnboarding"
 	static let otherDishes: Key = "otherDishes"
 }

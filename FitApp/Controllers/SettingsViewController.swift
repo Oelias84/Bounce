@@ -17,9 +17,12 @@ class SettingsViewController: UITableViewController {
 	@IBOutlet weak var mostHungryLabel: UILabel!
 	@IBOutlet weak var numberOfWorkoutsLabel: UILabel!
 	@IBOutlet weak var fitnessLevelLabel: UILabel!
+	@IBOutlet weak var externalWorkoutLabel: UILabel!
 	
 	@IBOutlet weak var mealsStepper: UIStepper!
 	@IBOutlet weak var workoutStepper: UIStepper!
+	@IBOutlet weak var externalWorkoutStepper: UIStepper!
+
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == K.SegueId.moveToSettingsOptions {
@@ -35,11 +38,26 @@ class SettingsViewController: UITableViewController {
 		setupStepper()
 	}
 	
+	@IBAction func mealStepperAction(_ sender: UIStepper) {
+		mealsPerDayLabel.text = "\(Int(sender.value))"
+		UserProfile.defaults.mealsPerDay = Int(sender.value)
+		UserProfile.updateServer()
+	}
+	@IBAction func workoutStepperAction(_ sender: UIStepper) {
+		numberOfWorkoutsLabel.text = "\(Int(sender.value))"
+		UserProfile.defaults.weaklyWorkouts = Int(sender.value)
+		UserProfile.updateServer()
+	}
+	@IBAction func externalWorkoutAction(_ sender: UIStepper) {
+		externalWorkoutLabel.text = "\(Int(sender.value))"
+		UserProfile.defaults.externalWorkout = Int(sender.value)
+		UserProfile.updateServer()
+	}
+	
 	//MARK: - Table view data source
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
 		switch indexPath.section {
-		
 		case 0:
 			personalDetailsTappedAt(indexPath.row)
 		case 1:
@@ -52,59 +70,11 @@ class SettingsViewController: UITableViewController {
 			break
 		}
 	}
-	
-	@IBAction func mealStepperAction(_ sender: UIStepper) {
-		mealsPerDayLabel.text = "\(Int(sender.value))"
-		UserProfile.defaults.mealsPerDay = Int(sender.value)
-		UserProfile.updateServer()
-	}
-	@IBAction func workoutStepperAction(_ sender: UIStepper) {
-		numberOfWorkoutsLabel.text = "\(Int(sender.value))"
-		UserProfile.defaults.weaklyWorkouts = Int(sender.value)
-		UserProfile.updateServer()
-	}
 }
 
+//MARK: - Functions
 extension SettingsViewController {
 	
-	private func personalDetailsTappedAt(_ row: Int) {
-		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
-		let activityLevelVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireForth)
-			as! QuestionnaireActivityViewController
-		
-		activityLevelVC.isFromSettings = true
-		navigationController?.pushViewController(activityLevelVC, animated: true)
-	}
-	private func nutritionDetailsTappedAt(_ row: Int) {
-		switch row {
-		case 1:
-			optionContentType = .mostHungry
-			performSegue(withIdentifier: K.SegueId.moveToSettingsOptions, sender: self)
-		default:
-			break
-		}
-	}
-	private func fitnessLevelDetailsTappedAt(_ row: Int) {
-		switch row {
-		case 0:
-			optionContentType = .fitnessLevel
-			performSegue(withIdentifier: K.SegueId.moveToSettingsOptions, sender: self)
-		default:
-			break
-		}
-	}
-	private func systemTappedAt(_ row: Int) {
-		switch row {
-		case 0:
-			optionContentType = .notifications
-			performSegue(withIdentifier: K.SegueId.moveToSettingsOptions, sender: self)
-		case 1:
-			presentLogoutAlert()
-		default:
-			break
-		}
-	}
-
 	private func setupLabels() {
 		let userData = UserProfile.defaults
 		
@@ -152,6 +122,7 @@ extension SettingsViewController {
 		let userData = UserProfile.defaults
 		mealsStepper.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
 		workoutStepper.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+		externalWorkoutStepper.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
 		
 		switch userData.fitnessLevel {
 		case 1:
@@ -170,6 +141,10 @@ extension SettingsViewController {
 			self.workoutStepper.value = Double(workouts)
 			self.numberOfWorkoutsLabel.text = "\(workouts)"
 		}
+		if let workouts = userData.externalWorkout {
+			self.externalWorkoutStepper.value = Double(workouts)
+			self.externalWorkoutLabel.text = "\(workouts)"
+		}
 	}
 	private func sendSupportEmail() {
 		let subject = ""
@@ -177,5 +152,43 @@ extension SettingsViewController {
 		let mailVC = MailComposerViewController(recipients: ["Fitappsupport@gmail.com"], subject: subject, messageBody: messageBody, messageBodyIsHtml: true)
 		
 		present(mailVC, animated: true)
+	}
+	
+	private func systemTappedAt(_ row: Int) {
+		switch row {
+		case 0:
+			optionContentType = .notifications
+			performSegue(withIdentifier: K.SegueId.moveToSettingsOptions, sender: self)
+		case 1:
+			presentLogoutAlert()
+		default:
+			break
+		}
+	}
+	private func personalDetailsTappedAt(_ row: Int) {
+		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
+		let activityLevelVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireForth)
+			as! QuestionnaireActivityViewController
+		
+		activityLevelVC.isFromSettings = true
+		navigationController?.pushViewController(activityLevelVC, animated: true)
+	}
+	private func nutritionDetailsTappedAt(_ row: Int) {
+		switch row {
+		case 1:
+			optionContentType = .mostHungry
+			performSegue(withIdentifier: K.SegueId.moveToSettingsOptions, sender: self)
+		default:
+			break
+		}
+	}
+	private func fitnessLevelDetailsTappedAt(_ row: Int) {
+		switch row {
+		case 0:
+			optionContentType = .fitnessLevel
+			performSegue(withIdentifier: K.SegueId.moveToSettingsOptions, sender: self)
+		default:
+			break
+		}
 	}
 }

@@ -189,12 +189,51 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="hbZ-OR-qyq">
+                                        <rect key="frame" x="0.0" y="340.00000069358134" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hbZ-OR-qyq" id="lRv-6F-vxz">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מספר אמונים שבועי חיצוני" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VTL-E1-ln2">
+                                                    <rect key="frame" x="20" y="11.5" width="171" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r9f-sR-sn1">
+                                                    <rect key="frame" x="272.5" y="6" width="135.5" height="32"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCO-qi-DOL">
+                                                            <rect key="frame" x="0.0" y="0.0" width="41.5" height="32"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" systemColor="systemBlueColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" maximumValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="28K-hD-kKd">
+                                                            <rect key="frame" x="41.5" y="0.0" width="94" height="32"/>
+                                                            <connections>
+                                                                <action selector="externalWorkoutAction:" destination="ueW-eC-avd" eventType="valueChanged" id="k3H-IP-uBJ"/>
+                                                            </connections>
+                                                        </stepper>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="VTL-E1-ln2" firstAttribute="leading" secondItem="lRv-6F-vxz" secondAttribute="leadingMargin" id="1VQ-O1-UpF"/>
+                                                <constraint firstItem="VTL-E1-ln2" firstAttribute="centerY" secondItem="lRv-6F-vxz" secondAttribute="centerY" id="9we-d3-DQE"/>
+                                                <constraint firstAttribute="trailing" secondItem="r9f-sR-sn1" secondAttribute="trailing" constant="6" id="KeX-DR-DQk"/>
+                                                <constraint firstItem="r9f-sR-sn1" firstAttribute="centerY" secondItem="lRv-6F-vxz" secondAttribute="centerY" id="v1E-AL-nR9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="מערכת" id="gyg-Rp-qdl">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="kQz-9p-hTD">
-                                        <rect key="frame" x="0.0" y="389.00000104037201" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="432.50000104037201" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kQz-9p-hTD" id="9BB-6F-3NT">
                                             <rect key="frame" x="0.0" y="0.0" width="384.5" height="43.5"/>
@@ -214,7 +253,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="gBw-XF-pVB">
-                                        <rect key="frame" x="0.0" y="432.50000104037201" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="476.00000104037201" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gBw-XF-pVB" id="pRz-Ur-PjX">
                                             <rect key="frame" x="0.0" y="0.0" width="384.5" height="43.5"/>
@@ -244,6 +283,8 @@
                     <navigationItem key="navigationItem" title="הגדרות" largeTitleDisplayMode="always" id="Gfg-6u-bcE"/>
                     <connections>
                         <outlet property="activityLabel" destination="RUi-v8-zN7" id="qTq-Tr-l7x"/>
+                        <outlet property="externalWorkoutLabel" destination="LCO-qi-DOL" id="SBE-gJ-nGV"/>
+                        <outlet property="externalWorkoutStepper" destination="28K-hD-kKd" id="lzg-Lu-5wi"/>
                         <outlet property="fitnessLevelLabel" destination="HUH-pu-0Kl" id="oXJ-N1-5cg"/>
                         <outlet property="mealsPerDayLabel" destination="rpz-De-E20" id="ZKV-v4-TT6"/>
                         <outlet property="mealsStepper" destination="jAb-rJ-zZE" id="rAI-3a-tnW"/>

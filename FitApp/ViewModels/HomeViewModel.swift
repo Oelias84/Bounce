@@ -63,12 +63,12 @@ class HomeViewModel {
 		let currentProgress = mealViewModel.getProgress()
 		userConsumption.calculateUserData()
 
-		return UserProgress(carbsTarget: userConsumption.getDailyCarbs(),
-							proteinTarget: userConsumption.getDailyProtein(),
-							fatTarget: userConsumption.getDailyFat(),
-							carbsProgress: currentProgress.carbs,
-							proteinProgress: currentProgress.protein,
-							fatProgress: currentProgress.fats)
+		return UserProgress(carbsTarget: currentProgress.1.carbs,
+							proteinTarget: currentProgress.1.protein,
+							fatTarget: currentProgress.1.fats,
+							carbsProgress: currentProgress.0.carbs,
+							proteinProgress: currentProgress.0.protein,
+							fatProgress: currentProgress.0.fats)
 	}
 	func fetchMeals() {
 		mealViewModel.fetchData()

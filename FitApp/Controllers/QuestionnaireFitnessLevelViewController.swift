@@ -25,15 +25,24 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
     @IBOutlet weak var weeklyWorkoutThird: UIStackView!
 	@IBOutlet weak var weeklyWorkoutStack: UIStackView!
 	
+	@IBOutlet weak var externalTrainingStepper: UIStepper! {
+		didSet {
+			externalTrainingStepper.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+		}
+	}
+	@IBOutlet weak var externalTrainingLabel: UILabel!
+	
 	@IBOutlet weak var nextButton: UIButton!
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		
 		setupCheckMarks()
 	}
 	
+	@IBAction func externalTrainingStepperAction(_ sender: UIStepper) {
+		externalTrainingLabel.text = "\(Int(sender.value))"
+	}
 	@IBAction func nextButtonAction(_ sender: Any) {
 		
 		if fitnessLevel != 0 && weaklyWorkouts != 0 {
