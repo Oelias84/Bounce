@@ -26,7 +26,11 @@ class ExerciseTableViewCell: UITableViewCell {
     @IBOutlet weak var exerciseTypeView: UIView!
     @IBOutlet weak var exerciseNumberLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var cellBackgroundView: UIView!
+	@IBOutlet weak var cellBackgroundView: UIView! {
+		didSet {
+			cellBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
+		}
+	}
     @IBOutlet weak var repeatsLabel: UILabel!
     @IBOutlet weak var setsLabel: UILabel!
     
@@ -57,4 +61,8 @@ class ExerciseTableViewCell: UITableViewCell {
         exerciseTypeView.layer.cornerRadius = 10
         exerciseTypeView.addSubview(exerciseTypeNib)
     }
+	
+	@objc private func backgroundTapped() {
+		delegate?.detailButtonTapped(indexPath: indexPath)
+	}
 }
