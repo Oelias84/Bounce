@@ -330,7 +330,7 @@ extension WeightAlertsManager {
 
 """
 
- איזה באסה ☹️,
+ איזה באסה 😑,
  לא הזנת 3 שקילות השבוע ולכן לא נוכל לבצע את הניתוח השבועי.
  מחכים לשקילות של השבוע הנוכחי! 💪🏼
 
