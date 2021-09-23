@@ -86,9 +86,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		}
 	}
 	
-	func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-		return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10), NSAttributedString.Key.foregroundColor: UIColor.darkGray])
-	}
 	func didTapImage(in cell: MessageCollectionViewCell) {
 		messagesCollectionView.endEditing(true)
 		guard let indexPath = messagesCollectionView.indexPath(for: cell) else { return }
@@ -103,6 +100,9 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		default:
 			break
 		}
+	}
+	func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+		return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10), NSAttributedString.Key.foregroundColor: UIColor.darkGray])
 	}
 }
 
@@ -212,35 +212,6 @@ extension ChatViewController: CropViewControllerDelegate, UINavigationController
 //MARK: - Functions
 extension ChatViewController {
 	
-	private func createMessageId() -> String? {
-		guard let currentUserEmail = UserProfile.defaults.email else { return nil }
-		let identifier = "\(otherUserEmail)_\(currentUserEmail.safeEmail)_\(Date().fullDateStringForDB)"
-		return identifier
-	}
-	private func listenToMessages(id: String, shouldScrollToBottom: Bool) {
-		GoogleDatabaseManager.shared.getAllMessagesForChat(with: id) { [weak self] result in
-			guard let self = self else { return }
-			
-			switch result {
-			case .success(let messages):
-				if messages.isEmpty {
-					return
-				}
-				self.messages = messages
-				DispatchQueue.main.async { [weak self] in
-					guard let self = self else { return }
-					if shouldScrollToBottom {
-						self.messagesCollectionView.reloadData()
-						self.messagesCollectionView.scrollToLastItem()
-					} else {
-						self.messagesCollectionView.reloadDataAndKeepOffset()
-					}
-				}
-			case .failure(let error):
-				print("faild to fetch messages:", error)
-			}
-		}
-	}
 	private func setupController() {
 		navigationItem.largeTitleDisplayMode = .never
 		showMessageTimestampOnSwipeLeft = true
@@ -264,12 +235,42 @@ extension ChatViewController {
 		messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
 		messageInputBar.setStackViewItems([button], forStack: .left, animated: true)
 	}
+	private func createMessageId() -> String? {
+		guard let currentUserEmail = UserProfile.defaults.email else { return nil }
+		let identifier = "\(otherUserEmail)_\(currentUserEmail.safeEmail)_\(Date().fullDateStringForDB)"
+		return identifier
+	}
 	private func sendNotification(with text: String) {
 		let notification = PushNotificationSender()
+		let userName = UserProfile.defaults.name!
 		
 		if let tokens = self.otherTokens {
 			tokens.forEach {
-				notification.sendPushNotification(to: $0, title: "הודעה נשלחה מ-" + (self.title ?? "User"), body: text)
+				notification.sendPushNotification(to: $0, title: "הודעה נשלחה מ-" + (userName), body: text)
+			}
+		}
+	}
+	private func listenToMessages(id: String, shouldScrollToBottom: Bool) {
+		GoogleDatabaseManager.shared.getAllMessagesForChat(with: id) { [weak self] result in
+			guard let self = self else { return }
+			
+			switch result {
+			case .success(let messages):
+				if messages.isEmpty {
+					return
+				}
+				self.messages = messages
+				DispatchQueue.main.async { [weak self] in
+					guard let self = self else { return }
+					if shouldScrollToBottom {
+						self.messagesCollectionView.reloadData()
+						self.messagesCollectionView.scrollToLastItem()
+					} else {
+						self.messagesCollectionView.reloadDataAndKeepOffset()
+					}
+				}
+			case .failure(let error):
+				print("faild to fetch messages:", error)
 			}
 		}
 	}

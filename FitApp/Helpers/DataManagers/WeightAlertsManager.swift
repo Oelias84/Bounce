@@ -52,6 +52,8 @@ class WeightAlertsManager {
 	private var firstWeekAverageWeight: Double!
 	private var secondWeekAverageWeight: Double!
 	
+	private let messagesManager = MessagesManager.shared
+	
 	required init() {
 		
 		setUserData() {
@@ -225,16 +227,21 @@ extension WeightAlertsManager {
 	}
 	
 	//MARK: - Notification
-	private func sendNotificationToManager(title: String, text: String) {
-		let notification = PushNotificationSender()
-		let userName = UserProfile.defaults.name
+	private func sendMessageToManager(title: String, text: String) {
 		
-		DispatchQueue.global(qos: .background).async {
-			self.getManagerTokens { tokens in
-				tokens.forEach {
-					notification.sendPushNotification(to: $0, title: "תצאות הבדיקה הקלורית של \(userName ?? "") \(title)", body: text)
+		//If chat exist send message and notification to support
+		if let supportChat = self.messagesManager.supportChat {
+			self.messagesManager.postMassage(isNewChat: false, existingChatId: supportChat.id, otherUserEmail: supportChat.otherUserEmail, messageText: title + "\n" + text, chatOtherTokens: nil)
+			
+		//Chat dose not exist generate new support chat and send message and notification
+		} else {
+			self.messagesManager.generateUserSupportChat(completion: {
+				newSupportChat in
+				
+				if let newChat = newSupportChat, let recipientTokens = newChat.otherUserTokens {
+					self.messagesManager.postMassage(isNewChat: true, existingChatId: nil, otherUserEmail: newSupportChat?.otherUserEmail, messageText: title + "\n" + text, chatOtherTokens: recipientTokens)
 				}
-			}
+			})
 		}
 	}
 	private func getManagerTokens(completion: @escaping ([String]) -> ()) {
@@ -318,7 +325,17 @@ extension WeightAlertsManager {
 	}
 	
 	private func notEnoughDataAlert() {
-		let weightAlert = UIAlertController(title: "חישוב צריכה קלורית תקופתי אינו זמין" ,message: "מצטערים, אך נראה שלא הזנת מספיק שקילות בכדי שנוכל לבצע את הבדיקה התקופתית", preferredStyle: .alert)
+		let weightAlert = UIAlertController(title: nil ,message: nil, preferredStyle: .alert)
+		weightAlert.message =
+
+"""
+
+ איזה באסה ☹️,
+ לא הזנת 3 שקילות השבוע ולכן לא נוכל לבצע את הניתוח השבועי.
+ מחכים לשקילות של השבוע הנוכחי! 💪🏼
+
+
+"""
 		
 		weightAlert.addAction(UIAlertAction(title: "הבנתי, אל תציג לי שוב", style: .default) { _ in
 			self.shouldShowAlertToUser = false
@@ -328,6 +345,9 @@ extension WeightAlertsManager {
 		weightAlert.addAction(UIAlertAction(title: "לא כרגע", style: .cancel) { _ in
 			return
 		})
+		if let title = weightAlert.title, let text = weightAlert.message, lastCaloriesCheckDate != Date().onlyDate {
+			self.sendMessageToManager(title: title, text: text)
+		}
 		weightAlert.showAlert()
 	}
 	private func userLostWeightAlert(caloriesConsumed: CaloriesAlertsState) {
@@ -338,7 +358,7 @@ extension WeightAlertsManager {
 		case .smallerThen:
 			
 			weightAlert.message =
-				"""
+"""
 
 שמנו לב שכמות הקק״ל שדיווחת בתפריט התזונה קטנה יותר מזו שניתנה לך.
 
@@ -355,7 +375,7 @@ extension WeightAlertsManager {
 		case .inRange:
 			
 			weightAlert.message =
-				"""
+"""
 שמנו לב שכמות הקק״ל שדיווחת בתפריט התזונה זהה לזו שניתנה לך.
 
 אנא בדקי האם:
@@ -371,8 +391,9 @@ extension WeightAlertsManager {
 
 """
 		case .biggerThen:
+			
 			weightAlert.message =
-				"""
+"""
 
 שמנו לב שכמות הקק״ל שדיווחת בתפריט התזונה גדולה יותר מזו שניתנה לך.
 
@@ -387,14 +408,15 @@ extension WeightAlertsManager {
 		weightAlert.addAction(UIAlertAction(title: "הבנתי, אל תציג לי שוב", style: .default) { _ in
 			self.updateUserCaloriesProgress()
 			self.shouldShowAlertToUser = false
-			if let text = weightAlert.message {
-				self.sendNotificationToManager(title: "לא ירדת לפי המתוכנן", text: text)
-			}
+
 			UserProfile.defaults.shouldShowCaloriesCheckAlert = self.shouldShowAlertToUser
 		})
 		weightAlert.addAction(UIAlertAction(title: "לא כרגע", style: .cancel) { _ in
 			return
 		})
+		if let title = weightAlert.title, let text = weightAlert.message, lastCaloriesCheckDate != Date().onlyDate {
+			self.sendMessageToManager(title: title, text: text)
+		}
 		weightAlert.showAlert()
 	}
 	private func userInRangeAlert(caloriesConsumed: CaloriesAlertsState) {
@@ -446,14 +468,14 @@ extension WeightAlertsManager {
 		weightAlert.addAction(UIAlertAction(title: "הבנתי, אל תציג לי שוב", style: .default) { _ in
 			self.updateUserCaloriesProgress()
 			self.shouldShowAlertToUser = false
-			if let text = weightAlert.message, text != neutralMessage {
-				self.sendNotificationToManager(title: "לא ירדת לפי המתוכנן", text: text)
-			}
 			UserProfile.defaults.shouldShowCaloriesCheckAlert = self.shouldShowAlertToUser
 		})
 		weightAlert.addAction(UIAlertAction(title: "לא כרגע", style: .cancel) { _ in
 			return
 		})
+		if let title = weightAlert.title, let text = weightAlert.message, lastCaloriesCheckDate != Date().onlyDate {
+			self.sendMessageToManager(title: title, text: text)
+		}
 		weightAlert.showAlert()
 	}
 	private func userGainedWeightAlert(caloriesConsumed: CaloriesAlertsState) {
@@ -518,14 +540,14 @@ extension WeightAlertsManager {
 		weightAlert.addAction(UIAlertAction(title: "הבנתי, אל תציג לי שוב", style: .default) { _ in
 			self.updateUserCaloriesProgress()
 			self.shouldShowAlertToUser = false
-			if let text = weightAlert.message {
-				self.sendNotificationToManager(title: "לא ירדת לפי המתוכנן", text: text)
-			}
 			UserProfile.defaults.shouldShowCaloriesCheckAlert = self.shouldShowAlertToUser
 		})
 		weightAlert.addAction(UIAlertAction(title: "לא כרגע", style: .cancel) { _ in
 			return
 		})
+		if let title = weightAlert.title, let text = weightAlert.message, lastCaloriesCheckDate != Date().onlyDate {
+			self.sendMessageToManager(title: title, text: text)
+		}
 		weightAlert.showAlert()
 	}
 }

@@ -377,15 +377,13 @@ extension GoogleDatabaseManager {
 					completion(false)
 					return
 				}
-				
-				//create func
-				
+								
 				self.database.child("\(currentUserSafeEmail)/chats").observeSingleEvent(of: .value) { snapshot in
 					
 					var databaseEntryChat = [[String:Any]]()
 					let updateValue: [String:Any] = [
 						"date": newMessage.sentDate.fullDateStringForDB,
-						"is_read": false,
+						"is_read": true,
 						"message": messageContent
 					]
 					
