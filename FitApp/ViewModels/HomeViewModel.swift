@@ -22,7 +22,7 @@ class HomeViewModel {
 		return mealViewModel.getMealStringDate()
 	}
 	var getUserCalories: String {
-		return userConsumption.getCaloriesString()
+		return mealViewModel.getCurrentMealCalories()
 	}
 	var getUserExceptionalCalories: NSAttributedString? {
 		if let exCalories = mealViewModel.getExceptionalCalories() {
