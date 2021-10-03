@@ -37,11 +37,11 @@ class QuestionnaireSumUpViewController: UIViewController {
 			userData.kilometer = Kilometer
 		}
 		
-		let data = ServerUserData(isManager: userData.isManager, checkedTermsOfUse: userData.checkedTermsOfUse, lastCaloriesCheckDate: userData.lastCaloriesCheckDate, birthDate: userData.birthDate!.dateStringForDB, email: userData.email!, name: userData.name!,
-								  weight: userData.weight!, height: userData.height!, fatPercentage: userData.fatPercentage!,
-								  steps: userData.steps, kilometer: userData.kilometer, lifeStyle: userData.lifeStyle, mealsPerDay: userData.mealsPerDay!,
-								  mostHungry: userData.mostHungry!, fitnessLevel: userData.fitnessLevel!,
-								  weaklyWorkouts: userData.weaklyWorkouts!, externalWorkout: userData.externalWorkout!, finishOnboarding: userData.finishOnboarding!)
+		let data = ServerUserData(isManager: userData.isManager, checkedTermsOfUse: userData.checkedTermsOfUse, lastCaloriesCheckDate: userData.lastCaloriesCheckDate,
+								  birthDate: userData.birthDate!.dateStringForDB, email: userData.email!, name: userData.name!, weight: userData.weight,
+								  height: userData.height, fatPercentage: userData.fatPercentage, steps: userData.steps, kilometer: userData.kilometer,
+								  lifeStyle: userData.lifeStyle, mealsPerDay: userData.mealsPerDay!, mostHungry: userData.mostHungry, fitnessLevel: userData.fitnessLevel,
+								  weaklyWorkouts: userData.weaklyWorkouts, externalWorkout: userData.externalWorkout, finishOnboarding: userData.finishOnboarding)
         
         manager.updateUserData(userData: data)
 		dismiss(animated: true)
