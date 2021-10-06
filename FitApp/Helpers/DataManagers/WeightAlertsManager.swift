@@ -110,7 +110,7 @@ extension WeightAlertsManager {
 			
 			completion()
 		 //First time check
-		} else if lastCaloriesCheckDate == nil {
+		} else if lastCaloriesCheckDate == nil, today.isLaterThanOrEqual(to: firstUserWeightDate.add(2.weeks)) {
 			
 			//Set true on show alert
 			shouldShowAlertToUser = true
@@ -230,8 +230,8 @@ extension WeightAlertsManager {
 	private func sendMessageToManager(title: String, text: String) {
 		
 		//If chat exist send message and notification to support
-		if let supportChat = self.messagesManager.supportChat {
-			self.messagesManager.postMassage(isNewChat: false, existingChatId: supportChat.id, otherUserEmail: supportChat.otherUserEmail, messageText: title + "\n" + text, chatOtherTokens: nil)
+		if let supportChat = self.messagesManager.userChats?.first(where: { $0.otherUserEmail == "support-mail-com" }) {
+			self.messagesManager.postMassageToSupport(existingChatId: supportChat.id, otherUserEmail: supportChat.otherUserEmail, messageText: title + "\n" + text, chatOtherTokens: nil)
 			
 		//Chat dose not exist generate new support chat and send message and notification
 		} else {
@@ -239,7 +239,7 @@ extension WeightAlertsManager {
 				newSupportChat in
 				
 				if let newChat = newSupportChat, let recipientTokens = newChat.otherUserTokens {
-					self.messagesManager.postMassage(isNewChat: true, existingChatId: nil, otherUserEmail: newSupportChat?.otherUserEmail, messageText: title + "\n" + text, chatOtherTokens: recipientTokens)
+					self.messagesManager.postMassageToSupport(existingChatId: nil, otherUserEmail: newSupportChat?.otherUserEmail, messageText: title + "\n" + text, chatOtherTokens: recipientTokens)
 				}
 			})
 		}
