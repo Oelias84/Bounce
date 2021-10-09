@@ -22,6 +22,8 @@ class MessagesManager {
 	private let userName = UserProfile.defaults.name
 	private let userEmail = UserProfile.defaults.email
 	
+	var bindMessageManager: (() -> ()) = {}
+	
 	private init() {
 		
 		let queue = OperationQueue()
@@ -38,6 +40,7 @@ class MessagesManager {
 				[weak self] chat in
 				guard let self = self else { return }
 				self.userChats = chat
+				self.bindMessageManager()
 			}
 		}
 		
@@ -95,14 +98,14 @@ extension MessagesManager {
 			}
 		}
 	}
-	private func createChat(otherUserEmail: String, otherTokens: [String], name: String, message: Message, notificationText: String) {
+	private func createChat(otherUserEmail: String, otherTokens: [String], name: String, message: Message, notificationSenderName: String? = nil, notificationText: String) {
 		DispatchQueue.global(qos: .background).async {
 			GoogleDatabaseManager.shared.createNewChat(with: otherUserEmail, otherUserTokens: otherTokens, name: name, firstMessage: message) {
 				[weak self] success in
 				guard let self = self else { return }
 				
 				if success {
-					self.sendNotification(to: otherTokens, name: name, text: notificationText)
+					self.sendNotification(to: otherTokens, name: notificationSenderName ?? name, text: notificationText)
 				} else {
 					print("not sent")
 					return
@@ -110,14 +113,14 @@ extension MessagesManager {
 			}
 		}
 	}
-	private func sendMessageToChat(chatId: String, otherUserEmail: String, otherTokens: [String], name: String, message: Message, notificationText: String) {
+	private func sendMessageToChat(chatId: String, otherUserEmail: String, otherTokens: [String], name: String, message: Message, notificationSenderName: String? = nil, notificationText: String) {
 		DispatchQueue.global(qos: .background).async {
 			GoogleDatabaseManager.shared.sendMessage(to: chatId, otherUserEmail: otherUserEmail, newMessage: message, name: name) {
 				[weak self] success in
 				guard let self = self else { return }
 				
 				if success {
-					self.sendNotification(to: otherTokens, name: name, text: notificationText)
+					self.sendNotification(to: otherTokens, name: notificationSenderName  ?? name, text: notificationText)
 				} else {
 					print("not sent")
 					return
@@ -178,14 +181,14 @@ extension MessagesManager {
 			guard let userToken = user.tokens, let messageId = generateMessageIdForBroadcast(otherUserEmail: user.email), let selfSender = generateSelfSender() else { return }
 			let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
 			
-			createChat(otherUserEmail: user.email, otherTokens: userToken, name: user.name, message: message, notificationText: text)
+			createChat(otherUserEmail: user.email, otherTokens: userToken, name: user.name, message: message, notificationSenderName: "Bounce", notificationText: text)
 		}
 		//Send messages for users with chats
 		for userChat in usersWithExistingChats {
 			guard let userToken = userChat.otherUserTokens , let messageId = generateMessageIdForBroadcast(otherUserEmail: userChat.otherUserEmail), let selfSender = generateSelfSender() else { return }
 			let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
 			
-			sendMessageToChat(chatId: userChat.id, otherUserEmail: userChat.otherUserEmail, otherTokens: userToken, name: "Bounce", message: message, notificationText: text)
+			sendMessageToChat(chatId: userChat.id, otherUserEmail: userChat.otherUserEmail, otherTokens: userToken, name: "Bounce", message: message, notificationSenderName: "Bounce", notificationText: text)
 		}
 	}
 }

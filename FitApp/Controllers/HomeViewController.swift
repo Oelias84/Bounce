@@ -16,8 +16,6 @@ class HomeViewController: UIViewController {
 	private var viewModel = HomeViewModel()
 	private let weightAlertsManager = WeightAlertsManager()
 
-	private var caloriesAlertCheck: WeightAlertsManager!
-	
 	private var carbsRingLayer: RingProgressView!
 	private var fatRingLayer: RingProgressView!
 	private var proteinRingLayer: RingProgressView!
