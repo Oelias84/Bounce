@@ -9,6 +9,29 @@ import Foundation
 
 class DailyMealManager {
 	
+	static func calculateMealAverageCalories(meals: [DailyMeal]) -> Double {
+		var mealCalorieSum = 0.0
+		
+		//Get the overall isMealDone calories
+		meals.forEach { dailyMeal in
+			
+			for meal in dailyMeal.meals {
+				//Check if there are mealsDone
+				meal.dishes.forEach { dish in
+					if dish.isDishDone {
+						switch dish.type {
+						case .protein:
+							mealCalorieSum += dish.amount * 150.0
+						case .carbs, .fat:
+							mealCalorieSum += dish.amount * 100.0
+						}
+					}
+				}
+			}
+		}
+		return mealCalorieSum
+	}
+	
 	static func calculateMealExpectedCalories(meals: [DailyMeal]) -> Double {
 		var mealCalorieSum = 0.0
 		
@@ -19,35 +42,12 @@ class DailyMealManager {
 				if meal.mealType != .other {
 					//Check if there are mealsDone
 					meal.dishes.forEach { dish in
-						if dish.isDishDone {
-							switch dish.type {
-							case .protein:
-								mealCalorieSum += dish.amount * 150.0
-							case .carbs, .fat:
-								mealCalorieSum += dish.amount * 100.0
-							}
+						switch dish.type {
+						case .protein:
+							mealCalorieSum += dish.amount * 150.0
+						case .carbs, .fat:
+							mealCalorieSum += dish.amount * 100.0
 						}
-					}
-				}
-			}
-		}
-		return mealCalorieSum
-	}
-	
-	static func calculateMealAverageCalories(meals: [DailyMeal]) -> Double {
-		var mealCalorieSum = 0.0
-		
-		//Get the overall isMealDone calories
-		meals.forEach { dailyMeal in
-			
-			for meal in dailyMeal.meals {
-				//Check if there are mealsDone
-				meal.dishes.forEach { dish in
-					switch dish.type {
-					case .protein:
-						mealCalorieSum += dish.amount * 150.0
-					case .carbs, .fat:
-						mealCalorieSum += dish.amount * 100.0
 					}
 				}
 			}
