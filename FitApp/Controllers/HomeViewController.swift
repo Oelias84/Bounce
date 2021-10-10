@@ -100,8 +100,8 @@ class HomeViewController: UIViewController {
 		setUpProgressView()
 	}
 	
-	@IBAction func chatButtonAction(_ sender: Any) {
-		openChat()
+	@IBAction func articlesButtonAction(_ sender: Any) {
+		openArticles()
 	}
 	@IBAction func profileButtonAction(_ sender: Any) {
 		let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
@@ -113,10 +113,10 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
 	
-	private func openChat() {
-		let chatStoryboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
-		let chatsVC = chatStoryboard.instantiateViewController(identifier: K.ViewControllerId.ChatsViewController)
-			as ChatsViewController
+	private func openArticles() {
+		let chatStoryboard = UIStoryboard(name: K.StoryboardName.articles, bundle: nil)
+		let chatsVC = chatStoryboard.instantiateViewController(identifier: K.ViewControllerId.articlesViewController)
+			as ArticlesViewController
 		
 		self.navigationController?.pushViewController(chatsVC, animated: true)
 	}

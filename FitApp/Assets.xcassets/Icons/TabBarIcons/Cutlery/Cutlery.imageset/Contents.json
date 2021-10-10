@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "MealIcon.png",
+      "filename" : "Cutlery.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "MealIcon@2x.png",
+      "filename" : "Cutlery@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "MealIcon@3x.png",
+      "filename" : "Cutlery@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

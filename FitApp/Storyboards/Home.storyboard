@@ -22,6 +22,7 @@
         <!--Home ViewController-->
         <scene sceneID="V6C-ra-s6Y">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZmW-3o-guf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="HomeViewController" title="Home ViewController" id="65l-oX-bHe" customClass="HomeViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oXi-sI-Ov4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -300,13 +301,10 @@
                         <barButtonItem key="backBarButtonItem" title="מסך הבית" id="p3p-YE-eTH"/>
                         <barButtonItem key="leftBarButtonItem" style="plain" id="cMD-sT-DSV">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PXv-5c-9zo">
-                                <rect key="frame" x="20" y="11" width="22" height="22"/>
+                                <rect key="frame" x="20" y="9" width="24.5" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="30" id="bZm-af-Q2M"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="30" id="hKJ-1W-KZ9"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="message" catalog="system"/>
+                                <color key="tintColor" red="0.73725490199999999" green="0.21960784310000001" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" backgroundImage="ArticleIcon"/>
                                 <connections>
                                     <action selector="chatButtonAction:" destination="65l-oX-bHe" eventType="touchUpInside" id="AEv-FI-bBh"/>
                                 </connections>
@@ -347,7 +345,6 @@
                         <outlet property="userMotivationTextLabel" destination="ime-qg-m1m" id="nVG-K1-UN3"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZmW-3o-guf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-413" y="1434"/>
         </scene>
@@ -387,7 +384,7 @@
         <scene sceneID="1CK-nm-WXs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nJB-tX-ghA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="MealIcon" id="bLi-MO-bJG"/>
+                    <tabBarItem key="tabBarItem" title="" image="Cutlery" id="bLi-MO-bJG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="hOm-GV-sig">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -406,7 +403,7 @@
         <scene sceneID="HxQ-5K-cFd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zmZ-sf-tsA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="RunIcon" id="qyL-mB-qAR"/>
+                    <tabBarItem key="tabBarItem" title="" image="Workout" id="qyL-mB-qAR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="0wG-4h-Ua1">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -425,7 +422,7 @@
         <scene sceneID="Ixk-Ge-SU3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="I6j-J7-ygL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="ScaleIcon" id="aOL-u8-b4d"/>
+                    <tabBarItem key="tabBarItem" title="" image="Weight" id="aOL-u8-b4d"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Wdr-OP-lAS">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -450,10 +447,10 @@
             </objects>
             <point key="canvasLocation" x="1747" y="1124"/>
         </scene>
-        <!--Articles-->
+        <!--Chat-->
         <scene sceneID="Mj2-0n-zcE">
             <objects>
-                <viewControllerPlaceholder storyboardName="Articles" id="9nc-JD-yyE" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Chat" id="9nc-JD-yyE" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="01l-ps-7jJ"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CiO-QW-xCJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -464,7 +461,7 @@
         <scene sceneID="dnp-sr-DGK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dzb-ek-JRY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="ArticleIcon" id="2dI-yY-Shp"/>
+                    <tabBarItem key="tabBarItem" title="" image="Chat" landscapeImage="Chat" largeContentSizeImage="Chat" id="2dI-yY-Shp"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="4uZ-sp-1OR">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -483,7 +480,7 @@
         <scene sceneID="MX8-hT-dT7">
             <objects>
                 <navigationController restorationIdentifier="HomeNavigation" automaticallyAdjustsScrollViewInsets="NO" id="5vo-ly-MDw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="HomeIcon" id="huH-1c-Qcl"/>
+                    <tabBarItem key="tabBarItem" title="" image="Wheels" id="huH-1c-Qcl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="3Xn-2L-GKh">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -501,11 +498,11 @@
     </scenes>
     <resources>
         <image name="ArticleIcon" width="24.5" height="26"/>
-        <image name="HomeIcon" width="26.5" height="26"/>
-        <image name="MealIcon" width="20.5" height="26"/>
-        <image name="RunIcon" width="27" height="26.5"/>
-        <image name="ScaleIcon" width="26" height="26"/>
-        <image name="message" catalog="system" width="128" height="113"/>
+        <image name="Chat" width="29" height="28.5"/>
+        <image name="Cutlery" width="23.5" height="28.5"/>
+        <image name="Weight" width="28.5" height="28.5"/>
+        <image name="Wheels" width="28.5" height="28.5"/>
+        <image name="Workout" width="28.5" height="33.5"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
