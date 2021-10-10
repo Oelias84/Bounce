@@ -480,7 +480,7 @@
         <scene sceneID="MX8-hT-dT7">
             <objects>
                 <navigationController restorationIdentifier="HomeNavigation" automaticallyAdjustsScrollViewInsets="NO" id="5vo-ly-MDw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Wheels" id="huH-1c-Qcl"/>
+                    <tabBarItem key="tabBarItem" title="" image="Home" id="huH-1c-Qcl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="3Xn-2L-GKh">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -500,8 +500,8 @@
         <image name="ArticleIcon" width="24.5" height="26"/>
         <image name="Chat" width="29" height="28.5"/>
         <image name="Cutlery" width="23.5" height="28.5"/>
+        <image name="Home" width="28.5" height="28.5"/>
         <image name="Weight" width="28.5" height="28.5"/>
-        <image name="Wheels" width="28.5" height="28.5"/>
         <image name="Workout" width="28.5" height="33.5"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
