@@ -67,6 +67,9 @@ struct UserProfile {
     @UserDefault(key: .weight)
     var weight: Double?
     
+	@UserDefault(key: .currentAverageWeight)
+	var currentAverageWeight: Double?
+	
     @UserDefault(key: .height)
     var height: Int?
 	
@@ -119,6 +122,7 @@ extension UserProfile {
 			email: defaults.email!,
 			name: defaults.name!,
 			weight: defaults.weight,
+			currentAverageWeight: defaults.currentAverageWeight,
 			height: defaults.height,
 			fatPercentage: defaults.fatPercentage,
 			steps: defaults.steps,
@@ -160,6 +164,7 @@ extension UserProfile {
 		userProfile.finishOnboarding = data.finishOnboarding
 		userProfile.birthDate = data.birthDate?.dateFromString
 		userProfile.weight = data.weight
+		userProfile.currentAverageWeight = data.currentAverageWeight
 		userProfile.height = data.height
 		userProfile.fatPercentage = data.fatPercentage
 		userProfile.kilometer = data.kilometer
@@ -182,6 +187,7 @@ extension UserProfile {
 		userProfile.finishOnboarding = nil
 		userProfile.birthDate = nil
 		userProfile.weight = nil
+		userProfile.currentAverageWeight = nil
 		userProfile.height = nil
 		userProfile.fatPercentage = nil
 		userProfile.kilometer = nil
@@ -203,6 +209,7 @@ struct ServerUserData: Codable {
 	let email: String
 	let name: String
     let weight: Double?
+	let currentAverageWeight: Double?
     let height: Int?
     let fatPercentage: Double?
     let steps: Int?
@@ -245,6 +252,7 @@ extension Key {
 	static let profileImageImageUrl: Key = "profileImageImageUrl"
     static let birthDate: Key = "birthDate"
     static let weight: Key = "weight"
+	static let currentAverageWeight: Key = "currentAverageWeight"
     static let height: Key = "height"
     static let fatPercentage: Key = "fatPercentage"
     static let kilometer: Key = "kilometer"
