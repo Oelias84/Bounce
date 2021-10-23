@@ -7,22 +7,6 @@
 
 import Foundation
 
-
-class WorkoutExercise: Codable {
-    
-    let exercise: String
-    let repeats: String
-    let sets: String
-    var exerciseToPresent: Exercise?
-	
-	init(exercise: String, repeats: String, sets: String, exerciseToPresent: Exercise?) {
-		self.exercise = exercise
-		self.repeats = repeats
-		self.sets = sets
-		self.exerciseToPresent = exerciseToPresent
-	}
-}
-
 class Exercise: Codable {
 
 	let name: String
@@ -30,4 +14,14 @@ class Exercise: Codable {
 	let title: String
 	let text: String
 	let type: String
+}
+
+struct ExerciseData: Codable {
+	
+	let exercises: [Exercise]
+	
+	enum CodingKeys: String, CodingKey {
+		
+		case exercises = "exercise-data"
+	}
 }

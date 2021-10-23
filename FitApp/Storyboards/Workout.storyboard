@@ -1,36 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1tB-Ih-WvV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pv1-qA-DXa">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--אימונים-->
-        <scene sceneID="lvv-fU-wvh">
-            <objects>
-                <tableViewController title="אימונים" id="1tB-Ih-WvV" customClass="WorkoutTableViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="rlg-bZ-yof">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <connections>
-                            <outlet property="dataSource" destination="1tB-Ih-WvV" id="1uz-MO-rnr"/>
-                            <outlet property="delegate" destination="1tB-Ih-WvV" id="Efb-ke-VxE"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <segue destination="wMi-9C-ooU" kind="show" id="M4L-oP-x6Q"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Yal-BW-wLa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-386" y="-48"/>
-        </scene>
         <!--תרגילים-->
         <scene sceneID="Ni2-D5-AEF">
             <objects>
@@ -117,7 +95,7 @@
                                         </connections>
                                     </button>
                                     <pageControl opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="9Se-H6-EaU">
-                                        <rect key="frame" x="146" y="225.5" width="122.5" height="27.5"/>
+                                        <rect key="frame" x="129.5" y="226" width="155.5" height="26"/>
                                     </pageControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FQi-hr-CuH">
                                         <rect key="frame" x="364" y="214" width="50" height="50"/>
@@ -246,6 +224,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fTO-ts-PY9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1128.985507246377" y="-48.214285714285715"/>
+        </scene>
+        <!--אימונים-->
+        <scene sceneID="X3a-ID-kpq">
+            <objects>
+                <viewController storyboardIdentifier="WorkoutTableViewController" title="אימונים" id="Pv1-qA-DXa" customClass="WorkoutTableViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rj2-xc-Wv6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JWM-0G-iNi">
+                                <rect key="frame" x="12" y="52" width="390" height="32"/>
+                                <segments>
+                                    <segment title="לבית"/>
+                                    <segment title="לחדר כושר"/>
+                                </segments>
+                                <connections>
+                                    <action selector="SegmentedControlAction:" destination="Pv1-qA-DXa" eventType="valueChanged" id="uHj-Rk-zWl"/>
+                                </connections>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Etg-l4-JQo">
+                                <rect key="frame" x="0.0" y="95" width="414" height="801"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="tintColor" red="0.038838829849999999" green="0.38600081209999998" blue="0.76410299540000004" alpha="0.053182942980000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Pv1-qA-DXa" id="4Hc-7Z-LC0"/>
+                                    <outlet property="delegate" destination="Pv1-qA-DXa" id="wEq-cF-KqM"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vgy-tl-bHW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="JWM-0G-iNi" secondAttribute="trailing" constant="12" id="9vR-dZ-p4T"/>
+                            <constraint firstAttribute="trailing" secondItem="Etg-l4-JQo" secondAttribute="trailing" id="FmW-Zh-QSI"/>
+                            <constraint firstItem="JWM-0G-iNi" firstAttribute="top" secondItem="vgy-tl-bHW" secondAttribute="top" constant="8" id="LRq-w6-0ji"/>
+                            <constraint firstItem="Etg-l4-JQo" firstAttribute="leading" secondItem="vgy-tl-bHW" secondAttribute="leading" id="QPX-Gm-7Te"/>
+                            <constraint firstItem="JWM-0G-iNi" firstAttribute="leading" secondItem="vgy-tl-bHW" secondAttribute="leading" constant="12" id="Sku-bJ-afr"/>
+                            <constraint firstItem="Etg-l4-JQo" firstAttribute="top" secondItem="JWM-0G-iNi" secondAttribute="bottom" constant="12" id="kof-0q-7aY"/>
+                            <constraint firstAttribute="bottom" secondItem="Etg-l4-JQo" secondAttribute="bottom" id="nMf-hl-VUz"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="אימונים" id="Myc-MT-gEh" userLabel="אימונים"/>
+                    <connections>
+                        <outlet property="segmentedController" destination="JWM-0G-iNi" id="dTF-lK-0Hp"/>
+                        <outlet property="tableView" destination="Etg-l4-JQo" id="id1-Lv-WLC"/>
+                        <segue destination="wMi-9C-ooU" kind="show" id="vrb-ul-TQl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gl6-Sd-YQP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-399" y="-48"/>
         </scene>
     </scenes>
     <resources>

@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--MealPlan-->
+        <!--MealViewController-->
         <scene sceneID="rUg-OZ-daz">
             <objects>
-                <viewControllerPlaceholder storyboardName="MealPlan" id="VD2-d0-tXD" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="MealPlan" referencedIdentifier="MealViewController" id="VD2-d0-tXD" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="sj6-nL-Tch"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ATy-zV-Rie" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -22,7 +22,6 @@
         <!--Home ViewController-->
         <scene sceneID="V6C-ra-s6Y">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZmW-3o-guf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="HomeViewController" title="Home ViewController" id="65l-oX-bHe" customClass="HomeViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oXi-sI-Ov4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -306,7 +305,7 @@
                                 <color key="tintColor" red="0.73725490199999999" green="0.21960784310000001" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="ArticleIcon"/>
                                 <connections>
-                                    <action selector="chatButtonAction:" destination="65l-oX-bHe" eventType="touchUpInside" id="AEv-FI-bBh"/>
+                                    <action selector="articlesButtonAction:" destination="65l-oX-bHe" eventType="touchUpInside" id="iMh-hN-Skj"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -345,6 +344,7 @@
                         <outlet property="userMotivationTextLabel" destination="ime-qg-m1m" id="nVG-K1-UN3"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZmW-3o-guf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-413" y="1434"/>
         </scene>
@@ -370,11 +370,11 @@
             </objects>
             <point key="canvasLocation" x="1021.7391304347827" y="-47.544642857142854"/>
         </scene>
-        <!--Workout-->
+        <!--WorkoutTableViewController-->
         <scene sceneID="hjH-1A-yQ9">
             <objects>
-                <viewControllerPlaceholder storyboardName="Workout" id="vWk-db-Umz" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="רגילים" id="bMp-hz-NjA"/>
+                <viewControllerPlaceholder storyboardName="Workout" referencedIdentifier="WorkoutTableViewController" id="vWk-db-Umz" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="תרגילים" id="bMp-hz-NjA"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nrr-gZ-zba" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

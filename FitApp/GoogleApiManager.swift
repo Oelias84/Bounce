@@ -310,6 +310,58 @@ struct GoogleApiManager {
 			})
 		}
 	}
+	
+	func getGymWorkouts(forFitnessLevel: Int, completion: @escaping (Result<[Workout], Error>) -> Void) {
+		do {
+			db.collection("workouts-data").document("gym-workouts").getDocument(source: .default, completion: { (data, error) in
+				if let error = error {
+					print(error)
+				} else if let data = data {
+					do {
+						var workouts: [Workout] = []
+						if let workoutsData = try data.data(as: Workouts.self) {
+							
+							switch forFitnessLevel {
+							case 1:
+								workouts = workoutsData.beginner
+								completion(.success(workouts))
+							case 2:
+								workouts = workoutsData.intermediate
+								completion(.success(workouts))
+							case 3:
+								workouts = workoutsData.advance
+								completion(.success(workouts))
+							default:
+								break
+							}
+						}
+					} catch {
+						print(error)
+						completion(.failure(error))
+					}
+				}
+			})
+		}
+	}
+	func getGymExerciseBy(completion: @escaping (Result<[Exercise], Error>) -> Void) {
+		do {
+			db.collection("workouts-data").document("gym-exercises").getDocument(source: .default, completion: { (data, error) in
+				if let error = error {
+					print(error)
+				} else if let data = data {
+					do {
+						if let decodedData = try data.data(as: ExerciseData.self) {
+							completion(.success(decodedData.exercises))
+						}
+					} catch {
+						print(error)
+						completion(.failure(error))
+					}
+				}
+			})
+		}
+	}
+	
 	func getExerciseVideo(videoNumber: [String], completion: @escaping (Result<[URL], Error>) -> Void) {
 		var urls = [URL]()
 		videoNumber.forEach { video in
@@ -331,7 +383,7 @@ struct GoogleApiManager {
 		}
 		
 	}
-	
+
 	func updateDishes() {
 		let carb = [
 			ServerDish(name: "אורז לבן 75 גרם"),
@@ -439,24 +491,6 @@ struct GoogleApiManager {
 		} catch {
 			print(error)
 		}
-	}
-}
-
-
-struct Workouts: Codable {
-	
-	let advance: [Workout]
-	let beginner: [Workout]
-	let intermediate: [Workout]
-}
-
-struct ExerciseData: Codable {
-	
-	let exercises: [Exercise]
-	
-	enum CodingKeys: String, CodingKey {
-		
-		case exercises = "exercise-data"
 	}
 }
 

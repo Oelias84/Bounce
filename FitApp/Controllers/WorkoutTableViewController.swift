@@ -7,36 +7,63 @@
 
 import UIKit
 
-class WorkoutTableViewController: UITableViewController {
+class WorkoutTableViewController: UIViewController {
     
     private var workoutViewModel: WorkoutViewModel!
 
+	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var segmentedController: UISegmentedControl!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
-		workoutViewModel = WorkoutViewModel()
-        tableView.register(UINib(nibName: K.NibName.workoutTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.workoutCell)
-    }
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
 		
 		if let navView = navigationController?.view {
 			Spinner.shared.show(navView)
 		}
+		setUpTableView()
+		workoutViewModel = WorkoutViewModel()
+    }
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
 		workoutViewModel.refreshDate()
 		workoutViewModel.bindWorkoutViewModelToController = {
 			Spinner.shared.stop()
-			DispatchQueue.main.async { [weak self] in
+			DispatchQueue.main.async {
+				[weak self] in
 				guard let self = self else { return }
 				self.tableView.reloadData()
 			}
 		}
 	}
+	
+	@IBAction func SegmentedControlAction(_ sender: UISegmentedControl) {
+		
+		switch sender.selectedSegmentIndex {
+		case 0:
+			workoutViewModel.type = .home
+		case 1:
+			workoutViewModel.type = .gym
+		default:
+			break
+		}
+		
+		DispatchQueue.main.async {
+			[weak self] in
+			guard let self = self else { return }
+			self.tableView.reloadData()
+		}
+	}
+}
 
-    // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        workoutViewModel.workoutsCount
+//MARK: Delegates
+extension WorkoutTableViewController: UITableViewDelegate, UITableViewDataSource {
+	
+	// MARK: - Table view data source
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		workoutViewModel.getWorkoutsCount()
     }
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellData = workoutViewModel.getWorkout(for: indexPath.row)
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.workoutCell, for: indexPath) as! WorkoutTableViewCell
         
@@ -44,18 +71,24 @@ class WorkoutTableViewController: UITableViewController {
         cell.workout = cellData
         return cell
     }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let workout = workoutViewModel.getWorkout(for: indexPath.row)
         
         moveToExercisesView(for: workout)
     }
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         146
     }
 }
 
+//MARK: Functions
 extension WorkoutTableViewController {
     
+	private func setUpTableView() {
+		tableView.delegate = self
+		tableView.dataSource = self
+		tableView.register(UINib(nibName: K.NibName.workoutTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.workoutCell)
+	}
     private func moveToExercisesView(for workout: Workout) {
         let storyboard = UIStoryboard(name: K.StoryboardName.workout, bundle: nil)
         let workoutVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.exercisesTableViewController) as ExercisesTableViewController

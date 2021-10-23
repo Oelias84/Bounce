@@ -13,3 +13,25 @@ class Workout: Codable {
     var name: String
     var type: Int
 }
+
+struct Workouts: Codable {
+	
+	let advance: [Workout]
+	let beginner: [Workout]
+	let intermediate: [Workout]
+}
+
+class WorkoutExercise: Codable {
+	
+	let exercise: String
+	let repeats: String
+	let sets: String
+	var exerciseToPresent: Exercise?
+	
+	init(exercise: String, repeats: String, sets: String, exerciseToPresent: Exercise?) {
+		self.exercise = exercise
+		self.repeats = repeats
+		self.sets = sets
+		self.exerciseToPresent = exerciseToPresent
+	}
+}
