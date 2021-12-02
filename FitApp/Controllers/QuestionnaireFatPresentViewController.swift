@@ -71,7 +71,7 @@ extension QuestionnaireFatPresentViewController: UICollectionViewDelegate, UICol
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CellId.fanCell, for: indexPath) as! QuestionnaireFatCollectionViewCell
 		
-		cell.fatImageString = pickerItems[indexPath.row]
+//		cell.fatImageString = pickerItems[indexPath.row]
 		cell.setFatPresentLabel(for: indexPath.row)
 		return cell
 	}
