@@ -9,21 +9,21 @@ import UIKit
 import AVKit
 
 class ExerciseViewController: UIViewController {
-    
+	
 	public var exercise: Exercise!
 	private var player: AVPlayer!
 	private var urlVideos: [URL]!
 	private var currentVideoUrlIndex = 0
 	
 	private let googleManager = GoogleApiManager()
-
+	
 	private var playerContainerView: UIView!
 	@IBOutlet weak var containerView: UIView!
 	
 	@IBOutlet weak var playButton: UIButton!
 	@IBOutlet weak var forwardButton: UIButton!
 	@IBOutlet weak var backwardsButton: UIButton!
-
+	
 	@IBOutlet weak var fullScreenButton: UIButton!
 	@IBOutlet weak var videoPageIndicator: UIPageControl!
 	
@@ -39,18 +39,18 @@ class ExerciseViewController: UIViewController {
 	@IBOutlet weak var textLabel: UILabel!
 	
 	override func viewDidLoad() {
-	super.viewDidLoad()
-	title = exercise.name
-	
-	setUpPlayerContainerView()
-	playActivity()
-	playVideo(userString: exercise.videos)
+		super.viewDidLoad()
+		title = exercise.name
+		
+		setUpPlayerContainerView()
+		playActivity()
+		playVideo(userString: exercise.videos)
 		
 		let title = exercise.title
 		let string = exercise.text.replacingOccurrences(of: "\\n", with: "\n")
 		textTitleLabel.text = title
 		textLabel.text = string
-}
+	}
 	
 	@IBAction func fullScreenButtonAction(_ sender: Any) {
 		playFull()
@@ -139,7 +139,7 @@ extension ExerciseViewController {
 		playerContainerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
 		playerContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
 		playerContainerView.heightAnchor.constraint(equalTo: containerView.heightAnchor ).isActive = true
-			
+		
 		if #available(iOS 11.0, *) {
 			playerContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
 		} else {
@@ -175,7 +175,7 @@ extension ExerciseViewController {
 				let durationSeconds = CMTimeGetSeconds(duration)
 				let seconds = CMTimeGetSeconds(progressTime)
 				let progress = Float(seconds/durationSeconds)
-
+				
 				if progress >= 0.0 {
 					self?.activityIndicator.stopAnimating()
 					self?.fullScreenButton.isHidden = false
@@ -195,7 +195,7 @@ extension ExerciseViewController {
 	@objc func playFull() {
 		let vc = AVPlayerViewController()
 		vc.player = self.player
-
+		
 		present(vc, animated: true) {
 			let playerTimescale = self.player.currentItem?.asset.duration.timescale ?? 1
 			let time =  CMTime(seconds: 1, preferredTimescale: playerTimescale)

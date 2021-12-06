@@ -361,29 +361,9 @@ struct GoogleApiManager {
 			})
 		}
 	}
-	
-	func getExerciseVideo(videoNumber: [String], completion: @escaping (Result<[URL], Error>) -> Void) {
-		var urls = [URL]()
-		videoNumber.forEach { video in
-			let number = video.split(separator: "/").last
-			let httpsReference = storage.reference(forURL: "https://firebasestorage.googleapis.com/b/gs://my-fit-app-a8595.appspot.com//o/\(number!).m4v")
-			
-			httpsReference.downloadURL { url, error in
-				if let error = error {
-					print(error)
-					completion(.failure(error))
-				} else {
-					guard let url = url else { return }
-					urls.append(url)
-					if urls.count == videoNumber.count {
-						completion(.success(urls))
-					}
-				}
-			}
-		}
-	}
 	func getGymExerciseVideo(videoNumber: [String], completion: @escaping (Result<[URL], Error>) -> Void) {
 		var urls = [URL]()
+		
 		videoNumber.forEach { video in
 			let number = video.split(separator: "/").last
 			let httpsReference = storage.reference(forURL: "https://firebasestorage.googleapis.com/b/gs://my-fit-app-a8595.appspot.com//o/exercise_videos/\(number!).m4v")
@@ -401,7 +381,6 @@ struct GoogleApiManager {
 				}
 			}
 		}
-		
 	}
 	func updateDishes() {
 		let carb = [

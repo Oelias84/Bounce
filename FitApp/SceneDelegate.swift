@@ -53,7 +53,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 					}
 				}
 			} else {
-				Spinner.shared.stop()
+				self.window!.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "אין באפשרוך להתחבר, אנא צרי איתנו קשר") {  }
 			}
 		}
 		if #available(iOS 13.0, *) {
