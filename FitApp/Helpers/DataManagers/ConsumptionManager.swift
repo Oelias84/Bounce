@@ -12,6 +12,7 @@ class ConsumptionManager {
 	static let shared = ConsumptionManager()
 	
 	private var weight: Double?
+	private var currentAverageWeight: Double?
 	private var fatPercentage: Double?
 	private var Kilometer: Double?
 	private var numberOfTrainings: Int?
@@ -59,6 +60,7 @@ class ConsumptionManager {
 		let userData = UserProfile.defaults
 		
 		self.weight = userData.weight
+		self.currentAverageWeight = userData.currentAverageWeight
 		self.fatPercentage = userData.fatPercentage
 		self.Kilometer = userData.kilometer
 		self.lifeStyle = userData.lifeStyle
@@ -70,6 +72,7 @@ class ConsumptionManager {
 	func resetConsumptionManager() {
 		
 		weight = nil
+		currentAverageWeight = nil
 		fatPercentage = nil
 		Kilometer = nil
 		numberOfTrainings = nil
@@ -158,7 +161,7 @@ extension ConsumptionManager {
 	private func configureData() {
 		guard let weight = weight, let fatPercentage = fatPercentage, var numberOfTrainings = numberOfTrainings else { return }
 		if let externalTraining = externalNumberOfTraining { numberOfTrainings += externalTraining }
-		guard let calculatedCalories = TDEE(weight: weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings) else { return }
+		guard let calculatedCalories = TDEE(weight: currentAverageWeight ?? weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings) else { return }
 		
 		self.dailyCalories = calculatedCalories
 		self.dailyFatPortion = portionFat(tdee: dailyCalories!)

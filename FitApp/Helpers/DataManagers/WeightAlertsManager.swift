@@ -180,6 +180,11 @@ extension WeightAlertsManager {
 		
 		GoogleApiManager.shared.updateCaloriesProgressState(data: data)
 	}
+	private func updateAverageWeight() {
+		//Update the week average weights for calories consumption update
+		UserProfile.defaults.currentAverageWeight = secondWeekAverageWeight
+		UserProfile.updateServer()
+	}
 	
 	//MARK: - Calculation
 	private func calculateWeights() {
@@ -275,7 +280,7 @@ extension WeightAlertsManager {
 		let expectedWeightRange = 0.5...1.5
 		let differenceBetweenWeight = firstWeekAverageWeight - secondWeekAverageWeight
 		let differenceBetweenWeightPercentage = (differenceBetweenWeight / firstWeekAverageWeight) * 100
-		
+				
 		if (shouldShowNotEnoughDataAlert || differenceBetweenWeight.isNaN) {
 			
 			//present an alert that the user dose not have enough data to calculate calories
@@ -407,6 +412,7 @@ extension WeightAlertsManager {
 		
 		weightAlert.addAction(UIAlertAction(title: "הבנתי, תודה", style: .default) { _ in
 			self.updateUserCaloriesProgress()
+			self.updateAverageWeight()
 			self.shouldShowAlertToUser = false
 			
 			UserProfile.defaults.shouldShowCaloriesCheckAlert = self.shouldShowAlertToUser
@@ -466,6 +472,7 @@ extension WeightAlertsManager {
 		
 		weightAlert.addAction(UIAlertAction(title: "הבנתי, תודה", style: .default) { _ in
 			self.updateUserCaloriesProgress()
+			self.updateAverageWeight()
 			self.shouldShowAlertToUser = false
 			UserProfile.defaults.shouldShowCaloriesCheckAlert = self.shouldShowAlertToUser
 			
@@ -536,6 +543,7 @@ extension WeightAlertsManager {
 		
 		weightAlert.addAction(UIAlertAction(title: "הבנתי, תודה", style: .default) { _ in
 			self.updateUserCaloriesProgress()
+			self.updateAverageWeight()
 			self.shouldShowAlertToUser = false
 			UserProfile.defaults.shouldShowCaloriesCheckAlert = self.shouldShowAlertToUser
 			
