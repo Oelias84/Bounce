@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		13CF235DA08F341CFEB28805 /* Pods_FitApp_FitAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F92787D51B022DC3D3BE25 /* Pods_FitApp_FitAppUITests.framework */; };
 		1A1C4513AE7EF2FAD0F25C05 /* Pods_FitAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */; };
+		7C0E4531275E8FA500ECA20E /* MessagesTextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */; };
 		7C149C7925D817DD00B0864F /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */; };
 		7C149C8E25D85A7600B0864F /* AddWeightAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C149C8D25D85A7600B0864F /* AddWeightAlertView.xib */; };
 		7C1ACCE7266F8D19008079C9 /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ACCE6266F8D19008079C9 /* CommentsTableViewController.swift */; };
@@ -175,6 +176,7 @@
 /* Begin PBXFileReference section */
 		05D96098412DCEF72F6C4753 /* Pods-FitApp-FitAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp-FitAppUITests.release.xcconfig"; path = "Target Support Files/Pods-FitApp-FitAppUITests/Pods-FitApp-FitAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTextManager.swift; sourceTree = "<group>"; };
 		7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
 		7C149C8D25D85A7600B0864F /* AddWeightAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddWeightAlertView.xib; sourceTree = "<group>"; };
 		7C1ACCE6266F8D19008079C9 /* CommentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 				7C7DF4B126FB87DE0043A132 /* MessagesManager.swift */,
 				7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */,
 				B3DB751A259F8773002CF48B /* ConsumptionManager.swift */,
+				7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */,
 				B367F18725B1EEC200DF21D7 /* LocalNotificationManager.swift */,
 				7C481C7126FA1883002FB8BF /* MealsManager.swift */,
 			);
@@ -1216,6 +1219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C0E4531275E8FA500ECA20E /* MessagesTextManager.swift in Sources */,
 				7C74352D25D056A900D33A9A /* GoogleStorageManager.swift in Sources */,
 				B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */,
 				7C149C7925D817DD00B0864F /* PhotoViewerViewController.swift in Sources */,

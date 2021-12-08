@@ -55,6 +55,10 @@ class WeightAlertsManager {
 	private let messagesManager = MessagesManager.shared
 	
 	required init() {
+		
+		let message = MessagesTextManager().notEnoughDataAlert()
+		self.presentAlert(title: "", message: message)
+		
 		if UserProfile.defaults.isManager ?? false { return }
 		
 		setUserData() {
@@ -280,278 +284,98 @@ extension WeightAlertsManager {
 		let expectedWeightRange = 0.5...1.5
 		let differenceBetweenWeight = firstWeekAverageWeight - secondWeekAverageWeight
 		let differenceBetweenWeightPercentage = (differenceBetweenWeight / firstWeekAverageWeight) * 100
-				
+		
+		
+		updateUserCaloriesProgress()
+		
+		let newMeals = MealViewModel.shared.createMealsForNewUserData()
+		let newCalories = DailyMealManager.getCurrentMealsCalories(meals: newMeals)
+		
 		if (shouldShowNotEnoughDataAlert || differenceBetweenWeight.isNaN) {
-			
 			//present an alert that the user dose not have enough data to calculate calories
-			notEnoughDataAlert()
+			let message = MessagesTextManager().notEnoughDataAlert()
+			self.presentAlert(title: "", message: message)
 		} else if shouldShowAlertToUser ?? false {
+			updateAverageWeight()
+			
 			//present an alert depending on the calories calculation
 			if differenceBetweenWeightPercentage < expectedWeightRange.lowerBound {
-				
 				//Check average calories consumed from the last week
 				if userConsumedCalories < userExpectedDailyCalories {
 					//Send Message 1
-					userLostWeightAlert(caloriesConsumed: .smallerThen)
+					let message = MessagesTextManager(weightState: .lowerThenExpected, calorieState: .smallerThenAverage, newCalories: Double(newCalories) ?? 0).composeMessage()
+					self.presentAlert(title: message.0, message: message.1)
+//					userLostWeightAlert(caloriesConsumed: .smallerThen)
 				} else if userConsumedCalories > userExpectedDailyCalories {
 					//Send Message 2
-					userLostWeightAlert(caloriesConsumed: .biggerThen)
+					let message = MessagesTextManager(weightState: .lowerThenExpected, calorieState: .higherThenAverage, newCalories: Double(newCalories) ?? 0).composeMessage()
+					self.presentAlert(title: message.0, message: message.1)
+					
+//					userLostWeightAlert(caloriesConsumed: .biggerThen)
 				} else {
 					//Send Message 3
-					userLostWeightAlert(caloriesConsumed: .inRange)
+					let message = MessagesTextManager(weightState: .lowerThenExpected, calorieState: .average, newCalories: Double(newCalories) ?? 0).composeMessage()
+					self.presentAlert(title: message.0, message: message.1)
+
+//					userLostWeightAlert(caloriesConsumed: .inRange)
 				}
 			} else if differenceBetweenWeightPercentage > expectedWeightRange.upperBound {
-				
+				updateAverageWeight()
+
 				//Check average calories consumed from the last week
 				if userConsumedCalories < userExpectedDailyCalories {
 					//Send Message 1
-					userGainedWeightAlert(caloriesConsumed: .smallerThen)
+					let message = MessagesTextManager(weightState: .gainWeight, calorieState: .higherThenAverage, newCalories: Double(newCalories) ?? 0).composeMessage()
+					self.presentAlert(title: message.0, message: message.1)
+
+//					userGainedWeightAlert(caloriesConsumed: .smallerThen)
 				} else if userConsumedCalories > userExpectedDailyCalories {
 					//Send Message 2
-					userGainedWeightAlert(caloriesConsumed: .biggerThen)
+					let message = MessagesTextManager(weightState: .gainWeight, calorieState: .higherThenAverage, newCalories: Double(newCalories) ?? 0).composeMessage()
+					self.presentAlert(title: message.0, message: message.1)
+
+//					userGainedWeightAlert(caloriesConsumed: .biggerThen)
 				} else {
 					//Send Message 3
-					userGainedWeightAlert(caloriesConsumed: .inRange)
+					let message = MessagesTextManager(weightState: .gainWeight, calorieState: .average, newCalories: Double(newCalories) ?? 0).composeMessage()
+					self.presentAlert(title: message.0, message: message.1)
+//					userGainedWeightAlert(caloriesConsumed: .inRange)
 				}
 			} else if expectedWeightRange.contains(differenceBetweenWeightPercentage) {
-				
+				updateAverageWeight()
+
 				//Check average calories consumed from the last week
 				if userConsumedCalories < userExpectedDailyCalories {
+
 					//Send Message 1
-					userInRangeAlert(caloriesConsumed: .smallerThen)
+					let message = MessagesTextManager(weightState: .asExpected, calorieState: .smallerThenAverage, newCalories: Double(newCalories) ?? 0).composeMessage()
+					presentAlert(title: message.0, message: message.1)
+//					userInRangeAlert(caloriesConsumed: .smallerThen)
 				} else if userConsumedCalories > userExpectedDailyCalories {
 					//Send Message 2
-					userInRangeAlert(caloriesConsumed: .biggerThen)
+					let message = MessagesTextManager(weightState: .asExpected, calorieState: .higherThenAverage, newCalories: Double(newCalories) ?? 0).composeMessage()
+					presentAlert(title: message.0, message: message.1)
+//					userInRangeAlert(caloriesConsumed: .biggerThen)
 				} else {
 					//Send Message 3
-					userInRangeAlert(caloriesConsumed: .inRange)
+					let message = MessagesTextManager(weightState: .asExpected, calorieState: .average, newCalories: Double(newCalories) ?? 0).composeMessage()
+					presentAlert(title: message.0, message: message.1)
+//					userInRangeAlert(caloriesConsumed: .inRange)
 				}
 			}
 		}
 	}
-	
-	private func notEnoughDataAlert() {
-		let weightAlert = UIAlertController(title: nil ,message: nil, preferredStyle: .alert)
-		weightAlert.message =
-		
-"""
-
- איזה באסה 😑,
- לא הזנת 3 שקילות השבוע ולכן לא נוכל לבצע את הניתוח השבועי.
- מחכים לשקילות של השבוע הנוכחי! 💪🏼
-
-
-"""
+	private func presentAlert(title: String, message: String) {
+		let weightAlert = UIAlertController(title: title ,message: message, preferredStyle: .alert)
 		
 		weightAlert.addAction(UIAlertAction(title: "הבנתי, תודה", style: .default) { _ in
 			self.shouldShowAlertToUser = false
-			self.updateUserCaloriesProgress()
 			UserProfile.defaults.shouldShowCaloriesCheckAlert = self.shouldShowAlertToUser
 			
 			if let text = weightAlert.message, self.lastCaloriesCheckDate != Date().onlyDate {
 				self.sendMessageToManager(title: "", text: text)
 			}
 		})
-		
-		weightAlert.showAlert()
-	}
-	private func userLostWeightAlert(caloriesConsumed: CaloriesAlertsState) {
-		let weightAlert = UIAlertController(title: "לא ירדת לפי המתוכנן, לא קרה כלום- מתחילים שבוע חדש!", message: nil, preferredStyle: .alert)
-		
-		//Calorie State
-		switch caloriesConsumed {
-		case .smallerThen:
-			
-			weightAlert.message =
-"""
-
-שמנו לב שכמות הקק״ל שדיווחת בתפריט התזונה קטנה יותר מזו שניתנה לך.
-
-אנא בדקי האם:
-
-1. תת הערכה קלורית- יכול להיות שהערכה הקלורית של המזון אותו המרת נמוכה מהערך הקלורי האמיתי שלו.
-לדוגמה: הערכת המזון עם הין, המרות לא מדויקות.
-
-2. אי סימון ארוחות שנאכלו.
-
-4. שכחת לדווח על ארוחות חריגות.
-
-"""
-		case .inRange:
-			
-			weightAlert.message =
-"""
-שמנו לב שכמות הקק״ל שדיווחת בתפריט התזונה זהה לזו שניתנה לך.
-
-אנא בדקי האם:
-1. תת הערכה קלורית- יכול להיות שהערכה הקלורית של המזון אותו המרת נמוכה מהערך הקלורי האמיתי שלו.
-לדוגמה: הערכת המזון עם העין, המרות לא מדויקות) .
-
-2. שכחת לדווח על ארוחות חריגות.
-
-3. ההוצאה האנרגטית (הפעילות היומית) שלך קטנה.
-משמע את זקוקה לכמות קלוריות
-
-קטנה יותר ולכן לא ירדת כמצופה.
-
-"""
-		case .biggerThen:
-			
-			weightAlert.message =
-"""
-
-שמנו לב שכמות הקק״ל שדיווחת בתפריט התזונה גדולה יותר מזו שניתנה לך.
-
-השבוע תנסי לשמור על כמות הקלוריות היומית כדי להגיע ליעדים שהצבנו.
-זה קטן עליך!
-
-"""
-		default:
-			break
-		}
-		
-		weightAlert.addAction(UIAlertAction(title: "הבנתי, תודה", style: .default) { _ in
-			self.updateUserCaloriesProgress()
-			self.updateAverageWeight()
-			self.shouldShowAlertToUser = false
-			
-			UserProfile.defaults.shouldShowCaloriesCheckAlert = self.shouldShowAlertToUser
-			
-			if let title = weightAlert.title, let text = weightAlert.message, self.lastCaloriesCheckDate != Date().onlyDate {
-				self.sendMessageToManager(title: title, text: text)
-			}
-		})
-		
-		weightAlert.showAlert()
-	}
-	private func userInRangeAlert(caloriesConsumed: CaloriesAlertsState) {
-		
-		let weightAlert = UIAlertController(title: "כל הכבוד עמדת ביעדים! עבודה יפה, המשיכי ככה!", message: nil, preferredStyle: .alert)
-		let neutralMessage =
-   """
-
-אנו רואים שגופך מגיב מעולה לכן לא נעשה שינוי בכמות הקלוריות.
-
-"""
-		//Calorie State
-		switch caloriesConsumed {
-		case .smallerThen:
-			
-			weightAlert.message =
-	"""
-
-אבל שמנו לב שכמות הקק״ל שדיווחת בתפריט התזונה קטנה יותר מזו שניתנה לך.
-
-אנא בדקי האם:
-
-1. שכחת לסמן ארוחות שנאכלו.
-
-2. ההוצאה האנרגטית (הפעילות היומית) שלך ירדה.
-
-"""
-		case .inRange:
-			
-			weightAlert.message = neutralMessage
-		case .biggerThen:
-			
-			weightAlert.message =
-	"""
-
-אבל שמנו לב שכמות הקק״ל שדיווחת בתפריט התזונה גדולה יותר מזו שניתנה לך.
-
-אנא בדקי האם:
-
-1. ההוצאה האנרגטית (הפעילות היומית) שלך עלתה.
-
-2. יתר הערכה קלורית בהמרות- יתכן והערכת את המזון המומר בכמות קלוריות גדולה יותר מהערך האמיתי של המזון.
-
-"""
-		default:
-			break
-		}
-		
-		weightAlert.addAction(UIAlertAction(title: "הבנתי, תודה", style: .default) { _ in
-			self.updateUserCaloriesProgress()
-			self.updateAverageWeight()
-			self.shouldShowAlertToUser = false
-			UserProfile.defaults.shouldShowCaloriesCheckAlert = self.shouldShowAlertToUser
-			
-			if let title = weightAlert.title, let text = weightAlert.message, self.lastCaloriesCheckDate != Date().onlyDate {
-				self.sendMessageToManager(title: title, text: text)
-			}
-		})
-		weightAlert.showAlert()
-	}
-	private func userGainedWeightAlert(caloriesConsumed: CaloriesAlertsState) {
-		
-		let weightAlert = UIAlertController(title: "כל הכבוד ירדת במשקל!", message: nil, preferredStyle: .alert)
-		
-		//Calorie State
-		switch caloriesConsumed {
-		case .smallerThen:
-			
-			weightAlert.message =
-	"""
-
-אבל ירדת מעל המצופה, משמע יש סיכון לפגיעה במסת שריר.
-שמנו לב שלמרות זאת דיווחת בתפריט תזונה על כמות קקל נמוכה יותר מזו שניתנה לך.
-
-אנא בדקי האם:
-
-1. אי סימון ארוחות- במידה ואינך מפתחת תאבון נבצע שינוי קלורי בהתאם, במידה ולא ,תנסי לאכול את כמות הקק״ל ולא להמנע במידה ומתפתח רעב על מנת שלא תאבדי מסת שריר.
-
-
-"""
-		case .inRange:
-			
-			weightAlert.message =
-	"""
-
-אבל ירדת מעל המצופה, משמע יש סיכון לפגיעה במסת שריר.
-שמנו לב שלמרות זאת דיווחת בתפריט תזונה על כמות קקל זהה לזו שניתנה לך.
-
-אנא בדקי האם:
-
-1. ההוצאה האנרגטית (הפעילות היומית) שלך עלתה.
-
-2. יתר הערכה קלורית.
-
-3. סימון ארוחות שלא נאכלו בטעות.
-
-
-"""
-		case .biggerThen:
-			
-			weightAlert.message =
-	"""
-
-אבל ירדת מעל המצופה, משמע יש סיכון לפגיעה במסת שריר.
-שמנו לב שלמרות זאת דיווחת בתפריט תזונה על כמות קקל גדולה יותר מזו שניתנה לך.
-
-אנא בדקי האם:
-
-1. ההוצאה האנרגטית (הפעילות היומית) שלך עלתה משמעותית- ולכן נצטרך להרים את כמות הקק״ל כי הדרישה הקלורית שלך עלתה.
-
-2. יתר הערכה קלורית בהמרות- יתכן והערכת את המזון המומר בכמות קלוריות גדולה יותר מהערך האמיתי של המזון.
-
-3. הוספת ארוחה חריגה בטעות.
-
-"""
-		default:
-			break
-		}
-		
-		weightAlert.addAction(UIAlertAction(title: "הבנתי, תודה", style: .default) { _ in
-			self.updateUserCaloriesProgress()
-			self.updateAverageWeight()
-			self.shouldShowAlertToUser = false
-			UserProfile.defaults.shouldShowCaloriesCheckAlert = self.shouldShowAlertToUser
-			
-			if let title = weightAlert.title, let text = weightAlert.message, self.lastCaloriesCheckDate != Date().onlyDate {
-				self.sendMessageToManager(title: title, text: text)
-			}
-		})
-		
 		weightAlert.showAlert()
 	}
 }

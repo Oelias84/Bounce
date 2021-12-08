@@ -44,8 +44,27 @@ class MealViewModel: NSObject {
 			fetchMealsForOrCreate(date: date!, prefer: preferredMeal, numberOfMeals: userData.mealsPerDay!, protein: consumptionManager.getDailyProtein(), carbs: consumptionManager.getDailyCarbs(), fat: consumptionManager.getDailyFat())
 		}
 	}
+	func createMealsForNewUserData() -> [Meal] {
+		consumptionManager.calculateUserData()
+		let userData = UserProfile.defaults
+		var preferredMeal: MealType?
+		
+		switch userData.mostHungry {
+		case 1:
+			preferredMeal = .breakfast
+		case 2:
+			preferredMeal = .lunch
+		case 3:
+			preferredMeal = .supper
+		default:
+			preferredMeal = nil
+		}
+		
+		let meals = self.populateMeals(forMessage: true, date: Date() + 1, hasPrefer: preferredMeal, numberOfMeals: userData.mealsPerDay!, protein: consumptionManager.getDailyProtein(), carbs: consumptionManager.getDailyCarbs(), fat: consumptionManager.getDailyFat())
+		return meals
+	}
 	
-	//MARK: - Meals Progress
+	//MARK: - Meals Progressb
 	func getMealDate() -> Date {
 		return meals!.first!.date
 	}
@@ -314,7 +333,7 @@ class MealViewModel: NSObject {
 			return numberOfDishes
 		}
 	}
-	func populateMeals(date: Date, hasPrefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) -> [Meal] {
+	func populateMeals(forMessage: Bool = false, date: Date, hasPrefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) -> [Meal] {
 		var dayMeals = [Meal(mealType: .breakfast, dishes: [], date: date), Meal(mealType: .lunch, dishes: [], date: date), Meal(mealType: .supper, dishes: [], date: date)]
 		
 		let numberCarbsDish = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .carbs, numberOfDishes: carbs)
@@ -366,7 +385,9 @@ class MealViewModel: NSObject {
 								 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein),type: .protein, amount: 1), Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .fat), type: .fat, amount: 0.5)],
 								 date: date), at: 3)
 		}
-		GoogleApiManager.shared.createDailyMeal(meals: dayMeals, date: date)
+		if !forMessage {
+			GoogleApiManager.shared.createDailyMeal(meals: dayMeals, date: date)
+		}
 		return dayMeals
 	}
 }
