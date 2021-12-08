@@ -55,10 +55,6 @@ class WeightAlertsManager {
 	private let messagesManager = MessagesManager.shared
 	
 	required init() {
-		
-		let message = MessagesTextManager().notEnoughDataAlert()
-		self.presentAlert(title: "", message: message)
-		
 		if UserProfile.defaults.isManager ?? false { return }
 		
 		setUserData() {
