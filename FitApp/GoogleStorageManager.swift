@@ -8,8 +8,6 @@
 import Foundation
 import FirebaseStorage
 
-
-
 final class GoogleStorageManager {
 	
 	static let shared = GoogleStorageManager()
