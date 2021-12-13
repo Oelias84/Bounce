@@ -78,7 +78,6 @@
 		7C9B345E2583C5B400D30480 /* QuestionnaireSumUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */; };
 		7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */; };
 		7C9B34922583F84A00D30480 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B34912583F84A00D30480 /* StartViewController.swift */; };
-		7CA78FC727149864004ACB64 /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78FC627149864004ACB64 /* Gradient.swift */; };
 		7CB9ADE5268B12290009B42A /* ChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE4268B12290009B42A /* ChartFormatter.swift */; };
 		7CB9ADE7268CB7140009B42A /* ChartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE6268CB7140009B42A /* ChartView.xib */; };
 		7CB9ADE9268CB72B0009B42A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE8268CB72B0009B42A /* ChartView.swift */; };
@@ -86,6 +85,9 @@
 		7CD1817B2647E80F0054DB9C /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */; };
 		7CD1817C2647E80F0054DB9C /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */; };
 		7CD1817E26481E5D0054DB9C /* SettingTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */; };
+		7CE0862527613FE000BF3CF3 /* UiColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0862427613FE000BF3CF3 /* UiColor+Extensions.swift */; };
+		7CE086272761482A00BF3CF3 /* ProjectColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE086262761482A00BF3CF3 /* ProjectColors.swift */; };
+		7CE0862A27614BEA00BF3CF3 /* Font in Resources */ = {isa = PBXBuildFile; fileRef = 7CE0862927614BEA00BF3CF3 /* Font */; };
 		7CFA5FF7262A0F5800A3F401 /* MoveDishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */; };
 		7CFA5FFF262A10E600A3F401 /* MoveDishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */; };
 		7CFA85CB26ECDEA000296B53 /* WeightAlertsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */; };
@@ -254,7 +256,6 @@
 		7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSumUpViewController.swift; sourceTree = "<group>"; };
 		7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C9B34912583F84A00D30480 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
-		7CA78FC627149864004ACB64 /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		7CB9ADE4268B12290009B42A /* ChartFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFormatter.swift; sourceTree = "<group>"; };
 		7CB9ADE6268CB7140009B42A /* ChartView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartView.xib; sourceTree = "<group>"; };
 		7CB9ADE8268CB72B0009B42A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -262,6 +263,9 @@
 		7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewModel.swift; sourceTree = "<group>"; };
+		7CE0862427613FE000BF3CF3 /* UiColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiColor+Extensions.swift"; sourceTree = "<group>"; };
+		7CE086262761482A00BF3CF3 /* ProjectColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectColors.swift; sourceTree = "<group>"; };
+		7CE0862927614BEA00BF3CF3 /* Font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Font; sourceTree = "<group>"; };
 		7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoveDishView.xib; sourceTree = "<group>"; };
 		7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDishView.swift; sourceTree = "<group>"; };
 		7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightAlertsManager.swift; sourceTree = "<group>"; };
@@ -613,7 +617,7 @@
 				7C89AA58256D6FDB009AD87C /* Constants.swift */,
 				7C74AF9D264336EA001D0F5D /* PushNotificationSender.swift */,
 				7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */,
-				7CA78FC627149864004ACB64 /* Gradient.swift */,
+				7CE086262761482A00BF3CF3 /* ProjectColors.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -638,6 +642,7 @@
 		7C89AA7C256D717F009AD87C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7CE0862927614BEA00BF3CF3 /* Font */,
 				7C89AA03256D69CB009AD87C /* Assets.xcassets */,
 				B367F17725B1BDF600DF21D7 /* DishesGenerator.swift */,
 				7C74353925D07DBD00D33A9A /* GoogleServices */,
@@ -801,6 +806,7 @@
 				7C89AA75256D715F009AD87C /* UIViewController+Extensions.swift */,
 				B3B2A231256ED2A60052E6C8 /* UIImage+Extensions.swift */,
 				B341E23A257FB3F400EE05A7 /* UITextField+Extensions.swift */,
+				7CE0862427613FE000BF3CF3 /* UiColor+Extensions.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1072,6 +1078,7 @@
 				7C89AA91256D8286009AD87C /* Questionnaire.storyboard in Resources */,
 				B3E6E9A02571446E00958C48 /* MealPlanTableViewCell.xib in Resources */,
 				B3B7FCEF2590EFBC004BC2CD /* WeightProgress.storyboard in Resources */,
+				7CE0862A27614BEA00BF3CF3 /* Font in Resources */,
 				7CFA5FF7262A0F5800A3F401 /* MoveDishView.xib in Resources */,
 				7CB9ADE7268CB7140009B42A /* ChartView.xib in Resources */,
 				7C8F51362671F9E3001FF0EE /* AddMealAlertDishView.xib in Resources */,
@@ -1251,12 +1258,14 @@
 				7CFA85CF26ED1A8A00296B53 /* WeightsManager.swift in Sources */,
 				7C7434F525CD9DD700D33A9A /* ChatViewController.swift in Sources */,
 				B368DFFB25A76A2C00BD1937 /* WeightViewModel.swift in Sources */,
+				7CE0862527613FE000BF3CF3 /* UiColor+Extensions.swift in Sources */,
 				7C33B661266A587D00E16A1C /* CommentsViewModel.swift in Sources */,
 				7C1ACCF5266FCBC6008079C9 /* ChangeDateView.swift in Sources */,
 				7C98731E26F4A7C8000E5299 /* CaloriesProgressState.swift in Sources */,
 				B358222825AC9A2F00C91295 /* ArticlesViewController.swift in Sources */,
 				B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */,
 				B3DB753525A09133002CF48B /* Double+Extensions.swift in Sources */,
+				7CE086272761482A00BF3CF3 /* ProjectColors.swift in Sources */,
 				7C74357D25D0824D00D33A9A /* User.swift in Sources */,
 				7C481C7226FA1883002FB8BF /* MealsManager.swift in Sources */,
 				7C5262BF25BC79B200694007 /* SettingsViewController.swift in Sources */,
@@ -1305,7 +1314,6 @@
 				B358227F25ACA40D00C91295 /* ArticleViewModel.swift in Sources */,
 				B34397AD258A7FA50073A59B /* DishView.swift in Sources */,
 				7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */,
-				7CA78FC727149864004ACB64 /* Gradient.swift in Sources */,
 				7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */,
 				7CFA85CB26ECDEA000296B53 /* WeightAlertsManager.swift in Sources */,
 				7C1ACD042670C25B008079C9 /* AddingTableViewCell.swift in Sources */,
