@@ -55,7 +55,6 @@ class WeightAlertsManager {
 	private let messagesManager = MessagesManager.shared
 	
 	required init() {
-		
 		if UserProfile.defaults.isManager ?? false { return }
 		
 		setUserData() {
