@@ -121,6 +121,10 @@ extension UIViewController {
 		cropViewController.delegate = self as? CropViewControllerDelegate
 		present(cropViewController, animated: true)
 	}
+	
+	func applyGradientBackground() {
+		view.layer.insertSublayer(ProjectColors.gradientColorView(view), at: 0)
+	}
 }
 
 

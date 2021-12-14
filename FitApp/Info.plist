@@ -2,6 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Assistant-VariableFont_wght.ttf</string>
+		<string>Assistant-SemiBold.ttf</string>
+		<string>Assistant-Regular.ttf</string>
+		<string>Assistant-Medium.ttf</string>
+		<string>Assistant-Light.ttf</string>
+		<string>Assistant-ExtraLight.ttf</string>
+		<string>Assistant-ExtraBold.ttf</string>
+		<string>Assistant-Bold.ttf</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

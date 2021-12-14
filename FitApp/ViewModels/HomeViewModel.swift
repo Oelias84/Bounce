@@ -13,9 +13,9 @@ class HomeViewModel {
 	lazy var mealViewModel = MealViewModel.shared
 	private let userConsumption = ConsumptionManager.shared
 	
-	private var fatColor = #colorLiteral(red: 0.9450980392, green: 0.1529411765, blue: 0.06666666667, alpha: 1)
-	private var carbsColor = #colorLiteral(red: 0.4980392157, green: 0.4980392157, blue: 0.8352941176, alpha: 1)
-	private var proteinColor = #colorLiteral(red: 0.1411764706, green: 0.9960784314, blue: 0.2549019608, alpha: 1)
+	private var fatColor = UIColor.projectTurquoise
+	private var carbsColor = UIColor.projectGreen
+	private var proteinColor = UIColor.projectTail
 
 	// Getters
 	var getMealDate: String {

@@ -162,7 +162,7 @@ extension HomeViewController {
 		proteinRingLayer = RingProgressView(frame: CGRect(x: 0, y: 0,
 														  width: circleContainerWidth, height: circleContainerWidth))
 		proteinRingLayer.startColor = viewModel.getProteinColor
-		proteinRingLayer.endColor = #colorLiteral(red: 0.9921568627, green: 0.9882352941, blue: 0.2784313725, alpha: 1)
+		proteinRingLayer.endColor = viewModel.getProteinColor
 		proteinRingLayer.ringWidth = ringWitdth
 		proteinRingLayer.progress = 0.0
 		proteinRingLayer.alpha = 0
@@ -170,7 +170,7 @@ extension HomeViewController {
 		carbsRingLayer = RingProgressView(frame: CGRect(x: carbsRingMeasure/2, y: carbsRingMeasure/2,
 														width: circleContainerWidth - carbsRingMeasure, height: circleContainerWidth - carbsRingMeasure))
 		carbsRingLayer.startColor = viewModel.getCarbsColor
-		carbsRingLayer.endColor = #colorLiteral(red: 0.568627451, green: 0.9176470588, blue: 0.8941176471, alpha: 1)
+		carbsRingLayer.endColor = viewModel.getCarbsColor
 		carbsRingLayer.ringWidth = ringWitdth
 		carbsRingLayer.progress = 0.0
 		carbsRingLayer.alpha = 0
@@ -178,7 +178,7 @@ extension HomeViewController {
 		fatRingLayer = RingProgressView(frame: CGRect(x: fatinRingMeasure/2, y: fatinRingMeasure/2,
 													  width: circleContainerWidth - fatinRingMeasure, height: circleContainerWidth - fatinRingMeasure))
 		fatRingLayer.startColor = viewModel.getFatColor
-		fatRingLayer.endColor = #colorLiteral(red: 0.9607843137, green: 0.6862745098, blue: 0.09803921569, alpha: 1)
+		fatRingLayer.endColor = viewModel.getFatColor
 		fatRingLayer.ringWidth = ringWitdth
 		fatRingLayer.progress = 0.0
 		fatRingLayer.alpha = 0
