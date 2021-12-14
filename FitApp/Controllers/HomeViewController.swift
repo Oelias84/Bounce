@@ -137,6 +137,7 @@ extension HomeViewController {
 		if let image = UserProfile.defaults.profileImageImageUrl?.showImage {
 			profileButton.setImage( image.circleMasked, for: .normal)
 		}
+		self.applyGradientBackground()
 	}
 	private func updateWheels() {
 		DispatchQueue.main.async {
