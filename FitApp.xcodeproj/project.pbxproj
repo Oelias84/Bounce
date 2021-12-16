@@ -10,6 +10,15 @@
 		13CF235DA08F341CFEB28805 /* Pods_FitApp_FitAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F92787D51B022DC3D3BE25 /* Pods_FitApp_FitAppUITests.framework */; };
 		1A1C4513AE7EF2FAD0F25C05 /* Pods_FitAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */; };
 		7C0E4531275E8FA500ECA20E /* MessagesTextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */; };
+		7C10BA70276BCB9C00B5860C /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10BA6F276BCB9C00B5860C /* UINavigationController+Extensions.swift */; };
+		7C10BA79276BCFB900B5860C /* Assistant-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C10BA78276BCFAF00B5860C /* Assistant-Bold.ttf */; };
+		7C10BA7A276BCFBE00B5860C /* Assistant-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C10BA75276BCFAF00B5860C /* Assistant-Regular.ttf */; };
+		7C10BA7B276BCFBE00B5860C /* Assistant-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C10BA71276BCFAE00B5860C /* Assistant-ExtraBold.ttf */; };
+		7C10BA7C276BCFBE00B5860C /* Assistant-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C10BA73276BCFAF00B5860C /* Assistant-SemiBold.ttf */; };
+		7C10BA7D276BCFBE00B5860C /* Assistant-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C10BA72276BCFAF00B5860C /* Assistant-Light.ttf */; };
+		7C10BA7E276BCFBE00B5860C /* Assistant-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C10BA74276BCFAF00B5860C /* Assistant-VariableFont_wght.ttf */; };
+		7C10BA7F276BCFBE00B5860C /* Assistant-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C10BA77276BCFAF00B5860C /* Assistant-Medium.ttf */; };
+		7C10BA80276BCFBE00B5860C /* Assistant-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C10BA76276BCFAF00B5860C /* Assistant-ExtraLight.ttf */; };
 		7C149C7925D817DD00B0864F /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */; };
 		7C149C8E25D85A7600B0864F /* AddWeightAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C149C8D25D85A7600B0864F /* AddWeightAlertView.xib */; };
 		7C1ACCE7266F8D19008079C9 /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ACCE6266F8D19008079C9 /* CommentsTableViewController.swift */; };
@@ -87,13 +96,14 @@
 		7CD1817E26481E5D0054DB9C /* SettingTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */; };
 		7CE0862527613FE000BF3CF3 /* UiColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0862427613FE000BF3CF3 /* UiColor+Extensions.swift */; };
 		7CE086272761482A00BF3CF3 /* ProjectColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE086262761482A00BF3CF3 /* ProjectColors.swift */; };
-		7CE0862A27614BEA00BF3CF3 /* Font in Resources */ = {isa = PBXBuildFile; fileRef = 7CE0862927614BEA00BF3CF3 /* Font */; };
 		7CFA5FF7262A0F5800A3F401 /* MoveDishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */; };
 		7CFA5FFF262A10E600A3F401 /* MoveDishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */; };
 		7CFA85CB26ECDEA000296B53 /* WeightAlertsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */; };
 		7CFA85CF26ED1A8A00296B53 /* WeightsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA85CE26ED1A8A00296B53 /* WeightsManager.swift */; };
 		7CFA85D126EE055700296B53 /* DailyMealManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA85D026EE055700296B53 /* DailyMealManager.swift */; };
 		7CFCAF4726BD58DA008A24F8 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFCAF4626BD58DA008A24F8 /* HomeViewModel.swift */; };
+		7CFE0C0E276936330077D16F /* BounceNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE086312767BCA100BF3CF3 /* BounceNavigationBarView.swift */; };
+		7CFE0C0F276936470077D16F /* BounceNavigationBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE086302767BCA100BF3CF3 /* BounceNavigationBarView.xib */; };
 		7CFFAD9C261DEF1000C05C66 /* DishesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFFAD9B261DEF1000C05C66 /* DishesTableViewController.swift */; };
 		B30069D325926F090025FA0E /* WeightProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30069D225926F090025FA0E /* WeightProgressViewController.swift */; };
 		B302982025793BBA00CF41F0 /* UserProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B302981F25793BBA00CF41F0 /* UserProgress.swift */; };
@@ -179,6 +189,15 @@
 		05D96098412DCEF72F6C4753 /* Pods-FitApp-FitAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp-FitAppUITests.release.xcconfig"; path = "Target Support Files/Pods-FitApp-FitAppUITests/Pods-FitApp-FitAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTextManager.swift; sourceTree = "<group>"; };
+		7C10BA6F276BCB9C00B5860C /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extensions.swift"; sourceTree = "<group>"; };
+		7C10BA71276BCFAE00B5860C /* Assistant-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-ExtraBold.ttf"; sourceTree = "<group>"; };
+		7C10BA72276BCFAF00B5860C /* Assistant-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-Light.ttf"; sourceTree = "<group>"; };
+		7C10BA73276BCFAF00B5860C /* Assistant-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-SemiBold.ttf"; sourceTree = "<group>"; };
+		7C10BA74276BCFAF00B5860C /* Assistant-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		7C10BA75276BCFAF00B5860C /* Assistant-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-Regular.ttf"; sourceTree = "<group>"; };
+		7C10BA76276BCFAF00B5860C /* Assistant-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-ExtraLight.ttf"; sourceTree = "<group>"; };
+		7C10BA77276BCFAF00B5860C /* Assistant-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-Medium.ttf"; sourceTree = "<group>"; };
+		7C10BA78276BCFAF00B5860C /* Assistant-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-Bold.ttf"; sourceTree = "<group>"; };
 		7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
 		7C149C8D25D85A7600B0864F /* AddWeightAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddWeightAlertView.xib; sourceTree = "<group>"; };
 		7C1ACCE6266F8D19008079C9 /* CommentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
@@ -265,9 +284,8 @@
 		7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewModel.swift; sourceTree = "<group>"; };
 		7CE0862427613FE000BF3CF3 /* UiColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiColor+Extensions.swift"; sourceTree = "<group>"; };
 		7CE086262761482A00BF3CF3 /* ProjectColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectColors.swift; sourceTree = "<group>"; };
-		7CE0862927614BEA00BF3CF3 /* Font */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Font; sourceTree = "<group>"; };
-		7CE086302767BCA100BF3CF3 /* BounceNavigationBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BounceNavigationBar.xib; sourceTree = "<group>"; };
-		7CE086312767BCA100BF3CF3 /* BounceNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceNavigationBar.swift; sourceTree = "<group>"; };
+		7CE086302767BCA100BF3CF3 /* BounceNavigationBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BounceNavigationBarView.xib; sourceTree = "<group>"; };
+		7CE086312767BCA100BF3CF3 /* BounceNavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceNavigationBarView.swift; sourceTree = "<group>"; };
 		7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoveDishView.xib; sourceTree = "<group>"; };
 		7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDishView.swift; sourceTree = "<group>"; };
 		7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightAlertsManager.swift; sourceTree = "<group>"; };
@@ -644,7 +662,14 @@
 		7C89AA7C256D717F009AD87C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7CE0862927614BEA00BF3CF3 /* Font */,
+				7C10BA78276BCFAF00B5860C /* Assistant-Bold.ttf */,
+				7C10BA71276BCFAE00B5860C /* Assistant-ExtraBold.ttf */,
+				7C10BA76276BCFAF00B5860C /* Assistant-ExtraLight.ttf */,
+				7C10BA72276BCFAF00B5860C /* Assistant-Light.ttf */,
+				7C10BA77276BCFAF00B5860C /* Assistant-Medium.ttf */,
+				7C10BA75276BCFAF00B5860C /* Assistant-Regular.ttf */,
+				7C10BA73276BCFAF00B5860C /* Assistant-SemiBold.ttf */,
+				7C10BA74276BCFAF00B5860C /* Assistant-VariableFont_wght.ttf */,
 				7C89AA03256D69CB009AD87C /* Assets.xcassets */,
 				B367F17725B1BDF600DF21D7 /* DishesGenerator.swift */,
 				7C74353925D07DBD00D33A9A /* GoogleServices */,
@@ -757,8 +782,8 @@
 		7CE0862F2767A64000BF3CF3 /* BounceNavigationBar */ = {
 			isa = PBXGroup;
 			children = (
-				7CE086312767BCA100BF3CF3 /* BounceNavigationBar.swift */,
-				7CE086302767BCA100BF3CF3 /* BounceNavigationBar.xib */,
+				7CE086312767BCA100BF3CF3 /* BounceNavigationBarView.swift */,
+				7CE086302767BCA100BF3CF3 /* BounceNavigationBarView.xib */,
 			);
 			name = BounceNavigationBar;
 			sourceTree = "<group>";
@@ -832,6 +857,7 @@
 				B368E05B25A79BB700BD1937 /* Data+Extensions.swift */,
 				B367F14725B036CC00DF21D7 /* UserDefaults+Extensions.swift */,
 				7C62180F26F4F2F20019FD25 /* UIAlertController+Extensions.swift */,
+				7C10BA6F276BCB9C00B5860C /* UINavigationController+Extensions.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -1083,30 +1109,36 @@
 				7C89AA07256D69CB009AD87C /* LaunchScreen.storyboard in Resources */,
 				B367F18025B1DE4F00DF21D7 /* DishesStrings.strings in Resources */,
 				7C89AA04256D69CB009AD87C /* Assets.xcassets in Resources */,
+				7C10BA7E276BCFBE00B5860C /* Assistant-VariableFont_wght.ttf in Resources */,
+				7C10BA7C276BCFBE00B5860C /* Assistant-SemiBold.ttf in Resources */,
 				B3E6E98D257142CD00958C48 /* MealPlan.storyboard in Resources */,
+				7C10BA80276BCFBE00B5860C /* Assistant-ExtraLight.ttf in Resources */,
 				7C857BA5262C4D68006AB0BD /* TableViewEmptyView.xib in Resources */,
 				B358222325AC930B00C91295 /* Articles.storyboard in Resources */,
 				7C5262B725BC756700694007 /* Settings.storyboard in Resources */,
 				7C89AA91256D8286009AD87C /* Questionnaire.storyboard in Resources */,
-				7CE0862E2767A63700BF3CF3 /* (null) in Resources */,
 				B3E6E9A02571446E00958C48 /* MealPlanTableViewCell.xib in Resources */,
+				7C10BA7B276BCFBE00B5860C /* Assistant-ExtraBold.ttf in Resources */,
 				B3B7FCEF2590EFBC004BC2CD /* WeightProgress.storyboard in Resources */,
-				7CE0862A27614BEA00BF3CF3 /* Font in Resources */,
 				7CFA5FF7262A0F5800A3F401 /* MoveDishView.xib in Resources */,
 				7CB9ADE7268CB7140009B42A /* ChartView.xib in Resources */,
 				7C8F51362671F9E3001FF0EE /* AddMealAlertDishView.xib in Resources */,
 				7C89AA02256D69CA009AD87C /* LoginRegister.storyboard in Resources */,
-				7CE086322767BCA100BF3CF3 /* BounceNavigationBar.xib in Resources */,
 				B330B87625757C1000BDB206 /* Workout.storyboard in Resources */,
+				7C10BA7A276BCFBE00B5860C /* Assistant-Regular.ttf in Resources */,
+				7CFE0C0F276936470077D16F /* BounceNavigationBarView.xib in Resources */,
+				7C10BA7F276BCFBE00B5860C /* Assistant-Medium.ttf in Resources */,
 				B330B87F25757F1300BDB206 /* ExerciseTableViewCell.xib in Resources */,
 				B358227925ACA2F800C91295 /* ArticleTableViewCell.xib in Resources */,
 				7C1ACD0A2670D145008079C9 /* AddMealAlertView.xib in Resources */,
 				B3C390F725B7700A00C7E23D /* ExerciseCategoryView.xib in Resources */,
+				7C10BA79276BCFB900B5860C /* Assistant-Bold.ttf in Resources */,
 				7C1ACCEC266F8F8F008079C9 /* CommentTableViewCell.xib in Resources */,
 				B34397A7258A7F720073A59B /* DishView.xib in Resources */,
 				7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */,
 				7C1ACD052670C25B008079C9 /* AddingTableViewCell.xib in Resources */,
 				B38068C725B7197E005C4A24 /* WorkoutTableViewCell.xib in Resources */,
+				7C10BA7D276BCFBE00B5860C /* Assistant-Light.ttf in Resources */,
 				B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */,
 				7C7434FB25CD9F0000D33A9A /* Chat.storyboard in Resources */,
 				7C149C8E25D85A7600B0864F /* AddWeightAlertView.xib in Resources */,
@@ -1327,8 +1359,6 @@
 				7C658AA825D9873C00CA75B2 /* Motivations.swift in Sources */,
 				B358227F25ACA40D00C91295 /* ArticleViewModel.swift in Sources */,
 				B34397AD258A7FA50073A59B /* DishView.swift in Sources */,
-				7CE086332767BCA100BF3CF3 /* BounceNavigationBar.swift in Sources */,
-				7CE0862C2767A5CA00BF3CF3 /* (null) in Sources */,
 				7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */,
 				7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */,
 				7CFA85CB26ECDEA000296B53 /* WeightAlertsManager.swift in Sources */,
@@ -1341,8 +1371,10 @@
 				7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */,
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
 				7C83152525E053B100335601 /* ExerciseCategoryView.swift in Sources */,
+				7C10BA70276BCB9C00B5860C /* UINavigationController+Extensions.swift in Sources */,
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
 				7C54164D269D951C00C22859 /* LoginViewModel.swift in Sources */,
+				7CFE0C0E276936330077D16F /* BounceNavigationBarView.swift in Sources */,
 				7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */,
 				7CD1817B2647E80F0054DB9C /* NotificationTableViewCell.swift in Sources */,
 				B358223025AC9DA800C91295 /* Article.swift in Sources */,
