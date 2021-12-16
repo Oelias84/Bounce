@@ -161,6 +161,7 @@ struct K {
 		static let exerciseCategoryView = "ExerciseCategoryView"
 		static let addMealAlertView = "AddMealAlertView"
 		static let addMealAlertDishView = "AddMealAlertDishView"
+		static let bounceNavigationBarView = "BounceNavigationBarView"
     }
 	
 	struct Units {
