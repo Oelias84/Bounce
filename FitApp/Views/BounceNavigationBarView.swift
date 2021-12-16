@@ -1,5 +1,5 @@
 //
-//  BounceNavigationBar.swift
+//  BounceNavigationBarView.swift
 //  FitApp
 //
 //  Created by Ofir Elias on 13/12/2021.
@@ -15,20 +15,24 @@ protocol BounceNavigationBarDelegate: AnyObject {
 	func userProfileImageDidTapp()
 }
 
-final class BounceNavigationBar: UIView {
+final class BounceNavigationBarView: UIView {
 	
-	private static let NIB_NAME = "NavigationBar"
 	
 	@IBOutlet private var view: UIView!
+	@IBOutlet weak var backButton: UIButton!
 	@IBOutlet weak var userProfileImage: UIImageView! {
 		didSet{
 			userProfileImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(userProfileImageTapped)))
 		}
 	}
-	@IBOutlet weak var backButton: UIButton!
 	@IBOutlet private weak var messageButton: UIButton!
 	@IBOutlet private weak var nameTitleLabel: UILabel!
 	@IBOutlet private weak var dayWelcomeLabel: UILabel!
+	@IBOutlet weak var backgroundImage: UIImageView! {
+		didSet {
+			backgroundImage.dropShadow()
+		}
+	}
 	
 	weak var delegate: BounceNavigationBarDelegate?
 	
@@ -72,12 +76,13 @@ final class BounceNavigationBar: UIView {
 }
 
 //MARK: - Functions
-extension BounceNavigationBar {
+extension BounceNavigationBarView {
 	
 	private func initWithNib() {
-		Bundle.main.loadNibNamed(BounceNavigationBar.NIB_NAME, owner: self, options: nil)
-		view.translatesAutoresizingMaskIntoConstraints = false
+		Bundle.main.loadNibNamed(K.NibName.bounceNavigationBarView, owner: self, options: nil)
 		addSubview(view)
+		frame = self.bounds
+		autoresizingMask = [.flexibleHeight, .flexibleWidth]
 		setupLayout()
 	}
 	private func setupLayout() {
@@ -92,6 +97,9 @@ extension BounceNavigationBar {
 		if let image = UserProfile.defaults.profileImageImageUrl?.showImage {
 			userProfileImage.image = image.circleMasked
 		}
+	}
+	@objc private func backButtonImageTapped() {
+		delegate?.backButtonTapped()
 	}
 	@objc private func userProfileImageTapped() {
 		delegate?.userProfileImageDidTapp()

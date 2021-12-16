@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Assistant-Light.ttf">
+            <string>Assistant-Light</string>
+        </array>
+        <array key="Assistant-Regular.ttf">
+            <string>Assistant-Regular</string>
+        </array>
+        <array key="Assistant-VariableFont_wght.ttf">
+            <string>AssistantRoman-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
+            <connections>
+                <outlet property="backButton" destination="ytV-81-ABg" id="1iY-hP-Eoi"/>
+                <outlet property="backgroundImage" destination="c7x-sx-FM9" id="hQV-Jh-Iem"/>
+                <outlet property="dayWelcomeLabel" destination="jcb-Hq-gyo" id="udY-B1-J2H"/>
+                <outlet property="messageButton" destination="5Oc-Oq-zBg" id="3kD-7Q-tzx"/>
+                <outlet property="nameTitleLabel" destination="IjQ-B2-AI0" id="jXc-2D-gf0"/>
+                <outlet property="userProfileImage" destination="fhu-ur-i2k" id="gWb-55-gbn"/>
+                <outlet property="view" destination="iN0-l3-epB" id="ABa-RE-bTI"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="392"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Vb-0t-tKu" userLabel="Backgound View">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="301"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NavigationBackground" translatesAutoresizingMaskIntoConstraints="NO" id="c7x-sx-FM9">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="301"/>
+                        </imageView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="fkT-0R-CAW" userLabel="Left Stack View">
+                            <rect key="frame" x="24" y="82.5" width="145" height="42"/>
+                            <subviews>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="בוקר טוב," textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcb-Hq-gyo">
+                                    <rect key="frame" x="0.0" y="0.0" width="145" height="0.0"/>
+                                    <fontDescription key="fontDescription" name="Assistant-Light" family="Assistant" pointSize="20"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="שחר אליאס" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjQ-B2-AI0">
+                                    <rect key="frame" x="0.0" y="0.0" width="145" height="42"/>
+                                    <fontDescription key="fontDescription" name="AssistantRoman-Bold" family="Assistant" pointSize="32"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odj-pP-h1t" userLabel="Right Stack View">
+                            <rect key="frame" x="300" y="85" width="90" height="37"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Oc-Oq-zBg" colorLabel="IBBuiltInLabel-Orange">
+                                    <rect key="frame" x="0.0" y="0.0" width="53" height="37"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="ChatIcon" title=" "/>
+                                    <connections>
+                                        <action selector="messageButtonTapped:" destination="-1" eventType="touchUpInside" id="msY-Ea-g2i"/>
+                                    </connections>
+                                </button>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fhu-ur-i2k">
+                                    <rect key="frame" x="53" y="0.5" width="37" height="36"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="37" id="qBt-QQ-12a"/>
+                                        <constraint firstAttribute="width" secondItem="fhu-ur-i2k" secondAttribute="height" multiplier="1:1" id="yhg-fk-XPc"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwy-Dd-NNS" userLabel="Buttom Stack View">
+                            <rect key="frame" x="24" y="142" width="366" height="21"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="היום אתה פועל מתוך אהבה לגוף שלך ולא מתוך שנאה" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwK-09-zWj">
+                                    <rect key="frame" x="0.0" y="0.0" width="366" height="21"/>
+                                    <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="16"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytV-81-ABg">
+                            <rect key="frame" x="10" y="51.5" width="49.5" height="31"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title=" ">
+                                <imageReference key="image" image="chevron.backward.circle.fill" catalog="system" symbolScale="large"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="bold"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="tJ0-Ve-ZDJ"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="IjQ-B2-AI0" firstAttribute="centerY" secondItem="fhu-ur-i2k" secondAttribute="centerY" id="6NS-e2-9wW"/>
+                        <constraint firstItem="dwy-Dd-NNS" firstAttribute="top" secondItem="odj-pP-h1t" secondAttribute="bottom" constant="20" id="6hL-Kg-Hr3"/>
+                        <constraint firstAttribute="trailing" secondItem="c7x-sx-FM9" secondAttribute="trailing" id="7E9-Ac-7iy"/>
+                        <constraint firstAttribute="trailing" secondItem="odj-pP-h1t" secondAttribute="trailing" constant="24" id="Jk9-8a-gcp"/>
+                        <constraint firstItem="fkT-0R-CAW" firstAttribute="top" secondItem="ytV-81-ABg" secondAttribute="bottom" id="Uxq-Cv-46D"/>
+                        <constraint firstItem="fkT-0R-CAW" firstAttribute="leading" secondItem="7Vb-0t-tKu" secondAttribute="leading" constant="24" id="bg6-su-zXD"/>
+                        <constraint firstItem="ytV-81-ABg" firstAttribute="leading" secondItem="7Vb-0t-tKu" secondAttribute="leading" constant="10" id="hNw-c8-eZe"/>
+                        <constraint firstItem="odj-pP-h1t" firstAttribute="top" secondItem="7Vb-0t-tKu" secondAttribute="top" constant="85" id="hjp-jc-3gL"/>
+                        <constraint firstItem="c7x-sx-FM9" firstAttribute="leading" secondItem="7Vb-0t-tKu" secondAttribute="leading" id="poL-tY-Fuz"/>
+                        <constraint firstAttribute="trailing" secondItem="dwy-Dd-NNS" secondAttribute="trailing" constant="24" id="q9K-ZS-qdD"/>
+                        <constraint firstAttribute="bottom" secondItem="c7x-sx-FM9" secondAttribute="bottom" id="swM-nv-aYi"/>
+                        <constraint firstItem="c7x-sx-FM9" firstAttribute="top" secondItem="7Vb-0t-tKu" secondAttribute="top" id="vAc-OO-ikS"/>
+                        <constraint firstAttribute="bottom" secondItem="dwy-Dd-NNS" secondAttribute="bottom" constant="138" id="vdA-EG-09e"/>
+                        <constraint firstItem="dwy-Dd-NNS" firstAttribute="leading" secondItem="7Vb-0t-tKu" secondAttribute="leading" constant="24" id="x0g-Jv-FXp"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="7Vb-0t-tKu" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="LkB-MZ-ZQo"/>
+                <constraint firstItem="7Vb-0t-tKu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="aMx-zc-ol5"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="7Vb-0t-tKu" secondAttribute="trailing" id="kac-sT-UwD"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="160.86956521739131" y="-780.13392857142856"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ChatIcon" width="25.261999130249023" height="23.416000366210938"/>
+        <image name="NavigationBackground" width="390" height="301"/>
+        <image name="chevron.backward.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
+    </resources>
+</document>
