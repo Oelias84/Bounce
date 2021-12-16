@@ -20,4 +20,7 @@ extension UIColor {
 	@nonobjc class var projectTurquoise: UIColor {
 		return UIColor(red: 153.0 / 255.0, green: 207.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
 	}
+	@nonobjc class var blackShadow: UIColor {
+	  return UIColor(white: 0.0, alpha: 0.16)
+	}
 }

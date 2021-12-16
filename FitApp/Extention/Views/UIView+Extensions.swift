@@ -75,10 +75,10 @@ extension UIView {
 	// OUTPUT 1
 	func dropShadow(scale: Bool = true) {
 		layer.masksToBounds = false
-		layer.shadowColor = UIColor.systemBlue.cgColor
-		layer.shadowOpacity = 0.2
-		layer.shadowOffset = CGSize(width: 0, height: 12)
-		layer.shadowRadius = 12
+		layer.shadowColor = UIColor.blackShadow.cgColor
+		layer.shadowOpacity = 1
+		layer.shadowOffset = CGSize(width: 0, height: 3)
+		layer.shadowRadius = 4
 	}
 	// OUTPUT 2
 	func buttonShadow(scale: Bool = true) {
