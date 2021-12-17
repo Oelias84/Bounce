@@ -26,8 +26,9 @@
                 <outlet property="backgroundImage" destination="c7x-sx-FM9" id="hQV-Jh-Iem"/>
                 <outlet property="dayWelcomeLabel" destination="jcb-Hq-gyo" id="udY-B1-J2H"/>
                 <outlet property="messageButton" destination="5Oc-Oq-zBg" id="3kD-7Q-tzx"/>
+                <outlet property="motivationLabel" destination="dwK-09-zWj" id="Z0H-3f-yjy"/>
                 <outlet property="nameTitleLabel" destination="IjQ-B2-AI0" id="jXc-2D-gf0"/>
-                <outlet property="userProfileImage" destination="fhu-ur-i2k" id="gWb-55-gbn"/>
+                <outlet property="userProfileButton" destination="f51-iL-U68" id="Ji7-Vq-9cB"/>
                 <outlet property="view" destination="iN0-l3-epB" id="ABa-RE-bTI"/>
             </connections>
         </placeholder>
@@ -36,23 +37,23 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="392"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Vb-0t-tKu" userLabel="Backgound View">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Vb-0t-tKu">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="301"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NavigationBackground" translatesAutoresizingMaskIntoConstraints="NO" id="c7x-sx-FM9">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="301"/>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="fkT-0R-CAW" userLabel="Left Stack View">
-                            <rect key="frame" x="24" y="82.5" width="145" height="42"/>
+                            <rect key="frame" x="24" y="55" width="145" height="69.5"/>
                             <subviews>
-                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="בוקר טוב," textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcb-Hq-gyo">
-                                    <rect key="frame" x="0.0" y="0.0" width="145" height="0.0"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="בוקר טוב," textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcb-Hq-gyo">
+                                    <rect key="frame" x="0.0" y="0.0" width="145" height="26.5"/>
                                     <fontDescription key="fontDescription" name="Assistant-Light" family="Assistant" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="שחר אליאס" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjQ-B2-AI0">
-                                    <rect key="frame" x="0.0" y="0.0" width="145" height="42"/>
+                                    <rect key="frame" x="0.0" y="27.5" width="145" height="42"/>
                                     <fontDescription key="fontDescription" name="AssistantRoman-Bold" family="Assistant" pointSize="32"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -60,24 +61,26 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odj-pP-h1t" userLabel="Right Stack View">
-                            <rect key="frame" x="300" y="85" width="90" height="37"/>
+                            <rect key="frame" x="306" y="85" width="84" height="37"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Oc-Oq-zBg" colorLabel="IBBuiltInLabel-Orange">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Oc-Oq-zBg" userLabel="messageButton" colorLabel="IBBuiltInLabel-Orange">
                                     <rect key="frame" x="0.0" y="0.0" width="53" height="37"/>
                                     <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" image="ChatIcon" title=" "/>
+                                    <buttonConfiguration key="configuration" style="plain" image="ChatIcon" title=" " titleAlignment="center"/>
                                     <connections>
                                         <action selector="messageButtonTapped:" destination="-1" eventType="touchUpInside" id="msY-Ea-g2i"/>
                                     </connections>
                                 </button>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fhu-ur-i2k">
-                                    <rect key="frame" x="53" y="0.5" width="37" height="36"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f51-iL-U68" userLabel="userProfileButton">
+                                    <rect key="frame" x="53" y="0.0" width="31" height="37"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="37" id="qBt-QQ-12a"/>
-                                        <constraint firstAttribute="width" secondItem="fhu-ur-i2k" secondAttribute="height" multiplier="1:1" id="yhg-fk-XPc"/>
-                                    </constraints>
-                                </imageView>
+                                    <state key="normal" title=" ">
+                                        <imageReference key="image" image="person.circle" catalog="system" symbolScale="large"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="userProfileButtonTapped:" destination="-1" eventType="touchUpInside" id="Rr2-Ox-SVR"/>
+                                    </connections>
+                                </button>
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwy-Dd-NNS" userLabel="Buttom Stack View">
@@ -91,8 +94,8 @@
                                 </label>
                             </subviews>
                         </stackView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytV-81-ABg">
-                            <rect key="frame" x="10" y="51.5" width="49.5" height="31"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytV-81-ABg">
+                            <rect key="frame" x="10" y="24" width="49.5" height="31"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title=" ">
@@ -106,7 +109,6 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="IjQ-B2-AI0" firstAttribute="centerY" secondItem="fhu-ur-i2k" secondAttribute="centerY" id="6NS-e2-9wW"/>
                         <constraint firstItem="dwy-Dd-NNS" firstAttribute="top" secondItem="odj-pP-h1t" secondAttribute="bottom" constant="20" id="6hL-Kg-Hr3"/>
                         <constraint firstAttribute="trailing" secondItem="c7x-sx-FM9" secondAttribute="trailing" id="7E9-Ac-7iy"/>
                         <constraint firstAttribute="trailing" secondItem="odj-pP-h1t" secondAttribute="trailing" constant="24" id="Jk9-8a-gcp"/>
@@ -118,7 +120,7 @@
                         <constraint firstAttribute="trailing" secondItem="dwy-Dd-NNS" secondAttribute="trailing" constant="24" id="q9K-ZS-qdD"/>
                         <constraint firstAttribute="bottom" secondItem="c7x-sx-FM9" secondAttribute="bottom" id="swM-nv-aYi"/>
                         <constraint firstItem="c7x-sx-FM9" firstAttribute="top" secondItem="7Vb-0t-tKu" secondAttribute="top" id="vAc-OO-ikS"/>
-                        <constraint firstAttribute="bottom" secondItem="dwy-Dd-NNS" secondAttribute="bottom" constant="138" id="vdA-EG-09e"/>
+                        <constraint firstItem="IjQ-B2-AI0" firstAttribute="centerY" secondItem="5Oc-Oq-zBg" secondAttribute="centerY" id="w6A-jc-FRo"/>
                         <constraint firstItem="dwy-Dd-NNS" firstAttribute="leading" secondItem="7Vb-0t-tKu" secondAttribute="leading" constant="24" id="x0g-Jv-FXp"/>
                     </constraints>
                 </view>

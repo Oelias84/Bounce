@@ -19,15 +19,15 @@ final class BounceNavigationBarView: UIView {
 	
 	
 	@IBOutlet private var view: UIView!
-	@IBOutlet weak var backButton: UIButton!
-	@IBOutlet weak var userProfileImage: UIImageView! {
-		didSet{
-			userProfileImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(userProfileImageTapped)))
-		}
-	}
+	
+	@IBOutlet private weak var backButton: UIButton!
 	@IBOutlet private weak var messageButton: UIButton!
+	@IBOutlet private weak var userProfileButton: UIButton!
+	
 	@IBOutlet private weak var nameTitleLabel: UILabel!
 	@IBOutlet private weak var dayWelcomeLabel: UILabel!
+	@IBOutlet private weak var motivationLabel: UILabel!
+	
 	@IBOutlet weak var backgroundImage: UIImageView! {
 		didSet {
 			backgroundImage.dropShadow()
@@ -36,14 +36,19 @@ final class BounceNavigationBarView: UIView {
 	
 	weak var delegate: BounceNavigationBarDelegate?
 	
-	var nameTitle: String = "" {
+	var nameTitle: String? = "" {
 		didSet {
 			nameTitleLabel.text = nameTitle
 		}
 	}
-	var dayWelcome: String = "" {
+	var dayWelcomeText: String? = "" {
 		didSet {
-			dayWelcomeLabel.text = dayWelcome
+			dayWelcomeLabel.text = dayWelcomeText
+		}
+	}
+	var motivationText: String? = "" {
+		didSet {
+			motivationLabel.text = motivationText
 		}
 	}
 	var isMessageButtonHidden: Bool {
@@ -67,6 +72,9 @@ final class BounceNavigationBarView: UIView {
 		initWithNib()
 	}
 	
+	@IBAction func userProfileButtonTapped(_ sender: Any) {
+		delegate?.userProfileImageDidTapp()
+	}
 	@IBAction func backButtonTapped(_ sender: Any) {
 		delegate?.backButtonTapped()
 	}
@@ -95,13 +103,9 @@ extension BounceNavigationBarView {
 			]
 		)
 		if let image = UserProfile.defaults.profileImageImageUrl?.showImage {
-			userProfileImage.image = image.circleMasked
+			userProfileButton.setImage(image.circleMasked, for: .normal)
 		}
-	}
-	@objc private func backButtonImageTapped() {
-		delegate?.backButtonTapped()
-	}
-	@objc private func userProfileImageTapped() {
-		delegate?.userProfileImageDidTapp()
+		userProfileButton.imageView?.contentMode = .scaleAspectFit
+		userProfileButton.imageEdgeInsets = UIEdgeInsets(top: 37, left: 37, bottom: 37, right: 37)
 	}
 }
