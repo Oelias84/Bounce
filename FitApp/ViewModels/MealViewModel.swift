@@ -130,7 +130,7 @@ class MealViewModel: NSObject {
 		return (currentMealDate ?? Date()).dateStringDisplay + " " + (currentMealDate ?? Date()).displayDayName
 	}
 	func getExceptionalCalories() -> String? {
-		if let meals = meals, meals.contains(where: {$0.mealType == .other}) {
+		if let meals = meals, meals.contains(where: {$0.mealType != .other}) {
 			var mealCalorieSum: Double = 0.0
 			
 			meals.forEach {
