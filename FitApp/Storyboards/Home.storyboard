@@ -258,10 +258,14 @@
             <objects>
                 <tabBarController storyboardIdentifier="HomeTabBar" automaticallyAdjustsScrollViewInsets="NO" id="BvC-9T-Ubh" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="centered" id="MbM-6T-4Ry">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MbM-6T-4Ry">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" name="ProjectBackground"/>
+                        <tabBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" name="ProjectBackground"/>
+                            <color key="selectionIndicatorTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </tabBarAppearance>
                     </tabBar>
                     <connections>
                         <segue destination="5vo-ly-MDw" kind="relationship" relationship="viewControllers" id="aa6-aT-idU"/>
@@ -289,7 +293,7 @@
         <scene sceneID="1CK-nm-WXs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nJB-tX-ghA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Cutlery" id="bLi-MO-bJG"/>
+                    <tabBarItem key="tabBarItem" title="" image="Meals" selectedImage="MealsSelected" id="bLi-MO-bJG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="hOm-GV-sig">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -308,7 +312,7 @@
         <scene sceneID="HxQ-5K-cFd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zmZ-sf-tsA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Workout" id="qyL-mB-qAR"/>
+                    <tabBarItem key="tabBarItem" title="" image="Workout" selectedImage="WorkoutSelected" id="qyL-mB-qAR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="0wG-4h-Ua1">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -327,7 +331,7 @@
         <scene sceneID="Ixk-Ge-SU3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="I6j-J7-ygL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Weight" id="aOL-u8-b4d"/>
+                    <tabBarItem key="tabBarItem" title="" image="Weight" selectedImage="WeightSelected" id="aOL-u8-b4d"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Wdr-OP-lAS">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -366,7 +370,9 @@
         <scene sceneID="dnp-sr-DGK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dzb-ek-JRY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Chat" landscapeImage="Chat" largeContentSizeImage="Chat" id="2dI-yY-Shp"/>
+                    <tabBarItem key="tabBarItem" title="" image="Article" selectedImage="ArticleSelected" id="2dI-yY-Shp">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="4uZ-sp-1OR">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -385,7 +391,7 @@
         <scene sceneID="MX8-hT-dT7">
             <objects>
                 <navigationController restorationIdentifier="HomeNavigation" automaticallyAdjustsScrollViewInsets="NO" id="5vo-ly-MDw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Home" id="huH-1c-Qcl"/>
+                    <tabBarItem key="tabBarItem" title="" image="Home" selectedImage="HomeSelected" id="huH-1c-Qcl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="3Xn-2L-GKh">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -401,12 +407,18 @@
             <point key="canvasLocation" x="-413" y="692"/>
         </scene>
     </scenes>
+    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
-        <image name="Chat" width="29" height="28.5"/>
-        <image name="Cutlery" width="23.5" height="28.5"/>
-        <image name="Home" width="28.5" height="28.5"/>
-        <image name="Weight" width="28.5" height="28.5"/>
-        <image name="Workout" width="28.5" height="33.5"/>
+        <image name="Article" width="22.170000076293945" height="22.159999847412109"/>
+        <image name="ArticleSelected" width="48" height="48"/>
+        <image name="Home" width="21.139999389648438" height="21.959999084472656"/>
+        <image name="HomeSelected" width="48" height="48"/>
+        <image name="Meals" width="21.059999465942383" height="24.959999084472656"/>
+        <image name="MealsSelected" width="48" height="48"/>
+        <image name="Weight" width="21.879999160766602" height="21.879999160766602"/>
+        <image name="WeightSelected" width="48" height="48"/>
+        <image name="Workout" width="22.290000915527344" height="27.430000305175781"/>
+        <image name="WorkoutSelected" width="48" height="48"/>
         <namedColor name="ProjectBackground">
             <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
