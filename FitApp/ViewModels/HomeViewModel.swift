@@ -24,9 +24,9 @@ class HomeViewModel {
 	var getUserCalories: String {
 		return mealViewModel.getCurrentMealCalories()
 	}
-	var getUserExceptionalCalories: NSAttributedString? {
+	var getUserExceptionalCalories: String? {
 		if let exCalories = mealViewModel.getExceptionalCalories() {
-			return "(\(exCalories))".colorText
+			return exCalories
 		}
 		return nil
 	}

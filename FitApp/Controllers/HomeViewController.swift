@@ -45,13 +45,8 @@ class HomeViewController: UIViewController {
 	}()
 	
 	@IBOutlet weak var tipContainerView: UIView!
-	@IBOutlet weak var progressWheelsContainerView: UIView!
-	@IBOutlet weak var progressDataContainerView: UIView!
-	
-	@IBOutlet weak var userMotivationTextLabel: UILabel!
 	
 	@IBOutlet weak var caloriesLabel: UILabel!
-	@IBOutlet weak var exceptionalCaloriesLabel: UILabel!
 	@IBOutlet weak var fatCountLabel: UILabel!
 	@IBOutlet weak var carbsCountLabel: UILabel!
 	@IBOutlet weak var proteinCountLabel: UILabel!
@@ -61,11 +56,11 @@ class HomeViewController: UIViewController {
 	@IBOutlet weak var carbsTargateLabel: UILabel!
 	@IBOutlet weak var proteinTargateLabel: UILabel!
 	
-	@IBOutlet weak var profileButton: UIButton!
+	@IBOutlet weak var topBarView: BounceNavigationBarView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		show()
+		showLoading()
 		
 		if (UserProfile.defaults.finishOnboarding ?? false) {
 			viewModel.fetchMeals()
@@ -73,18 +68,17 @@ class HomeViewController: UIViewController {
 			
 			viewModel.bindToMealViewModel {
 				[unowned self] in
-				self.stop()
+				self.stopLoading()
 				self.setupProgressLabels()
 				self.setUpProgressView()
 			}
 		}
-		setupView()
+		setupNavigationBarView()
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		navigationController?.clear()
 		
-		navigationItem.titleView = titleStackView
-
 		if !(UserProfile.defaults.finishOnboarding ?? false) {
 			boardManager.showBulletin(above: self)
 			boardManager.allowsSwipeInteraction = false
@@ -93,32 +87,43 @@ class HomeViewController: UIViewController {
 		setupProgressLabels()
 		checkWeightState()
 		checkMealsState()
+		
 	}
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
 		setUpProgressView()
 	}
+}
+
+//MARK: - Delegates
+extension HomeViewController: BounceNavigationBarDelegate {
 	
-	@IBAction func articlesButtonAction(_ sender: Any) {
-		openArticles()
+	func backButtonTapped() {
+		print("backButtonTapped")
 	}
-	@IBAction func profileButtonAction(_ sender: Any) {
+	func messageButtonTapped() {
+		openMessages()
+	}
+	func userProfileImageDidTapp() {
+		openSettings()
+	}
+}
+
+//MARK: - Functions
+extension HomeViewController {
+	
+	private func openMessages() {
+		let chatStoryboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
+		let chatsVC = chatStoryboard.instantiateViewController(identifier: K.ViewControllerId.ChatsViewController)
+		self.navigationController?.pushViewController(chatsVC, animated: true)
+	}
+	private func openSettings() {
+		
 		let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
 		let settingsVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsViewController)
 		
 		self.navigationController!.pushViewController(settingsVC, animated: true)
-	}
-}
-
-extension HomeViewController {
-	
-	private func openArticles() {
-		let chatStoryboard = UIStoryboard(name: K.StoryboardName.articles, bundle: nil)
-		let chatsVC = chatStoryboard.instantiateViewController(identifier: K.ViewControllerId.articlesViewController)
-			as ArticlesViewController
-		
-		self.navigationController?.pushViewController(chatsVC, animated: true)
 	}
 	private func startQuestionnaire() {
 		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
@@ -130,22 +135,12 @@ extension HomeViewController {
 		self.present(questionnaireVC, animated: true, completion: nil)
 	}
 	
-	private func setupView() {
-		tipContainerView.dropShadow()
-		progressDataContainerView.dropShadow()
-		progressWheelsContainerView.dropShadow()
-		if let image = UserProfile.defaults.profileImageImageUrl?.showImage {
-			profileButton.setImage( image.circleMasked, for: .normal)
-		}
-		self.applyGradientBackground()
-	}
 	private func updateWheels() {
 		DispatchQueue.main.async {
 			[unowned self] in
 			perform(#selector(animateProgress), with: nil, afterDelay: 0.5)
 		}
 	}
-
 	private func setUpProgressView() {
 		
 		if hasProgressView {
@@ -155,7 +150,7 @@ extension HomeViewController {
 		hasProgressView = true
 		let circleContainerWidth = circularProgress.frame.width
 		
-		let ringWitdth: CGFloat = 30
+		let ringWitdth: CGFloat = 28
 		let proteinRingMeasure: CGFloat = 0.0
 		let carbsRingMeasure: CGFloat = proteinRingMeasure + 80.0
 		let fatinRingMeasure: CGFloat = carbsRingMeasure + 80.0
@@ -167,7 +162,7 @@ extension HomeViewController {
 		proteinRingLayer.ringWidth = ringWitdth
 		proteinRingLayer.progress = 0.0
 		proteinRingLayer.alpha = 0
-
+		
 		carbsRingLayer = RingProgressView(frame: CGRect(x: carbsRingMeasure/2, y: carbsRingMeasure/2,
 														width: circleContainerWidth - carbsRingMeasure, height: circleContainerWidth - carbsRingMeasure))
 		carbsRingLayer.startColor = viewModel.getCarbsColor
@@ -175,7 +170,7 @@ extension HomeViewController {
 		carbsRingLayer.ringWidth = ringWitdth
 		carbsRingLayer.progress = 0.0
 		carbsRingLayer.alpha = 0
-
+		
 		fatRingLayer = RingProgressView(frame: CGRect(x: fatinRingMeasure/2, y: fatinRingMeasure/2,
 													  width: circleContainerWidth - fatinRingMeasure, height: circleContainerWidth - fatinRingMeasure))
 		fatRingLayer.startColor = viewModel.getFatColor
@@ -201,12 +196,10 @@ extension HomeViewController {
 			
 			setUpProgressTextFields()
 			
-			caloriesLabel.text = viewModel.getUserCalories
-			exceptionalCaloriesLabel.attributedText = viewModel.getUserExceptionalCalories
-			
 			fatCountLabel.text = viewModel.getFatCurrentValue
 			carbsCountLabel.text = viewModel.getCarbsCurrentValue
 			proteinCountLabel.text = viewModel.getProteinCurrentValue
+			caloriesLabel.text = viewModel.getUserExceptionalCalories
 			
 			if let view = titleStackView.subviews[0] as? UILabel {
 				view.text = viewModel.getMealDate
@@ -214,8 +207,8 @@ extension HomeViewController {
 		}
 	}
 	private func setupMotivationText() {
-		self.userMotivationTextLabel.text = UserProfile.defaults.motivationText
-
+		topBarView.motivationText = UserProfile.defaults.motivationText
+		
 		viewModel.getMotivationText() {
 			[weak self] motivation in
 			guard let self = self else { return }
@@ -229,20 +222,22 @@ extension HomeViewController {
 			} else {
 				DispatchQueue.main.async {
 					[unowned self] in
-					self.userMotivationTextLabel.text = UserProfile.defaults.motivationText
+					self.topBarView.motivationText = UserProfile.defaults.motivationText
 				}
 			}
 		}
 	}
+	private func setupNavigationBarView() {
+		topBarView.delegate = self
+		topBarView.nameTitle = UserProfile.defaults.name  ?? ""
+	}
 	private func setUpProgressTextFields() {
-		
-		navigationItem.title = "היי \(UserProfile.defaults.name  ?? ""),"
 		fatCountLabel.text = viewModel.getFatCurrentValue
 		carbsCountLabel.text = viewModel.getCarbsCurrentValue
 		proteinCountLabel.text = viewModel.getProteinCurrentValue
-		fatTargateLabel.text = "מתוך \(viewModel.getFatTargateValue)"
-		carbsTargateLabel.text = "מתוך \(viewModel.getCarbsTargateValue)"
-		proteinTargateLabel.text = "מתוך \(viewModel.getProteinTargateValue)"
+		fatTargateLabel.text = "/\(viewModel.getFatTargateValue)"
+		carbsTargateLabel.text = "/\(viewModel.getCarbsTargateValue)"
+		proteinTargateLabel.text = "/\(viewModel.getProteinTargateValue)"
 	}
 	
 	private func checkMealsState() {
@@ -300,12 +295,13 @@ extension HomeViewController {
 		}
 	}
 	
-	func show() {
+	func showLoading() {
 		hud.backgroundColor = #colorLiteral(red: 0.6394728422, green: 0.659519434, blue: 0.6805263758, alpha: 0.2546477665)
 		hud.textLabel.text = "טוען"
 		hud.show(in: self.view)
 	}
-	func stop() {
+	func stopLoading() {
 		hud.dismiss()
 	}
 }
+
