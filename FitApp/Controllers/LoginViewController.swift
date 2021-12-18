@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
 	
 	@IBOutlet weak var emailTextfield: UITextField!
 	@IBOutlet weak var passwordTextfield: UITextField!
+	@IBOutlet weak var buttonsStackView: UIStackView!
+	@IBOutlet weak var noAccountButton: UIButton!
 	
 	private let viewModel = LoginViewModel()
 	
@@ -23,6 +26,14 @@ class LoginViewController: UIViewController {
 		
 		raiseScreenWhenKeyboardAppears()
 		addScreenTappGesture()
+		
+		if Auth.auth().currentUser != nil {
+			buttonsStackView.isHidden = true
+			noAccountButton.isHidden = true
+		} else {
+			buttonsStackView.isHidden = false
+			noAccountButton.isHidden = false
+		}
 	}
 	
 	@IBAction func signInButtonAction(_ sender: Any) {
