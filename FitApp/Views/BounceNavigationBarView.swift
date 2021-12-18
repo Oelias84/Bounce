@@ -48,6 +48,14 @@ final class BounceNavigationBarView: UIView {
 			motivationLabel.text = motivationText
 		}
 	}
+	var isDayWelcomeHidden: Bool {
+		set {
+			dayWelcomeLabel.isHidden = newValue
+		}
+		get {
+			return dayWelcomeLabel.isHidden
+		}
+	}
 	var isMessageButtonHidden: Bool {
 		set {
 			messageButton.isHidden = newValue
@@ -63,6 +71,14 @@ final class BounceNavigationBarView: UIView {
 		}
 		get {
 			return backButton.isHidden
+		}
+	}
+	var isMotivationHidden: Bool {
+		set {
+			motivationLabel.isHidden = newValue
+		}
+		get {
+			return motivationLabel.isHidden
 		}
 	}
 	
