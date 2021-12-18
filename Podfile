@@ -25,7 +25,8 @@ target 'FitApp' do
 		pod 'MKRingProgressView'
 		pod 'Charts'
 		pod 'GMStepper'
-
+		pod 'BetterSegmentedControl', '~> 1.3'
+		
   target 'FitAppTests' do
     inherit! :search_paths
     # Pods for testing
