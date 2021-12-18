@@ -24,6 +24,7 @@ target 'FitApp' do
 		pod 'SDWebImage', '~> 5.0'
 		pod 'MKRingProgressView'
 		pod 'Charts'
+		pod 'GMStepper'
 
   target 'FitAppTests' do
     inherit! :search_paths
