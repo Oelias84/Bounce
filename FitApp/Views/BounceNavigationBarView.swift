@@ -11,12 +11,9 @@ import UIKit
 protocol BounceNavigationBarDelegate: AnyObject {
 	
 	func backButtonTapped()
-	func messageButtonTapped()
-	func userProfileImageDidTapp()
 }
 
 final class BounceNavigationBarView: UIView {
-	
 	
 	@IBOutlet private var view: UIView!
 	
@@ -62,6 +59,7 @@ final class BounceNavigationBarView: UIView {
 	var isBackButtonHidden: Bool {
 		set {
 			backButton.isHidden = newValue
+			dayWelcomeLabel.isHidden = !newValue
 		}
 		get {
 			return backButton.isHidden
@@ -73,13 +71,13 @@ final class BounceNavigationBarView: UIView {
 	}
 	
 	@IBAction func userProfileButtonTapped(_ sender: Any) {
-		delegate?.userProfileImageDidTapp()
+		openSettings()
 	}
 	@IBAction func backButtonTapped(_ sender: Any) {
 		delegate?.backButtonTapped()
 	}
 	@IBAction func messageButtonTapped(_ sender: Any) {
-		delegate?.messageButtonTapped()
+		openMessages()
 	}
 }
 
@@ -107,5 +105,22 @@ extension BounceNavigationBarView {
 		}
 		userProfileButton.imageView?.contentMode = .scaleAspectFit
 		userProfileButton.imageEdgeInsets = UIEdgeInsets(top: 37, left: 37, bottom: 37, right: 37)
+	}
+	private func openMessages() {
+		let chatStoryboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
+		let chatsVC = chatStoryboard.instantiateViewController(identifier: K.ViewControllerId.ChatsViewController)
+		
+		if let vc = delegate as? UIViewController {
+			vc.navigationController?.pushViewController(chatsVC, animated: true)
+		}
+	}
+	private func openSettings() {
+		
+		let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
+		let settingsVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsViewController)
+		
+		if let vc = delegate as? UIViewController {
+			vc.navigationController?.pushViewController(settingsVC, animated: true)
+		}
 	}
 }
