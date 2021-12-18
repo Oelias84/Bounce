@@ -40,14 +40,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NVe-Of-Wpt" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="322"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="319"/>
                                 <color key="backgroundColor" name="ProjectBackground"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="300" constant="319" id="8Sg-ae-A40"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u82-fd-ybZ">
-                                <rect key="frame" x="38" y="252" width="338" height="338"/>
+                                <rect key="frame" x="38" y="243" width="338" height="338"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BfH-9Y-I5t">
                                         <rect key="frame" x="133" y="142.5" width="72" height="53.5"/>
@@ -225,12 +225,11 @@
                             <constraint firstItem="8pW-15-4q7" firstAttribute="trailing" secondItem="u82-fd-ybZ" secondAttribute="trailing" constant="38" id="7ho-bW-giZ"/>
                             <constraint firstItem="8pW-15-4q7" firstAttribute="trailing" secondItem="NVe-Of-Wpt" secondAttribute="trailing" id="7qg-fg-7FW"/>
                             <constraint firstItem="8pW-15-4q7" firstAttribute="trailing" secondItem="nbM-Na-eN2" secondAttribute="trailing" constant="24" id="GCo-sq-WS8"/>
-                            <constraint firstItem="nbM-Na-eN2" firstAttribute="top" secondItem="u82-fd-ybZ" secondAttribute="bottom" constant="71" id="W8X-ey-odt"/>
                             <constraint firstItem="u82-fd-ybZ" firstAttribute="leading" secondItem="8pW-15-4q7" secondAttribute="leading" constant="38" id="ZSc-Qd-DTc"/>
                             <constraint firstItem="NVe-Of-Wpt" firstAttribute="top" secondItem="oXi-sI-Ov4" secondAttribute="top" id="Zz8-Hu-jrL"/>
                             <constraint firstItem="nbM-Na-eN2" firstAttribute="leading" secondItem="8pW-15-4q7" secondAttribute="leading" constant="24" id="aEf-Jj-PEc"/>
                             <constraint firstItem="8pW-15-4q7" firstAttribute="bottom" secondItem="nbM-Na-eN2" secondAttribute="bottom" constant="57" id="n2h-Ho-oBt"/>
-                            <constraint firstItem="u82-fd-ybZ" firstAttribute="top" secondItem="NVe-Of-Wpt" secondAttribute="bottom" constant="-70" id="sKh-iH-faC"/>
+                            <constraint firstItem="u82-fd-ybZ" firstAttribute="top" secondItem="NVe-Of-Wpt" secondAttribute="bottom" constant="-76" id="sKh-iH-faC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="iKW-MR-WrV">

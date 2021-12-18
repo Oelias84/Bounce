@@ -100,31 +100,13 @@ class HomeViewController: UIViewController {
 extension HomeViewController: BounceNavigationBarDelegate {
 	
 	func backButtonTapped() {
-		print("backButtonTapped")
-	}
-	func messageButtonTapped() {
-		openMessages()
-	}
-	func userProfileImageDidTapp() {
-		openSettings()
+		//
 	}
 }
 
 //MARK: - Functions
 extension HomeViewController {
 	
-	private func openMessages() {
-		let chatStoryboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
-		let chatsVC = chatStoryboard.instantiateViewController(identifier: K.ViewControllerId.ChatsViewController)
-		self.navigationController?.pushViewController(chatsVC, animated: true)
-	}
-	private func openSettings() {
-		
-		let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
-		let settingsVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsViewController)
-		
-		self.navigationController!.pushViewController(settingsVC, animated: true)
-	}
 	private func startQuestionnaire() {
 		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
 		let questionnaireVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation)
