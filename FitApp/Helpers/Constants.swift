@@ -136,11 +136,23 @@ struct K {
 		static let chatCell = "chatCell"
 		static let dishesCell = "dishesCell"
 		static let addingCell = "addingCell"
+		
+		static let settingCell = "settingCell"
+		
+		static let activityCell = "activityCell"
+		static let numberOfMealsCell = "numberOfMealsCell"
+		static let mostHungryCell = "mostHungryCell"
+		static let fitnessLevelCell = "fitnessLevelCell"
+		static let numberOfWorkouts = "numberOfWorkouts"
+		static let numberOfWorkoutsExternal = "numberOfWorkoutsExternal"
+		static let logoutCell = "logoutCell"
     }
 	
     struct NibName {
 		
         //Cells
+		static let SettingsTableViewCell = "SettingsTableViewCell"
+		
 		static let chatTableViewCell = "ChatTableViewCell"
 		static let addingTableViewCell = "AddingTableViewCell"
         static let workoutTableViewCell = "WorkoutTableViewCell"

@@ -74,6 +74,7 @@ class SettingsOptionsTableViewController: UITableViewController {
 			let cellData = viewModel.getNotificationCell(at: indexPath.row)
 			let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.notificationCell, for: indexPath) as! NotificationTableViewCell
 			cell.separatorInset = UIEdgeInsets(top: 0.0, left: cell.bounds.size.width - 10, bottom: 0.0, right: 0.0)
+			cell.accessoryView = viewModel.getNotificationTitleCellAccessoryView(at: indexPath.row)
 			cell.notification = cellData
 			return cell
 		default:
@@ -81,7 +82,6 @@ class SettingsOptionsTableViewController: UITableViewController {
 			cell.separatorInset = .zero
 			cell.selectionStyle = .none
 			cell.textLabel?.text = viewModel.getCellTitle(at: indexPath.row)
-			cell.accessoryView = viewModel.getNotificationTitleCellAccessoryView(at: indexPath.row)
 			return cell
 		}
 	}

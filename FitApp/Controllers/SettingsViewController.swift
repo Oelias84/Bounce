@@ -8,21 +8,23 @@
 import UIKit
 import FirebaseAuth
 
-class SettingsViewController: UITableViewController {
+enum SettingsMenu {
+	
+	case activity
+	case nutrition
+	case fitness
+	case system
+}
+
+class SettingsViewController: UIViewController {
 	
 	private var optionContentType: SettingsContentType!
 	
-	@IBOutlet weak var activityLabel: UILabel!
-	@IBOutlet weak var mealsPerDayLabel: UILabel!
-	@IBOutlet weak var mostHungryLabel: UILabel!
-	@IBOutlet weak var numberOfWorkoutsLabel: UILabel!
-	@IBOutlet weak var fitnessLevelLabel: UILabel!
-	@IBOutlet weak var externalWorkoutLabel: UILabel!
+	private var tableViewData: [SettingsMenu: [SettingsCell]]!
+	private let userData = UserProfile.defaults
 	
-	@IBOutlet weak var mealsStepper: UIStepper!
-	@IBOutlet weak var workoutStepper: UIStepper!
-	@IBOutlet weak var externalWorkoutStepper: UIStepper!
-
+	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var topBarView: BounceNavigationBarView!
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == K.SegueId.moveToSettingsOptions {
@@ -34,32 +36,62 @@ class SettingsViewController: UITableViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		setupLabels()
-		setupStepper()
+		setupTopBar()
+		registerCells()
+		setupTableViewData()
 	}
+}
+
+//MARK: - Delegates
+extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 	
-	@IBAction func mealStepperAction(_ sender: UIStepper) {
-		mealsPerDayLabel.text = "\(Int(sender.value))"
-		UserProfile.defaults.mealsPerDay = Int(sender.value)
-		UserProfile.updateServer()
+	func numberOfSections(in tableView: UITableView) -> Int {
+		4
 	}
-	@IBAction func workoutStepperAction(_ sender: UIStepper) {
-		numberOfWorkoutsLabel.text = "\(Int(sender.value))"
-		UserProfile.defaults.weaklyWorkouts = Int(sender.value)
-		UserProfile.updateServer()
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		
+		switch section {
+		case 0:
+			return "פרטים אישיים"
+		case 1:
+			return "תזונה"
+		case 2:
+			return "כושר"
+		case 3:
+			return "מערכת"
+		default:
+			return nil
+		}
 	}
-	@IBAction func externalWorkoutAction(_ sender: UIStepper) {
-		externalWorkoutLabel.text = "\(Int(sender.value))"
-		UserProfile.defaults.externalWorkout = Int(sender.value)
-		UserProfile.updateServer()
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		
+		switch section {
+		case 0:
+			return tableViewData[.activity]!.count
+		case 1:
+			return tableViewData[.nutrition]!.count
+		case 2:
+			return tableViewData[.fitness]!.count
+		case 3:
+			return tableViewData[.system]!.count
+		default:
+			return 0
+		}
 	}
-	
-	//MARK: - Table view data source
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+	func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+		guard let header = view as? UITableViewHeaderFooterView else { return }
+		
+		header.textLabel?.frame = header.bounds
+		header.textLabel?.textColor = UIColor.projectTail
+		header.backgroundView?.backgroundColor = UIColor.clear
+		header.textLabel?.font = UIFont(name: "Assistant-Bold", size: 18)
+	}
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
 		switch indexPath.section {
+			
 		case 0:
-			personalDetailsTappedAt(indexPath.row)
+			personalDetailsTappedAt()
 		case 1:
 			nutritionDetailsTappedAt(indexPath.row)
 		case 2:
@@ -70,27 +102,134 @@ class SettingsViewController: UITableViewController {
 			break
 		}
 	}
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		
+		let stepperCell = tableView.dequeueReusableCell(withIdentifier: K.CellId.settingCell, for: indexPath) as! SettingsTableViewCell
+		
+		stepperCell.delegate = self
+		
+		switch indexPath.section {
+		case 0:
+			//Personal details
+			//activity level
+			stepperCell.settingsCellData = tableViewData[.activity]![indexPath.row]
+			stepperCell.tag = 0
+		case 1:
+			//Nutrition
+			switch indexPath.row {
+			case 0:
+				//number of meals
+				stepperCell.settingsCellData = tableViewData[.nutrition]![indexPath.row]
+				stepperCell.tag = 1
+			case 1:
+				//most hungry
+				stepperCell.settingsCellData = tableViewData[.nutrition]![indexPath.row]
+				stepperCell.tag = 2
+			default:
+				return UITableViewCell()
+			}
+		case 2:
+			//Fitness Level
+			stepperCell.settingsCellData = tableViewData[.fitness]![indexPath.row]
+		case 3:
+			stepperCell.settingsCellData = tableViewData[.system]![indexPath.row]
+		default:
+			return UITableViewCell()
+		}
+		return stepperCell
+	}
+}
+extension SettingsViewController: SettingsStepperViewCellDelegate {
+	
+	func valueChanged(_ newValue: Double, cell: UITableViewCell) {
+		
+		if let cellIndex = tableView.indexPath(for: cell) {
+			
+			switch cellIndex.section {
+			case 0:
+				break
+			case 1:
+				//Nutrition
+				switch cellIndex.row {
+				case 0:
+					mealStepperAction(newValue)
+				default:
+					break
+				}
+			case 2:
+				//Fitness Level
+				switch cellIndex.row {
+				case 1:
+					workoutStepperAction(newValue)
+				case 2:
+					externalWorkoutAction(newValue)
+				default:
+					break
+				}
+			case 3:
+				break
+			default:
+				break
+			}
+		}
+		DispatchQueue.main.async {
+			self.setupTableViewData()
+			
+			DispatchQueue.main.async {
+				self.tableView.reloadData()
+			}
+		}
+	}
+}
+extension SettingsViewController: BounceNavigationBarDelegate {
+	
+	func backButtonTapped() {
+		navigationController?.popViewController(animated: true)
+	}
 }
 
 //MARK: - Functions
 extension SettingsViewController {
 	
-	private func setupLabels() {
+	private func setupTopBar() {
+		topBarView.delegate = self
+		topBarView.nameTitle = "הגדרות"
+		topBarView.isBackButtonHidden = false
+	}
+	private func registerCells() {
+		tableView.delegate = self
+		tableView.dataSource = self
+		tableView.register(UINib(nibName: K.NibName.SettingsTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.settingCell)
+	}
+	private func setupTableViewData() {
+		
+		tableViewData =
+		[
+			.activity: [SettingsCell(title: "רמת פעילות", secondaryTitle: setupActivityTitle())],
+			
+			.nutrition: [SettingsCell(title: "מספר ארוחות", stepperValue: setupNumberOfMealsStepper().2, stepperMin: setupNumberOfMealsStepper().0, stepperMax: setupNumberOfMealsStepper().1),
+						 SettingsCell(title: "מתי אני הכי רעב", secondaryTitle: setupMostHungryTitle())],
+			
+			.fitness: [SettingsCell(title: "רמת קושי", secondaryTitle: setupFitnessLevelTitle()),
+					   SettingsCell(title: "מספר אימונים שבועי", stepperValue: numberOfTrainingsStepper().2, stepperMin: numberOfTrainingsStepper().0, stepperMax: numberOfTrainingsStepper().1),
+					   SettingsCell(title: "מספר אימונים שבועי חיצוני", stepperValue: numberOfExternalTrainingsStepper().2, stepperMin: numberOfExternalTrainingsStepper().0, stepperMax: numberOfExternalTrainingsStepper().1)],
+			.system: [SettingsCell(title: "התראות", secondaryTitle: ""),
+					  SettingsCell(title: "התנתק", secondaryTitle: "")]
+		]
+	}
+	
+	private func setupActivityTitle() -> String {
 		let userData = UserProfile.defaults
 		
 		if let steps = userData.steps {
-		   activityLabel.text = "\(steps) צעדים"
+			return "\(steps) צעדים"
 		} else if let kilometers = userData.kilometer {
-			activityLabel.text = "\(kilometers) ק״מ"
+			return "\(kilometers) ק״מ"
 		} else {
-			activityLabel.text = UserProfile.getLifeStyleText()
+			return UserProfile.getLifeStyleText()
 		}
-		
-		if let meals = userData.mealsPerDay {
-			mealsPerDayLabel.text = "\(meals)"
-			mealsStepper.value = Double(meals)
-		}
-		
+	}
+	private func setupMostHungryTitle() -> String {
 		var hungerTitle: String {
 			switch userData.mostHungry  {
 			case 1:
@@ -103,7 +242,10 @@ extension SettingsViewController {
 				return "לא ידוע"
 			}
 		}
-		mostHungryLabel.text = hungerTitle
+		return hungerTitle
+	}
+	private func setupFitnessLevelTitle() -> String {
+		
 		var fitnessTitle: String {
 			switch userData.fitnessLevel  {
 			case 1:
@@ -116,42 +258,77 @@ extension SettingsViewController {
 				return "שגיאה"
 			}
 		}
-		fitnessLevelLabel.text = fitnessTitle
+		return fitnessTitle
 	}
-	private func setupStepper() {
-		let userData = UserProfile.defaults
-		mealsStepper.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-		workoutStepper.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-		externalWorkoutStepper.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+	
+	private func setupNumberOfMealsStepper() -> (Int,Int,Double) {
+		if let meals = userData.mealsPerDay {
+			return (0, 0, Double(meals))
+		}
+		return (0, 0, 0)
+	}
+	private func numberOfTrainingsStepper() -> (Int,Int,Double) {
+		var min = 0
+		var max = 0
+		var value = 0.0
 		
 		switch userData.fitnessLevel {
 		case 1:
-			workoutStepper.minimumValue = 2
-			workoutStepper.maximumValue = 2
+			min = 2
+			max = 2
 		case 2:
-			workoutStepper.minimumValue = 2
-			workoutStepper.maximumValue = 3
+			min = 2
+			max = 3
 		case 3:
-			workoutStepper.minimumValue = 3
-			workoutStepper.maximumValue = 4
+			min = 3
+			max = 4
 		default:
 			break
 		}
 		if let workouts = userData.weaklyWorkouts {
-			self.workoutStepper.value = Double(workouts)
-			self.numberOfWorkoutsLabel.text = "\(workouts)"
+			value = Double(workouts)
+		}
+		return (min, max, value)
+	}
+	private func numberOfExternalTrainingsStepper() -> (Int,Int,Double) {
+		var min = 0
+		var max = 0
+		var value = 0.0
+		
+		switch userData.fitnessLevel {
+		case 1:
+			min = 2
+			max = 2
+		case 2:
+			min = 2
+			max = 3
+		case 3:
+			min = 3
+			max = 4
+		default:
+			break
 		}
 		if let workouts = userData.externalWorkout {
-			self.externalWorkoutStepper.value = Double(workouts)
-			self.externalWorkoutLabel.text = "\(workouts)"
+			value = Double(workouts)
+		}
+		return (min, max, value)
+	}
+	
+	private func mealStepperAction(_ value: Double) {
+		UserProfile.defaults.mealsPerDay = Int(value)
+		UserProfile.updateServer()
+		
+		DispatchQueue.main.async {
+			self.tableView.reloadData()
 		}
 	}
-	private func sendSupportEmail() {
-		let subject = ""
-		let messageBody = "<h1>יש לכתוב כאן את ההודעה</h1>"
-		let mailVC = MailComposerViewController(recipients: ["Fitappsupport@gmail.com"], subject: subject, messageBody: messageBody, messageBodyIsHtml: true)
-		
-		present(mailVC, animated: true)
+	private func workoutStepperAction(_ value: Double) {
+		UserProfile.defaults.weaklyWorkouts = Int(value)
+		UserProfile.updateServer()
+	}
+	private func externalWorkoutAction(_ value: Double) {
+		UserProfile.defaults.externalWorkout = Int(value)
+		UserProfile.updateServer()
 	}
 	
 	private func systemTappedAt(_ row: Int) {
@@ -165,10 +342,10 @@ extension SettingsViewController {
 			break
 		}
 	}
-	private func personalDetailsTappedAt(_ row: Int) {
+	private func personalDetailsTappedAt() {
 		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
 		let activityLevelVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireForth)
-			as! QuestionnaireActivityViewController
+		as! QuestionnaireActivityViewController
 		
 		activityLevelVC.isFromSettings = true
 		navigationController?.pushViewController(activityLevelVC, animated: true)
@@ -190,5 +367,13 @@ extension SettingsViewController {
 		default:
 			break
 		}
+	}
+	
+	private func sendSupportEmail() {
+		let subject = ""
+		let messageBody = "<h1>יש לכתוב כאן את ההודעה</h1>"
+		let mailVC = MailComposerViewController(recipients: ["Fitappsupport@gmail.com"], subject: subject, messageBody: messageBody, messageBodyIsHtml: true)
+		
+		present(mailVC, animated: true)
 	}
 }
