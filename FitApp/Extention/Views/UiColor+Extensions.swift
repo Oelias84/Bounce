@@ -23,4 +23,7 @@ extension UIColor {
 	@nonobjc class var blackShadow: UIColor {
 	  return UIColor(white: 0.0, alpha: 0.16)
 	}
+	@nonobjc class var projectBackgroundColor: UIColor {
+		return #colorLiteral(red: 0.9568627477, green: 0.9568628669, blue: 0.9568627477, alpha: 1)
+	}
 }

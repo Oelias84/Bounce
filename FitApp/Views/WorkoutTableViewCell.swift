@@ -20,7 +20,11 @@ class WorkoutTableViewCell: UITableViewCell {
     @IBOutlet weak var workoutDescriptionLabel: UILabel!
     @IBOutlet weak var workoutBackgroundCell: UIView!
     
-    override func awakeFromNib() {
+	@IBOutlet weak var exerciseLabel: UILabel!
+	@IBOutlet weak var setsLabel: UILabel!
+	@IBOutlet weak var timeLabel: UILabel!
+
+	override func awakeFromNib() {
         super.awakeFromNib()
         
         workoutBackgroundCell.cellView()
@@ -32,6 +36,17 @@ class WorkoutTableViewCell: UITableViewCell {
 
     func setupData() {
         
+		let numberOfExercise = workout.exercises.count
+		var numberOfSets = 0
+
+		workout.exercises.forEach {
+			exercise in
+			numberOfSets += exercise.sets.count
+		}
+		
+		exerciseLabel.text = "\(numberOfExercise) תרגילים"
+		setsLabel.text = "\(numberOfSets * numberOfExercise) סטים"
+		
         workoutTitleLabel.text = "אימון #\(workoutNumber!)"
         workoutDescriptionLabel.text = workout.name
         selectionStyle = .none

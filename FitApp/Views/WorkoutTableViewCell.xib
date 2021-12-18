@@ -30,25 +30,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wDS-aq-ZBq">
-                        <rect key="frame" x="24" y="16" width="512" height="154"/>
+                        <rect key="frame" x="24" y="0.0" width="512" height="159"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="MBJ-iF-fsi">
-                                <rect key="frame" x="12" y="10" width="488" height="126"/>
+                                <rect key="frame" x="24" y="16" width="464" height="127"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="שם האימון" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ad-XL-m3F">
-                                        <rect key="frame" x="0.0" y="0.0" width="488" height="36"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="464" height="36.5"/>
                                         <fontDescription key="fontDescription" name="Assistant-Bold" family="Assistant" pointSize="25"/>
                                         <color key="textColor" name="ProjectTail"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="משפט המתאר את האימון בקצרה" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPb-ke-Qm1">
-                                        <rect key="frame" x="0.0" y="40" width="488" height="52"/>
+                                        <rect key="frame" x="0.0" y="40.5" width="464" height="52.5"/>
                                         <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZUJ-Dv-j1Q">
-                                        <rect key="frame" x="0.0" y="96" width="488" height="30"/>
+                                        <rect key="frame" x="0.0" y="97" width="464" height="30"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="nba-9E-zCy">
                                                 <rect key="frame" x="0.0" y="0.0" width="260" height="30"/>
@@ -127,24 +127,27 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="MBJ-iF-fsi" secondAttribute="bottom" constant="18" id="0At-mB-HaJ"/>
-                            <constraint firstAttribute="trailing" secondItem="MBJ-iF-fsi" secondAttribute="trailing" constant="12" id="EPd-em-fVg"/>
-                            <constraint firstItem="MBJ-iF-fsi" firstAttribute="top" secondItem="wDS-aq-ZBq" secondAttribute="top" constant="10" id="gBk-vR-eXh"/>
-                            <constraint firstItem="MBJ-iF-fsi" firstAttribute="leading" secondItem="wDS-aq-ZBq" secondAttribute="leading" constant="12" id="lLx-PS-fFY"/>
+                            <constraint firstAttribute="bottom" secondItem="MBJ-iF-fsi" secondAttribute="bottom" constant="16" id="0At-mB-HaJ"/>
+                            <constraint firstAttribute="trailing" secondItem="MBJ-iF-fsi" secondAttribute="trailing" constant="24" id="EPd-em-fVg"/>
+                            <constraint firstItem="MBJ-iF-fsi" firstAttribute="top" secondItem="wDS-aq-ZBq" secondAttribute="top" constant="16" id="gBk-vR-eXh"/>
+                            <constraint firstItem="MBJ-iF-fsi" firstAttribute="leading" secondItem="wDS-aq-ZBq" secondAttribute="leading" constant="24" id="lLx-PS-fFY"/>
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <color key="backgroundColor" name="ProjectBackground"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="wDS-aq-ZBq" secondAttribute="bottom" constant="16" id="98h-xE-4f6"/>
+                    <constraint firstAttribute="bottom" secondItem="wDS-aq-ZBq" secondAttribute="bottom" constant="27" id="98h-xE-4f6"/>
                     <constraint firstItem="wDS-aq-ZBq" firstAttribute="leading" secondItem="bJO-Vc-loQ" secondAttribute="leading" constant="24" id="F6M-JI-yzg"/>
                     <constraint firstAttribute="trailing" secondItem="wDS-aq-ZBq" secondAttribute="trailing" constant="24" id="mND-4B-ohE"/>
-                    <constraint firstItem="wDS-aq-ZBq" firstAttribute="top" secondItem="bJO-Vc-loQ" secondAttribute="top" constant="16" id="skJ-fL-GqG"/>
+                    <constraint firstItem="wDS-aq-ZBq" firstAttribute="top" secondItem="bJO-Vc-loQ" secondAttribute="top" id="skJ-fL-GqG"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="exerciseLabel" destination="uX6-Rg-aRO" id="PjM-Lb-sGc"/>
+                <outlet property="setsLabel" destination="gNj-8H-yWi" id="IHi-Qz-Imj"/>
+                <outlet property="timeLabel" destination="kPE-3b-GvW" id="eds-DT-F7O"/>
                 <outlet property="workoutBackgroundCell" destination="wDS-aq-ZBq" id="nJJ-Gg-7Jx"/>
                 <outlet property="workoutDescriptionLabel" destination="tPb-ke-Qm1" id="f0r-HO-YmV"/>
                 <outlet property="workoutTitleLabel" destination="3Ad-XL-m3F" id="Tf2-Rq-dfD"/>
@@ -156,6 +159,9 @@
         <image name="arrow.counterclockwise" catalog="system" width="115" height="128"/>
         <image name="arrow.up.left.and.arrow.down.right" catalog="system" width="128" height="115"/>
         <image name="stopwatch" catalog="system" width="121" height="128"/>
+        <namedColor name="ProjectBackground">
+            <color red="0.95686274509803915" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="ProjectTail">
             <color red="0.067000001668930054" green="0.47499999403953552" blue="0.45100000500679016" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

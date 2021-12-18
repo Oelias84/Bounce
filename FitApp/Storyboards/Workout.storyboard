@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pv1-qA-DXa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pv1-qA-DXa">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -95,7 +96,7 @@
                                         </connections>
                                     </button>
                                     <pageControl opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="9Se-H6-EaU">
-                                        <rect key="frame" x="129.5" y="226" width="155.5" height="26"/>
+                                        <rect key="frame" x="149.5" y="226" width="115.5" height="26"/>
                                     </pageControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FQi-hr-CuH">
                                         <rect key="frame" x="364" y="214" width="50" height="50"/>
@@ -150,7 +151,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZzQ-sn-JnJ">
                                                         <rect key="frame" x="40" y="8" width="334" height="68.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBc-13-RwI" userLabel="Article Title Label">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBc-13-RwI" userLabel="Article Title Label">
                                                                 <rect key="frame" x="0.0" y="0.0" width="334" height="27"/>
                                                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="24"/>
                                                                 <nil key="textColor"/>
@@ -225,28 +226,35 @@
             </objects>
             <point key="canvasLocation" x="1128.985507246377" y="-48.214285714285715"/>
         </scene>
-        <!--אימונים-->
+        <!--Workout Table View Controller-->
         <scene sceneID="X3a-ID-kpq">
             <objects>
-                <viewController storyboardIdentifier="WorkoutTableViewController" title="אימונים" id="Pv1-qA-DXa" customClass="WorkoutTableViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WorkoutTableViewController" id="Pv1-qA-DXa" customClass="WorkoutTableViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rj2-xc-Wv6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JWM-0G-iNi">
-                                <rect key="frame" x="12" y="52" width="390" height="32"/>
-                                <segments>
-                                    <segment title="לבית"/>
-                                    <segment title="לחדר כושר"/>
-                                </segments>
-                                <connections>
-                                    <action selector="SegmentedControlAction:" destination="Pv1-qA-DXa" eventType="valueChanged" id="uHj-Rk-zWl"/>
-                                </connections>
-                            </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Etg-l4-JQo">
-                                <rect key="frame" x="0.0" y="95" width="414" height="801"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hQ-ih-zZJ" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="319"/>
+                                <color key="backgroundColor" name="ProjectBackground"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="319" id="YSr-mE-vqf"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KlI-IT-ekv" customClass="BetterSegmentedControl" customModule="BetterSegmentedControl">
+                                <rect key="frame" x="34" y="255" width="346" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <color key="tintColor" red="0.038838829849999999" green="0.38600081209999998" blue="0.76410299540000004" alpha="0.053182942980000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="G0h-1b-uwH"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="segmentedControlAction:" destination="Pv1-qA-DXa" eventType="valueChanged" id="A23-0b-84f"/>
+                                </connections>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Etg-l4-JQo">
+                                <rect key="frame" x="0.0" y="325" width="414" height="571"/>
+                                <color key="backgroundColor" name="ProjectBackground"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Pv1-qA-DXa" id="4Hc-7Z-LC0"/>
                                     <outlet property="delegate" destination="Pv1-qA-DXa" id="wEq-cF-KqM"/>
@@ -254,27 +262,31 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vgy-tl-bHW"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="ProjectBackground"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="JWM-0G-iNi" secondAttribute="trailing" constant="12" id="9vR-dZ-p4T"/>
+                            <constraint firstItem="4hQ-ih-zZJ" firstAttribute="trailing" secondItem="vgy-tl-bHW" secondAttribute="trailing" id="0oI-kT-2bF"/>
+                            <constraint firstItem="4hQ-ih-zZJ" firstAttribute="leading" secondItem="vgy-tl-bHW" secondAttribute="leading" id="3id-Xz-Le9"/>
                             <constraint firstAttribute="trailing" secondItem="Etg-l4-JQo" secondAttribute="trailing" id="FmW-Zh-QSI"/>
-                            <constraint firstItem="JWM-0G-iNi" firstAttribute="top" secondItem="vgy-tl-bHW" secondAttribute="top" constant="8" id="LRq-w6-0ji"/>
                             <constraint firstItem="Etg-l4-JQo" firstAttribute="leading" secondItem="vgy-tl-bHW" secondAttribute="leading" id="QPX-Gm-7Te"/>
-                            <constraint firstItem="JWM-0G-iNi" firstAttribute="leading" secondItem="vgy-tl-bHW" secondAttribute="leading" constant="12" id="Sku-bJ-afr"/>
-                            <constraint firstItem="Etg-l4-JQo" firstAttribute="top" secondItem="JWM-0G-iNi" secondAttribute="bottom" constant="12" id="kof-0q-7aY"/>
+                            <constraint firstItem="KlI-IT-ekv" firstAttribute="leading" secondItem="vgy-tl-bHW" secondAttribute="leading" constant="34" id="cCE-3z-Yuw"/>
+                            <constraint firstItem="KlI-IT-ekv" firstAttribute="top" secondItem="4hQ-ih-zZJ" secondAttribute="bottom" constant="-64" id="d3r-7b-aEq"/>
+                            <constraint firstItem="4hQ-ih-zZJ" firstAttribute="top" secondItem="Rj2-xc-Wv6" secondAttribute="top" id="g1H-In-4WT"/>
                             <constraint firstAttribute="bottom" secondItem="Etg-l4-JQo" secondAttribute="bottom" id="nMf-hl-VUz"/>
+                            <constraint firstItem="vgy-tl-bHW" firstAttribute="trailing" secondItem="KlI-IT-ekv" secondAttribute="trailing" constant="34" id="vs8-Fv-D7h"/>
+                            <constraint firstItem="Etg-l4-JQo" firstAttribute="top" secondItem="KlI-IT-ekv" secondAttribute="bottom" constant="30" id="z1E-h1-iA8"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="אימונים" id="Myc-MT-gEh" userLabel="אימונים"/>
+                    <navigationItem key="navigationItem" id="Myc-MT-gEh" userLabel="אימונים"/>
                     <connections>
-                        <outlet property="segmentedController" destination="JWM-0G-iNi" id="dTF-lK-0Hp"/>
+                        <outlet property="segmentedControl" destination="KlI-IT-ekv" id="B8z-Qk-Q99"/>
                         <outlet property="tableView" destination="Etg-l4-JQo" id="id1-Lv-WLC"/>
+                        <outlet property="topBarView" destination="4hQ-ih-zZJ" id="VHo-FD-aCK"/>
                         <segue destination="wMi-9C-ooU" kind="show" id="vrb-ul-TQl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gl6-Sd-YQP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-399" y="-48"/>
+            <point key="canvasLocation" x="-400.00000000000006" y="-48.214285714285715"/>
         </scene>
     </scenes>
     <resources>
@@ -283,6 +295,9 @@
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
+        <namedColor name="ProjectBackground">
+            <color red="0.95686274509803915" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
