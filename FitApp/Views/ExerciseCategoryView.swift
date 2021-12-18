@@ -11,18 +11,18 @@ class ExerciseCategoryView: UIView {
 	
 	var type: String! {
 		didSet {
-			commonInit(type: self.type)
+			commonInit()
 		}
 	}
 	
 	@IBOutlet weak var exerciseCategoryBackgroundView: UIView!
 	@IBOutlet weak var exerciseCategoryTextLabel: UILabel!
-	
+		
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
 	
-	private func commonInit(type: String) {
+	private func commonInit() {
 		
 		switch type {
 		case "legs":
