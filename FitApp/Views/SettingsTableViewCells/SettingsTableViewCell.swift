@@ -26,13 +26,16 @@ class SettingsTableViewCell: UITableViewCell {
 	@IBOutlet weak var stepperView: GMStepper! {
 		didSet {
 			stepperView.roundButtons = true
-			stepperView.labelFont = UIFont(name: "Assistant-SemiBold", size: 16)!
+			stepperView.labelFont = UIFont(name: "Assistant-SemiBold", size: 18)!
 			stepperView.buttonsBackgroundColor = UIColor.projectTail
 			stepperView.labelTextColor = .black
 			stepperView.backgroundColor = .clear
 			stepperView.buttonsTextColor = .white
 			stepperView.labelBackgroundColor = .clear
 			stepperView.showIntegerIfDoubleIsInteger = true
+			
+			stepperView.minimumValue = 0
+			stepperView.maximumValue = 0
 		}
 	}
 	@IBOutlet weak var labelStackView: UIStackView!
