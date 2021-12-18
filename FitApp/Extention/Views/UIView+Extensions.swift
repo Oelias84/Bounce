@@ -65,11 +65,12 @@ extension UIView {
 		NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: container, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
 	}
 	func cellView() {
-		layer.cornerRadius = 10
-		layer.shadowOpacity = 0.18
-		layer.shadowColor = UIColor.systemBlue.cgColor
-		layer.shadowOffset = CGSize(width: 0, height: 12)
-		layer.shadowRadius = 12
+		layer.masksToBounds = false
+		layer.shadowColor = UIColor.blackShadow.cgColor
+		layer.shadowOpacity = 0.5
+		layer.shadowOffset = CGSize(width: 0, height: 3)
+		layer.shadowRadius = 2
+		layer.cornerRadius = 15
 	}
 	
 	// OUTPUT 1
