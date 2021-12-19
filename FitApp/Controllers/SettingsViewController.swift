@@ -195,6 +195,7 @@ extension SettingsViewController {
 		topBarView.delegate = self
 		topBarView.nameTitle = "הגדרות"
 		topBarView.isBackButtonHidden = false
+		topBarView.isMotivationHidden = true
 	}
 	private func registerCells() {
 		tableView.delegate = self
