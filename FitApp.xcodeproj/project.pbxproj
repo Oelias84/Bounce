@@ -957,10 +957,10 @@
 		B3B2A245256EDDCA0052E6C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7C1ACD082670C9D2008079C9 /* CellViews */,
 				7C4EB828276E57FE00DA1407 /* TextFieldView */,
 				7CE0862F2767A64000BF3CF3 /* BounceNavigationBar */,
 				7CB9ADEA268CB72F0009B42A /* ChartView */,
-				7C1ACD082670C9D2008079C9 /* CellViews */,
 				7CCC0E65262B2E2D006E2E35 /* EmptyTabelViewView */,
 				7CFA5FF5262A0F1C00A3F401 /* MoveDishView */,
 				7C1ACCEF266FCA97008079C9 /* ChangeDateView */,
