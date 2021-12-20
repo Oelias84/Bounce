@@ -19,7 +19,8 @@ class ExerciseViewController: UIViewController {
 	
 	private var playerContainerView: UIView!
 	@IBOutlet weak var containerView: UIView!
-	
+	@IBOutlet weak var topBarView: BounceNavigationBarView!
+
 	@IBOutlet weak var playButton: UIButton!
 	@IBOutlet weak var forwardButton: UIButton!
 	@IBOutlet weak var backwardsButton: UIButton!
@@ -40,16 +41,20 @@ class ExerciseViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		title = exercise.name
 		
-		setUpPlayerContainerView()
-		playActivity()
-		playVideo(userString: exercise.videos)
+		setupTopBarView()
 		
 		let title = exercise.title
 		let string = exercise.text.replacingOccurrences(of: "\\n", with: "\n")
 		textTitleLabel.text = title
 		textLabel.text = string
+	}
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		setUpPlayerContainerView()
+		playActivity()
+		playVideo(userString: exercise.videos)
 	}
 	
 	@IBAction func fullScreenButtonAction(_ sender: Any) {
@@ -99,25 +104,57 @@ class ExerciseViewController: UIViewController {
 
 extension ExerciseViewController {
 	
-	private func playVideo(userString: [String]) {
-		playButton.isHidden = true
-		googleManager.getGymExerciseVideo(videoNumber: userString) { result in
-                switch result {
-                case .success(let urls):
-					if self.exercise.name == "Push-Ups" {
-						let order = ["/17","/16","/22","/23","/44","/18"]
-						let orderUrls = order.compactMap({ order in urls.first(where: { $0.absoluteString.contains(order) })})
-						self.urlVideos = orderUrls
-						self.play(self.urlVideos.first!)
-					} else {
-						self.urlVideos = urls
-						self.play(self.urlVideos.first!)
-					}
-                case .failure(let error):
-                    print(error)
-            }
-        }
-    }
+	private func play(_ url: URL) {
+		playActivity()
+		
+		let asset = AVAsset(url: url)
+		player = AVPlayer(playerItem: AVPlayerItem(asset: asset))
+		
+		let playerLayer = AVPlayerLayer(player: player)
+		let playerTimescale = self.player.currentItem?.asset.duration.timescale ?? 1
+		let time = CMTime(seconds: 0, preferredTimescale: playerTimescale)
+		
+		playerLayer.frame = playerContainerView.bounds
+		playerLayer.videoGravity = .resizeAspectFill
+		playerContainerView.layer.addSublayer(playerLayer)
+		
+		getProgress()
+		self.player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) { (finished) in
+			DispatchQueue.main.async { [weak self] in
+				guard let self = self else { return }
+				self.player.play()
+			}
+		}
+	}
+	private func getProgress()  {
+		player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 10), queue: DispatchQueue.main) {
+			[weak self] (progressTime) in
+			if let duration = self?.player.currentItem?.duration {
+				
+				let durationSeconds = CMTimeGetSeconds(duration)
+				let seconds = CMTimeGetSeconds(progressTime)
+				let progress = Float(seconds/durationSeconds)
+				
+				if progress >= 0.0 {
+					self?.activityIndicator.stopAnimating()
+					self?.fullScreenButton.isHidden = false
+				}
+				if progress >= 1.0 {
+					self?.playButton.isHidden = false
+				}
+			}
+		}
+	}
+	private func playActivity() {
+		playerContainerView.addSubview(activityIndicator)
+		activityIndicator.centerYAnchor.constraint(equalTo: playerContainerView.centerYAnchor).isActive = true
+		activityIndicator.centerXAnchor.constraint(equalTo: playerContainerView.centerXAnchor).isActive = true
+		activityIndicator.startAnimating()
+	}
+	private func setupTopBarView() {
+		topBarView.nameTitle = exercise.name
+		topBarView.isBackButtonHidden = false
+	}
 	private func setUpPlayerContainerView() {
 		let buttonSize = UIEdgeInsets(top: 32, left: 32, bottom: 32, right: 32)
 
@@ -146,52 +183,33 @@ extension ExerciseViewController {
 			playerContainerView.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor).isActive = true
 		}
 	}
-	private func play(_ url: URL) {
-		playActivity()
+	private func playVideo(userString: [String]) {
+		playButton.isHidden = true
 		
-		let asset = AVAsset(url: url)
-		player = AVPlayer(playerItem: AVPlayerItem(asset: asset))
-		
-		let playerLayer = AVPlayerLayer(player: player)
-		let playerTimescale = self.player.currentItem?.asset.duration.timescale ?? 1
-		let time = CMTime(seconds: 0, preferredTimescale: playerTimescale)
-		
-		playerLayer.frame = playerContainerView.bounds
-		playerLayer.videoGravity = .resizeAspectFill
-		playerContainerView.layer.addSublayer(playerLayer)
-		
-		getProgress()
-		self.player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) { (finished) in
-			DispatchQueue.main.async { [weak self] in
-				guard let self = self else { return }
-				self.player.play()
+		googleManager.getGymExerciseVideo(videoNumber: userString) {
+			result in
+				switch result {
+				case .success(let urls):
+					if self.exercise.name == "Push-Ups" {
+						let order = ["F17","F16","F22","F23","F44","F18"]
+						let orderUrls = order.compactMap({
+							order in urls.first(where: {
+								$0.absoluteString.contains(order)
+							})
+						})
+						
+						self.urlVideos = orderUrls
+						self.play(self.urlVideos.first!)
+					} else {
+						self.urlVideos = urls
+						self.play(self.urlVideos.first!)
+					}
+				case .failure(let error):
+					print(error)
 			}
 		}
 	}
-	private func getProgress()  {
-		player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 10), queue: DispatchQueue.main) {[weak self] (progressTime) in
-			if let duration = self?.player.currentItem?.duration {
-				
-				let durationSeconds = CMTimeGetSeconds(duration)
-				let seconds = CMTimeGetSeconds(progressTime)
-				let progress = Float(seconds/durationSeconds)
-				
-				if progress >= 0.0 {
-					self?.activityIndicator.stopAnimating()
-					self?.fullScreenButton.isHidden = false
-				}
-				if progress >= 1.0 {
-					self?.playButton.isHidden = false
-				}
-			}
-		}
-	}
-	private func playActivity() {
-		playerContainerView.addSubview(activityIndicator)
-		activityIndicator.centerYAnchor.constraint(equalTo: playerContainerView.centerYAnchor).isActive = true
-		activityIndicator.centerXAnchor.constraint(equalTo: playerContainerView.centerXAnchor).isActive = true
-		activityIndicator.startAnimating()
-	}
+	
 	@objc func playFull() {
 		let vc = AVPlayerViewController()
 		vc.player = self.player

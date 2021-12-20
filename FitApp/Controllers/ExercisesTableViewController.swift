@@ -7,14 +7,17 @@
 
 import UIKit
 
-class ExercisesTableViewController: UITableViewController {
+class ExercisesTableViewController: UIViewController {
     
     var workout: Workout!
     var selectedExercise: Exercise?
 	var numberOfExerciseSection: [String:Int] = ["legs":0, "chest":0, "stomach":0, "shoulders":0, "back":0]
 	var sectionCount: Int!
 	
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+	@IBOutlet weak var topBarView: BounceNavigationBarView!
+	@IBOutlet weak var tableView: UITableView!
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == K.SegueId.moveToExerciseDetailViewController {
             let controller = segue.destination as! ExerciseViewController
             if let exercise = selectedExercise {
@@ -30,16 +33,27 @@ class ExercisesTableViewController: UITableViewController {
 			numberOfExerciseSection.updateValue(+1, forKey: exercise.exerciseToPresent!.type)
 		}
 		sectionCount = numberOfExerciseSection.filter { $0.value != 0 }.count-1
-		
-		title = workout.name
-        tableView.register(UINib(nibName: K.NibName.exerciseTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.exerciseCell)
+		tableView.register(UINib(nibName: K.NibName.exerciseTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.exerciseCell)
+		setupTopBar()
     }
+}
+
+extension ExercisesTableViewController {
+	
+	private func setupTopBar() {
+		
+		topBarView.nameTitle = workout.name
+		topBarView.isBackButtonHidden = false
+		topBarView.isMotivationHidden = true
+	}
+}
+extension ExercisesTableViewController: UITableViewDelegate, UITableViewDataSource {
 
     // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         workout.exercises.count
     }
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let exercise = workout.exercises[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.exerciseCell, for: indexPath) as! ExerciseTableViewCell
         
@@ -49,7 +63,7 @@ class ExercisesTableViewController: UITableViewController {
         cell.delegate = self
         return cell
     }
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         146
     }
 }
