@@ -190,13 +190,13 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="366" height="128"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBc-13-RwI" userLabel="Article Title Label">
-                                                                        <rect key="frame" x="16" y="8" width="334" height="31.5"/>
+                                                                        <rect key="frame" x="16" y="8" width="334" height="28"/>
                                                                         <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="24"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FtX-pr-zMl" userLabel="Article Text Label">
-                                                                        <rect key="frame" x="16" y="47.5" width="334" height="80.5"/>
+                                                                        <rect key="frame" x="16" y="44" width="334" height="84"/>
                                                                         <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="14"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -317,7 +317,7 @@
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Etg-l4-JQo">
-                                <rect key="frame" x="0.0" y="325" width="414" height="571"/>
+                                <rect key="frame" x="0.0" y="311" width="414" height="585"/>
                                 <color key="backgroundColor" name="ProjectBackground"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -338,7 +338,7 @@
                             <constraint firstItem="4hQ-ih-zZJ" firstAttribute="top" secondItem="Rj2-xc-Wv6" secondAttribute="top" id="g1H-In-4WT"/>
                             <constraint firstAttribute="bottom" secondItem="Etg-l4-JQo" secondAttribute="bottom" id="nMf-hl-VUz"/>
                             <constraint firstItem="vgy-tl-bHW" firstAttribute="trailing" secondItem="KlI-IT-ekv" secondAttribute="trailing" constant="34" id="vs8-Fv-D7h"/>
-                            <constraint firstItem="Etg-l4-JQo" firstAttribute="top" secondItem="KlI-IT-ekv" secondAttribute="bottom" constant="30" id="z1E-h1-iA8"/>
+                            <constraint firstItem="Etg-l4-JQo" firstAttribute="top" secondItem="KlI-IT-ekv" secondAttribute="bottom" constant="16" id="z1E-h1-iA8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="Myc-MT-gEh" userLabel="אימונים"/>

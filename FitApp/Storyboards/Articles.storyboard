@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="56e-N1-VCD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="56e-N1-VCD">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -83,7 +84,7 @@
             </objects>
             <point key="canvasLocation" x="5001" y="1405"/>
         </scene>
-        <!--מאמרים-->
+        <!--Articles View Controller-->
         <scene sceneID="bgm-qM-56Z">
             <objects>
                 <viewController storyboardIdentifier="ArticlesViewController" id="56e-N1-VCD" customClass="ArticlesViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -91,22 +92,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="NT9-WG-P5w">
-                                <rect key="frame" x="12" y="52" width="390" height="32"/>
-                                <segments>
-                                    <segment title="תזונה"/>
-                                    <segment title="אימונים"/>
-                                    <segment title="מתכונים"/>
-                                    <segment title="אחר"/>
-                                </segments>
-                                <connections>
-                                    <action selector="articlesSegmentedControlAction:" destination="56e-N1-VCD" eventType="valueChanged" id="rOL-Z7-92O"/>
-                                </connections>
-                            </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mWh-cb-Ats">
-                                <rect key="frame" x="0.0" y="95" width="414" height="801"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Rb-R8-CpK" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="319"/>
+                                <color key="backgroundColor" name="ProjectBackground"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="319" id="hn3-E8-uE3"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RmY-xf-1yg" customClass="BetterSegmentedControl" customModule="BetterSegmentedControl">
+                                <rect key="frame" x="24" y="255" width="366" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <color key="tintColor" red="0.038838829849999999" green="0.38600081209999998" blue="0.76410299540000004" alpha="0.053182942980000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="oh8-nw-rUf"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="segmentedControlAction:" destination="56e-N1-VCD" eventType="valueChanged" id="TGy-d7-sV0"/>
+                                </connections>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mWh-cb-Ats">
+                                <rect key="frame" x="0.0" y="311" width="414" height="555"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="tintColor" name="ProjectBackground"/>
                                 <connections>
                                     <outlet property="dataSource" destination="56e-N1-VCD" id="nOh-0f-W7Z"/>
                                     <outlet property="delegate" destination="56e-N1-VCD" id="ZLR-3t-3is"/>
@@ -114,30 +120,37 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="88o-9H-u9b"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="ProjectBackground"/>
                         <constraints>
+                            <constraint firstItem="RmY-xf-1yg" firstAttribute="leading" secondItem="88o-9H-u9b" secondAttribute="leading" constant="24" id="581-Qb-9Fz"/>
                             <constraint firstAttribute="trailing" secondItem="mWh-cb-Ats" secondAttribute="trailing" id="9c4-7V-MNA"/>
-                            <constraint firstItem="NT9-WG-P5w" firstAttribute="top" secondItem="88o-9H-u9b" secondAttribute="top" constant="8" id="Jq8-VU-V1l"/>
                             <constraint firstItem="mWh-cb-Ats" firstAttribute="leading" secondItem="88o-9H-u9b" secondAttribute="leading" id="XNV-NQ-PLB"/>
-                            <constraint firstItem="mWh-cb-Ats" firstAttribute="top" secondItem="NT9-WG-P5w" secondAttribute="bottom" constant="12" id="aLz-wO-45v"/>
-                            <constraint firstItem="NT9-WG-P5w" firstAttribute="leading" secondItem="88o-9H-u9b" secondAttribute="leading" constant="12" id="miD-Iq-JAZ"/>
-                            <constraint firstAttribute="bottom" secondItem="mWh-cb-Ats" secondAttribute="bottom" id="nld-Oj-RTK"/>
-                            <constraint firstAttribute="trailing" secondItem="NT9-WG-P5w" secondAttribute="trailing" constant="12" id="rW1-45-5l9"/>
+                            <constraint firstItem="88o-9H-u9b" firstAttribute="trailing" secondItem="RmY-xf-1yg" secondAttribute="trailing" constant="24" id="Zm1-Th-8dT"/>
+                            <constraint firstItem="88o-9H-u9b" firstAttribute="trailing" secondItem="7Rb-R8-CpK" secondAttribute="trailing" id="eQo-qP-cMi"/>
+                            <constraint firstAttribute="bottom" secondItem="mWh-cb-Ats" secondAttribute="bottom" constant="30" id="nld-Oj-RTK"/>
+                            <constraint firstItem="RmY-xf-1yg" firstAttribute="top" secondItem="7Rb-R8-CpK" secondAttribute="bottom" constant="-64" id="oGV-bp-nwv"/>
+                            <constraint firstItem="7Rb-R8-CpK" firstAttribute="leading" secondItem="rMH-yP-KtT" secondAttribute="leading" id="qN4-rm-w7h"/>
+                            <constraint firstItem="mWh-cb-Ats" firstAttribute="top" secondItem="RmY-xf-1yg" secondAttribute="bottom" constant="16" id="v5Q-A0-Hfx"/>
+                            <constraint firstItem="7Rb-R8-CpK" firstAttribute="top" secondItem="rMH-yP-KtT" secondAttribute="top" id="wPl-He-Uom"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="מאמרים" id="hl8-7f-RiT"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="hl8-7f-RiT"/>
                     <connections>
-                        <outlet property="articlesSegmentedControl" destination="NT9-WG-P5w" id="d6e-DF-bp4"/>
+                        <outlet property="segmentedControl" destination="RmY-xf-1yg" id="AYE-zT-EjI"/>
                         <outlet property="tableView" destination="mWh-cb-Ats" id="Ocf-Ma-Rla"/>
+                        <outlet property="topBarView" destination="7Rb-R8-CpK" id="nH7-sc-JoT"/>
                         <segue destination="OKL-3q-aGS" kind="show" id="WWW-fN-fxf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QaI-47-lSf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4226" y="1405"/>
+            <point key="canvasLocation" x="4224.6376811594209" y="1404.9107142857142"/>
         </scene>
     </scenes>
     <resources>
+        <namedColor name="ProjectBackground">
+            <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

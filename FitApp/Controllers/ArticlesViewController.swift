@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import BetterSegmentedControl
 
 class ArticlesViewController: UIViewController {
 	
@@ -14,26 +15,27 @@ class ArticlesViewController: UIViewController {
 	private var articleTopic: String!
 	public var openFromChat = false
 	
-	@IBOutlet weak var articlesSegmentedControl: UISegmentedControl! {
-		didSet {
-			articlesSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)], for: .normal)
-		}
-	}
+	@IBOutlet weak var topBarView: BounceNavigationBarView!
+	@IBOutlet weak var segmentedControl: BetterSegmentedControl!
+	
 	@IBOutlet weak var tableView: UITableView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		setupView()
 		callToViewModelForUIUpdate()
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		
 		if filteredArticles != nil {
 			checkTopic()
 		}
 	}
-	
-	@IBAction func articlesSegmentedControlAction(_ sender: UISegmentedControl) {
-		let index = sender.selectedSegmentIndex
+	@IBAction func segmentedControlAction(_ sender: BetterSegmentedControl) {
+		let index = sender.index
+		
 		moveTo(index)
 	}
 }
@@ -73,6 +75,28 @@ extension ArticlesViewController {
 			self.updateDataSource()
 		}
 	}
+	private func setupView() {
+		segmentedControl.backgroundColor = UIColor.projectBackgroundColor
+		segmentedControl.borderColorV = .projectGray
+		segmentedControl.borderWidthV = 1
+
+		segmentedControl.options = [
+				.cornerRadius(20),
+				.indicatorViewBorderWidth(1),
+				.indicatorViewBackgroundColor(.projectTail),
+		]
+		
+		segmentedControl.segments =  [
+			LabelSegment(text: "תזונה", normalFont: UIFont(name: "Assistant-SemiBold", size: 18), normalTextColor: .black, selectedTextColor: .white),
+			LabelSegment(text: "אימונים", normalFont: UIFont(name: "Assistant-SemiBold", size: 18), normalTextColor: .black, selectedTextColor: .white),
+			LabelSegment(text: "מתכונים", normalFont: UIFont(name: "Assistant-SemiBold", size: 18), normalTextColor: .black, selectedTextColor: .white),
+			LabelSegment(text: "אחר", normalFont: UIFont(name: "Assistant-SemiBold", size: 18), normalTextColor: .black, selectedTextColor: .white)
+		]
+		
+		topBarView.nameTitle = "מאמרים"
+		topBarView.isMotivationHidden = true
+		topBarView.isDayWelcomeHidden = true
+	}
 	private func moveToArticleView(for article: Article) {
 		let storyboard = UIStoryboard(name: K.StoryboardName.articles, bundle: nil)
 		let articleVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.articleViewController) as ArticleViewController
@@ -87,7 +111,7 @@ extension ArticlesViewController {
 		DispatchQueue.main.async {
 			self.tableView.reloadData()
 		}
-		articlesSegmentedControl.selectedSegmentIndex = index
+		segmentedControl.setIndex(index)
 	}
 	private func checkTopic() {
 		if openFromChat {
