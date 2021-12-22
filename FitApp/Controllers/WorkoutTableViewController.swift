@@ -88,10 +88,15 @@ extension WorkoutTableViewController: UITableViewDelegate, UITableViewDataSource
 extension WorkoutTableViewController {
 	
 	private func setupView() {
-		segmentedControl.backgroundColor = UIColor.projectBackgroundColor
+		segmentedControl.backgroundColor = .projectBackgroundColor
+		segmentedControl.borderColorV = .projectGray.withAlphaComponent(0.2)
+		segmentedControl.borderWidthV = 1
 		
-		segmentedControl.indicatorView.backgroundColor = .projectTail
-		segmentedControl.options = [.cornerRadius(20)]
+		segmentedControl.options = [
+			.cornerRadius(20),
+			.indicatorViewBackgroundColor(.projectTail),
+		]
+		
 		segmentedControl.segments =  [LabelSegment(text: "בית", normalFont: UIFont(name: "Assistant-SemiBold", size: 18), normalTextColor: .black, selectedTextColor: .white),
 									  LabelSegment(text: "חדר כושר", normalFont: UIFont(name: "Assistant-SemiBold", size: 18), normalTextColor: .black, selectedTextColor: .white)]
 		

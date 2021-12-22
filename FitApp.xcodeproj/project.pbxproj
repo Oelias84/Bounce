@@ -73,7 +73,6 @@
 		7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89A9FA256D69CA009AD87C /* AppDelegate.swift */; };
 		7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89A9FC256D69CA009AD87C /* SceneDelegate.swift */; };
 		7C89AA02256D69CA009AD87C /* LoginRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA00256D69CA009AD87C /* LoginRegister.storyboard */; };
-		7C89AA04256D69CB009AD87C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA03256D69CB009AD87C /* Assets.xcassets */; };
 		7C89AA07256D69CB009AD87C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA05256D69CB009AD87C /* LaunchScreen.storyboard */; };
 		7C89AA12256D69CB009AD87C /* FitAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89AA11256D69CB009AD87C /* FitAppTests.swift */; };
 		7C89AA1D256D69CB009AD87C /* FitAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89AA1C256D69CB009AD87C /* FitAppUITests.swift */; };
@@ -103,6 +102,7 @@
 		7CE1ED0F277126B800337304 /* ExpandableSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE1ED0E277126B800337304 /* ExpandableSectionData.swift */; };
 		7CE1ED132773633500337304 /* CollapsibleTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE1ED122773633500337304 /* CollapsibleTableViewHeader.xib */; };
 		7CE1ED1527737A5C00337304 /* CollapsibleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE1ED1427737A5C00337304 /* CollapsibleTableViewCell.xib */; };
+		7CE1ED1627738D3700337304 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA03256D69CB009AD87C /* Assets.xcassets */; };
 		7CFA5FF7262A0F5800A3F401 /* MoveDishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */; };
 		7CFA5FFF262A10E600A3F401 /* MoveDishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */; };
 		7CFA85CB26ECDEA000296B53 /* WeightAlertsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */; };
@@ -1147,7 +1147,6 @@
 				7CD1817C2647E80F0054DB9C /* NotificationTableViewCell.xib in Resources */,
 				7C89AA07256D69CB009AD87C /* LaunchScreen.storyboard in Resources */,
 				B367F18025B1DE4F00DF21D7 /* DishesStrings.strings in Resources */,
-				7C89AA04256D69CB009AD87C /* Assets.xcassets in Resources */,
 				7C10BA7E276BCFBE00B5860C /* Assistant-VariableFont_wght.ttf in Resources */,
 				7C10BA7C276BCFBE00B5860C /* Assistant-SemiBold.ttf in Resources */,
 				B3E6E98D257142CD00958C48 /* MealPlan.storyboard in Resources */,
@@ -1161,6 +1160,7 @@
 				B3B7FCEF2590EFBC004BC2CD /* WeightProgress.storyboard in Resources */,
 				7CFA5FF7262A0F5800A3F401 /* MoveDishView.xib in Resources */,
 				7CB9ADE7268CB7140009B42A /* ChartView.xib in Resources */,
+				7CE1ED1627738D3700337304 /* Assets.xcassets in Resources */,
 				7C8F51362671F9E3001FF0EE /* AddMealAlertDishView.xib in Resources */,
 				7C0F703A276CEA5900964004 /* SettingsTableViewCell.xib in Resources */,
 				7C89AA02256D69CA009AD87C /* LoginRegister.storyboard in Resources */,
