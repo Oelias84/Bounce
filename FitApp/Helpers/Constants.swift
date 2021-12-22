@@ -127,7 +127,8 @@ struct K {
         static let mealCell = "mealCell"
         static let fanCell = "fanCell"
         static let weightCell = "weightCell"
-        static let articleCell = "articleCell"
+		static let collapsibleCell = "collapsibleCell"
+		static let collapsibleHeader = "collapsibleTableViewHeader"
 		static let commentCell = "commentCell"
         static let exerciseCell = "exerciseCell"
         static let workoutCell = "workoutCell"
@@ -146,6 +147,7 @@ struct K {
 		static let numberOfWorkouts = "numberOfWorkouts"
 		static let numberOfWorkoutsExternal = "numberOfWorkoutsExternal"
 		static let logoutCell = "logoutCell"
+		
     }
 	
     struct NibName {
@@ -157,11 +159,15 @@ struct K {
 		static let addingTableViewCell = "AddingTableViewCell"
         static let workoutTableViewCell = "WorkoutTableViewCell"
         static let articleTableViewCell = "ArticleTableViewCell"
+		
+		static let collapsibleTableViewCell = "CollapsibleTableViewCell"
+		
 		static let commentTableViewCell = "CommentTableViewCell"
 		static let exerciseTableViewCell = "ExerciseTableViewCell"
 		static let mealPlanTableViewCell = "MealPlanTableViewCell"
 		static let notificationTableViewCell = "NotificationTableViewCell"
 		static let questionnaireFatCollectionViewCell = "QuestionnaireFatCollectionViewCell"
+		static let collapsibleTableViewHeader = "CollapsibleTableViewHeader"
 
 		//Views
 		static let dishView = "DishView"
