@@ -11,7 +11,6 @@ import UIKit
 protocol BounceNavigationBarDelegate: AnyObject {
 	
 	func backButtonTapped()
-	func todayButtonTapped()
 }
 
 final class BounceNavigationBarView: UIView {
@@ -20,7 +19,6 @@ final class BounceNavigationBarView: UIView {
 	
 	@IBOutlet private weak var clearView: UIView!
 	@IBOutlet private weak var backButton: UIButton!
-	@IBOutlet private weak var todayButton: UIButton!
 	@IBOutlet private weak var messageButton: UIButton!
 	@IBOutlet private weak var informationButton: UIButton!
 	@IBOutlet private weak var userProfileButton: UIButton!
@@ -77,14 +75,6 @@ final class BounceNavigationBarView: UIView {
 			return backButton.isHidden
 		}
 	}
-	var isTodayButtonHidden: Bool {
-		set {
-			todayButton.isHidden = newValue
-		}
-		get {
-			return todayButton.isHidden
-		}
-	}
 	var isMotivationHidden: Bool {
 		set {
 			motivationLabel.isHidden = newValue
@@ -101,7 +91,7 @@ final class BounceNavigationBarView: UIView {
 			return clearView.isHidden
 		}
 	}
-	var isinformationButtonHidden: Bool {
+	var isInformationButtonHidden: Bool {
 		set {
 			informationButton.isHidden = newValue
 		}
@@ -123,11 +113,8 @@ final class BounceNavigationBarView: UIView {
 	@IBAction func backButtonTapped(_ sender: Any) {
 		delegate?.backButtonTapped()
 	}
-	@IBAction func todayButtonTapped(_ sender: Any) {
-		delegate?.todayButtonTapped()
-	}
 }
-
+	
 //MARK: - Functions
 extension BounceNavigationBarView {
 	

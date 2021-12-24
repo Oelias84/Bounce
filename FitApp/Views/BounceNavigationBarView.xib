@@ -30,14 +30,13 @@
                 <outlet property="messageButton" destination="5Oc-Oq-zBg" id="3kD-7Q-tzx"/>
                 <outlet property="motivationLabel" destination="dwK-09-zWj" id="Z0H-3f-yjy"/>
                 <outlet property="nameTitleLabel" destination="IjQ-B2-AI0" id="jXc-2D-gf0"/>
-                <outlet property="todayButton" destination="wxU-4G-DVD" id="sWn-yR-g6e"/>
                 <outlet property="userProfileButton" destination="f51-iL-U68" id="Ji7-Vq-9cB"/>
                 <outlet property="view" destination="iN0-l3-epB" id="ABa-RE-bTI"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="392"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="232"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Vb-0t-tKu">
@@ -47,10 +46,10 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="220"/>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="-2" translatesAutoresizingMaskIntoConstraints="NO" id="fkT-0R-CAW" userLabel="Left Stack View">
-                            <rect key="frame" x="24" y="46" width="145" height="90.5"/>
+                            <rect key="frame" x="24" y="56" width="145" height="90.5"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dVb-AG-Db7">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="26"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="dVb-AG-Db7">
+                                    <rect key="frame" x="0.0" y="0.0" width="56" height="26"/>
                                     <subviews>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sew-5w-wga" userLabel="Comments Button">
                                             <rect key="frame" x="0.0" y="2" width="0.0" height="22"/>
@@ -59,7 +58,7 @@
                                             <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" title="הערות" image="info.circle.fill" catalog="system"/>
                                             <connections>
-                                                <action selector="todayButtonTapped:" destination="-1" eventType="touchUpInside" id="O7r-Ob-yPg"/>
+                                                <action selector="commentsButtonTapped:" destination="-1" eventType="touchUpInside" id="gzH-ik-TZg"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbV-Xy-QoH" userLabel="Back Button">
@@ -81,7 +80,7 @@
                                             </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cq0-K0-D0s" userLabel="clear View">
-                                            <rect key="frame" x="26" y="1" width="24" height="24"/>
+                                            <rect key="frame" x="32" y="1" width="24" height="24"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="fip-45-Vfy"/>
@@ -104,20 +103,10 @@
                                 </label>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="k0w-Wr-2EH">
-                            <rect key="frame" x="306" y="97" width="84" height="37"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="k0w-Wr-2EH" userLabel="Right Stack View">
+                            <rect key="frame" x="306" y="107" width="84" height="37"/>
                             <subviews>
-                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxU-4G-DVD" userLabel="Today Button">
-                                    <rect key="frame" x="0.0" y="0.0" width="84" height="0.0"/>
-                                    <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
-                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="היום" image="today"/>
-                                    <connections>
-                                        <action selector="todayButtonTapped:" destination="-1" eventType="touchUpInside" id="Vx9-I4-EIz"/>
-                                    </connections>
-                                </button>
-                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odj-pP-h1t" userLabel="Right Stack View">
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="odj-pP-h1t" userLabel="Right Stack View">
                                     <rect key="frame" x="0.0" y="0.0" width="84" height="37"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Oc-Oq-zBg" userLabel="messageButton" colorLabel="IBBuiltInLabel-Orange">
@@ -143,7 +132,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwy-Dd-NNS" userLabel="Buttom Stack View">
-                            <rect key="frame" x="24" y="138" width="366" height="21"/>
+                            <rect key="frame" x="24" y="148" width="366" height="21"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="היום אתה פועל מתוך אהבה לגוף שלך ולא מתוך שנאה" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwK-09-zWj">
                                     <rect key="frame" x="0.0" y="0.0" width="366" height="21"/>
@@ -159,7 +148,7 @@
                         <constraint firstItem="5Oc-Oq-zBg" firstAttribute="centerY" secondItem="IjQ-B2-AI0" secondAttribute="centerY" id="2Hx-Rj-b2U"/>
                         <constraint firstAttribute="trailing" secondItem="c7x-sx-FM9" secondAttribute="trailing" id="7E9-Ac-7iy"/>
                         <constraint firstItem="fkT-0R-CAW" firstAttribute="leading" secondItem="7Vb-0t-tKu" secondAttribute="leading" constant="24" id="bg6-su-zXD"/>
-                        <constraint firstItem="fkT-0R-CAW" firstAttribute="top" secondItem="7Vb-0t-tKu" secondAttribute="top" constant="46" id="lZ8-fH-lgY"/>
+                        <constraint firstItem="fkT-0R-CAW" firstAttribute="top" secondItem="7Vb-0t-tKu" secondAttribute="top" constant="56" id="lZ8-fH-lgY"/>
                         <constraint firstItem="c7x-sx-FM9" firstAttribute="leading" secondItem="7Vb-0t-tKu" secondAttribute="leading" id="poL-tY-Fuz"/>
                         <constraint firstAttribute="trailing" secondItem="dwy-Dd-NNS" secondAttribute="trailing" constant="24" id="q9K-ZS-qdD"/>
                         <constraint firstItem="dwK-09-zWj" firstAttribute="top" secondItem="k0w-Wr-2EH" secondAttribute="bottom" constant="4" id="sBn-EV-090"/>
@@ -178,7 +167,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="7Vb-0t-tKu" secondAttribute="trailing" id="kac-sT-UwD"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="160.86956521739131" y="-780.13392857142856"/>
+            <point key="canvasLocation" x="160.86956521739131" y="-833.70535714285711"/>
         </view>
     </objects>
     <resources>
@@ -187,6 +176,5 @@
         <image name="chevron.backward.circle.fill" catalog="system" width="128" height="121"/>
         <image name="info.circle.fill" catalog="system" width="128" height="121"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
-        <image name="today" width="15.105999946594238" height="16.784999847412109"/>
     </resources>
 </document>
