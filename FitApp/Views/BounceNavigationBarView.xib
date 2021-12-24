@@ -22,12 +22,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
             <connections>
-                <outlet property="backButton" destination="ytV-81-ABg" id="1iY-hP-Eoi"/>
+                <outlet property="backButton" destination="RbV-Xy-QoH" id="sDj-hO-lT3"/>
                 <outlet property="backgroundImage" destination="c7x-sx-FM9" id="hQV-Jh-Iem"/>
+                <outlet property="clearView" destination="Cq0-K0-D0s" id="tdK-17-k1f"/>
                 <outlet property="dayWelcomeLabel" destination="jcb-Hq-gyo" id="udY-B1-J2H"/>
+                <outlet property="informationButton" destination="sew-5w-wga" id="34j-Vp-kH5"/>
                 <outlet property="messageButton" destination="5Oc-Oq-zBg" id="3kD-7Q-tzx"/>
                 <outlet property="motivationLabel" destination="dwK-09-zWj" id="Z0H-3f-yjy"/>
                 <outlet property="nameTitleLabel" destination="IjQ-B2-AI0" id="jXc-2D-gf0"/>
+                <outlet property="todayButton" destination="wxU-4G-DVD" id="sWn-yR-g6e"/>
                 <outlet property="userProfileButton" destination="f51-iL-U68" id="Ji7-Vq-9cB"/>
                 <outlet property="view" destination="iN0-l3-epB" id="ABa-RE-bTI"/>
             </connections>
@@ -38,53 +41,109 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Vb-0t-tKu">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="301"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="220"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NavigationBackground" translatesAutoresizingMaskIntoConstraints="NO" id="c7x-sx-FM9">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="301"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="220"/>
                         </imageView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="fkT-0R-CAW" userLabel="Left Stack View">
-                            <rect key="frame" x="24" y="55" width="145" height="69.5"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="-2" translatesAutoresizingMaskIntoConstraints="NO" id="fkT-0R-CAW" userLabel="Left Stack View">
+                            <rect key="frame" x="24" y="46" width="145" height="90.5"/>
                             <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dVb-AG-Db7">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="26"/>
+                                    <subviews>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sew-5w-wga" userLabel="Comments Button">
+                                            <rect key="frame" x="0.0" y="2" width="0.0" height="22"/>
+                                            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <state key="normal" title="הערות" image="info.circle.fill" catalog="system"/>
+                                            <connections>
+                                                <action selector="todayButtonTapped:" destination="-1" eventType="touchUpInside" id="O7r-Ob-yPg"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbV-Xy-QoH" userLabel="Back Button">
+                                            <rect key="frame" x="0.0" y="0.0" width="26" height="26"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <imageReference key="image" image="chevron.backward.circle.fill" catalog="system" symbolScale="large"/>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium" weight="medium"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                    <real key="value" value="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="boz-1K-yAD"/>
+                                            </connections>
+                                        </button>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cq0-K0-D0s" userLabel="clear View">
+                                            <rect key="frame" x="26" y="1" width="24" height="24"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="fip-45-Vfy"/>
+                                                <constraint firstAttribute="width" constant="24" id="sI5-fN-Djx"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="בוקר טוב," textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcb-Hq-gyo">
-                                    <rect key="frame" x="0.0" y="0.0" width="145" height="26.5"/>
+                                    <rect key="frame" x="0.0" y="24" width="69" height="26.5"/>
                                     <fontDescription key="fontDescription" name="Assistant-Light" family="Assistant" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="שחר אליאס" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjQ-B2-AI0">
-                                    <rect key="frame" x="0.0" y="27.5" width="145" height="42"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="שחר אליאס" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjQ-B2-AI0">
+                                    <rect key="frame" x="0.0" y="48.5" width="145" height="42"/>
                                     <fontDescription key="fontDescription" name="AssistantRoman-Bold" family="Assistant" pointSize="32"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odj-pP-h1t" userLabel="Right Stack View">
-                            <rect key="frame" x="306" y="85" width="84" height="37"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="k0w-Wr-2EH">
+                            <rect key="frame" x="306" y="97" width="84" height="37"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Oc-Oq-zBg" userLabel="messageButton" colorLabel="IBBuiltInLabel-Orange">
-                                    <rect key="frame" x="0.0" y="0.0" width="53" height="37"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" image="ChatIcon" title=" " titleAlignment="center"/>
-                                    <connections>
-                                        <action selector="messageButtonTapped:" destination="-1" eventType="touchUpInside" id="msY-Ea-g2i"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f51-iL-U68" userLabel="userProfileButton">
-                                    <rect key="frame" x="53" y="0.0" width="31" height="37"/>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxU-4G-DVD" userLabel="Today Button">
+                                    <rect key="frame" x="0.0" y="0.0" width="84" height="0.0"/>
+                                    <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <state key="normal" title=" ">
-                                        <imageReference key="image" image="person.circle" catalog="system" symbolScale="large"/>
-                                    </state>
+                                    <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="היום" image="today"/>
                                     <connections>
-                                        <action selector="userProfileButtonTapped:" destination="-1" eventType="touchUpInside" id="Rr2-Ox-SVR"/>
+                                        <action selector="todayButtonTapped:" destination="-1" eventType="touchUpInside" id="Vx9-I4-EIz"/>
                                     </connections>
                                 </button>
+                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odj-pP-h1t" userLabel="Right Stack View">
+                                    <rect key="frame" x="0.0" y="0.0" width="84" height="37"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Oc-Oq-zBg" userLabel="messageButton" colorLabel="IBBuiltInLabel-Orange">
+                                            <rect key="frame" x="0.0" y="0.0" width="53" height="37"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="ChatIcon" title=" " titleAlignment="center"/>
+                                            <connections>
+                                                <action selector="messageButtonTapped:" destination="-1" eventType="touchUpInside" id="msY-Ea-g2i"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f51-iL-U68" userLabel="userProfileButton">
+                                            <rect key="frame" x="53" y="0.0" width="31" height="37"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" title=" ">
+                                                <imageReference key="image" image="person.circle" catalog="system" symbolScale="large"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="userProfileButtonTapped:" destination="-1" eventType="touchUpInside" id="Rr2-Ox-SVR"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwy-Dd-NNS" userLabel="Buttom Stack View">
-                            <rect key="frame" x="24" y="142" width="366" height="21"/>
+                            <rect key="frame" x="24" y="138" width="366" height="21"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="היום אתה פועל מתוך אהבה לגוף שלך ולא מתוך שנאה" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwK-09-zWj">
                                     <rect key="frame" x="0.0" y="0.0" width="366" height="21"/>
@@ -94,34 +153,20 @@
                                 </label>
                             </subviews>
                         </stackView>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytV-81-ABg">
-                            <rect key="frame" x="10" y="24" width="49.5" height="31"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title=" ">
-                                <imageReference key="image" image="chevron.backward.circle.fill" catalog="system" symbolScale="large"/>
-                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="bold"/>
-                            </buttonConfiguration>
-                            <connections>
-                                <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="tJ0-Ve-ZDJ"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="dwy-Dd-NNS" firstAttribute="top" secondItem="odj-pP-h1t" secondAttribute="bottom" constant="20" id="6hL-Kg-Hr3"/>
+                        <constraint firstItem="5Oc-Oq-zBg" firstAttribute="centerY" secondItem="IjQ-B2-AI0" secondAttribute="centerY" id="2Hx-Rj-b2U"/>
                         <constraint firstAttribute="trailing" secondItem="c7x-sx-FM9" secondAttribute="trailing" id="7E9-Ac-7iy"/>
-                        <constraint firstAttribute="trailing" secondItem="odj-pP-h1t" secondAttribute="trailing" constant="24" id="Jk9-8a-gcp"/>
-                        <constraint firstItem="fkT-0R-CAW" firstAttribute="top" secondItem="ytV-81-ABg" secondAttribute="bottom" id="Uxq-Cv-46D"/>
                         <constraint firstItem="fkT-0R-CAW" firstAttribute="leading" secondItem="7Vb-0t-tKu" secondAttribute="leading" constant="24" id="bg6-su-zXD"/>
-                        <constraint firstItem="ytV-81-ABg" firstAttribute="leading" secondItem="7Vb-0t-tKu" secondAttribute="leading" constant="10" id="hNw-c8-eZe"/>
-                        <constraint firstItem="odj-pP-h1t" firstAttribute="top" secondItem="7Vb-0t-tKu" secondAttribute="top" constant="85" id="hjp-jc-3gL"/>
+                        <constraint firstItem="fkT-0R-CAW" firstAttribute="top" secondItem="7Vb-0t-tKu" secondAttribute="top" constant="46" id="lZ8-fH-lgY"/>
                         <constraint firstItem="c7x-sx-FM9" firstAttribute="leading" secondItem="7Vb-0t-tKu" secondAttribute="leading" id="poL-tY-Fuz"/>
                         <constraint firstAttribute="trailing" secondItem="dwy-Dd-NNS" secondAttribute="trailing" constant="24" id="q9K-ZS-qdD"/>
+                        <constraint firstItem="dwK-09-zWj" firstAttribute="top" secondItem="k0w-Wr-2EH" secondAttribute="bottom" constant="4" id="sBn-EV-090"/>
                         <constraint firstAttribute="bottom" secondItem="c7x-sx-FM9" secondAttribute="bottom" id="swM-nv-aYi"/>
                         <constraint firstItem="c7x-sx-FM9" firstAttribute="top" secondItem="7Vb-0t-tKu" secondAttribute="top" id="vAc-OO-ikS"/>
-                        <constraint firstItem="IjQ-B2-AI0" firstAttribute="centerY" secondItem="5Oc-Oq-zBg" secondAttribute="centerY" id="w6A-jc-FRo"/>
                         <constraint firstItem="dwy-Dd-NNS" firstAttribute="leading" secondItem="7Vb-0t-tKu" secondAttribute="leading" constant="24" id="x0g-Jv-FXp"/>
+                        <constraint firstAttribute="trailing" secondItem="k0w-Wr-2EH" secondAttribute="trailing" constant="24" id="ynf-bT-HW2"/>
                     </constraints>
                 </view>
             </subviews>
@@ -138,8 +183,10 @@
     </objects>
     <resources>
         <image name="ChatIcon" width="25.261999130249023" height="23.416000366210938"/>
-        <image name="NavigationBackground" width="390" height="301"/>
+        <image name="NavigationBackground" width="377" height="220.13999938964844"/>
         <image name="chevron.backward.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="info.circle.fill" catalog="system" width="128" height="121"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="today" width="15.105999946594238" height="16.784999847412109"/>
     </resources>
 </document>

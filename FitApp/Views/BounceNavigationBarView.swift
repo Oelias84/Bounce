@@ -11,14 +11,18 @@ import UIKit
 protocol BounceNavigationBarDelegate: AnyObject {
 	
 	func backButtonTapped()
+	func todayButtonTapped()
 }
 
 final class BounceNavigationBarView: UIView {
 	
 	@IBOutlet private var view: UIView!
 	
+	@IBOutlet private weak var clearView: UIView!
 	@IBOutlet private weak var backButton: UIButton!
+	@IBOutlet private weak var todayButton: UIButton!
 	@IBOutlet private weak var messageButton: UIButton!
+	@IBOutlet private weak var informationButton: UIButton!
 	@IBOutlet private weak var userProfileButton: UIButton!
 	
 	@IBOutlet private weak var nameTitleLabel: UILabel!
@@ -32,6 +36,7 @@ final class BounceNavigationBarView: UIView {
 	}
 	
 	weak var delegate: BounceNavigationBarDelegate?
+	var presentingVC: UIViewController?
 	
 	var nameTitle: String? = "" {
 		didSet {
@@ -67,10 +72,17 @@ final class BounceNavigationBarView: UIView {
 	var isBackButtonHidden: Bool {
 		set {
 			backButton.isHidden = newValue
-			dayWelcomeLabel.isHidden = !newValue
 		}
 		get {
 			return backButton.isHidden
+		}
+	}
+	var isTodayButtonHidden: Bool {
+		set {
+			todayButton.isHidden = newValue
+		}
+		get {
+			return todayButton.isHidden
 		}
 	}
 	var isMotivationHidden: Bool {
@@ -81,7 +93,23 @@ final class BounceNavigationBarView: UIView {
 			return motivationLabel.isHidden
 		}
 	}
-	
+	var isClearButtonHidden: Bool {
+		set {
+			clearView.isHidden = newValue
+		}
+		get {
+			return clearView.isHidden
+		}
+	}
+	var isinformationButtonHidden: Bool {
+		set {
+			informationButton.isHidden = newValue
+		}
+		get {
+			return informationButton.isHidden
+		}
+	}
+
 	override func awakeFromNib() {
 		initWithNib()
 	}
@@ -89,11 +117,14 @@ final class BounceNavigationBarView: UIView {
 	@IBAction func userProfileButtonTapped(_ sender: Any) {
 		openSettings()
 	}
+	@IBAction func messageButtonTapped(_ sender: Any) {
+		openMessages()
+	}
 	@IBAction func backButtonTapped(_ sender: Any) {
 		delegate?.backButtonTapped()
 	}
-	@IBAction func messageButtonTapped(_ sender: Any) {
-		openMessages()
+	@IBAction func todayButtonTapped(_ sender: Any) {
+		delegate?.todayButtonTapped()
 	}
 }
 
@@ -135,7 +166,7 @@ extension BounceNavigationBarView {
 		let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
 		let settingsVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsViewController)
 		
-		if let vc = delegate as? UIViewController {
+		if let vc = delegate as? HomeViewController {
 			vc.navigationController?.pushViewController(settingsVC, animated: true)
 		}
 	}
