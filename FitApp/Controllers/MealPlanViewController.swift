@@ -14,6 +14,7 @@ class MealPlanViewController: UIViewController {
 	private var mealViewModel = MealViewModel.shared
 	private var selectedCellIndexPath: IndexPath?
 	
+	@IBOutlet weak var topBarView: BounceNavigationBarView!
 	@IBOutlet weak var changeDateView: ChangeDateView!
 	@IBOutlet weak var tableView: UITableView!
 	
@@ -22,11 +23,29 @@ class MealPlanViewController: UIViewController {
 		
 		changeDateView.delegate = self
 		tableView.register(UINib(nibName: K.NibName.addingTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.addingCell)
-		addBarButtonIcon()
+		
+		topBarView.delegate = self
+		topBarView.nameTitle = "ארוחות"
+		topBarView.isMotivationHidden = true
+		topBarView.isDayWelcomeHidden = true
+		topBarView.isBackButtonHidden = true
+		topBarView.isDayWelcomeHidden = true
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		callToViewModelForUIUpdate()
+	}
+	
+	@IBAction private func todayButtonTapped(_ sender: UIBarButtonItem) {
+		date = Date()
+		Spinner.shared.show(self.view)
+		changeDateView.changeToCurrentDate()
+		mealViewModel.fetchMealsBy(date: date) {
+			[weak self] hasMeal in
+			guard let self = self else { return }
+			Spinner.shared.stop()
+			self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
+		}
 	}
 }
 
@@ -54,26 +73,6 @@ extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MealPlanViewController {
 	
-	private func addBarButtonIcon() {
-		let comments = UIButton(type: .system)
-		let today = UIButton(type: .system)
-		let rightBarButton = UIBarButtonItem(customView: today)
-		let leftBarButton = UIBarButtonItem(customView: comments)
-		
-		comments.setTitle("הערות ", for: .normal)
-		comments.setImage(UIImage(systemName: "info.circle.fill"), for: .normal)
-		comments.addTarget(self, action: #selector(commentsBarButtonItemTapped), for: .touchUpInside)
-		comments.sizeToFit()
-		
-		today.setTitle(" היום", for: .normal)
-		today.setImage(UIImage(systemName: "calendar"), for: .normal)
-		today.addTarget(self, action: #selector(todayBarButtonItemTapped), for: .touchUpInside)
-		today.semanticContentAttribute = .forceLeftToRight
-		today.sizeToFit()
-		
-		navigationItem.rightBarButtonItem = rightBarButton
-		navigationItem.leftBarButtonItem = leftBarButton
-	}
 	private func updateDataSource() {
 		Spinner.shared.stop()
 		tableView.register(UINib(nibName: K.NibName.mealPlanTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.mealCell)
@@ -118,23 +117,6 @@ extension MealPlanViewController {
 		addMealAlert.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width,
 									height: UIScreen.main.bounds.size.height)
 		view.addSubview(addMealAlert)
-	}
-	
-	@objc private func todayBarButtonItemTapped(_ sender: UIBarButtonItem) {
-		date = Date()
-		Spinner.shared.show(self.view)
-		changeDateView.changeToCurrentDate()
-		mealViewModel.fetchMealsBy(date: date) {
-			[weak self] hasMeal in
-			guard let self = self else { return }
-			Spinner.shared.stop()
-			self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
-		}
-	}
-	@objc private func commentsBarButtonItemTapped(_ sender: UIBarButtonItem) {
-		if let commentVC = storyboard?.instantiateViewController(identifier: K.ViewControllerId.commentsTableViewController) {
-			self.navigationController?.pushViewController(commentVC, animated: true)
-		}
 	}
 }
 
@@ -198,4 +180,8 @@ extension MealPlanViewController: AddMealAlertViewDelegate {
 		mealViewModel.meals?.append(with)
 		mealViewModel.updateMeals(for: date)
 	}
+}
+extension MealPlanViewController: BounceNavigationBarDelegate {
+	
+	func backButtonTapped() {}
 }

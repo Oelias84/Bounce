@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pjO-ox-C9x">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pjO-ox-C9x">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--ארוחות-->
+        <!--Meal Plan View Controller-->
         <scene sceneID="A4b-w1-ydu">
             <objects>
                 <viewController storyboardIdentifier="MealViewController" id="pjO-ox-C9x" customClass="MealPlanViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,22 +19,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u2U-1J-EnM" userLabel="Separator Line View">
-                                <rect key="frame" x="0.0" y="162" width="414" height="1"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGu-YC-Xn7" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="214"/>
+                                <color key="backgroundColor" name="ProjectBackground"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="vXs-he-HTU"/>
+                                    <constraint firstAttribute="height" constant="214" id="9aO-JP-IOJ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBd-1e-NZn" userLabel="Date Change View" customClass="ChangeDateView" customModule="FitApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88" width="414" height="74"/>
+                                <rect key="frame" x="40" y="202" width="334" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="74" id="QtY-Bb-I7y"/>
+                                    <constraint firstAttribute="height" constant="40" id="QtY-Bb-I7y"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MealPlan" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CMS-EQ-Utu">
-                                <rect key="frame" x="0.0" y="163" width="414" height="733"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="242" width="414" height="654"/>
+                                <color key="backgroundColor" name="ProjectBackground"/>
                                 <connections>
                                     <outlet property="dataSource" destination="pjO-ox-C9x" id="QJM-2u-Uev"/>
                                     <outlet property="delegate" destination="pjO-ox-C9x" id="zWt-b5-dYj"/>
@@ -40,33 +43,60 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Omb-rW-HA7"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="ProjectBackground"/>
                         <constraints>
-                            <constraint firstItem="CMS-EQ-Utu" firstAttribute="top" secondItem="u2U-1J-EnM" secondAttribute="bottom" id="7y3-IQ-Son"/>
+                            <constraint firstItem="eBd-1e-NZn" firstAttribute="top" secondItem="fGu-YC-Xn7" secondAttribute="bottom" constant="-12" id="2aU-EN-7Bc"/>
                             <constraint firstAttribute="bottom" secondItem="CMS-EQ-Utu" secondAttribute="bottom" id="BKJ-Yp-2M0"/>
                             <constraint firstItem="CMS-EQ-Utu" firstAttribute="leading" secondItem="Omb-rW-HA7" secondAttribute="leading" id="COq-Vy-gSu"/>
-                            <constraint firstItem="eBd-1e-NZn" firstAttribute="leading" secondItem="Omb-rW-HA7" secondAttribute="leading" id="Fgt-Wv-Ndt"/>
-                            <constraint firstItem="eBd-1e-NZn" firstAttribute="trailing" secondItem="Omb-rW-HA7" secondAttribute="trailing" id="I6o-zR-dAP"/>
-                            <constraint firstItem="u2U-1J-EnM" firstAttribute="leading" secondItem="Omb-rW-HA7" secondAttribute="leading" id="aCu-HC-Zbd"/>
-                            <constraint firstItem="u2U-1J-EnM" firstAttribute="top" secondItem="eBd-1e-NZn" secondAttribute="bottom" id="c8D-yc-GhK"/>
-                            <constraint firstItem="u2U-1J-EnM" firstAttribute="trailing" secondItem="Omb-rW-HA7" secondAttribute="trailing" id="eN0-ac-VpM"/>
+                            <constraint firstItem="eBd-1e-NZn" firstAttribute="leading" secondItem="Omb-rW-HA7" secondAttribute="leading" constant="40" id="Fgt-Wv-Ndt"/>
+                            <constraint firstItem="Omb-rW-HA7" firstAttribute="trailing" secondItem="eBd-1e-NZn" secondAttribute="trailing" constant="40" id="G9d-ys-UrB"/>
+                            <constraint firstItem="fGu-YC-Xn7" firstAttribute="top" secondItem="6r4-4C-Ha1" secondAttribute="top" id="VI3-4F-t15"/>
+                            <constraint firstItem="CMS-EQ-Utu" firstAttribute="top" secondItem="eBd-1e-NZn" secondAttribute="bottom" id="eqs-2A-F4j"/>
+                            <constraint firstItem="fGu-YC-Xn7" firstAttribute="leading" secondItem="Omb-rW-HA7" secondAttribute="leading" id="rIT-1m-ODC"/>
                             <constraint firstItem="Omb-rW-HA7" firstAttribute="trailing" secondItem="CMS-EQ-Utu" secondAttribute="trailing" id="uiB-ik-f4M"/>
-                            <constraint firstItem="eBd-1e-NZn" firstAttribute="top" secondItem="Omb-rW-HA7" secondAttribute="top" id="yIy-cV-jfq"/>
+                            <constraint firstItem="fGu-YC-Xn7" firstAttribute="trailing" secondItem="Omb-rW-HA7" secondAttribute="trailing" id="xah-5d-t2L"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="ארוחות" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="always" id="ElR-4c-7nc"/>
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="never" id="ElR-4c-7nc">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="2sj-dV-ly0">
+                            <button key="customView" opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Nj3-Ke-eCG">
+                                <rect key="frame" x="20" y="5" width="93.5" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="הערות" imagePadding="6">
+                                    <imageReference key="image" image="info.circle.fill" catalog="system" symbolScale="default" renderingMode="template"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="Qlv-VD-Cd8" kind="show" id="Sia-08-IsN"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="todayBarButtonItemTapped:" destination="pjO-ox-C9x" id="kxp-s5-72a"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="PSX-Au-Zb0">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Fp5-PH-Pd1">
+                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="today" title="היום" imagePadding="6"/>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="changeDateView" destination="eBd-1e-NZn" id="UY0-7i-NzK"/>
                         <outlet property="tableView" destination="CMS-EQ-Utu" id="au5-8h-cph"/>
-                        <segue destination="Qlv-VD-Cd8" kind="show" id="ZV0-of-a4E"/>
+                        <outlet property="topBarView" destination="fGu-YC-Xn7" id="S20-MF-LBw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AA9-Z0-acL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1407.2463768115942" y="-117.1875"/>
         </scene>
-        <!--הערות-->
+        <!--Comments Table View Controller-->
         <scene sceneID="0Ij-QK-IdA">
             <objects>
                 <tableViewController storyboardIdentifier="CommentsTableViewController" id="Qlv-VD-Cd8" customClass="CommentsTableViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -79,7 +109,7 @@
                             <outlet property="delegate" destination="Qlv-VD-Cd8" id="nhK-eC-VgE"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="הערות" largeTitleDisplayMode="always" id="JzY-Nm-8wf"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="JzY-Nm-8wf"/>
                     <connections>
                         <segue destination="qU7-kB-rAR" kind="show" id="kiO-pz-Ivt"/>
                     </connections>
@@ -171,7 +201,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dishesCell" id="0fb-u7-asH">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0fb-u7-asH" id="tea-OR-U9Q">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -235,6 +265,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="info.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="today" width="15.105999946594238" height="16.784999847412109"/>
+        <namedColor name="ProjectBackground">
+            <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

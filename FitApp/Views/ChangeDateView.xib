@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChangeDateView" customModule="FitApp" customModuleProvider="target">
             <connections>
-                <outlet property="backwardDateButton" destination="hbh-eD-OO4" id="M8N-J0-JEx"/>
-                <outlet property="backwardDateButtonView" destination="rk2-o9-zxr" id="cEG-6U-PtN"/>
+                <outlet property="backwardDateButton" destination="FPL-M6-jKa" id="UXO-Z6-SJJ"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="XjG-lI-Vb1"/>
                 <outlet property="dateTextField" destination="LA5-Xp-BpP" id="ov3-9y-F6J"/>
-                <outlet property="forwardDateButton" destination="H7B-WS-F2s" id="KAK-FE-Qhe"/>
-                <outlet property="forwardDateButtonView" destination="zgH-yG-ME6" id="dz5-ug-6mm"/>
+                <outlet property="forwardDateButton" destination="eDq-Rn-eza" id="DDe-RX-aXK"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -31,78 +29,55 @@
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="7kE-6O-KO3">
                             <rect key="frame" x="24" y="12" width="366" height="40"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rk2-o9-zxr">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FPL-M6-jKa">
                                     <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbh-eD-OO4">
-                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                            <inset key="contentEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal">
-                                                <imageReference key="image" image="chevron.backward" catalog="system" symbolScale="large"/>
-                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="changeDateButtons:" destination="-1" eventType="touchUpInside" id="85l-2t-eaw"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="hbh-eD-OO4" firstAttribute="leading" secondItem="rk2-o9-zxr" secondAttribute="leading" id="AVa-0P-pRX"/>
-                                        <constraint firstAttribute="trailing" secondItem="hbh-eD-OO4" secondAttribute="trailing" id="HgJ-EG-zuQ"/>
-                                        <constraint firstAttribute="bottom" secondItem="hbh-eD-OO4" secondAttribute="bottom" id="TJt-I6-p4z"/>
-                                        <constraint firstAttribute="width" secondItem="rk2-o9-zxr" secondAttribute="height" multiplier="1:1" id="WOO-Dk-iQr"/>
-                                        <constraint firstAttribute="height" constant="40" id="aIp-4h-H7r"/>
-                                        <constraint firstItem="hbh-eD-OO4" firstAttribute="top" secondItem="rk2-o9-zxr" secondAttribute="top" id="mst-2k-l3d"/>
+                                        <constraint firstAttribute="width" constant="40" id="ItT-cI-n0L"/>
+                                        <constraint firstAttribute="height" constant="40" id="O9x-Lo-GQ3"/>
                                     </constraints>
+                                    <color key="tintColor" name="ProjectLightGreen"/>
+                                    <state key="normal">
+                                        <imageReference key="image" image="chevron.backward.circle.fill" catalog="system" symbolScale="large"/>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
+                                    </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
-                                            <real key="value" value="20"/>
+                                            <real key="value" value="10"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
-                                </view>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10/10/10 יום שלישי" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LA5-Xp-BpP">
-                                    <rect key="frame" x="52" y="0.0" width="262" height="40"/>
-                                    <color key="textColor" red="0.43436774610000001" green="0.39554607870000003" blue="0.85887217520000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <connections>
+                                        <action selector="changeDateButtons:" destination="-1" eventType="touchUpInside" id="GVM-cp-9Y1"/>
+                                    </connections>
+                                </button>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10/10/10 יום שלישי" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LA5-Xp-BpP">
+                                    <rect key="frame" x="104" y="0.0" width="158" height="40"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zgH-yG-ME6">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDq-Rn-eza">
                                     <rect key="frame" x="326" y="0.0" width="40" height="40"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H7B-WS-F2s">
-                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                            <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="6" maxY="0.0"/>
-                                            <state key="normal" image="chevron.forward" catalog="system">
-                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="changeDateButtons:" destination="-1" eventType="touchUpInside" id="Ilb-oU-Fly"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="H7B-WS-F2s" firstAttribute="top" secondItem="zgH-yG-ME6" secondAttribute="top" id="C3o-cm-2x9"/>
-                                        <constraint firstAttribute="width" secondItem="zgH-yG-ME6" secondAttribute="height" multiplier="1:1" id="MId-d4-cSn"/>
-                                        <constraint firstAttribute="height" constant="40" id="eon-lk-RqB"/>
-                                        <constraint firstAttribute="trailing" secondItem="H7B-WS-F2s" secondAttribute="trailing" id="lAT-me-lYQ"/>
-                                        <constraint firstAttribute="bottom" secondItem="H7B-WS-F2s" secondAttribute="bottom" id="q2f-Yw-Hb2"/>
-                                        <constraint firstItem="H7B-WS-F2s" firstAttribute="leading" secondItem="zgH-yG-ME6" secondAttribute="leading" id="upl-Yc-OQe"/>
+                                        <constraint firstAttribute="width" constant="40" id="2CN-Rx-koS"/>
+                                        <constraint firstAttribute="height" constant="40" id="gBL-eU-H35"/>
                                     </constraints>
+                                    <color key="tintColor" name="ProjectLightGreen"/>
+                                    <state key="normal">
+                                        <imageReference key="image" image="chevron.forward.circle.fill" catalog="system" symbolScale="large"/>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
+                                    </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
-                                            <real key="value" value="20"/>
+                                            <real key="value" value="10"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
-                                </view>
+                                    <connections>
+                                        <action selector="changeDateButtons:" destination="-1" eventType="touchUpInside" id="hi1-wi-Tve"/>
+                                    </connections>
+                                </button>
                             </subviews>
-                            <constraints>
-                                <constraint firstItem="LA5-Xp-BpP" firstAttribute="leading" secondItem="rk2-o9-zxr" secondAttribute="trailing" constant="12" id="FHN-o9-iEp"/>
-                                <constraint firstItem="zgH-yG-ME6" firstAttribute="leading" secondItem="LA5-Xp-BpP" secondAttribute="trailing" constant="12" id="lqk-BF-SBv"/>
-                            </constraints>
                         </stackView>
                     </subviews>
                     <constraints>
@@ -113,7 +88,6 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="cAL-8D-C8R" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ejj-8m-vXp"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="cAL-8D-C8R" secondAttribute="bottom" id="Zvq-Ks-yac"/>
@@ -125,10 +99,10 @@
         </view>
     </objects>
     <resources>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
-        <image name="chevron.forward" catalog="system" width="96" height="128"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="chevron.backward.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="chevron.forward.circle.fill" catalog="system" width="128" height="121"/>
+        <namedColor name="ProjectLightGreen">
+            <color red="0.28600001335144043" green="0.57599997520446777" blue="0.56099998950958252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

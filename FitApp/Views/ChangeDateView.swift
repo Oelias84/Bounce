@@ -18,9 +18,7 @@ class ChangeDateView: UIView {
 	private lazy var picker = UIDatePicker()
 
 	@IBOutlet weak var dateTextField: UITextField!
-	@IBOutlet weak var backwardDateButtonView: UIView!
 	@IBOutlet weak var backwardDateButton: UIButton!
-	@IBOutlet weak var forwardDateButtonView: UIView!
 	@IBOutlet weak var forwardDateButton: UIButton!
 	
 	@IBOutlet var contentView: UIView!
@@ -50,7 +48,7 @@ class ChangeDateView: UIView {
 		default:
 			break
 		}
-		dateTextField.text = date.dateStringDisplay + " " + date.displayDayName
+		dateTextField.text = date.dateStringDisplay + " \n " + date.displayDayName
 	}
 
 	private func setupView() {
@@ -58,10 +56,7 @@ class ChangeDateView: UIView {
 		dateTextField.delegate = self
 		dateTextField.tintColor = .clear
 
-		dateTextField.text = date.dateStringDisplay + " " + date.displayDayName
-		
-		backwardDateButtonView.buttonShadow()
-		forwardDateButtonView.buttonShadow()
+		dateTextField.text = date.dateStringDisplay + "\n " + date.displayDayName
 		addDatePickerWithToolBar()
 	}
 	private func commonInit() {
