@@ -183,9 +183,6 @@ extension SettingsViewController: SettingsStepperViewCellDelegate {
 }
 extension SettingsViewController: BounceNavigationBarDelegate {
 	
-	func todayButtonTapped() {
-		
-	}
 	func backButtonTapped() {
 		navigationController?.popViewController(animated: true)
 	}

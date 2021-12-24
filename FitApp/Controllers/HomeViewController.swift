@@ -99,12 +99,7 @@ class HomeViewController: UIViewController {
 //MARK: - Delegates
 extension HomeViewController: BounceNavigationBarDelegate {
 	
-	func todayButtonTapped() {
-		//
-	}
-	func backButtonTapped() {
-		//
-	}
+	func backButtonTapped() {}
 }
 
 //MARK: - Functions
@@ -216,9 +211,7 @@ extension HomeViewController {
 		topBarView.delegate = self
 		topBarView.nameTitle = UserProfile.defaults.name  ?? ""
 		topBarView.isBackButtonHidden = true
-		topBarView.isTodayButtonHidden = true
 		topBarView.isClearButtonHidden = true
-		
 	}
 	private func setUpProgressTextFields() {
 		fatCountLabel.text = viewModel.getFatCurrentValue

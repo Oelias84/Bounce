@@ -97,7 +97,6 @@ extension ArticlesViewController:  CollapsibleTableViewHeaderDelegate {
 extension ArticlesViewController: BounceNavigationBarDelegate {
 	
 	func backButtonTapped() {}
-	func todayButtonTapped() {}
 }
 
 //MARK: - Functions

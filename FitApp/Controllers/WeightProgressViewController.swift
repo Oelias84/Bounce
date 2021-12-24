@@ -56,6 +56,7 @@ class WeightProgressViewController: UIViewController {
 		}
 	}
 	
+	@IBOutlet weak var todayButton: UIButton!
 	@IBOutlet weak var dateRightButton: UIButton!
 	@IBOutlet weak var dateTextLabel: UILabel!
 	@IBOutlet weak var dateLeftButton: UIButton!
@@ -226,7 +227,6 @@ extension WeightProgressViewController {
 		topBarView.isDayWelcomeHidden = true
 		topBarView.isBackButtonHidden = true
 		topBarView.isDayWelcomeHidden = true
-		topBarView.isTodayButtonHidden = false
 	}
 	private func updateDateLabels() {
 		switch timePeriod {
@@ -399,16 +399,5 @@ extension WeightProgressViewController: ChartViewDelegate {
 }
 extension WeightProgressViewController: BounceNavigationBarDelegate {
 	
-	func backButtonTapped() {
-		//
-	}
-	func todayButtonTapped() {
-		
-		selectedDate = Date()
-		filteredArray = weightViewModel.getWeekBy(selectedDate.startOfWeek!)
-		segmentedControl.setIndex(0)
-		timePeriod = .week
-		updateDateLabels()
-		updateFiltersArray()
-	}
+	func backButtonTapped() {}
 }

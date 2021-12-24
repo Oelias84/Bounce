@@ -308,7 +308,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KlI-IT-ekv" customClass="BetterSegmentedControl" customModule="BetterSegmentedControl">
-                                <rect key="frame" x="34" y="202" width="346" height="40"/>
+                                <rect key="frame" x="24" y="202" width="366" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="G0h-1b-uwH"/>
@@ -334,11 +334,11 @@
                             <constraint firstItem="4hQ-ih-zZJ" firstAttribute="leading" secondItem="vgy-tl-bHW" secondAttribute="leading" id="3id-Xz-Le9"/>
                             <constraint firstAttribute="trailing" secondItem="Etg-l4-JQo" secondAttribute="trailing" id="FmW-Zh-QSI"/>
                             <constraint firstItem="Etg-l4-JQo" firstAttribute="leading" secondItem="vgy-tl-bHW" secondAttribute="leading" id="QPX-Gm-7Te"/>
-                            <constraint firstItem="KlI-IT-ekv" firstAttribute="leading" secondItem="vgy-tl-bHW" secondAttribute="leading" constant="34" id="cCE-3z-Yuw"/>
+                            <constraint firstItem="KlI-IT-ekv" firstAttribute="leading" secondItem="vgy-tl-bHW" secondAttribute="leading" constant="24" id="cCE-3z-Yuw"/>
                             <constraint firstItem="KlI-IT-ekv" firstAttribute="top" secondItem="4hQ-ih-zZJ" secondAttribute="bottom" constant="-12" id="d3r-7b-aEq"/>
                             <constraint firstItem="4hQ-ih-zZJ" firstAttribute="top" secondItem="Rj2-xc-Wv6" secondAttribute="top" id="g1H-In-4WT"/>
                             <constraint firstAttribute="bottom" secondItem="Etg-l4-JQo" secondAttribute="bottom" id="nMf-hl-VUz"/>
-                            <constraint firstItem="vgy-tl-bHW" firstAttribute="trailing" secondItem="KlI-IT-ekv" secondAttribute="trailing" constant="34" id="vs8-Fv-D7h"/>
+                            <constraint firstItem="vgy-tl-bHW" firstAttribute="trailing" secondItem="KlI-IT-ekv" secondAttribute="trailing" constant="24" id="vs8-Fv-D7h"/>
                             <constraint firstItem="Etg-l4-JQo" firstAttribute="top" secondItem="KlI-IT-ekv" secondAttribute="bottom" constant="16" id="z1E-h1-iA8"/>
                         </constraints>
                     </view>

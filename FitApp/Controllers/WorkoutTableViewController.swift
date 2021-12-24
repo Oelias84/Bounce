@@ -86,7 +86,6 @@ extension WorkoutTableViewController: UITableViewDelegate, UITableViewDataSource
 extension WorkoutTableViewController: BounceNavigationBarDelegate {
 	
 	func backButtonTapped() {}
-	func todayButtonTapped() {}
 }
 
 //MARK: Functions
