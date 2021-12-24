@@ -11,6 +11,7 @@ import SDWebImage
 import Foundation
 import DateToolsSwift
 import CropViewController
+import BetterSegmentedControl
 
 enum TimePeriod {
 	
@@ -20,6 +21,7 @@ enum TimePeriod {
 }
 
 class WeightProgressViewController: UIViewController {
+	
 	
 	private var weightViewModel: WeightViewModel!
 	private var filteredArray: [Weight]? {
@@ -46,22 +48,20 @@ class WeightProgressViewController: UIViewController {
 	internal var values = [Double]()
 	internal var timeLinePeriod = [Date]()
 	internal var timePeriod: TimePeriod = .week
-
+	
 	@IBOutlet weak var chartView: UIView!
 	@IBOutlet weak var chartViewContainer: UIView! {
 		didSet {
 			chartViewContainer.buttonShadow()
 		}
 	}
-	@IBOutlet weak var periodSegmentedControl: UISegmentedControl! {
-		didSet {
-			periodSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)], for: .normal)
-		}
-	}
 	
 	@IBOutlet weak var dateRightButton: UIButton!
 	@IBOutlet weak var dateTextLabel: UILabel!
 	@IBOutlet weak var dateLeftButton: UIButton!
+	
+	@IBOutlet weak var topBarView: BounceNavigationBarView!
+	@IBOutlet weak var segmentedControl: BetterSegmentedControl!
 	
 	@IBOutlet weak var tableView: UITableView!
 	
@@ -72,6 +72,7 @@ class WeightProgressViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		setupView()
 		selectedDate = Date()
 		callToViewModelForUIUpdate()
 		dateRightButton.isHidden = true
@@ -81,7 +82,7 @@ class WeightProgressViewController: UIViewController {
 	@IBAction func todayButtonAction(_ sender: Any) {
 		selectedDate = Date()
 		filteredArray = weightViewModel.getWeekBy(selectedDate.startOfWeek!)
-		periodSegmentedControl.selectedSegmentIndex = 0
+		segmentedControl.setIndex(0)
 		timePeriod = .week
 		updateDateLabels()
 		updateFiltersArray()
@@ -121,8 +122,8 @@ class WeightProgressViewController: UIViewController {
 		updateDateLabels()
 		updateFiltersArray()
 	}
-	@IBAction func periodSegmentedControlAction(_ sender: UISegmentedControl) {
-		switch sender.selectedSegmentIndex {
+	@IBAction func segmentedControlAction(_ sender: BetterSegmentedControl) {
+		switch sender.index {
 		case 0:
 			timePeriod = .week
 		case 1:
@@ -176,8 +177,8 @@ extension WeightProgressViewController: UITableViewDelegate, UITableViewDataSour
 		default:
 			label.text =  " תאריך             הפרש           שינוי          ממוצע"
 		}
-		label.textColor = .gray
-		headerView.backgroundColor = .white
+		label.textColor = .black
+		headerView.backgroundColor = .projectBackgroundColor
 		headerView.addSubview(label)
 		return headerView
 	}
@@ -188,11 +189,11 @@ extension WeightProgressViewController: UITableViewDelegate, UITableViewDataSour
 				presentAddWeightAlert(weight: cell)
 			case .month:
 				selectedDate = cell.date
-				periodSegmentedControl.selectedSegmentIndex = 0
+				segmentedControl.setIndex(0)
 				timePeriod = .week
 			case .year:
 				selectedDate = cell.date
-				periodSegmentedControl.selectedSegmentIndex = 1
+				segmentedControl.setIndex(1)
 				timePeriod = .month
 			}
 			updateDateLabels()
@@ -201,9 +202,32 @@ extension WeightProgressViewController: UITableViewDelegate, UITableViewDataSour
 	}
 }
 
-//MARK: - Class Function
+//MARK: - Functions
 extension WeightProgressViewController {
 	
+	private func setupView() {
+		segmentedControl.backgroundColor = .projectBackgroundColor
+		segmentedControl.borderColorV = .projectGray.withAlphaComponent(0.2)
+		segmentedControl.borderWidthV = 1
+		
+		segmentedControl.options = [
+			.cornerRadius(20),
+			.indicatorViewBackgroundColor(.projectTail),
+		]
+		
+		segmentedControl.segments =  [
+			LabelSegment(text: "שבוע", normalFont: UIFont(name: "Assistant-SemiBold", size: 18), normalTextColor: .black, selectedTextColor: .white),
+			LabelSegment(text: "חודש", normalFont: UIFont(name: "Assistant-SemiBold", size: 18), normalTextColor: .black, selectedTextColor: .white),
+			LabelSegment(text: "שנה", normalFont: UIFont(name: "Assistant-SemiBold", size: 18), normalTextColor: .black, selectedTextColor: .white),
+		]
+		topBarView.delegate = self
+		topBarView.nameTitle = "מעקב שקילה"
+		topBarView.isMotivationHidden = true
+		topBarView.isDayWelcomeHidden = true
+		topBarView.isBackButtonHidden = true
+		topBarView.isDayWelcomeHidden = true
+		topBarView.isTodayButtonHidden = false
+	}
 	private func updateDateLabels() {
 		switch timePeriod {
 		case .week:
@@ -248,7 +272,7 @@ extension WeightProgressViewController {
 	private func addWeight(weight: String, image: UIImage?, date: Date? = nil) {
 		todayButtonAction(self)
 		let weight = Weight(date: date ?? Date(), weight: Double(weight)!)
-
+		
 		getImageUrl(weightDate: weight.date) {
 			[weak self] image in
 			guard let self = self else { return }
@@ -260,9 +284,6 @@ extension WeightProgressViewController {
 			self.updateFiltersArray()
 		}
 	}
-}
-
-extension WeightProgressViewController {
 	
 	private func updateDataSource() {
 		Spinner.shared.stop()
@@ -305,14 +326,12 @@ extension WeightProgressViewController {
 			completion(nil)
 		}
 	}
-}
-//MARK: - Chart functions
-extension WeightProgressViewController {
 	
+	//MARK: - Chart
 	private func addChartView() {
 		let lineChat = ChartView(frame: CGRect(x: 0, y: 0, width: chartView.frame.width, height: chartView.frame.height))
 		lineChat.delegate = self
-
+		
 		chartView.addSubview(lineChat)
 	}
 	private func populateChart() {
@@ -377,4 +396,19 @@ extension WeightProgressViewController: weightTableViewCellDelegate {
 extension WeightProgressViewController: ChartViewDelegate {
 	
 	func getChartData() {}
+}
+extension WeightProgressViewController: BounceNavigationBarDelegate {
+	
+	func backButtonTapped() {
+		//
+	}
+	func todayButtonTapped() {
+		
+		selectedDate = Date()
+		filteredArray = weightViewModel.getWeekBy(selectedDate.startOfWeek!)
+		segmentedControl.setIndex(0)
+		timePeriod = .week
+		updateDateLabels()
+		updateFiltersArray()
+	}
 }

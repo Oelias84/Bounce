@@ -154,6 +154,7 @@ extension ExerciseViewController {
 	private func setupTopBarView() {
 		topBarView.nameTitle = exercise.name
 		topBarView.isBackButtonHidden = false
+		topBarView.isMotivationHidden = true
 	}
 	private func setUpPlayerContainerView() {
 		let buttonSize = UIEdgeInsets(top: 32, left: 32, bottom: 32, right: 32)

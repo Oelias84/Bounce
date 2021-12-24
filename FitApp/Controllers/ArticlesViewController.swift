@@ -10,7 +10,6 @@ import Foundation
 import BetterSegmentedControl
 
 class ArticlesViewController: UIViewController {
-	
 	private var filteredArticles: [Article]? {
 		didSet {
 			self.sections = filteredArticles?.map { return ExpandableSectionData(name: $0.title, text: [$0.text]) }
@@ -95,6 +94,11 @@ extension ArticlesViewController:  CollapsibleTableViewHeaderDelegate {
 		tableView.reloadSections(NSIndexSet(index: section) as IndexSet, with: .automatic)
 	}
 }
+extension ArticlesViewController: BounceNavigationBarDelegate {
+	
+	func backButtonTapped() {}
+	func todayButtonTapped() {}
+}
 
 //MARK: - Functions
 extension ArticlesViewController {
@@ -106,7 +110,7 @@ extension ArticlesViewController {
 		
 		segmentedControl.options = [
 			.cornerRadius(20),
-			.indicatorViewBackgroundColor(.projectTail),
+			.indicatorViewBackgroundColor(.projectTail)
 		]
 		
 		segmentedControl.segments =  [
@@ -116,9 +120,11 @@ extension ArticlesViewController {
 			LabelSegment(text: "אחר", normalFont: UIFont(name: "Assistant-SemiBold", size: 18), normalTextColor: .black, selectedTextColor: .white)
 		]
 		
+		topBarView.delegate = self
 		topBarView.nameTitle = "מאמרים"
 		topBarView.isMotivationHidden = true
 		topBarView.isDayWelcomeHidden = true
+		topBarView.isBackButtonHidden = true
 		registerCells()
 	}
 	private func checkTopic() {

@@ -83,6 +83,11 @@ extension WorkoutTableViewController: UITableViewDelegate, UITableViewDataSource
 		146
 	}
 }
+extension WorkoutTableViewController: BounceNavigationBarDelegate {
+	
+	func backButtonTapped() {}
+	func todayButtonTapped() {}
+}
 
 //MARK: Functions
 extension WorkoutTableViewController {
@@ -103,9 +108,11 @@ extension WorkoutTableViewController {
 		segmentedControl.indicatorViewBorderWidth = 1
 		segmentedControl.indicatorViewBorderColor = .projectTail
 		
+		topBarView.delegate = self
 		topBarView.nameTitle = "אימונים"
 		topBarView.isMotivationHidden = true
 		topBarView.isDayWelcomeHidden = true
+		topBarView.isBackButtonHidden = true
 	}
 	private func setUpTableView() {
 		tableView.delegate = self

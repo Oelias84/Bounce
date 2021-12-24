@@ -44,6 +44,7 @@ extension ExercisesTableViewController {
 		
 		topBarView.nameTitle = workout.name
 		topBarView.isBackButtonHidden = false
+		topBarView.isDayWelcomeHidden = true
 		topBarView.isMotivationHidden = true
 	}
 }
