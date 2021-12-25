@@ -20,7 +20,12 @@ enum MealType: Int, Codable {
 class Meal: Codable {
 
     let id: UUID
-    let date: Date
+    var date: Date?
+    var dateString: String? {
+        didSet {
+            updateDate()
+        }
+    }
     let mealType: MealType
     var dishes: [Dish]
     var mealDescription: String?
@@ -47,15 +52,25 @@ class Meal: Codable {
         self.id = UUID()
         self.mealType = mealType
         self.date = date
+        self.dateString = date.dateStringForDB
         self.dishes = dishes
         self.isMealDone = false
+    }
+    
+    func updateDate(fallbackDateString: String? = nil) {
+        if date == nil, let dateString = dateString {
+            date = dateString.dateFromString
+        } else if dateString == nil, let date = date {
+            dateString = date.dateStringForDB
+        } else if let dateString = fallbackDateString {
+            self.dateString = dateString
+        }
     }
 }
 
 extension Meal: Comparable {
-    
     static func < (lhs: Meal, rhs: Meal) -> Bool {
-        lhs.date < rhs.date
+        lhs.date! < rhs.date!
     }
     static func == (lhs: Meal, rhs: Meal) -> Bool {
         lhs.id == rhs.id

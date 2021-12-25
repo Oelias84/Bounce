@@ -156,8 +156,8 @@ extension MealsManager {
 		//Append the dish with the desire portion to the destinationMeal
 		destinationMeal.dishes.append(Dish(name: dish.getDishName, type: dish.type, amount: portion))
 		
-		updateMeals(for: meal.date)
-		fetchMealsBy(date: meal.date) {_ in}
+		updateMeals(for: meal.date!)
+		fetchMealsBy(date: meal.date!) {_ in}
 	}
 	
 	//MARK: - Meals Algorithm

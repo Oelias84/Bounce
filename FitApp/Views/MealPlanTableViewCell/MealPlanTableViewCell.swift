@@ -75,7 +75,7 @@ extension MealPlanTableViewCell {
 	private func presentTrashingMealAlert() {
 		let alert = UIAlertController(title: "הסרת ארוחת חריגה", message: "האם ברצונך להסיר ארוחה זאת?", preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: "אישור", style: .default, handler: { _ in
-			self.mealViewModel.removeExceptionalMeal(for: self.meal.date)
+            self.mealViewModel.removeExceptionalMeal(for: self.meal.date!)
 		}))
 		alert.addAction(UIAlertAction(title: "ביטול", style: .cancel))
 		self.parentViewController?.present(alert, animated: true)
@@ -135,7 +135,7 @@ extension MealPlanTableViewCell: DishViewDelegate {
 		mealViewModel.getProgress()
 		meal.isMealDone = allChecked
 		mealIsDoneCheckMark.isSelected = allChecked
-		mealViewModel.updateMeals(for: meal.date)
+		mealViewModel.updateMeals(for: meal.date!)
 	}
 }
 
@@ -152,6 +152,6 @@ extension MealPlanTableViewCell {
 			$0.isDishDone = sender.isSelected
 		}
 		configureData()
-		mealViewModel.updateMeals(for: meal.date)
+		mealViewModel.updateMeals(for: meal.date!)
 	}
 }

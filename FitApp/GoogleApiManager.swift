@@ -98,7 +98,8 @@ struct GoogleApiManager {
 		}
 	}
 	func getMealFor( _ date: Date, completion: @escaping (Result<DailyMeal?, Error>) -> Void) {
-		db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("user-daily-meals").document("\(date.dateStringForDB)")
+        let dateString = date.dateStringForDB
+		db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("user-daily-meals").document(dateString)
 			.getDocument(source: .default, completion: { (data, error) in
 				if let error = error {
 					print(error)
@@ -106,6 +107,9 @@ struct GoogleApiManager {
 					do {
 						var dailyMeal: DailyMeal? = nil
 						dailyMeal = try data.data(as: DailyMeal.self)
+                        dailyMeal?.meals.forEach({
+                            $0.updateDate(fallbackDateString: dateString)
+                        })
 						completion(.success(dailyMeal))
 					} catch {
 						print(error)
@@ -124,7 +128,14 @@ struct GoogleApiManager {
 			} else if let data = data {
 				do {
 					var dailyMeal: [DailyMeal]? = nil
-					dailyMeal = try data.documents.map { try $0.data(as: DailyMeal.self)! }
+					dailyMeal = try data.documents.map {
+                        let dailyMeal = try $0.data(as: DailyMeal.self)!
+                        let dateString = $0.documentID
+                        dailyMeal.meals.forEach({
+                            $0.updateDate(fallbackDateString: dateString)
+                        })
+                        return dailyMeal
+                    }
 					completion(.success(dailyMeal))
 				} catch {
 					print(error)

@@ -221,8 +221,8 @@ extension WeightAlertsManager {
 		let firstDayForCalculatedWeek = lastCaloriesCheckDate.subtract(1.weeks).start(of: .day)
 		
 		let mealsConsumedInPeriod = userDailyMeals.filter {
-			$0.meals.first!.date.onlyDate.isLater(than: firstDayForCalculatedWeek) &&
-			$0.meals.first!.date.onlyDate.isEarlierThanOrEqual(to: firstDayForCalculatedWeek.add(1.weeks).start(of: .day))
+			$0.meals.first!.date!.onlyDate.isLater(than: firstDayForCalculatedWeek) &&
+			$0.meals.first!.date!.onlyDate.isEarlierThanOrEqual(to: firstDayForCalculatedWeek.add(1.weeks).start(of: .day))
 		}
 		
 		let consumedCalories = DailyMealManager.calculateMealAverageCalories(meals: mealsConsumedInPeriod)

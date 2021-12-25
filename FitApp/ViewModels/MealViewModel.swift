@@ -66,7 +66,7 @@ class MealViewModel: NSObject {
 	
 	//MARK: - Meals Progressb
 	func getMealDate() -> Date {
-		return meals!.first!.date
+		return meals!.first!.date!
 	}
 	func getProgress() -> (MealProgress, MealTarget) {
 		var carbs: Double
@@ -241,8 +241,8 @@ class MealViewModel: NSObject {
 		//Append the dish with the desire portion to the destinationMeal
 		destinationMeal.dishes.append(Dish(name: dish.getDishName, type: dish.type, amount: portion))
 		
-		updateMeals(for: meal.date)
-		fetchMealsBy(date: meal.date) {_ in}
+		updateMeals(for: meal.date!)
+		fetchMealsBy(date: meal.date!) {_ in}
 	}
 	
 	private func fetchMealsForOrCreate(date: Date, prefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) {
