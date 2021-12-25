@@ -377,7 +377,7 @@ extension WeightProgressViewController: AddWeightAlertViewDelegate {
 	}
 	func confirmButtonAction(weight: String, date: Date?) {
 		if let weightTab = self.tabBarController?.tabBar.items?[3] {
-			weightTab.image = UIImage(named:"ScaleIcon")
+			weightTab.image = UIImage(named:"Weight")
 		}
 		addWeight(weight: weight, image: weightImage, date: date)
 		weightAlert?.removeFromSuperview()

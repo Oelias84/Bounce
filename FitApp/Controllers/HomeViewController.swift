@@ -256,7 +256,7 @@ extension HomeViewController {
 				case 1:
 					//turns weight tab bar icon to red for alerting the user
 					if let weightTab = self.tabBarController?.tabBar.items?[3] {
-						weightTab.image = UIImage(named:"ScaleIcon")?
+						weightTab.image = UIImage(named:"Weight")?
 							.withTintColor(.red, renderingMode: .alwaysOriginal)
 					}
 				default:
