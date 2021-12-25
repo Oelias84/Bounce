@@ -14,25 +14,15 @@ protocol AddingTableViewCellDelegate: AnyObject {
 
 class AddingTableViewCell: UITableViewCell {
 	
-	@IBOutlet weak var plusView: UIView! {
-		didSet {
-			plusView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(plusTapped)))
-		}
-	}
+	@IBOutlet weak var plusButton: UIButton!
+	
 	
 	weak var delegate: AddingTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-	override func draw(_ rect: CGRect) {
-		setupView()
-	}
-
-	private func setupView() {
-		plusView.layer.cornerRadius = (plusView.frame.height/2)
-	}
-	@objc private func plusTapped(_ sender: UIView) {
+	@IBAction func plusButtonTapped(_ sender: Any) {
 		delegate?.didTapped()
 	}
 }

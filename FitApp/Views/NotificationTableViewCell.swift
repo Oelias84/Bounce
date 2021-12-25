@@ -33,7 +33,7 @@ class NotificationTableViewCell: UITableViewCell {
 		timeLabel.text = Calendar.current.date(from: notification.dateTime)?.timeString
 		notificationTitle.text = self.notification.title
 		if notification.title == "זמן להישקל" {
-			notificationImageView.image = UIImage(named: "ScaleIcon")?.withTintColor(.systemGreen)
+			notificationImageView.image = UIImage(named: "Weight")?.withTintColor(.systemGreen)
 		} else {
 			notificationImageView.image = UIImage(named: "WaterIcon")
 		}

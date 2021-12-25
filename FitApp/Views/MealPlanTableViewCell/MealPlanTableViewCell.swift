@@ -32,6 +32,8 @@ class MealPlanTableViewCell: UITableViewCell {
 	@IBOutlet weak var mealTrashButton: UIButton!
 	@IBOutlet weak var mealCaloriesSumLabel: UILabel!
 	
+	private let cellHeight: CGFloat = 46
+	
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
@@ -68,11 +70,7 @@ class MealPlanTableViewCell: UITableViewCell {
 extension MealPlanTableViewCell {
 	
 	private func setupView() {
-		cellBackgroundView.layer.cornerRadius = 14
-		cellBackgroundView.layer.shadowOpacity = 0.18
-		cellBackgroundView.layer.shadowColor = UIColor.systemBlue.cgColor
-		cellBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 5)
-		cellBackgroundView.layer.shadowRadius = 14
+		cellBackgroundView.cellView()
 	}
 	private func presentTrashingMealAlert() {
 		let alert = UIAlertController(title: "הסרת ארוחת חריגה", message: "האם ברצונך להסיר ארוחה זאת?", preferredStyle: .alert)
@@ -95,7 +93,7 @@ extension MealPlanTableViewCell {
 		var tag = 1
 		mealIsDoneCheckMark.isSelected = meal.isMealDone
 		dishStackView.arrangedSubviews.forEach {
-			dishesStackViewHeight.constant -= 40
+			dishesStackViewHeight.constant -= cellHeight
 			$0.removeFromSuperview()
 		}
 		mealNameLabel.text = meal.name
@@ -108,7 +106,7 @@ extension MealPlanTableViewCell {
 			view.dishes = mealViewModel.mealManager.getDishesFor(type: $0.type)
 			view.clipsToBounds = true
 			dishStackView.addArrangedSubview(view)
-			dishesStackViewHeight.constant += 40
+			dishesStackViewHeight.constant += cellHeight
 		}
 		if meal.dishes.count == 0 {
 			moveDishButton.isHidden = true
@@ -147,7 +145,7 @@ extension MealPlanTableViewCell {
 		meal.isMealDone.toggle()
 		
 		dishStackView.arrangedSubviews.forEach {
-			dishesStackViewHeight.constant -= 40
+			dishesStackViewHeight.constant -= cellHeight
 			$0.removeFromSuperview()
 		}
 		meal.dishes.forEach {
