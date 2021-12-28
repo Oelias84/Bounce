@@ -36,7 +36,7 @@
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="10" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mWh-cb-Ats">
-                                <rect key="frame" x="0.0" y="258" width="414" height="608"/>
+                                <rect key="frame" x="0.0" y="258" width="414" height="638"/>
                                 <color key="backgroundColor" name="ProjectBackground"/>
                                 <connections>
                                     <outlet property="dataSource" destination="56e-N1-VCD" id="nOh-0f-W7Z"/>
@@ -52,7 +52,7 @@
                             <constraint firstItem="mWh-cb-Ats" firstAttribute="leading" secondItem="88o-9H-u9b" secondAttribute="leading" id="XNV-NQ-PLB"/>
                             <constraint firstItem="88o-9H-u9b" firstAttribute="trailing" secondItem="RmY-xf-1yg" secondAttribute="trailing" constant="24" id="Zm1-Th-8dT"/>
                             <constraint firstItem="88o-9H-u9b" firstAttribute="trailing" secondItem="7Rb-R8-CpK" secondAttribute="trailing" id="eQo-qP-cMi"/>
-                            <constraint firstAttribute="bottom" secondItem="mWh-cb-Ats" secondAttribute="bottom" constant="30" id="nld-Oj-RTK"/>
+                            <constraint firstAttribute="bottom" secondItem="mWh-cb-Ats" secondAttribute="bottom" id="nld-Oj-RTK"/>
                             <constraint firstItem="RmY-xf-1yg" firstAttribute="top" secondItem="7Rb-R8-CpK" secondAttribute="bottom" constant="-12" id="oGV-bp-nwv"/>
                             <constraint firstItem="7Rb-R8-CpK" firstAttribute="leading" secondItem="rMH-yP-KtT" secondAttribute="leading" id="qN4-rm-w7h"/>
                             <constraint firstItem="mWh-cb-Ats" firstAttribute="top" secondItem="RmY-xf-1yg" secondAttribute="bottom" constant="16" id="v5Q-A0-Hfx"/>

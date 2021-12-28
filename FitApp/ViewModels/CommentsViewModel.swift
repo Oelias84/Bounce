@@ -11,24 +11,44 @@ import SDWebImage
 class CommentsViewModel {
 	
 	
-	var comments: CommentsData? {
+	private var comments: CommentsData? {
+		didSet {
+			self.sections = comments?.comments.map { return ExpandableSectionData(name: $0.title, text: $0.text ?? []) }
+		}
+	}
+	var sections: [ExpandableSectionData]! {
 		didSet {
 			bindNotificationViewModelToController()
 		}
 	}
-	
 	var bindNotificationViewModelToController: (() -> ()) = {}
 	
 	init() {
 		fetchComments()
 	}
+	func getSectionCollapsed(for section: Int) -> Bool {
+		sections[section].collapsed
+	}
+	func getCommentsCount(for section: Int) -> Int {
+		sections[section].text.count
+	}
+	func getComment(for indexPath: IndexPath) -> String {
+		sections?[indexPath.section].text[indexPath.row] ?? ""
+	}
+	func getSectionTitle(for section: Int) -> String  {
+		sections?[section].name ?? ""
+	}
+	func getSectionCount() -> Int {
+		return sections?.count ?? 0
+	}
+	func updateSection(at: Int, collapsed: Bool) {
+		sections?[at].collapsed = collapsed
+	}
+	func setCollapsed(_ isCollapsed: Bool, for section: Int) {
+		sections?[section].collapsed = isCollapsed
+	}
 	
-	func getComments() -> [Comment] {
-		return comments!.comments
-	}
-	func getCommentsCount() -> Int {
-		return comments?.comments.count ?? 0
-	}
+	
 	func getCommentForCell(at index: Int) -> Comment {
 		return comments!.comments[index]
 	}
