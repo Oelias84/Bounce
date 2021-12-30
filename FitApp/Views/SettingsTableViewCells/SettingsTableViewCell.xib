@@ -41,9 +41,6 @@
                                     <constraint firstAttribute="width" constant="100" id="Pfh-ph-GZm"/>
                                     <constraint firstAttribute="height" constant="30" id="btP-yH-TUf"/>
                                 </constraints>
-                                <connections>
-                                    <action selector="stepper:" destination="wrz-ce-7bP" eventType="valueChanged" id="UzX-dz-vZe"/>
-                                </connections>
                             </view>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="30Q-cA-ivM">
                                 <rect key="frame" x="100" y="77" width="100" height="20.5"/>

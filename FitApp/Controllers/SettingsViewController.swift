@@ -21,7 +21,7 @@ class SettingsViewController: UIViewController {
 	private var optionContentType: SettingsContentType!
 	
 	private var tableViewData: [SettingsMenu: [SettingsCell]]!
-	private let userData = UserProfile.defaults
+	private var userData: UserProfile! = UserProfile.defaults
 	
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var topBarView: BounceNavigationBarView!
@@ -35,6 +35,8 @@ class SettingsViewController: UIViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		
+		userData = UserProfile.defaults
 		
 		setupTopBar()
 		registerCells()
@@ -172,13 +174,6 @@ extension SettingsViewController: SettingsStepperViewCellDelegate {
 				break
 			}
 		}
-		DispatchQueue.main.async {
-			self.setupTableViewData()
-			
-			DispatchQueue.main.async {
-				self.tableView.reloadData()
-			}
-		}
 	}
 }
 extension SettingsViewController: BounceNavigationBarDelegate {
@@ -205,24 +200,27 @@ extension SettingsViewController {
 	}
 	private func setupTableViewData() {
 		
+		let setupNumberOfMealsStepper = setupNumberOfMealsStepper()
+		let setupNumberOfTrainingsStepper = setupNumberOfTrainingsStepper()
+		let setupNumberOfExternalTrainingsStepper = setupNumberOfExternalTrainingsStepper()
+		
 		tableViewData =
 		[
 			.activity: [SettingsCell(title: "רמת פעילות", secondaryTitle: setupActivityTitle())],
 			
-			.nutrition: [SettingsCell(title: "מספר ארוחות", stepperValue: setupNumberOfMealsStepper().2, stepperMin: setupNumberOfMealsStepper().0, stepperMax: setupNumberOfMealsStepper().1),
+			.nutrition: [SettingsCell(title: "מספר ארוחות", stepperValue: setupNumberOfMealsStepper.2, stepperMin: setupNumberOfMealsStepper.0, stepperMax: setupNumberOfMealsStepper.1),
 						 SettingsCell(title: "מתי אני הכי רעב", secondaryTitle: setupMostHungryTitle())],
 			
 			.fitness: [SettingsCell(title: "רמת קושי", secondaryTitle: setupFitnessLevelTitle()),
-					   SettingsCell(title: "מספר אימונים שבועי", stepperValue: numberOfTrainingsStepper().2, stepperMin: numberOfTrainingsStepper().0, stepperMax: numberOfTrainingsStepper().1),
-					   SettingsCell(title: "מספר אימונים שבועי חיצוני", stepperValue: numberOfExternalTrainingsStepper().2, stepperMin: numberOfExternalTrainingsStepper().0, stepperMax: numberOfExternalTrainingsStepper().1)],
+					   SettingsCell(title: "מספר אימונים שבועי", stepperValue: setupNumberOfTrainingsStepper.2, stepperMin: setupNumberOfTrainingsStepper.0, stepperMax: setupNumberOfTrainingsStepper.1),
+					   SettingsCell(title: "מספר אימונים שבועי חיצוני", stepperValue: setupNumberOfExternalTrainingsStepper.2, stepperMin: setupNumberOfExternalTrainingsStepper.0, stepperMax: setupNumberOfExternalTrainingsStepper.1)],
+			
 			.system: [SettingsCell(title: "התראות", secondaryTitle: ""),
 					  SettingsCell(title: "התנתק", secondaryTitle: "")]
 		]
 	}
 	
 	private func setupActivityTitle() -> String {
-		let userData = UserProfile.defaults
-		
 		if let steps = userData.steps {
 			return "\(steps) צעדים"
 		} else if let kilometers = userData.kilometer {
@@ -265,14 +263,13 @@ extension SettingsViewController {
 	
 	private func setupNumberOfMealsStepper() -> (Int,Int,Double) {
 		if let meals = userData.mealsPerDay {
-			return (0, 0, Double(meals))
+			return (3, 5, Double(meals))
 		}
 		return (0, 0, 0)
 	}
-	private func numberOfTrainingsStepper() -> (Int,Int,Double) {
+	private func setupNumberOfTrainingsStepper() -> (Int,Int,Double) {
 		var min = 0
 		var max = 0
-		var value = 0.0
 		
 		switch userData.fitnessLevel {
 		case 1:
@@ -288,41 +285,23 @@ extension SettingsViewController {
 			break
 		}
 		if let workouts = userData.weaklyWorkouts {
-			value = Double(workouts)
+			return (min, max, Double(workouts))
 		}
-		return (min, max, value)
+		return (min, max, 0)
 	}
-	private func numberOfExternalTrainingsStepper() -> (Int,Int,Double) {
-		var min = 0
-		var max = 0
-		var value = 0.0
+	private func setupNumberOfExternalTrainingsStepper() -> (Int,Int,Double) {
+		let min = 0
+		let max = 3
 		
-		switch userData.fitnessLevel {
-		case 1:
-			min = 2
-			max = 2
-		case 2:
-			min = 2
-			max = 3
-		case 3:
-			min = 3
-			max = 4
-		default:
-			break
-		}
 		if let workouts = userData.externalWorkout {
-			value = Double(workouts)
+			return (min, max, Double(workouts))
 		}
-		return (min, max, value)
+		return (min, max, 0)
 	}
 	
 	private func mealStepperAction(_ value: Double) {
 		UserProfile.defaults.mealsPerDay = Int(value)
 		UserProfile.updateServer()
-		
-		DispatchQueue.main.async {
-			self.tableView.reloadData()
-		}
 	}
 	private func workoutStepperAction(_ value: Double) {
 		UserProfile.defaults.weaklyWorkouts = Int(value)

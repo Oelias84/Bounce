@@ -23,21 +23,7 @@ class SettingsTableViewCell: UITableViewCell {
 	}
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var secondaryLabel: UILabel!
-	@IBOutlet weak var stepperView: GMStepper! {
-		didSet {
-			stepperView.roundButtons = true
-			stepperView.labelFont = UIFont(name: "Assistant-SemiBold", size: 18)!
-			stepperView.buttonsBackgroundColor = UIColor.projectTail
-			stepperView.labelTextColor = .black
-			stepperView.backgroundColor = .clear
-			stepperView.buttonsTextColor = .white
-			stepperView.labelBackgroundColor = .clear
-			stepperView.showIntegerIfDoubleIsInteger = true
-			
-			stepperView.minimumValue = 0
-			stepperView.maximumValue = 0
-		}
-	}
+	@IBOutlet weak var stepperView: GMStepper!
 	@IBOutlet weak var labelStackView: UIStackView!
 	
 	weak var delegate: SettingsStepperViewCellDelegate?
@@ -49,9 +35,9 @@ class SettingsTableViewCell: UITableViewCell {
 	override func setSelected(_ selected: Bool, animated: Bool) {
 		super.setSelected(selected, animated: animated)
 	}
-	
-	@IBAction func stepper(_ sender: GMStepper) {
-		delegate?.valueChanged(sender.value, cell: self)
+	@objc func stepperValueChanged(stepper: GMStepper) {
+		delegate?.valueChanged(stepper.value, cell: self)
+		print(stepper.value, terminator: "")
 	}
 }
 
@@ -60,6 +46,14 @@ extension SettingsTableViewCell {
 	
 	private func setupView() {
 		selectionStyle = .none
+		stepperView.roundButtons = true
+		stepperView.labelTextColor = .black
+		stepperView.backgroundColor = .clear
+		stepperView.buttonsTextColor = .white
+		stepperView.labelBackgroundColor = .clear
+		stepperView.buttonsBackgroundColor = .projectTail
+		stepperView.labelFont = UIFont(name: "Assistant-SemiBold", size: 18)!
+		stepperView.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
 	}
 	private func setupCellData() {
 		
