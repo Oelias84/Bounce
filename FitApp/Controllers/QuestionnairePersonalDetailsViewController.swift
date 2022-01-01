@@ -6,16 +6,32 @@
 //
 
 import UIKit
+import PDFKit
 
 class QuestionnairePersonalDetailsViewController: UIViewController {
-    
+	
+	@IBOutlet weak var userNameTextField: UITextField!
 	@IBOutlet weak var birthdayDatePicker: UIDatePicker!
 	@IBOutlet weak var heightTextField: UITextField!
-    @IBOutlet weak var weightTextField: UITextField!
+	@IBOutlet weak var weightTextField: UITextField!
+	@IBOutlet weak var pageControl: UIPageControl!
+
+	@IBOutlet weak var termsOfUseViewButton: UIButton!
+	@IBOutlet weak var termsOfUseCheckMarkButton: UIButton!
 	
 	@IBOutlet weak var nextButton: UIButton!
 	
-    private let numberPicker = UIPickerView()
+	private lazy var pdfView: PDFView = {
+		let pdfView = PDFView(frame: self.view.bounds)
+		pdfView.translatesAutoresizingMaskIntoConstraints = false
+		pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		view.addSubview(pdfView)
+		pdfView.autoScales = true
+
+		return pdfView
+	}()
+	
+	private let numberPicker = UIPickerView()
 	private let weightNumberArray = Array(30...150)
     private let frictionNumberArray = Array(0...99)
     private let heightNumberArray = Array(100...250)
@@ -24,7 +40,8 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
     private var weight: Double?
     private var birthDate: Date?
     private var userName: String?
-	
+	private var userHasCheckedTermOfUse = false
+
     private var weightString: String?
 	private var weighWholeString: String?
 	private var weightFrictionString: String?
@@ -33,7 +50,8 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+		super.navigationItem.setHidesBackButton(true, animated: false)
+
         configurePicker()
 		configureTextFields()
         addScreenTappGesture()
@@ -46,14 +64,14 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
 		
-        if let birthDate = birthDate, let height = height, let weight = weight {
-			if birthDate == nil {
-				presentAlert(withTitle: "אופס", withMessage: "יש ליבחור תאריך לידה", options: "אישור") { _ in
-					self.birthdayDatePicker.becomeFirstResponder()
+        if let birthDate = birthDate, let height = height, let weight = weight, let userName = userName {
+			
+			if userName != "", !userName.isValidFullName {
+				presentOkAlert(withTitle: "אופס",withMessage: "יש להזין שם ושם משפחה") {
+					self.userNameTextField.becomeFirstResponder()
 				}
-			}
-			if birthDate.isLater(than: Date()) {
-				presentAlert(withTitle: "אופס", withMessage: "תאריך הלידה לא יכול גדול מהתאריך הנוחכי", options: "אישור") { _ in
+			} else if birthDate.onlyDate.isLaterThanOrEqual(to: Date().onlyDate) {
+				presentAlert(withTitle: "אופס", withMessage: "תאריך הלידה לא יכול גדול או שווה מהתאריך הנוחכי", options: "אישור") { _ in
 					self.birthdayDatePicker.becomeFirstResponder()
 				}
 			} else if height<100 {
@@ -64,12 +82,17 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 				presentAlert(withTitle: "אופס", withMessage: "משקל שגויי אנא בדקי את הנתונים שהזנת", options: "אישור") { _ in
 					self.weightTextField.becomeFirstResponder()
 				}
+			} else if userHasCheckedTermOfUse == false {
+				presentOkAlert(withTitle: "תנאי השירות לא אושרו", withMessage: "נראה כי לא אשרת את תנאי השירות, בכדי להמשיך בהרשמה אנא סמני את התיבה שמאשרת את תנאי השימוש.") {}
 			} else {
+				UserProfile.defaults.name = userName
 				UserProfile.defaults.height = height
 				UserProfile.defaults.weight = weight
 				UserProfile.defaults.birthDate = birthDate
+				UserProfile.defaults.checkedTermsOfUse = userHasCheckedTermOfUse
 				googleManager.updateWeights(weights: Weights(weights: [Weight(date: Date(), weight: weight)]))
-				self.performSegue(withIdentifier: K.SegueId.moveToFatPercentage, sender: self)
+				
+				self.performSegue(withIdentifier: K.SegueId.moveToFatGender, sender: self)
 			}
         } else {
 			presentAlert(withTitle: "אופס", withMessage: "יש למלא את כל השדות", options: "אישור") { _ in
@@ -78,45 +101,50 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 			return
         }
     }
+	@IBAction func termsOfUseViewButtonAction(_ sender: UIButton) {
+		showTermsOfUse()
+	}
+	@IBAction func termsOfUseCheckMarkButtonAction(_ sender: UIButton) {
+		sender.isSelected = !sender.isSelected
+		userHasCheckedTermOfUse = sender.isSelected
+	}
 }
 
 extension QuestionnairePersonalDetailsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        var components = 1
-        
-        if weightTextField.isFirstResponder {
-            components = 2
-        }
-        return components
-    }
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-
+	
+	func numberOfComponents(in pickerView: UIPickerView) -> Int {
+		var components = 1
 		
-        if component == 0 {
+		if weightTextField.isFirstResponder {
+			components = 2
+		}
+		return components
+	}
+	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+		if component == 0 {
 			if weightTextField.isFirstResponder {
 				return weightNumberArray.count
 			}
 			return heightNumberArray.count
-        } else {
-            return frictionNumberArray.count
-        }
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if component == 0 {
+		} else {
+			return frictionNumberArray.count
+		}
+	}
+	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+		if component == 0 {
 			if weightTextField.isFirstResponder {
 				return "\(weightNumberArray[row])"
 			}
-            return "\(heightNumberArray[row])"
-        } else {
-            return "\(frictionNumberArray[row])"
-        }
-    }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if heightTextField.isFirstResponder {
-            heightTextField.text = "\(heightNumberArray[row])"
-            height = heightNumberArray[row]
-        } else if weightTextField.isFirstResponder {
+			return "\(heightNumberArray[row])"
+		} else {
+			return "\(frictionNumberArray[row])"
+		}
+	}
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		if heightTextField.isFirstResponder {
+			heightTextField.text = "\(heightNumberArray[row])"
+			height = heightNumberArray[row]
+		} else if weightTextField.isFirstResponder {
 			if component == 0 {
 				weighWholeString = "\(weightNumberArray[row])"
 			} else {
@@ -125,39 +153,101 @@ extension QuestionnairePersonalDetailsViewController: UIPickerViewDelegate, UIPi
 			weightString = "\(weighWholeString ?? "0").\(weightFrictionString ?? "0")"
 			weightTextField.text = weightString
 			weight = Double(weightString!)
-        }
-    }
-    
-    @objc private func pickerChanged(_ sender: UIDatePicker) {
+		}
+	}
+	
+	@objc private func pickerChanged(_ sender: UIDatePicker) {
 		birthDate = sender.date
-    }
+	}
 }
 
 extension QuestionnairePersonalDetailsViewController: UITextFieldDelegate {
-    
+	
 	func textFieldDidEndEditing(_ textField: UITextField) {
-        if !(textField.text?.isEmpty ?? true){
+		
+        if let text = textField.text, text != "" {
             switch textField {
+			case userNameTextField:
+				userName = text
             case heightTextField:
-                height = Int(textField.text!)
+                height = Int(text)
             case weightTextField:
-                weight = Double(textField.text!)
+                weight = Double(text)
             default:
                 break
             }
         }
-		checkFieldsEmpty()
 	}
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+	func textFieldDidBeginEditing(_ textField: UITextField) {
 		
 		numberPicker.selectRow(getIndex(textField: textField), inComponent: 0, animated: true)
-        numberPicker.reloadAllComponents()
-        numberPicker.reloadInputViews()
-    }
+		numberPicker.reloadAllComponents()
+		numberPicker.reloadInputViews()
+	}
 }
 
 extension QuestionnairePersonalDetailsViewController {
-    
+	
+	private func configurePicker() {
+		numberPicker.delegate = self
+		numberPicker.dataSource = self
+		numberPicker.backgroundColor = .white
+		numberPicker.semanticContentAttribute = .forceLeftToRight
+	}
+	private func showTermsOfUse() {
+		Spinner.shared.show(self.view)
+		GoogleStorageManager.shared.downloadImageURL(from: .pdf, path: "terms_of_use.pdf") {
+			[weak self] result in
+			guard let self = self else { return }
+			Spinner.shared.stop()
+
+			switch result {
+			case .success(let url):
+				if let document = PDFDocument(url: url) {
+					self.pdfView.document = document
+				}
+			case .failure(let error):
+				print(error)
+			}
+		}
+	}
+	private func setupTextfieldText() {
+		let userData = UserProfile.defaults
+		
+		if let height = userData.height {
+			heightTextField.text = "\(height)"
+			self.height = height
+		}
+		if let birthDate = userData.birthDate {
+			birthdayDatePicker.date = birthDate
+			self.birthDate = birthDate
+		}
+		if let weight = userData.weight {
+			weightTextField.text = "\(weight)"
+			self.weight = weight
+		}
+		if let name = userData.name {
+			userNameTextField.text = name
+			self.userName = name
+		}
+	}
+	private func configureTextFields() {
+		
+		height = 100
+		weight = 30.0
+		heightTextField.text = String(100.0)
+		weightTextField.text = String(30.0)
+
+		heightTextField.inputView = numberPicker
+		weightTextField.inputView = numberPicker
+		heightTextField.setupToolBar(cancelButtonName: "אישור")
+		weightTextField.setupToolBar(cancelButtonName: "אישור")
+		
+		heightTextField.delegate = self
+		weightTextField.delegate = self
+		userNameTextField.delegate = self
+		birthdayDatePicker.addTarget(self, action: #selector(pickerChanged), for: .valueChanged)
+	}
 	private func getIndex(textField: UITextField) -> Int {
 		var text: String
 		
@@ -182,45 +272,4 @@ extension QuestionnairePersonalDetailsViewController {
 			return 0
 		}
 	}
-    private func configurePicker() {
-        numberPicker.delegate = self
-        numberPicker.dataSource = self
-        numberPicker.backgroundColor = .white
-		numberPicker.semanticContentAttribute = .forceLeftToRight
-    }
-	private func checkFieldsEmpty() {
-		if let height = heightTextField.text, let weight = weightTextField.text {
-			if !height.isEmpty && !weight.isEmpty {
-				nextButton.isEnabled = true
-			}
-		}
-	}
-    private func setupTextfieldText() {
-        let userData = UserProfile.defaults
-        
-		if let height = userData.height, let weight = userData.weight, let birthDate = userData.birthDate {
-            heightTextField.text = "\(height)"
-            weightTextField.text = "\(weight)"
-			birthdayDatePicker.date = birthDate
-			
-			self.height = height
-			self.weight = weight
-			self.birthDate = birthDate
-        }
-    }
-    private func configureTextFields() {
-        
-        birthdayDatePicker.addTarget(self, action: #selector(pickerChanged), for: .valueChanged)
-		heightTextField.text = String(100.0)
-		weightTextField.text = String(30.0)
-		height = 100
-		weight = 30.0
-        heightTextField.inputView = numberPicker
-        weightTextField.inputView = numberPicker
-		heightTextField.setupToolBar(cancelButtonName: "אישור")
-		weightTextField.setupToolBar(cancelButtonName: "אישור")
-        heightTextField.delegate = self
-        weightTextField.delegate = self
-    }
-
 }

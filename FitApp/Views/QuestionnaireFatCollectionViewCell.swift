@@ -9,18 +9,11 @@ import UIKit
 
 class QuestionnaireFatCollectionViewCell: UICollectionViewCell {
 	
-	var fatImageString: String! {
-		didSet {
-			cellImage.image = UIImage(named: fatImageString)
-		}
-	}
-	
 	@IBOutlet weak var cellImage: UIImageView! {
 		didSet {
 			cellImage.layer.cornerRadius = 3
 		}
 	}
-	@IBOutlet weak var fatPercentageLabel: UILabel!
 	
 	override func layoutSubviews() {
 		superview?.layoutSubviews()
@@ -31,33 +24,24 @@ class QuestionnaireFatCollectionViewCell: UICollectionViewCell {
 		super.prepareForReuse()
 		cellImage.image = nil
 	}
-	override var isSelected: Bool {
-		
-		didSet {
-			if isSelected {
-				cellImage.backgroundColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 0.1488236181)
-			} else {
-				cellImage.backgroundColor = nil
-			}
-		}
-	}
 	func setFatPresentLabel(for row: Int) {
+		let gender = UserProfile.defaults.userGander
 		
 		switch row {
 		case 0:
-			self.fatPercentageLabel.text = String(18.0)
+			cellImage.image = UIImage(named: gender == 1 ? "18 women" : "8 men")
 		case 1:
-			self.fatPercentageLabel.text = String(20.0)
+			cellImage.image = UIImage(named: gender == 1 ? "20 women" : "12 men")
 		case 2:
-			self.fatPercentageLabel.text = String(25.0)
+			cellImage.image = UIImage(named: gender == 1 ? "25 women" : "15 men")
 		case 3:
-			self.fatPercentageLabel.text = String(30.0)
+			cellImage.image = UIImage(named: gender == 1 ? "30 women" : "20 men")
 		case 4:
-			self.fatPercentageLabel.text = String(40.0)
+			cellImage.image = UIImage(named: gender == 1 ? "40 women" : "25 men")
 		case 5:
-			self.fatPercentageLabel.text = String(45.0)
+			cellImage.image = UIImage(named: gender == 1 ? "45 women" : "30 men")
 		default:
-			self.fatPercentageLabel.text = String(18.0)
+			cellImage.image = UIImage(named: gender == 1 ? "18 women" : "8 men")
 		}
 	}
 	func changeImageBackgroundColor() {

@@ -46,6 +46,7 @@
 		7C54164B269D923800C22859 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54164A269D923800C22859 /* ErrorManager.swift */; };
 		7C54164D269D951C00C22859 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54164C269D951C00C22859 /* LoginViewModel.swift */; };
 		7C54164F26AACC9900C22859 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C54164E26AACC9900C22859 /* RegisterViewModel.swift */; };
+		7C567110277F43C400B7346A /* QuestionnaireGanderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C56710F277F43C400B7346A /* QuestionnaireGanderViewController.swift */; };
 		7C62181026F4F2F20019FD25 /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C62180F26F4F2F20019FD25 /* UIAlertController+Extensions.swift */; };
 		7C658AA825D9873C00CA75B2 /* Motivations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658AA725D9873C00CA75B2 /* Motivations.swift */; };
 		7C658AB525D990EB00CA75B2 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658AB425D990EB00CA75B2 /* CommentViewController.swift */; };
@@ -230,6 +231,7 @@
 		7C54164A269D923800C22859 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		7C54164C269D951C00C22859 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		7C54164E26AACC9900C22859 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		7C56710F277F43C400B7346A /* QuestionnaireGanderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireGanderViewController.swift; sourceTree = "<group>"; };
 		7C62180F26F4F2F20019FD25 /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
 		7C658AA725D9873C00CA75B2 /* Motivations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motivations.swift; sourceTree = "<group>"; };
 		7C658AB425D990EB00CA75B2 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
@@ -958,6 +960,7 @@
 			isa = PBXGroup;
 			children = (
 				B341E22F257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift */,
+				7C56710F277F43C400B7346A /* QuestionnaireGanderViewController.swift */,
 				B3B2A237256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift */,
 				B3BB8F34258223E400D70628 /* QuestionnaireActivityViewController.swift */,
 				7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */,
@@ -1404,6 +1407,7 @@
 				B34397AD258A7FA50073A59B /* DishView.swift in Sources */,
 				7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */,
 				7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */,
+				7C567110277F43C400B7346A /* QuestionnaireGanderViewController.swift in Sources */,
 				7CFA85CB26ECDEA000296B53 /* WeightAlertsManager.swift in Sources */,
 				7C1ACD042670C25B008079C9 /* AddingTableViewCell.swift in Sources */,
 				7C54164B269D923800C22859 /* ErrorManager.swift in Sources */,

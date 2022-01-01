@@ -18,6 +18,9 @@ struct UserProfile {
 	@UserDefault(key: .isManager)
 	var isManager: Bool?
 	
+	@UserDefault(key: .userGander)
+	var userGander: Int?
+
 	@UserDefault(key: .hasRunBefore)
 	var hasRunBefore: Bool?
 	
@@ -117,6 +120,7 @@ extension UserProfile {
 		let data = ServerUserData (
 			isManager: defaults.isManager,
 			checkedTermsOfUse: defaults.checkedTermsOfUse,
+			userGander: defaults.userGander,
 			lastCaloriesCheckDate: defaults.lastCaloriesCheckDate,
 			birthDate: defaults.birthDate?.dateStringForDB,
 			email: defaults.email!,
@@ -157,6 +161,7 @@ extension UserProfile {
 		
 		userProfile.isManager = data.isManager
 		userProfile.checkedTermsOfUse = data.checkedTermsOfUse
+		userProfile.userGander = data.userGander
 		userProfile.lastCaloriesCheckDate = data.lastCaloriesCheckDate
 		userProfile.id = id
 		userProfile.name = data.name
@@ -180,6 +185,7 @@ extension UserProfile {
 		
 		userProfile.isManager = nil
 		userProfile.checkedTermsOfUse = nil
+		userProfile.userGander = nil
 		userProfile.lastCaloriesCheckDate = nil
 		userProfile.id = nil
 		userProfile.name = nil
@@ -204,6 +210,7 @@ struct ServerUserData: Codable {
 	
 	let isManager: Bool?
 	let checkedTermsOfUse: Bool?
+	let userGander: Int?
 	let lastCaloriesCheckDate: Date?
 	let birthDate: String?
 	let email: String
@@ -244,6 +251,7 @@ extension Key {
 	//user data
 	static let isManager: Key = "isManager"
 	static let checkedTermsOfUse: Key = "checkedTermsOfUse"
+	static let userGander: Key = "userGander"
 	static let fcmToken: Key = "fcmToken"
     static let id: Key = "id"
     static let name: Key = "name"

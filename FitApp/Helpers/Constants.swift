@@ -83,7 +83,9 @@ struct K {
         static let questionnaireFifth = "QuestionnaireFifth"
         static let questionnaireSixth = "QuestionnaireSixth"
         static let questionnaireSeventh = "QuestionnaireSeventh"
-        //Workout
+		static let questionnaireEighth = "QuestionnaireEighth"
+
+		//Workout
         static let workoutTableViewController = "WorkoutTableViewController"
         static let exercisesTableViewController = "ExercisesTableViewController"
         static let exerciseDetailViewController = "ExerciseDetailViewController"
@@ -112,6 +114,7 @@ struct K {
         static let moveToExerciseDetailViewController = "moveToExerciseDetailViewController"
         //Questionnaire Segue
         static let moveToPersonalDetails = "moveToPersonalDetails"
+		static let moveToFatGender = "moveToFatGender"
         static let moveToFatPercentage = "moveToFatPercentage"
         static let moveToActivity = "moveToActivity"
 		static let moveToSecondActivity = "moveToSecondActivity"

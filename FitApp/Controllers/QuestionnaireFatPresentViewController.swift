@@ -9,54 +9,62 @@ import UIKit
 
 class QuestionnaireFatPresentViewController: UIViewController {
 	
-	private let pickerItems = ["18", "20", "25", "30", "40", "45"]
-	private var cellScale: CGFloat = 0.6
 	private var selectedPercentage: String?
 	private var isFirstLoad = true
 	private var index: Int?
 	
-	@IBOutlet weak var collectionView: UICollectionView!
-	@IBOutlet weak var pageControl: UIPageControl!
+	var currentIndex: IndexPath {
+		let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
+		let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+		return collectionView.indexPathForItem(at: visiblePoint) ?? IndexPath()
+	}
+	var gender: Int {
+		return UserProfile.defaults.userGander ?? 1
+	}
 	
+	@IBOutlet weak var collectionView: UICollectionView!
 	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+		navigationItem.setHidesBackButton(true, animated: false)
+
 		setupSelectedImage()
 		setUpCollectionView()
 	}
 	
+	@IBAction func scrollForewordButtonAction(_ sender: Any) {
+		collectionView.scrollToItem(at: IndexPath(item: currentIndex.row + 1, section: 0), at: .centeredHorizontally, animated: true)
+
+	}
+	@IBAction func scrollBackButtonAction(_ sender: Any) {
+		collectionView.scrollToItem(at: IndexPath(item: currentIndex.row - 1, section: 0), at: .centeredHorizontally, animated: true)
+	}
+
+	@IBAction func backButtonAction(_ sender: Any) {
+		navigationController?.popViewController(animated: true)
+	}
 	@IBAction func nextButtonAction(_ sender: Any) {
+		var fatPrecent: Double = 0.0
 		
-			
-			if let fatPercentage = selectedPercentage {
-				var fatPrecent: Double = 0.0
-				
-				switch fatPercentage {
-				case "18":
-					fatPrecent = 18.0
-				case "20":
-					fatPrecent = 20.0
-				case "25":
-					fatPrecent = 25.0
-				case "30":
-					fatPrecent = 30.0
-				case "40":
-					fatPrecent = 40.0
-				case "45":
-					fatPrecent = 45.0
-				default:
-					break
-				}
-				UserProfile.defaults.fatPercentage = fatPrecent
-				performSegue(withIdentifier: K.SegueId.moveToActivity, sender: self)
-				
-			} else {
-				presentOkAlert(withTitle: "אופס",withMessage: "נראה כי לא נעשתה בחירה, יש לבחור בתמונה שהכי משקפת אתת הנראות שלך", buttonText: "הבנתי") {
-					return
-				}
-			}
+		switch currentIndex.row {
+		case 0:
+			fatPrecent = gender == 1 ? 18.0 : 8.0
+		case 1:
+			fatPrecent = gender == 1 ? 20.0 : 12.0
+		case 2:
+			fatPrecent = gender == 1 ? 25.0 : 15.0
+		case 3:
+			fatPrecent = gender == 1 ? 30.0 : 20.0
+		case 4:
+			fatPrecent = gender == 1 ? 40.0 : 25.0
+		case 5:
+			fatPrecent = gender == 1 ? 45.0 : 30.0
+		default:
+			break
+		}
+		UserProfile.defaults.fatPercentage = fatPrecent
+		performSegue(withIdentifier: K.SegueId.moveToActivity, sender: self)
 	}
 }
 
@@ -66,60 +74,67 @@ extension QuestionnaireFatPresentViewController: UICollectionViewDelegate, UICol
 		1
 	}
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		pickerItems.count
+		6
 	}
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.CellId.fanCell, for: indexPath) as! QuestionnaireFatCollectionViewCell
 		
-//		cell.fatImageString = pickerItems[indexPath.row]
 		cell.setFatPresentLabel(for: indexPath.row)
 		return cell
-	}
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		selectedPercentage = pickerItems[indexPath.row]
 	}
 }
 
 extension QuestionnaireFatPresentViewController {
 	
-	func setupSelectedImage() {
+	private func setupSelectedImage() {
 		let userData = UserProfile.defaults
-		
-		switch userData.fatPercentage {
-		case 18.0:
-			index = 0
-		case 20.0:
-			index = 1
-		case 25.0:
-			index = 2
-		case 30.0:
-			index = 3
-		case 40.0:
-			index = 4
-		case 45.0:
-			index = 5
-		default:
-			break
-		}
-		if let _ = userData.fatPercentage {
-			selectedPercentage = pickerItems[index!]
+		if gender == 1 {
+			switch userData.fatPercentage {
+			case 18.0:
+				index = 0
+			case 20.0:
+				index = 1
+			case 25.0:
+				index = 2
+			case 30.0:
+				index = 3
+			case 40.0:
+				index = 4
+			case 45.0:
+				index = 5
+			default:
+				break
+			}
+		} else {
+			switch userData.fatPercentage {
+			case 8.0:
+				index = 0
+			case 12.0:
+				index = 1
+			case 15.0:
+				index = 2
+			case 20.0:
+				index = 3
+			case 25.0:
+				index = 4
+			case 30.0:
+				index = 5
+			default:
+				break
+			}
 		}
 		DispatchQueue.main.async {
 			[unowned self] in
-			self.collectionView.scrollToItem(at: IndexPath(item: index ?? 0, section: 0), at: .centeredHorizontally, animated: true)
+			collectionView.scrollToItem(at: IndexPath(item: index ?? 0, section: 0), at: .centeredHorizontally, animated: true)
 		}
 	}
 	private func setUpCollectionView() {
 		collectionView.isUserInteractionEnabled = true
-		layout(collectionView){
-			[weak self] row in
-			guard let self = self else { return }
-			self.pageControl.currentPage = row
-		}
+		layout(collectionView)
 	}
-
+	
 	//MARK: - CollectionView CompositionalLayout
-	func layout(_ collectionView: UICollectionView, callBack: @escaping (Int)->()) {
+	private func layout(_ collectionView: UICollectionView) {
 		
 		let layout = UICollectionViewCompositionalLayout { sectionIndex, environment -> NSCollectionLayoutSection? in
 			
@@ -141,7 +156,6 @@ extension QuestionnaireFatPresentViewController {
 			section.visibleItemsInvalidationHandler = { items, contentOffset, environment in
 				let currentPage = Int(max(0, round(contentOffset.x / environment.container.contentSize.width)))
 				if rowToCompare != currentPage {
-					callBack(currentPage)
 					rowToCompare = currentPage
 				}
 			}
