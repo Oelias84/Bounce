@@ -72,10 +72,8 @@ class QuestionnaireNutritionViewController: UIViewController {
 			mealCheckSecond.backgroundColor = .clear
 			numberOfMeals = 5
 		default:
-			return
-		}
-		if !sender.isSelected {
 			mostHunger = 0
+			return
 		}
 	}
 	@IBAction func mostHungryCheckBoxes(sender: UIButton) {
@@ -84,6 +82,8 @@ class QuestionnaireNutritionViewController: UIViewController {
 		
 		switch sender {
 		case mostHungerCheckFirst:
+			mostHunger = 1
+
 			mostHungerCheckSecond.borderColorV = .white
 			mostHungerCheckThird.borderColorV = .white
 			mostHungerCheckForth.borderColorV = .white
@@ -91,6 +91,8 @@ class QuestionnaireNutritionViewController: UIViewController {
 			mostHungerCheckThird.backgroundColor = .clear
 			mostHungerCheckForth.backgroundColor = .clear
 		case mostHungerCheckSecond:
+			mostHunger = 2
+
 			mostHungerCheckFirst.borderColorV = .white
 			mostHungerCheckThird.borderColorV = .white
 			mostHungerCheckForth.borderColorV = .white
@@ -98,6 +100,8 @@ class QuestionnaireNutritionViewController: UIViewController {
 			mostHungerCheckThird.backgroundColor = .clear
 			mostHungerCheckForth.backgroundColor = .clear
 		case mostHungerCheckThird:
+			mostHunger = 3
+
 			mostHungerCheckFirst.borderColorV = .white
 			mostHungerCheckSecond.borderColorV = .white
 			mostHungerCheckForth.borderColorV = .white
@@ -105,6 +109,8 @@ class QuestionnaireNutritionViewController: UIViewController {
 			mostHungerCheckSecond.backgroundColor = .clear
 			mostHungerCheckForth.backgroundColor = .clear
 		case mostHungerCheckForth:
+			mostHunger = 4
+			
 			mostHungerCheckFirst.borderColorV = .white
 			mostHungerCheckSecond.borderColorV = .white
 			mostHungerCheckThird.borderColorV = .white
@@ -112,10 +118,8 @@ class QuestionnaireNutritionViewController: UIViewController {
 			mostHungerCheckSecond.backgroundColor = .clear
 			mostHungerCheckThird.backgroundColor = .clear
 		default:
-			return
-		}
-		if !sender.isSelected {
 			mostHunger = 0
+			return
 		}
 	}
 }
@@ -126,13 +130,17 @@ extension QuestionnaireNutritionViewController {
 		let userData = UserProfile.defaults
 		
 		if let meals = userData.mealsPerDay {
+			
 			switch meals {
 			case 3:
-				mealCheckFirst.isSelected = true
+				mealCheckFirst.backgroundColor = .projectTail
+				mealCheckFirst.borderColorV = .projectTail
 			case 4:
-				mealCheckSecond.isSelected = true
+				mealCheckSecond.backgroundColor = .projectTail
+				mealCheckSecond.borderColorV = .projectTail
 			case 5:
-				mealCheckThird.isSelected = true
+				mealCheckThird.backgroundColor = .projectTail
+				mealCheckThird.borderColorV = .projectTail
 			default:
 				break
 			}
@@ -140,13 +148,17 @@ extension QuestionnaireNutritionViewController {
 		if let mostHungry = userData.mostHungry {
 			switch mostHungry {
 			case 1:
-				mostHungerCheckFirst.isSelected = true
+				mostHungerCheckFirst.backgroundColor = .projectTail
+				mostHungerCheckFirst.borderColorV = .projectTail
 			case 2:
-				mostHungerCheckSecond.isSelected = true
+				mostHungerCheckSecond.backgroundColor = .projectTail
+				mostHungerCheckSecond.borderColorV = .projectTail
 			case 3:
-				mostHungerCheckThird.isSelected = true
+				mostHungerCheckSecond.backgroundColor = .projectTail
+				mostHungerCheckSecond.borderColorV = .projectTail
 			case 4:
-				mostHungerCheckForth.isSelected = true
+				mostHungerCheckForth.backgroundColor = .projectTail
+				mostHungerCheckForth.borderColorV = .projectTail
 			default:
 				break
 			}
