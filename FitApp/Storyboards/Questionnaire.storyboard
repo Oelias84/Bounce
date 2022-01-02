@@ -259,254 +259,272 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQ8-li-Ioz">
-                                <rect key="frame" x="84" y="722" width="207" height="40"/>
-                                <color key="backgroundColor" red="0.43436774610000001" green="0.39554607870000003" blue="0.85887217520000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="wFg-IC-btj"/>
-                                </constraints>
-                                <state key="normal" title="הבא">
-                                    <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
-                                        <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="nextButtonAction:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="U9b-ji-sP0"/>
-                                </connections>
-                            </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="ie3-Uu-Xba" userLabel="Prompt Stack View">
-                                <rect key="frame" x="32" y="300" width="311" height="212"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GradientBackground" translatesAutoresizingMaskIntoConstraints="NO" id="6BI-gY-XsL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="jvZ-Dn-3ZE">
+                                <rect key="frame" x="97.666666666666671" y="697" width="179.66666666666663" height="73"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="eWw-5g-Yeb" userLabel="Meals Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="311" height="69"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="wil-t5-hOU">
+                                        <rect key="frame" x="21.333333333333329" y="0.0" width="137.33333333333337" height="22"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מספר ארוחות ביום" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeS-hl-LU0">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="23"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <nil key="textColor"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKy-Rk-2Lc" userLabel="backButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="25.666666666666668" height="22"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="arrow.backward" catalog="system">
+                                                    <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="backButtonAction:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="OAm-U1-8hh"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTk-67-1kY" userLabel="cuntinueButton">
+                                                <rect key="frame" x="111.66666666666666" y="0.0" width="25.666666666666657" height="22"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="arrow.forward" catalog="system">
+                                                    <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="nextButtonAction:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="AR9-nQ-NqO"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="4" translatesAutoresizingMaskIntoConstraints="NO" id="2St-up-K8c">
+                                        <rect key="frame" x="0.0" y="48" width="179.66666666666666" height="25"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </pageControl>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jnp-lq-XWM">
+                                <rect key="frame" x="24" y="261" width="327" height="290"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="ie3-Uu-Xba" userLabel="Prompt Stack View">
+                                        <rect key="frame" x="14" y="18" width="299" height="254"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="על מנת שתצליחי להתמיד בתהליך אנו רוצים להבין מהם הרגלי האכילה שלך" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brW-cK-lxq">
+                                                <rect key="frame" x="0.0" y="0.0" width="299" height="47.333333333333336"/>
+                                                <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="18"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="NhM-pl-Z7x">
-                                                <rect key="frame" x="0.0" y="39" width="311" height="30"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="eWw-5g-Yeb" userLabel="Meals Stack View">
+                                                <rect key="frame" x="0.0" y="84" width="299" height="73"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="g5e-C0-t15">
-                                                        <rect key="frame" x="0.0" y="0.0" width="44.333333333333336" height="30"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מספר ארוחות ביום" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeS-hl-LU0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="299" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="16"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="NhM-pl-Z7x">
+                                                        <rect key="frame" x="0.0" y="37" width="299" height="36"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LeU-m5-pSo">
-                                                                <rect key="frame" x="0.0" y="0.0" width="10.333333333333334" height="30"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <color key="textColor" systemColor="systemBlueColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E7i-Cd-OCM">
-                                                                <rect key="frame" x="14.333333333333336" y="0.0" width="30" height="30"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="80.333333333333329" height="36"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="30" id="DeR-Vg-hP8"/>
-                                                                    <constraint firstAttribute="height" constant="30" id="cpQ-0b-n0j"/>
+                                                                    <constraint firstAttribute="height" constant="36" id="zxd-0G-nQB"/>
                                                                 </constraints>
                                                                 <color key="tintColor" name="AccentColor"/>
-                                                                <state key="normal">
-                                                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
-                                                                </state>
+                                                                <state key="normal" title="3"/>
                                                                 <state key="selected">
                                                                     <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
                                                                 </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidthV">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                                        <real key="value" value="18"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="mealsCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="8WH-k5-gQV"/>
                                                                 </connections>
                                                             </button>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="f2P-hF-Woe">
-                                                        <rect key="frame" x="133.33333333333334" y="0.0" width="44.666666666666657" height="30"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ZI-KY-s2E">
-                                                                <rect key="frame" x="0.0" y="0.0" width="10.666666666666666" height="30"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <color key="textColor" systemColor="systemBlueColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6TT-SR-q4e">
-                                                                <rect key="frame" x="14.666666666666657" y="0.0" width="30" height="30"/>
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPa-f9-MKs">
+                                                                <rect key="frame" x="109.33333333333334" y="0.0" width="80.333333333333343" height="36"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="30" id="NZZ-eY-xi1"/>
-                                                                    <constraint firstAttribute="width" constant="30" id="r4a-jX-3H9"/>
+                                                                    <constraint firstAttribute="height" constant="36" id="mcS-5R-SSA"/>
                                                                 </constraints>
                                                                 <color key="tintColor" name="AccentColor"/>
-                                                                <state key="normal">
-                                                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
-                                                                </state>
+                                                                <state key="normal" title="4"/>
                                                                 <state key="selected">
                                                                     <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
                                                                 </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidthV">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                                        <real key="value" value="18"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="mealsCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="wTI-II-x8l"/>
+                                                                    <action selector="mealsCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="bFW-AN-CQj"/>
                                                                 </connections>
                                                             </button>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="teB-Ge-VUo">
-                                                        <rect key="frame" x="266.66666666666669" y="0.0" width="44.333333333333314" height="30"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGQ-C0-m08">
-                                                                <rect key="frame" x="0.0" y="0.0" width="10.333333333333334" height="30"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <color key="textColor" systemColor="systemBlueColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7qb-TD-Xop">
-                                                                <rect key="frame" x="14.333333333333314" y="0.0" width="30" height="30"/>
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zA5-rB-5mk">
+                                                                <rect key="frame" x="218.66666666666671" y="0.0" width="80.333333333333343" height="36"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="30" id="ISb-SI-ZXT"/>
-                                                                    <constraint firstAttribute="height" constant="30" id="YvE-D4-g6I"/>
+                                                                    <constraint firstAttribute="height" constant="36" id="UiT-TP-x1G"/>
                                                                 </constraints>
                                                                 <color key="tintColor" name="AccentColor"/>
-                                                                <state key="normal">
-                                                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
-                                                                </state>
+                                                                <state key="normal" title="5"/>
                                                                 <state key="selected">
                                                                     <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
                                                                 </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidthV">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                                        <real key="value" value="18"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="mealsCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="mHv-MC-eC2"/>
+                                                                    <action selector="mealsCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="V4I-WA-n9c"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                        </subviews>
-                                    </stackView>
-                                    <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Jw-fg-dw1">
-                                        <rect key="frame" x="0.0" y="93" width="311" height="1"/>
-                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="18T-bP-tT3"/>
-                                        </constraints>
-                                    </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="lYb-fz-HMn" userLabel="Most Hunger Stack View">
-                                        <rect key="frame" x="0.0" y="118" width="311" height="69"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="באיזה זמן ביום אתה הכי רעב" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ive-0Z-bE0">
-                                                <rect key="frame" x="0.0" y="0.0" width="311" height="23"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Lhe-q7-u2g">
-                                                <rect key="frame" x="0.0" y="39" width="311" height="30"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="lYb-fz-HMn" userLabel="Most Hunger Stack View">
+                                                <rect key="frame" x="0.0" y="181" width="299" height="73"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="SCn-8I-SA3">
-                                                        <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="30"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="באיזה זמן ביום אתה הכי רעב" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ive-0Z-bE0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="299" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="16"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Lhe-q7-u2g">
+                                                        <rect key="frame" x="0.0" y="37" width="299" height="36"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="בוקר" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="395-cE-QZx">
-                                                                <rect key="frame" x="0.0" y="0.0" width="31.666666666666668" height="30"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <color key="textColor" systemColor="systemBlueColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iG1-kc-D7P">
-                                                                <rect key="frame" x="35.666666666666671" y="0.0" width="30" height="30"/>
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cez-HC-uhz" userLabel="בוקר">
+                                                                <rect key="frame" x="0.0" y="0.0" width="70.333333333333329" height="36"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="30" id="7dT-Kb-Msd"/>
-                                                                    <constraint firstAttribute="height" constant="30" id="aIi-r3-Wee"/>
+                                                                    <constraint firstAttribute="height" constant="36" id="Ih0-7a-wtQ"/>
                                                                 </constraints>
                                                                 <color key="tintColor" name="AccentColor"/>
-                                                                <state key="normal">
-                                                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
-                                                                </state>
+                                                                <state key="normal" title="בוקר"/>
                                                                 <state key="selected">
                                                                     <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
                                                                 </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidthV">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                                        <real key="value" value="18"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="53O-9T-arb"/>
+                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="VSm-0x-gpB"/>
                                                                 </connections>
                                                             </button>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="4zr-5D-lw0">
-                                                        <rect key="frame" x="73.333333333333314" y="0.0" width="79.666666666666686" height="30"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="צהריים" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qoa-FK-Lh2">
-                                                                <rect key="frame" x="0.0" y="0.0" width="45.666666666666664" height="30"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <color key="textColor" systemColor="systemBlueColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uj9-44-Bwb">
-                                                                <rect key="frame" x="49.666666666666671" y="0.0" width="30" height="30"/>
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7d-Hi-6ji" userLabel="צהריים">
+                                                                <rect key="frame" x="76.333333333333343" y="0.0" width="70.333333333333343" height="36"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="30" id="NUI-kv-bRF"/>
-                                                                    <constraint firstAttribute="height" constant="30" id="fVU-SC-l51"/>
+                                                                    <constraint firstAttribute="height" constant="36" id="pCE-8J-bX6"/>
                                                                 </constraints>
                                                                 <color key="tintColor" name="AccentColor"/>
-                                                                <state key="normal">
-                                                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
-                                                                </state>
+                                                                <state key="normal" title="צהריים"/>
                                                                 <state key="selected">
                                                                     <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
                                                                 </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidthV">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                                        <real key="value" value="18"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="2KJ-jm-Kf7"/>
+                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="pAK-as-phe"/>
                                                                 </connections>
                                                             </button>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="iLH-E9-uoC">
-                                                        <rect key="frame" x="160.33333333333334" y="0.0" width="61" height="30"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="ערב" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IxR-9A-1B9">
-                                                                <rect key="frame" x="0.0" y="0.0" width="27" height="30"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <color key="textColor" systemColor="systemBlueColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lDt-FC-gMg">
-                                                                <rect key="frame" x="31" y="0.0" width="30" height="30"/>
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pzo-1F-fVl" userLabel="ערב">
+                                                                <rect key="frame" x="152.66666666666666" y="0.0" width="70" height="36"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="30" id="jRu-Al-VAG"/>
-                                                                    <constraint firstAttribute="height" constant="30" id="khw-rV-9ru"/>
+                                                                    <constraint firstAttribute="height" constant="36" id="dtx-8d-N6Z"/>
                                                                 </constraints>
                                                                 <color key="tintColor" name="AccentColor"/>
-                                                                <state key="normal">
-                                                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
-                                                                </state>
+                                                                <state key="normal" title="ערב"/>
                                                                 <state key="selected">
                                                                     <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
                                                                 </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidthV">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                                        <real key="value" value="18"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="yhW-cv-fCw"/>
+                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="gYa-rZ-lDG"/>
                                                                 </connections>
                                                             </button>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="16i-v4-GSt">
-                                                        <rect key="frame" x="229" y="0.0" width="82" height="30"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="לא ידוע" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfi-jD-Ydo">
-                                                                <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <color key="textColor" systemColor="systemBlueColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7H-Be-zbv">
-                                                                <rect key="frame" x="52" y="0.0" width="30" height="30"/>
+                                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edV-KF-A1v" userLabel="לא ידוע">
+                                                                <rect key="frame" x="228.66666666666671" y="0.0" width="70.333333333333343" height="36"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="30" id="VWd-63-bQb"/>
-                                                                    <constraint firstAttribute="width" constant="30" id="Zes-Xn-e21"/>
+                                                                    <constraint firstAttribute="height" constant="36" id="buh-us-V3m"/>
                                                                 </constraints>
                                                                 <color key="tintColor" name="AccentColor"/>
-                                                                <state key="normal">
-                                                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
-                                                                </state>
+                                                                <state key="normal" title="לא ידוע"/>
                                                                 <state key="selected">
                                                                     <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
                                                                 </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidthV">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
+                                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                                        <real key="value" value="18"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="8bU-bm-7fE"/>
+                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="BsL-fg-ppB"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -515,35 +533,40 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WN7-Zp-8Wy">
-                                        <rect key="frame" x="0.0" y="211" width="311" height="1"/>
-                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="zyW-bn-q03"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
-                            </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="על מנת שתצליחי להתמיד בתהליך אנו רוצים להבין מהם הרגלי האכילה שלך" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brW-cK-lxq">
-                                <rect key="frame" x="46" y="104" width="283" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
+                                <color key="backgroundColor" red="0.95686274770000002" green="0.9568628669" blue="0.95686274770000002" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="ie3-Uu-Xba" secondAttribute="bottom" constant="18" id="MZ0-zK-7SG"/>
+                                    <constraint firstItem="ie3-Uu-Xba" firstAttribute="leading" secondItem="jnp-lq-XWM" secondAttribute="leading" constant="14" id="Mja-lp-WiP"/>
+                                    <constraint firstAttribute="trailing" secondItem="ie3-Uu-Xba" secondAttribute="trailing" constant="14" id="fgI-Op-FXC"/>
+                                    <constraint firstItem="ie3-Uu-Xba" firstAttribute="top" secondItem="jnp-lq-XWM" secondAttribute="top" constant="18" id="mIY-Za-wkH"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="תזונה" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daV-DI-eGM">
+                                <rect key="frame" x="89" y="112.00000000000001" width="196.33333333333337" height="36.666666666666671"/>
+                                <fontDescription key="fontDescription" name="Assistant-Bold" family="Assistant" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jdm-VF-Ek2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="jdm-VF-Ek2" firstAttribute="trailing" secondItem="oQ8-li-Ioz" secondAttribute="trailing" constant="84" id="1dC-iH-zoA"/>
-                            <constraint firstItem="jdm-VF-Ek2" firstAttribute="trailing" secondItem="ie3-Uu-Xba" secondAttribute="trailing" constant="32" id="2tL-dN-WPs"/>
-                            <constraint firstItem="oQ8-li-Ioz" firstAttribute="leading" secondItem="jdm-VF-Ek2" secondAttribute="leading" constant="84" id="5Dh-QA-LZr"/>
-                            <constraint firstItem="ie3-Uu-Xba" firstAttribute="centerY" secondItem="Bu1-Ct-4n0" secondAttribute="centerY" id="6ZL-r7-n9O"/>
-                            <constraint firstItem="brW-cK-lxq" firstAttribute="top" secondItem="jdm-VF-Ek2" secondAttribute="top" constant="16" id="9Ia-cE-6ro"/>
-                            <constraint firstItem="jdm-VF-Ek2" firstAttribute="bottom" secondItem="oQ8-li-Ioz" secondAttribute="bottom" constant="16" id="CHK-DB-8Y5"/>
-                            <constraint firstItem="ie3-Uu-Xba" firstAttribute="leading" secondItem="jdm-VF-Ek2" secondAttribute="leading" constant="32" id="IRi-Fo-hub"/>
-                            <constraint firstItem="brW-cK-lxq" firstAttribute="leading" secondItem="jdm-VF-Ek2" secondAttribute="leading" constant="46" id="KaV-IJ-Oiq"/>
-                            <constraint firstItem="oQ8-li-Ioz" firstAttribute="centerX" secondItem="Bu1-Ct-4n0" secondAttribute="centerX" id="gnJ-IC-3Ui"/>
-                            <constraint firstAttribute="trailing" secondItem="brW-cK-lxq" secondAttribute="trailing" constant="46" id="z1V-vN-SH3"/>
+                            <constraint firstAttribute="bottom" secondItem="6BI-gY-XsL" secondAttribute="bottom" id="0tR-KU-LPx"/>
+                            <constraint firstItem="daV-DI-eGM" firstAttribute="top" secondItem="jdm-VF-Ek2" secondAttribute="top" constant="24" id="8Xi-9p-Eun"/>
+                            <constraint firstAttribute="trailing" secondItem="jnp-lq-XWM" secondAttribute="trailing" constant="24" id="BEU-j3-iNT"/>
+                            <constraint firstItem="jnp-lq-XWM" firstAttribute="centerY" secondItem="Bu1-Ct-4n0" secondAttribute="centerY" id="PFg-QS-H04"/>
+                            <constraint firstItem="jnp-lq-XWM" firstAttribute="leading" secondItem="jdm-VF-Ek2" secondAttribute="leading" constant="24" id="XjX-XL-tMl"/>
+                            <constraint firstItem="6BI-gY-XsL" firstAttribute="trailing" secondItem="jdm-VF-Ek2" secondAttribute="trailing" id="lxg-MH-SdT"/>
+                            <constraint firstItem="jvZ-Dn-3ZE" firstAttribute="centerX" secondItem="Bu1-Ct-4n0" secondAttribute="centerX" id="mkw-Xp-HEr"/>
+                            <constraint firstItem="6BI-gY-XsL" firstAttribute="leading" secondItem="jdm-VF-Ek2" secondAttribute="leading" id="oD1-Oe-4HG"/>
+                            <constraint firstItem="jdm-VF-Ek2" firstAttribute="bottom" secondItem="jvZ-Dn-3ZE" secondAttribute="bottom" constant="8" id="seg-3S-BcK"/>
+                            <constraint firstItem="6BI-gY-XsL" firstAttribute="top" secondItem="Bu1-Ct-4n0" secondAttribute="top" id="uRk-Zl-aF4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="9Za-Mm-yRj">
@@ -551,13 +574,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mealCheckFirst" destination="E7i-Cd-OCM" id="lDc-8b-HeL"/>
-                        <outlet property="mealCheckSecond" destination="6TT-SR-q4e" id="EuM-QH-d8D"/>
-                        <outlet property="mealCheckThird" destination="7qb-TD-Xop" id="9ia-Fg-kze"/>
-                        <outlet property="mostHungerCheckFirst" destination="iG1-kc-D7P" id="q2i-Uj-Rk3"/>
-                        <outlet property="mostHungerCheckForth" destination="q7H-Be-zbv" id="0K9-Ed-MFI"/>
-                        <outlet property="mostHungerCheckSecond" destination="uj9-44-Bwb" id="jzr-nF-3i0"/>
-                        <outlet property="mostHungerCheckThird" destination="lDt-FC-gMg" id="MwO-v3-KZW"/>
-                        <outlet property="nextButton" destination="oQ8-li-Ioz" id="Pe6-sf-DfK"/>
+                        <outlet property="mealCheckSecond" destination="JPa-f9-MKs" id="kte-Vo-JwZ"/>
+                        <outlet property="mealCheckThird" destination="zA5-rB-5mk" id="8bH-5Z-E9R"/>
+                        <outlet property="mostHungerCheckFirst" destination="Cez-HC-uhz" id="7Ws-0y-YTx"/>
+                        <outlet property="mostHungerCheckForth" destination="edV-KF-A1v" id="Xne-nY-7DQ"/>
+                        <outlet property="mostHungerCheckSecond" destination="J7d-Hi-6ji" id="prz-a6-zhF"/>
+                        <outlet property="mostHungerCheckThird" destination="pzo-1F-fVl" id="aO5-rL-9Qk"/>
+                        <outlet property="nextButton" destination="sTk-67-1kY" id="mje-6b-9ch"/>
                         <segue destination="tgm-97-b7M" kind="show" identifier="moveToFitnessLevel" id="m7k-Sb-MqB"/>
                     </connections>
                 </viewController>
@@ -1861,7 +1884,6 @@
                                                                                 </state>
                                                                                 <connections>
                                                                                     <action selector="checkBoxAction:" destination="PvH-mg-GZf" eventType="touchUpInside" id="xjN-RJ-OQI"/>
-                                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="DZP-OF-5C7"/>
                                                                                 </connections>
                                                                             </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" text="אורח חיים יושבני" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NUM-wz-ur4">
@@ -1902,7 +1924,6 @@
                                                                                 </state>
                                                                                 <connections>
                                                                                     <action selector="checkBoxAction:" destination="PvH-mg-GZf" eventType="touchUpInside" id="x7X-2T-Gau"/>
-                                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="jIz-wO-JNR"/>
                                                                                 </connections>
                                                                             </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" text="אורח חיים פעיל מתון" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xsc-3t-LyX">
@@ -1943,7 +1964,6 @@
                                                                                 </state>
                                                                                 <connections>
                                                                                     <action selector="checkBoxAction:" destination="PvH-mg-GZf" eventType="touchUpInside" id="aiL-tL-eQC"/>
-                                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="aBa-W6-mwz"/>
                                                                                 </connections>
                                                                             </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" text="אורח חיים פעיל" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1JC-55-cD2">
@@ -1983,7 +2003,6 @@
                                                                                 </state>
                                                                                 <connections>
                                                                                     <action selector="checkBoxAction:" destination="PvH-mg-GZf" eventType="touchUpInside" id="L8T-ya-bhO"/>
-                                                                                    <action selector="mostHungryCheckBoxesWithSender:" destination="tbo-Fu-A0i" eventType="touchUpInside" id="apz-5e-XCp"/>
                                                                                 </connections>
                                                                             </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" text="אורח חיים פעיל מאוד" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Khp-Og-Z3X">
@@ -2287,7 +2306,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qiK-vY-Riw"/>
+        <segue reference="3yk-Xy-vQY"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="20 men" width="3159" height="6209"/>
