@@ -124,8 +124,7 @@ extension QuestionnaireFatPresentViewController {
 			}
 		}
 		DispatchQueue.main.async {
-			[unowned self] in
-			collectionView.scrollToItem(at: IndexPath(item: index ?? 0, section: 0), at: .centeredHorizontally, animated: true)
+			self.collectionView.scrollToItem(at: IndexPath(item: self.index ?? 0, section: 0), at: .centeredHorizontally, animated: true)
 		}
 	}
 	private func setUpCollectionView() {
