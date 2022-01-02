@@ -39,13 +39,20 @@ class QuestionnaireActivityViewController: UIViewController {
 			QuestionnaireSecondActivityVC.isFromSettings = isFromSettings
 		}
 	}
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		navigationItem.setHidesBackButton(true, animated: false)
+	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		
+
 		setUpTextfields()
 	}
 	
+	@IBAction func backButtonAction(_ sender: Any) {
+		navigationController?.popViewController(animated: true)
+	}
 	@IBAction func nextButtonAction(_ sender: Any) {
 		
 		if kilometersCheckBox.isSelected {
@@ -96,10 +103,6 @@ class QuestionnaireActivityViewController: UIViewController {
 				return
 			}
 		}
-		
-		(kilometersCheckBox.isSelected || stepsCheckBox.isSelected)
-			? nextButton.setTitle(isFromSettings ? "אישור" : "הבא", for: .normal)
-			: nextButton.setTitle("דלג", for: .normal)
 	}
 }
 
@@ -109,12 +112,10 @@ extension QuestionnaireActivityViewController {
 		let userData = UserProfile.defaults
 		
 		if let steps = userData.steps {
-			nextButton.setTitle(isFromSettings ? "אישור" : "הבא", for: .normal)
 			stepsLabel.text = String(steps)
 			stepsCheckBox.isSelected = true
 			kilometersSlider.isEnabled = false
 		} else if let kilometers = userData.kilometer {
-			nextButton.setTitle(isFromSettings ? "אישור" : "הבא", for: .normal)
 			kilometersLabel.text = String(kilometers)
 			kilometersCheckBox.isSelected = true
 			stepsSlider.isEnabled = false

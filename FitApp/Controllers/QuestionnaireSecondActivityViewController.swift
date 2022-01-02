@@ -18,13 +18,19 @@ class QuestionnaireSecondActivityViewController: UIViewController {
 	@IBOutlet weak var veryActiveCheckBox: UIButton!
 	@IBOutlet weak var nextButton: UIButton!
 	
-
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		navigationItem.setHidesBackButton(true, animated: false)
+	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		UserProfile.defaults.lifeStyle = nil
+		
 		setUpTextfields()
 	}
 	
+	@IBAction func backButtonAction(_ sender: Any) {
+		navigationController?.popViewController(animated: true)
+	}
 	@IBAction func nextButtonAction(_ sender: Any) {
 		
 		if let lifeStyle = lifeStyleSelection {
@@ -78,7 +84,6 @@ extension QuestionnaireSecondActivityViewController {
 		}
 	}
 	private func setUpTextfields() {
-		nextButton.setTitle(isFromSettings ? "אישור" : "הבא", for: .normal)
 		if let lifeStyle = UserProfile.defaults.lifeStyle {
 			getLifeStyleCheckBox(for: lifeStyle)
 		}
