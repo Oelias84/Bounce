@@ -40,10 +40,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Vb-0t-tKu">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="220"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="232"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NavigationBackground" translatesAutoresizingMaskIntoConstraints="NO" id="c7x-sx-FM9">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="220"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="232"/>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="-2" translatesAutoresizingMaskIntoConstraints="NO" id="fkT-0R-CAW" userLabel="Left Stack View">
                             <rect key="frame" x="24" y="56" width="145" height="90.5"/>
@@ -162,6 +162,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="7Vb-0t-tKu" secondAttribute="bottom" id="Bm0-m2-oPn"/>
                 <constraint firstItem="7Vb-0t-tKu" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="LkB-MZ-ZQo"/>
                 <constraint firstItem="7Vb-0t-tKu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="aMx-zc-ol5"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="7Vb-0t-tKu" secondAttribute="trailing" id="kac-sT-UwD"/>
