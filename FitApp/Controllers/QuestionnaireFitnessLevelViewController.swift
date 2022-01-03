@@ -25,6 +25,10 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 	
 	@IBOutlet weak var nextButton: UIButton!
 	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		navigationItem.setHidesBackButton(true, animated: false)
+	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		

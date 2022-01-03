@@ -26,7 +26,8 @@ class QuestionnaireNutritionViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+		navigationItem.setHidesBackButton(true, animated: false)
+
 		setupCheckCheckMark()
 	}
 	@IBAction func backButtonAction(_ sender: Any) {
