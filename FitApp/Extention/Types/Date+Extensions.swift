@@ -84,9 +84,10 @@ extension Date {
 	}
 	
 	var age: String? {
-		let calendar = Calendar.current
-		let ageComponents = calendar.dateComponents([.year], from: self, to: Date())
-		return "\(ageComponents.year!)"
+		let now = Date()
+		let birthday: Date = self
+		
+		return "\(now.year - birthday.year)"
 	}
 }
 
