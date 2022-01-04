@@ -13,11 +13,10 @@ import InputBarAccessoryView
 
 class ChatViewController: MessagesViewController {
 	
-	public var isNewChat = false
-	
-	private let chatId: String?
-	private let otherUserEmail: String
-	private var otherTokens: [String]?
+	var isNewChat = false
+	var chatId: String!
+	var otherUserEmail: String!
+	var otherTokens: [String]!
 	
 	private let imagePickerController = UIImagePickerController()
 	private var messages = [Message]()
@@ -29,16 +28,6 @@ class ChatViewController: MessagesViewController {
 		}
 		return Sender(senderId: email.safeEmail, displayName: name)
 	}()
-	
-	init(with email: String, id: String?, token: [String]? = nil) {
-		self.chatId = id
-		self.otherUserEmail = email
-		self.otherTokens = token
-		super.init(nibName: nil, bundle: nil)
-	}
-	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -135,7 +124,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 				inputBar.sendButton.isEnabled = true
 			}
 		} else {
-			guard let chatId = chatId, let name = title else { return }
+			guard let chatId = chatId, let name = (UserProfile.defaults.isManager ?? false) ? "דברי אלינו" : UserProfile.defaults.name  else { return }
 			GoogleDatabaseManager.shared.sendMessage(to: chatId, otherUserEmail: otherUserEmail, newMessage: message, name: name) {
 				[weak self] success in
 				guard let self = self else { return }

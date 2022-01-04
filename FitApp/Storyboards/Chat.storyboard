@@ -1,91 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Z0U-GT-Oxe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3WV-NT-5lt">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--צ׳אטים-->
-        <scene sceneID="WzL-s6-TfF">
-            <objects>
-                <tableViewController storyboardIdentifier="ChatsViewController" id="Z0U-GT-Oxe" customClass="ChatsViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="A1l-6j-eFe">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="chatsCell" id="HwV-EK-6gc">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HwV-EK-6gc" id="ubU-7M-PQz">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Z0U-GT-Oxe" id="Uxg-Fo-LIV"/>
-                            <outlet property="delegate" destination="Z0U-GT-Oxe" id="QNo-Oe-qFf"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="צ׳אטים" largeTitleDisplayMode="always" id="tGY-JF-xNw"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OBa-2O-l6n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="973.91304347826099" y="107.8125"/>
-        </scene>
-        <!--New Chat View Controller-->
-        <scene sceneID="Zv3-PL-YRv">
-            <objects>
-                <tableViewController storyboardIdentifier="NewChatViewController" id="7Zi-9a-NSZ" customClass="NewChatViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="8rw-gG-40A">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="0yB-h7-6fz">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0yB-h7-6fz" id="bHC-nY-A5d">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="nZY-OI-URK">
-                                <rect key="frame" x="0.0" y="88" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nZY-OI-URK" id="wov-Ck-pqx">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="7Zi-9a-NSZ" id="tCp-IG-noS"/>
-                            <outlet property="delegate" destination="7Zi-9a-NSZ" id="j3e-v9-x5F"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wsm-Iw-vW5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1688" y="108"/>
-        </scene>
-        <!--Chat View Controller-->
+        <!--Chat Container View Controller-->
         <scene sceneID="B4x-h0-Esx">
             <objects>
-                <viewController storyboardIdentifier="ChatViewController" id="Ddp-KK-7Jr" customClass="ChatViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatContainerViewController" id="Ddp-KK-7Jr" customClass="ChatContainerViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7dO-Dp-V85">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l1q-s8-8R2" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="214"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="214" id="7lD-Mg-F5P"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="HOM-lb-cix"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="l1q-s8-8R2" firstAttribute="top" secondItem="7dO-Dp-V85" secondAttribute="top" id="EMb-HP-Fqa"/>
+                            <constraint firstAttribute="trailing" secondItem="l1q-s8-8R2" secondAttribute="trailing" id="Ugo-0w-q9v"/>
+                            <constraint firstItem="l1q-s8-8R2" firstAttribute="leading" secondItem="HOM-lb-cix" secondAttribute="leading" id="f3z-5l-ulD"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kZC-hn-PMA"/>
+                    <connections>
+                        <outlet property="topBarView" destination="l1q-s8-8R2" id="qIp-RN-LlW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ygL-Cw-cgQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -102,15 +54,110 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Z0U-GT-Oxe" kind="relationship" relationship="rootViewController" id="sgV-JV-0v5"/>
+                        <segue destination="3WV-NT-5lt" kind="relationship" relationship="rootViewController" id="yhq-mL-ocL"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wCa-X9-zH6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-420" y="130"/>
+            <point key="canvasLocation" x="212" y="108"/>
+        </scene>
+        <!--Chats Table View Controller-->
+        <scene sceneID="hB0-8f-TeG">
+            <objects>
+                <viewController storyboardIdentifier="ChatsViewController" id="3WV-NT-5lt" userLabel="Chats Table View Controller" customClass="ChatsViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k8C-70-xjZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zhA-De-oAp">
+                                <rect key="frame" x="0.0" y="214" width="414" height="682"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="3WV-NT-5lt" id="Xoa-t9-Hx0"/>
+                                    <outlet property="delegate" destination="3WV-NT-5lt" id="xHm-6D-wTq"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6I-dd-rQg" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="214"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="214" id="i21-gk-7UK"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="56i-w5-PJG"/>
+                        <color key="backgroundColor" name="ProjectBackground"/>
+                        <constraints>
+                            <constraint firstItem="zhA-De-oAp" firstAttribute="leading" secondItem="56i-w5-PJG" secondAttribute="leading" id="1Nv-nG-jIb"/>
+                            <constraint firstItem="zhA-De-oAp" firstAttribute="top" secondItem="F6I-dd-rQg" secondAttribute="bottom" id="Phd-G0-TNU"/>
+                            <constraint firstItem="zhA-De-oAp" firstAttribute="trailing" secondItem="56i-w5-PJG" secondAttribute="trailing" id="QHY-Mi-jB1"/>
+                            <constraint firstItem="zhA-De-oAp" firstAttribute="bottom" secondItem="k8C-70-xjZ" secondAttribute="bottom" id="UG4-tj-4ix"/>
+                            <constraint firstItem="F6I-dd-rQg" firstAttribute="leading" secondItem="56i-w5-PJG" secondAttribute="leading" id="bP8-Qq-Xcm"/>
+                            <constraint firstItem="F6I-dd-rQg" firstAttribute="top" secondItem="k8C-70-xjZ" secondAttribute="top" id="czQ-3b-BY7"/>
+                            <constraint firstItem="F6I-dd-rQg" firstAttribute="trailing" secondItem="56i-w5-PJG" secondAttribute="trailing" id="oFp-y4-vX0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="6PT-1W-are"/>
+                    <connections>
+                        <outlet property="tableView" destination="zhA-De-oAp" id="8Pe-1K-LBq"/>
+                        <outlet property="topBarView" destination="F6I-dd-rQg" id="rdJ-zB-arK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="baY-9S-v1Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="974" y="108"/>
+        </scene>
+        <!--New Chat View Controller-->
+        <scene sceneID="f0I-ZN-eqH">
+            <objects>
+                <viewController storyboardIdentifier="NewChatViewController" id="Sj6-oV-FMS" customClass="NewChatViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Kxq-dX-uZk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OKa-a0-vuu">
+                                <rect key="frame" x="0.0" y="214" width="414" height="682"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Sj6-oV-FMS" id="Jbl-rM-mc6"/>
+                                    <outlet property="delegate" destination="Sj6-oV-FMS" id="JbJ-e4-nKQ"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gPA-6x-ikX" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="214"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="214" id="EvM-nt-xa0"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="HT3-lc-KaG"/>
+                        <color key="backgroundColor" name="ProjectBackground"/>
+                        <constraints>
+                            <constraint firstItem="OKa-a0-vuu" firstAttribute="trailing" secondItem="HT3-lc-KaG" secondAttribute="trailing" id="7sq-b1-kdD"/>
+                            <constraint firstItem="OKa-a0-vuu" firstAttribute="leading" secondItem="HT3-lc-KaG" secondAttribute="leading" id="7yY-4q-P9k"/>
+                            <constraint firstItem="gPA-6x-ikX" firstAttribute="top" secondItem="Kxq-dX-uZk" secondAttribute="top" id="fqn-6H-gNZ"/>
+                            <constraint firstItem="OKa-a0-vuu" firstAttribute="top" secondItem="gPA-6x-ikX" secondAttribute="bottom" id="hZh-dl-1pD"/>
+                            <constraint firstItem="OKa-a0-vuu" firstAttribute="bottom" secondItem="Kxq-dX-uZk" secondAttribute="bottom" id="scw-YI-QtQ"/>
+                            <constraint firstItem="gPA-6x-ikX" firstAttribute="trailing" secondItem="HT3-lc-KaG" secondAttribute="trailing" id="svq-oG-yhj"/>
+                            <constraint firstItem="gPA-6x-ikX" firstAttribute="leading" secondItem="HT3-lc-KaG" secondAttribute="leading" id="u42-a3-3oq"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="WVv-W8-6Hp"/>
+                    <connections>
+                        <outlet property="tableView" destination="OKa-a0-vuu" id="dXA-PU-85I"/>
+                        <outlet property="topBarView" destination="gPA-6x-ikX" id="AOm-UQ-UVF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FbU-k3-mAX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1700" y="108"/>
         </scene>
     </scenes>
     <resources>
+        <namedColor name="ProjectBackground">
+            <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

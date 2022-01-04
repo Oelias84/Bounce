@@ -7,8 +7,11 @@
 
 import UIKit
 
-class NewChatViewController: UITableViewController {
+class NewChatViewController: UIViewController {
 	
+	
+	private var isManager = UserProfile.defaults.isManager ?? false
+	private var hasFetched = false
 	private var chatUsers = [ChatUser]()
 	private var flitteredChatUsers: [ChatUser]? {
 		didSet {
@@ -17,19 +20,16 @@ class NewChatViewController: UITableViewController {
 			}
 		}
 	}
-	
-	private var isManager = UserProfile.defaults.isManager ?? false
-	
-	private var hasFetched = false
-	
 	public var completion: ((ChatUser) -> Void)?
+	
+	@IBOutlet weak var topBarView: BounceNavigationBarView!
+	@IBOutlet weak var tableView: UITableView!
 	
 	private let searchBar: UISearchBar = {
 		let searchBar = UISearchBar()
 		searchBar.placeholder = "חפש משתמשים..."
 		return searchBar
 	}()
-	
 	private let noResultsLabel: UILabel = {
 		let label = UILabel()
 		label.isHidden = true
@@ -39,6 +39,7 @@ class NewChatViewController: UITableViewController {
 		label.font = .systemFont(ofSize: 22, weight: .medium)
 		return label
 	}()
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -54,16 +55,16 @@ class NewChatViewController: UITableViewController {
 									  width: view.frame.width/2, height: 200)
 	}
 	
-	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		flitteredChatUsers?.count ?? 0
 	}
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		
 		cell.textLabel?.text = flitteredChatUsers?[indexPath.row].name
 		return cell
 	}
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 		guard let targetUserData = flitteredChatUsers?[indexPath.row] else { return }
 		
@@ -87,8 +88,6 @@ extension NewChatViewController {
 	}
 	private func setDelegates() {
 		searchBar.delegate = self
-		tableView.delegate = self
-		tableView.dataSource = self
 	}
 	private func fetchUsers() {
 		GoogleDatabaseManager.shared.getChatUsers {
