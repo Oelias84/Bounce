@@ -8,15 +8,9 @@
 import Foundation
 import UIKit
 
-enum UserGender: Int {
-	
-	case women = 1
-	case men = 2
-}
-
 class QuestionnaireGanderViewController: UIViewController {
 	
-	var gender: UserGender?
+	var gender: Gender?
 
 	@IBOutlet weak var womenCheckBoxButton: UIButton!
 	@IBOutlet weak var menCheckBoxButton: UIButton!
@@ -53,17 +47,13 @@ class QuestionnaireGanderViewController: UIViewController {
 	private func setUpCheckBox() {
 		let userData = UserProfile.defaults
 		
-		if let gender = userData.userGander {
-			
+		if let gender = userData.getGender {
+			self.gender = gender
 			switch gender {
-			case 1:
-				self.gender = .women
+			case .female:
 				womenCheckBoxButton.isSelected = true
-			case 2:
-				self.gender = .men
+			case .male:
 				menCheckBoxButton.isSelected = true
-			default:
-				break
 			}
 		}
 	}
@@ -71,10 +61,10 @@ class QuestionnaireGanderViewController: UIViewController {
 		
 		switch sender {
 		case womenCheckBoxButton:
-			gender = .women
+			gender = .female
 			menCheckBoxButton.isSelected = false
 		case menCheckBoxButton:
-			gender = .men
+			gender = .male
 			womenCheckBoxButton.isSelected = false
 		default :
 			break

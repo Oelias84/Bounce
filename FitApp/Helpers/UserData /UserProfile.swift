@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum Gender: String, Codable {
+	case male
+	case female
+}
 
 struct UserProfile {
     
@@ -19,8 +23,8 @@ struct UserProfile {
 	var isManager: Bool?
 	
 	@UserDefault(key: .userGander)
-	var userGander: Int?
-
+	var userGander: String?
+	
 	@UserDefault(key: .hasRunBefore)
 	var hasRunBefore: Bool?
 	
@@ -113,7 +117,19 @@ struct UserProfile {
 }
 
 extension UserProfile {
-    
+	
+	var getGender: Gender? {
+		get {
+			switch userGander {
+			case "female":
+				return .female
+			case "male":
+				return .male
+			default:
+				return nil
+			}
+		}
+	}
 	static func updateServer() {
 		let googleManager = GoogleApiManager()
 		

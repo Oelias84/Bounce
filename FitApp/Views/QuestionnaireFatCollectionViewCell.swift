@@ -25,23 +25,23 @@ class QuestionnaireFatCollectionViewCell: UICollectionViewCell {
 		cellImage.image = nil
 	}
 	func setFatPresentLabel(for row: Int) {
-		let gender = UserProfile.defaults.userGander
+		let gender = UserProfile.defaults.getGender
 		
 		switch row {
 		case 0:
-			cellImage.image = UIImage(named: gender == 1 ? "18 women" : "8 men")
+			cellImage.image = UIImage(named: gender == .female ? "18 women" : "8 men")
 		case 1:
-			cellImage.image = UIImage(named: gender == 1 ? "20 women" : "12 men")
+			cellImage.image = UIImage(named: gender == .female ? "20 women" : "12 men")
 		case 2:
-			cellImage.image = UIImage(named: gender == 1 ? "25 women" : "15 men")
+			cellImage.image = UIImage(named: gender == .female ? "25 women" : "15 men")
 		case 3:
-			cellImage.image = UIImage(named: gender == 1 ? "30 women" : "20 men")
+			cellImage.image = UIImage(named: gender == .female ? "30 women" : "20 men")
 		case 4:
-			cellImage.image = UIImage(named: gender == 1 ? "40 women" : "25 men")
+			cellImage.image = UIImage(named: gender == .female ? "40 women" : "25 men")
 		case 5:
-			cellImage.image = UIImage(named: gender == 1 ? "45 women" : "30 men")
+			cellImage.image = UIImage(named: gender == .female ? "45 women" : "30 men")
 		default:
-			cellImage.image = UIImage(named: gender == 1 ? "18 women" : "8 men")
+			cellImage.image = UIImage(named: gender == .female ? "18 women" : "8 men")
 		}
 	}
 	func changeImageBackgroundColor() {

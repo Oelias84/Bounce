@@ -18,8 +18,8 @@ class QuestionnaireFatPresentViewController: UIViewController {
 		let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
 		return collectionView.indexPathForItem(at: visiblePoint) ?? IndexPath()
 	}
-	var gender: Int {
-		return UserProfile.defaults.userGander ?? 1
+	var gender: Gender {
+		return UserProfile.defaults.getGender ?? .female
 	}
 	
 	@IBOutlet weak var collectionView: UICollectionView!
@@ -49,17 +49,17 @@ class QuestionnaireFatPresentViewController: UIViewController {
 		
 		switch currentIndex.row {
 		case 0:
-			fatPrecent = gender == 1 ? 18.0 : 8.0
+			fatPrecent = gender == .female ? 18.0 : 8.0
 		case 1:
-			fatPrecent = gender == 1 ? 20.0 : 12.0
+			fatPrecent = gender == .female ? 20.0 : 12.0
 		case 2:
-			fatPrecent = gender == 1 ? 25.0 : 15.0
+			fatPrecent = gender == .female ? 25.0 : 15.0
 		case 3:
-			fatPrecent = gender == 1 ? 30.0 : 20.0
+			fatPrecent = gender == .female ? 30.0 : 20.0
 		case 4:
-			fatPrecent = gender == 1 ? 40.0 : 25.0
+			fatPrecent = gender == .female ? 40.0 : 25.0
 		case 5:
-			fatPrecent = gender == 1 ? 45.0 : 30.0
+			fatPrecent = gender == .female ? 45.0 : 30.0
 		default:
 			break
 		}
@@ -88,7 +88,7 @@ extension QuestionnaireFatPresentViewController {
 	
 	private func setupSelectedImage() {
 		let userData = UserProfile.defaults
-		if gender == 1 {
+		if gender == .female {
 			switch userData.fatPercentage {
 			case 18.0:
 				index = 0
