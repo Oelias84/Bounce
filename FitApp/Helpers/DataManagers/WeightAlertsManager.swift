@@ -121,7 +121,7 @@ extension WeightAlertsManager {
 			calculateWeights()
 			
 			//Update last check date
-			lastCaloriesCheckDate = firstUserWeightDate.add(2.weeks)
+			lastCaloriesCheckDateString = firstUserWeightDate.add(2.weeks)
 			
 			//Calculate calories consumed over the last week
 			calculateConsumedCaloriesFormPastWeek()

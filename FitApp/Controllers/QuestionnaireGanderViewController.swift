@@ -36,7 +36,7 @@ class QuestionnaireGanderViewController: UIViewController {
 				return
 			}
 		} else {
-			UserProfile.defaults.userGander = gender?.rawValue
+			UserProfile.defaults.gander = gender?.rawValue
 			performSegue(withIdentifier: K.SegueId.moveToFatPercentage, sender: self)
 		}
 	}

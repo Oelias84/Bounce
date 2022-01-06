@@ -22,8 +22,8 @@ struct UserProfile {
 	@UserDefault(key: .permissionsLevel)
 	var permissionsLevel: Int?
 	
-	@UserDefault(key: .userGander)
-	var userGander: String?
+	@UserDefault(key: .gander)
+	var gander: String?
 	
 	@UserDefault(key: .hasRunBefore)
 	var hasRunBefore: Bool?
@@ -120,7 +120,7 @@ extension UserProfile {
 	
 	var getGender: Gender? {
 		get {
-			switch userGander {
+			switch gander {
 			case "female":
 				return .female
 			case "male":
@@ -142,13 +142,28 @@ extension UserProfile {
 			}
 		}
 	}
+	static func getLifeStyleText() -> String {
+		
+		switch defaults.lifeStyle {
+		case 1.2:
+			return "אורח חיים יושבני"
+		case 1.3:
+			return "אורח חיים פעיל מתון"
+		case 1.5:
+			return "אורח חיים פעיל"
+		case 1.6:
+			return "אורח חיים פעיל מאוד"
+		default:
+			return ""
+		}
+	}
 	static func updateServer() {
 		let googleManager = GoogleApiManager()
 		
 		let data = ServerUserData (
 			permissionsLevel: defaults.permissionsLevel,
 			checkedTermsOfUse: defaults.checkedTermsOfUse,
-			gander: defaults.userGander,
+			gander: defaults.gander,
 			lastCaloriesCheckDateString: defaults.lastCaloriesCheckDateString,
 			birthDate: defaults.birthDate?.dateStringForDB,
 			email: defaults.email!,
@@ -169,27 +184,12 @@ extension UserProfile {
 		)
 		googleManager.updateUserData(userData: data)
 	}
-	static func getLifeStyleText() -> String {
-		
-		switch defaults.lifeStyle {
-		case 1.2:
-			return "אורח חיים יושבני"
-		case 1.3:
-			return "אורח חיים פעיל מתון"
-		case 1.5:
-			return "אורח חיים פעיל"
-		case 1.6:
-			return "אורח חיים פעיל מאוד"
-		default:
-			return ""
-		}
-	}
 	func updateUserProfileData(_ data: ServerUserData, id: String) {
 		var userProfile = self
 		
 		userProfile.permissionsLevel = data.permissionsLevel
 		userProfile.checkedTermsOfUse = data.checkedTermsOfUse
-		userProfile.userGander = data.gander
+		userProfile.gander = data.gander
 		userProfile.lastCaloriesCheckDateString = data.lastCaloriesCheckDateString
 		userProfile.id = id
 		userProfile.name = data.name
@@ -213,7 +213,7 @@ extension UserProfile {
 		
 		userProfile.permissionsLevel = nil
 		userProfile.checkedTermsOfUse = nil
-		userProfile.userGander = nil
+		userProfile.gander = nil
 		userProfile.lastCaloriesCheckDateString = nil
 		userProfile.id = nil
 		userProfile.name = nil
@@ -274,12 +274,12 @@ extension Key {
 	static let motivationText: Key = "motivationText"
 	
 	//User Calories Check Data
-	static let lastCaloriesCheckDate: Key = "lastCaloriesCheckDate"
+	static let lastCaloriesCheckDateString: Key = "lastCaloriesCheckDateString"
 	
 	//user data
 	static let permissionsLevel: Key = "permissionsLevel"
 	static let checkedTermsOfUse: Key = "checkedTermsOfUse"
-	static let userGander: Key = "userGander"
+	static let gander: Key = "gander"
 	static let fcmToken: Key = "fcmToken"
 	static let id: Key = "id"
 	static let name: Key = "name"
