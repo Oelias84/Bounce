@@ -81,7 +81,7 @@ class LoginViewModel {
 		let path = "\(email.safeEmail)_profile_picture.jpeg"
 		GoogleStorageManager.shared.downloadImageURL(from: .profileImage , path: path) {
 			result in
-			
+
 			switch result {
 			case .success(let url):
 				DispatchQueue.main.async {

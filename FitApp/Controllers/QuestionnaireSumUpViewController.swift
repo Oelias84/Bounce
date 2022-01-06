@@ -46,14 +46,15 @@ class QuestionnaireSumUpViewController: UIViewController {
 			userData.kilometer = Kilometer
 		}
 		
-		let data = ServerUserData(isManager: userData.isManager, checkedTermsOfUse: userData.checkedTermsOfUse, userGander: userData.userGander, lastCaloriesCheckDate: userData.lastCaloriesCheckDate,
+		let data = ServerUserData(permissionsLevel: userData.permissionsLevel, checkedTermsOfUse: userData.checkedTermsOfUse, gander: userData.userGander,
+								  lastCaloriesCheckDateString: userData.lastCaloriesCheckDateString,
 								  birthDate: userData.birthDate!.dateStringForDB, email: userData.email!, name: userData.name!, weight: userData.weight, currentAverageWeight: nil,
 								  height: userData.height, fatPercentage: userData.fatPercentage, steps: userData.steps, kilometer: userData.kilometer,
 								  lifeStyle: userData.lifeStyle, mealsPerDay: userData.mealsPerDay!, mostHungry: userData.mostHungry, fitnessLevel: userData.fitnessLevel,
 								  weaklyWorkouts: userData.weaklyWorkouts, externalWorkout: userData.externalWorkout, finishOnboarding: userData.finishOnboarding)
         
         manager.updateUserData(userData: data)
-		dismiss(animated: true)
+		moveToHomeViewController()
 	}
 }
 extension QuestionnaireSumUpViewController: UITextFieldDelegate {

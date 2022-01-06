@@ -20,12 +20,20 @@ enum MealType: Int, Codable {
 class Meal: Codable {
 
     let id: UUID
-    let date: Date
+    var dateString: String
     let mealType: MealType
     var dishes: [Dish]
     var mealDescription: String?
     var isMealDone: Bool
-    
+	
+	var date: Date {
+		get {
+			return dateString.dateFromString!
+		}
+		set {
+			dateString = newValue.dateStringForDB
+		}
+	}
     var name: String {
         switch mealType {
         case .breakfast:
@@ -43,10 +51,10 @@ class Meal: Codable {
         }
     }
     
-	init(mealType: MealType, dishes: [Dish], date: Date = Date()) {
+	init(mealType: MealType, dishes: [Dish], date: String = Date().dateStringForDB) {
         self.id = UUID()
         self.mealType = mealType
-        self.date = date
+        self.dateString = date
         self.dishes = dishes
         self.isMealDone = false
     }

@@ -68,7 +68,7 @@ class AddMealAlertView: UIView {
 			return
 		}
 		
-		let meal = Meal(mealType: .other, dishes: dishes, date: mealDate)
+		let meal = Meal(mealType: .other, dishes: dishes, date: mealDate.dateStringForDB)
 		delegate?.didFinish(with: meal)
 		removeFromSuperview()
 	}

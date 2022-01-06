@@ -124,7 +124,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 				inputBar.sendButton.isEnabled = true
 			}
 		} else {
-			guard let chatId = chatId, let name = (UserProfile.defaults.isManager ?? false) ? "דברי אלינו" : UserProfile.defaults.name  else { return }
+			guard let chatId = chatId, let name = (UserProfile.defaults.getIsManager ?? false) ? "דברי אלינו" : UserProfile.defaults.name  else { return }
 			GoogleDatabaseManager.shared.sendMessage(to: chatId, otherUserEmail: otherUserEmail, newMessage: message, name: name) {
 				[weak self] success in
 				guard let self = self else { return }

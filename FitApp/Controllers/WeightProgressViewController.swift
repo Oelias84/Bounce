@@ -271,7 +271,7 @@ extension WeightProgressViewController {
 	}
 	private func addWeight(weight: String, image: UIImage?, date: Date? = nil) {
 		todayButtonAction(self)
-		let weight = Weight(date: date ?? Date(), weight: Double(weight)!)
+		let weight = Weight(dateString: (date ?? Date()).dateStringForDB, weight: Double(weight)!)
 		
 		getImageUrl(weightDate: weight.date) {
 			[weak self] image in

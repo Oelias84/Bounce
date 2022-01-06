@@ -19,8 +19,8 @@ struct UserProfile {
 	@UserDefault(key: .checkedTermsOfUse)
 	var checkedTermsOfUse: Bool?
 	
-	@UserDefault(key: .isManager)
-	var isManager: Bool?
+	@UserDefault(key: .permissionsLevel)
+	var permissionsLevel: Int?
 	
 	@UserDefault(key: .userGander)
 	var userGander: String?
@@ -37,19 +37,19 @@ struct UserProfile {
 	@UserDefault(key: .shouldShowCaloriesCheckAlert)
 	var shouldShowCaloriesCheckAlert: Bool?
 	
-	@UserDefault(key: .lastCaloriesCheckDate)
-	var lastCaloriesCheckDate: Date?
+	@UserDefault(key: .lastCaloriesCheckDateString)
+	var lastCaloriesCheckDateString: String?
 	
 	@UserDefault(key: .motivationText)
 	var motivationText: String?
 	
 	@UserDefault(key: .lastMotivationDate)
 	var lastMotivationDate: Date?
-    
-    @UserDefault(key: .finishOnboarding)
-    var finishOnboarding: Bool?
-    
-    @UserDefault(key: .id)
+	
+	@UserDefault(key: .finishOnboarding)
+	var finishOnboarding: Bool?
+	
+	@UserDefault(key: .id)
 	var id: String?
 	
 	@UserDefault(key: .fcmToken)
@@ -130,14 +130,26 @@ extension UserProfile {
 			}
 		}
 	}
+	var getIsManager: Bool? {
+		get {
+			switch permissionsLevel {
+			case 1:
+				return false
+			case 2:
+				return true
+			default:
+				return nil
+			}
+		}
+	}
 	static func updateServer() {
 		let googleManager = GoogleApiManager()
 		
 		let data = ServerUserData (
-			isManager: defaults.isManager,
+			permissionsLevel: defaults.permissionsLevel,
 			checkedTermsOfUse: defaults.checkedTermsOfUse,
-			userGander: defaults.userGander,
-			lastCaloriesCheckDate: defaults.lastCaloriesCheckDate,
+			gander: defaults.userGander,
+			lastCaloriesCheckDateString: defaults.lastCaloriesCheckDateString,
 			birthDate: defaults.birthDate?.dateStringForDB,
 			email: defaults.email!,
 			name: defaults.name!,
@@ -175,10 +187,10 @@ extension UserProfile {
 	func updateUserProfileData(_ data: ServerUserData, id: String) {
 		var userProfile = self
 		
-		userProfile.isManager = data.isManager
+		userProfile.permissionsLevel = data.permissionsLevel
 		userProfile.checkedTermsOfUse = data.checkedTermsOfUse
-		userProfile.userGander = data.userGander
-		userProfile.lastCaloriesCheckDate = data.lastCaloriesCheckDate
+		userProfile.userGander = data.gander
+		userProfile.lastCaloriesCheckDateString = data.lastCaloriesCheckDateString
 		userProfile.id = id
 		userProfile.name = data.name
 		userProfile.email = data.email
@@ -199,10 +211,10 @@ extension UserProfile {
 	func resetUserProfileData() {
 		var userProfile = UserProfile.defaults
 		
-		userProfile.isManager = nil
+		userProfile.permissionsLevel = nil
 		userProfile.checkedTermsOfUse = nil
 		userProfile.userGander = nil
-		userProfile.lastCaloriesCheckDate = nil
+		userProfile.lastCaloriesCheckDateString = nil
 		userProfile.id = nil
 		userProfile.name = nil
 		userProfile.email = nil
@@ -224,10 +236,10 @@ extension UserProfile {
 
 struct ServerUserData: Codable {
 	
-	let isManager: Bool?
+	let permissionsLevel: Int?
 	let checkedTermsOfUse: Bool?
-	let userGander: Int?
-	let lastCaloriesCheckDate: Date?
+	let gander: String?
+	let lastCaloriesCheckDateString: String?
 	let birthDate: String?
 	let email: String
 	let name: String
@@ -238,17 +250,17 @@ struct ServerUserData: Codable {
     let steps: Int?
     let kilometer: Double?
 	let lifeStyle: Double?
-    let mealsPerDay: Int?
-    let mostHungry: Int?
-    let fitnessLevel: Int?
-    let weaklyWorkouts: Int?
+	let mealsPerDay: Int?
+	let mostHungry: Int?
+	let fitnessLevel: Int?
+	let weaklyWorkouts: Int?
 	let externalWorkout: Int?
-    let finishOnboarding: Bool?
+	let finishOnboarding: Bool?
 }
 
-//MARK: - UserDate Keys
+//MARK: - UserData Keys
 extension Key {
-    
+	
 	//check if app been used before
 	static let hasRunBefore: Key = "hasRunBefore"
 	
@@ -256,7 +268,7 @@ extension Key {
 	static let showQaAlert: Key = "showQaAlert"
 	static let showMealNotFinishedAlert: Key = "showMealNotFinishedAlert"
 	static let shouldShowCaloriesCheckAlert: Key = "shouldShowCaloriesCheckAlert"
-
+	
 	//motivations
 	static let lastMotivationDate: Key = "lastMotivationDate"
 	static let motivationText: Key = "motivationText"
@@ -265,29 +277,29 @@ extension Key {
 	static let lastCaloriesCheckDate: Key = "lastCaloriesCheckDate"
 	
 	//user data
-	static let isManager: Key = "isManager"
+	static let permissionsLevel: Key = "permissionsLevel"
 	static let checkedTermsOfUse: Key = "checkedTermsOfUse"
 	static let userGander: Key = "userGander"
 	static let fcmToken: Key = "fcmToken"
-    static let id: Key = "id"
-    static let name: Key = "name"
+	static let id: Key = "id"
+	static let name: Key = "name"
 	static let email: Key = "email"
 	static let lastWightImageUrl: Key = "lastWightImageUrl"
 	static let profileImageImageUrl: Key = "profileImageImageUrl"
-    static let birthDate: Key = "birthDate"
-    static let weight: Key = "weight"
+	static let birthDate: Key = "birthDate"
+	static let weight: Key = "weight"
 	static let currentAverageWeight: Key = "currentAverageWeight"
-    static let height: Key = "height"
-    static let fatPercentage: Key = "fatPercentage"
-    static let kilometer: Key = "kilometer"
+	static let height: Key = "height"
+	static let fatPercentage: Key = "fatPercentage"
+	static let kilometer: Key = "kilometer"
 	static let lifeStyle: Key = "lifeStyle"
-    static let steps: Key = "steps"
-    static let mealsPerDay: Key = "mealsPerDay"
-    static let mostHungry: Key = "mostHungry"
-    static let fitnessLevel: Key = "fitnessLevel"
-    static let weaklyWorkouts: Key = "weaklyWorkouts"
+	static let steps: Key = "steps"
+	static let mealsPerDay: Key = "mealsPerDay"
+	static let mostHungry: Key = "mostHungry"
+	static let fitnessLevel: Key = "fitnessLevel"
+	static let weaklyWorkouts: Key = "weaklyWorkouts"
 	static let externalWorkout: Key = "externalWorkout"
-    static let finishOnboarding: Key = "finishOnboarding"
+	static let finishOnboarding: Key = "finishOnboarding"
 	static let otherDishes: Key = "otherDishes"
 }
 

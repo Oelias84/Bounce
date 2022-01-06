@@ -10,7 +10,7 @@ import UIKit
 class NewChatViewController: UIViewController {
 	
 	
-	private var isManager = UserProfile.defaults.isManager ?? false
+	private var isManager = UserProfile.defaults.getIsManager ?? false
 	private var hasFetched = false
 	private var chatUsers = [ChatUser]()
 	private var flitteredChatUsers: [ChatUser]? {
