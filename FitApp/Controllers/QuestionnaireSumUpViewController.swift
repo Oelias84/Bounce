@@ -119,6 +119,14 @@ extension QuestionnaireSumUpViewController: UITextFieldDelegate {
 
 extension QuestionnaireSumUpViewController {
 	
+	private func moveToHomeViewController() {
+		let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
+		let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar)
+		
+		homeVC.modalPresentationStyle = .fullScreen
+		self.present(homeVC, animated: true)
+	}
+	
 	private func configureLabels() {
 		
 		if let weight = userData.weight, let birthDate = userData.birthDate,
