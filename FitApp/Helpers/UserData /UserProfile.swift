@@ -22,6 +22,9 @@ struct UserProfile {
 	@UserDefault(key: .permissionsLevel)
 	var permissionsLevel: Int?
 	
+	@UserDefault(key: .orderId)
+	var orderId: String?
+	
 	@UserDefault(key: .gander)
 	var gander: String?
 	
@@ -162,6 +165,7 @@ extension UserProfile {
 		
 		let data = ServerUserData (
 			permissionsLevel: defaults.permissionsLevel,
+			orderId: defaults.orderId,
 			checkedTermsOfUse: defaults.checkedTermsOfUse,
 			gander: defaults.gander,
 			lastCaloriesCheckDateString: defaults.lastCaloriesCheckDateString,
@@ -188,6 +192,7 @@ extension UserProfile {
 		var userProfile = self
 		
 		userProfile.permissionsLevel = data.permissionsLevel
+		userProfile.orderId = data.orderId
 		userProfile.checkedTermsOfUse = data.checkedTermsOfUse
 		userProfile.gander = data.gander
 		userProfile.lastCaloriesCheckDateString = data.lastCaloriesCheckDateString
@@ -212,6 +217,7 @@ extension UserProfile {
 		var userProfile = UserProfile.defaults
 		
 		userProfile.permissionsLevel = nil
+		userProfile.orderId = nil
 		userProfile.checkedTermsOfUse = nil
 		userProfile.gander = nil
 		userProfile.lastCaloriesCheckDateString = nil
@@ -237,6 +243,7 @@ extension UserProfile {
 struct ServerUserData: Codable {
 	
 	let permissionsLevel: Int?
+	let orderId: String?
 	let checkedTermsOfUse: Bool?
 	let gander: String?
 	let lastCaloriesCheckDateString: String?
@@ -278,6 +285,7 @@ extension Key {
 	
 	//user data
 	static let permissionsLevel: Key = "permissionsLevel"
+	static let orderId: Key = "orderId"
 	static let checkedTermsOfUse: Key = "checkedTermsOfUse"
 	static let gander: Key = "gander"
 	static let fcmToken: Key = "fcmToken"
