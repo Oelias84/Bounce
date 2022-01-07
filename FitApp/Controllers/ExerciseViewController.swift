@@ -102,6 +102,15 @@ class ExerciseViewController: UIViewController {
 	}
 }
 
+//MARK: - Delegate
+extension ExerciseViewController: BounceNavigationBarDelegate {
+	
+	func backButtonTapped() {
+		navigationController?.popViewController(animated: true)
+	}
+}
+
+//MARK: - Functions
 extension ExerciseViewController {
 	
 	private func play(_ url: URL) {
@@ -153,8 +162,10 @@ extension ExerciseViewController {
 	}
 	private func setupTopBarView() {
 		topBarView.nameTitle = exercise.name
+		topBarView.delegate = self
 		topBarView.isBackButtonHidden = false
 		topBarView.isMotivationHidden = true
+		topBarView.isDayWelcomeHidden = true
 	}
 	private func setUpPlayerContainerView() {
 		let buttonSize = UIEdgeInsets(top: 32, left: 32, bottom: 32, right: 32)
@@ -177,12 +188,6 @@ extension ExerciseViewController {
 		playerContainerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
 		playerContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
 		playerContainerView.heightAnchor.constraint(equalTo: containerView.heightAnchor ).isActive = true
-		
-		if #available(iOS 11.0, *) {
-			playerContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-		} else {
-			playerContainerView.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor).isActive = true
-		}
 	}
 	private func playVideo(userString: [String]) {
 		playButton.isHidden = true
