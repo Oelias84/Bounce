@@ -104,20 +104,7 @@ class WorkoutViewModel: NSObject {
 					workouts.forEach {
 						$0.exercises.insert(self.addWarmup(.home), at: 0)
 					}
-					switch level {
-					case 2:
-						if weeklyWorkout == 2 {
-							var count = 0
-							while count < 2 {
-								self.homeWorkout.append(contentsOf: workouts.filter {$0.type == weeklyWorkout})
-								count += 1
-							}
-						} else {
-							self.homeWorkout.append(contentsOf: workouts.filter {$0.type == weeklyWorkout})
-						}
-					default:
-						self.homeWorkout.append(contentsOf: workouts.filter {$0.type == weeklyWorkout})
-					}
+					self.homeWorkout.append(contentsOf: workouts.filter {$0.type == weeklyWorkout})
 				case .failure(let error):
 					print("There was an issue getting workouts: ", error )
 				}
@@ -156,26 +143,7 @@ class WorkoutViewModel: NSObject {
 					workouts.forEach {
 						$0.exercises.insert(self.addWarmup(.gym), at: 0)
 					}
-					switch level {
-					case 1:
-						var count = 0
-						while count < 2 {
-							self.gymWorkout.append(contentsOf: workouts.filter {$0.type == weeklyWorkout})
-							count += 1
-						}
-					case 2:
-						if weeklyWorkout == 2 {
-							var count = 0
-							while count < 2 {
-								self.gymWorkout.append(contentsOf: workouts.filter {$0.type == weeklyWorkout})
-								count += 1
-							}
-						} else {
-							self.gymWorkout.append(contentsOf: workouts.filter {$0.type == weeklyWorkout})
-						}
-					default:
-						self.gymWorkout.append(contentsOf: workouts.filter {$0.type == weeklyWorkout})
-					}
+					self.gymWorkout.append(contentsOf: workouts.filter {$0.type == weeklyWorkout})
 				case .failure(let error):
 					print("There was an issue getting workouts: ", error )
 				}

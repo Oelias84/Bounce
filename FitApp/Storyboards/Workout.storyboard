@@ -23,6 +23,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DVS-bx-UAm">
+                                <rect key="frame" x="0.0" y="214" width="414" height="682"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="jTV-rI-T0V" id="bZt-Th-6aQ"/>
+                                    <outlet property="delegate" destination="jTV-rI-T0V" id="Mbq-Ge-YbU"/>
+                                </connections>
+                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dT-qn-pGP" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="214"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -30,19 +38,11 @@
                                     <constraint firstAttribute="height" constant="214" id="xXo-l5-GcU"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DVS-bx-UAm">
-                                <rect key="frame" x="0.0" y="202" width="414" height="694"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="jTV-rI-T0V" id="bZt-Th-6aQ"/>
-                                    <outlet property="delegate" destination="jTV-rI-T0V" id="Mbq-Ge-YbU"/>
-                                </connections>
-                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Kdj-rf-K5U"/>
                         <color key="backgroundColor" name="ProjectBackground"/>
                         <constraints>
-                            <constraint firstItem="DVS-bx-UAm" firstAttribute="top" secondItem="5dT-qn-pGP" secondAttribute="bottom" constant="-12" id="5Pg-bl-yXr"/>
+                            <constraint firstItem="DVS-bx-UAm" firstAttribute="top" secondItem="5dT-qn-pGP" secondAttribute="bottom" id="5Pg-bl-yXr"/>
                             <constraint firstItem="5dT-qn-pGP" firstAttribute="top" secondItem="pGf-YY-agy" secondAttribute="top" id="8fc-f9-gyU"/>
                             <constraint firstItem="5dT-qn-pGP" firstAttribute="leading" secondItem="Kdj-rf-K5U" secondAttribute="leading" id="FM4-dn-RcY"/>
                             <constraint firstItem="5dT-qn-pGP" firstAttribute="trailing" secondItem="Kdj-rf-K5U" secondAttribute="trailing" id="Y6j-In-vpX"/>
@@ -78,7 +78,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SpC-Gd-oIp">
-                                <rect key="frame" x="0.0" y="168" width="414" height="272"/>
+                                <rect key="frame" x="0.0" y="150" width="414" height="272"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wee-OS-ynv">
                                         <rect key="frame" x="8" y="8" width="30" height="30"/>
@@ -176,13 +176,13 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQQ-cV-Bme" userLabel="Exercise Text View">
-                                <rect key="frame" x="0.0" y="440" width="414" height="422"/>
+                                <rect key="frame" x="0.0" y="422" width="414" height="440"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqB-ig-YMH">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="422"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="440"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AnO-3q-6lb" userLabel="Content View">
-                                                <rect key="frame" x="0.0" y="20" width="414" height="422"/>
+                                                <rect key="frame" x="0.0" y="20" width="414" height="440"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZzQ-sn-JnJ">
                                                         <rect key="frame" x="24" y="0.0" width="366" height="128"/>
@@ -263,7 +263,7 @@
                         <viewLayoutGuide key="safeArea" id="Ri8-KY-aND"/>
                         <color key="backgroundColor" name="ProjectBackground"/>
                         <constraints>
-                            <constraint firstItem="SpC-Gd-oIp" firstAttribute="top" secondItem="7ZC-b9-shO" secondAttribute="bottom" constant="-46" id="2ba-oL-vQQ"/>
+                            <constraint firstItem="SpC-Gd-oIp" firstAttribute="top" secondItem="7ZC-b9-shO" secondAttribute="bottom" constant="-64" id="2ba-oL-vQQ"/>
                             <constraint firstItem="Ri8-KY-aND" firstAttribute="trailing" secondItem="7ZC-b9-shO" secondAttribute="trailing" id="5Oc-jp-ViG"/>
                             <constraint firstItem="Ri8-KY-aND" firstAttribute="bottom" secondItem="iQQ-cV-Bme" secondAttribute="bottom" id="9Ci-NI-ZBu"/>
                             <constraint firstItem="iQQ-cV-Bme" firstAttribute="top" secondItem="SpC-Gd-oIp" secondAttribute="bottom" id="9NI-wd-FIX"/>
@@ -308,7 +308,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KlI-IT-ekv" customClass="BetterSegmentedControl" customModule="BetterSegmentedControl">
-                                <rect key="frame" x="24" y="202" width="366" height="40"/>
+                                <rect key="frame" x="24" y="214" width="366" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="G0h-1b-uwH"/>
@@ -318,7 +318,7 @@
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Etg-l4-JQo">
-                                <rect key="frame" x="0.0" y="258" width="414" height="638"/>
+                                <rect key="frame" x="0.0" y="266" width="414" height="630"/>
                                 <color key="backgroundColor" name="ProjectBackground"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -335,11 +335,11 @@
                             <constraint firstAttribute="trailing" secondItem="Etg-l4-JQo" secondAttribute="trailing" id="FmW-Zh-QSI"/>
                             <constraint firstItem="Etg-l4-JQo" firstAttribute="leading" secondItem="vgy-tl-bHW" secondAttribute="leading" id="QPX-Gm-7Te"/>
                             <constraint firstItem="KlI-IT-ekv" firstAttribute="leading" secondItem="vgy-tl-bHW" secondAttribute="leading" constant="24" id="cCE-3z-Yuw"/>
-                            <constraint firstItem="KlI-IT-ekv" firstAttribute="top" secondItem="4hQ-ih-zZJ" secondAttribute="bottom" constant="-12" id="d3r-7b-aEq"/>
+                            <constraint firstItem="KlI-IT-ekv" firstAttribute="top" secondItem="4hQ-ih-zZJ" secondAttribute="bottom" id="d3r-7b-aEq"/>
                             <constraint firstItem="4hQ-ih-zZJ" firstAttribute="top" secondItem="Rj2-xc-Wv6" secondAttribute="top" id="g1H-In-4WT"/>
                             <constraint firstAttribute="bottom" secondItem="Etg-l4-JQo" secondAttribute="bottom" id="nMf-hl-VUz"/>
                             <constraint firstItem="vgy-tl-bHW" firstAttribute="trailing" secondItem="KlI-IT-ekv" secondAttribute="trailing" constant="24" id="vs8-Fv-D7h"/>
-                            <constraint firstItem="Etg-l4-JQo" firstAttribute="top" secondItem="KlI-IT-ekv" secondAttribute="bottom" constant="16" id="z1E-h1-iA8"/>
+                            <constraint firstItem="Etg-l4-JQo" firstAttribute="top" secondItem="KlI-IT-ekv" secondAttribute="bottom" constant="12" id="z1E-h1-iA8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="Myc-MT-gEh" userLabel="אימונים"/>
