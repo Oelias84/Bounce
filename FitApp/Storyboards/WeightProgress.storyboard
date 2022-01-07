@@ -31,8 +31,19 @@
                                     <constraint firstAttribute="height" constant="214" id="rDL-w6-YbT"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a46-U0-wHL">
+                                <rect key="frame" x="335.5" y="44" width="66.5" height="31"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="calendar" catalog="system" title="היום">
+                                    <fontDescription key="titleFontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="12"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="todayButtonAction:" destination="Mxh-5B-SBV" eventType="touchUpInside" id="1Md-9X-Nc1"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jok-No-7Ae" customClass="BetterSegmentedControl" customModule="BetterSegmentedControl">
-                                <rect key="frame" x="24" y="202" width="366" height="40"/>
+                                <rect key="frame" x="24" y="214" width="366" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="n4R-9V-Rk3"/>
@@ -42,7 +53,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0AR-6a-gI9" userLabel="Date Change View">
-                                <rect key="frame" x="12" y="254" width="390" height="40"/>
+                                <rect key="frame" x="12" y="266" width="390" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wqJ-n8-SiV">
                                         <rect key="frame" x="64" y="0.0" width="40" height="40"/>
@@ -109,7 +120,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CkF-ZQ-fGy">
-                                <rect key="frame" x="0.0" y="460" width="414" height="338"/>
+                                <rect key="frame" x="0.0" y="472" width="414" height="326"/>
                                 <color key="backgroundColor" name="ProjectBackground"/>
                                 <inset key="separatorInset" minX="22" minY="0.0" maxX="22" maxY="0.0"/>
                                 <prototypes>
@@ -207,7 +218,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vc1-z7-vmc">
-                                <rect key="frame" x="24" y="302" width="366" height="150"/>
+                                <rect key="frame" x="24" y="314" width="366" height="150"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sbm-f2-dKc">
                                         <rect key="frame" x="9" y="8" width="349" height="134"/>
@@ -263,8 +274,9 @@
                         <constraints>
                             <constraint firstItem="jok-No-7Ae" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" constant="24" id="37d-ud-TnU"/>
                             <constraint firstItem="wzd-di-cCp" firstAttribute="trailing" secondItem="L5X-A7-qr1" secondAttribute="trailing" id="3Gg-A5-HrK"/>
+                            <constraint firstItem="a46-U0-wHL" firstAttribute="top" secondItem="wzd-di-cCp" secondAttribute="top" id="4fh-ge-rZM"/>
                             <constraint firstItem="wzd-di-cCp" firstAttribute="trailing" secondItem="CkF-ZQ-fGy" secondAttribute="trailing" id="61k-MY-9Lw"/>
-                            <constraint firstItem="jok-No-7Ae" firstAttribute="top" secondItem="L5X-A7-qr1" secondAttribute="bottom" constant="-12" id="BBI-YG-Cbx"/>
+                            <constraint firstItem="jok-No-7Ae" firstAttribute="top" secondItem="L5X-A7-qr1" secondAttribute="bottom" id="BBI-YG-Cbx"/>
                             <constraint firstItem="wzd-di-cCp" firstAttribute="trailing" secondItem="0AR-6a-gI9" secondAttribute="trailing" constant="12" id="Bt9-Cq-sXR"/>
                             <constraint firstItem="vc1-z7-vmc" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" constant="24" id="DAt-sK-cT1"/>
                             <constraint firstItem="wzd-di-cCp" firstAttribute="bottom" secondItem="mRF-da-tSi" secondAttribute="bottom" constant="12" id="EIs-6P-UJ4"/>
@@ -274,6 +286,7 @@
                             <constraint firstItem="L5X-A7-qr1" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" id="NIb-1y-a5L"/>
                             <constraint firstItem="vc1-z7-vmc" firstAttribute="top" secondItem="0AR-6a-gI9" secondAttribute="bottom" constant="8" id="Stb-1G-VeW"/>
                             <constraint firstItem="wzd-di-cCp" firstAttribute="trailing" secondItem="jok-No-7Ae" secondAttribute="trailing" constant="24" id="YsM-N4-MkS"/>
+                            <constraint firstItem="wzd-di-cCp" firstAttribute="trailing" secondItem="a46-U0-wHL" secondAttribute="trailing" constant="12" id="crG-iE-9Es"/>
                             <constraint firstItem="CkF-ZQ-fGy" firstAttribute="top" secondItem="vc1-z7-vmc" secondAttribute="bottom" constant="8" id="gj7-cE-u3x"/>
                             <constraint firstItem="L5X-A7-qr1" firstAttribute="top" secondItem="ra4-ZC-RFT" secondAttribute="top" id="hES-fH-O8m"/>
                             <constraint firstItem="0AR-6a-gI9" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" constant="12" id="hZo-oL-ERq"/>
@@ -281,21 +294,7 @@
                             <constraint firstItem="CkF-ZQ-fGy" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" id="sOy-Gh-EHh"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="J6d-R0-ADY">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="bDY-gn-wuO">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="HIv-wK-WCf">
-                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="today" title="היום" imagePadding="6"/>
-                                <connections>
-                                    <action selector="todayButtonAction:" destination="Mxh-5B-SBV" eventType="touchUpInside" id="sHh-d7-kv7"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="J6d-R0-ADY"/>
                     <connections>
                         <outlet property="chartView" destination="sbm-f2-dKc" id="plI-bd-gLK"/>
                         <outlet property="chartViewContainer" destination="vc1-z7-vmc" id="T7J-Ob-N7p"/>
@@ -304,7 +303,7 @@
                         <outlet property="dateTextLabel" destination="bFi-c4-6al" id="Qau-uG-ZmJ"/>
                         <outlet property="segmentedControl" destination="jok-No-7Ae" id="NfC-jZ-FRn"/>
                         <outlet property="tableView" destination="CkF-ZQ-fGy" id="VBv-UJ-LSc"/>
-                        <outlet property="todayButton" destination="HIv-wK-WCf" id="AXH-2T-Drp"/>
+                        <outlet property="todayButton" destination="a46-U0-wHL" id="zSo-BL-PzJ"/>
                         <outlet property="topBarView" destination="L5X-A7-qr1" id="5Ug-XA-gfm"/>
                     </connections>
                 </viewController>
@@ -314,11 +313,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="calendar" catalog="system" width="128" height="106"/>
         <image name="chevron.backward.circle.fill" catalog="system" width="128" height="121"/>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
         <image name="chevron.forward.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="today" width="15.105999946594238" height="16.784999847412109"/>
         <namedColor name="ProjectBackground">
             <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
