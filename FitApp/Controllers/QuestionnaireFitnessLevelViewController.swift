@@ -14,13 +14,14 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 	var weaklyWorkouts = 0
 	var externalWorkouts = 0
 	
-	@IBOutlet weak var beginnerButton: UIButton!
-	@IBOutlet weak var intermediateButton: UIButton!
-	@IBOutlet weak var advancedButton: UIButton!
+	@IBOutlet weak var beginnerCheckBox: UIButton!
+	@IBOutlet weak var intermediateCheckBox: UIButton!
+	@IBOutlet weak var advancedCheckBox: UIButton!
 	
-	@IBOutlet weak var weeklyWorkoutCheckFirst: UIButton!
-	@IBOutlet weak var weeklyWorkoutCheckSecond: UIButton!
-	@IBOutlet weak var weeklyWorkoutCheckThird: UIButton!
+	@IBOutlet weak var towWeeklyWorkoutsButton: UIButton!
+	@IBOutlet weak var threeWeeklyWorkoutsButton: UIButton!
+	@IBOutlet weak var fourWeeklyWorkoutsButton: UIButton!
+	
 	@IBOutlet weak var externalTrainingStepper: GMStepper!
 	
 	@IBOutlet weak var nextButton: UIButton!
@@ -56,34 +57,37 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 		fitnessLevel = sender.tag
 
 		switch sender {
-		case beginnerButton:
-			beginnerButton.isSelected = true
-			intermediateButton.isSelected = false
-			advancedButton.isSelected = false
-			
-			weeklyWorkoutCheckFirst.backgroundColor = .projectTail
-			weeklyWorkoutCheckFirst.borderColorV = .projectTail
-			weeklyWorkoutCheckSecond.borderColorV = .white
-			weeklyWorkoutCheckThird.borderColorV = .white
-			weeklyWorkoutCheckSecond.backgroundColor = .clear
-			weeklyWorkoutCheckThird.backgroundColor = .clear
+		case beginnerCheckBox:
 			weaklyWorkouts = 2
-		case intermediateButton:
-			beginnerButton.isSelected = false
-			intermediateButton.isSelected = true
-			advancedButton.isSelected = false
 
-			weeklyWorkoutCheckFirst.backgroundColor = .clear
-			weeklyWorkoutCheckFirst.borderColorV = .white
+			beginnerCheckBox.isSelected = true
+			intermediateCheckBox.isSelected = false
+			advancedCheckBox.isSelected = false
+			
+			towWeeklyWorkoutsButton.backgroundColor = .projectTail
+			towWeeklyWorkoutsButton.borderColorV = .projectTail
+			threeWeeklyWorkoutsButton.borderColorV = .white
+			fourWeeklyWorkoutsButton.borderColorV = .white
+			threeWeeklyWorkoutsButton.backgroundColor = .clear
+			fourWeeklyWorkoutsButton.backgroundColor = .clear
+		case intermediateCheckBox:
 			weaklyWorkouts = 0
-		case advancedButton:
-			beginnerButton.isSelected = false
-			intermediateButton.isSelected = false
-			advancedButton.isSelected = true
 
-			weeklyWorkoutCheckFirst.backgroundColor = .clear
-			weeklyWorkoutCheckFirst.borderColorV = .white
+			beginnerCheckBox.isSelected = false
+			intermediateCheckBox.isSelected = true
+			advancedCheckBox.isSelected = false
+
+			towWeeklyWorkoutsButton.backgroundColor = .clear
+			towWeeklyWorkoutsButton.borderColorV = .white
+		case advancedCheckBox:
 			weaklyWorkouts = 0
+
+			beginnerCheckBox.isSelected = false
+			intermediateCheckBox.isSelected = false
+			advancedCheckBox.isSelected = true
+
+			towWeeklyWorkoutsButton.backgroundColor = .clear
+			towWeeklyWorkoutsButton.borderColorV = .white
 		default:
 			return
 		}
@@ -97,37 +101,37 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 		
         if fitnessLevel == 0 {
             presentOkAlert(withMessage: "יש לבחור קודם את רמת הכושר") {}
-			weeklyWorkoutCheckFirst.isSelected = false
-			weeklyWorkoutCheckSecond.isSelected = false
-			weeklyWorkoutCheckThird.isSelected = false
+			towWeeklyWorkoutsButton.isSelected = false
+			threeWeeklyWorkoutsButton.isSelected = false
+			fourWeeklyWorkoutsButton.isSelected = false
             return
         }
 		sender.backgroundColor = .projectTail
 		sender.borderColorV = .projectTail
 		
 		switch sender {
-		case weeklyWorkoutCheckFirst:
-			weeklyWorkoutCheckSecond.borderColorV = .white
-			weeklyWorkoutCheckThird.borderColorV = .white
-			weeklyWorkoutCheckSecond.backgroundColor = .clear
-			weeklyWorkoutCheckThird.backgroundColor = .clear
+		case towWeeklyWorkoutsButton:
+			threeWeeklyWorkoutsButton.borderColorV = .white
+			fourWeeklyWorkoutsButton.borderColorV = .white
+			threeWeeklyWorkoutsButton.backgroundColor = .clear
+			fourWeeklyWorkoutsButton.backgroundColor = .clear
 			weaklyWorkouts = 2
-		case weeklyWorkoutCheckSecond:
-			weeklyWorkoutCheckFirst.borderColorV = .white
-			weeklyWorkoutCheckThird.borderColorV = .white
-			weeklyWorkoutCheckFirst.backgroundColor = .clear
-			weeklyWorkoutCheckThird.backgroundColor = .clear
+		case threeWeeklyWorkoutsButton:
+			towWeeklyWorkoutsButton.borderColorV = .white
+			fourWeeklyWorkoutsButton.borderColorV = .white
+			towWeeklyWorkoutsButton.backgroundColor = .clear
+			fourWeeklyWorkoutsButton.backgroundColor = .clear
 			weaklyWorkouts = 3
-		case weeklyWorkoutCheckThird:
-			weeklyWorkoutCheckFirst.borderColorV = .white
-			weeklyWorkoutCheckSecond.borderColorV = .white
-			weeklyWorkoutCheckFirst.backgroundColor = .clear
-			weeklyWorkoutCheckSecond.backgroundColor = .clear
+		case fourWeeklyWorkoutsButton:
+			towWeeklyWorkoutsButton.borderColorV = .white
+			threeWeeklyWorkoutsButton.borderColorV = .white
+			towWeeklyWorkoutsButton.backgroundColor = .clear
+			threeWeeklyWorkoutsButton.backgroundColor = .clear
 			weaklyWorkouts = 4
 		default:
 			return
 		}
-		if !sender.isSelected && sender != weeklyWorkoutCheckFirst {
+		if !sender.isSelected && sender != towWeeklyWorkoutsButton {
 			weaklyWorkouts = 0
 		}
 	}
@@ -157,62 +161,61 @@ extension QuestionnaireFitnessLevelViewController {
 
 			switch fitnessLevel {
             case 1:
-				weaklyWorkouts = 2
-                beginnerButton.isSelected = true
-				weeklyWorkoutCheckFirst.backgroundColor = .projectTail
-				weeklyWorkoutCheckFirst.borderColorV = .projectTail
-				weeklyWorkoutCheckSecond.borderColorV = .white
-				weeklyWorkoutCheckThird.borderColorV = .white
-				weeklyWorkoutCheckSecond.backgroundColor = .clear
-				weeklyWorkoutCheckThird.backgroundColor = .clear
+                beginnerCheckBox.isSelected = true
             case 2:
-                intermediateButton.isSelected = true
-				weeklyWorkoutCheckFirst.backgroundColor = .projectTail
-				weeklyWorkoutCheckFirst.borderColorV = .projectTail
-				weeklyWorkoutCheckSecond.borderColorV = .white
-				weeklyWorkoutCheckThird.borderColorV = .white
-				weeklyWorkoutCheckSecond.backgroundColor = .clear
-				weeklyWorkoutCheckThird.backgroundColor = .clear
+                intermediateCheckBox.isSelected = true
             case 3:
-                advancedButton.isSelected = true
-				beginnerButton.isSelected = false
-				intermediateButton.isSelected = false
-				advancedButton.isSelected = true
+				beginnerCheckBox.isSelected = false
+				intermediateCheckBox.isSelected = false
+				advancedCheckBox.isSelected = true
 
-				weeklyWorkoutCheckFirst.backgroundColor = .clear
-				weeklyWorkoutCheckFirst.borderColorV = .white
+				towWeeklyWorkoutsButton.backgroundColor = .clear
+				towWeeklyWorkoutsButton.borderColorV = .white
             default:
                 break
             }
         }
         if let weaklyWorkouts = userData.weaklyWorkouts {
+			self.weaklyWorkouts = weaklyWorkouts
+			
             switch weaklyWorkouts {
             case 2:
-                weeklyWorkoutCheckFirst.isSelected = true
+                towWeeklyWorkoutsButton.isSelected = true
+				towWeeklyWorkoutsButton.backgroundColor = .projectTail
+				towWeeklyWorkoutsButton.borderColorV = .projectTail
             case 3:
-                weeklyWorkoutCheckSecond.isSelected = true
+                threeWeeklyWorkoutsButton.isSelected = true
+				threeWeeklyWorkoutsButton.borderColorV = .projectTail
+				threeWeeklyWorkoutsButton.backgroundColor = .projectTail
+
             case 4:
-                weeklyWorkoutCheckThird.isSelected = true
+                fourWeeklyWorkoutsButton.isSelected = true
+				fourWeeklyWorkoutsButton.borderColorV = .projectTail
+				fourWeeklyWorkoutsButton.backgroundColor = .projectTail
             default:
                 break
             }
         }
+		if let externalWorkouts = UserProfile.defaults.externalWorkout {
+			self.externalWorkouts = externalWorkouts
+			externalTrainingStepper.value = Double(externalWorkouts)
+		}
     }
     private func hideUnnecessaryWeeklySelectionOptions(_ sender: Int) {
         
 		switch sender {
 		case 1:
-			weeklyWorkoutCheckFirst.isHidden = false
-			weeklyWorkoutCheckSecond.isHidden = true
-			weeklyWorkoutCheckThird.isHidden = true
+			towWeeklyWorkoutsButton.isHidden = false
+			threeWeeklyWorkoutsButton.isHidden = true
+			fourWeeklyWorkoutsButton.isHidden = true
 		case 2:
-			weeklyWorkoutCheckFirst.isHidden = false
-			weeklyWorkoutCheckSecond.isHidden = false
-			weeklyWorkoutCheckThird.isHidden = true
+			towWeeklyWorkoutsButton.isHidden = false
+			threeWeeklyWorkoutsButton.isHidden = false
+			fourWeeklyWorkoutsButton.isHidden = true
 		case 3:
-			weeklyWorkoutCheckFirst.isHidden = true
-			weeklyWorkoutCheckSecond.isHidden = false
-			weeklyWorkoutCheckThird.isHidden = false
+			towWeeklyWorkoutsButton.isHidden = true
+			threeWeeklyWorkoutsButton.isHidden = false
+			fourWeeklyWorkoutsButton.isHidden = false
 		default:
 			break
         }
