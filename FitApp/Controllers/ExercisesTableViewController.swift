@@ -42,10 +42,19 @@ extension ExercisesTableViewController {
 	
 	private func setupTopBar() {
 		
+		topBarView.delegate = self
 		topBarView.nameTitle = workout.name
 		topBarView.isBackButtonHidden = false
 		topBarView.isDayWelcomeHidden = true
 		topBarView.isMotivationHidden = true
+	}
+}
+
+//MARK: - Delegates
+extension ExercisesTableViewController: BounceNavigationBarDelegate {
+	
+	func backButtonTapped() {
+		navigationController?.popViewController(animated: true)
 	}
 }
 extension ExercisesTableViewController: UITableViewDelegate, UITableViewDataSource {
@@ -69,6 +78,7 @@ extension ExercisesTableViewController: UITableViewDelegate, UITableViewDataSour
     }
 }
 
+//MARK: - Functions
 extension ExercisesTableViewController: ExerciseTableViewCellDelegate {
     
     func detailButtonTapped(indexPath: IndexPath) {
