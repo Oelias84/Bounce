@@ -23,19 +23,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		FirebaseApp.configure()
 		Auth.auth().useAppLanguage()
 		
+		window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window
+		
 		if #available(iOS 10.0, *) {
-		  // For iOS 10 display notification (sent via APNS)
-		  UNUserNotificationCenter.current().delegate = self
-
-		  let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-		  UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { _, _ in })
+			// For iOS 10 display notification (sent via APNS)
+			UNUserNotificationCenter.current().delegate = self
+			
+			let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+			UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { _, _ in })
 		} else {
-		  let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-		  application.registerUserNotificationSettings(settings)
+			let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+			application.registerUserNotificationSettings(settings)
 		}
 		application.registerForRemoteNotifications()
-
+		
 		Messaging.messaging().delegate = self
+		
+		if #available(iOS 13.0, *) {
+			// In iOS 13 setup is done in SceneDelegate
+		} else {
+			let window = UIWindow(frame: UIScreen.main.bounds)
+			self.window = window
+			
+			if !(UserProfile.defaults.hasRunBefore ?? false) {
+				do {
+					try Auth.auth().signOut()
+				} catch {
+					print("could not signOut")
+				}
+				UserProfile.defaults.hasRunBefore = true
+			} else {
+				Spinner.shared.show(window)
+				// Run code here for every other launch but the first
+				if Auth.auth().currentUser != nil {
+					//Check if the user is approved in data base
+					GoogleApiManager.shared.checkUserApproved() {
+						result in
+						switch result {
+						case .success(let isApproved):
+							if isApproved, (UserProfile.defaults.finishOnboarding ?? false) == true {
+								if UserProfile.defaults.finishOnboarding ?? false {
+									Spinner.shared.stop()
+								} else {
+									self.startQuestionnaire()
+								}
+							} else {
+								Spinner.shared.stop()
+								self.window!.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "אין באפשרוך להתחבר, אנא צרי איתנו קשר") { }
+							}
+						case .failure(let error):
+							self.window!.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה: \(error.localizedDescription)") { }
+						}
+					}
+				} else {
+					self.goToLoginScreen()
+				}
+			}
+		}
 		return true
 	}
 	
@@ -120,7 +164,7 @@ extension AppDelegate {
 		window!.rootViewController = nav
 		window!.makeKeyAndVisible()
 	}
-	private func moveTo(storyboardId: String, vcId: String ) {
+	private func moveTo(storyboardId: String, vcId: String) {
 		mainView()
 		let storyboard = UIStoryboard(name: storyboardId, bundle: nil)
 		let toVc = storyboard.instantiateViewController(withIdentifier: vcId)
@@ -134,12 +178,27 @@ extension AppDelegate {
 			default:
 				tabBar.selectedIndex = 0
 				if let nav = tabBar.viewControllers?.first as? UINavigationController {
-					let homeVc = nav.viewControllers.first { vc in
+					let homeVc = nav.viewControllers.first {
+						vc in
 						vc is HomeViewController
 					}
 					homeVc?.navigationController?.pushViewController(toVc, animated: true)
 				}
 			}
 		}
+	}
+	private func startQuestionnaire() {
+		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
+		let questionnaireVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation)
+		
+		questionnaireVC.modalPresentationStyle = .fullScreen
+		self.window!.rootViewController = questionnaireVC
+	}
+	private func goToLoginScreen() {
+		let storyboard = UIStoryboard(name: K.StoryboardName.loginRegister, bundle: nil)
+		let questionnaireVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.startNavigationViewController)
+		
+		questionnaireVC.modalPresentationStyle = .fullScreen
+		self.window!.rootViewController = questionnaireVC
 	}
 }

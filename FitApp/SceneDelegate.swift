@@ -11,13 +11,16 @@ import FirebaseAuth
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 	var window: UIWindow?
-
+	
+	@available(iOS 13.0, *)
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 		// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
 		// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
 		// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+		guard let windowScene = (scene as? UIWindowScene) else { return }
+		let window = UIWindow(windowScene: windowScene)
+		window.overrideUserInterfaceStyle = .light
 
-		
 		if !(UserProfile.defaults.hasRunBefore ?? false) {
 			do {
 				try Auth.auth().signOut()
@@ -26,40 +29,53 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 			}
 			UserProfile.defaults.hasRunBefore = true
 		} else {
-			Spinner.shared.show(window!)
 			// Run code here for every other launch but the first
 			if Auth.auth().currentUser != nil {
 				//Check if the user is approved in data base
-				GoogleApiManager.shared.checkUserApproved(userEmail: UserProfile.defaults.email!) {
+				GoogleApiManager.shared.checkUserApproved() {
 					result in
 					
 					switch result {
 					case .success(let isApproved):
 						if isApproved {
 							
-							let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
-							let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar) as! UITabBarController
-							homeVC.selectedIndex = 0
-							
-							homeVC.modalPresentationStyle = .fullScreen
-//							Spinner.shared.stop()
-							self.window!.rootViewController = homeVC
+							if UserProfile.defaults.finishOnboarding == true {
+								//Go to Home Screen
+								let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
+								let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar) as! UITabBarController
+								
+								homeVC.modalPresentationStyle = .fullScreen
+								window.rootViewController = homeVC
+							} else {
+								//Go to Questionnaire
+								let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
+								let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation) as! UINavigationController
+								
+								homeVC.modalPresentationStyle = .fullScreen
+								window.rootViewController = homeVC
+							}
+							self.window = window
+							window.makeKeyAndVisible()
 						} else {
 							Spinner.shared.stop()
-							self.window!.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "אין באפשרוך להתחבר, אנא צרי איתנו קשר") { }
+							self.window?.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "אין באפשרוך להתחבר, אנא צרי איתנו קשר") { }
 						}
 					case .failure(let error):
-						self.window!.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה: \(error.localizedDescription)") { }
+						self.window?.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה: \(error.localizedDescription)") { }
 					}
 				}
 			} else {
-				self.window!.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "אין באפשרוך להתחבר, אנא צרי איתנו קשר") {  }
+				//Go To Login Screen
+				let storyboard = UIStoryboard(name: K.StoryboardName.loginRegister, bundle: nil)
+				let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.startNavigationViewController) as! UINavigationController
+				
+				homeVC.modalPresentationStyle = .fullScreen
+				window.rootViewController = homeVC
+				
+				self.window = window
+				window.makeKeyAndVisible()
 			}
 		}
-		if #available(iOS 13.0, *) {
-			window?.overrideUserInterfaceStyle = .light
-		}
-		guard let _ = (scene as? UIWindowScene) else { return }
 	}
 
 	func sceneDidDisconnect(_ scene: UIScene) {
@@ -90,7 +106,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// Use this method to save data, release shared resources, and store enough scene-specific state information
 		// to restore the scene back to its current state.
 	}
-
-
 }
 
