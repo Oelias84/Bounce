@@ -218,11 +218,11 @@ extension WeightAlertsManager {
 		guard let lastCaloriesCheckDateString = lastCaloriesCheckDateString else { return }
 		
 		//If first check the take today and subtract a week else add take
-		let firstDayForCalculatedWeek = lastCaloriesCheckDate.subtract(1.weeks).start(of: .day)
+		let firstDayForCalculatedWeek = lastCaloriesCheckDateString.subtract(1.weeks).start(of: .day)
 		
 		let mealsConsumedInPeriod = userDailyMeals.filter {
 			$0.meals.first!.date.onlyDate.isLater(than: firstDayForCalculatedWeek) &&
-			$0.meals.first!.date.onlyDate.isEarlierThanOrEqual(to: firstDayForCalculatedWeek.add(1.weeks).start(of: .day))
+			$0.meals.first!.date.onlyDate.isEarlier(than: firstDayForCalculatedWeek.add(1.weeks).start(of: .day))
 		}
 		
 		let consumedCalories = DailyMealManager.calculateMealAverageCalories(meals: mealsConsumedInPeriod)
@@ -368,8 +368,8 @@ extension WeightAlertsManager {
 			self.shouldShowAlertToUser = false
 			UserProfile.defaults.shouldShowCaloriesCheckAlert = self.shouldShowAlertToUser
 			
-			if let text = weightAlert.message, self.lastCaloriesCheckDate != Date().onlyDate {
-				self.sendMessageToManager(title: "", text: text)
+			if let text = weightAlert.message, self.lastCaloriesCheckDateString != Date().onlyDate {
+				self.sendMessageToManager(title: title, text: text)
 			}
 		})
 		weightAlert.showAlert()
