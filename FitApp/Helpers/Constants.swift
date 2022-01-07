@@ -100,6 +100,7 @@ struct K {
 		static let ChatViewController = "ChatViewController"
 		static let ChatsViewController = "ChatsViewController"
 		static let NewChatViewController = "NewChatViewController"
+		static let ChatContainerViewController = "ChatContainerViewController"
 	}
 	
 	struct NavigationId {
