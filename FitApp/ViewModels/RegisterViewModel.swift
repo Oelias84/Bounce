@@ -33,6 +33,9 @@ class RegisterViewModel {
 		guard let termsOfUse = termsOfUse, termsOfUse != false else {
 			throw ErrorManager.RegisterError.termsOfUse
 		}
+		UserProfile.defaults.checkedTermsOfUse = termsOfUse
+		UserProfile.defaults.name = userName
+		UserProfile.defaults.email = email
 		
 		// Check if email dose exist in database
 		GoogleDatabaseManager.shared.userExists(with: email) { exist in
@@ -61,9 +64,6 @@ class RegisterViewModel {
 							
 							if success {
 								// Save User name and update server
-								UserProfile.defaults.checkedTermsOfUse = termsOfUse
-								UserProfile.defaults.name = userName
-								UserProfile.defaults.email = email
 								UserProfile.updateServer()
 								
 								// If contain User image upload to server
@@ -78,7 +78,7 @@ class RegisterViewModel {
 											UserProfile.defaults.profileImageImageUrl = imageUrl
 											
 											//Check if the user is approved in data base
-											GoogleApiManager.shared.checkUserApproved(userEmail: email) {
+											GoogleApiManager.shared.checkUserApproved() {
 												result in
 												
 												switch result {
@@ -98,7 +98,7 @@ class RegisterViewModel {
 									}
 								} else {
 									//Check if the user is approved in data base
-									GoogleApiManager.shared.checkUserApproved(userEmail: email) {
+									GoogleApiManager.shared.checkUserApproved() {
 										result in
 										
 										switch result {

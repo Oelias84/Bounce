@@ -10,7 +10,6 @@ import Foundation
 
 class HomeViewModel {
 	
-	lazy var mealViewModel = MealViewModel.shared
 	private let userConsumption = ConsumptionManager.shared
 	
 	private var fatColor = UIColor.projectTurquoise
@@ -19,13 +18,13 @@ class HomeViewModel {
 
 	// Getters
 	var getMealDate: String {
-		return mealViewModel.getMealStringDate()
+		return MealViewModel.shared.getMealStringDate()
 	}
 	var getUserCalories: String {
-		return mealViewModel.getCurrentMealCalories()
+		return MealViewModel.shared.getCurrentMealCalories()
 	}
 	var getUserExceptionalCalories: String? {
-		if let exCalories = mealViewModel.getExceptionalCalories() {
+		if let exCalories = MealViewModel.shared.getExceptionalCalories() {
 			return exCalories
 		}
 		return nil
@@ -60,7 +59,7 @@ class HomeViewModel {
 	}
 	
 	var getUserMealProgress: UserProgress {
-		let currentProgress = mealViewModel.getProgress()
+		let currentProgress = MealViewModel.shared.getProgress()
 		userConsumption.calculateUserData()
 
 		return UserProgress(carbsTarget: currentProgress.1.carbs,
@@ -71,7 +70,8 @@ class HomeViewModel {
 							fatProgress: currentProgress.0.fats)
 	}
 	func fetchMeals() {
-		mealViewModel.fetchData()
+		
+		MealViewModel.shared.fetchData()
 	}
 	
 	var getFatColor: UIColor {
@@ -86,7 +86,8 @@ class HomeViewModel {
 	
 	// Meals Binder
 	func bindToMealViewModel(completion: @escaping ()->()) {
-		mealViewModel.bindMealViewModelToController = {
+		fetchMeals()
+		MealViewModel.shared.bindMealViewModelToController = {
 			completion()
 		}
 	}
@@ -101,7 +102,7 @@ class HomeViewModel {
 		}
 	}
 	func checkDidFinishDailyMeals(completion: @escaping ()->()) {
-		mealViewModel.checkDailyMealIsDoneBeforeHour {
+		MealViewModel.shared.checkDailyMealIsDoneBeforeHour {
 			mealIsDone in
 			if !mealIsDone {
 				completion()

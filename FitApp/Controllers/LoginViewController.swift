@@ -9,13 +9,13 @@ import UIKit
 import FirebaseAuth
 
 class LoginViewController: UIViewController {
-	
+
+	private let viewModel = LoginViewModel()
+
 	@IBOutlet weak var emailTextfield: UITextField!
 	@IBOutlet weak var passwordTextfield: UITextField!
 	@IBOutlet weak var buttonsStackView: UIStackView!
 	@IBOutlet weak var noAccountButton: UIButton!
-	
-	private let viewModel = LoginViewModel()
 	
 	deinit {
 		removeKeyboardListener()
@@ -26,14 +26,6 @@ class LoginViewController: UIViewController {
 		
 		raiseScreenWhenKeyboardAppears()
 		addScreenTappGesture()
-		
-		if Auth.auth().currentUser != nil {
-			buttonsStackView.isHidden = true
-			noAccountButton.isHidden = true
-		} else {
-			buttonsStackView.isHidden = false
-			noAccountButton.isHidden = false
-		}
 	}
 	
 	@IBAction func signInButtonAction(_ sender: Any) {
@@ -60,11 +52,11 @@ class LoginViewController: UIViewController {
 					
 					self.presentAlert(withTitle: "לא מצליח להתחבר", withMessage: message, options: "אישור") { _ in }
 				} else {
-					let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
-					let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar)
-					
-					homeVC.modalPresentationStyle = .fullScreen
-					self.present(homeVC, animated: true)
+					if !(UserProfile.defaults.finishOnboarding ?? false) {
+						self.startQuestionnaire()
+					} else  {
+						self.moveToHomeViewController()
+					}
 				}
 			}
 		} catch ErrorManager.LoginError.emptyEmail {
@@ -86,5 +78,20 @@ class LoginViewController: UIViewController {
 		} catch {
 			print("Something went wrong!")
 		}
+	}
+	
+	private func startQuestionnaire() {
+		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
+		let questionnaireVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation)
+		
+		questionnaireVC.modalPresentationStyle = .fullScreen
+		present(questionnaireVC, animated: true)
+	}
+	private func moveToHomeViewController() {
+		let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
+		let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar)
+		
+		homeVC.modalPresentationStyle = .fullScreen
+		present(homeVC, animated: true)
 	}
 }

@@ -253,10 +253,10 @@
             </objects>
             <point key="canvasLocation" x="-413" y="1415"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Home Tab Bar Controller-->
         <scene sceneID="ADI-1a-awp">
             <objects>
-                <tabBarController storyboardIdentifier="HomeTabBar" automaticallyAdjustsScrollViewInsets="NO" id="BvC-9T-Ubh" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="HomeTabBar" automaticallyAdjustsScrollViewInsets="NO" id="BvC-9T-Ubh" customClass="HomeTabBarController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MbM-6T-4Ry">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -311,11 +311,10 @@
         <!--Navigation Controller-->
         <scene sceneID="HxQ-5K-cFd">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zmZ-sf-tsA" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="zmZ-sf-tsA" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="Workout" selectedImage="WorkoutSelected" id="qyL-mB-qAR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="0wG-4h-Ua1">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -369,13 +368,12 @@
         <!--Navigation Controller-->
         <scene sceneID="dnp-sr-DGK">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dzb-ek-JRY" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="dzb-ek-JRY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="Article" selectedImage="ArticleSelected" id="2dI-yY-Shp">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="4uZ-sp-1OR">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -390,11 +388,10 @@
         <!--Navigation Controller-->
         <scene sceneID="MX8-hT-dT7">
             <objects>
-                <navigationController restorationIdentifier="HomeNavigation" automaticallyAdjustsScrollViewInsets="NO" id="5vo-ly-MDw" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="HomeNavigation" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="5vo-ly-MDw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="Home" selectedImage="HomeSelected" id="huH-1c-Qcl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="3Xn-2L-GKh">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

@@ -24,20 +24,18 @@ struct GoogleApiManager {
 	}
 	
 	//MARK: - AprovedUsersCheck
-	func checkUserApproved(userEmail: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+	func checkUserApproved(completion: @escaping (Result<Bool, Error>) -> Void) {
 		do {
-			db.collection("approved-users").document("emails").getDocument { (data, error) in
+			db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("profile-data").document("data").getDocument {
+				(data, error) in
+				
 				if let error = error {
 					completion(.failure(error))
 				} else if let data = data {
 					do {
-						var approvedEmails: [String] = []
-						
 						if let decodedData = try data.data(as: approvedUser.self) {
-							
-							approvedEmails = decodedData.emails
-							
-							if approvedEmails.contains(where: { $0.lowercased() == userEmail.lowercased() }) {
+							if decodedData.permissionsLevel == 1 {
+								UserProfile.defaults.permissionsLevel = decodedData.permissionsLevel
 								completion(.success(true))
 							} else {
 								completion(.success(false))
@@ -53,7 +51,7 @@ struct GoogleApiManager {
 	}
 	
 	//MARK: - UserData
-	func updateUserData(userData: ServerUserData){
+	func updateUserData(userData: ServerUserData) {
 		do {
 			try db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("profile-data").document("data").setData(from: userData.self)
 		} catch {

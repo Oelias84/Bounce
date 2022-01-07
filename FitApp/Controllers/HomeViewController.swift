@@ -26,16 +26,6 @@ class HomeViewController: UIViewController {
 	let shared = Spinner()
 	var hud = JGProgressHUD()
 	
-	private lazy var boardManager: BLTNItemManager = {
-		let item = BLTNPageItem(title: "שמחים שהצטרפת אלינו :)")
-		item.isDismissable = false
-		item.descriptionText = "לחצי כאן כדי שנוכל להכיר אותך ולהתאים לך את המסלול הטוב ביותר"
-		item.actionButtonTitle = "בואי נתחיל"
-		item.actionHandler = { _ in
-			self.startQuestionnaire()
-		}
-		return BLTNItemManager(rootItem: item)
-	}()
 	private lazy var titleStackView: UIStackView = {
 		let titleLabel = UILabel()
 		titleLabel.textAlignment = .center
@@ -63,11 +53,10 @@ class HomeViewController: UIViewController {
 		showLoading()
 		
 		if (UserProfile.defaults.finishOnboarding ?? false) {
-			viewModel.fetchMeals()
 			setupMotivationText()
-			
 			viewModel.bindToMealViewModel {
-				[unowned self] in
+				[weak self] in
+				guard let self = self else { return }
 				self.stopLoading()
 				self.setupProgressLabels()
 				self.setUpProgressView()
@@ -77,22 +66,11 @@ class HomeViewController: UIViewController {
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		navigationController?.clear()
 		
-		if !(UserProfile.defaults.finishOnboarding ?? false) {
-			boardManager.showBulletin(above: self)
-			boardManager.allowsSwipeInteraction = false
-		}
-		setUpProgressTextFields()
 		setupProgressLabels()
+		setUpProgressView()
 		checkWeightState()
 		checkMealsState()
-		
-	}
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		
-		setUpProgressView()
 	}
 }
 
@@ -105,16 +83,6 @@ extension HomeViewController: BounceNavigationBarDelegate {
 //MARK: - Functions
 extension HomeViewController {
 	
-	private func startQuestionnaire() {
-		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
-		let questionnaireVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation)
-		
-		questionnaireVC.modalPresentationStyle = .fullScreen
-		boardManager.dismissBulletin()
-		didFinishOnboarding = true
-		self.present(questionnaireVC, animated: true, completion: nil)
-	}
-	
 	private func updateWheels() {
 		DispatchQueue.main.async {
 			[unowned self] in
@@ -122,7 +90,6 @@ extension HomeViewController {
 		}
 	}
 	private func setUpProgressView() {
-		
 		if hasProgressView {
 			updateWheels()
 			return
@@ -198,12 +165,10 @@ extension HomeViewController {
 			if lastMotivationDate == nil || lastMotivationDate!.onlyDate > Date().onlyDate {
 				UserProfile.defaults.lastMotivationDate = Date()
 				UserProfile.defaults.motivationText = motivation
-				
-			} else {
-				DispatchQueue.main.async {
-					[unowned self] in
-					self.topBarView.motivationText = UserProfile.defaults.motivationText
-				}
+			}
+			DispatchQueue.main.async {
+				[unowned self] in
+				self.topBarView.motivationText = UserProfile.defaults.motivationText
 			}
 		}
 	}

@@ -73,7 +73,6 @@
 		7C857BA5262C4D68006AB0BD /* TableViewEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C857BA4262C4D68006AB0BD /* TableViewEmptyView.xib */; };
 		7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89A9FA256D69CA009AD87C /* AppDelegate.swift */; };
 		7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89A9FC256D69CA009AD87C /* SceneDelegate.swift */; };
-		7C89AA02256D69CA009AD87C /* LoginRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA00256D69CA009AD87C /* LoginRegister.storyboard */; };
 		7C89AA07256D69CB009AD87C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA05256D69CB009AD87C /* LaunchScreen.storyboard */; };
 		7C89AA12256D69CB009AD87C /* FitAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89AA11256D69CB009AD87C /* FitAppTests.swift */; };
 		7C89AA1D256D69CB009AD87C /* FitAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89AA1C256D69CB009AD87C /* FitAppUITests.swift */; };
@@ -90,6 +89,8 @@
 		7C98731E26F4A7C8000E5299 /* CaloriesProgressState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98731D26F4A7C8000E5299 /* CaloriesProgressState.swift */; };
 		7C9B345E2583C5B400D30480 /* QuestionnaireSumUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */; };
 		7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */; };
+		7CB0E179278775B400D6EDA5 /* ChatContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */; };
+		7CB0E17B2787764B00D6EDA5 /* LoginRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */; };
 		7CB9ADE5268B12290009B42A /* ChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE4268B12290009B42A /* ChartFormatter.swift */; };
 		7CB9ADE7268CB7140009B42A /* ChartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE6268CB7140009B42A /* ChartView.xib */; };
 		7CB9ADE9268CB72B0009B42A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE8268CB72B0009B42A /* ChartView.swift */; };
@@ -261,7 +262,6 @@
 		7C89A9F7256D69CA009AD87C /* FitApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C89A9FA256D69CA009AD87C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C89A9FC256D69CA009AD87C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7C89AA01256D69CA009AD87C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LoginRegister.storyboard; sourceTree = "<group>"; };
 		7C89AA03256D69CB009AD87C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C89AA06256D69CB009AD87C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C89AA08256D69CB009AD87C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -285,6 +285,8 @@
 		7C98731D26F4A7C8000E5299 /* CaloriesProgressState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesProgressState.swift; sourceTree = "<group>"; };
 		7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSumUpViewController.swift; sourceTree = "<group>"; };
 		7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatContainerViewController.swift; sourceTree = "<group>"; };
+		7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginRegister.storyboard; sourceTree = "<group>"; };
 		7CB9ADE4268B12290009B42A /* ChartFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFormatter.swift; sourceTree = "<group>"; };
 		7CB9ADE6268CB7140009B42A /* ChartView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartView.xib; sourceTree = "<group>"; };
 		7CB9ADE8268CB72B0009B42A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 				7C7434F425CD9DD700D33A9A /* ChatViewController.swift */,
 				7C7434EF25CD9D9D00D33A9A /* ChatsViewController.swift */,
 				7C74352425CDC56300D33A9A /* NewChatViewController.swift */,
+				7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -677,7 +680,7 @@
 			isa = PBXGroup;
 			children = (
 				7C89AA05256D69CB009AD87C /* LaunchScreen.storyboard */,
-				7C89AA00256D69CA009AD87C /* LoginRegister.storyboard */,
+				7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */,
 				7C89AA90256D8286009AD87C /* Questionnaire.storyboard */,
 				B3E36E6F25727F63006CE558 /* Home.storyboard */,
 				B358222225AC930B00C91295 /* Articles.storyboard */,
@@ -1166,7 +1169,6 @@
 				7CE1ED1627738D3700337304 /* Assets.xcassets in Resources */,
 				7C8F51362671F9E3001FF0EE /* AddMealAlertDishView.xib in Resources */,
 				7C0F703A276CEA5900964004 /* SettingsTableViewCell.xib in Resources */,
-				7C89AA02256D69CA009AD87C /* LoginRegister.storyboard in Resources */,
 				7CE1ED1527737A5C00337304 /* CollapsibleTableViewCell.xib in Resources */,
 				B330B87625757C1000BDB206 /* Workout.storyboard in Resources */,
 				7C10BA7A276BCFBE00B5860C /* Assistant-Regular.ttf in Resources */,
@@ -1184,6 +1186,7 @@
 				B38068C725B7197E005C4A24 /* WorkoutTableViewCell.xib in Resources */,
 				7C10BA7D276BCFBE00B5860C /* Assistant-Light.ttf in Resources */,
 				B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */,
+				7CB0E17B2787764B00D6EDA5 /* LoginRegister.storyboard in Resources */,
 				7C7434FB25CD9F0000D33A9A /* Chat.storyboard in Resources */,
 				7CE1ED132773633500337304 /* CollapsibleTableViewHeader.xib in Resources */,
 				7C149C8E25D85A7600B0864F /* AddWeightAlertView.xib in Resources */,
@@ -1339,6 +1342,7 @@
 				7C74AF9E264336EA001D0F5D /* PushNotificationSender.swift in Sources */,
 				B38397F625B4A1BE00154697 /* WorkoutViewModel.swift in Sources */,
 				B30069D325926F090025FA0E /* WeightProgressViewController.swift in Sources */,
+				7CB0E179278775B400D6EDA5 /* ChatContainerViewController.swift in Sources */,
 				B367F18825B1EEC200DF21D7 /* LocalNotificationManager.swift in Sources */,
 				7C74350D25CDBBE900D33A9A /* Sender.swift in Sources */,
 				B302982025793BBA00CF41F0 /* UserProgress.swift in Sources */,
@@ -1469,14 +1473,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		7C89AA00256D69CA009AD87C /* LoginRegister.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7C89AA01256D69CA009AD87C /* Base */,
-			);
-			name = LoginRegister.storyboard;
-			sourceTree = "<group>";
-		};
 		7C89AA05256D69CB009AD87C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

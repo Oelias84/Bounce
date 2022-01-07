@@ -13,7 +13,7 @@ import FirebaseDatabase
 class LoginViewModel {
 	
 	private let googleManager = GoogleApiManager()
-
+	
 	func login(email: String?, password: String?, completion: @escaping (Bool, String?) -> () ) throws {
 		
 		guard let email = email, !email.isEmpty, email != "" else {
@@ -38,7 +38,7 @@ class LoginViewModel {
 			} else {
 				
 				//Check if the user is approved in data base
-				GoogleApiManager.shared.checkUserApproved(userEmail: email) {
+				GoogleApiManager.shared.checkUserApproved() {
 					result in
 					
 					switch result {
@@ -50,17 +50,17 @@ class LoginViewModel {
 
 								switch result {
 								case .success(let userData):
-									Analytics.logEvent(AnalyticsEventLogin, parameters: ["USER_EMAIL": email])
 									LocalNotificationManager.shared.setMealNotification()
-
-									UserProfile.defaults.email = email
+									
 									if let user = user?.user, let data = userData {
 										UserProfile.defaults.updateUserProfileData(data, id: user.uid)
 										if let token =  UserProfile.defaults.fcmToken {
-											let userName = data.name.splitFullName
-											GoogleDatabaseManager.shared.add(token: token, for: User(firsName: userName.0, lastName: userName.1, email: user.email!, deviceToken: token))
+											if let userName = data.name?.splitFullName {
+												GoogleDatabaseManager.shared.add(token: token, for: User(firsName: userName.0, lastName: userName.1, email: user.email!, deviceToken: token))
+											}
 										}
 									}
+									UserProfile.defaults.email = email
 									completion(true, nil)
 								case .failure(let error):
 									print("Error fetching user data: ", error)

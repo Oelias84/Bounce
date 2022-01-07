@@ -166,8 +166,8 @@ extension UserProfile {
 			gander: defaults.gander,
 			lastCaloriesCheckDateString: defaults.lastCaloriesCheckDateString,
 			birthDate: defaults.birthDate?.dateStringForDB,
-			email: defaults.email!,
-			name: defaults.name!,
+			email: defaults.email,
+			name: defaults.name,
 			weight: defaults.weight,
 			currentAverageWeight: defaults.currentAverageWeight,
 			height: defaults.height,
@@ -241,8 +241,8 @@ struct ServerUserData: Codable {
 	let gander: String?
 	let lastCaloriesCheckDateString: String?
 	let birthDate: String?
-	let email: String
-	let name: String
+	let email: String?
+	let name: String?
     let weight: Double?
 	let currentAverageWeight: Double?
     let height: Int?

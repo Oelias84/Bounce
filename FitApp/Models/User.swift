@@ -27,5 +27,5 @@ struct User: Codable {
 
 struct approvedUser: Codable {
 	
-	let emails: [String]
+	let permissionsLevel: Int?
 }

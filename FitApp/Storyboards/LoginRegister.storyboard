@@ -136,9 +136,6 @@
                                         <color key="value" red="0.95686274770000002" green="0.9568628669" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="kJX-hb-JXs" kind="show" id="lV7-Q9-txX"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FdR-RX-Yjo"/>
@@ -266,7 +263,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7RE-NY-QBb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1790" y="-261"/>
+            <point key="canvasLocation" x="1820" y="88"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jki-yR-9Ax">
@@ -494,7 +491,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10Y-mR-Khy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1790" y="413"/>
+            <point key="canvasLocation" x="2593" y="88"/>
         </scene>
     </scenes>
     <resources>
