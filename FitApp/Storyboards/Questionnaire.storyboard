@@ -27,10 +27,9 @@
         <!--Navigation Controller-->
         <scene sceneID="1N5-pd-Vmb">
             <objects>
-                <navigationController restorationIdentifier="QuestionnaireNavigation" storyboardIdentifier="QuestionnaireNavigation" automaticallyAdjustsScrollViewInsets="NO" id="O8A-Ws-eqf" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="QuestionnaireNavigation" storyboardIdentifier="QuestionnaireNavigation" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="O8A-Ws-eqf" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EnS-We-LME">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <userDefinedRuntimeAttributes>
@@ -60,7 +59,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="אחוז שומן" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ve-Jx-vla">
-                                <rect key="frame" x="133" y="112.00000000000001" width="109" height="36.666666666666671"/>
+                                <rect key="frame" x="133" y="68" width="109" height="36.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Assistant-Bold" family="Assistant" pointSize="28"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -548,7 +547,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="תזונה" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daV-DI-eGM">
-                                <rect key="frame" x="156.33333333333334" y="112.00000000000001" width="62.333333333333343" height="36.666666666666671"/>
+                                <rect key="frame" x="156.33333333333334" y="68" width="62.333333333333343" height="36.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Assistant-Bold" family="Assistant" pointSize="28"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -651,7 +650,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="רמת פעילות יומית" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMd-Yd-k7J">
-                                <rect key="frame" x="89.333333333333329" y="112.00000000000001" width="196.33333333333337" height="36.666666666666671"/>
+                                <rect key="frame" x="89.333333333333329" y="68" width="196.33333333333337" height="36.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Assistant-Bold" family="Assistant" pointSize="28"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -853,7 +852,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="רמת כושר" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZF-yb-5co">
-                                <rect key="frame" x="133.33333333333334" y="112.00000000000001" width="108.66666666666666" height="36.666666666666671"/>
+                                <rect key="frame" x="133.33333333333334" y="68" width="108.66666666666666" height="36.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Assistant-Bold" family="Assistant" pointSize="28"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1207,14 +1206,14 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="rsk-B6-Xai"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="advancedButton" destination="0DM-BJ-wry" id="d8r-6z-mAs"/>
-                        <outlet property="beginnerButton" destination="nQA-mm-po0" id="2fb-RQ-hWE"/>
+                        <outlet property="advancedCheckBox" destination="0DM-BJ-wry" id="d8r-6z-mAs"/>
+                        <outlet property="beginnerCheckBox" destination="nQA-mm-po0" id="2fb-RQ-hWE"/>
                         <outlet property="externalTrainingStepper" destination="i1P-Tw-VkB" id="QRr-fR-QJ6"/>
-                        <outlet property="intermediateButton" destination="xTe-r0-Sa4" id="0dZ-He-tqY"/>
+                        <outlet property="fourWeeklyWorkoutsButton" destination="QjY-kk-7KF" id="jZp-Fa-4ok"/>
+                        <outlet property="intermediateCheckBox" destination="xTe-r0-Sa4" id="0dZ-He-tqY"/>
                         <outlet property="nextButton" destination="dFF-Mj-IMh" id="1CZ-Y0-8oh"/>
-                        <outlet property="weeklyWorkoutCheckFirst" destination="04G-aJ-tgB" id="LEK-L0-ct1"/>
-                        <outlet property="weeklyWorkoutCheckSecond" destination="IDG-F9-Wej" id="cHj-If-svU"/>
-                        <outlet property="weeklyWorkoutCheckThird" destination="QjY-kk-7KF" id="jZp-Fa-4ok"/>
+                        <outlet property="threeWeeklyWorkoutsButton" destination="IDG-F9-Wej" id="cHj-If-svU"/>
+                        <outlet property="towWeeklyWorkoutsButton" destination="04G-aJ-tgB" id="LEK-L0-ct1"/>
                         <segue destination="1ZW-um-s0r" kind="show" identifier="moveToSumup" id="DIn-bP-nBF"/>
                     </connections>
                 </viewController>
@@ -1763,7 +1762,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="פרטים אישיים" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pK0-lB-4bo">
-                                <rect key="frame" x="112.66666666666669" y="112.00000000000001" width="150" height="36.666666666666671"/>
+                                <rect key="frame" x="112.66666666666669" y="68" width="150" height="36.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Assistant-Bold" family="Assistant" pointSize="28"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1902,7 +1901,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="רמת פעילות יומית" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rmz-uc-oS8">
-                                <rect key="frame" x="89.333333333333329" y="112.00000000000001" width="196.33333333333337" height="36.666666666666671"/>
+                                <rect key="frame" x="89.333333333333329" y="68" width="196.33333333333337" height="36.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Assistant-Bold" family="Assistant" pointSize="28"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -2148,7 +2147,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מגדר" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hp3-wN-PSo">
-                                <rect key="frame" x="46" y="112.00000000000001" width="283" height="36.666666666666671"/>
+                                <rect key="frame" x="46" y="68" width="283" height="36.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Assistant-Bold" family="Assistant" pointSize="28"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
