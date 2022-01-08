@@ -17,12 +17,12 @@ extension Double {
         return numberToRound.rounded() / n
     }
     var roundHalfDown: Double {
-        let friction = self.fraction
+        let fraction = self.fraction
         let whole = self.whole.nextDown.rounded()
 		
-		if friction >= 0.75 {
+		if fraction >= 0.75 {
 			return whole + 1
-		} else if friction < 0.75 && friction >= 0.25 {
+		} else if fraction < 0.75 && fraction >= 0.25 {
 			return whole + 0.5
 		} else {
 			return whole

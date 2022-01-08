@@ -33,7 +33,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	
 	private let numberPicker = UIPickerView()
 	private let weightNumberArray = Array(30...150)
-    private let frictionNumberArray = Array(0...99)
+    private let fractionNumberArray = Array(0...99)
     private let heightNumberArray = Array(100...250)
 
     private var height: Int?
@@ -44,7 +44,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 
     private var weightString: String?
 	private var weighWholeString: String?
-	private var weightFrictionString: String?
+	private var weightfractionString: String?
     
     private let googleManager = GoogleApiManager()
     
@@ -127,7 +127,7 @@ extension QuestionnairePersonalDetailsViewController: UIPickerViewDelegate, UIPi
 			}
 			return heightNumberArray.count
 		} else {
-			return frictionNumberArray.count
+			return fractionNumberArray.count
 		}
 	}
 	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -137,7 +137,7 @@ extension QuestionnairePersonalDetailsViewController: UIPickerViewDelegate, UIPi
 			}
 			return "\(heightNumberArray[row])"
 		} else {
-			return "\(frictionNumberArray[row])"
+			return "\(fractionNumberArray[row])"
 		}
 	}
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -148,9 +148,9 @@ extension QuestionnairePersonalDetailsViewController: UIPickerViewDelegate, UIPi
 			if component == 0 {
 				weighWholeString = "\(weightNumberArray[row])"
 			} else {
-				weightFrictionString = "\(frictionNumberArray[row])"
+				weightfractionString = "\(fractionNumberArray[row])"
 			}
-			weightString = "\(weighWholeString ?? "0").\(weightFrictionString ?? "0")"
+			weightString = "\(weighWholeString ?? "0").\(weightfractionString ?? "0")"
 			weightTextField.text = weightString
 			weight = Double(weightString!)
 		}
