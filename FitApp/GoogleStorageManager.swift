@@ -22,7 +22,7 @@ final class GoogleStorageManager {
 		
 		var description : String {
 			switch self {
-			case .profileImage: return "images"
+			case .profileImage: return "profileImage"
 			case .weightImage: return "weight"
 			case .pdf: return "pdf"
 			case .messagesImage: return "message_images"
