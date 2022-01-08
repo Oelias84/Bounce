@@ -11,6 +11,7 @@ class ConsumptionManager {
 	
 	static let shared = ConsumptionManager()
 	
+	private var gender: Gender?
 	private var weight: Double?
 	private var currentAverageWeight: Double?
 	private var fatPercentage: Double?
@@ -59,6 +60,7 @@ class ConsumptionManager {
 	func calculateUserData() {
 		let userData = UserProfile.defaults
 		
+		self.gender = userData.getGender
 		self.weight = userData.weight
 		self.currentAverageWeight = userData.currentAverageWeight
 		self.fatPercentage = userData.fatPercentage
@@ -91,11 +93,18 @@ extension ConsumptionManager {
 	
 	//MARK: - lean body weight
 	//= daily calories
-	private func TDEE(weight: Double, fatPercentage: Double, Kilometer: Double?, lifeStyle: Double?, numberOfTrainings: Int) -> Double? {
+	private func TDEE(gender: Gender, weight: Double, fatPercentage: Double, Kilometer: Double?, lifeStyle: Double?, numberOfTrainings: Int) -> Double? {
 		
 		let LBM = weight * ((100 - fatPercentage) / 100)
 		let BMR = (LBM * 22.0) + 500.0
-		let EAT = (150.0 * Double(numberOfTrainings)) / 7.0
+		var EAT: Double {
+			switch gender {
+			case .male:
+				return (150.0 * Double(numberOfTrainings)) / 7.0
+			case .female:
+				return (250.0 * Double(numberOfTrainings)) / 7.0
+			}
+		}
 		var NIT: Double!
 		
 		if let Kilometer = Kilometer {
@@ -130,9 +139,8 @@ extension ConsumptionManager {
 	//Calculate Daily Protein portion dish
 	func proteinPortion(proteinGrams: Double) -> Double {
 		let proteinPortion = proteinGrams / 20.0
-		let truncatingRemainder = proteinPortion.fraction
 		
-		return roundOrHalf(friction: truncatingRemainder, portion: proteinPortion)
+		return proteinPortion.roundHalfDown
 	}
 	
 	//MARK: - Fat calculation
@@ -144,43 +152,29 @@ extension ConsumptionManager {
 	private func portionFat(tdee: Double) -> Double {
 		let fatCalories = tdee * 0.15
 		let portionFat = fatCalories / 100
-		let truncatingRemainder = portionFat.fraction
 		
-		return roundOrHalf(friction: truncatingRemainder, portion: portionFat)
+		return portionFat.roundHalfDown
 	}
 	
 	//MARK: - Carbs calculation
 	private func portionCarbs(fatPortion: Double, proteinPortion: Double, calories: Double) -> Double {
 		let caloriesCarbs = calories - ((fatPortion * 100) + (proteinPortion * 150))
 		let portion = caloriesCarbs / 100.0
-		let truncatingRemainder = portion.fraction
 		
-		return roundOrHalf(friction: truncatingRemainder, portion: portion)
+		return portion.roundHalfDown
 	}
 	
 	private func configureData() {
-		guard let weight = weight, let fatPercentage = fatPercentage, var numberOfTrainings = numberOfTrainings else { return }
+		guard let gender = gender, let weight = weight, let fatPercentage = fatPercentage, var numberOfTrainings = numberOfTrainings else { return }
 		if let externalTraining = externalNumberOfTraining { numberOfTrainings += externalTraining }
-		guard let calculatedCalories = TDEE(weight: currentAverageWeight ?? weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings) else { return }
+		guard let calculatedCalories = TDEE(gender: gender, weight: currentAverageWeight ?? weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings) else { return }
 		
 		self.dailyCalories = calculatedCalories
 		self.dailyFatPortion = portionFat(tdee: dailyCalories!)
 		self.dailyProteinPortion = proteinPortion(proteinGrams: proteinGrams(weight: weight, fatPercentage: fatPercentage))
 		self.dailyCarbsPortion = portionCarbs(fatPortion: self.dailyFatPortion!, proteinPortion: self.dailyProteinPortion!, calories: dailyCalories!)
 	}
-	
-	private func roundOrHalf(friction: Double, portion: Double) -> Double {
 
-		if (friction > 0.25 && friction < 0.5) || (friction < 0.75 && friction > 0.5) {
-			return portion.round(nearest: 0.5)
-		} else if friction <= 0.25 {
-			return portion.rounded(.towardZero)
-		} else if  friction >= 0.75 {
-			return portion.rounded(.awayFromZero)
-		} else {
-			return portion
-		}
-	}
 	func stepsToKilometers(steps: Int, height: Int) -> Double {
 		let stepsLengthForMeter = (Double(height) * 0.413) / 100
 		let stepsForOneKilometer = 1000 / stepsLengthForMeter
