@@ -19,13 +19,13 @@ extension Double {
     var roundHalfDown: Double {
         let friction = self.fraction
         let whole = self.whole.nextDown.rounded()
-        
-        if friction > 0.0 && friction < 0.5 {
-            return whole
-        } else if friction > 0.5 && friction < whole+1 {
-            return whole + 0.5
-        } else {
-            return self
-        }
+		
+		if friction >= 0.75 {
+			return whole + 1
+		} else if friction < 0.75 && friction >= 0.25 {
+			return whole + 0.5
+		} else {
+			return whole
+		}
     }
 }
