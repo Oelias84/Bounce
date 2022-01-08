@@ -5,6 +5,7 @@
 //  Created by Ofir Elias on 24/11/2020.
 //
 
+import UIKit
 import Foundation
 
 enum Gender: String, Codable {
@@ -13,8 +14,11 @@ enum Gender: String, Codable {
 }
 
 struct UserProfile {
-    
-    static var defaults = UserProfile()
+	
+	static var defaults = UserProfile()
+	
+	private var currentImage: UIImage?
+	private var currentImageUrl: String?
 	
 	@UserDefault(key: .checkedTermsOfUse)
 	var checkedTermsOfUse: Bool?
@@ -67,49 +71,49 @@ struct UserProfile {
 	@UserDefault(key: .lastWightImageUrl)
 	var lastWightImageUrl: String?
 	
-    //UserBasicDetails
-    @UserDefault(key: .name)
-    var name: String?
-    
-    @UserDefault(key: .birthDate)
-    var birthDate: Date?
-    
-    @UserDefault(key: .weight)
-    var weight: Double?
-    
+	//UserBasicDetails
+	@UserDefault(key: .name)
+	var name: String?
+	
+	@UserDefault(key: .birthDate)
+	var birthDate: Date?
+	
+	@UserDefault(key: .weight)
+	var weight: Double?
+	
 	@UserDefault(key: .currentAverageWeight)
 	var currentAverageWeight: Double?
 	
-    @UserDefault(key: .height)
-    var height: Int?
+	@UserDefault(key: .height)
+	var height: Int?
 	
 	@UserDefault(key: .lifeStyle)
 	var lifeStyle: Double?
-    
-    //UserFatPercentage
-    @UserDefault(key: .fatPercentage)
-    var fatPercentage: Double?
-    
-    //UserActivity
-    @UserDefault(key: .kilometer)
-    var kilometer: Double?
-    
-    @UserDefault(key: .steps)
-    var steps: Int?
-    
-    //UserNutrition
-    @UserDefault(key: .mealsPerDay)
-    var mealsPerDay: Int?
-    
-    @UserDefault(key: .mostHungry)
-    var mostHungry: Int?
-    
-    //UserFitnessLevel
-    @UserDefault(key: .fitnessLevel)
-    var fitnessLevel: Int?
-    
-    @UserDefault(key: .weaklyWorkouts)
-    var weaklyWorkouts: Int?
+	
+	//UserFatPercentage
+	@UserDefault(key: .fatPercentage)
+	var fatPercentage: Double?
+	
+	//UserActivity
+	@UserDefault(key: .kilometer)
+	var kilometer: Double?
+	
+	@UserDefault(key: .steps)
+	var steps: Int?
+	
+	//UserNutrition
+	@UserDefault(key: .mealsPerDay)
+	var mealsPerDay: Int?
+	
+	@UserDefault(key: .mostHungry)
+	var mostHungry: Int?
+	
+	//UserFitnessLevel
+	@UserDefault(key: .fitnessLevel)
+	var fitnessLevel: Int?
+	
+	@UserDefault(key: .weaklyWorkouts)
+	var weaklyWorkouts: Int?
 	
 	@UserDefault(key: .externalWorkout)
 	var externalWorkout: Int?
@@ -158,6 +162,29 @@ extension UserProfile {
 			return "אורח חיים פעיל מאוד"
 		default:
 			return ""
+		}
+	}
+	mutating func getUserProfileImage(completion: @escaping (UIImage?)->()) {
+		
+		guard let imageUrl = self.profileImageImageUrl else {
+			completion(nil)
+			return
+		}
+		
+		if currentImageUrl == nil {
+			self.currentImageUrl = imageUrl
+			if let image = currentImageUrl?.showImage {
+				self.currentImage = image
+				completion(image)
+			}
+		} else if currentImageUrl != self.profileImageImageUrl {
+			self.currentImageUrl = self.profileImageImageUrl
+			if let image = currentImageUrl?.showImage {
+				self.currentImage = image
+				completion(image)
+			}
+		} else {
+			completion(currentImage)
 		}
 	}
 	static func updateServer() {
@@ -250,12 +277,12 @@ struct ServerUserData: Codable {
 	let birthDate: String?
 	let email: String?
 	let name: String?
-    let weight: Double?
+	let weight: Double?
 	let currentAverageWeight: Double?
-    let height: Int?
-    let fatPercentage: Double?
-    let steps: Int?
-    let kilometer: Double?
+	let height: Int?
+	let fatPercentage: Double?
+	let steps: Int?
+	let kilometer: Double?
 	let lifeStyle: Double?
 	let mealsPerDay: Int?
 	let mostHungry: Int?

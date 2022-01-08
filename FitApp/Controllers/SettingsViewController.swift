@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import CropViewController
 
 enum SettingsMenu {
 	
@@ -23,6 +24,8 @@ class SettingsViewController: UIViewController {
 	private var tableViewData: [SettingsMenu: [SettingsCell]]!
 	private var userData: UserProfile! = UserProfile.defaults
 	
+	private let imagePickerController = UIImagePickerController()
+	
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var topBarView: BounceNavigationBarView!
 	
@@ -33,6 +36,11 @@ class SettingsViewController: UIViewController {
 		}
 	}
 	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		imagePickerController.delegate = self
+	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
@@ -141,6 +149,24 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 		return stepperCell
 	}
 }
+//Camera delegate
+extension SettingsViewController: CropViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+	
+	func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+		cropViewController.dismiss(animated: true) {
+			self.saveImage(image)
+		}
+	}
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+		let tempoImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+		
+		picker.dismiss(animated: true)
+		presentCropViewController(image: tempoImage, type: .circular)
+	}
+	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+		picker.dismiss(animated: true)
+	}
+}
 extension SettingsViewController: SettingsStepperViewCellDelegate {
 	
 	func valueChanged(_ newValue: Double, cell: UITableViewCell) {
@@ -178,6 +204,9 @@ extension SettingsViewController: SettingsStepperViewCellDelegate {
 }
 extension SettingsViewController: BounceNavigationBarDelegate {
 	
+	func cameraButtonTapped() {
+		presentImagePickerActionSheet(imagePicker: imagePickerController) { _ in }
+	}
 	func backButtonTapped() {
 		navigationController?.popViewController(animated: true)
 	}
@@ -187,6 +216,7 @@ extension SettingsViewController: BounceNavigationBarDelegate {
 extension SettingsViewController {
 	
 	private func setupTopBar() {
+		
 		topBarView.delegate = self
 		topBarView.nameTitle = "הגדרות"
 		topBarView.isBackButtonHidden = false
@@ -208,15 +238,15 @@ extension SettingsViewController {
 		[
 			.activity: [SettingsCell(title: "רמת פעילות", secondaryTitle: setupActivityTitle())],
 			
-			.nutrition: [SettingsCell(title: "מספר ארוחות", stepperValue: setupNumberOfMealsStepper.2, stepperMin: setupNumberOfMealsStepper.0, stepperMax: setupNumberOfMealsStepper.1),
-						 SettingsCell(title: "מתי אני הכי רעב", secondaryTitle: setupMostHungryTitle())],
+				.nutrition: [SettingsCell(title: "מספר ארוחות", stepperValue: setupNumberOfMealsStepper.2, stepperMin: setupNumberOfMealsStepper.0, stepperMax: setupNumberOfMealsStepper.1),
+							 SettingsCell(title: "מתי אני הכי רעב", secondaryTitle: setupMostHungryTitle())],
 			
-			.fitness: [SettingsCell(title: "רמת קושי", secondaryTitle: setupFitnessLevelTitle()),
-					   SettingsCell(title: "מספר אימונים שבועי", stepperValue: setupNumberOfTrainingsStepper.2, stepperMin: setupNumberOfTrainingsStepper.0, stepperMax: setupNumberOfTrainingsStepper.1),
-					   SettingsCell(title: "מספר אימונים שבועי חיצוני", stepperValue: setupNumberOfExternalTrainingsStepper.2, stepperMin: setupNumberOfExternalTrainingsStepper.0, stepperMax: setupNumberOfExternalTrainingsStepper.1)],
+				.fitness: [SettingsCell(title: "רמת קושי", secondaryTitle: setupFitnessLevelTitle()),
+						   SettingsCell(title: "מספר אימונים שבועי", stepperValue: setupNumberOfTrainingsStepper.2, stepperMin: setupNumberOfTrainingsStepper.0, stepperMax: setupNumberOfTrainingsStepper.1),
+						   SettingsCell(title: "מספר אימונים שבועי חיצוני", stepperValue: setupNumberOfExternalTrainingsStepper.2, stepperMin: setupNumberOfExternalTrainingsStepper.0, stepperMax: setupNumberOfExternalTrainingsStepper.1)],
 			
-			.system: [SettingsCell(title: "התראות", secondaryTitle: ""),
-					  SettingsCell(title: "התנתק", secondaryTitle: "")]
+				.system: [SettingsCell(title: "התראות", secondaryTitle: ""),
+						  SettingsCell(title: "התנתק", secondaryTitle: "")]
 		]
 	}
 	
@@ -357,4 +387,32 @@ extension SettingsViewController {
 		
 		present(mailVC, animated: true)
 	}
+	
+	private func saveImage(_ image: UIImage) {
+		guard let userSafeEmail = UserProfile.defaults.email?.safeEmail else { return }
+		let profileImageUrl = "\(userSafeEmail)_profile_picture.jpeg"
+		
+		// If contain User image upload to server
+		self.saveUserImage(image: image, for: profileImageUrl) {
+			[weak self] result in
+			guard let self = self else { return }
+			
+			switch result {
+			case .success(let imageUrl):
+				// Saves image url to user defaults
+				UserProfile.defaults.profileImageImageUrl = imageUrl
+				self.topBarView.userImage = imageUrl
+			case .failure(let error):
+				print(error.localizedDescription)
+				self.presentOkAlert(withMessage: "נכשל לשמור את התמונה אנא נסו שנית", completion: {})
+			}
+		}
+	}
+	private func saveUserImage(image: UIImage, for url: String, completion: @escaping (Result<String, Error>) -> Void) {
+		GoogleStorageManager.shared.uploadImage(from: .profileImage, data: image.jpegData(compressionQuality: 8)!, fileName: url) {
+			result in
+			completion(result)
+		}
+	}
 }
+

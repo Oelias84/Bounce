@@ -5,12 +5,13 @@
 //  Created by Ofir Elias on 13/12/2021.
 //
 
-import Foundation
 import UIKit
+import Foundation
 
-protocol BounceNavigationBarDelegate: AnyObject {
+@objc protocol BounceNavigationBarDelegate: AnyObject {
 	
 	func backButtonTapped()
+	@objc optional func cameraButtonTapped()
 }
 
 final class BounceNavigationBarView: UIView {
@@ -34,6 +35,7 @@ final class BounceNavigationBarView: UIView {
 	}
 	
 	weak var delegate: BounceNavigationBarDelegate?
+	
 	var presentingVC: UIViewController?
 	
 	var nameTitle: String? = "" {
@@ -49,6 +51,11 @@ final class BounceNavigationBarView: UIView {
 	var motivationText: String? = "" {
 		didSet {
 			motivationLabel.text = motivationText
+		}
+	}
+	var userImage: String? {
+		didSet {
+			setImage()
 		}
 	}
 	var isDayWelcomeHidden: Bool {
@@ -99,13 +106,14 @@ final class BounceNavigationBarView: UIView {
 			return informationButton.isHidden
 		}
 	}
-
+	
 	override func awakeFromNib() {
 		initWithNib()
 	}
 	
 	@IBAction func userProfileButtonTapped(_ sender: Any) {
 		openSettings()
+		delegate?.cameraButtonTapped?()
 	}
 	@IBAction func messageButtonTapped(_ sender: Any) {
 		openMessages()
@@ -114,7 +122,7 @@ final class BounceNavigationBarView: UIView {
 		delegate?.backButtonTapped()
 	}
 }
-	
+
 //MARK: - Functions
 extension BounceNavigationBarView {
 	
@@ -134,11 +142,7 @@ extension BounceNavigationBarView {
 				view.trailingAnchor.constraint(equalTo: trailingAnchor),
 			]
 		)
-		if let image = UserProfile.defaults.profileImageImageUrl?.showImage {
-			userProfileButton.setImage(image.circleMasked, for: .normal)
-		}
-		userProfileButton.imageView?.contentMode = .scaleAspectFit
-		userProfileButton.imageEdgeInsets = UIEdgeInsets(top: 37, left: 37, bottom: 37, right: 37)
+		setImage()
 	}
 	private func openMessages() {
 		let chatStoryboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
@@ -157,4 +161,18 @@ extension BounceNavigationBarView {
 			vc.navigationController?.pushViewController(settingsVC, animated: true)
 		}
 	}
+	func setImage() {
+		DispatchQueue.global(qos: .background).async {
+			UserProfile.defaults.getUserProfileImage() {
+				image in
+				
+				DispatchQueue.main.async {
+					self.userProfileButton.setImage(image?.circleMasked, for: .normal)
+					self.userProfileButton.imageView?.contentMode = .scaleAspectFill
+					self.userProfileButton.imageEdgeInsets = UIEdgeInsets(top: 37, left: 37, bottom: 37, right: 37)
+				}
+			}
+		}
+	}
 }
+

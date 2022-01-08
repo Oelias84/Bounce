@@ -104,10 +104,10 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="k0w-Wr-2EH" userLabel="Right Stack View">
-                            <rect key="frame" x="306" y="107" width="84" height="37"/>
+                            <rect key="frame" x="300" y="107" width="90" height="37"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="odj-pP-h1t" userLabel="Right Stack View">
-                                    <rect key="frame" x="0.0" y="0.0" width="84" height="37"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="90" height="37"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Oc-Oq-zBg" userLabel="messageButton" colorLabel="IBBuiltInLabel-Orange">
                                             <rect key="frame" x="0.0" y="0.0" width="53" height="37"/>
@@ -118,9 +118,13 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f51-iL-U68" userLabel="userProfileButton">
-                                            <rect key="frame" x="53" y="0.0" width="31" height="37"/>
+                                            <rect key="frame" x="53" y="0.0" width="37" height="37"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="37" id="5X8-qh-JEj"/>
+                                                <constraint firstAttribute="width" secondItem="f51-iL-U68" secondAttribute="height" multiplier="1:1" id="7yE-w7-J82"/>
+                                            </constraints>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal" title=" ">
+                                            <state key="normal">
                                                 <imageReference key="image" image="person.circle" catalog="system" symbolScale="large"/>
                                             </state>
                                             <connections>

@@ -83,9 +83,10 @@ extension String {
 	//MARK: - Image from string
 	var showImage: UIImage? {
 		guard let url = URL(string: self) else { return nil }
-		let data = try? Data(contentsOf: url)
-		
-		return UIImage(data: data!)
+		if let data = try? Data(contentsOf: url) {
+			return UIImage(data: data)
+		}
+		return nil
 	}
 	
 	//MARK: - Validation
