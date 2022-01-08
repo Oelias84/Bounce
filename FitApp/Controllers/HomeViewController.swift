@@ -42,9 +42,9 @@ class HomeViewController: UIViewController {
 	@IBOutlet weak var proteinCountLabel: UILabel!
 	@IBOutlet weak var circularProgress: UIView!
 	
-	@IBOutlet weak var fatTargateLabel: UILabel!
-	@IBOutlet weak var carbsTargateLabel: UILabel!
-	@IBOutlet weak var proteinTargateLabel: UILabel!
+	@IBOutlet weak var fatTargetLabel: UILabel!
+	@IBOutlet weak var carbsTargetLabel: UILabel!
+	@IBOutlet weak var proteinTargetLabel: UILabel!
 	
 	@IBOutlet weak var topBarView: BounceNavigationBarView!
 	
@@ -182,9 +182,9 @@ extension HomeViewController {
 		fatCountLabel.text = viewModel.getFatCurrentValue
 		carbsCountLabel.text = viewModel.getCarbsCurrentValue
 		proteinCountLabel.text = viewModel.getProteinCurrentValue
-		fatTargateLabel.text = "/\(viewModel.getFatTargateValue)"
-		carbsTargateLabel.text = "/\(viewModel.getCarbsTargateValue)"
-		proteinTargateLabel.text = "/\(viewModel.getProteinTargateValue)"
+		fatTargetLabel.text = "/\(viewModel.getFatTargateValue)"
+		carbsTargetLabel.text = "/\(viewModel.getCarbsTargateValue)"
+		proteinTargetLabel.text = "/\(viewModel.getProteinTargateValue)"
 	}
 	
 	private func checkMealsState() {
