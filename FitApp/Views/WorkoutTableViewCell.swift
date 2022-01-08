@@ -15,7 +15,7 @@ class WorkoutTableViewCell: UITableViewCell {
         }
     }
     var workoutNumber: Int!
-    
+	var workoutType: workoutType!
     @IBOutlet weak var workoutTitleLabel: UILabel!
     @IBOutlet weak var workoutDescriptionLabel: UILabel!
     @IBOutlet weak var workoutBackgroundCell: UIView!
@@ -46,8 +46,8 @@ class WorkoutTableViewCell: UITableViewCell {
 		
 		exerciseLabel.text = "\(numberOfExercise) תרגילים"
 		setsLabel.text = "\(numberOfSets * numberOfExercise) סטים"
-		
-        workoutTitleLabel.text = "אימון #\(workoutNumber!)"
+		timeLabel.text = workout.time
+		workoutTitleLabel.text = workoutType == .home ? "אימון בית \(workoutNumber!)" : "אימון חד״כ \(workoutNumber!)"
         workoutDescriptionLabel.text = workout.name
         selectionStyle = .none
     }

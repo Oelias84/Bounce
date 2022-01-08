@@ -36,13 +36,13 @@
                                 <rect key="frame" x="24" y="16" width="464" height="127"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="שם האימון" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ad-XL-m3F">
-                                        <rect key="frame" x="0.0" y="0.0" width="464" height="36.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="464" height="37.5"/>
                                         <fontDescription key="fontDescription" name="Assistant-Bold" family="Assistant" pointSize="25"/>
                                         <color key="textColor" name="ProjectTail"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="משפט המתאר את האימון בקצרה" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPb-ke-Qm1">
-                                        <rect key="frame" x="0.0" y="40.5" width="464" height="52.5"/>
+                                        <rect key="frame" x="0.0" y="41.5" width="464" height="51.5"/>
                                         <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -51,10 +51,10 @@
                                         <rect key="frame" x="0.0" y="97" width="464" height="30"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="nba-9E-zCy">
-                                                <rect key="frame" x="0.0" y="0.0" width="260" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="272.5" height="30"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="FoE-C3-KPx">
-                                                        <rect key="frame" x="0.0" y="6" width="65.5" height="18.5"/>
+                                                        <rect key="frame" x="0.0" y="6" width="67.5" height="18"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.up.left.and.arrow.down.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="uA5-Lp-CEo">
                                                                 <rect key="frame" x="0.0" y="1" width="18" height="16"/>
@@ -65,7 +65,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="תרגילים" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uX6-Rg-aRO">
-                                                                <rect key="frame" x="24" y="0.0" width="41.5" height="18.5"/>
+                                                                <rect key="frame" x="24" y="1" width="43.5" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -73,7 +73,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="SZy-nM-IEe">
-                                                        <rect key="frame" x="99.5" y="6" width="51" height="18.5"/>
+                                                        <rect key="frame" x="104" y="6" width="52.5" height="18"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.counterclockwise" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Kh4-UR-qUk">
                                                                 <rect key="frame" x="0.0" y="-1" width="18" height="18"/>
@@ -84,7 +84,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="סטים" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNj-8H-yWi">
-                                                                <rect key="frame" x="24" y="0.0" width="27" height="18.5"/>
+                                                                <rect key="frame" x="24" y="1" width="28.5" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -92,7 +92,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="8I8-pv-4bg">
-                                                        <rect key="frame" x="174.5" y="6" width="85.5" height="18.5"/>
+                                                        <rect key="frame" x="180.5" y="6" width="92" height="18"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stopwatch" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ymw-qB-aRj">
                                                                 <rect key="frame" x="0.0" y="-1.5" width="18" height="19"/>
@@ -103,7 +103,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="55-45 דקות" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPE-3b-GvW">
-                                                                <rect key="frame" x="24" y="0.0" width="61.5" height="18.5"/>
+                                                                <rect key="frame" x="24" y="1" width="68" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>

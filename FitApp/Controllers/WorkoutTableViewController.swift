@@ -70,6 +70,7 @@ extension WorkoutTableViewController: UITableViewDelegate, UITableViewDataSource
 		let cellData = workoutViewModel.getWorkout(for: indexPath.row)
 		let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.workoutCell, for: indexPath) as! WorkoutTableViewCell
 		
+		cell.workoutType = workoutViewModel.type
 		cell.workoutNumber = indexPath.row + 1
 		cell.workout = cellData
 		return cell
