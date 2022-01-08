@@ -239,12 +239,12 @@
                     <connections>
                         <outlet property="caloriesLabel" destination="Xn8-Tp-ozb" id="ZqM-1E-o3T"/>
                         <outlet property="carbsCountLabel" destination="oVv-Ky-GsP" id="IkM-u7-FI9"/>
-                        <outlet property="carbsTargateLabel" destination="mar-kr-c7w" id="fl2-lI-kXy"/>
+                        <outlet property="carbsTargetLabel" destination="mar-kr-c7w" id="kxd-7Z-Ezn"/>
                         <outlet property="circularProgress" destination="u82-fd-ybZ" id="7ze-5G-gzG"/>
                         <outlet property="fatCountLabel" destination="aiS-TJ-dYx" id="Tci-qL-tEk"/>
-                        <outlet property="fatTargateLabel" destination="ZBO-tA-KUF" id="R35-rL-8lR"/>
+                        <outlet property="fatTargetLabel" destination="ZBO-tA-KUF" id="hz8-7Q-npP"/>
                         <outlet property="proteinCountLabel" destination="pe4-yu-ZBb" id="JQp-Xu-AnU"/>
-                        <outlet property="proteinTargateLabel" destination="VOb-3k-qut" id="eBt-Mz-DbU"/>
+                        <outlet property="proteinTargetLabel" destination="VOb-3k-qut" id="XWx-5B-yxf"/>
                         <outlet property="tipContainerView" destination="NVe-Of-Wpt" id="ls1-Cz-YUH"/>
                         <outlet property="topBarView" destination="NVe-Of-Wpt" id="efz-AD-y0M"/>
                     </connections>
