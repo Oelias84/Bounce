@@ -20,13 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		guard let windowScene = (scene as? UIWindowScene) else { return }
 		let window = UIWindow(windowScene: windowScene)
 		window.overrideUserInterfaceStyle = .light
-
+			
+		//Add loading screen here
+		
 		if !(UserProfile.defaults.hasRunBefore ?? false) {
-			do {
-				try Auth.auth().signOut()
-			} catch {
-				print("could not signOut")
-			}
+			//Sign out User
+			signOutCurrentUser()
+			//Go To Login Screen
+			goToLogin(window)
 			UserProfile.defaults.hasRunBefore = true
 		} else {
 			// Run code here for every other launch but the first
@@ -40,40 +41,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 						if isApproved {
 							
 							if UserProfile.defaults.finishOnboarding == true {
-								//Go to Home Screen
-								let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
-								let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar) as! UITabBarController
-								
-								homeVC.modalPresentationStyle = .fullScreen
-								window.rootViewController = homeVC
+								self.goToHome(window)
 							} else {
-								//Go to Questionnaire
-								let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
-								let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation) as! UINavigationController
-								
-								homeVC.modalPresentationStyle = .fullScreen
-								window.rootViewController = homeVC
+								self.goToQuestionnaire(window)
 							}
-							self.window = window
-							window.makeKeyAndVisible()
 						} else {
 							Spinner.shared.stop()
+							self.goToLogin(window)
 							self.window?.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "אין באפשרוך להתחבר, אנא צרי איתנו קשר") { }
 						}
 					case .failure(let error):
+						self.goToLogin(window)
 						self.window?.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה: \(error.localizedDescription)") { }
 					}
 				}
 			} else {
 				//Go To Login Screen
-				let storyboard = UIStoryboard(name: K.StoryboardName.loginRegister, bundle: nil)
-				let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.startNavigationViewController) as! UINavigationController
-				
-				homeVC.modalPresentationStyle = .fullScreen
-				window.rootViewController = homeVC
-				
-				self.window = window
-				window.makeKeyAndVisible()
+				goToLogin(window)
 			}
 		}
 	}
@@ -105,6 +89,50 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// Called as the scene transitions from the foreground to the background.
 		// Use this method to save data, release shared resources, and store enough scene-specific state information
 		// to restore the scene back to its current state.
+	}
+//	private func lunchScreen(_ window: UIWindow) {
+//		let storyboard = UIStoryboard(name: K.StoryboardName.launchScreen, bundle: nil)
+//		let homeVC = storyboard.instantiateViewController(identifier: "lunchScreen")
+//
+//		homeVC.modalPresentationStyle = .fullScreen
+//		window.rootViewController = homeVC
+//		self.window = window
+//		window.makeKeyAndVisible()
+//	}
+	private func goToLogin(_ window: UIWindow) {
+		let storyboard = UIStoryboard(name: K.StoryboardName.loginRegister, bundle: nil)
+		let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.startNavigationViewController) as! UINavigationController
+		
+		homeVC.modalPresentationStyle = .fullScreen
+		window.rootViewController = homeVC
+		self.window = window
+		window.makeKeyAndVisible()
+	}
+	private func goToQuestionnaire(_ window: UIWindow) {
+		//Go to Questionnaire
+		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
+		let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation) as! UINavigationController
+		
+		homeVC.modalPresentationStyle = .fullScreen
+		window.rootViewController = homeVC
+		self.window = window
+		window.makeKeyAndVisible()
+	}
+	private func goToHome(_ window: UIWindow) {
+		let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
+		let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar) as! UITabBarController
+		
+		homeVC.modalPresentationStyle = .fullScreen
+		window.rootViewController = homeVC
+		self.window = window
+		window.makeKeyAndVisible()
+	}
+	private func signOutCurrentUser() {
+		do {
+			try Auth.auth().signOut()
+		} catch {
+			print("could not signOut")
+		}
 	}
 }
 
