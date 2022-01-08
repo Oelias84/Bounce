@@ -46,11 +46,14 @@ class HomeViewController: UIViewController {
 	@IBOutlet weak var carbsTargetLabel: UILabel!
 	@IBOutlet weak var proteinTargetLabel: UILabel!
 	
+	@IBOutlet weak var progressStackView: UIStackView!
+	
 	@IBOutlet weak var topBarView: BounceNavigationBarView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		showLoading()
+		changeStackSpacing()
 		
 		if (UserProfile.defaults.finishOnboarding ?? false) {
 			setupMotivationText()
@@ -66,11 +69,14 @@ class HomeViewController: UIViewController {
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		
+	
 		setupProgressLabels()
-		setUpProgressView()
 		checkWeightState()
 		checkMealsState()
+	}
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		setUpProgressView()
 	}
 }
 
@@ -240,6 +246,13 @@ extension HomeViewController {
 				self.fatRingLayer.progress = self.viewModel.fatPercentage
 			}
 		}
+	}
+	func changeStackSpacing() {
+		let window = UIApplication.shared.windows[0]
+		let safeFrame = window.safeAreaLayoutGuide.layoutFrame
+		let width = safeFrame.width
+		let height = safeFrame.height
+		progressStackView.spacing = height > 647.0 ? 84 : 24
 	}
 	
 	func showLoading() {
