@@ -250,7 +250,6 @@ extension HomeViewController {
 	func changeStackSpacing() {
 		let window = UIApplication.shared.windows[0]
 		let safeFrame = window.safeAreaLayoutGuide.layoutFrame
-		let width = safeFrame.width
 		let height = safeFrame.height
 		progressStackView.spacing = height > 647.0 ? 84 : 24
 	}

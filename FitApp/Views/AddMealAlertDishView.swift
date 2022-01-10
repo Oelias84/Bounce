@@ -41,10 +41,6 @@ class AddMealAlertDishView: UIView {
 		dishAmountTextField.delegate = self
 		dishTypeTextField.delegate = self
 		
-		dishNameTextField.inputTextFieldStyle()
-		dishAmountTextField.inputTextFieldStyle()
-		dishTypeTextField.inputTextFieldStyle()
-		
 		dishTypePicker.dataSource = self
 		dishTypePicker.delegate = self
 		

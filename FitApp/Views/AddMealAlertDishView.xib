@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,21 +18,21 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="402" height="30"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="402" height="48"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KTe-X9-2uz">
-                    <rect key="frame" x="0.0" y="0.0" width="402" height="30"/>
+                    <rect key="frame" x="0.0" y="6" width="402" height="36"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="fDO-kX-UbJ" userLabel="DIsh Stack View">
-                            <rect key="frame" x="0.0" y="0.0" width="402" height="30"/>
+                            <rect key="frame" x="0.0" y="2" width="402" height="32"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Mip-kg-luL">
-                                    <rect key="frame" x="0.0" y="0.0" width="149.5" height="30"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mip-kg-luL">
+                                    <rect key="frame" x="0.0" y="0.0" width="154.5" height="32"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="פחמימה" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qVP-7t-NEX">
-                                            <rect key="frame" x="0.0" y="0.0" width="74" height="30"/>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="פחמימה" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qVP-7t-NEX" customClass="AddMealTextFieldView" customModule="FitApp" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="74" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="74" id="tGq-hS-KCZ"/>
                                             </constraints>
@@ -41,71 +41,61 @@
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="KxG-UF-otI">
-                                            <rect key="frame" x="86" y="0.0" width="63.5" height="30"/>
+                                            <rect key="frame" x="91" y="0.0" width="63.5" height="32"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DiE-14-ne3">
-                                                    <rect key="frame" x="0.0" y="0.0" width="9.5" height="30"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="9.5" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QZT-k1-Rwd">
-                                                    <rect key="frame" x="11.5" y="0.0" width="52" height="30"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QZT-k1-Rwd" customClass="AddMealTextFieldView" customModule="FitApp" customModuleProvider="target">
+                                                    <rect key="frame" x="11.5" y="0.0" width="52" height="32"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
                                                 </textField>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="63.5" id="Btc-ea-4Jo"/>
+                                            </constraints>
                                         </stackView>
                                     </subviews>
                                 </stackView>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="בחרו מנה" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sWe-mc-qOV" colorLabel="IBBuiltInLabel-Gray">
-                                    <rect key="frame" x="169.5" y="0.0" width="232.5" height="30"/>
-                                    <color key="textColor" red="0.43529411759999997" green="0.39554607870000003" blue="0.85887217520000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="בחרו מנה" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sWe-mc-qOV" customClass="AddMealTextFieldView" customModule="FitApp" customModuleProvider="target" colorLabel="IBBuiltInLabel-Gray">
+                                    <rect key="frame" x="174.5" y="0.0" width="227.5" height="32"/>
+                                    <color key="tintColor" red="0.066666666669999999" green="0.47450980390000003" blue="0.45098039220000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <textInputTraits key="textInputTraits"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
-                                            <real key="value" value="3"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidthV">
-                                            <real key="value" value="1"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
-                                            <color key="value" systemColor="systemBlueColor"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
                                 </textField>
                             </subviews>
                         </stackView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
+                        <constraint firstItem="fDO-kX-UbJ" firstAttribute="top" secondItem="KTe-X9-2uz" secondAttribute="top" constant="2" id="5Xy-B3-95m"/>
                         <constraint firstItem="fDO-kX-UbJ" firstAttribute="leading" secondItem="KTe-X9-2uz" secondAttribute="leading" id="DYq-Mv-bBU"/>
-                        <constraint firstAttribute="bottom" secondItem="fDO-kX-UbJ" secondAttribute="bottom" id="Mdv-PU-dBX"/>
-                        <constraint firstAttribute="height" constant="30" id="cFN-uZ-3Mc"/>
+                        <constraint firstAttribute="bottom" secondItem="fDO-kX-UbJ" secondAttribute="bottom" constant="2" id="Mdv-PU-dBX"/>
+                        <constraint firstAttribute="height" constant="36" id="cFN-uZ-3Mc"/>
                         <constraint firstAttribute="trailing" secondItem="fDO-kX-UbJ" secondAttribute="trailing" id="dTX-oD-4XW"/>
-                        <constraint firstItem="fDO-kX-UbJ" firstAttribute="top" secondItem="KTe-X9-2uz" secondAttribute="top" id="sDI-0p-982"/>
                     </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="KTe-X9-2uz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="6" id="JWh-uB-9vf"/>
                 <constraint firstItem="KTe-X9-2uz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Ug8-XL-5GT"/>
                 <constraint firstAttribute="bottom" secondItem="KTe-X9-2uz" secondAttribute="bottom" id="WSt-aQ-79D"/>
-                <constraint firstItem="KTe-X9-2uz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uQd-Yp-bCD"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="KTe-X9-2uz" secondAttribute="trailing" id="vtp-EI-Jyt"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="175.36231884057972" y="-158.70535714285714"/>
+            <point key="canvasLocation" x="175.36231884057972" y="-152.67857142857142"/>
         </view>
     </objects>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
