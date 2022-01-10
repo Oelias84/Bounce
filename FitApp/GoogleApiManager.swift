@@ -220,7 +220,17 @@ struct GoogleApiManager {
 	//MARK: - Motivations
 	func getMotivations(completion: @escaping (Result<Motivations?, Error>) -> Void) {
 		do {
-			db.collection("motivation-sentences-data").document("sentences").getDocument { (data, error) in
+			guard let userGender = UserProfile.defaults.getGender else { return }
+			
+			var fileName: String {
+				switch userGender {
+				case .female:
+					return "sentences"
+				case .male:
+					return "man-sentences"
+				}
+			}
+			db.collection("motivation-sentences-data").document(fileName).getDocument { (data, error) in
 				if let error = error {
 					print(error)
 				} else if let data = data {

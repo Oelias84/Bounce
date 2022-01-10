@@ -22,6 +22,7 @@ class QuestionnaireFatPresentViewController: UIViewController {
 		return UserProfile.defaults.getGender ?? .female
 	}
 	
+	@IBOutlet weak var titleTextLabel: UILabel!
 	@IBOutlet weak var collectionView: UICollectionView!
 	
 	
@@ -29,6 +30,7 @@ class QuestionnaireFatPresentViewController: UIViewController {
 		super.viewDidLoad()
 		navigationItem.setHidesBackButton(true, animated: false)
 
+		setupTextFields()
 		setupSelectedImage()
 		setUpCollectionView()
 	}
@@ -85,7 +87,9 @@ extension QuestionnaireFatPresentViewController: UICollectionViewDelegate, UICol
 }
 
 extension QuestionnaireFatPresentViewController {
-	
+	private func setupTextFields() {
+		titleTextLabel.text = StaticStringsManager.shared.getGenderString?[4]
+	}
 	private func setupSelectedImage() {
 		let userData = UserProfile.defaults
 		if gender == .female {

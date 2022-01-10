@@ -13,6 +13,8 @@ class QuestionnaireActivityViewController: UIViewController {
 	private var minimumKilometers: Float = 0.1
 	private var minimumSteps: Int = 100
 	
+	@IBOutlet weak var titleTextLabel: UILabel!
+	@IBOutlet weak var dontKnowTextLabel: UILabel!
 	@IBOutlet weak var kilometersSlider: UISlider! {
 		didSet {
 			kilometersSlider.value = minimumKilometers
@@ -41,6 +43,7 @@ class QuestionnaireActivityViewController: UIViewController {
 	}
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
 		navigationItem.setHidesBackButton(true, animated: false)
 	}
 	
@@ -109,6 +112,10 @@ class QuestionnaireActivityViewController: UIViewController {
 extension QuestionnaireActivityViewController {
 	
 	private func setUpTextfields() {
+		
+		titleTextLabel.text = StaticStringsManager.shared.getGenderString?[5]
+		dontKnowTextLabel.text = StaticStringsManager.shared.getGenderString?[6]
+		
 		let userData = UserProfile.defaults
 		
 		if let steps = userData.steps {

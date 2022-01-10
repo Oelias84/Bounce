@@ -243,6 +243,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="haf-7R-eyy" id="Z5U-2a-ogt"/>
+                        <outlet property="titleTextLabel" destination="Zyd-iD-ZRb" id="6DG-nA-oL8"/>
                         <segue destination="9J8-iP-E6D" kind="show" identifier="moveToActivity" id="YLV-FR-FGj"/>
                     </connections>
                 </viewController>
@@ -581,6 +582,8 @@
                         <outlet property="mostHungerCheckSecond" destination="J7d-Hi-6ji" id="prz-a6-zhF"/>
                         <outlet property="mostHungerCheckThird" destination="pzo-1F-fVl" id="aO5-rL-9Qk"/>
                         <outlet property="nextButton" destination="sTk-67-1kY" id="mje-6b-9ch"/>
+                        <outlet property="titleTextLabel" destination="brW-cK-lxq" id="2go-UD-Hzl"/>
+                        <outlet property="whatTimeTextLabel" destination="Ive-0Z-bE0" id="8tX-yb-wAz"/>
                         <segue destination="tgm-97-b7M" kind="show" identifier="moveToFitnessLevel" id="m7k-Sb-MqB"/>
                     </connections>
                 </viewController>
@@ -825,6 +828,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="jdb-f3-5bF"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="dontKnowTextLabel" destination="27V-1c-aSB" id="Mix-24-Njg"/>
                         <outlet property="kilometersCheckBox" destination="ltq-Y4-pYV" id="A3Y-UT-WL1"/>
                         <outlet property="kilometersLabel" destination="IrN-Y8-15L" id="LpN-0U-XJE"/>
                         <outlet property="kilometersSlider" destination="vUo-e3-91F" id="ilp-ZY-FkR"/>
@@ -832,6 +836,7 @@
                         <outlet property="stepsCheckBox" destination="XO0-qv-nLS" id="4lU-SS-43X"/>
                         <outlet property="stepsLabel" destination="038-xu-HAO" id="5kl-vk-k19"/>
                         <outlet property="stepsSlider" destination="RoB-B0-B9Y" id="Xae-2r-2mj"/>
+                        <outlet property="titleTextLabel" destination="R2b-yB-RfJ" id="DbE-3g-PDk"/>
                         <segue destination="PvH-mg-GZf" kind="show" identifier="moveToSecondActivity" id="riz-hP-itb"/>
                         <segue destination="tbo-Fu-A0i" kind="show" identifier="moveToNutrition" id="3yk-Xy-vQY"/>
                     </connections>
@@ -1206,12 +1211,19 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="rsk-B6-Xai"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="advanceTextLabel" destination="fxj-jH-iDq" id="xSh-ty-wrc"/>
+                        <outlet property="advanceTitleTextLabel" destination="Jgc-Bc-bMx" id="lSs-7D-pgQ"/>
                         <outlet property="advancedCheckBox" destination="0DM-BJ-wry" id="d8r-6z-mAs"/>
                         <outlet property="beginnerCheckBox" destination="nQA-mm-po0" id="2fb-RQ-hWE"/>
+                        <outlet property="beginnerTextLabel" destination="gaO-J6-hSC" id="LtY-Lk-pAw"/>
+                        <outlet property="beginnerTitleTextLabel" destination="Q9Z-3p-Zu4" id="L4V-nL-RoG"/>
                         <outlet property="externalTrainingStepper" destination="i1P-Tw-VkB" id="QRr-fR-QJ6"/>
+                        <outlet property="externalWorkoutTextLabel" destination="EqR-gX-XNc" id="J5k-se-N1h"/>
                         <outlet property="fourWeeklyWorkoutsButton" destination="QjY-kk-7KF" id="jZp-Fa-4ok"/>
                         <outlet property="intermediateCheckBox" destination="xTe-r0-Sa4" id="0dZ-He-tqY"/>
+                        <outlet property="intermediateTextLabel" destination="C4p-Uj-1bL" id="bHP-Er-O2j"/>
                         <outlet property="nextButton" destination="dFF-Mj-IMh" id="1CZ-Y0-8oh"/>
+                        <outlet property="selectNumberOfTrainingLabel" destination="XfZ-ec-vHQ" id="MQ0-6Q-c36"/>
                         <outlet property="threeWeeklyWorkoutsButton" destination="IDG-F9-Wej" id="cHj-If-svU"/>
                         <outlet property="towWeeklyWorkoutsButton" destination="04G-aJ-tgB" id="LEK-L0-ct1"/>
                         <segue destination="1ZW-um-s0r" kind="show" identifier="moveToSumup" id="DIn-bP-nBF"/>
@@ -2124,9 +2136,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activeCheckBox" destination="sqg-0I-sfQ" id="zIJ-Ec-uSi"/>
+                        <outlet property="firstParagraphTextLabel" destination="iZD-JT-8ob" id="Egc-S7-bMe"/>
+                        <outlet property="forthParagraphTextLabel" destination="nnm-RV-06N" id="e5K-Ku-Occ"/>
                         <outlet property="nextButton" destination="RU6-lA-Hat" id="Qbd-vq-aKX"/>
+                        <outlet property="secondParagraphTextLabel" destination="AMT-ek-skU" id="NUP-VC-VdO"/>
                         <outlet property="semiActiveCheckBox" destination="wXN-f0-750" id="RQQ-Vr-7KE"/>
                         <outlet property="sittingCheckBox" destination="oj1-5s-qM6" id="EAv-Xd-0uF"/>
+                        <outlet property="thirdParagraphTextLabel" destination="x7X-1k-yqN" id="2xe-e2-Asn"/>
+                        <outlet property="titleTextLabel" destination="DB2-nl-opS" id="es3-G1-OCP"/>
                         <outlet property="veryActiveCheckBox" destination="UM3-4k-zWU" id="82Y-Ds-0dU"/>
                         <segue destination="tbo-Fu-A0i" kind="show" identifier="moveToNutrition" id="qiK-vY-Riw"/>
                     </connections>

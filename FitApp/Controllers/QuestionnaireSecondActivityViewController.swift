@@ -12,6 +12,12 @@ class QuestionnaireSecondActivityViewController: UIViewController {
 	public var isFromSettings = false
 	private var lifeStyleSelection: Int?
 
+	@IBOutlet weak var titleTextLabel: UILabel!
+	@IBOutlet weak var firstParagraphTextLabel: UILabel!
+	@IBOutlet weak var secondParagraphTextLabel: UILabel!
+	@IBOutlet weak var thirdParagraphTextLabel: UILabel!
+	@IBOutlet weak var forthParagraphTextLabel: UILabel!
+	
 	@IBOutlet weak var sittingCheckBox: UIButton!
 	@IBOutlet weak var semiActiveCheckBox: UIButton!
 	@IBOutlet weak var activeCheckBox: UIButton!
@@ -77,6 +83,13 @@ class QuestionnaireSecondActivityViewController: UIViewController {
 
 extension QuestionnaireSecondActivityViewController {
 	
+	private func setupTextLabels() {
+		titleTextLabel.text = StaticStringsManager.shared.getGenderString?[7]
+		firstParagraphTextLabel.text = StaticStringsManager.shared.getGenderString?[8]
+		secondParagraphTextLabel.text = StaticStringsManager.shared.getGenderString?[9]
+		thirdParagraphTextLabel.text = StaticStringsManager.shared.getGenderString?[10]
+		forthParagraphTextLabel.text = StaticStringsManager.shared.getGenderString?[11]
+	}
 	private func updateServer() {
 		UserProfile.updateServer()
 		if let firstViewController = self.navigationController?.viewControllers[1] {

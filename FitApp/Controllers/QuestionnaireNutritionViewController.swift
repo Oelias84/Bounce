@@ -13,6 +13,9 @@ class QuestionnaireNutritionViewController: UIViewController {
 	var mostHunger = 0
 	var leastHunger = 0
 	
+	@IBOutlet weak var titleTextLabel: UILabel!
+	@IBOutlet weak var whatTimeTextLabel: UILabel!
+	
 	@IBOutlet weak var mealCheckFirst: UIButton!
 	@IBOutlet weak var mealCheckSecond: UIButton!
 	@IBOutlet weak var mealCheckThird: UIButton!
@@ -27,7 +30,8 @@ class QuestionnaireNutritionViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationItem.setHidesBackButton(true, animated: false)
-
+		
+		setupTextFields()
 		setupCheckCheckMark()
 	}
 	@IBAction func backButtonAction(_ sender: Any) {
@@ -127,6 +131,10 @@ class QuestionnaireNutritionViewController: UIViewController {
 
 extension QuestionnaireNutritionViewController {
 	
+	private func setupTextFields() {
+		titleTextLabel.text = StaticStringsManager.shared.getGenderString?[12]
+		whatTimeTextLabel.text = StaticStringsManager.shared.getGenderString?[13]
+	}
 	private func setupCheckCheckMark() {
 		let userData = UserProfile.defaults
 		

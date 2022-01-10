@@ -14,6 +14,14 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 	var weaklyWorkouts = 0
 	var externalWorkouts = 0
 	
+	@IBOutlet weak var beginnerTitleTextLabel: UILabel!
+	@IBOutlet weak var beginnerTextLabel: UILabel!
+	@IBOutlet weak var intermediateTextLabel: UILabel!
+	@IBOutlet weak var advanceTitleTextLabel: UILabel!
+	@IBOutlet weak var advanceTextLabel: UILabel!
+	@IBOutlet weak var selectNumberOfTrainingLabel: UILabel!
+	@IBOutlet weak var externalWorkoutTextLabel: UILabel!
+	
 	@IBOutlet weak var beginnerCheckBox: UIButton!
 	@IBOutlet weak var intermediateCheckBox: UIButton!
 	@IBOutlet weak var advancedCheckBox: UIButton!
@@ -150,6 +158,15 @@ extension QuestionnaireFitnessLevelViewController {
 		externalTrainingStepper.buttonsBackgroundColor = .projectTail
 		externalTrainingStepper.labelFont = UIFont(name: "Assistant-SemiBold", size: 18)!
 		externalTrainingStepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
+	}
+	private func setupTextLabels() {
+		beginnerTitleTextLabel.text = StaticStringsManager.shared.getGenderString?[14]
+		beginnerTextLabel.text = StaticStringsManager.shared.getGenderString?[15]
+		intermediateTextLabel.text = StaticStringsManager.shared.getGenderString?[16]
+		advanceTitleTextLabel.text = StaticStringsManager.shared.getGenderString?[17]
+		advanceTextLabel.text = StaticStringsManager.shared.getGenderString?[18]
+		selectNumberOfTrainingLabel.text = StaticStringsManager.shared.getGenderString?[19]
+		externalWorkoutTextLabel.text = StaticStringsManager.shared.getGenderString?[20]
 	}
     private func setupCheckMarks() {
         let userData = UserProfile.defaults

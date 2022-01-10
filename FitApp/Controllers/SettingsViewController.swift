@@ -21,6 +21,7 @@ class SettingsViewController: UIViewController {
 	
 	private var optionContentType: SettingsContentType!
 	
+	private let userGender = UserProfile.defaults.getGender
 	private var tableViewData: [SettingsMenu: [SettingsCell]]!
 	private var userData: UserProfile! = UserProfile.defaults
 	
@@ -239,14 +240,14 @@ extension SettingsViewController {
 			.activity: [SettingsCell(title: "רמת פעילות", secondaryTitle: setupActivityTitle())],
 			
 				.nutrition: [SettingsCell(title: "מספר ארוחות", stepperValue: setupNumberOfMealsStepper.2, stepperMin: setupNumberOfMealsStepper.0, stepperMax: setupNumberOfMealsStepper.1),
-							 SettingsCell(title: "מתי אני הכי רעב", secondaryTitle: setupMostHungryTitle())],
+							 SettingsCell(title: StaticStringsManager.shared.getGenderString?[21] ?? "", secondaryTitle: setupMostHungryTitle())],
 			
 				.fitness: [SettingsCell(title: "רמת קושי", secondaryTitle: setupFitnessLevelTitle()),
 						   SettingsCell(title: "מספר אימונים שבועי", stepperValue: setupNumberOfTrainingsStepper.2, stepperMin: setupNumberOfTrainingsStepper.0, stepperMax: setupNumberOfTrainingsStepper.1),
 						   SettingsCell(title: "מספר אימונים שבועי חיצוני", stepperValue: setupNumberOfExternalTrainingsStepper.2, stepperMin: setupNumberOfExternalTrainingsStepper.0, stepperMax: setupNumberOfExternalTrainingsStepper.1)],
 			
 				.system: [SettingsCell(title: "התראות", secondaryTitle: ""),
-						  SettingsCell(title: "התנתק", secondaryTitle: "")]
+						  SettingsCell(title:  StaticStringsManager.shared.getGenderString?[22] ?? "", secondaryTitle: "")]
 		]
 	}
 	
@@ -279,11 +280,11 @@ extension SettingsViewController {
 		var fitnessTitle: String {
 			switch userData.fitnessLevel  {
 			case 1:
-				return "מתחיל"
+				return StaticStringsManager.shared.getGenderString?[14] ?? ""
 			case 2:
 				return "ביניים"
 			case 3:
-				return "מתקדם"
+				return StaticStringsManager.shared.getGenderString?[17] ?? "" 
 			default:
 				return "שגיאה"
 			}

@@ -165,11 +165,16 @@ extension BounceNavigationBarView {
 		DispatchQueue.global(qos: .background).async {
 			UserProfile.defaults.getUserProfileImage() {
 				image in
-				
-				DispatchQueue.main.async {
-					self.userProfileButton.setImage(image?.circleMasked, for: .normal)
-					self.userProfileButton.imageView?.contentMode = .scaleAspectFill
-					self.userProfileButton.imageEdgeInsets = UIEdgeInsets(top: 37, left: 37, bottom: 37, right: 37)
+				if image != nil {
+					DispatchQueue.main.async {
+						self.userProfileButton.setImage(image?.circleMasked, for: .normal)
+						self.userProfileButton.imageView?.contentMode = .scaleAspectFill
+						self.userProfileButton.imageEdgeInsets = UIEdgeInsets(top: 37, left: 37, bottom: 37, right: 37)
+					}
+				} else {
+					DispatchQueue.main.async {
+						self.userProfileButton.imageEdgeInsets = UIEdgeInsets(top: 37, left: 37, bottom: 37, right: 37)
+					}
 				}
 			}
 		}

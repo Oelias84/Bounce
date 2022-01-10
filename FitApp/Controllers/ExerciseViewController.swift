@@ -45,7 +45,7 @@ class ExerciseViewController: UIViewController {
 		setupTopBarView()
 		
 		let title = exercise.title
-		let string = exercise.text.replacingOccurrences(of: "\\n", with: "\n")
+		let string = exercise.getExerciseText.replacingOccurrences(of: "\\n", with: "\n")
 		textTitleLabel.text = title
 		textLabel.text = string
 	}
