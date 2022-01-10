@@ -89,6 +89,9 @@
 		7C98731E26F4A7C8000E5299 /* CaloriesProgressState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98731D26F4A7C8000E5299 /* CaloriesProgressState.swift */; };
 		7C9B345E2583C5B400D30480 /* QuestionnaireSumUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */; };
 		7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */; };
+		7CADF74C278CADDE0020CD83 /* StaticText.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CADF74B278CADDE0020CD83 /* StaticText.json */; };
+		7CADF74E278CADFF0020CD83 /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CADF74D278CADFF0020CD83 /* Static.swift */; };
+		7CADF750278CAEBC0020CD83 /* StaticStringsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */; };
 		7CB0E179278775B400D6EDA5 /* ChatContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */; };
 		7CB0E17B2787764B00D6EDA5 /* LoginRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */; };
 		7CB9ADE5268B12290009B42A /* ChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE4268B12290009B42A /* ChartFormatter.swift */; };
@@ -285,6 +288,9 @@
 		7C98731D26F4A7C8000E5299 /* CaloriesProgressState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesProgressState.swift; sourceTree = "<group>"; };
 		7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSumUpViewController.swift; sourceTree = "<group>"; };
 		7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7CADF74B278CADDE0020CD83 /* StaticText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StaticText.json; sourceTree = "<group>"; };
+		7CADF74D278CADFF0020CD83 /* Static.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
+		7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticStringsManager.swift; sourceTree = "<group>"; };
 		7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatContainerViewController.swift; sourceTree = "<group>"; };
 		7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginRegister.storyboard; sourceTree = "<group>"; };
 		7CB9ADE4268B12290009B42A /* ChartFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFormatter.swift; sourceTree = "<group>"; };
@@ -511,6 +517,7 @@
 				7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */,
 				B3DB751A259F8773002CF48B /* ConsumptionManager.swift */,
 				7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */,
+				7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */,
 				B367F18725B1EEC200DF21D7 /* LocalNotificationManager.swift */,
 				7C481C7126FA1883002FB8BF /* MealsManager.swift */,
 			);
@@ -696,6 +703,7 @@
 		7C89AA7C256D717F009AD87C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7CADF74B278CADDE0020CD83 /* StaticText.json */,
 				7C10BA78276BCFAF00B5860C /* Assistant-Bold.ttf */,
 				7C10BA71276BCFAE00B5860C /* Assistant-ExtraBold.ttf */,
 				7C10BA76276BCFAF00B5860C /* Assistant-ExtraLight.ttf */,
@@ -927,6 +935,7 @@
 		B36B71902577BEFC001CD393 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7CADF74D278CADFF0020CD83 /* Static.swift */,
 				7C74357C25D0824D00D33A9A /* User.swift */,
 				B358222F25AC9DA800C91295 /* Article.swift */,
 				7C658AA725D9873C00CA75B2 /* Motivations.swift */,
@@ -1182,6 +1191,7 @@
 				7C1ACCEC266F8F8F008079C9 /* CommentTableViewCell.xib in Resources */,
 				B34397A7258A7F720073A59B /* DishView.xib in Resources */,
 				7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */,
+				7CADF74C278CADDE0020CD83 /* StaticText.json in Resources */,
 				7C1ACD052670C25B008079C9 /* AddingTableViewCell.xib in Resources */,
 				B38068C725B7197E005C4A24 /* WorkoutTableViewCell.xib in Resources */,
 				7C10BA7D276BCFBE00B5860C /* Assistant-Light.ttf in Resources */,
@@ -1326,6 +1336,7 @@
 				7C149C7925D817DD00B0864F /* PhotoViewerViewController.swift in Sources */,
 				B330B88A257581AA00BDB206 /* ExerciseTableViewCell.swift in Sources */,
 				7C7434EB25CD906500D33A9A /* MailComposerViewController.swift in Sources */,
+				7CADF74E278CADFF0020CD83 /* Static.swift in Sources */,
 				B3DB7513259F8270002CF48B /* MealViewModel.swift in Sources */,
 				7C2BD810267212C7006A1736 /* MealManager.swift in Sources */,
 				B367F17825B1BDF600DF21D7 /* DishesGenerator.swift in Sources */,
@@ -1361,6 +1372,7 @@
 				B3DB753525A09133002CF48B /* Double+Extensions.swift in Sources */,
 				7CE086272761482A00BF3CF3 /* ProjectColors.swift in Sources */,
 				7C74357D25D0824D00D33A9A /* User.swift in Sources */,
+				7CADF750278CAEBC0020CD83 /* StaticStringsManager.swift in Sources */,
 				7C481C7226FA1883002FB8BF /* MealsManager.swift in Sources */,
 				7C5262BF25BC79B200694007 /* SettingsViewController.swift in Sources */,
 				7C1ACCE7266F8D19008079C9 /* CommentsViewController.swift in Sources */,
