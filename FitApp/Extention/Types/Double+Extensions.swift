@@ -28,4 +28,14 @@ extension Double {
 			return whole
 		}
     }
+	var mealRound: Double {
+		let fraction = self.fraction
+		let whole = self.whole.nextDown.rounded()
+		
+		if fraction >= 0.5 {
+			return whole + 0.5
+		} else {
+			return whole
+		}
+	}
 }
