@@ -35,6 +35,8 @@
 		7C1ACD0C2670D170008079C9 /* AddMealAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ACD0B2670D170008079C9 /* AddMealAlertView.swift */; };
 		7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */; };
 		7C2BD810267212C7006A1736 /* MealManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2BD80F267212C7006A1736 /* MealManager.swift */; };
+		7C32C588278E370500B97642 /* PopupAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C32C587278E370500B97642 /* PopupAlertView.swift */; };
+		7C32C58E278E3E2400B97642 /* PopupAlertView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C32C58D278E3E2400B97642 /* PopupAlertView.storyboard */; };
 		7C33B65F26690A3800E16A1C /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C33B65E26690A3800E16A1C /* Notification.swift */; };
 		7C33B661266A587D00E16A1C /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C33B660266A587D00E16A1C /* CommentsViewModel.swift */; };
 		7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F4F3125C2D31300EE3758 /* SettingsOptionsTableViewController.swift */; };
@@ -226,6 +228,8 @@
 		7C1ACD0B2670D170008079C9 /* AddMealAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealAlertView.swift; sourceTree = "<group>"; };
 		7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSecondActivityViewController.swift; sourceTree = "<group>"; };
 		7C2BD80F267212C7006A1736 /* MealManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealManager.swift; sourceTree = "<group>"; };
+		7C32C587278E370500B97642 /* PopupAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAlertView.swift; sourceTree = "<group>"; };
+		7C32C58D278E3E2400B97642 /* PopupAlertView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopupAlertView.storyboard; sourceTree = "<group>"; };
 		7C33B65E26690A3800E16A1C /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		7C33B660266A587D00E16A1C /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
 		7C3F4F3125C2D31300EE3758 /* SettingsOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOptionsTableViewController.swift; sourceTree = "<group>"; };
@@ -498,6 +502,15 @@
 				7C8F51392671FAE5001FF0EE /* DishView */,
 			);
 			name = AddMealAlertView;
+			sourceTree = "<group>";
+		};
+		7C32C586278E368C00B97642 /* PopupAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				7C32C587278E370500B97642 /* PopupAlertView.swift */,
+				7C32C58D278E3E2400B97642 /* PopupAlertView.storyboard */,
+			);
+			name = PopupAlertView;
 			sourceTree = "<group>";
 		};
 		7C3F4F3625C2D31900EE3758 /* Settings */ = {
@@ -992,6 +1005,7 @@
 		B3B2A245256EDDCA0052E6C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7C32C586278E368C00B97642 /* PopupAlertView */,
 				7C1ACD082670C9D2008079C9 /* CellViews */,
 				7C4EB828276E57FE00DA1407 /* TextFieldView */,
 				7CE0862F2767A64000BF3CF3 /* BounceNavigationBar */,
@@ -1178,6 +1192,7 @@
 				7C89AA91256D8286009AD87C /* Questionnaire.storyboard in Resources */,
 				B3E6E9A02571446E00958C48 /* MealPlanTableViewCell.xib in Resources */,
 				7C10BA7B276BCFBE00B5860C /* Assistant-ExtraBold.ttf in Resources */,
+				7C32C58E278E3E2400B97642 /* PopupAlertView.storyboard in Resources */,
 				B3B7FCEF2590EFBC004BC2CD /* WeightProgress.storyboard in Resources */,
 				7CFA5FF7262A0F5800A3F401 /* MoveDishView.xib in Resources */,
 				7CB9ADE7268CB7140009B42A /* ChartView.xib in Resources */,
@@ -1376,6 +1391,7 @@
 				7C98731E26F4A7C8000E5299 /* CaloriesProgressState.swift in Sources */,
 				B358222825AC9A2F00C91295 /* ArticlesViewController.swift in Sources */,
 				B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */,
+				7C32C588278E370500B97642 /* PopupAlertView.swift in Sources */,
 				B3DB753525A09133002CF48B /* Double+Extensions.swift in Sources */,
 				7CE086272761482A00BF3CF3 /* ProjectColors.swift in Sources */,
 				7C74357D25D0824D00D33A9A /* User.swift in Sources */,

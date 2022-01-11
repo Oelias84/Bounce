@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sFZ-PF-moY">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Assistant-Regular.ttf">
+            <string>Assistant-Regular</string>
+        </array>
+        <array key="Assistant-SemiBold.ttf">
+            <string>Assistant-SemiBold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Popup Alert View-->
+        <scene sceneID="PFh-uS-4zr">
+            <objects>
+                <viewController storyboardIdentifier="PopupAlertView" id="sFZ-PF-moY" customClass="PopupAlertView" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Tfa-33-Ct3"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fon-O2-AeS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xrO-SC-JvE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="baN-VD-dsB">
+                                <rect key="frame" x="32" y="249" width="311" height="169"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9A-L3-03r">
+                                        <rect key="frame" x="139" y="16" width="33" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="17"/>
+                                        <color key="textColor" name="ProjectLightGreen"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJe-te-LIp">
+                                        <rect key="frame" x="18" y="46.5" width="275" height="18.5"/>
+                                        <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="nLe-al-RDN">
+                                        <rect key="frame" x="40" y="105" width="231" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7C-Xv-K9G">
+                                                <rect key="frame" x="0.0" y="0.0" width="110" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" name="ProjectLightGreen"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="ביטול"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidthV">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
+                                                        <color key="value" name="ProjectLightGreen"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onTapCancelButton:" destination="sFZ-PF-moY" eventType="touchUpInside" id="8vG-qB-beZ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYg-vi-d0a">
+                                                <rect key="frame" x="121" y="0.0" width="110" height="40"/>
+                                                <color key="backgroundColor" name="ProjectLightGreen"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="אישור"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidthV">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onTapOkButton:" destination="sFZ-PF-moY" eventType="touchUpInside" id="G9E-i9-ZbH"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="fM5-CT-kWw"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="nLe-al-RDN" secondAttribute="trailing" constant="40" id="8kw-Ue-kfJ"/>
+                                    <constraint firstItem="iJe-te-LIp" firstAttribute="top" secondItem="Q9A-L3-03r" secondAttribute="bottom" constant="8" id="Kz5-NI-ihn"/>
+                                    <constraint firstItem="nLe-al-RDN" firstAttribute="leading" secondItem="baN-VD-dsB" secondAttribute="leading" constant="40" id="NU1-7d-9Xz"/>
+                                    <constraint firstAttribute="trailing" secondItem="iJe-te-LIp" secondAttribute="trailing" constant="18" id="Tqb-O7-LFc"/>
+                                    <constraint firstItem="iJe-te-LIp" firstAttribute="centerX" secondItem="baN-VD-dsB" secondAttribute="centerX" id="ZTA-sv-s9y"/>
+                                    <constraint firstItem="nLe-al-RDN" firstAttribute="top" secondItem="iJe-te-LIp" secondAttribute="bottom" constant="40" id="fMj-iA-Fd1"/>
+                                    <constraint firstAttribute="bottom" secondItem="nLe-al-RDN" secondAttribute="bottom" constant="24" id="lH4-1n-tXc"/>
+                                    <constraint firstItem="iJe-te-LIp" firstAttribute="leading" secondItem="baN-VD-dsB" secondAttribute="leading" constant="18" id="lld-Fp-6C7"/>
+                                    <constraint firstItem="Q9A-L3-03r" firstAttribute="top" secondItem="baN-VD-dsB" secondAttribute="top" constant="16" id="uFe-PM-bcR"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="baN-VD-dsB" secondAttribute="trailing" constant="16" id="9bz-IW-n9H"/>
+                            <constraint firstItem="baN-VD-dsB" firstAttribute="leading" secondItem="xrO-SC-JvE" secondAttribute="leadingMargin" constant="16" id="YuK-gM-g2z"/>
+                            <constraint firstItem="Q9A-L3-03r" firstAttribute="centerX" secondItem="xrO-SC-JvE" secondAttribute="centerX" id="mgW-Nf-fVD"/>
+                            <constraint firstItem="baN-VD-dsB" firstAttribute="centerX" secondItem="xrO-SC-JvE" secondAttribute="centerX" id="nC7-WG-Jvi"/>
+                            <constraint firstItem="baN-VD-dsB" firstAttribute="centerY" secondItem="xrO-SC-JvE" secondAttribute="centerY" id="wpn-WB-vx2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="alertView" destination="baN-VD-dsB" id="ISO-oa-aUt"/>
+                        <outlet property="cancelButton" destination="o7C-Xv-K9G" id="Jb5-FO-QML"/>
+                        <outlet property="messageLabel" destination="iJe-te-LIp" id="68R-AC-imQ"/>
+                        <outlet property="okButton" destination="zYg-vi-d0a" id="MQD-Rj-HDh"/>
+                        <outlet property="titleLabel" destination="Q9A-L3-03r" id="rsB-P0-gFT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Yi-wb-Us2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1041" y="134"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="ProjectLightGreen">
+            <color red="0.28600001335144043" green="0.57599997520446777" blue="0.56099998950958252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
