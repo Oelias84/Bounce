@@ -16,7 +16,6 @@ class AddingTableViewCell: UITableViewCell {
 	
 	@IBOutlet weak var plusButton: UIButton!
 	
-	
 	weak var delegate: AddingTableViewCellDelegate?
 
     override func awakeFromNib() {

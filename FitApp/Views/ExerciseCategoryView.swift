@@ -27,7 +27,7 @@ class ExerciseCategoryView: UIView {
 		switch type {
 		case "legs":
 			exerciseCategoryTextLabel.text = "רגליים"
-			exerciseCategoryBackgroundView.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+			exerciseCategoryBackgroundView.backgroundColor = #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1)
 		case "chest":
 			exerciseCategoryTextLabel.text = "חזה"
 			exerciseCategoryBackgroundView.backgroundColor = #colorLiteral(red: 0.1863320172, green: 0.6013119817, blue: 0.9211298823, alpha: 1)
@@ -42,7 +42,7 @@ class ExerciseCategoryView: UIView {
 			exerciseCategoryBackgroundView.backgroundColor = #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1)
 		case "warmup":
 			exerciseCategoryTextLabel.text = "חימום"
-			exerciseCategoryBackgroundView.backgroundColor = #colorLiteral(red: 0.5741485357, green: 0.5741624236, blue: 0.574154973, alpha: 1)
+			exerciseCategoryBackgroundView.backgroundColor = #colorLiteral(red: 0.7058823529, green: 0.8549019608, blue: 0.7529411765, alpha: 1)
 		default:
 			break
 		}
