@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
 						message = error
 					}
 					
-					self.presentAlert(withTitle: "לא מצליח להתחבר", withMessage: message, options: "אישור") { _ in }
+					self.presentAlert(withTitle: "לא מצליח להתחבר", withMessage: message, options: "אישור", alertNumber: 1)
 				} else {
 					if !(UserProfile.defaults.finishOnboarding ?? false) {
 						self.startQuestionnaire()
@@ -60,25 +60,48 @@ class LoginViewController: UIViewController {
 				}
 			}
 		} catch ErrorManager.LoginError.emptyEmail {
-			presentOkAlert(withTitle: "אופס", withMessage: "נראה ששכחת להזין כתובת האמייל") {
-				self.emailTextfield.becomeFirstResponder()
-			}
+			presentAlert(withTitle: "אופס", withMessage: "נראה ששכחת להזין כתובת האמייל", options: "אישור", alertNumber: 2)
 		} catch ErrorManager.LoginError.emptyPassword {
-			presentOkAlert(withTitle: "אופס", withMessage: "נראה ששכחת להזין סיסמא") {
-				self.passwordTextfield.becomeFirstResponder()
-			}
+			presentAlert(withTitle: "אופס", withMessage: "נראה ששכחת להזין סיסמא", options: "אישור", alertNumber: 3)
 		} catch ErrorManager.LoginError.invalidEmail {
-			presentOkAlert(withTitle: "אופס", withMessage: "נראה שכתובת האמייל שגויה") {
-				self.emailTextfield.becomeFirstResponder()
-			}
+			presentAlert(withTitle: "אופס", withMessage: "נראה שכתובת האמייל שגויה", options: "אישור", alertNumber: 4)
 		} catch ErrorManager.LoginError.incorrectPassword {
-			presentOkAlert(withTitle: "אופס", withMessage: "אורך הסיסמא חייב להיות בעל 6 תווים") {
-				self.passwordTextfield.becomeFirstResponder()
-			}
+			presentAlert(withTitle: "אופס", withMessage: "אורך הסיסמא חייב להיות בעל 6 תווים", options: "אישור", alertNumber: 5)
 		} catch {
 			print("Something went wrong!")
 		}
 	}
+}
+
+//MARK: - Delegates
+extension LoginViewController: PopupAlertViewDelegate {
+	
+	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
+		switch alertNumber {
+		case 1:
+			break
+		case 2:
+			self.emailTextfield.becomeFirstResponder()
+		case 3:
+			self.passwordTextfield.becomeFirstResponder()
+		case 4:
+			self.emailTextfield.becomeFirstResponder()
+		case 5:
+			self.passwordTextfield.becomeFirstResponder()
+		default:
+			break
+		}
+	}
+	func cancelButtonTapped(alertNumber: Int) {
+		return
+	}
+	func thirdButtonTapped(alertNumber: Int) {
+		return
+	}
+}
+
+//MARK: - Function
+extension LoginViewController {
 	
 	private func startQuestionnaire() {
 		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
@@ -93,5 +116,34 @@ class LoginViewController: UIViewController {
 		
 		homeVC.modalPresentationStyle = .fullScreen
 		present(homeVC, animated: true)
+	}
+	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., alertNumber: Int) {
+		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
+			return
+		}
+		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
+		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
+		
+		customAlert.providesPresentationContextTransitionStyle = true
+		customAlert.definesPresentationContext = true
+		customAlert.modalPresentationStyle = .overCurrentContext
+		customAlert.modalTransitionStyle = .crossDissolve
+		
+		customAlert.delegate = self
+		customAlert.titleText = title
+		customAlert.messageText = message
+		customAlert.alertNumber = alertNumber
+		customAlert.okButtonText = options[0]
+		customAlert.cancelButtonText = options[1]
+		switch options.count {
+		case 1:
+			customAlert.cancelButton.isHidden = true
+		case 3:
+			customAlert.doNotShowText = options.last
+		default:
+			break
+		}
+		
+		window.rootViewController?.present(customAlert, animated: true, completion: nil)
 	}
 }

@@ -25,9 +25,6 @@ class LoginViewModel {
 		if !email.isValidEmail {
 			throw ErrorManager.LoginError.invalidEmail
 		}
-		if password.count != 6 {
-			throw ErrorManager.LoginError.incorrectPassword
-		}
 		
 		Auth.auth().signIn(withEmail: email, password: password) {
 			[weak self] (user, error) in

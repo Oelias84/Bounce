@@ -62,6 +62,24 @@ extension ChatsViewController: BounceNavigationBarDelegate {
 		navigationController?.popViewController(animated: true)
 	}
 }
+extension ChatsViewController: PopupAlertViewDelegate {
+	
+	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
+		if let navC = self.tabBarController?.viewControllers?[4] as? UINavigationController {
+			let tableC = navC.viewControllers.last as! ArticlesViewController
+			
+			tableC.openFromChat = true
+			self.tabBarController?.selectedIndex = 4
+			self.navigationController?.popToRootViewController(animated: false)
+		}
+	}
+	func cancelButtonTapped(alertNumber: Int) {
+		return
+	}
+	func thirdButtonTapped(alertNumber: Int) {
+		UserProfile.defaults.showQaAlert = false
+	}
+}
 
 // MARK: - Functions
 extension ChatsViewController {
@@ -90,22 +108,7 @@ extension ChatsViewController {
 	}
 	private func alertForDirectingToQA() {
 		if UserProfile.defaults.showQaAlert == nil {
-			presentAlert(withTitle: "רק רצינו לספר לך", withMessage: "הכנו מאמר שאלות תשובות נפוצות וכדאי לך לעבור עליו, אם את לא מוצאת תשובה, אנחנו פה לעזור לך :)", options: "אישור", "ביטול", "אל תציג שוב") { selection in
-				switch selection {
-				case 0:
-					if let navC = self.tabBarController?.viewControllers?[4] as? UINavigationController {
-						let tableC = navC.viewControllers.last as! ArticlesViewController
-						
-						tableC.openFromChat = true
-						self.tabBarController?.selectedIndex = 4
-						self.navigationController?.popToRootViewController(animated: false)
-					}
-				case 2:
-					UserProfile.defaults.showQaAlert = false
-				default:
-					break
-				}
-			}
+			presentAlert(withTitle: "רק רצינו לספר לך", withMessage: "הכנו מאמר שאלות תשובות נפוצות וכדאי לך לעבור עליו, אם את לא מוצאת תשובה, אנחנו פה לעזור לך :)", options: "אישור", "ביטול", "אל תציג שוב")
 		}
 	}
 	private func createNewChat(result: ChatUser) {
@@ -126,6 +129,29 @@ extension ChatsViewController {
 		chatContainerVC.chatData = chatData
 		chatContainerVC.isNewChat = isNewChat
 		navigationController?.pushViewController(chatContainerVC, animated: true)
+	}
+	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
+		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
+			return
+		}
+		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
+		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
+		
+		customAlert.providesPresentationContextTransitionStyle = true
+		customAlert.definesPresentationContext = true
+		customAlert.modalPresentationStyle = .overCurrentContext
+		customAlert.modalTransitionStyle = .crossDissolve
+
+		customAlert.delegate = self
+		customAlert.titleText = title
+		customAlert.messageText = message
+		customAlert.okButtonText = options[0]
+		customAlert.cancelButtonText = options[1]
+		
+		if options.count == 3 {
+			customAlert.doNotShowText = options.last
+		}
+		window.rootViewController?.present(customAlert, animated: true, completion: nil)
 	}
 	
 	@objc private func addChatDidTapped() {

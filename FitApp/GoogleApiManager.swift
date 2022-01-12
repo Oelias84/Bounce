@@ -23,7 +23,7 @@ struct GoogleApiManager {
 		return safeEmail
 	}
 	
-	//MARK: - AprovedUsersCheck
+	//MARK: - ApprovedUsersCheck
 	func checkUserApproved(completion: @escaping (Result<Bool, Error>) -> Void) {
 		do {
 			db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("profile-data").document("data").getDocument {
@@ -34,7 +34,7 @@ struct GoogleApiManager {
 				} else if let data = data {
 					do {
 						if let decodedData = try data.data(as: approvedUser.self) {
-							if decodedData.permissionsLevel == 1 {
+							if decodedData.permissionsLevel == 10 {
 								UserProfile.defaults.permissionsLevel = decodedData.permissionsLevel
 								completion(.success(true))
 							} else {
@@ -58,9 +58,10 @@ struct GoogleApiManager {
 			print(error)
 		}
 	}
-	func getUserData(completion: @escaping (Result<ServerUserData?, Error>) -> Void){
+	func getUserData(completion: @escaping (Result<ServerUserData?, Error>) -> Void) {
 		db.collection("users").document("\(Auth.auth().currentUser!.uid)").collection("profile-data").document("data")
-			.getDocument(source: .default, completion: { (data, error) in
+			.getDocument(source: .default, completion: {
+				(data, error) in
 				if let error = error {
 					print(error)
 				} else if let data = data {

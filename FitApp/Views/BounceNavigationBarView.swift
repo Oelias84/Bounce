@@ -142,6 +142,11 @@ extension BounceNavigationBarView {
 				view.trailingAnchor.constraint(equalTo: trailingAnchor),
 			]
 		)
+		if let permission = UserProfile.defaults.permissionsLevel {
+			if permission < 10 {
+				messageButton.isHidden = true
+			}
+		}
 		setImage()
 	}
 	private func openMessages() {

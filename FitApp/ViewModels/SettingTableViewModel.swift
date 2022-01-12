@@ -13,6 +13,7 @@ class SettingTableViewModel {
 	var contentType: SettingsContentType!
 	private let notificationManager = LocalNotificationManager.shared
 	
+	private var level: Int?
 	private var tableViewTitle: String!
 	private var tableViewItemArray = [String]()
 	private var notificationsArray: [Notification]? {
@@ -34,6 +35,36 @@ class SettingTableViewModel {
 			self.notificationsArray = self.notificationManager.getNotifications()
 		}
 	}
+}
+
+//MARK: - Delegates
+extension SettingTableViewModel: PopupAlertViewDelegate {
+	
+	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
+		guard let level = level else { return }
+		
+		switch self.level {
+		case 1:
+			UserProfile.defaults.weaklyWorkouts = 2
+		case 2:
+			UserProfile.defaults.weaklyWorkouts = 2
+		case 3:
+			UserProfile.defaults.weaklyWorkouts = 3
+		default:
+			break
+		}
+		self.updateAndPopViewController(level)
+	}
+	func cancelButtonTapped(alertNumber: Int) {
+		self.vc.navigationController?.popViewController(animated: true)
+	}
+	func thirdButtonTapped(alertNumber: Int) {
+		return
+	}
+}
+
+//MARK: - Functions
+extension SettingTableViewModel {
 	
 	//MARK: - Setters
 	private func setTitle() {
@@ -125,27 +156,9 @@ class SettingTableViewModel {
 		vc.navigationController?.popViewController(animated: true)
 	}
 	func presentFitnessAlert(_ level: Int) {
-		vc.presentAlert(withTitle: "שינוי רמת קושי", withMessage: "שימי לב! בעקבות שינוי ברמת הקושי גם כמות האימונים תשתנה לכמות דיפולטיבית שאותה את תוכלי לשנות ממסך ההגדרות, האם ברצונך לאשר את השינוי?", options: "אישור", "ביטול") { selection in
-			
-			switch selection {
-			case 0:
-				switch level {
-				case 1:
-					UserProfile.defaults.weaklyWorkouts = 2
-				case 2:
-					UserProfile.defaults.weaklyWorkouts = 2
-				case 3:
-					UserProfile.defaults.weaklyWorkouts = 3
-				default:
-					break
-				}
-				self.updateAndPopViewController(level)
-			case 1:
-				self.vc.navigationController?.popViewController(animated: true)
-			default:
-				break
-			}
-		}
+		self.level = level
+		presentAlert(withTitle: "שינוי רמת קושי", withMessage: "שימי לב! בעקבות שינוי ברמת הקושי גם כמות האימונים תשתנה לכמות דיפולטיבית שאותה את תוכלי לשנות ממסך ההגדרות, האם ברצונך לאשר את השינוי?", options: "אישור", "ביטול")
+		
 	}
 	func notificationsPressed(at row: Int) {
 		
@@ -209,5 +222,34 @@ class SettingTableViewModel {
 	private func addWaterNotificationCell() {
 		notificationManager.showNotificationAlert(withTitle: K.Notifications.alertWaterTitle,
 												  withMessage: K.Notifications.alertWeterMessage, type: .waterNotification, vc: vc)
+	}
+	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
+		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
+			return
+		}
+		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
+		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
+		
+		customAlert.providesPresentationContextTransitionStyle = true
+		customAlert.definesPresentationContext = true
+		customAlert.modalPresentationStyle = .overCurrentContext
+		customAlert.modalTransitionStyle = .crossDissolve
+		
+		customAlert.delegate = self
+		customAlert.titleText = title
+		customAlert.messageText = message
+		customAlert.okButtonText = options[0]
+		customAlert.cancelButtonText = options[1]
+		
+		switch options.count {
+		case 1:
+			customAlert.cancelButton.isHidden = true
+		case 3:
+			customAlert.doNotShowText = options.last
+		default:
+			break
+		}
+		
+		window.rootViewController?.present(customAlert, animated: true, completion: nil)
 	}
 }

@@ -21,12 +21,13 @@ protocol DishesTableViewControllerDelegate {
 class DishesTableViewController: UIViewController {
 	
 	var state: DishesState!
-	
 	var originalDish: Dish!
+
 	private var dishes: [ServerDish]!
 	private var otherDishes: [String]?
 	private var selectedDish: String?
 	private let mealViewModel = MealViewModel.shared
+	private var indexPath: IndexPath?
 	
 	var delegate: DishesTableViewControllerDelegate?
 	
@@ -54,7 +55,7 @@ class DishesTableViewController: UIViewController {
 	}
 }
 
-// MARK: - Table view data source
+// MARK: - Delegates
 extension DishesTableViewController: UITableViewDataSource, UITableViewDelegate {
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
@@ -111,6 +112,7 @@ extension DishesTableViewController: UITableViewDataSource, UITableViewDelegate 
 	}
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
+		self.indexPath = indexPath
 		switch indexPath.section {
 		case 0:
 			self.selectedDish = self.dishes[indexPath.row].name
@@ -119,10 +121,26 @@ extension DishesTableViewController: UITableViewDataSource, UITableViewDelegate 
 		default:
 			break
 		}
-		changeDishAlert(indexPath: indexPath)
+		changeDishAlert()
+	}
+}
+extension DishesTableViewController: PopupAlertViewDelegate {
+	
+	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
+		self.selectedDish = nil
+		if let indexPath = indexPath {
+			self.tableView.deselectRow(at: indexPath, animated: true)
+		}
+	}
+	func cancelButtonTapped(alertNumber: Int) {
+		dismiss(animated: true)
+	}	
+	func thirdButtonTapped(alertNumber: Int) {
+		return
 	}
 }
 
+// MARK: - Functions
 extension DishesTableViewController {
 	
 	private func configure() {
@@ -137,28 +155,14 @@ extension DishesTableViewController {
 			}
 		}
 	}
-	private func changeDishAlert(indexPath: IndexPath?) {
+	private func changeDishAlert() {
 		guard let selectedDish = self.selectedDish else { return }
 		
 		switch state {
 		case .normal:
-			presentAlert(withTitle: "החלפת מנה" , withMessage: "האם ברצונך להחליף \nאת-\(self.originalDish.getDishName)\n ב-\(selectedDish)", options: "ביטול", "אישור") {
-				[unowned self] (selection) in
-				
-				switch selection {
-				case 0:
-					self.selectedDish = nil
-					if let indexPath = indexPath {
-						self.tableView.deselectRow(at: indexPath, animated: true)
-					}
-				case 1:
-					self.dismiss(animated: true)
-				default:
-					break
-				}
-			}
+			presentAlert(withTitle: "החלפת מנה" , withMessage: "האם ברצונך להחליף \nאת-\(self.originalDish.getDishName)\n ב-\(selectedDish)", options: "ביטול", "אישור")
 		case .exceptional:
-			self.dismiss(animated: true)
+			dismiss(animated: true)
 		default:
 			break
 		}
@@ -184,5 +188,28 @@ extension DishesTableViewController {
 			self.selectedDish = nil
 		})
 		present(alert, animated: true)
+	}
+	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
+		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
+			return
+		}
+		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
+		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
+		
+		customAlert.providesPresentationContextTransitionStyle = true
+		customAlert.definesPresentationContext = true
+		customAlert.modalPresentationStyle = .overCurrentContext
+		customAlert.modalTransitionStyle = .crossDissolve
+
+		customAlert.delegate = self
+		customAlert.titleText = title
+		customAlert.messageText = message
+		customAlert.okButtonText = options[0]
+		customAlert.cancelButtonText = options[1]
+		
+		if options.count == 3 {
+			customAlert.doNotShowText = options.last
+		}
+		window.rootViewController?.present(customAlert, animated: true, completion: nil)
 	}
 }

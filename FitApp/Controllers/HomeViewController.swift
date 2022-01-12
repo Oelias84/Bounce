@@ -86,6 +86,41 @@ extension HomeViewController: BounceNavigationBarDelegate {
 	
 	func backButtonTapped() {}
 }
+extension HomeViewController: PopupAlertViewDelegate {
+	
+	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
+		switch alertNumber {
+		case 1:
+			self.tabBarController?.selectedIndex = 1
+		case 2:
+			if let navC = self.tabBarController?.viewControllers?[3] as? UINavigationController {
+				let weightVC = navC.viewControllers.last as! WeightProgressViewController
+				
+				self.tabBarController?.selectedIndex = 3
+				DispatchQueue.main.async {
+					weightVC.addWeightButtonAction(self)
+				}
+			}
+		default:
+			break
+		}
+	}
+	func cancelButtonTapped(alertNumber: Int) {
+		switch alertNumber {
+		case 2:
+			//turns weight tab bar icon to red for alerting the user
+			if let weightTab = self.tabBarController?.tabBar.items?[3] {
+				weightTab.image = UIImage(named:"Weight")?
+					.withTintColor(.red, renderingMode: .alwaysOriginal)
+			}
+		default:
+			break
+		}
+	}
+	func thirdButtonTapped(alertNumber: Int) {
+		return
+	}
+}
 
 //MARK: - Functions
 extension HomeViewController {
@@ -196,45 +231,12 @@ extension HomeViewController {
 	
 	private func checkMealsState() {
 		viewModel.checkDidFinishDailyMeals {
-			[unowned self] in
-			self.presentAlert(withTitle: "מעקב ארוחות", withMessage: "ראינו שלא השלמת את מעקב האורחות היומי שלך",
-							  options: "עבור למסך ארוחות", "ביטול") {
-				selection in
-				switch selection {
-				case 0:
-					self.tabBarController?.selectedIndex = 1
-				default:
-					break
-				}
-			}
+			self.presentAlert(withTitle: "מעקב ארוחות", withMessage: "ראינו שלא השלמת את מעקב האורחות היומי שלך", options: "עבור למסך ארוחות", "ביטול", alertNumber: 1)
 		}
 	}
 	private func checkWeightState() {
 		viewModel.checkAddWeight {
-			self.presentAlert(withTitle: "זמן להישקל", withMessage: "תזכורת קטנה לא לשכוח להישקל הבוקר לפני שאת מתחילה את היום :)", options: "עבור למסך שקילה", "ביטול") {
-				[weak self] selection in
-				guard let self = self else { return }
-				
-				switch selection {
-				case 0:
-					if let navC = self.tabBarController?.viewControllers?[3] as? UINavigationController {
-						let weightVC = navC.viewControllers.last as! WeightProgressViewController
-						
-						self.tabBarController?.selectedIndex = 3
-						DispatchQueue.main.async {
-							weightVC.addWeightButtonAction(self)
-						}
-					}
-				case 1:
-					//turns weight tab bar icon to red for alerting the user
-					if let weightTab = self.tabBarController?.tabBar.items?[3] {
-						weightTab.image = UIImage(named:"Weight")?
-							.withTintColor(.red, renderingMode: .alwaysOriginal)
-					}
-				default:
-					break
-				}
-			}
+			self.presentAlert(withTitle: "זמן להישקל", withMessage: "תזכורת קטנה לא לשכוח להישקל הבוקר לפני שאת מתחילה את היום :)", options: "עבור למסך שקילה", "ביטול", alertNumber: 2)
 		}
 	}
 	
@@ -262,6 +264,32 @@ extension HomeViewController {
 	}
 	func stopLoading() {
 		hud.dismiss()
+	}
+	
+	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., alertNumber: Int) {
+		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
+			return
+		}
+		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
+		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
+		
+		customAlert.providesPresentationContextTransitionStyle = true
+		customAlert.definesPresentationContext = true
+		customAlert.modalPresentationStyle = .overCurrentContext
+		customAlert.modalTransitionStyle = .crossDissolve
+		
+		customAlert.delegate = self
+		customAlert.titleText = title
+		customAlert.messageText = message
+		customAlert.alertNumber = alertNumber
+		customAlert.okButtonText = options[0]
+		customAlert.cancelButtonText = options[1]
+		
+		if options.count == 3 {
+			customAlert.doNotShowText = options.last
+		}
+		
+		window.rootViewController?.present(customAlert, animated: true, completion: nil)
 	}
 }
 

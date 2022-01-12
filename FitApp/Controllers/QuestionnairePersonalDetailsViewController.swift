@@ -67,23 +67,15 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
         if let birthDate = birthDate, let height = height, let weight = weight, let userName = userName {
 			
 			if userName != "", !userName.isValidFullName {
-				presentOkAlert(withTitle: "אופס",withMessage: "יש להזין שם ושם משפחה") {
-					self.userNameTextField.becomeFirstResponder()
-				}
+				presentAlert(withTitle: "אופס",withMessage: "יש להזין שם ושם משפחה", options: "אישור", alertNumber: 1)
 			} else if birthDate.onlyDate.isLaterThanOrEqual(to: Date().onlyDate) {
-				presentAlert(withTitle: "אופס", withMessage: "תאריך הלידה לא יכול גדול או שווה מהתאריך הנוחכי", options: "אישור") { _ in
-					self.birthdayDatePicker.becomeFirstResponder()
-				}
+				presentAlert(withTitle: "אופס", withMessage: "תאריך הלידה לא יכול גדול או שווה מהתאריך הנוחכי", options: "אישור", alertNumber: 2)
 			} else if height<100 {
-				presentAlert(withTitle: "אופס", withMessage: "גובה שגויי אנא בדקי את הנתונים שהזנת", options: "אישור") { _ in
-					self.heightTextField.becomeFirstResponder()
-				}
+				presentAlert(withTitle: "אופס", withMessage: "גובה שגויי אנא בדקי את הנתונים שהזנת", options: "אישור", alertNumber: 3)
 			} else if weight<30.0 {
-				presentAlert(withTitle: "אופס", withMessage: "משקל שגויי אנא בדקי את הנתונים שהזנת", options: "אישור") { _ in
-					self.weightTextField.becomeFirstResponder()
-				}
+				presentAlert(withTitle: "אופס", withMessage: "משקל שגויי אנא בדקי את הנתונים שהזנת", options: "אישור", alertNumber: 4)
 			} else if userHasCheckedTermOfUse == false {
-				presentOkAlert(withTitle: "תנאי השירות לא אושרו", withMessage: "נראה כי לא אשרת את תנאי השירות, בכדי להמשיך בהרשמה אנא סמני את התיבה שמאשרת את תנאי השימוש.") {}
+				presentAlert(withTitle: "תנאי השירות לא אושרו", withMessage: "נראה כי לא אשרת את תנאי השירות, בכדי להמשיך בהרשמה אנא סמני את התיבה שמאשרת את תנאי השימוש.", options: "אישור", alertNumber: 5)
 			} else {
 				UserProfile.defaults.name = userName
 				UserProfile.defaults.height = height
@@ -95,9 +87,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 				self.performSegue(withIdentifier: K.SegueId.moveToFatGender, sender: self)
 			}
         } else {
-			presentAlert(withTitle: "אופס", withMessage: "יש למלא את כל השדות", options: "אישור") { _ in
-				self.birthdayDatePicker.becomeFirstResponder()
-			}
+			presentAlert(withTitle: "אופס", withMessage: "יש למלא את כל השדות", options: "אישור", alertNumber: 2)
 			return
         }
     }
@@ -160,7 +150,6 @@ extension QuestionnairePersonalDetailsViewController: UIPickerViewDelegate, UIPi
 		birthDate = sender.date
 	}
 }
-
 extension QuestionnairePersonalDetailsViewController: UITextFieldDelegate {
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
@@ -185,7 +174,29 @@ extension QuestionnairePersonalDetailsViewController: UITextFieldDelegate {
 		numberPicker.reloadInputViews()
 	}
 }
-
+extension QuestionnairePersonalDetailsViewController: PopupAlertViewDelegate {
+	
+	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
+		switch alertNumber {
+		case 1:
+			self.userNameTextField.becomeFirstResponder()
+		case 2:
+			self.birthdayDatePicker.becomeFirstResponder()
+		case 3:
+			self.heightTextField.becomeFirstResponder()
+		case 4:
+			self.weightTextField.becomeFirstResponder()
+		default:
+			break
+		}
+	}
+	func cancelButtonTapped(alertNumber: Int) {
+		return
+	}
+	func thirdButtonTapped(alertNumber: Int) {
+		return
+	}
+}
 extension QuestionnairePersonalDetailsViewController {
 	
 	private func configurePicker() {
@@ -272,4 +283,35 @@ extension QuestionnairePersonalDetailsViewController {
 			return 0
 		}
 	}
+	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., alertNumber: Int) {
+		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
+			return
+		}
+		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
+		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
+		
+		customAlert.providesPresentationContextTransitionStyle = true
+		customAlert.definesPresentationContext = true
+		customAlert.modalPresentationStyle = .overCurrentContext
+		customAlert.modalTransitionStyle = .crossDissolve
+		
+		customAlert.delegate = self
+		customAlert.titleText = title
+		customAlert.messageText = message
+		customAlert.alertNumber = alertNumber
+		customAlert.okButtonText = options[0]
+		customAlert.cancelButtonText = options[1]
+		
+		switch options.count {
+		case 1:
+			customAlert.cancelButton.isHidden = true
+		case 3:
+			customAlert.doNotShowText = options.last
+		default:
+			break
+		}
+		
+		window.rootViewController?.present(customAlert, animated: true, completion: nil)
+	}
+
 }

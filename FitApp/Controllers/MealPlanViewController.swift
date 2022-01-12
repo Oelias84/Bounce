@@ -119,6 +119,36 @@ extension MealPlanViewController {
 									height: UIScreen.main.bounds.size.height)
 		view.addSubview(addMealAlert)
 	}
+	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., alertNumber: Int) {
+		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
+			return
+		}
+		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
+		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
+		
+		customAlert.providesPresentationContextTransitionStyle = true
+		customAlert.definesPresentationContext = true
+		customAlert.modalPresentationStyle = .overCurrentContext
+		customAlert.modalTransitionStyle = .crossDissolve
+		
+		customAlert.delegate = self
+		customAlert.titleText = title
+		customAlert.messageText = message
+		customAlert.alertNumber = alertNumber
+		customAlert.okButtonText = options[0]
+		customAlert.cancelButtonText = options[1]
+		
+		switch options.count {
+		case 1:
+			customAlert.cancelButton.isHidden = true
+		case 3:
+			customAlert.doNotShowText = options.last
+		default:
+			break
+		}
+		
+		window.rootViewController?.present(customAlert, animated: true, completion: nil)
+	}
 }
 
 //MARK: - Delegates
@@ -147,41 +177,29 @@ extension MealPlanViewController: AddingTableViewCellDelegate {
 	
 	func didTapped() {
 		if mealViewModel.checkIfCurrentMealIsDone() {
-			presentAlert(withTitle: "הוספת ארוחת חריגה",
-						 withMessage: "האם ברצונך להוסיף ארוחה לתפריט היום?",
-						 options: "אישור", "ביטול") {
-				
-				selection in
-				switch selection {
-				case 0:
-					self.presentAddMealAlert()
-				default:
-					break
-				}
-			}
+			presentAlert(withTitle: "הוספת ארוחת חריגה", withMessage: "האם ברצונך להוסיף ארוחה לתפריט היום?", options: "אישור", "ביטול", alertNumber: 1)
 		} else {
-			presentAlert(withTitle: "הוספת ארוחת חריגה",
-						 withMessage: "שמנו לב שלא סימנת את כל הארוחות היום, אולי בכלל אין צורך בארוחת חריגה :)",
-						 options: "אישור", "ביטול") {
-				
-				selection in
-				switch selection {
-				case 0:
-					self.presentAddMealAlert()
-				default:
-					break
-				}
-			}
+			presentAlert(withTitle: "הוספת ארוחת חריגה", withMessage: "שמנו לב שלא סימנת את כל הארוחות היום, אולי בכלל אין צורך בארוחת חריגה :)", options: "אישור", "ביטול", alertNumber: 2)
 		}
 	}
 }
 extension MealPlanViewController: PopupAlertViewDelegate {
 	
-	func okButtonTapped(selectedOption: String?, textFieldValue: String?) {
-		self.presentAddMealAlert()
+	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
+		switch alertNumber {
+		case 1:
+			self.presentAddMealAlert()
+		case 2:
+			self.presentAddMealAlert()
+		default:
+			break
+		}
 	}
-	func cancelButtonTapped() {
-		""
+	func cancelButtonTapped(alertNumber: Int) {
+		return
+	}
+	func thirdButtonTapped(alertNumber: Int) {
+		return
 	}
 }
 extension MealPlanViewController: AddMealAlertViewDelegate {

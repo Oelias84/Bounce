@@ -69,11 +69,7 @@ class MoveDishView: UIView {
 			mealViewModel.move(portion: portion, of: dish, from: meal, to: toMeal)
 			removeFromSuperview()
 		} else {
-			window?.rootViewController?.presentAlert(withTitle: "שגיאה בהעברה", withMessage: "יש לקבוע לאיזו ארוחה להעביר את המנה", options: "אישור", completion: {
-				[weak self] _ in
-				guard let self = self else { return }
-				self.destinationMealTextfield.becomeFirstResponder()
-			})
+			self.presentAlert(withTitle: "שגיאה בהעברה", withMessage: "יש לקבוע לאיזו ארוחה להעביר את המנה", options: "אישור")
 		}
 	}
 	@IBAction func cancelButtonAction(_ sender: Any) {
@@ -85,6 +81,19 @@ class MoveDishView: UIView {
 	}
 }
 
+// MARK: - Delegates
+extension MoveDishView: PopupAlertViewDelegate {
+	
+	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
+		self.destinationMealTextfield.becomeFirstResponder()
+	}
+	func cancelButtonTapped(alertNumber: Int) {
+		return
+	}
+	func thirdButtonTapped(alertNumber: Int) {
+		return
+	}
+}
 extension MoveDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 	
 	func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -130,7 +139,6 @@ extension MoveDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 		}
 	}
 }
-
 extension MoveDishView: UITextFieldDelegate {
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -156,6 +164,7 @@ extension MoveDishView: UITextFieldDelegate {
 	}
 }
 
+//MARK: - Functions
 extension MoveDishView {
 	
 	private func setupView() {
@@ -186,5 +195,33 @@ extension MoveDishView {
 	private func updateAmountLabel() {
 		dishAmountLabel.text = "\(dishToMove!.amount) / \(dishAmount!)"
 	}
+	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
+		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
+			return
+		}
+		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
+		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
+		
+		customAlert.providesPresentationContextTransitionStyle = true
+		customAlert.definesPresentationContext = true
+		customAlert.modalPresentationStyle = .overCurrentContext
+		customAlert.modalTransitionStyle = .crossDissolve
+		
+		customAlert.delegate = self
+		customAlert.titleText = title
+		customAlert.messageText = message
+		customAlert.okButtonText = options[0]
+		customAlert.cancelButtonText = options[1]
+		switch options.count {
+		case 1:
+			customAlert.cancelButton.isHidden = true
+		case 3:
+			customAlert.doNotShowText = options.last
+		default:
+			break
+		}
+		
+		window.rootViewController?.present(customAlert, animated: true, completion: nil)
+	}
 }
- 
+

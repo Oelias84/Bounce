@@ -35,6 +35,8 @@ class AddMealAlertDishView: UIView {
 	override func draw(_ rect: CGRect) {
 		setupView()
 	}
+}
+extension AddMealAlertDishView {
 	
 	private func setupView() {
 		dishNameTextField.delegate = self
@@ -67,6 +69,29 @@ class AddMealAlertDishView: UIView {
 		dishesListVC.state = .exceptional
 		self.parentViewController?.present(dishesListVC, animated: true, completion: nil)
 	}
+	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
+		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
+			return
+		}
+		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
+		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
+		
+		customAlert.providesPresentationContextTransitionStyle = true
+		customAlert.definesPresentationContext = true
+		customAlert.modalPresentationStyle = .overCurrentContext
+		customAlert.modalTransitionStyle = .crossDissolve
+
+		customAlert.delegate = self
+		customAlert.titleText = title
+		customAlert.messageText = message
+		customAlert.okButtonText = options[0]
+		customAlert.cancelButtonText = options[1]
+		
+		if options.count == 3 {
+			customAlert.doNotShowText = options.last
+		}
+		window.rootViewController?.present(customAlert, animated: true, completion: nil)
+	}
 }
 
 extension AddMealAlertDishView: UITextFieldDelegate {
@@ -91,16 +116,7 @@ extension AddMealAlertDishView: UITextFieldDelegate {
 				dish.amount = amount
 				dishAmountTextField.text = String(amount)
 			} else {
-				self.parentViewController?.presentAlert(withMessage: "נראה שכמות המנה שגויה אנא נסה שנית", options: "הבנתי", "ביטול", completion: {
-					[unowned self ] selection in
-					
-					switch selection {
-					case 0:
-						self.dishAmountTextField.becomeFirstResponder()
-					default:
-						break
-					}
-				})
+				self.presentAlert(withMessage: "נראה שכמות המנה שגויה אנא נסה שנית", options: "הבנתי", "ביטול")
 			}
 		default:
 			break
@@ -108,6 +124,19 @@ extension AddMealAlertDishView: UITextFieldDelegate {
 	}
 }
 
+extension AddMealAlertDishView: PopupAlertViewDelegate {
+	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
+		self.dishAmountTextField.becomeFirstResponder()
+	}
+	
+	func cancelButtonTapped(alertNumber: Int) {
+		return
+	}
+	
+	func thirdButtonTapped(alertNumber: Int) {
+		return
+	}
+}
 extension AddMealAlertDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 	
 	private var typeNames: [String] {

@@ -42,18 +42,20 @@ class TableViewEmptyView: UIView {
 	}
 	
 	@IBAction func buttonAction(_ sender: Any) {
-		presentingVC?.presentAlert(withMessage: "האם ברצונך לבצע פעולה זו?", options: "אישור", "ביטול", completion: {
-			[weak self] selection in
-			guard let self = self else { return }
-			switch selection {
-			case 0:
-				self.delegate?.createNewMealButtonTapped()
-			case 1:
-				self.removeFromSuperview()
-			default:
-				break
-			}
-		})
+		presentAlert(withMessage: "האם ברצונך לבצע פעולה זו?", options: "אישור", "ביטול")
+	}
+}
+
+extension TableViewEmptyView: PopupAlertViewDelegate {
+	
+	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
+		self.delegate?.createNewMealButtonTapped()
+	}
+	func cancelButtonTapped(alertNumber: Int) {
+		self.removeFromSuperview()
+	}
+	func thirdButtonTapped(alertNumber: Int) {
+		return
 	}
 }
 
@@ -72,5 +74,34 @@ extension TableViewEmptyView {
 	}
 	private func setup() {
 		button.setTitle(buttonText, for: .normal)
+	}
+	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
+		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
+			return
+		}
+		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
+		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
+		
+		customAlert.providesPresentationContextTransitionStyle = true
+		customAlert.definesPresentationContext = true
+		customAlert.modalPresentationStyle = .overCurrentContext
+		customAlert.modalTransitionStyle = .crossDissolve
+		
+		customAlert.delegate = self
+		customAlert.titleText = title
+		customAlert.messageText = message
+		customAlert.okButtonText = options[0]
+		customAlert.cancelButtonText = options[1]
+		
+		switch options.count {
+		case 1:
+			customAlert.cancelButton.isHidden = true
+		case 3:
+			customAlert.doNotShowText = options.last
+		default:
+			break
+		}
+		
+		window.rootViewController?.present(customAlert, animated: true, completion: nil)
 	}
 }

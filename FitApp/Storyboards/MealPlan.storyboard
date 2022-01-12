@@ -10,6 +10,14 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Assistant-Regular.ttf">
+            <string>Assistant-Regular</string>
+        </array>
+        <array key="Assistant-SemiBold.ttf">
+            <string>Assistant-SemiBold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Meal Plan View Controller-->
         <scene sceneID="A4b-w1-ydu">
@@ -151,7 +159,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3o2-Oe-fBy">
-                                <rect key="frame" x="0.0" y="98" width="414" height="764"/>
+                                <rect key="frame" x="0.0" y="96" width="414" height="766"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dishesCell" id="0fb-u7-asH">
@@ -169,17 +177,32 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gvg-pm-H70">
-                                <rect key="frame" x="367" y="52" width="31" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="אחר"/>
+                                <rect key="frame" x="352" y="60" width="46" height="24"/>
+                                <color key="backgroundColor" name="ProjectTail"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="19F-O0-GWh"/>
+                                    <constraint firstAttribute="width" constant="46" id="lIG-4T-gym"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="12"/>
+                                <inset key="contentEdgeInsets" minX="3" minY="0.0" maxX="3" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="אחר">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="otherButtonAction:" destination="NQt-sN-zou" eventType="touchUpInside" id="DG6-qd-eVf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r9p-2i-eYZ">
-                                <rect key="frame" x="16" y="52" width="38" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="ביטול">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r9p-2i-eYZ">
+                                <rect key="frame" x="16" y="56" width="27.5" height="32"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                <state key="normal" image="xmark" catalog="system">
                                     <color key="titleColor" systemColor="systemRedColor"/>
                                 </state>
                                 <connections>
@@ -187,25 +210,25 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="סוג מנה" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eL0-n5-slG">
-                                <rect key="frame" x="179.5" y="58.5" width="55" height="21.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="183" y="61.5" width="48" height="21"/>
+                                <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="16"/>
+                                <color key="textColor" name="ProjectTail"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3JB-6k-h3V"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Gvg-pm-H70" firstAttribute="top" secondItem="3JB-6k-h3V" secondAttribute="top" constant="8" id="BH5-V8-poR"/>
+                            <constraint firstItem="Gvg-pm-H70" firstAttribute="top" secondItem="3JB-6k-h3V" secondAttribute="top" constant="16" id="BH5-V8-poR"/>
                             <constraint firstItem="3JB-6k-h3V" firstAttribute="trailing" secondItem="3o2-Oe-fBy" secondAttribute="trailing" id="Ezb-CI-KAR"/>
                             <constraint firstItem="3JB-6k-h3V" firstAttribute="trailing" secondItem="Gvg-pm-H70" secondAttribute="trailing" constant="16" id="JWw-cb-Xvs"/>
                             <constraint firstItem="r9p-2i-eYZ" firstAttribute="leading" secondItem="3JB-6k-h3V" secondAttribute="leading" constant="16" id="K1Q-kD-DuR"/>
                             <constraint firstItem="eL0-n5-slG" firstAttribute="centerX" secondItem="RGQ-o2-rUk" secondAttribute="centerX" id="LbC-aW-laC"/>
                             <constraint firstItem="3o2-Oe-fBy" firstAttribute="top" secondItem="Gvg-pm-H70" secondAttribute="bottom" constant="12" id="Nde-hB-Yow"/>
                             <constraint firstItem="3o2-Oe-fBy" firstAttribute="leading" secondItem="3JB-6k-h3V" secondAttribute="leading" id="NkE-wh-SOJ"/>
+                            <constraint firstItem="r9p-2i-eYZ" firstAttribute="centerY" secondItem="eL0-n5-slG" secondAttribute="centerY" id="i6K-bm-2xl"/>
                             <constraint firstItem="3JB-6k-h3V" firstAttribute="bottom" secondItem="3o2-Oe-fBy" secondAttribute="bottom" id="n6e-GB-mhX"/>
                             <constraint firstItem="eL0-n5-slG" firstAttribute="centerY" secondItem="Gvg-pm-H70" secondAttribute="centerY" id="xYY-uk-7FQ"/>
-                            <constraint firstItem="r9p-2i-eYZ" firstAttribute="top" secondItem="3JB-6k-h3V" secondAttribute="top" constant="8" id="zK4-uU-SBe"/>
                         </constraints>
                     </view>
                     <connections>
@@ -221,8 +244,12 @@
     <resources>
         <image name="info.circle.fill" catalog="system" width="128" height="121"/>
         <image name="today" width="15.105999946594238" height="16.784999847412109"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="ProjectBackground">
             <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ProjectTail">
+            <color red="0.067000001668930054" green="0.47499999403953552" blue="0.45100000500679016" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
