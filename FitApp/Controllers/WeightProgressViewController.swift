@@ -52,7 +52,7 @@ class WeightProgressViewController: UIViewController {
 	@IBOutlet weak var chartView: UIView!
 	@IBOutlet weak var chartViewContainer: UIView! {
 		didSet {
-			chartViewContainer.buttonShadow()
+			chartViewContainer.cellView()
 		}
 	}
 	
