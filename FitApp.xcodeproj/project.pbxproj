@@ -43,7 +43,7 @@
 		7C3F4F8C25C9E2AF00EE3758 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F4F8B25C9E2AF00EE3758 /* ResetPasswordViewController.swift */; };
 		7C481C7226FA1883002FB8BF /* MealsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C481C7126FA1883002FB8BF /* MealsManager.swift */; };
 		7C48D1B5278CEFDE00A53AF2 /* AddMealTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C48D1B4278CEFDD00A53AF2 /* AddMealTextFieldView.swift */; };
-		7C48D1B7278CF2E600A53AF2 /* DishCellTExtFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C48D1B6278CF2E600A53AF2 /* DishCellTExtFieldView.swift */; };
+		7C48D1B7278CF2E600A53AF2 /* DishCellTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C48D1B6278CF2E600A53AF2 /* DishCellTextFieldView.swift */; };
 		7C4EB82A276E586300DA1407 /* LoginTextFiels.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4EB829276E586300DA1407 /* LoginTextFiels.xib */; };
 		7C5262B725BC756700694007 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C5262B625BC756700694007 /* Settings.storyboard */; };
 		7C5262BF25BC79B200694007 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5262BE25BC79B200694007 /* SettingsViewController.swift */; };
@@ -236,7 +236,7 @@
 		7C3F4F8B25C9E2AF00EE3758 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		7C481C7126FA1883002FB8BF /* MealsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsManager.swift; sourceTree = "<group>"; };
 		7C48D1B4278CEFDD00A53AF2 /* AddMealTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealTextFieldView.swift; sourceTree = "<group>"; };
-		7C48D1B6278CF2E600A53AF2 /* DishCellTExtFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCellTExtFieldView.swift; sourceTree = "<group>"; };
+		7C48D1B6278CF2E600A53AF2 /* DishCellTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCellTextFieldView.swift; sourceTree = "<group>"; };
 		7C4EB829276E586300DA1407 /* LoginTextFiels.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginTextFiels.xib; sourceTree = "<group>"; };
 		7C5262B625BC756700694007 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		7C5262BE25BC79B200694007 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -546,7 +546,7 @@
 			children = (
 				7C4EB829276E586300DA1407 /* LoginTextFiels.xib */,
 				7C48D1B4278CEFDD00A53AF2 /* AddMealTextFieldView.swift */,
-				7C48D1B6278CF2E600A53AF2 /* DishCellTExtFieldView.swift */,
+				7C48D1B6278CF2E600A53AF2 /* DishCellTextFieldView.swift */,
 			);
 			path = TextFieldView;
 			sourceTree = "<group>";
@@ -1364,7 +1364,7 @@
 				B368E05C25A79BB700BD1937 /* Data+Extensions.swift in Sources */,
 				7C89AA81256D7342009AD87C /* RegisterViewController.swift in Sources */,
 				7C89AA77256D715F009AD87C /* UIView+Extensions.swift in Sources */,
-				7C48D1B7278CF2E600A53AF2 /* DishCellTExtFieldView.swift in Sources */,
+				7C48D1B7278CF2E600A53AF2 /* DishCellTextFieldView.swift in Sources */,
 				B348421525890E5D00E0EF31 /* DIsh.swift in Sources */,
 				B348420D25890CF800E0EF31 /* Meal.swift in Sources */,
 				B3833F39259364ED006776D5 /* Weight.swift in Sources */,

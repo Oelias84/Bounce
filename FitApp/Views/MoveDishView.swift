@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GMStepper
 
 class MoveDishView: UIView {
 	
@@ -39,7 +40,7 @@ class MoveDishView: UIView {
 	@IBOutlet weak var mealTitleLabel: UILabel!
 	@IBOutlet weak var dishToMoveTextfield: UITextField!
 	@IBOutlet weak var destinationMealTextfield: UITextField!
-	@IBOutlet weak var dishAmountStepper: UIStepper!
+	@IBOutlet weak var dishAmountStepper: GMStepper!
 	@IBOutlet weak var dishAmountLabel: UILabel!
 	@IBOutlet weak var bottomViewConstrain: NSLayoutConstraint!
 	
@@ -74,10 +75,6 @@ class MoveDishView: UIView {
 	}
 	@IBAction func cancelButtonAction(_ sender: Any) {
 		removeFromSuperview()
-	}
-	@IBAction func dishAmountStepper(_ sender: UIStepper) {
-		dishAmount = sender.value
-		updateAmountLabel()
 	}
 }
 
@@ -170,7 +167,9 @@ extension MoveDishView {
 	private func setupView() {
 		mealViewModel = MealViewModel.shared
 		
+		setupStepper()
 		raiseScreenWhenKeyboardAppears()
+		
 		dishPickerView.delegate = self
 		dishPickerView.dataSource = self
 		destinationPickerView.delegate = self
@@ -179,8 +178,6 @@ extension MoveDishView {
 		destinationMealTextfield.delegate = self
 		dishToMoveTextfield.inputView = dishPickerView
 		destinationMealTextfield.inputView = destinationPickerView
-		dishToMoveTextfield.tintColor = .clear
-		destinationMealTextfield.tintColor = .clear
 		dishAmountStepper.minimumValue = 0.5
 		dishAmountStepper.stepValue = 0.5
 		dishToMoveTextfield.becomeFirstResponder()
@@ -192,8 +189,20 @@ extension MoveDishView {
 		contentView.frame = self.bounds
 		contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 	}
+	private func setupStepper() {
+		dishAmountStepper.roundButtons = true
+		dishAmountStepper.labelTextColor = .black
+		dishAmountStepper.backgroundColor = .clear
+		dishAmountStepper.buttonsTextColor = .white
+		dishAmountStepper.labelBackgroundColor = .clear
+		dishAmountStepper.buttonsBackgroundColor = .projectTail
+		dishAmountStepper.labelFont = UIFont(name: "Assistant-SemiBold", size: 18)!
+		dishAmountStepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
+	}
 	private func updateAmountLabel() {
-		dishAmountLabel.text = "\(dishToMove!.amount) / \(dishAmount!)"
+		if let dishToMove = dishToMove {
+			dishAmountLabel.text = "\(dishToMove.amount) / \(dishAmount!)"
+		}
 	}
 	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
 		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
@@ -222,6 +231,11 @@ extension MoveDishView {
 		}
 		
 		window.rootViewController?.present(customAlert, animated: true, completion: nil)
+	}
+	
+	@objc func stepperValueChanged(stepper: GMStepper) {
+		dishAmount = stepper.value
+		updateAmountLabel()
 	}
 }
 
