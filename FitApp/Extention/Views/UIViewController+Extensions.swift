@@ -104,13 +104,16 @@ extension UIViewController {
 		alert.addAction(UIAlertAction(title: "מצלמה", style: .default, handler: { _ in
 			imagePicker.sourceType = .camera
 			self.present(imagePicker, animated: true)
+			completion(true)
 		}))
 		alert.addAction(UIAlertAction(title: "גלריה", style: .default, handler: { _ in
 			imagePicker.sourceType = .photoLibrary
 			self.present(imagePicker, animated: true)
+			completion(true)
 		}))
 		alert.addAction(UIAlertAction(title: "ביטול", style: .cancel))
 		present(alert, animated: true)
+		completion(false)
 	}
 	
 	func presentCropViewController(image: UIImage, type: CropViewCroppingStyle) {

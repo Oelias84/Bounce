@@ -36,6 +36,11 @@ class ExercisesTableViewController: UIViewController {
 		tableView.register(UINib(nibName: K.NibName.exerciseTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.exerciseCell)
 		setupTopBar()
     }
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		topBarView.setImage()
+	}
 }
 
 extension ExercisesTableViewController {

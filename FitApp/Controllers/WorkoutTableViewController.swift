@@ -29,6 +29,7 @@ class WorkoutTableViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
+		topBarView.setImage()
 		workoutViewModel.refreshDate()
 		workoutViewModel.bindWorkoutViewModelToController = {
 			Spinner.shared.stop()

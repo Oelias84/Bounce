@@ -52,6 +52,7 @@ class ExerciseViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
+		topBarView.setImage()
 		setUpPlayerContainerView()
 		playActivity()
 		playVideo(userString: exercise.videos)

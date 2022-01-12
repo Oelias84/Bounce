@@ -36,8 +36,6 @@ final class BounceNavigationBarView: UIView {
 	
 	weak var delegate: BounceNavigationBarDelegate?
 	
-	var presentingVC: UIViewController?
-	
 	var nameTitle: String? = "" {
 		didSet {
 			nameTitleLabel.text = nameTitle
@@ -53,9 +51,11 @@ final class BounceNavigationBarView: UIView {
 			motivationLabel.text = motivationText
 		}
 	}
-	var userImage: String? {
+	var isCameraButton: Bool = false {
 		didSet {
-			setImage()
+			if isCameraButton {
+				userProfileButton.setImage(UIImage(systemName: "camera"), for: .normal)
+			}
 		}
 	}
 	var isDayWelcomeHidden: Bool {
@@ -162,18 +162,17 @@ extension BounceNavigationBarView {
 		}
 	}
 	func setImage() {
-		DispatchQueue.global(qos: .background).async {
-			UserProfile.defaults.getUserProfileImage() {
-				image in
-				if image != nil {
-					DispatchQueue.main.async {
-						self.userProfileButton.setImage(image?.circleMasked, for: .normal)
-						self.userProfileButton.imageView?.contentMode = .scaleAspectFill
-						self.userProfileButton.imageEdgeInsets = UIEdgeInsets(top: 37, left: 37, bottom: 37, right: 37)
-					}
-				} else {
-					DispatchQueue.main.async {
-						self.userProfileButton.imageEdgeInsets = UIEdgeInsets(top: 37, left: 37, bottom: 37, right: 37)
+		if let image = UserProfile.defaults.profileImageImageUrl, let url = URL(string: image) {
+
+			DispatchQueue.main.async {
+				let imageView = UIImageView()
+				imageView.sd_setImage(with: url) {
+					[weak self] image, error, type, url  in
+					guard let self = self else { return }
+					
+					if let image = imageView.image {
+						Spinner.shared.stop()
+						self.userProfileButton.setImage(image.circleMasked, for: .normal)
 					}
 				}
 			}

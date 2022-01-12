@@ -17,17 +17,23 @@ struct UserProfile {
 	
 	static var defaults = UserProfile()
 	
-	private var currentImage: UIImage?
-	private var currentImageUrl: String?
-	
 	@UserDefault(key: .checkedTermsOfUse)
 	var checkedTermsOfUse: Bool?
 	
 	@UserDefault(key: .permissionsLevel)
 	var permissionsLevel: Int?
 	
-	@UserDefault(key: .orderId)
-	var orderId: String?
+	@UserDefault(key: .orderIds)
+	var orderIds: [String]?
+	
+	@UserDefault(key: .currentOrderId)
+	var currentOrderId: String?
+	
+	@UserDefault(key: .period)
+	var period: Int?
+	
+	@UserDefault(key: .dateOfTransaction)
+	var dateOfTransaction: String?
 	
 	@UserDefault(key: .gander)
 	var gander: String?
@@ -164,35 +170,15 @@ extension UserProfile {
 			return ""
 		}
 	}
-	mutating func getUserProfileImage(completion: @escaping (UIImage?)->()) {
-		
-		guard let imageUrl = self.profileImageImageUrl else {
-			completion(nil)
-			return
-		}
-		
-		if currentImageUrl == nil {
-			self.currentImageUrl = imageUrl
-			if let image = currentImageUrl?.showImage {
-				self.currentImage = image
-				completion(image)
-			}
-		} else if currentImageUrl != self.profileImageImageUrl {
-			self.currentImageUrl = self.profileImageImageUrl
-			if let image = currentImageUrl?.showImage {
-				self.currentImage = image
-				completion(image)
-			}
-		} else {
-			completion(currentImage)
-		}
-	}
 	static func updateServer() {
 		let googleManager = GoogleApiManager()
 		
 		let data = ServerUserData (
 			permissionsLevel: defaults.permissionsLevel,
-			orderId: defaults.orderId,
+			currentOrderId: defaults.currentOrderId,
+			orderIds: defaults.orderIds,
+			period: defaults.period,
+			dateOfTransaction: defaults.dateOfTransaction,
 			checkedTermsOfUse: defaults.checkedTermsOfUse,
 			gander: defaults.gander,
 			lastCaloriesCheckDateString: defaults.lastCaloriesCheckDateString,
@@ -219,7 +205,8 @@ extension UserProfile {
 		var userProfile = self
 		
 		userProfile.permissionsLevel = data.permissionsLevel
-		userProfile.orderId = data.orderId
+		userProfile.orderIds = data.orderIds
+		userProfile.period = data.period
 		userProfile.checkedTermsOfUse = data.checkedTermsOfUse
 		userProfile.gander = data.gander
 		userProfile.lastCaloriesCheckDateString = data.lastCaloriesCheckDateString
@@ -243,8 +230,11 @@ extension UserProfile {
 	func resetUserProfileData() {
 		var userProfile = UserProfile.defaults
 		
+		userProfile.currentOrderId = nil
+		userProfile.dateOfTransaction = nil
 		userProfile.permissionsLevel = nil
-		userProfile.orderId = nil
+		userProfile.orderIds = nil
+		userProfile.period = nil
 		userProfile.checkedTermsOfUse = nil
 		userProfile.gander = nil
 		userProfile.lastCaloriesCheckDateString = nil
@@ -270,7 +260,10 @@ extension UserProfile {
 struct ServerUserData: Codable {
 	
 	let permissionsLevel: Int?
-	let orderId: String?
+	let currentOrderId: String?
+	let orderIds: [String]?
+	let period: Int?
+	let dateOfTransaction: String?
 	let checkedTermsOfUse: Bool?
 	let gander: String?
 	let lastCaloriesCheckDateString: String?
@@ -311,8 +304,11 @@ extension Key {
 	static let lastCaloriesCheckDateString: Key = "lastCaloriesCheckDateString"
 	
 	//user data
+	static let orderIds: Key = "orderIds"
+	static let currentOrderId: Key = "currentOrderId"
+	static let dateOfTransaction: Key = "dateOfTransaction"
 	static let permissionsLevel: Key = "permissionsLevel"
-	static let orderId: Key = "orderId"
+	static let period: Key = "preiod"
 	static let checkedTermsOfUse: Key = "checkedTermsOfUse"
 	static let gander: Key = "gander"
 	static let fcmToken: Key = "fcmToken"

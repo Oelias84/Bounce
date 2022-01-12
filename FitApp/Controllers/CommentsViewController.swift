@@ -28,6 +28,11 @@ class CommentsViewController: UIViewController {
 			self.updateUI()
 		}
     }
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		topBarView.setImage()
+	}
 }
 
 //MAKR: - Delegates

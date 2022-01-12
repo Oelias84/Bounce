@@ -79,6 +79,10 @@ class WeightProgressViewController: UIViewController {
 		dateRightButton.isHidden = true
 		tableView.sectionHeaderHeight = 46
 	}
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		topBarView.setImage()
+	}
 	
 	@IBAction func todayButtonAction(_ sender: Any) {
 		selectedDate = Date()

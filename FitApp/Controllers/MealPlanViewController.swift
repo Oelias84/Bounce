@@ -34,6 +34,7 @@ class MealPlanViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		callToViewModelForUIUpdate()
+		topBarView.setImage()
 	}
 	
 	@IBAction private func todayButtonTapped(_ sender: UIBarButtonItem) {
@@ -172,6 +173,15 @@ extension MealPlanViewController: AddingTableViewCellDelegate {
 				}
 			}
 		}
+	}
+}
+extension MealPlanViewController: PopupAlertViewDelegate {
+	
+	func okButtonTapped(selectedOption: String?, textFieldValue: String?) {
+		self.presentAddMealAlert()
+	}
+	func cancelButtonTapped() {
+		""
 	}
 }
 extension MealPlanViewController: AddMealAlertViewDelegate {

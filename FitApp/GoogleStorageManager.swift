@@ -22,17 +22,21 @@ final class GoogleStorageManager {
 		
 		var description : String {
 			switch self {
-			case .profileImage: return "profileImage"
-			case .weightImage: return "weight"
-			case .pdf: return "pdf"
-			case .messagesImage: return "message_images"
+			case .profileImage:
+				return "profile_image"
+			case .weightImage:
+				return "weight"
+			case .pdf:
+				return "pdf"
+			case .messagesImage:
+				return "message_images"
 			}
 		}
 	}
 	
 	public func uploadImage(from child: ChildType, data: Data, fileName: String, completion: @escaping (Result<String, Error>) -> Void) {
 		
-		storage.child("\(child)/\(fileName)").putData(data, metadata: nil) { metadata, error in
+		storage.child("\(child.description)/\(fileName)").putData(data, metadata: nil) { metadata, error in
 			if let error = error {
 				completion(.failure(error))
 				return
@@ -50,9 +54,9 @@ final class GoogleStorageManager {
 			}
 		}
 	}
-	public func downloadImageURL(from child: ChildType, path: String, completion: @escaping (Result<URL, Error>) -> Void ) {
+	public func downloadImageURL(from child: ChildType, path: String, completion: @escaping (Result<URL, Error>) -> Void) {
 		
-		self.storage.child("\(child)/\(path)").downloadURL { url, error in
+		self.storage.child("\(child.description)/\(path)").downloadURL { url, error in
 			guard error == nil, let url = url else {
 				completion(.failure(error!))
 				return

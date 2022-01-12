@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 class NewChatViewController: UIViewController {
 	
@@ -40,7 +41,7 @@ class NewChatViewController: UIViewController {
 		return label
 	}()
 	
-	
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -48,6 +49,12 @@ class NewChatViewController: UIViewController {
 		fetchUsers()
 		setDelegates()
 	}
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		topBarView.setImage()
+	}
+
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		noResultsLabel.frame = CGRect(x: view.frame.width/2,

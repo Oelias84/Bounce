@@ -42,6 +42,7 @@ class ArticlesViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
+		topBarView.setImage()
 		if filteredArticles != nil {
 			checkTopic()
 		}

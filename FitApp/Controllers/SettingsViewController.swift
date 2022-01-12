@@ -25,6 +25,7 @@ class SettingsViewController: UIViewController {
 	private var tableViewData: [SettingsMenu: [SettingsCell]]!
 	private var userData: UserProfile! = UserProfile.defaults
 	
+	private var inCameraMode: Bool = false
 	private let imagePickerController = UIImagePickerController()
 	
 	@IBOutlet weak var tableView: UITableView!
@@ -39,17 +40,19 @@ class SettingsViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		imagePickerController.delegate = self
-	}
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		
 		userData = UserProfile.defaults
-		
+
 		setupTopBar()
 		registerCells()
 		setupTableViewData()
+		imagePickerController.delegate = self
+	}
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		if !inCameraMode {
+			navigationController?.popViewController(animated: false)
+		}
 	}
 }
 
@@ -155,6 +158,8 @@ extension SettingsViewController: CropViewControllerDelegate, UINavigationContro
 	
 	func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
 		cropViewController.dismiss(animated: true) {
+			self.inCameraMode = false
+			Spinner.shared.show(self.view)
 			self.saveImage(image)
 		}
 	}
@@ -206,7 +211,12 @@ extension SettingsViewController: SettingsStepperViewCellDelegate {
 extension SettingsViewController: BounceNavigationBarDelegate {
 	
 	func cameraButtonTapped() {
-		presentImagePickerActionSheet(imagePicker: imagePickerController) { _ in }
+		presentImagePickerActionSheet(imagePicker: imagePickerController) {
+			didSelect in
+			if didSelect {
+				self.inCameraMode = true
+			}
+		}
 	}
 	func backButtonTapped() {
 		navigationController?.popViewController(animated: true)
@@ -220,6 +230,7 @@ extension SettingsViewController {
 		
 		topBarView.delegate = self
 		topBarView.nameTitle = "הגדרות"
+		topBarView.isCameraButton = true
 		topBarView.isBackButtonHidden = false
 		topBarView.isMotivationHidden = true
 		topBarView.isDayWelcomeHidden = true
@@ -402,15 +413,17 @@ extension SettingsViewController {
 			case .success(let imageUrl):
 				// Saves image url to user defaults
 				UserProfile.defaults.profileImageImageUrl = imageUrl
-				self.topBarView.userImage = imageUrl
+				self.topBarView.setImage()
+				Spinner.shared.stop()
 			case .failure(let error):
 				print(error.localizedDescription)
+				Spinner.shared.stop()
 				self.presentOkAlert(withMessage: "נכשל לשמור את התמונה אנא נסו שנית", completion: {})
 			}
 		}
 	}
 	private func saveUserImage(image: UIImage, for url: String, completion: @escaping (Result<String, Error>) -> Void) {
-		GoogleStorageManager.shared.uploadImage(from: .profileImage, data: image.jpegData(compressionQuality: 8)!, fileName: url) {
+		GoogleStorageManager.shared.uploadImage(from: .profileImage, data: image.jpegData(compressionQuality: 0.2)!, fileName: url) {
 			result in
 			completion(result)
 		}

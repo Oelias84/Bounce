@@ -27,6 +27,7 @@ class ChatsViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
+		topBarView.setImage()
 		chatsViewModel.bindChatsViewModelToController = {
 			Spinner.shared.stop()
 			self.updateUI()

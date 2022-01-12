@@ -23,6 +23,11 @@ class ChatContainerViewController: UIViewController {
 		setupChat()
 		setupTopBarView()
 	}
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		topBarView.setImage()
+	}
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 		let headerHeight: CGFloat = 236
