@@ -70,6 +70,7 @@ extension DishView {
 		amountLabel.text = "x\(dish.amount)"
 		dishTypeLabel.text = dish.printDishType
 		dishNameTextField.text = dish.getDishName
+		dishNameTextField.inputView = UIView(frame: .zero)
 		checkBoxButton.isSelected = dish.isDishDone
 	}
 }
