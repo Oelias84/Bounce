@@ -126,17 +126,17 @@ extension DishesTableViewController: UITableViewDataSource, UITableViewDelegate 
 }
 extension DishesTableViewController: PopupAlertViewDelegate {
 	
+	func thirdButtonTapped(alertNumber: Int) {
+		return
+	}
+	func cancelButtonTapped(alertNumber: Int) {
+		dismiss(animated: true)
+	}
 	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
 		self.selectedDish = nil
 		if let indexPath = indexPath {
 			self.tableView.deselectRow(at: indexPath, animated: true)
 		}
-	}
-	func cancelButtonTapped(alertNumber: Int) {
-		dismiss(animated: true)
-	}	
-	func thirdButtonTapped(alertNumber: Int) {
-		return
 	}
 }
 
@@ -160,7 +160,7 @@ extension DishesTableViewController {
 		
 		switch state {
 		case .normal:
-			presentAlert(withTitle: "החלפת מנה" , withMessage: "האם ברצונך להחליף \nאת-\(self.originalDish.getDishName)\n ב-\(selectedDish)", options: "ביטול", "אישור")
+			presentAlert(withTitle: "החלפת מנה" , withMessage: "האם ברצונך להחליף \nאת- \(self.originalDish.getDishName)\n ב- \(selectedDish)", options: "ביטול", "אישור")
 		case .exceptional:
 			dismiss(animated: true)
 		default:
@@ -190,9 +190,7 @@ extension DishesTableViewController {
 		present(alert, animated: true)
 	}
 	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
-		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
-			return
-		}
+		
 		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
 		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
 		
@@ -210,6 +208,6 @@ extension DishesTableViewController {
 		if options.count == 3 {
 			customAlert.doNotShowText = options.last
 		}
-		window.rootViewController?.present(customAlert, animated: true, completion: nil)
+		present(customAlert, animated: true)
 	}
 }

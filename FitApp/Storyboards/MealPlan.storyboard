@@ -26,6 +26,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MealPlan" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CMS-EQ-Utu">
+                                <rect key="frame" x="0.0" y="242" width="414" height="654"/>
+                                <color key="backgroundColor" name="ProjectBackground"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="pjO-ox-C9x" id="QJM-2u-Uev"/>
+                                    <outlet property="delegate" destination="pjO-ox-C9x" id="zWt-b5-dYj"/>
+                                </connections>
+                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGu-YC-Xn7" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="214"/>
                                 <color key="backgroundColor" name="ProjectBackground"/>
@@ -40,14 +48,6 @@
                                     <constraint firstAttribute="height" constant="40" id="QtY-Bb-I7y"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MealPlan" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CMS-EQ-Utu">
-                                <rect key="frame" x="0.0" y="242" width="414" height="654"/>
-                                <color key="backgroundColor" name="ProjectBackground"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="pjO-ox-C9x" id="QJM-2u-Uev"/>
-                                    <outlet property="delegate" destination="pjO-ox-C9x" id="zWt-b5-dYj"/>
-                                </connections>
-                            </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yJ0-vt-EQA">
                                 <rect key="frame" x="12" y="44" width="78.5" height="31"/>
                                 <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="12"/>
@@ -114,13 +114,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hH3-GD-ub9" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="214"/>
-                                <color key="backgroundColor" name="ProjectBackground"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="214" id="c44-8h-Y3v"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cUC-k4-PnM">
                                 <rect key="frame" x="0.0" y="214" width="414" height="628"/>
                                 <color key="backgroundColor" name="ProjectBackground"/>
@@ -129,6 +122,13 @@
                                     <outlet property="delegate" destination="KPi-An-b0g" id="r5i-vQ-eEX"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hH3-GD-ub9" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="214"/>
+                                <color key="backgroundColor" name="ProjectBackground"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="214" id="c44-8h-Y3v"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hzk-MY-sGr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
