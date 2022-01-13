@@ -7,6 +7,13 @@
 
 import Foundation
 
+struct DishesDividerResult {
+	
+	var amount: Double
+	var remainder: Double = 0.0
+	var lunchRemainder: Double = 0.0
+}
+
 class MealViewModel: NSObject {
 	
 	static let shared = MealViewModel()
@@ -211,6 +218,7 @@ class MealViewModel: NSObject {
 		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal)
 		fetchMealsBy(date: date) {_ in}
 	}
+	
 	func fetchMealsBy(date: Date, completion: @escaping (Bool) -> ()) {
 		GoogleApiManager.shared.getMealFor(date) { result in
 			switch result {
@@ -289,30 +297,48 @@ class MealViewModel: NSObject {
 	}
 	
 	//MARK: - Meals Algorithm
-	func mealDishesDivider(hasPrefer: Bool, numberOfDishes: Double) -> (Double, Double) {
-		let reducer = 0.5
+	private func mealDishesDivider(hasPrefer: Bool, numberOfDishes: Double) -> DishesDividerResult {
 		let numberOfMeals = 3
-		let isDividable = (numberOfDishes / Double(numberOfMeals)).isWholeNumber
-		var dishesForMeal = 0.0
-		var reminder = 0.0
+		let dishesForMealRaw = numberOfDishes / Double(numberOfMeals)
+		let dishesForMeal = dishesForMealRaw.mealRound
 		
-		if hasPrefer {
-			if isDividable {
-				let numberOfDishesLessOne = numberOfDishes-reducer
-				dishesForMeal = (numberOfDishesLessOne / Double(numberOfMeals)).roundHalfDown
-				reminder = numberOfDishesLessOne - (dishesForMeal * Double(numberOfMeals)) + reducer
+		var result: DishesDividerResult {
+			
+			if !hasPrefer {
+				if (dishesForMealRaw == dishesForMeal) {
+					return DishesDividerResult(amount: dishesForMeal)
+				} else {
+					let remainder = ((dishesForMealRaw - dishesForMeal) * Double(numberOfMeals)).roundHalfDown
+					return DishesDividerResult(amount: dishesForMeal, lunchRemainder: remainder)
+				}
 			} else {
-				dishesForMeal = (numberOfDishes / Double(numberOfMeals)).roundHalfDown
-				reminder = numberOfDishes - (dishesForMeal * Double(numberOfMeals))
+				if (dishesForMealRaw == dishesForMeal) {
+					// Is dividable
+					var diff: Double
+					var remainder: Double
+					
+					if (dishesForMeal > 0.5) {
+						diff = 0.5
+						remainder = 1.5
+					} else {
+						diff = 0.0
+						remainder = 0.5
+					}
+					return DishesDividerResult(amount: dishesForMeal - diff, remainder: remainder)
+				} else {
+					// Not dividable
+					let remainder = ((dishesForMealRaw - dishesForMeal) * Double(numberOfMeals)).roundHalfDown
+					return DishesDividerResult(
+						amount: dishesForMeal,
+						remainder: remainder
+					)
+				}
 			}
-		} else {
-			if isDividable { return (numberOfDishes/Double(numberOfMeals), reminder) }
-			dishesForMeal = (numberOfDishes / Double(numberOfMeals)).roundHalfDown
-			reminder = numberOfDishes - (dishesForMeal * Double(numberOfMeals))
 		}
-		return (dishesForMeal, reminder.roundHalfDown)
+		return result
 	}
-	func numberOfDishes(numberOfMeals: Int, dishType: DishType, numberOfDishes: Double) -> Double {
+	private func numberOfDishes(numberOfMeals: Int, dishType: DishType, numberOfDishes: Double) -> Double {
+		
 		if numberOfMeals == 4 {
 			switch dishType {
 			case .carbs:
@@ -327,71 +353,125 @@ class MealViewModel: NSObject {
 			case .fat:
 				return numberOfDishes - 0.5
 			case .protein:
-				return numberOfDishes - 1
+				return numberOfDishes - 1.0
 			}
 		} else {
 			return numberOfDishes
 		}
 	}
-	func populateMeals(forMessage: Bool = false, date: Date, hasPrefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) -> [Meal] {
-		let dateString = date.dateStringForDB
-		var dayMeals = [Meal(mealType: .breakfast, dishes: [], date: dateString), Meal(mealType: .lunch, dishes: [], date: dateString), Meal(mealType: .supper, dishes: [], date: dateString)]
-		
-		let numberCarbsDish = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .carbs, numberOfDishes: carbs)
-		let numberProteinDish = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .protein, numberOfDishes: protein)
-		let numberFatDishes = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .fat, numberOfDishes: fat)
-		
-		let carbsForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil, numberOfDishes: numberCarbsDish)
-		let proteinForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil, numberOfDishes: numberProteinDish)
-		let fatForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil, numberOfDishes: numberFatDishes)
-		
-		for i in 0...2 {
-			let mealType: [MealType] = [.breakfast, .lunch, .supper]
-			let carbsDish = Dish(name: DishesGenerator.randomDishFor(mealType: mealType[i], .carbs), type: .carbs, amount: carbsForMeal.0)
-			let proteinDish = Dish(name: DishesGenerator.randomDishFor(mealType: mealType[i], .protein), type: .protein, amount: proteinForMeal.0)
-			let fatDish = Dish(name: DishesGenerator.randomDishFor(mealType: mealType[i], .fat), type: .fat, amount: fatForMeal.0)
+	private func populateMeals(forMessage: Bool = false, date: Date, hasPrefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) -> [Meal] {
+
+			let numberCarbsDish = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .carbs, numberOfDishes: carbs)
+			let numberProteinDish = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .protein, numberOfDishes: protein)
+			let numberFatDishes = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .fat, numberOfDishes: fat)
 			
-			dayMeals[i].dishes = [proteinDish, carbsDish, fatDish]
-		}
-		if let prefer = hasPrefer {
-			if let addToPreferred = dayMeals.first(where: {$0.mealType == prefer}) {
-				
-				addToPreferred.dishes.forEach { dish in
-					switch dish.type {
-					case .protein:
-						dish.amount += proteinForMeal.1
-					case .carbs:
-						dish.amount += carbsForMeal.1
-					case .fat:
-						dish.amount += fatForMeal.1
+			let carbsForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil, numberOfDishes: numberCarbsDish)
+			let proteinForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil, numberOfDishes: numberProteinDish)
+			let fatForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil, numberOfDishes: numberFatDishes)
+			
+			let dateString = date.dateStringForDB
+			var dayMeals = [
+				Meal(
+					mealType: .breakfast,
+					dishes: [
+						Dish(
+							name: DishesGenerator.randomDishFor(mealType: .breakfast, .protein),
+							type: .protein,
+							amount: proteinForMeal.amount
+						),
+						Dish(
+							name: DishesGenerator.randomDishFor(mealType: .breakfast, .carbs),
+							type: .carbs,
+							amount: carbsForMeal.amount
+						),
+						Dish(
+							name: DishesGenerator.randomDishFor(mealType: .breakfast, .fat),
+							type: .fat,
+							amount: fatForMeal.amount
+						),
+					],
+					date: dateString
+				),
+				Meal(
+					mealType: .lunch,
+					dishes: [
+						Dish(
+							name: DishesGenerator.randomDishFor(mealType: .lunch, .protein),
+							type: .protein,
+							amount: proteinForMeal.amount + proteinForMeal.lunchRemainder
+						),
+						Dish(
+							name: DishesGenerator.randomDishFor(mealType: .lunch, .carbs),
+							type: .carbs,
+							amount: carbsForMeal.amount + carbsForMeal.lunchRemainder
+						),
+						Dish(
+							name: DishesGenerator.randomDishFor(mealType: .lunch, .fat),
+							type: .fat,
+							amount: fatForMeal.amount + fatForMeal.lunchRemainder
+						),
+					],
+					date: dateString
+				),
+				Meal(
+					mealType: .supper,
+					dishes: [
+						Dish(
+							name: DishesGenerator.randomDishFor(mealType: .supper, .protein),
+							type: .protein,
+							amount: proteinForMeal.amount
+						),
+						Dish(
+							name: DishesGenerator.randomDishFor(mealType: .supper, DishType.carbs),
+							type: .carbs,
+							amount: carbsForMeal.amount
+						),
+						Dish(
+							name: DishesGenerator.randomDishFor(mealType: .supper, DishType.fat),
+							type: .fat,
+							amount: fatForMeal.amount
+						),
+					],
+					date: dateString
+				)
+			]
+			if let prefer = hasPrefer {
+				if let addToPreferred = dayMeals.first(where: {$0.mealType == prefer}) {
+					
+					addToPreferred.dishes.forEach { dish in
+						switch dish.type {
+						case .protein:
+							dish.amount += proteinForMeal.remainder
+						case .carbs:
+							dish.amount += carbsForMeal.remainder
+						case .fat:
+							dish.amount += fatForMeal.remainder
+						}
 					}
 				}
 			}
-		}
-		if numberOfMeals == 4 {
-			if numberCarbsDish < 4 {
+		
+			if numberOfMeals == 4 {
+				if numberCarbsDish < 4 {
+					dayMeals.insert(Meal(mealType: .middle1,
+										 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein), type: .protein, amount: 1)],
+										 date: dateString), at: 1)
+				} else {
+					dayMeals.insert(Meal(mealType: .middle1,
+										 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs), type: .carbs, amount: 1)],
+										 date: dateString), at: 1)
+				}
+			} else if numberOfMeals == 5 {
+				
 				dayMeals.insert(Meal(mealType: .middle1,
-									 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein),type: .protein, amount: 1)],
-									 date: dateString), at: 1)
-			} else {
-				dayMeals.insert(Meal(mealType: .middle1,
-									 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs),type: .carbs, amount: 1)],
-									 date: dateString), at: 1)
+									 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs), type: .carbs, amount: 1)],
+									 date: dateString),at: 1)
+				
+				dayMeals.insert(Meal(mealType: .middle2,
+									 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein), type: .protein, amount: 1),
+											  Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .fat), type: .fat, amount: 0.5)],
+									 date: dateString), at: 3)
 			}
-		} else if numberOfMeals == 5 {
-			
-			dayMeals.insert(Meal(mealType: .middle1,
-								 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs), type: .carbs, amount: 1)],
-								 date: dateString),at: 1)
-			
-			dayMeals.insert(Meal(mealType: .middle2,
-								 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein),type: .protein, amount: 1),
-										  Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .fat), type: .fat, amount: 0.5)],
-								 date: dateString), at: 3)
+			return dayMeals
 		}
-		if !forMessage {
-			GoogleApiManager.shared.createDailyMeal(meals: dayMeals, date: date)
-		}
-		return dayMeals
-	}
 }
