@@ -34,11 +34,12 @@ class MealPlanViewController: UIViewController {
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		
 		callToViewModelForUIUpdate()
 		topBarView.setImage()
 	}
 	
-	@IBAction private func todayButtonTapped(_ sender: UIBarButtonItem) {
+	@IBAction private func todayButtonTapped(_ sender: UIButton) {
 		date = Date()
 		Spinner.shared.show(self.view)
 		changeDateView.changeToCurrentDate()
@@ -50,7 +51,6 @@ class MealPlanViewController: UIViewController {
 				self.showAddNewMealButton = true
 			}
 			self.tableView.reloadData()
-//			self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
 		}
 	}
 }
@@ -105,7 +105,6 @@ extension MealPlanViewController {
 			DispatchQueue.main.async {
 				if let meals = self.mealViewModel.meals, meals.isEmpty {
 					self.showAddNewMealButton = true
-//					self.tableView.backgroundView = self.presentEmptyTableViewBackground(self.date)
 				} else {
 					self.showAddNewMealButton = false
 				}
@@ -176,7 +175,6 @@ extension MealPlanViewController: ChangeDateViewDelegate {
 				self.showAddNewMealButton = true
 			}
 			self.tableView.reloadData()
-//			self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
 		}
 	}
 }

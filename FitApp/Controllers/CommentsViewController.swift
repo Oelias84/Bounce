@@ -72,22 +72,30 @@ extension CommentsViewController:  CollapsibleTableViewHeaderDelegate {
 		tableView.reloadSections(NSIndexSet(index: section) as IndexSet, with: .automatic)
 	}
 }
+extension CommentsViewController: BounceNavigationBarDelegate {
+	
+	func backButtonTapped() {
+		navigationController?.popViewController(animated: true)
+	}
+}
 
 //MAKR: - Functions
 extension CommentsViewController {
 	
-	private func setupTopBarView() {
-		
-		topBarView.nameTitle = "ארוחות"
-		topBarView.isMotivationHidden = true
-		topBarView.isDayWelcomeHidden = true
-		topBarView.isDayWelcomeHidden = true
-	}
+
 	private func updateUI() {
 		Spinner.shared.stop()
 		DispatchQueue.main.async {
 			self.tableView.reloadData()
 		}
+	}
+	private func setupTopBarView() {
+		
+		topBarView.delegate = self
+		topBarView.nameTitle = "ארוחות"
+		topBarView.isMotivationHidden = true
+		topBarView.isDayWelcomeHidden = true
+		topBarView.isDayWelcomeHidden = true
 	}
 	private func registerCells() {
 		tableView.register(UINib(nibName: K.NibName.collapsibleTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.collapsibleCell)

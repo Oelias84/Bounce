@@ -284,7 +284,7 @@ class MealViewModel: NSObject {
 					}
 				}
 			case .failure(let error):
-			print(error)
+				print(error)
 			}
 		}
 	}
@@ -360,118 +360,121 @@ class MealViewModel: NSObject {
 		}
 	}
 	private func populateMeals(forMessage: Bool = false, date: Date, hasPrefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) -> [Meal] {
-
-			let numberCarbsDish = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .carbs, numberOfDishes: carbs)
-			let numberProteinDish = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .protein, numberOfDishes: protein)
-			let numberFatDishes = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .fat, numberOfDishes: fat)
-			
-			let carbsForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil, numberOfDishes: numberCarbsDish)
-			let proteinForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil, numberOfDishes: numberProteinDish)
-			let fatForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil, numberOfDishes: numberFatDishes)
-			
-			let dateString = date.dateStringForDB
-			var dayMeals = [
-				Meal(
-					mealType: .breakfast,
-					dishes: [
-						Dish(
-							name: DishesGenerator.randomDishFor(mealType: .breakfast, .protein),
-							type: .protein,
-							amount: proteinForMeal.amount
-						),
-						Dish(
-							name: DishesGenerator.randomDishFor(mealType: .breakfast, .carbs),
-							type: .carbs,
-							amount: carbsForMeal.amount
-						),
-						Dish(
-							name: DishesGenerator.randomDishFor(mealType: .breakfast, .fat),
-							type: .fat,
-							amount: fatForMeal.amount
-						),
-					],
-					date: dateString
-				),
-				Meal(
-					mealType: .lunch,
-					dishes: [
-						Dish(
-							name: DishesGenerator.randomDishFor(mealType: .lunch, .protein),
-							type: .protein,
-							amount: proteinForMeal.amount + proteinForMeal.lunchRemainder
-						),
-						Dish(
-							name: DishesGenerator.randomDishFor(mealType: .lunch, .carbs),
-							type: .carbs,
-							amount: carbsForMeal.amount + carbsForMeal.lunchRemainder
-						),
-						Dish(
-							name: DishesGenerator.randomDishFor(mealType: .lunch, .fat),
-							type: .fat,
-							amount: fatForMeal.amount + fatForMeal.lunchRemainder
-						),
-					],
-					date: dateString
-				),
-				Meal(
-					mealType: .supper,
-					dishes: [
-						Dish(
-							name: DishesGenerator.randomDishFor(mealType: .supper, .protein),
-							type: .protein,
-							amount: proteinForMeal.amount
-						),
-						Dish(
-							name: DishesGenerator.randomDishFor(mealType: .supper, DishType.carbs),
-							type: .carbs,
-							amount: carbsForMeal.amount
-						),
-						Dish(
-							name: DishesGenerator.randomDishFor(mealType: .supper, DishType.fat),
-							type: .fat,
-							amount: fatForMeal.amount
-						),
-					],
-					date: dateString
-				)
-			]
-			if let prefer = hasPrefer {
-				if let addToPreferred = dayMeals.first(where: {$0.mealType == prefer}) {
-					
-					addToPreferred.dishes.forEach { dish in
-						switch dish.type {
-						case .protein:
-							dish.amount += proteinForMeal.remainder
-						case .carbs:
-							dish.amount += carbsForMeal.remainder
-						case .fat:
-							dish.amount += fatForMeal.remainder
-						}
+		
+		let numberCarbsDish = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .carbs, numberOfDishes: carbs)
+		let numberProteinDish = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .protein, numberOfDishes: protein)
+		let numberFatDishes = numberOfDishes(numberOfMeals: numberOfMeals, dishType: .fat, numberOfDishes: fat)
+		
+		let carbsForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil, numberOfDishes: numberCarbsDish)
+		let proteinForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil, numberOfDishes: numberProteinDish)
+		let fatForMeal = mealDishesDivider(hasPrefer: hasPrefer != nil, numberOfDishes: numberFatDishes)
+		
+		let dateString = date.dateStringForDB
+		var dayMeals = [
+			Meal(
+				mealType: .breakfast,
+				dishes: [
+					Dish(
+						name: DishesGenerator.randomDishFor(mealType: .breakfast, .protein),
+						type: .protein,
+						amount: proteinForMeal.amount
+					),
+					Dish(
+						name: DishesGenerator.randomDishFor(mealType: .breakfast, .carbs),
+						type: .carbs,
+						amount: carbsForMeal.amount
+					),
+					Dish(
+						name: DishesGenerator.randomDishFor(mealType: .breakfast, .fat),
+						type: .fat,
+						amount: fatForMeal.amount
+					),
+				],
+				date: dateString
+			),
+			Meal(
+				mealType: .lunch,
+				dishes: [
+					Dish(
+						name: DishesGenerator.randomDishFor(mealType: .lunch, .protein),
+						type: .protein,
+						amount: proteinForMeal.amount + proteinForMeal.lunchRemainder
+					),
+					Dish(
+						name: DishesGenerator.randomDishFor(mealType: .lunch, .carbs),
+						type: .carbs,
+						amount: carbsForMeal.amount + carbsForMeal.lunchRemainder
+					),
+					Dish(
+						name: DishesGenerator.randomDishFor(mealType: .lunch, .fat),
+						type: .fat,
+						amount: fatForMeal.amount + fatForMeal.lunchRemainder
+					),
+				],
+				date: dateString
+			),
+			Meal(
+				mealType: .supper,
+				dishes: [
+					Dish(
+						name: DishesGenerator.randomDishFor(mealType: .supper, .protein),
+						type: .protein,
+						amount: proteinForMeal.amount
+					),
+					Dish(
+						name: DishesGenerator.randomDishFor(mealType: .supper, DishType.carbs),
+						type: .carbs,
+						amount: carbsForMeal.amount
+					),
+					Dish(
+						name: DishesGenerator.randomDishFor(mealType: .supper, DishType.fat),
+						type: .fat,
+						amount: fatForMeal.amount
+					),
+				],
+				date: dateString
+			)
+		]
+		if let prefer = hasPrefer {
+			if let addToPreferred = dayMeals.first(where: {$0.mealType == prefer}) {
+				
+				addToPreferred.dishes.forEach { dish in
+					switch dish.type {
+					case .protein:
+						dish.amount += proteinForMeal.remainder
+					case .carbs:
+						dish.amount += carbsForMeal.remainder
+					case .fat:
+						dish.amount += fatForMeal.remainder
 					}
 				}
 			}
+		}
 		
-			if numberOfMeals == 4 {
-				if numberCarbsDish < 4 {
-					dayMeals.insert(Meal(mealType: .middle1,
-										 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein), type: .protein, amount: 1)],
-										 date: dateString), at: 1)
-				} else {
-					dayMeals.insert(Meal(mealType: .middle1,
-										 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs), type: .carbs, amount: 1)],
-										 date: dateString), at: 1)
-				}
-			} else if numberOfMeals == 5 {
-				
+		if numberOfMeals == 4 {
+			if numberCarbsDish < 4 {
+				dayMeals.insert(Meal(mealType: .middle1,
+									 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein), type: .protein, amount: 1)],
+									 date: dateString), at: 1)
+			} else {
 				dayMeals.insert(Meal(mealType: .middle1,
 									 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs), type: .carbs, amount: 1)],
-									 date: dateString),at: 1)
-				
-				dayMeals.insert(Meal(mealType: .middle2,
-									 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein), type: .protein, amount: 1),
-											  Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .fat), type: .fat, amount: 0.5)],
-									 date: dateString), at: 3)
+									 date: dateString), at: 1)
 			}
-			return dayMeals
+		} else if numberOfMeals == 5 {
+			
+			dayMeals.insert(Meal(mealType: .middle1,
+								 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .carbs), type: .carbs, amount: 1)],
+								 date: dateString),at: 1)
+			
+			dayMeals.insert(Meal(mealType: .middle2,
+								 dishes: [Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .protein), type: .protein, amount: 1),
+										  Dish(name: DishesGenerator.randomDishFor(mealType: .middle1, .fat), type: .fat, amount: 0.5)],
+								 date: dateString), at: 3)
 		}
+		if !forMessage {
+			GoogleApiManager.shared.createDailyMeal(meals: dayMeals, date: date)
+		}
+		return dayMeals
+	}
 }
