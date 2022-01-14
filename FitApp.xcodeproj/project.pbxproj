@@ -71,7 +71,6 @@
 		7C7435DC25D31A0000D33A9A /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C7435DA25D31A0000D33A9A /* ChatTableViewCell.xib */; };
 		7C7435EB25D31F9A00D33A9A /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7435EA25D31F9A00D33A9A /* Chat.swift */; };
 		7C74AF9E264336EA001D0F5D /* PushNotificationSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74AF9D264336EA001D0F5D /* PushNotificationSender.swift */; };
-		7C7C381B279074260075B64A /* DishCellTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7C381A279074260075B64A /* DishCellTextFieldView.swift */; };
 		7C7C381D2790B52F0075B64A /* SpreadsheetViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7C381C2790B52F0075B64A /* SpreadsheetViewCells.swift */; };
 		7C7C38202790B6EA0075B64A /* CollapsibleSpreadsheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7C381F2790B6EA0075B64A /* CollapsibleSpreadsheetTableViewCell.swift */; };
 		7C7C38252790C3760075B64A /* CollapsibleSpreadsheetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C7C38242790C3760075B64A /* CollapsibleSpreadsheetTableViewCell.xib */; };
@@ -1403,7 +1402,6 @@
 				B3DB7513259F8270002CF48B /* MealViewModel.swift in Sources */,
 				7C2BD810267212C7006A1736 /* MealManager.swift in Sources */,
 				B367F17825B1BDF600DF21D7 /* DishesGenerator.swift in Sources */,
-				7C7C381B279074260075B64A /* DishCellTextFieldView.swift in Sources */,
 				B368E05C25A79BB700BD1937 /* Data+Extensions.swift in Sources */,
 				7C89AA81256D7342009AD87C /* RegisterViewController.swift in Sources */,
 				7C89AA77256D715F009AD87C /* UIView+Extensions.swift in Sources */,
@@ -1622,6 +1620,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1631,6 +1630,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_SKIP_APP_STORE_DEPLOYMENT = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1677,6 +1677,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -1700,6 +1701,7 @@
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1722,6 +1724,7 @@
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1767,6 +1770,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = swift.Oelias.FitAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FitApp.app/FitApp";
