@@ -8,6 +8,12 @@
 import UIKit
 import SpreadsheetView
 
+enum CollapsibleSpreadsheetType {
+	 
+	case junkFood
+	case conversion
+}
+
 class CollapsibleSpreadsheetTableViewCell: UITableViewCell {
 	
 	var header = [String]()
@@ -16,6 +22,8 @@ class CollapsibleSpreadsheetTableViewCell: UITableViewCell {
 	
 	var text: String = ""
 	private var spreadsheetView: SpreadsheetView = SpreadsheetView()
+	
+	var type: CollapsibleSpreadsheetType = .junkFood
 	
 	@IBOutlet weak var cellBackgroundView: UIView!
 	@IBOutlet weak var spreadsheetViewContainer: UIView!
@@ -40,6 +48,7 @@ class CollapsibleSpreadsheetTableViewCell: UITableViewCell {
 	
 	override func prepareForReuse() {
 		super.prepareForReuse()
+		spreadsheetView.reloadData()
 	}
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -56,7 +65,17 @@ extension CollapsibleSpreadsheetTableViewCell: SpreadsheetViewDataSource, Spread
 		return 1 + data.count
 	}
 	func spreadsheetView(_ spreadsheetView: SpreadsheetView, widthForColumn column: Int) -> CGFloat {
-		return (spreadsheetViewContainer.frame.width-5) / 2
+		switch type {
+		case .junkFood:
+			if case 0 = column {
+				return 100
+			} else {
+				return 60
+			}
+		case .conversion:
+			return (spreadsheetViewContainer.frame.width-5) / 2
+		}
+
 	}
 	func spreadsheetView(_ spreadsheetView: SpreadsheetView, heightForRow row: Int) -> CGFloat {
 		if case 0 = row {
@@ -65,7 +84,11 @@ extension CollapsibleSpreadsheetTableViewCell: SpreadsheetViewDataSource, Spread
 			return 38
 		}
 	}
+
 	func frozenRows(in spreadsheetView: SpreadsheetView) -> Int {
+		return 1
+	}
+	func frozenColumns(in spreadsheetView: SpreadsheetView) -> Int {
 		return 1
 	}
 	func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> Cell? {
@@ -79,7 +102,6 @@ extension CollapsibleSpreadsheetTableViewCell: SpreadsheetViewDataSource, Spread
 				cell.sortArrow.text = ""
 			}
 			cell.setNeedsLayout()
-			
 			return cell
 		} else {
 			let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TextCell.self), for: indexPath) as! TextCell

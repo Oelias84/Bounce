@@ -49,12 +49,14 @@ extension CommentsViewController: UITableViewDataSource, UITableViewDelegate {
 		switch viewModel.getSectionTitle(for: indexPath.section) {
 		case "טבלת המרות":
 			let cell = tableView.dequeueReusableCell(withIdentifier:  K.CellId.collapsibleSpreadsheetCell, for: indexPath) as! CollapsibleSpreadsheetTableViewCell
+			cell.type = .conversion
 			cell.setupData(fileName: "ConversionTable")
 			return cell
-//		case "טבלת ג׳אנק פוד":
-//			let cell = tableView.dequeueReusableCell(withIdentifier:  K.CellId.collapsibleSpreadsheetCell, for: indexPath) as! CollapsibleSpreadsheetTableViewCell
-//			cell.setupData(fileName: "JunkFoodTable")
-//			return cell
+		case "טבלת ג׳אנק פוד":
+			let cell = tableView.dequeueReusableCell(withIdentifier:  K.CellId.collapsibleSpreadsheetCell, for: indexPath) as! CollapsibleSpreadsheetTableViewCell
+			cell.type = .junkFood
+			cell.setupData(fileName: "JunkFoodTable")
+			return cell
 		default:
 			let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.collapsibleCell, for: indexPath) as! CollapsibleTableViewCell
 			let text = viewModel.getComment(for: indexPath)
