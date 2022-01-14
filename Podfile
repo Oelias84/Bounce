@@ -17,6 +17,7 @@ target 'FitApp' do
 		pod 'Firebase/Messaging'
     pod 'FirebaseFirestoreSwift'
     
+		pod 'SpreadsheetView'
     pod 'BulletinBoard'
     pod 'DateToolsSwift'
 		pod 'CropViewController'

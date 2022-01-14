@@ -379,6 +379,7 @@ PODS:
   - SDWebImage (5.10.4):
     - SDWebImage/Core (= 5.10.4)
   - SDWebImage/Core (5.10.4)
+  - SpreadsheetView (0.9.1)
 
 DEPENDENCIES:
   - BetterSegmentedControl (~> 1.3)
@@ -399,6 +400,7 @@ DEPENDENCIES:
   - MessageKit
   - MKRingProgressView
   - SDWebImage (~> 5.0)
+  - SpreadsheetView
 
 SPEC REPOS:
   trunk:
@@ -437,6 +439,7 @@ SPEC REPOS:
     - PromisesObjC
     - Protobuf
     - SDWebImage
+    - SpreadsheetView
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -474,7 +477,8 @@ SPEC CHECKSUMS:
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
+  SpreadsheetView: 688dbd19f2b355df0eb09e486266fd913a013449
 
-PODFILE CHECKSUM: ec5e224d4727205c0c301f57348356c426b361fc
+PODFILE CHECKSUM: 620bc6f40fe8288de11f335220e3d684cc96c800
 
 COCOAPODS: 1.8.4

@@ -132,6 +132,7 @@ struct K {
         static let fanCell = "fanCell"
         static let weightCell = "weightCell"
 		static let collapsibleCell = "collapsibleCell"
+		static let collapsibleSpreadsheetCell = "collapsibleSpreadsheetCell"
 		static let collapsibleHeader = "collapsibleTableViewHeader"
 		static let commentCell = "commentCell"
         static let exerciseCell = "exerciseCell"
@@ -165,7 +166,8 @@ struct K {
         static let articleTableViewCell = "ArticleTableViewCell"
 		
 		static let collapsibleTableViewCell = "CollapsibleTableViewCell"
-		
+		static let collapsibleSpreadsheetTableViewCell = "CollapsibleSpreadsheetTableViewCell"
+
 		static let commentTableViewCell = "CommentTableViewCell"
 		static let exerciseTableViewCell = "ExerciseTableViewCell"
 		static let mealPlanTableViewCell = "MealPlanTableViewCell"

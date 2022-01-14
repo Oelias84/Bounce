@@ -72,6 +72,11 @@
 		7C7435EB25D31F9A00D33A9A /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7435EA25D31F9A00D33A9A /* Chat.swift */; };
 		7C74AF9E264336EA001D0F5D /* PushNotificationSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74AF9D264336EA001D0F5D /* PushNotificationSender.swift */; };
 		7C7C381B279074260075B64A /* DishCellTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7C381A279074260075B64A /* DishCellTextFieldView.swift */; };
+		7C7C381D2790B52F0075B64A /* SpreadsheetViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7C381C2790B52F0075B64A /* SpreadsheetViewCells.swift */; };
+		7C7C38202790B6EA0075B64A /* CollapsibleSpreadsheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7C381F2790B6EA0075B64A /* CollapsibleSpreadsheetTableViewCell.swift */; };
+		7C7C38252790C3760075B64A /* CollapsibleSpreadsheetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C7C38242790C3760075B64A /* CollapsibleSpreadsheetTableViewCell.xib */; };
+		7C7C382F2790F97F0075B64A /* ConversionTable.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 7C7C382D2790F97F0075B64A /* ConversionTable.tsv */; };
+		7C7C38302790F97F0075B64A /* JunkFoodTable.tsv in Resources */ = {isa = PBXBuildFile; fileRef = 7C7C382E2790F97F0075B64A /* JunkFoodTable.tsv */; };
 		7C7DF4B226FB87DE0043A132 /* MessagesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7DF4B126FB87DE0043A132 /* MessagesManager.swift */; };
 		7C83152525E053B100335601 /* ExerciseCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83152425E053B100335601 /* ExerciseCategoryView.swift */; };
 		7C857BA5262C4D68006AB0BD /* TableViewEmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C857BA4262C4D68006AB0BD /* TableViewEmptyView.xib */; };
@@ -266,6 +271,11 @@
 		7C74AF9C26414913001D0F5D /* FitApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FitApp.entitlements; sourceTree = "<group>"; };
 		7C74AF9D264336EA001D0F5D /* PushNotificationSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationSender.swift; sourceTree = "<group>"; };
 		7C7C381A279074260075B64A /* DishCellTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DishCellTextFieldView.swift; path = "../../../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/DishCellTextFieldView.swift"; sourceTree = "<group>"; };
+		7C7C381C2790B52F0075B64A /* SpreadsheetViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetViewCells.swift; sourceTree = "<group>"; };
+		7C7C381F2790B6EA0075B64A /* CollapsibleSpreadsheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsibleSpreadsheetTableViewCell.swift; sourceTree = "<group>"; };
+		7C7C38242790C3760075B64A /* CollapsibleSpreadsheetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollapsibleSpreadsheetTableViewCell.xib; sourceTree = "<group>"; };
+		7C7C382D2790F97F0075B64A /* ConversionTable.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ConversionTable.tsv; sourceTree = "<group>"; };
+		7C7C382E2790F97F0075B64A /* JunkFoodTable.tsv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JunkFoodTable.tsv; sourceTree = "<group>"; };
 		7C7DF4B126FB87DE0043A132 /* MessagesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesManager.swift; sourceTree = "<group>"; };
 		7C83152425E053B100335601 /* ExerciseCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCategoryView.swift; sourceTree = "<group>"; };
 		7C857BA4262C4D68006AB0BD /* TableViewEmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewEmptyView.xib; sourceTree = "<group>"; };
@@ -480,6 +490,7 @@
 		7C1ACD082670C9D2008079C9 /* CellViews */ = {
 			isa = PBXGroup;
 			children = (
+				7C7C38262790C39F0075B64A /* CollapsibleSpreadsheetCellView */,
 				B358227D25ACA2FE00C91295 /* CollapsibleTableViewHeader */,
 				7CE1ED0927710FA400337304 /* CollapsibleTableViewCell */,
 				7C0F7034276CE99600964004 /* SettingsTableViewCells */,
@@ -613,6 +624,32 @@
 			name = ChatTabelViewCell;
 			sourceTree = "<group>";
 		};
+		7C7C381E2790B5FE0075B64A /* SpreadsheetView */ = {
+			isa = PBXGroup;
+			children = (
+				7C7C381C2790B52F0075B64A /* SpreadsheetViewCells.swift */,
+			);
+			name = SpreadsheetView;
+			sourceTree = "<group>";
+		};
+		7C7C38262790C39F0075B64A /* CollapsibleSpreadsheetCellView */ = {
+			isa = PBXGroup;
+			children = (
+				7C7C381F2790B6EA0075B64A /* CollapsibleSpreadsheetTableViewCell.swift */,
+				7C7C38242790C3760075B64A /* CollapsibleSpreadsheetTableViewCell.xib */,
+			);
+			name = CollapsibleSpreadsheetCellView;
+			sourceTree = "<group>";
+		};
+		7C7C38312790F99F0075B64A /* TSV Files */ = {
+			isa = PBXGroup;
+			children = (
+				7C7C382D2790F97F0075B64A /* ConversionTable.tsv */,
+				7C7C382E2790F97F0075B64A /* JunkFoodTable.tsv */,
+			);
+			name = "TSV Files";
+			sourceTree = "<group>";
+		};
 		7C89A9EE256D69CA009AD87C = {
 			isa = PBXGroup;
 			children = (
@@ -722,6 +759,7 @@
 		7C89AA7C256D717F009AD87C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7C7C38312790F99F0075B64A /* TSV Files */,
 				7CADF74B278CADDE0020CD83 /* StaticText.json */,
 				7C10BA78276BCFAF00B5860C /* Assistant-Bold.ttf */,
 				7C10BA71276BCFAE00B5860C /* Assistant-ExtraBold.ttf */,
@@ -1005,8 +1043,8 @@
 		B3B2A245256EDDCA0052E6C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7C32C586278E368C00B97642 /* PopupAlertView */,
 				7C1ACD082670C9D2008079C9 /* CellViews */,
+				7C32C586278E368C00B97642 /* PopupAlertView */,
 				7C4EB828276E57FE00DA1407 /* TextFieldView */,
 				7CE0862F2767A64000BF3CF3 /* BounceNavigationBar */,
 				7CB9ADEA268CB72F0009B42A /* ChartView */,
@@ -1015,6 +1053,7 @@
 				7C1ACCEF266FCA97008079C9 /* ChangeDateView */,
 				7C71BB4E25D869B400FBEB96 /* WeightViews */,
 				7C1ACD0D2670D175008079C9 /* AddMealAlertView */,
+				7C7C381E2790B5FE0075B64A /* SpreadsheetView */,
 				B3CA0CE2258111FD00923902 /* CircularProgressView.swift */,
 				B368DFDF25A6247600BD1937 /* SpinnerView.swift */,
 			);
@@ -1185,6 +1224,7 @@
 				7C10BA7E276BCFBE00B5860C /* Assistant-VariableFont_wght.ttf in Resources */,
 				7C10BA7C276BCFBE00B5860C /* Assistant-SemiBold.ttf in Resources */,
 				B3E6E98D257142CD00958C48 /* MealPlan.storyboard in Resources */,
+				7C7C38252790C3760075B64A /* CollapsibleSpreadsheetTableViewCell.xib in Resources */,
 				7C10BA80276BCFBE00B5860C /* Assistant-ExtraLight.ttf in Resources */,
 				7C857BA5262C4D68006AB0BD /* TableViewEmptyView.xib in Resources */,
 				B358222325AC930B00C91295 /* Articles.storyboard in Resources */,
@@ -1202,6 +1242,7 @@
 				7CE1ED1527737A5C00337304 /* CollapsibleTableViewCell.xib in Resources */,
 				B330B87625757C1000BDB206 /* Workout.storyboard in Resources */,
 				7C10BA7A276BCFBE00B5860C /* Assistant-Regular.ttf in Resources */,
+				7C7C382F2790F97F0075B64A /* ConversionTable.tsv in Resources */,
 				7CFE0C0F276936470077D16F /* BounceNavigationBarView.xib in Resources */,
 				7C10BA7F276BCFBE00B5860C /* Assistant-Medium.ttf in Resources */,
 				B330B87F25757F1300BDB206 /* ExerciseTableViewCell.xib in Resources */,
@@ -1213,6 +1254,7 @@
 				B34397A7258A7F720073A59B /* DishView.xib in Resources */,
 				7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */,
 				7CADF74C278CADDE0020CD83 /* StaticText.json in Resources */,
+				7C7C38302790F97F0075B64A /* JunkFoodTable.tsv in Resources */,
 				7C1ACD052670C25B008079C9 /* AddingTableViewCell.xib in Resources */,
 				B38068C725B7197E005C4A24 /* WorkoutTableViewCell.xib in Resources */,
 				7C10BA7D276BCFBE00B5860C /* Assistant-Light.ttf in Resources */,
@@ -1442,6 +1484,7 @@
 				B330B88F257583D200BDB206 /* ExercisesTableViewController.swift in Sources */,
 				7C89AA61256D700F009AD87C /* UserProfile.swift in Sources */,
 				7C658AA825D9873C00CA75B2 /* Motivations.swift in Sources */,
+				7C7C381D2790B52F0075B64A /* SpreadsheetViewCells.swift in Sources */,
 				B358227F25ACA40D00C91295 /* ArticleViewModel.swift in Sources */,
 				B34397AD258A7FA50073A59B /* DishView.swift in Sources */,
 				7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */,
@@ -1449,6 +1492,7 @@
 				7C89A9FD256D69CA009AD87C /* SceneDelegate.swift in Sources */,
 				7C567110277F43C400B7346A /* QuestionnaireGanderViewController.swift in Sources */,
 				7CFA85CB26ECDEA000296B53 /* WeightAlertsManager.swift in Sources */,
+				7C7C38202790B6EA0075B64A /* CollapsibleSpreadsheetTableViewCell.swift in Sources */,
 				7C1ACD042670C25B008079C9 /* AddingTableViewCell.swift in Sources */,
 				7C54164B269D923800C22859 /* ErrorManager.swift in Sources */,
 				B38397FB25B4A21F00154697 /* Workout.swift in Sources */,

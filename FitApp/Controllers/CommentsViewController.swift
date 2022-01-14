@@ -45,11 +45,23 @@ extension CommentsViewController: UITableViewDataSource, UITableViewDelegate {
 		return viewModel.getSectionCollapsed(for: section) ? 0 : viewModel.getCommentsCount(for: section)
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.collapsibleCell, for: indexPath) as! CollapsibleTableViewCell
-		let text = viewModel.getComment(for: indexPath)
 		
-		cell.articleTextLabel.text = text.replacingOccurrences(of: "\\n", with: "\n")
-		return cell
+		switch viewModel.getSectionTitle(for: indexPath.section) {
+		case "טבלת המרות":
+			let cell = tableView.dequeueReusableCell(withIdentifier:  K.CellId.collapsibleSpreadsheetCell, for: indexPath) as! CollapsibleSpreadsheetTableViewCell
+			cell.setupData(fileName: "ConversionTable")
+			return cell
+//		case "טבלת ג׳אנק פוד":
+//			let cell = tableView.dequeueReusableCell(withIdentifier:  K.CellId.collapsibleSpreadsheetCell, for: indexPath) as! CollapsibleSpreadsheetTableViewCell
+//			cell.setupData(fileName: "JunkFoodTable")
+//			return cell
+		default:
+			let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.collapsibleCell, for: indexPath) as! CollapsibleTableViewCell
+			let text = viewModel.getComment(for: indexPath)
+
+			cell.articleTextLabel.text = text.replacingOccurrences(of: "\\n", with: "\n")
+			return cell
+		}
 	}
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		let header = tableView.dequeueReusableHeaderFooterView(withIdentifier:  K.CellId.collapsibleHeader) as! CollapsibleTableViewHeader
@@ -85,6 +97,7 @@ extension CommentsViewController {
 
 	private func updateUI() {
 		Spinner.shared.stop()
+		
 		DispatchQueue.main.async {
 			self.tableView.reloadData()
 		}
@@ -98,7 +111,9 @@ extension CommentsViewController {
 		topBarView.isDayWelcomeHidden = true
 	}
 	private func registerCells() {
+		
 		tableView.register(UINib(nibName: K.NibName.collapsibleTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.collapsibleCell)
 		tableView.register(UINib(nibName: K.NibName.collapsibleTableViewHeader, bundle: nil), forHeaderFooterViewReuseIdentifier: K.CellId.collapsibleHeader)
+		tableView.register(UINib(nibName: K.NibName.collapsibleSpreadsheetTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.collapsibleSpreadsheetCell)
 	}
 }
