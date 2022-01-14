@@ -39,18 +39,25 @@ class LoginViewController: UIViewController {
 				Spinner.shared.stop()
 
 				if let error = error {
+					var title = "לא מצליח להתחבר"
 					var message = ""
 					if error.contains("There is no user record corresponding to this identifier") {
-						message = "נראה שהיוזר לא נמצא"
+						title = "הי! לצערנו נראה שאין לך מנוי bounce 😞"
+						message = "האפליקציה מהווה חלק מסדנת \" מוציאים אתכם מהלופ!\" לפרטים נוספים והרשמה ניתן להכנס לאתר שלנו"
+						self.presentAlert(withTitle: title, withMessage: message, options: "לאתר", "ביטול", alertNumber: 1)
+						return
 					} else if error.contains("The password is invalid") {
 						message = "הסיסמא שהכנסת שגויה"
 					} else if error.contains("Access to this account has been temporarily disabled due to many failed login attempts") {
 						message = "החשבון נחסם זמנית, בעכבות יותר מידיי ניסיונות כושלים. את יכולה לאפס סיסמא או שנית במועד מאוחר יותר"
 					} else {
-						message = error
+						title = "הי! לצערנו נראה שאין לך מנוי bounce 😞"
+						message = "האפליקציה מהווה חלק מסדנת \" מוציאים אתכם מהלופ!\" לפרטים נוספים והרשמה ניתן להכנס לאתר שלנו"
+						self.presentAlert(withTitle: title, withMessage: message, options: "לאתר", "ביטול", alertNumber: 1)
+						return
 					}
 					
-					self.presentAlert(withTitle: "לא מצליח להתחבר", withMessage: message, options: "אישור", alertNumber: 1)
+					self.presentAlert(withTitle: title, withMessage: message, options: "אישור", alertNumber: 2)
 				} else {
 					if !(UserProfile.defaults.finishOnboarding ?? false) {
 						self.startQuestionnaire()
@@ -60,13 +67,13 @@ class LoginViewController: UIViewController {
 				}
 			}
 		} catch ErrorManager.LoginError.emptyEmail {
-			presentAlert(withTitle: "אופס", withMessage: "נראה ששכחת להזין כתובת האמייל", options: "אישור", alertNumber: 2)
+			presentAlert(withTitle: "אופס", withMessage: "נראה ששכחת להזין כתובת האמייל", options: "אישור", alertNumber: 3)
 		} catch ErrorManager.LoginError.emptyPassword {
-			presentAlert(withTitle: "אופס", withMessage: "נראה ששכחת להזין סיסמא", options: "אישור", alertNumber: 3)
+			presentAlert(withTitle: "אופס", withMessage: "נראה ששכחת להזין סיסמא", options: "אישור", alertNumber: 4)
 		} catch ErrorManager.LoginError.invalidEmail {
-			presentAlert(withTitle: "אופס", withMessage: "נראה שכתובת האמייל שגויה", options: "אישור", alertNumber: 4)
+			presentAlert(withTitle: "אופס", withMessage: "נראה שכתובת האמייל שגויה", options: "אישור", alertNumber: 5)
 		} catch ErrorManager.LoginError.incorrectPassword {
-			presentAlert(withTitle: "אופס", withMessage: "אורך הסיסמא חייב להיות בעל 6 תווים", options: "אישור", alertNumber: 5)
+			presentAlert(withTitle: "אופס", withMessage: "אורך הסיסמא חייב להיות בעל 6 תווים", options: "אישור", alertNumber: 6)
 		} catch {
 			print("Something went wrong!")
 		}
@@ -79,14 +86,18 @@ extension LoginViewController: PopupAlertViewDelegate {
 	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
 		switch alertNumber {
 		case 1:
-			break
+			if let url = URL(string: "https://www.bouncefit.co.il") {
+				UIApplication.shared.open(url)
+			}
 		case 2:
-			self.emailTextfield.becomeFirstResponder()
+			break
 		case 3:
-			self.passwordTextfield.becomeFirstResponder()
-		case 4:
 			self.emailTextfield.becomeFirstResponder()
+		case 4:
+			self.passwordTextfield.becomeFirstResponder()
 		case 5:
+			self.emailTextfield.becomeFirstResponder()
+		case 6:
 			self.passwordTextfield.becomeFirstResponder()
 		default:
 			break
@@ -134,10 +145,10 @@ extension LoginViewController {
 		customAlert.messageText = message
 		customAlert.alertNumber = alertNumber
 		customAlert.okButtonText = options[0]
-		customAlert.cancelButtonText = options[1]
+
 		switch options.count {
 		case 1:
-			customAlert.cancelButton.isHidden = true
+			customAlert.cancelButtonIsHidden = true
 		case 3:
 			customAlert.doNotShowText = options.last
 		default:
