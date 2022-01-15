@@ -20,8 +20,8 @@ struct UserProfile {
 	@UserDefault(key: .checkedTermsOfUse)
 	var checkedTermsOfUse: Bool?
 	
-	@UserDefault(key: .permissionsLevel)
-	var permissionsLevel: Int?
+	@UserDefault(key: .permissionLevel)
+	var permissionLevel: Int?
 	
 	@UserDefault(key: .orderIds)
 	var orderIds: [String]?
@@ -145,14 +145,7 @@ extension UserProfile {
 	}
 	var getIsManager: Bool? {
 		get {
-			switch permissionsLevel {
-			case 1:
-				return false
-			case 2:
-				return true
-			default:
-				return nil
-			}
+			return permissionLevel == 99
 		}
 	}
 	static func getLifeStyleText() -> String {
@@ -174,7 +167,7 @@ extension UserProfile {
 		let googleManager = GoogleApiManager()
 		
 		let data = ServerUserData (
-			permissionsLevel: defaults.permissionsLevel,
+			permissionLevel: defaults.permissionLevel,
 			currentOrderId: defaults.currentOrderId,
 			orderIds: defaults.orderIds,
 			period: defaults.period,
@@ -204,7 +197,7 @@ extension UserProfile {
 	func updateUserProfileData(_ data: ServerUserData, id: String) {
 		var userProfile = self
 		
-		userProfile.permissionsLevel = data.permissionsLevel
+		userProfile.permissionLevel = data.permissionLevel
 		userProfile.orderIds = data.orderIds
 		userProfile.period = data.period
 		userProfile.checkedTermsOfUse = data.checkedTermsOfUse
@@ -232,7 +225,7 @@ extension UserProfile {
 		
 		userProfile.currentOrderId = nil
 		userProfile.dateOfTransaction = nil
-		userProfile.permissionsLevel = nil
+		userProfile.permissionLevel = nil
 		userProfile.orderIds = nil
 		userProfile.period = nil
 		userProfile.checkedTermsOfUse = nil
@@ -259,7 +252,7 @@ extension UserProfile {
 
 struct ServerUserData: Codable {
 	
-	let permissionsLevel: Int?
+	let permissionLevel: Int?
 	let currentOrderId: String?
 	let orderIds: [String]?
 	let period: Int?
@@ -307,7 +300,7 @@ extension Key {
 	static let orderIds: Key = "orderIds"
 	static let currentOrderId: Key = "currentOrderId"
 	static let dateOfTransaction: Key = "dateOfTransaction"
-	static let permissionsLevel: Key = "permissionsLevel"
+	static let permissionLevel: Key = "permissionLevel"
 	static let period: Key = "preiod"
 	static let checkedTermsOfUse: Key = "checkedTermsOfUse"
 	static let gander: Key = "gander"

@@ -34,8 +34,8 @@ struct GoogleApiManager {
 				} else if let data = data {
 					do {
 						if let decodedData = try data.data(as: approvedUser.self) {
-							if decodedData.permissionsLevel == 10 {
-								UserProfile.defaults.permissionsLevel = decodedData.permissionsLevel
+							if let permissionLevel = decodedData.permissionLevel, permissionLevel > 0 {
+								UserProfile.defaults.permissionLevel = decodedData.permissionLevel
 								completion(.success(true))
 							} else {
 								completion(.success(false))
