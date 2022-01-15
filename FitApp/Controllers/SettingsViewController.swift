@@ -418,7 +418,7 @@ extension SettingsViewController {
 			case .failure(let error):
 				print(error.localizedDescription)
 				Spinner.shared.stop()
-				self.presentOkAlert(withMessage: "נכשל לשמור את התמונה אנא נסו שנית", completion: {})
+				self.presentOkAlert(withMessage: "נכשל לשמור את התמונה אנא נסו שנית")
 			}
 		}
 	}

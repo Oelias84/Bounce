@@ -62,89 +62,89 @@ class RegisterViewController: UIViewController {
 	}
 	@IBAction func singUpButtonAction(_ sender: Any) {
 		Spinner.shared.show(self.view)
-		
-		do {
-			try viewModel.register(userName: userNameTextfield.text, email: emailTextfield.text, password: passwordTextfield.text, confirmPassword: confirmPasswordTextfield.text, userImage: profileImage, termsOfUse: userHasCheckedTermOfUse) {
-				[weak self] result in
-				guard let self = self else { return }
-				Spinner.shared.stop()
-				
-				switch result {
-				case .success(_):
-					self.moveToHomeViewController()
-				case .failure(let error):
-					
-					switch error {
-					case ErrorManager.RegisterError.emailExist:
-						Spinner.shared.stop()
-						self.presentOkAlert(withTitle: "שמשתמש קיים", withMessage: "נראה שכתובת האימייל שהזנת כבר קיימת במערכת, אנא נסי שנית") {
-							self.userNameTextfield.text?.removeAll()
-							self.emailTextfield.text?.removeAll()
-							self.passwordTextfield.text?.removeAll()
-							self.confirmPasswordTextfield.text?.removeAll()
-						}
-					case ErrorManager.RegisterError.userNotApproved:
-						Spinner.shared.stop()
-						self.presentOkAlert(withTitle: "אופס",withMessage: "אין באפשרוך להתחבר, אנא צרי איתנו קשר") { }
-					case ErrorManager.RegisterError.failToRegister:
-						Spinner.shared.stop()
-						self.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה ביצירת המשתמש, אנא נסה שנית מאוחר יותר") { }
-					case ErrorManager.RegisterError.userNotSaved:
-						Spinner.shared.stop()
-						self.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה ביצירת המשתמש \(error.localizedDescription)") { }
-					default:
-						Spinner.shared.stop()
-						self.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה: \(error.localizedDescription)") { }
-					}
-				}
-			}
-		} catch ErrorManager.RegisterError.emptyUserName {
-			Spinner.shared.stop()
-			presentOkAlert(withTitle: "אופס",withMessage: "נראה ששחכת להזין שם משתמש") {
-				self.userNameTextfield.becomeFirstResponder()
-			}
-		} catch ErrorManager.RegisterError.emptyEmail {
-			Spinner.shared.stop()
-			presentOkAlert(withTitle: "אופס",withMessage: "נראה ששחכת להזין כתובת אימייל") {
-				self.emailTextfield.becomeFirstResponder()
-			}
-		} catch ErrorManager.RegisterError.emptyPassword {
-			Spinner.shared.stop()
-			presentOkAlert(withTitle: "אופס",withMessage: "נראה ששחכת להזין סיסמא") {
-				self.passwordTextfield.becomeFirstResponder()
-			}
-		} catch ErrorManager.RegisterError.emptyConfirmPassword {
-			Spinner.shared.stop()
-			presentOkAlert(withTitle: "אופס",withMessage: "נראה ששחכת להזין את אישור הסיסמא") {
-				self.confirmPasswordTextfield.becomeFirstResponder()
-			}
-		} catch ErrorManager.RegisterError.userNameNotFullName {
-			Spinner.shared.stop()
-			presentOkAlert(withTitle: "אופס",withMessage: "יש להזין שם ושם משפחה") {
-				self.userNameTextfield.becomeFirstResponder()
-			}
-		} catch ErrorManager.RegisterError.incorrectEmail {
-			Spinner.shared.stop()
-			presentOkAlert(withTitle: "אופס",withMessage: "נראה כי כתובת האימייל שגויה") {
-				self.emailTextfield.becomeFirstResponder()
-			}
-		} catch ErrorManager.RegisterError.shortPassword {
-			Spinner.shared.stop()
-			presentOkAlert(withTitle: "אופס",withMessage: "הסיסמא חייבת לכלול רק 6 תווים") {
-				self.passwordTextfield.becomeFirstResponder()
-			}
-		} catch ErrorManager.RegisterError.confirmPasswordDoNotMatch {
-			Spinner.shared.stop()
-			presentOkAlert(withTitle: "אופס",withMessage: "הסיסמא אינה תואמת, אנא נסי שנית") {
-				self.confirmPasswordTextfield.becomeFirstResponder()
-			}
-		} catch ErrorManager.RegisterError.termsOfUse {
-			Spinner.shared.stop()
-			presentOkAlert(withTitle: "תנאי השירות לא אושרו", withMessage: "נראה כי לא אשרת את תנאי השירות, בכדי להמשיך בהרשמה אנא סמני את התיבה שמאשרת את תנאי השימוש.") {}
-		} catch {
-			Spinner.shared.stop()
-			presentOkAlert(withTitle: "אופס", withMessage: "נראה שמשהו לא צפוי קרה, אנא נסי להרשם יותר מאוחר") {}
-		}
+//
+//		do {
+//			try viewModel.register(userName: userNameTextfield.text, email: emailTextfield.text, password: passwordTextfield.text, confirmPassword: confirmPasswordTextfield.text, userImage: profileImage, termsOfUse: userHasCheckedTermOfUse) {
+//				[weak self] result in
+//				guard let self = self else { return }
+//				Spinner.shared.stop()
+//
+//				switch result {
+//				case .success(_):
+//					self.moveToHomeViewController()
+//				case .failure(let error):
+//
+//					switch error {
+//					case ErrorManager.RegisterError.emailExist:
+//						Spinner.shared.stop()
+//						self.presentOkAlert(withTitle: "שמשתמש קיים", withMessage: "נראה שכתובת האימייל שהזנת כבר קיימת במערכת, אנא נסי שנית") {
+//							self.userNameTextfield.text?.removeAll()
+//							self.emailTextfield.text?.removeAll()
+//							self.passwordTextfield.text?.removeAll()
+//							self.confirmPasswordTextfield.text?.removeAll()
+//						}
+//					case ErrorManager.RegisterError.userNotApproved:
+//						Spinner.shared.stop()
+//						self.presentOkAlert(withTitle: "אופס",withMessage: "אין באפשרוך להתחבר, אנא צרי איתנו קשר") { }
+//					case ErrorManager.RegisterError.failToRegister:
+//						Spinner.shared.stop()
+//						self.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה ביצירת המשתמש, אנא נסה שנית מאוחר יותר") { }
+//					case ErrorManager.RegisterError.userNotSaved:
+//						Spinner.shared.stop()
+//						self.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה ביצירת המשתמש \(error.localizedDescription)") { }
+//					default:
+//						Spinner.shared.stop()
+//						self.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה: \(error.localizedDescription)") { }
+//					}
+//				}
+//			}
+//		} catch ErrorManager.RegisterError.emptyUserName {
+//			Spinner.shared.stop()
+//			presentOkAlert(withTitle: "אופס",withMessage: "נראה ששחכת להזין שם משתמש") {
+//				self.userNameTextfield.becomeFirstResponder()
+//			}
+//		} catch ErrorManager.RegisterError.emptyEmail {
+//			Spinner.shared.stop()
+//			presentOkAlert(withTitle: "אופס",withMessage: "נראה ששחכת להזין כתובת אימייל") {
+//				self.emailTextfield.becomeFirstResponder()
+//			}
+//		} catch ErrorManager.RegisterError.emptyPassword {
+//			Spinner.shared.stop()
+//			presentOkAlert(withTitle: "אופס",withMessage: "נראה ששחכת להזין סיסמא") {
+//				self.passwordTextfield.becomeFirstResponder()
+//			}
+//		} catch ErrorManager.RegisterError.emptyConfirmPassword {
+//			Spinner.shared.stop()
+//			presentOkAlert(withTitle: "אופס",withMessage: "נראה ששחכת להזין את אישור הסיסמא") {
+//				self.confirmPasswordTextfield.becomeFirstResponder()
+//			}
+//		} catch ErrorManager.RegisterError.userNameNotFullName {
+//			Spinner.shared.stop()
+//			presentOkAlert(withTitle: "אופס",withMessage: "יש להזין שם ושם משפחה") {
+//				self.userNameTextfield.becomeFirstResponder()
+//			}
+//		} catch ErrorManager.RegisterError.incorrectEmail {
+//			Spinner.shared.stop()
+//			presentOkAlert(withTitle: "אופס",withMessage: "נראה כי כתובת האימייל שגויה") {
+//				self.emailTextfield.becomeFirstResponder()
+//			}
+//		} catch ErrorManager.RegisterError.shortPassword {
+//			Spinner.shared.stop()
+//			presentOkAlert(withTitle: "אופס",withMessage: "הסיסמא חייבת לכלול רק 6 תווים") {
+//				self.passwordTextfield.becomeFirstResponder()
+//			}
+//		} catch ErrorManager.RegisterError.confirmPasswordDoNotMatch {
+//			Spinner.shared.stop()
+//			presentOkAlert(withTitle: "אופס",withMessage: "הסיסמא אינה תואמת, אנא נסי שנית") {
+//				self.confirmPasswordTextfield.becomeFirstResponder()
+//			}
+//		} catch ErrorManager.RegisterError.termsOfUse {
+//			Spinner.shared.stop()
+//			presentOkAlert(withTitle: "תנאי השירות לא אושרו", withMessage: "נראה כי לא אשרת את תנאי השירות, בכדי להמשיך בהרשמה אנא סמני את התיבה שמאשרת את תנאי השימוש.") {}
+//		} catch {
+//			Spinner.shared.stop()
+//			presentOkAlert(withTitle: "אופס", withMessage: "נראה שמשהו לא צפוי קרה, אנא נסי להרשם יותר מאוחר") {}
+//		}
 	}
 }
 

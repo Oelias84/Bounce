@@ -56,9 +56,8 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 			UserProfile.defaults.externalWorkout = externalWorkouts
 			performSegue(withIdentifier: K.SegueId.moveToSumup, sender: self)
 		} else {
-			presentOkAlert(withTitle: "אופס",withMessage: "נראה כי לא נעשתה בחירה, יש לבחור רמת קושי ולאחר מכן מספר אימונים", buttonText: "הבנתי") {
-				return
-			}
+			presentOkAlert(withTitle: "אופס",withMessage: "נראה כי לא נעשתה בחירה, יש לבחור רמת קושי ולאחר מכן מספר אימונים", buttonText: "הבנתי")
+			return
 		}
 	}
 	@IBAction func levelCheckBoxes(sender: UIButton) {
@@ -108,7 +107,7 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 		sender.isSelected = !sender.isSelected
 		
         if fitnessLevel == 0 {
-            presentOkAlert(withMessage: "יש לבחור קודם את רמת הכושר") {}
+            presentOkAlert(withMessage: "יש לבחור קודם את רמת הכושר")
 			towWeeklyWorkoutsButton.isSelected = false
 			threeWeeklyWorkoutsButton.isSelected = false
 			fourWeeklyWorkoutsButton.isSelected = false

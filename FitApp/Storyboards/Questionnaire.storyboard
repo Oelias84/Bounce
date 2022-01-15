@@ -1779,38 +1779,76 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8R4-T8-Vmf" userLabel="Terms of use Stack View">
-                                <rect key="frame" x="116" y="598" width="143" height="40"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="8R4-T8-Vmf" userLabel="Terms of use Stack View">
+                                <rect key="frame" x="60" y="598" width="255" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1f-9o-ze9" userLabel="Terms View Button">
-                                        <rect key="frame" x="0.0" y="5" width="103" height="30"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="תקנון תנאי שימוש">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="termsOfUseViewButtonAction:" destination="PzG-Rq-Lca" eventType="touchUpInside" id="suO-cK-Lp1"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYe-mE-TEK" userLabel="Terrms Checkbox">
-                                        <rect key="frame" x="103" y="0.0" width="40" height="40"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="kcH-v1-5Ct">
+                                        <rect key="frame" x="0.0" y="0.0" width="239" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYe-mE-TEK" userLabel="Terrms Checkbox">
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <imageReference key="image" image="square" catalog="system" symbolScale="large"/>
+                                                </state>
+                                                <state key="disabled" image="square" catalog="system"/>
+                                                <state key="selected">
+                                                    <imageReference key="image" image="checkmark.square" catalog="system" symbolScale="large"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="termsOfUseCheckMarkButtonAction:" destination="PzG-Rq-Lca" eventType="touchUpInside" id="FQ5-Ar-4Uh"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1f-9o-ze9" userLabel="Terms View Button">
+                                                <rect key="frame" x="29" y="0.0" width="210" height="30"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="קראתי ואני מאשר תקנון תנאי שימוש">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="termsOfUseViewButtonAction:" destination="PzG-Rq-Lca" eventType="touchUpInside" id="suO-cK-Lp1"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="de1-P2-qac"/>
-                                            <constraint firstAttribute="width" constant="40" id="plV-ah-22u"/>
+                                            <constraint firstItem="cYe-mE-TEK" firstAttribute="centerY" secondItem="kcH-v1-5Ct" secondAttribute="centerY" id="Bal-ef-Kki"/>
                                         </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <imageReference key="image" image="square" catalog="system" symbolScale="large"/>
-                                        </state>
-                                        <state key="disabled" image="square" catalog="system"/>
-                                        <state key="selected">
-                                            <imageReference key="image" image="checkmark.square" catalog="system" symbolScale="large"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="termsOfUseCheckMarkButtonAction:" destination="PzG-Rq-Lca" eventType="touchUpInside" id="FQ5-Ar-4Uh"/>
-                                        </connections>
-                                    </button>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="n8o-Fp-dMo">
+                                        <rect key="frame" x="0.0" y="30" width="255" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUz-Bn-YDr" userLabel="Terrms Checkbox">
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <imageReference key="image" image="square" catalog="system" symbolScale="large"/>
+                                                </state>
+                                                <state key="disabled" image="square" catalog="system"/>
+                                                <state key="selected">
+                                                    <imageReference key="image" image="checkmark.square" catalog="system" symbolScale="large"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="heathCheckMarkButtonAction:" destination="PzG-Rq-Lca" eventType="touchUpInside" id="9wP-mC-Vnc"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0nE-1c-rf5" userLabel="Terms View Button">
+                                                <rect key="frame" x="29" y="0.0" width="226" height="30"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="קראתי ואני מאשר את הצהרת הבריאות">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="heathViewButtonAction:" destination="PzG-Rq-Lca" eventType="touchUpInside" id="XH1-9b-NLO"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="0nE-1c-rf5" firstAttribute="centerY" secondItem="GUz-Bn-YDr" secondAttribute="centerY" id="m6M-HK-38d"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>

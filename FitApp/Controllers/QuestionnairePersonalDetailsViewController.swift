@@ -41,17 +41,18 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
     private var birthDate: Date?
     private var userName: String?
 	private var userHasCheckedTermOfUse = false
+	private var userHasCheckedHealth = false
 
     private var weightString: String?
 	private var weighWholeString: String?
-	private var weightfractionString: String?
+	private var weightFractionString: String?
     
     private let googleManager = GoogleApiManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 		super.navigationItem.setHidesBackButton(true, animated: false)
-
+		UserProfile.defaults.name = nil
         configurePicker()
 		configureTextFields()
         addScreenTappGesture()
@@ -67,36 +68,50 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
         if let birthDate = birthDate, let height = height, let weight = weight, let userName = userName {
 			
 			if userName != "", !userName.isValidFullName {
-				presentAlert(withTitle: "אופס",withMessage: "יש להזין שם ושם משפחה", options: "אישור", alertNumber: 1)
+				presentOkAlert(withTitle: "אופס!",withMessage: "יש להזין שם ושם משפחה")
+				presentOkAlertWithDelegate(withTitle: "אופס",withMessage: "יש להזין שם ושם משפחה", alertNumber: 1)
 			} else if birthDate.onlyDate.isLaterThanOrEqual(to: Date().onlyDate) {
-				presentAlert(withTitle: "אופס", withMessage: "תאריך הלידה לא יכול גדול או שווה מהתאריך הנוחכי", options: "אישור", alertNumber: 2)
+				presentOkAlertWithDelegate(withTitle: "אופס", withMessage: "תאריך הלידה לא יכול גדול או שווה מהתאריך הנוחכי", alertNumber: 2)
 			} else if height<100 {
-				presentAlert(withTitle: "אופס", withMessage: "גובה שגויי אנא בדקי את הנתונים שהזנת", options: "אישור", alertNumber: 3)
+				presentOkAlertWithDelegate(withTitle: "אופס", withMessage: "גובה שגויי אנא בדקי את הנתונים שהזנת", alertNumber: 3)
 			} else if weight<30.0 {
-				presentAlert(withTitle: "אופס", withMessage: "משקל שגויי אנא בדקי את הנתונים שהזנת", options: "אישור", alertNumber: 4)
-			} else if userHasCheckedTermOfUse == false {
-				presentAlert(withTitle: "תנאי השירות לא אושרו", withMessage: "נראה כי לא אשרת את תנאי השירות, בכדי להמשיך בהרשמה אנא סמני את התיבה שמאשרת את תנאי השימוש.", options: "אישור", alertNumber: 5)
+				presentOkAlertWithDelegate(withTitle: "אופס", withMessage: "משקל שגויי אנא בדקי את הנתונים שהזנת", alertNumber: 4)
+			} else if userHasCheckedTermOfUse == false, userHasCheckedHealth == false {
+				presentOkAlertWithDelegate(withTitle: "תנאי השירות לא אושרו", withMessage: "נראה כי לא אשרת את תנאי השירות והצהרת הבריאות, בכדי להמשיך אנא סמני את התיבה שמאשרת את תנאי השימוש.", alertNumber: 5)
 			} else {
 				UserProfile.defaults.name = userName
 				UserProfile.defaults.height = height
 				UserProfile.defaults.weight = weight
 				UserProfile.defaults.birthDate = birthDate
 				UserProfile.defaults.checkedTermsOfUse = userHasCheckedTermOfUse
+				UserProfile.defaults.healthTermsOfUse = userHasCheckedHealth
 				googleManager.updateWeights(weights: Weights(weights: [Weight(dateString: Date().dateStringForDB, weight: weight)]))
 				
 				self.performSegue(withIdentifier: K.SegueId.moveToFatGender, sender: self)
 			}
         } else {
-			presentAlert(withTitle: "אופס", withMessage: "יש למלא את כל השדות", options: "אישור", alertNumber: 2)
+			presentOkAlertWithDelegate(withTitle: "אופס", withMessage: "יש למלא את כל השדות", alertNumber: 2)
 			return
         }
     }
 	@IBAction func termsOfUseViewButtonAction(_ sender: UIButton) {
-		showTermsOfUse()
+		if let url = URL(string: "https://bouncefit.co.il/privacy-policy/") {
+			UIApplication.shared.open(url)
+		}
 	}
 	@IBAction func termsOfUseCheckMarkButtonAction(_ sender: UIButton) {
 		sender.isSelected = !sender.isSelected
 		userHasCheckedTermOfUse = sender.isSelected
+	}
+
+	@IBAction func heathViewButtonAction(_ sender: UIButton) {
+		if let url = URL(string: "https://bouncefit.co.il/health/") {
+			UIApplication.shared.open(url)
+		}
+	}
+	@IBAction func heathCheckMarkButtonAction(_ sender: UIButton) {
+			sender.isSelected = !sender.isSelected
+			userHasCheckedTermOfUse = sender.isSelected
 	}
 }
 
@@ -138,9 +153,9 @@ extension QuestionnairePersonalDetailsViewController: UIPickerViewDelegate, UIPi
 			if component == 0 {
 				weighWholeString = "\(weightNumberArray[row])"
 			} else {
-				weightfractionString = "\(fractionNumberArray[row])"
+				weightFractionString = "\(fractionNumberArray[row])"
 			}
-			weightString = "\(weighWholeString ?? "0").\(weightfractionString ?? "0")"
+			weightString = "\(weighWholeString ?? "0").\(weightFractionString ?? "0")"
 			weightTextField.text = weightString
 			weight = Double(weightString!)
 		}
@@ -205,23 +220,6 @@ extension QuestionnairePersonalDetailsViewController {
 		numberPicker.backgroundColor = .white
 		numberPicker.semanticContentAttribute = .forceLeftToRight
 	}
-	private func showTermsOfUse() {
-		Spinner.shared.show(self.view)
-		GoogleStorageManager.shared.downloadImageURL(from: .pdf, path: "terms_of_use.pdf") {
-			[weak self] result in
-			guard let self = self else { return }
-			Spinner.shared.stop()
-
-			switch result {
-			case .success(let url):
-				if let document = PDFDocument(url: url) {
-					self.pdfView.document = document
-				}
-			case .failure(let error):
-				print(error)
-			}
-		}
-	}
 	private func setupTextfieldText() {
 		let userData = UserProfile.defaults
 		
@@ -283,7 +281,7 @@ extension QuestionnairePersonalDetailsViewController {
 			return 0
 		}
 	}
-	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., alertNumber: Int) {
+	private func presentOkAlertWithDelegate(withTitle title: String? = nil, withMessage message: String, buttonText: String = "אישור", alertNumber: Int) {
 		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
 			return
 		}
@@ -299,19 +297,9 @@ extension QuestionnairePersonalDetailsViewController {
 		customAlert.titleText = title
 		customAlert.messageText = message
 		customAlert.alertNumber = alertNumber
-		customAlert.okButtonText = options[0]
-		customAlert.cancelButtonText = options[1]
-		
-		switch options.count {
-		case 1:
-			customAlert.cancelButton.isHidden = true
-		case 3:
-			customAlert.doNotShowText = options.last
-		default:
-			break
-		}
+		customAlert.okButtonText = buttonText
+		customAlert.cancelButtonIsHidden = true
 		
 		window.rootViewController?.present(customAlert, animated: true, completion: nil)
 	}
-
 }

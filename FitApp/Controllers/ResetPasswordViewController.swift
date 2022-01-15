@@ -29,25 +29,51 @@ class ResetPasswordViewController: UIViewController {
 	
 	@IBAction func resetButtonAction(_ sender: Any) {
 		guard let email = emailTextField.text, email != "" else {
-			self.presentOkAlert(withTitle:"!אימייל ריק", withMessage: "בכדי לאפס סיסמא יש להזין את כתובת האימייל הרצויה" ) { }
+			self.presentOkAlert(withTitle:"!אימייל ריק", withMessage: "בכדי לאפס סיסמא יש להזין את כתובת האימייל הרצויה")
 			return
 		}
-		resetPassword(email: email) {
-			self.view.endEditing(true)
-			self.navigationController?.popViewController(animated: true)
-		}
+		resetPassword(email: email)
 	}
 	
-	func resetPassword(email: String, complition: @escaping () -> Void) {
+	func resetPassword(email: String) {
 		Auth.auth().sendPasswordReset(withEmail: email) { error in
 			if let error = error {
 				print(error.localizedDescription)
 			} else {
-				self.presentOkAlert(withTitle: "איפוס סיסמא", withMessage: "נשלח אליך מייל לאיפוס הסיסמא") {
-					complition()
-				}
+				self.presentOkAlertWithDelegate(withTitle: "איפוס סיסמא", withMessage: "נשלח אליך מייל לאיפוס הסיסמא")
 			}
 		}
+	}
+	func presentOkAlertWithDelegate(withTitle title: String? = nil, withMessage message: String, buttonText: String = "אישור") {
 		
+		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
+		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
+		
+		customAlert.providesPresentationContextTransitionStyle = true
+		customAlert.definesPresentationContext = true
+		customAlert.modalPresentationStyle = .overCurrentContext
+		customAlert.modalTransitionStyle = .crossDissolve
+		
+		customAlert.delegate = self
+		customAlert.titleText = title
+		customAlert.messageText = message
+		customAlert.cancelButtonIsHidden = true
+
+		present(customAlert, animated: true)
+	}
+}
+extension ResetPasswordViewController: PopupAlertViewDelegate {
+	
+	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
+		if alertNumber == 99 {
+			self.view.endEditing(true)
+			self.navigationController?.popViewController(animated: true)
+		}
+	}
+	func cancelButtonTapped(alertNumber: Int) {
+		return
+	}
+	func thirdButtonTapped(alertNumber: Int) {
+		return
 	}
 }

@@ -27,5 +27,5 @@ struct User: Codable {
 
 struct approvedUser: Codable {
 	
-	let permissionsLevel: Int?
+	let permissionLevel: Int?
 }

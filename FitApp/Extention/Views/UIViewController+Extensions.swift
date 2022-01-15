@@ -40,13 +40,21 @@ extension UIViewController {
 	}
 	
 	//MARK: - Alerts
-	func presentOkAlert(withTitle title: String? = nil, withMessage message: String, buttonText: String = "אישור", completion: @escaping () -> Void) {
-		let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-		alertController.addAction(UIAlertAction(title: buttonText, style: .default){ action in
-			completion()
-			Spinner.shared.stop()
-		})
-		present(alertController, animated: true)
+	func presentOkAlert(withTitle title: String? = nil, withMessage message: String, buttonText: String = "אישור") {
+	
+		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
+		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
+		
+		customAlert.providesPresentationContextTransitionStyle = true
+		customAlert.definesPresentationContext = true
+		customAlert.modalPresentationStyle = .overCurrentContext
+		customAlert.modalTransitionStyle = .crossDissolve
+		
+		customAlert.titleText = title
+		customAlert.messageText = message
+		customAlert.cancelButtonIsHidden = true
+		
+		present(customAlert, animated: true)
 	}
 	func presentLogoutAlert() {
 		

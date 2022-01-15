@@ -32,9 +32,8 @@ class QuestionnaireGanderViewController: UIViewController {
 	}
 	@IBAction func continueButtonAction(_ sender: UIButton) {
 		if gender == nil {
-			presentOkAlert(withTitle: "אופס",withMessage: "יש לבחור מגדר") {
-				return
-			}
+			presentOkAlert(withTitle: "אופס",withMessage: "יש לבחור מגדר")
+			return
 		} else {
 			UserProfile.defaults.gander = gender?.rawValue
 			performSegue(withIdentifier: K.SegueId.moveToFatPercentage, sender: self)

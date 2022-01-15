@@ -70,7 +70,7 @@ class MoveDishView: UIView {
 			mealViewModel.move(portion: portion, of: dish, from: meal, to: toMeal)
 			removeFromSuperview()
 		} else {
-			self.presentAlert(withTitle: "שגיאה בהעברה", withMessage: "יש לקבוע לאיזו ארוחה להעביר את המנה", options: "אישור")
+			self.presentOkAlertWithDelegate(withTitle: "שגיאה בהעברה", withMessage: "יש לקבוע לאיזו ארוחה להעביר את המנה")
 		}
 	}
 	@IBAction func cancelButtonAction(_ sender: Any) {
@@ -204,7 +204,7 @@ extension MoveDishView {
 			dishAmountLabel.text = "\(dishToMove.amount) / \(dishAmount!)"
 		}
 	}
-	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
+	func presentOkAlertWithDelegate(withTitle title: String? = nil, withMessage message: String, buttonText: String = "אישור") {
 		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
 			return
 		}
@@ -219,20 +219,10 @@ extension MoveDishView {
 		customAlert.delegate = self
 		customAlert.titleText = title
 		customAlert.messageText = message
-		customAlert.okButtonText = options[0]
-		customAlert.cancelButtonText = options[1]
-		switch options.count {
-		case 1:
-			customAlert.cancelButton.isHidden = true
-		case 3:
-			customAlert.doNotShowText = options.last
-		default:
-			break
-		}
-		
+		customAlert.cancelButtonIsHidden = true
+
 		window.rootViewController?.present(customAlert, animated: true, completion: nil)
 	}
-	
 	@objc func stepperValueChanged(stepper: GMStepper) {
 		dishAmount = stepper.value
 		updateAmountLabel()

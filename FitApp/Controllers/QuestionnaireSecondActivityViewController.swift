@@ -49,9 +49,8 @@ class QuestionnaireSecondActivityViewController: UIViewController {
 				performSegue(withIdentifier: K.SegueId.moveToNutrition, sender: self)
 			}
 		} else {
-			presentOkAlert(withTitle: "אופס",withMessage: "נראה כי לא נעשתה בחירה, יש לבחור ברמת הפעילות המתאימה לך", buttonText: "הבנתי") {
-				return
-			}
+			presentOkAlert(withTitle: "אופס",withMessage: "נראה כי לא נעשתה בחירה, יש לבחור ברמת הפעילות המתאימה לך", buttonText: "הבנתי")
+			return
 		}
 	}
 	@IBAction func checkBoxAction(_ sender: UIButton) {

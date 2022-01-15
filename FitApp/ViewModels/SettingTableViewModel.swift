@@ -243,8 +243,11 @@ extension SettingTableViewModel {
 		
 		switch options.count {
 		case 1:
-			customAlert.cancelButton.isHidden = true
+			customAlert.cancelButtonIsHidden = true
+		case 2:
+			customAlert.cancelButtonText = options[1]
 		case 3:
+			customAlert.cancelButtonText = options[1]
 			customAlert.doNotShowText = options.last
 		default:
 			break

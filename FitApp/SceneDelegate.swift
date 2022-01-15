@@ -48,11 +48,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 						} else {
 							Spinner.shared.stop()
 							self.goToLogin(window)
-							self.window?.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "אין באפשרוך להתחבר, אנא צרי איתנו קשר") { }
+							self.window?.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "אין באפשרוך להתחבר, אנא צרי איתנו קשר")
 						}
 					case .failure(let error):
 						self.goToLogin(window)
-						self.window?.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה: \(error.localizedDescription)") { }
+						self.window?.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה: \(error.localizedDescription)")
 					}
 				}
 			} else {
