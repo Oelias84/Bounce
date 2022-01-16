@@ -83,8 +83,8 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 				UserProfile.defaults.height = height
 				UserProfile.defaults.weight = weight
 				UserProfile.defaults.birthDate = birthDate
-				UserProfile.defaults.checkedTermsOfUse = userHasCheckedTermOfUse
-				UserProfile.defaults.healthTermsOfUse = userHasCheckedHealth
+				UserProfile.defaults.termsApproval = TermsAgreeDataModel()
+				UserProfile.defaults.healthApproval = TermsAgreeDataModel()
 				googleManager.updateWeights(weights: Weights(weights: [Weight(dateString: Date().dateStringForDB, weight: weight)]))
 				
 				self.performSegue(withIdentifier: K.SegueId.moveToFatGender, sender: self)

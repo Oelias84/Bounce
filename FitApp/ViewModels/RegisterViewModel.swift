@@ -33,7 +33,8 @@ class RegisterViewModel {
 		guard let termsOfUse = termsOfUse, termsOfUse != false else {
 			throw ErrorManager.RegisterError.termsOfUse
 		}
-		UserProfile.defaults.checkedTermsOfUse = termsOfUse
+		UserProfile.defaults.termsApproval = TermsAgreeDataModel()
+		UserProfile.defaults.healthApproval = TermsAgreeDataModel()
 		UserProfile.defaults.name = userName
 		UserProfile.defaults.email = email
 		

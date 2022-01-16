@@ -19,6 +19,7 @@ struct UserDefault<T: PropertyListValue> {
     }
 }
 
+extension TermsAgreeDataModel: PropertyListValue {}
 extension Data: PropertyListValue {}
 extension String: PropertyListValue {}
 extension Date: PropertyListValue {}

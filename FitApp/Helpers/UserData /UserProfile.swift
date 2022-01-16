@@ -17,8 +17,11 @@ struct UserProfile {
 	
 	static var defaults = UserProfile()
 	
-	@UserDefault(key: .checkedTermsOfUse)
-	var checkedTermsOfUse: Bool?
+	@UserDefault(key: .termsApproval)
+	var termsApproval: TermsAgreeDataModel?
+	
+	@UserDefault(key: .healthApproval)
+	var healthApproval: TermsAgreeDataModel?
 	
 	@UserDefault(key: .permissionLevel)
 	var permissionLevel: Int?
@@ -172,7 +175,8 @@ extension UserProfile {
 			orderIds: defaults.orderIds,
 			period: defaults.period,
 			dateOfTransaction: defaults.dateOfTransaction,
-			checkedTermsOfUse: defaults.checkedTermsOfUse,
+			termsApproval: defaults.healthApproval,
+			healthApproval: defaults.termsApproval,
 			gander: defaults.gander,
 			lastCaloriesCheckDateString: defaults.lastCaloriesCheckDateString,
 			birthDate: defaults.birthDate?.dateStringForDB,
@@ -200,7 +204,8 @@ extension UserProfile {
 		userProfile.permissionLevel = data.permissionLevel
 		userProfile.orderIds = data.orderIds
 		userProfile.period = data.period
-		userProfile.checkedTermsOfUse = data.checkedTermsOfUse
+		userProfile.termsApproval = data.termsApproval
+		userProfile.healthApproval = data.healthApproval
 		userProfile.gander = data.gander
 		userProfile.lastCaloriesCheckDateString = data.lastCaloriesCheckDateString
 		userProfile.id = id
@@ -228,7 +233,8 @@ extension UserProfile {
 		userProfile.permissionLevel = nil
 		userProfile.orderIds = nil
 		userProfile.period = nil
-		userProfile.checkedTermsOfUse = nil
+		userProfile.healthApproval = nil
+		userProfile.termsApproval = nil
 		userProfile.gander = nil
 		userProfile.lastCaloriesCheckDateString = nil
 		userProfile.id = nil
@@ -257,7 +263,8 @@ struct ServerUserData: Codable {
 	let orderIds: [String]?
 	let period: Int?
 	let dateOfTransaction: String?
-	let checkedTermsOfUse: Bool?
+	let termsApproval: TermsAgreeDataModel?
+	let healthApproval: TermsAgreeDataModel?
 	let gander: String?
 	let lastCaloriesCheckDateString: String?
 	let birthDate: String?
@@ -276,6 +283,12 @@ struct ServerUserData: Codable {
 	let weaklyWorkouts: Int?
 	let externalWorkout: Int?
 	let finishOnboarding: Bool?
+}
+struct TermsAgreeDataModel: Codable {
+	
+	var date: String = "\(Date().dateStringForDB)"
+	var platform: String = "IOS"
+	var appVersion: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
 }
 
 //MARK: - UserData Keys
@@ -302,7 +315,8 @@ extension Key {
 	static let dateOfTransaction: Key = "dateOfTransaction"
 	static let permissionLevel: Key = "permissionLevel"
 	static let period: Key = "preiod"
-	static let checkedTermsOfUse: Key = "checkedTermsOfUse"
+	static let termsApproval: Key = "termsApproval"
+	static let healthApproval: Key = "healthApproval"
 	static let gander: Key = "gander"
 	static let fcmToken: Key = "fcmToken"
 	static let id: Key = "id"
