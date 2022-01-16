@@ -46,9 +46,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 								self.goToQuestionnaire(window)
 							}
 						} else {
+							self.signOutCurrentUser()
 							Spinner.shared.stop()
 							self.goToLogin(window)
-							self.window?.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "אין באפשרוך להתחבר, אנא צרי איתנו קשר")
 						}
 					case .failure(let error):
 						self.goToLogin(window)
@@ -135,4 +135,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		}
 	}
 }
-
