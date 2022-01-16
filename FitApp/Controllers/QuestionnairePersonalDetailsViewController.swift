@@ -52,8 +52,8 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		super.navigationItem.setHidesBackButton(true, animated: false)
-		UserProfile.defaults.name = nil
-        configurePicker()
+
+		configurePicker()
 		configureTextFields()
         addScreenTappGesture()
     }

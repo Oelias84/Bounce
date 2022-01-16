@@ -17,26 +17,11 @@ struct UserProfile {
 	
 	static var defaults = UserProfile()
 	
-	@UserDefault(key: .termsApproval)
 	var termsApproval: TermsAgreeDataModel?
-	
-	@UserDefault(key: .healthApproval)
 	var healthApproval: TermsAgreeDataModel?
 	
 	@UserDefault(key: .permissionLevel)
 	var permissionLevel: Int?
-	
-	@UserDefault(key: .orderIds)
-	var orderIds: [String]?
-	
-	@UserDefault(key: .currentOrderId)
-	var currentOrderId: String?
-	
-	@UserDefault(key: .period)
-	var period: Int?
-	
-	@UserDefault(key: .dateOfTransaction)
-	var dateOfTransaction: String?
 	
 	@UserDefault(key: .gander)
 	var gander: String?
@@ -171,11 +156,7 @@ extension UserProfile {
 		
 		let data = ServerUserData (
 			permissionLevel: defaults.permissionLevel,
-			currentOrderId: defaults.currentOrderId,
-			orderIds: defaults.orderIds,
-			period: defaults.period,
-			dateOfTransaction: defaults.dateOfTransaction,
-			termsApproval: defaults.healthApproval,
+			termsApproval: defaults.termsApproval,
 			healthApproval: defaults.termsApproval,
 			gander: defaults.gander,
 			lastCaloriesCheckDateString: defaults.lastCaloriesCheckDateString,
@@ -202,8 +183,6 @@ extension UserProfile {
 		var userProfile = self
 		
 		userProfile.permissionLevel = data.permissionLevel
-		userProfile.orderIds = data.orderIds
-		userProfile.period = data.period
 		userProfile.termsApproval = data.termsApproval
 		userProfile.healthApproval = data.healthApproval
 		userProfile.gander = data.gander
@@ -228,11 +207,7 @@ extension UserProfile {
 	func resetUserProfileData() {
 		var userProfile = UserProfile.defaults
 		
-		userProfile.currentOrderId = nil
-		userProfile.dateOfTransaction = nil
 		userProfile.permissionLevel = nil
-		userProfile.orderIds = nil
-		userProfile.period = nil
 		userProfile.healthApproval = nil
 		userProfile.termsApproval = nil
 		userProfile.gander = nil
@@ -259,12 +234,8 @@ extension UserProfile {
 struct ServerUserData: Codable {
 	
 	let permissionLevel: Int?
-	let currentOrderId: String?
-	let orderIds: [String]?
-	let period: Int?
-	let dateOfTransaction: String?
-	let termsApproval: TermsAgreeDataModel?
-	let healthApproval: TermsAgreeDataModel?
+	var termsApproval: TermsAgreeDataModel?
+	var healthApproval: TermsAgreeDataModel?
 	let gander: String?
 	let lastCaloriesCheckDateString: String?
 	let birthDate: String?
@@ -310,11 +281,7 @@ extension Key {
 	static let lastCaloriesCheckDateString: Key = "lastCaloriesCheckDateString"
 	
 	//user data
-	static let orderIds: Key = "orderIds"
-	static let currentOrderId: Key = "currentOrderId"
-	static let dateOfTransaction: Key = "dateOfTransaction"
 	static let permissionLevel: Key = "permissionLevel"
-	static let period: Key = "preiod"
 	static let termsApproval: Key = "termsApproval"
 	static let healthApproval: Key = "healthApproval"
 	static let gander: Key = "gander"
