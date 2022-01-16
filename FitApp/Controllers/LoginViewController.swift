@@ -52,7 +52,7 @@ class LoginViewController: UIViewController {
 						message = "החשבון נחסם זמנית, בעכבות יותר מידיי ניסיונות כושלים. את יכולה לאפס סיסמא או שנית במועד מאוחר יותר"
 					} else {
 						title = "הי! לצערנו נראה שאין לך מנוי bounce 😞"
-						message = "האפליקציה מהווה חלק מסדנת \" מוציאים אתכם מהלופ!\" לפרטים נוספים והרשמה ניתן להכנס לאתר שלנו"
+						message = "האפליקציה מהווה חלק מסדנת \"מוציאים אתכם מהלופ!\" לפרטים נוספים והרשמה ניתן להכנס לאתר שלנו"
 						self.presentAlert(withTitle: title, withMessage: message, options: "לאתר", "ביטול", alertNumber: 1)
 						return
 					}
