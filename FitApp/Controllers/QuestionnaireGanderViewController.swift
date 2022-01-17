@@ -35,7 +35,7 @@ class QuestionnaireGanderViewController: UIViewController {
 			presentOkAlert(withTitle: "אופס",withMessage: "יש לבחור מגדר")
 			return
 		} else {
-			UserProfile.defaults.gander = gender?.rawValue
+			UserProfile.defaults.gender = gender?.rawValue
 			performSegue(withIdentifier: K.SegueId.moveToFatPercentage, sender: self)
 		}
 	}

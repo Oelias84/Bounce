@@ -129,6 +129,8 @@ extension LoginViewController {
 		present(homeVC, animated: true)
 	}
 	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., alertNumber: Int) {
+		Spinner.shared.stop()
+		
 		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
 			return
 		}

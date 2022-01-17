@@ -17,14 +17,28 @@ struct UserProfile {
 	
 	static var defaults = UserProfile()
 	
-	var termsApproval: TermsAgreeDataModel?
-	var healthApproval: TermsAgreeDataModel?
+	var termsApproval: TermsAgreeDataModel? {
+		set {
+			self.encodeTermAndSet(name: "termsApproval", newValue)
+		}
+		get {
+			self.getTermsAndDecode(name: "termsApproval")
+		}
+	}
+	var healthApproval: TermsAgreeDataModel? {
+		set {
+			self.encodeTermAndSet(name: "healthApproval", newValue)
+		}
+		get {
+			self.getTermsAndDecode(name: "healthApproval")
+		}
+	}
 	
 	@UserDefault(key: .permissionLevel)
 	var permissionLevel: Int?
 	
-	@UserDefault(key: .gander)
-	var gander: String?
+	@UserDefault(key: .gender)
+	var gender: String?
 	
 	@UserDefault(key: .hasRunBefore)
 	var hasRunBefore: Bool?
@@ -115,13 +129,36 @@ struct UserProfile {
 	//MealData
 	@UserDefault(key: .otherDishes)
 	var otherDishes: [String]?
+	
+	
+	func encodeTermAndSet(name: String,_ data: TermsAgreeDataModel?) {
+		let userDefaults = UserDefaults.standard
+		
+		do {
+			try userDefaults.setObject(data, forKey: name)
+		} catch {
+			print(error.localizedDescription)
+		}
+	}
+	func getTermsAndDecode(name: String) -> TermsAgreeDataModel? {
+		let userDefaults = UserDefaults.standard
+		
+		do {
+			let termsAgreeData = try userDefaults.getObject(forKey: name, castTo: TermsAgreeDataModel.self)
+			print(termsAgreeData)
+			return termsAgreeData
+		} catch {
+			print(error.localizedDescription)
+			return nil
+		}
+	}
 }
 
 extension UserProfile {
 	
 	var getGender: Gender? {
 		get {
-			switch gander {
+			switch gender {
 			case "female":
 				return .female
 			case "male":
@@ -158,7 +195,7 @@ extension UserProfile {
 			permissionLevel: defaults.permissionLevel,
 			termsApproval: defaults.termsApproval,
 			healthApproval: defaults.termsApproval,
-			gander: defaults.gander,
+			gender: defaults.gender,
 			lastCaloriesCheckDateString: defaults.lastCaloriesCheckDateString,
 			birthDate: defaults.birthDate?.dateStringForDB,
 			email: defaults.email,
@@ -185,7 +222,7 @@ extension UserProfile {
 		userProfile.permissionLevel = data.permissionLevel
 		userProfile.termsApproval = data.termsApproval
 		userProfile.healthApproval = data.healthApproval
-		userProfile.gander = data.gander
+		userProfile.gender = data.gender
 		userProfile.lastCaloriesCheckDateString = data.lastCaloriesCheckDateString
 		userProfile.id = id
 		userProfile.name = data.name
@@ -210,7 +247,7 @@ extension UserProfile {
 		userProfile.permissionLevel = nil
 		userProfile.healthApproval = nil
 		userProfile.termsApproval = nil
-		userProfile.gander = nil
+		userProfile.gender = nil
 		userProfile.lastCaloriesCheckDateString = nil
 		userProfile.id = nil
 		userProfile.name = nil
@@ -236,7 +273,7 @@ struct ServerUserData: Codable {
 	let permissionLevel: Int?
 	var termsApproval: TermsAgreeDataModel?
 	var healthApproval: TermsAgreeDataModel?
-	let gander: String?
+	let gender: String?
 	let lastCaloriesCheckDateString: String?
 	let birthDate: String?
 	let email: String?
@@ -255,11 +292,11 @@ struct ServerUserData: Codable {
 	let externalWorkout: Int?
 	let finishOnboarding: Bool?
 }
-struct TermsAgreeDataModel: Codable {
+class TermsAgreeDataModel: Codable {
 	
+	var appVersion: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
 	var date: String = "\(Date().dateStringForDB)"
 	var platform: String = "IOS"
-	var appVersion: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
 }
 
 //MARK: - UserData Keys
@@ -284,7 +321,7 @@ extension Key {
 	static let permissionLevel: Key = "permissionLevel"
 	static let termsApproval: Key = "termsApproval"
 	static let healthApproval: Key = "healthApproval"
-	static let gander: Key = "gander"
+	static let gender: Key = "gender"
 	static let fcmToken: Key = "fcmToken"
 	static let id: Key = "id"
 	static let name: Key = "name"
@@ -307,5 +344,4 @@ extension Key {
 	static let finishOnboarding: Key = "finishOnboarding"
 	static let otherDishes: Key = "otherDishes"
 }
-
 

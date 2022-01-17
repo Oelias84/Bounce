@@ -61,6 +61,7 @@ class LoginViewModel {
 									completion(true, nil)
 								case .failure(let error):
 									print("Error fetching user data: ", error)
+									completion(false, nil)
 								}
 							}
 						} else {
