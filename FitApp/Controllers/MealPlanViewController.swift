@@ -13,7 +13,6 @@ class MealPlanViewController: UIViewController {
 	private var date = Date()
 	private var mealViewModel = MealViewModel.shared
 	private var selectedCellIndexPath: IndexPath?
-	private var showAddNewMealButton: Bool = false
 	
 	@IBOutlet weak var topBarView: BounceNavigationBarView!
 	@IBOutlet weak var changeDateView: ChangeDateView!
@@ -47,10 +46,7 @@ class MealPlanViewController: UIViewController {
 			[weak self] hasMeal in
 			guard let self = self else { return }
 			Spinner.shared.stop()
-			if !hasMeal {
-				self.showAddNewMealButton = true
-			}
-			self.tableView.reloadData()
+			self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
 		}
 	}
 }
@@ -58,14 +54,10 @@ class MealPlanViewController: UIViewController {
 extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if showAddNewMealButton {
-			return 1
-		} else {
-			return mealViewModel.getMealsCount()
-		}
+		mealViewModel.getMealsCount()
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		if indexPath.row == mealViewModel.meals!.count || showAddNewMealButton {
+		if indexPath.row == mealViewModel.meals!.count {
 			let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.addingCell, for: indexPath) as! AddingTableViewCell
 			cell.delegate = self
 			return cell
@@ -104,11 +96,10 @@ extension MealPlanViewController {
 			Spinner.shared.stop()
 			DispatchQueue.main.async {
 				if let meals = self.mealViewModel.meals, meals.isEmpty {
-					self.showAddNewMealButton = true
+					self.tableView.backgroundView = self.presentEmptyTableViewBackground(self.date)
 				} else {
-					self.showAddNewMealButton = false
+					self.tableView.backgroundView = nil
 				}
-				self.tableView.backgroundView = nil
 				self.updateDataSource()
 				self.tableView.reloadData()
 			}
@@ -173,30 +164,24 @@ extension MealPlanViewController: ChangeDateViewDelegate {
 			[weak self] hasMeal in
 			guard let self = self else { return }
 			Spinner.shared.stop()
-			if !hasMeal {
-				self.showAddNewMealButton = true
-			}
-			self.tableView.reloadData()
+			self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
 		}
 	}
 }
 extension MealPlanViewController: TableViewEmptyViewDelegate {
 	
 	func createNewMealButtonTapped() {
-		return
-	}
+		Spinner.shared.show(view)
+		tableView.backgroundView = nil
+		mealViewModel.fetchData(date: date)	}
 }
 extension MealPlanViewController: AddingTableViewCellDelegate {
 	
 	func didTapped() {
-		if showAddNewMealButton {
-			presentAlert(withMessage: "האם ברצונך לבצע פעולה זו?", options: "אישור", "ביטול", alertNumber: 3)
+		if mealViewModel.checkIfCurrentMealIsDone() {
+			presentAlert(withTitle: "הוספת ארוחת חריגה", withMessage: "האם ברצונך להוסיף ארוחה לתפריט היום?", options: "אישור", "ביטול", alertNumber: 1)
 		} else {
-			if mealViewModel.checkIfCurrentMealIsDone() {
-				presentAlert(withTitle: "הוספת ארוחת חריגה", withMessage: "האם ברצונך להוסיף ארוחה לתפריט היום?", options: "אישור", "ביטול", alertNumber: 1)
-			} else {
-				presentAlert(withTitle: "הוספת ארוחת חריגה", withMessage: "שמנו לב שלא סימנת את כל הארוחות היום, אולי בכלל אין צורך בארוחת חריגה :)", options: "אישור", "ביטול", alertNumber: 2)
-			}
+			presentAlert(withTitle: "הוספת ארוחת חריגה", withMessage: "שמנו לב שלא סימנת את כל הארוחות היום, אולי בכלל אין צורך בארוחת חריגה :)", options: "אישור", "ביטול", alertNumber: 2)
 		}
 	}
 }
@@ -208,10 +193,6 @@ extension MealPlanViewController: PopupAlertViewDelegate {
 			self.presentAddMealAlert()
 		case 2:
 			self.presentAddMealAlert()
-		case 3:
-			Spinner.shared.show(view)
-			tableView.backgroundView = nil
-			mealViewModel.fetchData(date: date)
 		default:
 			break
 		}

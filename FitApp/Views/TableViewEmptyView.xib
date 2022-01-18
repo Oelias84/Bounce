@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Assistant-SemiBold.ttf">
+            <string>Assistant-SemiBold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TableViewEmptyView" customModule="FitApp" customModuleProvider="target">
             <connections>
@@ -21,16 +26,21 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nQG-yS-Q3v">
-                    <rect key="frame" x="182" y="428" width="50" height="40"/>
+                    <rect key="frame" x="42" y="428" width="330" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oY3-4Y-BUU">
-                            <rect key="frame" x="10" y="5" width="30" height="30"/>
+                            <rect key="frame" x="10" y="5" width="310" height="30"/>
+                            <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="14"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
                             <connections>
                                 <action selector="buttonAction:" destination="-1" eventType="touchUpInside" id="Ec1-m4-tYG"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" name="ProjectLightGreen"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="oY3-4Y-BUU" secondAttribute="bottom" constant="5" id="X1S-Bo-uXe"/>
                         <constraint firstItem="oY3-4Y-BUU" firstAttribute="centerX" secondItem="nQG-yS-Q3v" secondAttribute="centerX" id="XR7-Qs-SJE"/>
@@ -38,23 +48,20 @@
                         <constraint firstItem="oY3-4Y-BUU" firstAttribute="leading" secondItem="nQG-yS-Q3v" secondAttribute="leading" constant="10" id="a8g-zj-7V6"/>
                         <constraint firstItem="oY3-4Y-BUU" firstAttribute="top" secondItem="nQG-yS-Q3v" secondAttribute="top" constant="5" id="dkm-VA-s9F"/>
                         <constraint firstAttribute="trailing" secondItem="oY3-4Y-BUU" secondAttribute="trailing" constant="10" id="h1Q-R4-VF1"/>
+                        <constraint firstAttribute="height" constant="40" id="wDU-8o-WjX"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidthV">
-                            <real key="value" value="1"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
-                            <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
-                            <real key="value" value="10"/>
+                            <real key="value" value="20"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="nQG-yS-Q3v" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="42" id="9oZ-uf-N4R"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nQG-yS-Q3v" secondAttribute="trailing" constant="42" id="Cvc-FH-rfF"/>
                 <constraint firstItem="nQG-yS-Q3v" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="SBM-75-HgX"/>
                 <constraint firstItem="nQG-yS-Q3v" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="rOm-ZV-RM0"/>
             </constraints>
@@ -62,8 +69,8 @@
         </view>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="ProjectLightGreen">
+            <color red="0.28600001335144043" green="0.57599997520446777" blue="0.56099998950958252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
