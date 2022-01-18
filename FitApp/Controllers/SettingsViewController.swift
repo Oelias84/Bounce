@@ -40,18 +40,19 @@ class SettingsViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		userData = UserProfile.defaults
-
 		setupTopBar()
 		registerCells()
-		setupTableViewData()
 		imagePickerController.delegate = self
+
 	}
-	override func viewWillDisappear(_ animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
+		userData = UserProfile.defaults
+		setupTableViewData()
+		
 		if !inCameraMode {
-			navigationController?.popViewController(animated: false)
+//			navigationController?.popViewController(animated: false)
 		}
 	}
 }
@@ -260,6 +261,7 @@ extension SettingsViewController {
 				.system: [SettingsCell(title: "התראות", secondaryTitle: ""),
 						  SettingsCell(title:  StaticStringsManager.shared.getGenderString?[22] ?? "", secondaryTitle: "")]
 		]
+		tableView.reloadData()
 	}
 	
 	private func setupActivityTitle() -> String {
