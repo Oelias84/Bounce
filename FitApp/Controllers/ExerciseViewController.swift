@@ -193,7 +193,7 @@ extension ExerciseViewController {
 	private func playVideo(userString: [String]) {
 		playButton.isHidden = true
 		
-		googleManager.getGymExerciseVideo(videoNumber: userString) {
+		googleManager.getExerciseVideo(videoNumber: userString) {
 			result in
 				switch result {
 				case .success(let urls):

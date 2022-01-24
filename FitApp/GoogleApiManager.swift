@@ -370,7 +370,7 @@ struct GoogleApiManager {
 			})
 		}
 	}
-	func getGymExerciseVideo(videoNumber: [String], completion: @escaping (Result<[URL], Error>) -> Void) {
+	func getExerciseVideo(videoNumber: [String], completion: @escaping (Result<[URL], Error>) -> Void) {
 		var urls = [URL]()
 		
 		videoNumber.forEach { video in
