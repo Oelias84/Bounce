@@ -9,15 +9,16 @@ import Foundation
 import MessageKit
 
 struct Sender: SenderType {
-	
-	var senderId: String
-	var displayName: String
+	public var photoURL: String
+	public var senderId: String
+	public var displayName: String
 }
 
 struct Media: MediaItem {
 	
 	var url: URL?
 	var image: UIImage?
+	var previewBitmap: UIImage?
 	var placeholderImage: UIImage
 	var size: CGSize
 }

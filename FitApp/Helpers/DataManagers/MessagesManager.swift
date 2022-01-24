@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import FirebaseAuth
+import AVFoundation
+import MessageKit
 
 enum MessageError: Error {
 	
@@ -16,34 +19,38 @@ class MessagesManager {
 	
 	static let shared = MessagesManager()
 	
-	public var userChats: [Chat]?
-	private var supportTokens: [String]?
+	let googleManager = GoogleDatabaseManager.shared
+	let googleStorageManager = GoogleStorageManager.shared
 	
-	private let userName = UserProfile.defaults.name
+	private var chats: [Chat] = [Chat]() {
+		didSet {
+			self.bindMessageManager()
+		}
+	}
+	
+	private let isAdmin = UserProfile.defaults.getIsManager
+	private let supportEmail = "support-mail-com"
+	private let userId = Auth.auth().currentUser?.uid
 	private let userEmail = UserProfile.defaults.email
+	private let userName = UserProfile.defaults.name
 	
 	var bindMessageManager: (() -> ()) = {}
 	
 	private init() {
-		
+		guard let userId = self.userId else { return }
 		let queue = OperationQueue()
 		
 		queue.addOperation {
-			self.generateUserSupportChat() {
-				[weak self] chat in
-				guard let self = self else { return }
-				self.supportTokens = chat?.otherUserTokens
-			}
+			// Update tokens
+			self.googleManager.updatePushToken(userId: userId, isAdmin: self.isAdmin)
 		}
 		queue.addOperation {
-			self.supportChatExist() {
-				[weak self] chat in
-				guard let self = self else { return }
-				self.userChats = chat
-				self.bindMessageManager()
+			if self.isAdmin {
+				self.fetchSupportChats()
+			} else {
+				self.fetchUserChat(userId: userId, isAdmin: self.isAdmin)
 			}
 		}
-		
 		queue.waitUntilAllOperationsAreFinished()
 	}
 }
@@ -51,100 +58,196 @@ class MessagesManager {
 //MARK: - Functions
 extension MessagesManager {
 	
-	private func generateSelfSender() -> Sender? {
-		guard let email = userEmail, let name = userName else {  return nil }
-		return Sender(senderId: email.safeEmail, displayName: name)
+	//Getters
+	public func getUserChat() -> Chat? {
+		guard let chat = chats.first else { return nil }
+		return chat
 	}
-	private func generateMessageId(otherUserEmail: String) -> String? {
-		guard let currentUserEmail = UserProfile.defaults.email else { return nil }
-		let identifier = "\(otherUserEmail)_\(currentUserEmail.safeEmail)_\(Date().fullDateStringForDB)"
-		return identifier
+	public func getSupportChats() -> [Chat]? {
+		guard !chats.isEmpty else { return nil }
+		return chats
 	}
-	private func generateMessageIdForBroadcast(otherUserEmail: String) -> String? {
-		guard let currentUserEmail = UserProfile.defaults.email else { return nil }
-		let identifier = "\(currentUserEmail.safeEmail)_\(otherUserEmail)_\(Date().fullDateStringForDB)"
-		return identifier
-	}
-	public func generateUserSupportChat(completion: @escaping (Chat?) -> ()) {
-		guard let userSafeEmail = userEmail?.safeEmail else { return }
-		let name = "דברי אלינו"
-		let latestMessage = LatestMessage (date: Date().dateStringForDB, text: "כיתבי לנו כאן ואנו מבטיחים לחזור אליך בהקדם האפשרי", isRead: false)
+	
+	//Setters
+	public func setChat(chat: Chat, completion: @escaping ([Message]) -> ()) {
+		chats.removeAll()
+		chats.append(chat)
 		
-		GoogleDatabaseManager.shared.getChatUsers {
-			result in
+		fetchMessagesFor(chat) {
+			messages in
 			
-			switch result {
-			case .success(let users):
-				for user in users {
-					if user.email == "support-mail-com" {
-						let tokens = user.tokens
-						let otherUserEmail = user.email
-						let chatId = "\(userSafeEmail)_\(otherUserEmail)_\(Date().dateStringForDB)"
-						completion(Chat(id: chatId, name: name, otherUserEmail: otherUserEmail, otherUserTokens: tokens, latestMessage: latestMessage))
-					}
-				}
-			case .failure(let error):
-				print(error.localizedDescription)
-				completion(nil)
-			}
+			completion(messages ?? [])
 		}
 	}
 	
 	private func sendNotification(to tokens: [String], name: String, text: String) {
 		let notification = PushNotificationSender()
+		
 		DispatchQueue.global(qos: .background).async {
 			tokens.forEach {
 				notification.sendPushNotification(to: $0, title: "הודעה נשלחה מ- \(name)", body: text)
 			}
 		}
 	}
-	private func createChat(otherUserEmail: String, otherTokens: [String], name: String, message: Message, notificationSenderName: String? = nil, notificationText: String) {
+	public func sendTextMessageToChat(chat: Chat, text: String, completion: @escaping (Error?) -> ()) {
+		
 		DispatchQueue.global(qos: .background).async {
-			GoogleDatabaseManager.shared.createNewChat(with: otherUserEmail, otherUserTokens: otherTokens, name: name, firstMessage: message) {
-				[weak self] success in
+			GoogleDatabaseManager.shared.sendMessageToChat(chat: chat, content: text, kind: .text(text)) {
+				[weak self] result in
 				guard let self = self else { return }
 				
-				if success {
-					self.sendNotification(to: otherTokens, name: notificationSenderName ?? name, text: notificationText)
-				} else {
-					print("not sent")
-					return
+				switch result {
+				case .success(_):
+					
+					completion(nil)
+					guard let userName = self.userName, let otherUserPushTokens = chat.otherUserPushTokens else { return }
+					self.sendNotification(to: otherUserPushTokens, name: userName, text: text)
+				case .failure(let error):
+					
+					completion(error)
+					print("Error:", error.localizedDescription)
 				}
 			}
 		}
 	}
-	private func sendMessageToChat(chatId: String, otherUserEmail: String, otherTokens: [String], name: String, message: Message, notificationSenderName: String? = nil, notificationText: String) {
-		DispatchQueue.global(qos: .background).async {
-			GoogleDatabaseManager.shared.sendMessage(to: chatId, otherUserEmail: otherUserEmail, newMessage: message, name: name) {
-				[weak self] success in
-				guard let self = self else { return }
+	public func sendMediaMessageFor(chat: Chat, messageKind: MessageKind, completion: @escaping (Error?) -> ()) {
+		
+		switch messageKind {
+		case .photo(let media):
+			guard let image = media.image,
+				  let imageData = image.jpegData(compressionQuality: 0.5),
+				  let fileName = self.remoteFileName(chat: chat, suffix: "photo_message.jpeg") else { return }
+			
+			//Send Photo message
+			GoogleStorageManager.shared.uploadImage(from: .messagesImage, data: imageData, fileName: fileName) {
+				result in
 				
-				if success {
-					self.sendNotification(to: otherTokens, name: notificationSenderName  ?? name, text: notificationText)
-				} else {
-					print("not sent")
-					return
+				switch result {
+				case .success(let urlString):
+					
+					guard let url = URL(string: urlString),
+						  let placeholder = UIImage(systemName: "plus") else { return }
+					let media = Media(url: url, image: nil, placeholderImage: placeholder, size: .zero)
+					
+					GoogleDatabaseManager.shared.sendMessageToChat(chat: chat, content: "", link: urlString, previewData: nil, kind: .photo(media)) {
+						[weak self] result in
+						guard let self = self else { return }
+						
+						switch result {
+							
+						case .success():
+							completion(nil)
+							guard let userName = self.userName, let otherUserPushTokens = chat.otherUserPushTokens else { return }
+							self.sendNotification(to: otherUserPushTokens, name: userName, text: "הודעת תמונה")
+							
+						case .failure(let error):
+							completion(error)
+							print("Error:", error.localizedDescription)
+						}
+					}
+				case .failure(let error):
+					print("message photo upload error:", error)
 				}
 			}
+		case .video(let media):
+			guard let fileUrl = media.url,
+				  let fileName = self.remoteFileName(chat: chat, suffix: "video_message.mp4") else { return }
+			
+			//Send Video message
+			googleStorageManager.uploadVideo(fileUrl: fileUrl, fileName: fileName) {
+				[weak self] result in
+				guard let self = self else { return }
+				
+				switch result {
+				case .success(let urlString):
+					
+					guard let url = URL(string: urlString),
+						  let placeholder = MessagesManager.generateThumbnailFrom(videoURL: url) else { return }
+					let media = Media(url: url, image: nil, placeholderImage: placeholder, size: .zero)
+					
+					GoogleDatabaseManager.shared.sendMessageToChat(chat: chat, content: "", link: urlString, previewData: placeholder.jpegData(compressionQuality: 2), kind: .video(media)) {
+						[weak self] result in
+						guard let self = self else { return }
+						
+						switch result {
+							
+						case .success():
+							completion(nil)
+							guard let userName = self.userName, let otherUserPushTokens = chat.otherUserPushTokens else { return }
+							self.sendNotification(to: otherUserPushTokens, name: userName, text: "הודעת וידאו")
+							
+						case .failure(let error):
+							completion(error)
+							print("Error:", error.localizedDescription)
+						}
+					}
+				case .failure(let error):
+					print("message photo upload error:", error)
+				}
+			}
+		default:
+			return
 		}
 	}
 	
-	public func supportChatExist(completion: @escaping ([Chat]?) -> ()) {
-		guard let userSafeEmail = userEmail?.safeEmail else { return }
+	private func fetchSupportChats() {
+		guard let userId = self.userId else { return }
 		
-		GoogleDatabaseManager.shared.getAllChats(for: userSafeEmail) {
+		GoogleDatabaseManager.shared.getAllChats(userId: userId) {
+			[weak self] chats in
+			guard let self = self else { return }
+			
+			self.chats = chats
+		}
+	}
+	private func fetchUserChat(userId: String, isAdmin: Bool) {
+		//Get Chat If Exist
+		googleManager.getChat(userId: userId, isAdmin: isAdmin) {
+			[weak self] result in
+			guard let self = self else { return }
+			
+			switch result {
+			case .success(let chat):
+				
+				self.chats.append(chat)
+			case .failure(let error):
+				
+				switch error {
+				case .dataIsEmpty:
+					
+					//If chat dose not exist, create new Chat
+					GoogleDatabaseManager.shared.createChat(userId: userId, isAdmin: self.isAdmin) {
+						[weak self] result in
+						guard let self = self else { return }
+						
+						switch result {
+						case .success(let chat):
+							self.chats.append(chat)
+						case .failure(let error):
+							print("Error:", error.localizedDescription)
+						}
+					}
+				default:
+					Spinner.shared.stop()
+					print("Error:", error.localizedDescription)
+				}
+			}
+		}
+	}
+	public func fetchMessagesFor(_ chat: Chat, completion: @escaping ([Message]?) -> ()) {
+		
+		googleManager.getAllMessagesForChat(chat: chat) {
 			result in
 			
 			switch result {
-			case .success(let chats):
-				guard !chats.isEmpty else {
-					completion(nil)
+			case .success(let messages):
+				if messages.isEmpty {
+					completion([])
 					return
 				}
-				completion(chats)
+				completion(messages)
 			case .failure(let error):
-				print(error.localizedDescription)
-				completion(nil)
+				print("Error:", error.localizedDescription)
 			}
 		}
 	}
@@ -152,43 +255,62 @@ extension MessagesManager {
 
 extension MessagesManager {
 	
-	public func postMassageToSupport(existingChatId: String?, otherUserEmail: String? ,messageText: String, chatOtherTokens: [String]?) {
-		guard let otherUserEmail = otherUserEmail, let messageId = generateMessageId(otherUserEmail: otherUserEmail), let selfSender = generateSelfSender(), let userName = userName else { return }
-		let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(messageText))
+	private func remoteFileName(chat: Chat, suffix: String) -> String? {
+		return "\(chat.userId)_\(Date().millisecondsSince2020)_\(suffix)"
+	}
+	static func generateThumbnailFrom(videoURL: URL) -> UIImage? {
+		let asset = AVAsset(url: videoURL)
+		let assetImgGenerate = AVAssetImageGenerator(asset: asset)
+		let time = CMTimeMakeWithSeconds(Float64(1), preferredTimescale: 100)
 		
-		if existingChatId == nil {
-			guard let otherTokens = supportTokens else { return }
-			createChat(otherUserEmail: otherUserEmail, otherTokens: otherTokens, name: userName, message: message, notificationText: messageText)
-		} else {
-			guard let chatID = existingChatId, let otherTokens = supportTokens else { return }
-			sendMessageToChat(chatId: chatID, otherUserEmail: otherUserEmail, otherTokens: otherTokens, name: userName, message: message, notificationText: messageText)
+		assetImgGenerate.appliesPreferredTrackTransform = true
+
+		do {
+			let img = try assetImgGenerate.copyCGImage(at: time, actualTime: nil)
+			let thumbnail = UIImage(cgImage: img)
+			return thumbnail
+		} catch {
+			return UIImage(named: "plus")
 		}
 	}
-	public func postBroadcast(text: String, chatUsers: [ChatUser]) {
-		let usersWithExistingChats: [Chat] = userChats ?? []
-		var usersWithoutChats: [ChatUser] = [ChatUser]()
-		
-		//Filter users without chats
-		let existingChatUserNames = usersWithExistingChats.map { $0.otherUserEmail }
-		for user in chatUsers {
-			if !existingChatUserNames.contains(where: { $0 == user.email }) {
-				usersWithoutChats.append(user)
-			}
-		}
-		
-		//Create new chats and send messages for users without chats
-		for user in usersWithoutChats {
-			guard let userToken = user.tokens, let messageId = generateMessageIdForBroadcast(otherUserEmail: user.email), let selfSender = generateSelfSender() else { return }
-			let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
-			
-			createChat(otherUserEmail: user.email, otherTokens: userToken, name: user.name, message: message, notificationSenderName: "Bounce", notificationText: text)
-		}
-		//Send messages for users with chats
-		for userChat in usersWithExistingChats {
-			guard let userToken = userChat.otherUserTokens , let messageId = generateMessageIdForBroadcast(otherUserEmail: userChat.otherUserEmail), let selfSender = generateSelfSender() else { return }
-			let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
-			
-			sendMessageToChat(chatId: userChat.id, otherUserEmail: userChat.otherUserEmail, otherTokens: userToken, name: "Bounce", message: message, notificationSenderName: "Bounce", notificationText: text)
-		}
+	public func sendMassageToSupport(existingChatId: String?, otherUserEmail: String? ,messageText: String, chatOtherTokens: [String]?) {
+		//		guard let otherUserEmail = otherUserEmail, let messageId = generateMessageId(otherUserEmail: otherUserEmail), let selfSender = generateSelfSender(), let userName = userName else { return }
+		//		let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(messageText), isIncoming: false)
+		//
+		//		if existingChatId == nil {
+		//			guard let otherTokens = supportTokens else { return }
+		//			createChat(otherUserEmail: otherUserEmail, otherTokens: otherTokens, name: userName, message: message, notificationText: messageText)
+		//		} else {
+		//			guard let chatID = existingChatId, let otherTokens = supportTokens else { return }
+		//			sendMessageToChat(chatId: chatID, otherUserEmail: otherUserEmail, otherTokens: otherTokens, name: userName, message: message, notificationText: messageText)
+		//		}
 	}
+	
+	//	public func postBroadcast(text: String, chatUsers: [ChatUser]) {
+	//		let usersWithExistingChats: [Chat] = userChats ?? []
+	//		var usersWithoutChats: [ChatUser] = [ChatUser]()
+	//
+	//		//Filter users without chats
+	////		let existingChatUserNames = usersWithExistingChats.map { $0.otherUserEmail }
+	////		for user in chatUsers {
+	////			if !existingChatUserNames.contains(where: { $0 == user.email }) {
+	////				usersWithoutChats.append(user)
+	////			}
+	////		}
+	//
+	//		//Create new chats and send messages for users without chats
+	//		for user in usersWithoutChats {
+	//			guard let userToken = user.tokens, let messageId = generateMessageIdForBroadcast(otherUserEmail: user.email), let selfSender = generateSelfSender() else { return }
+	//			let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text), isIncoming: false)
+	//
+	//			createChat(otherUserEmail: user.email, otherTokens: userToken, name: user.name, message: message, notificationSenderName: "Bounce", notificationText: text)
+	//		}
+	//		//Send messages for users with chats
+	//		for userChat in usersWithExistingChats {
+	////			guard let userToken = userChat.otherUserTokens , let messageId = generateMessageIdForBroadcast(otherUserEmail: userChat.otherUserEmail), let selfSender = generateSelfSender() else { return }
+	////			let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
+	//
+	////			sendMessageToChat(chatId: userChat.id, otherUserEmail: userChat.otherUserEmail, otherTokens: userToken, name: "Bounce", message: message, notificationSenderName: "Bounce", notificationText: text)
+	//		}
+	//	}
 }

@@ -24,8 +24,12 @@
 	<string>NO</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>אנא אשרו גישה לסיפרית תמונות בכדי לאפשר שליחת מדיה</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>אנא אשרו גישה למיקרופון בכדי לאפשר שליחת וידאו</string>
 	<key>NSCameraUsageDescription</key>
-	<string>היי כדי שיתאפשר לך להשתמש במצלמה אנא אשרי גישה לאפליקציה </string>
+	<string>אנא אשרו גישה למצלמה בכדי לאפשר שליחת מדיה</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Assistant-VariableFont_wght.ttf</string>

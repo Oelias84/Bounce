@@ -7,13 +7,19 @@
 
 import Foundation
 
-struct Chat {
+class Chat {
+
+	var userId: String
+	var isAdmin: Bool
+	var otherUserPushTokens: [String]?
+	var lastSeenMessageDate: Date?
 	
-	let id: String
-	let name: String
-	let otherUserEmail: String
-	let otherUserTokens: [String]?
-	let latestMessage: LatestMessage
+	init(userId: String, isAdmin: Bool = false, otherUserPushTokens: [String]? = nil, lastSeenMessageDate: Date? = nil) {
+		self.userId = userId
+		self.isAdmin = isAdmin
+		self.otherUserPushTokens = otherUserPushTokens
+		self.lastSeenMessageDate = lastSeenMessageDate
+	}
 }
 
 struct LatestMessage {

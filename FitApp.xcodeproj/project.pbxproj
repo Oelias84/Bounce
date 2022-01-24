@@ -24,6 +24,7 @@
 		7C10BA80276BCFBE00B5860C /* Assistant-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C10BA76276BCFAF00B5860C /* Assistant-ExtraLight.ttf */; };
 		7C149C7925D817DD00B0864F /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */; };
 		7C149C8E25D85A7600B0864F /* AddWeightAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C149C8D25D85A7600B0864F /* AddWeightAlertView.xib */; };
+		7C182FE4279DF26B00796693 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C182FE3279DF26A00796693 /* ChatViewModel.swift */; };
 		7C1ACCE7266F8D19008079C9 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ACCE6266F8D19008079C9 /* CommentsViewController.swift */; };
 		7C1ACCEB266F8F8F008079C9 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ACCE9266F8F8F008079C9 /* CommentTableViewCell.swift */; };
 		7C1ACCEC266F8F8F008079C9 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1ACCEA266F8F8F008079C9 /* CommentTableViewCell.xib */; };
@@ -222,6 +223,7 @@
 		7C10BA78276BCFAF00B5860C /* Assistant-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-Bold.ttf"; sourceTree = "<group>"; };
 		7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
 		7C149C8D25D85A7600B0864F /* AddWeightAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddWeightAlertView.xib; sourceTree = "<group>"; };
+		7C182FE3279DF26A00796693 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		7C1ACCE6266F8D19008079C9 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		7C1ACCE9266F8F8F008079C9 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		7C1ACCEA266F8F8F008079C9 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
@@ -1082,6 +1084,7 @@
 				7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */,
 				7C33B660266A587D00E16A1C /* CommentsViewModel.swift */,
 				7CFCAF4626BD58DA008A24F8 /* HomeViewModel.swift */,
+				7C182FE3279DF26A00796693 /* ChatViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1433,6 +1436,7 @@
 				B358222825AC9A2F00C91295 /* ArticlesViewController.swift in Sources */,
 				B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */,
 				7C32C588278E370500B97642 /* PopupAlertView.swift in Sources */,
+				7C182FE4279DF26B00796693 /* ChatViewModel.swift in Sources */,
 				B3DB753525A09133002CF48B /* Double+Extensions.swift in Sources */,
 				7CE086272761482A00BF3CF3 /* ProjectColors.swift in Sources */,
 				7C74357D25D0824D00D33A9A /* User.swift in Sources */,
@@ -1700,7 +1704,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.02;
+				MARKETING_VERSION = 1.1.03;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
@@ -1723,7 +1727,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.02;
+				MARKETING_VERSION = 1.1.03;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;

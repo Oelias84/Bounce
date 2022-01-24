@@ -8,38 +8,21 @@
 import Foundation
 import MessageKit
 
-struct Message: MessageType {
+struct Message: MessageType, Comparable {
 	
 	var sender: SenderType
 	var messageId: String
 	var sentDate: Date
 	var kind: MessageKind
-}
-
-extension MessageKind {
+	var isIncoming: Bool
+	var content: Any?
+	var isPending: Bool = false
 	
-	var rawValue: String {
-		switch self {
-		case .text(_):
-			return "text"
-		case .attributedText(_):
-			return "attributedText"
-		case .photo(_):
-			return "photo"
-		case .video(_):
-			return "video"
-		case .location(_):
-			return "location"
-		case .emoji(_):
-			return "emoji"
-		case .audio(_):
-			return "audio"
-		case .contact(_):
-			return "contact"
-		case .linkPreview(_):
-			return "linkPreview"
-		case .custom(_):
-			return "custom"
-		}
+	static func < (lhs: Message, rhs: Message) -> Bool {
+		lhs.sentDate < rhs.sentDate
+	}
+	
+	static func == (lhs: Message, rhs: Message) -> Bool {
+		false
 	}
 }

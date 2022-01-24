@@ -116,7 +116,7 @@ final class BounceNavigationBarView: UIView {
 		delegate?.cameraButtonTapped?()
 	}
 	@IBAction func messageButtonTapped(_ sender: Any) {
-		openMessages()
+		openChat()
 	}
 	@IBAction func backButtonTapped(_ sender: Any) {
 		delegate?.backButtonTapped()
@@ -149,12 +149,13 @@ extension BounceNavigationBarView {
 		}
 		setImage()
 	}
-	private func openMessages() {
-		let chatStoryboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
-		let chatsVC = chatStoryboard.instantiateViewController(identifier: K.ViewControllerId.ChatsViewController)
+	private func openChat() {
+		let storyboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
+		let chatContainerVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.ChatContainerViewController) as ChatContainerViewController
+		chatContainerVC.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: nil))
 		
 		if let vc = delegate as? UIViewController {
-			vc.navigationController?.pushViewController(chatsVC, animated: true)
+			vc.navigationController?.pushViewController(chatContainerVC, animated: true)
 		}
 	}
 	private func openSettings() {

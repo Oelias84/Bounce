@@ -11,15 +11,15 @@ import InputBarAccessoryView
 
 class ChatContainerViewController: UIViewController {
 	
-	var chatData: Chat!
-	var isNewChat: Bool!
 	var chatViewController: ChatViewController!
 	
 	@IBOutlet weak var topBarView: BounceNavigationBarView!
+	@IBOutlet weak var topBarViewHeightConstraint: NSLayoutConstraint!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		Spinner.shared.show((navigationController?.view)!)
 		setupChat()
 		setupTopBarView()
 	}
@@ -30,8 +30,7 @@ class ChatContainerViewController: UIViewController {
 	}
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
-		let headerHeight: CGFloat = 236
-		chatViewController.view.frame = CGRect(x: 0, y: headerHeight, width: view.bounds.width, height: view.bounds.height - headerHeight)
+		chatViewController.view.frame = CGRect(x: 0, y: topBarViewHeightConstraint.constant, width: view.bounds.width, height: view.bounds.height - topBarViewHeightConstraint.constant)
 	}
 	
 	/// Required for the `MessageInputBar` to be visible
@@ -61,14 +60,11 @@ extension ChatContainerViewController {
 		topBarView.isMessageButtonHidden = true
 	}
 	private func setupChat() {
-		chatViewController = ChatViewController()
-		chatViewController.chatId = chatData.id
-		chatViewController.otherUserEmail = chatData.otherUserEmail
-		chatViewController.otherTokens = chatData.otherUserTokens
 
-		chatViewController.willMove(toParent: self)
+  §		chatViewController.willMove(toParent: self)
 		addChild(chatViewController)
 		view.addSubview(chatViewController.view)
 		chatViewController.didMove(toParent: self)
+		view.bringSubviewToFront(topBarView)
 	}
 }
