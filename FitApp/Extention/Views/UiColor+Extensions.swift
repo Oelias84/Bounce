@@ -31,4 +31,10 @@ extension UIColor {
 	@nonobjc class var projectGray: UIColor {
 		return #colorLiteral(red: 0.6470588235, green: 0.6470588235, blue: 0.6470588235, alpha: 1)
 	}
+	@nonobjc class var projectIncomingMessageBubble: UIColor {
+		return #colorLiteral(red: 0.6274509804, green: 0.7764705882, blue: 0.768627451, alpha: 1)
+	}
+	@nonobjc class var projectOutgoingMessageBubble: UIColor {
+		return #colorLiteral(red: 0.7058823529, green: 0.8470588235, blue: 0.7529411765, alpha: 1)
+	}
 }
