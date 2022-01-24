@@ -168,7 +168,7 @@ extension UserProfile {
 			}
 		}
 	}
-	var getIsManager: Bool? {
+	var getIsManager: Bool {
 		get {
 			return permissionLevel == 99
 		}

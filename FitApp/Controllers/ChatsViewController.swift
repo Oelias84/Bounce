@@ -10,7 +10,7 @@ import UIKit
 class ChatsViewController: UIViewController {
 	
 	private var chatsViewModel: ChatsViewModel!
-	private var isManager = UserProfile.defaults.getIsManager ?? false
+	private var isManager = UserProfile.defaults.getIsManager
 
 	@IBOutlet weak var topBarView: BounceNavigationBarView!
 	@IBOutlet weak var tableView: UITableView!

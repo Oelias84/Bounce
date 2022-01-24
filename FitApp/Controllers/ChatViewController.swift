@@ -18,6 +18,7 @@ class ChatViewController: MessagesViewController {
 	var otherUserEmail: String!
 	var otherTokens: [String]!
 	
+	private let isAdmin: Bool = UserProfile.defaults.getIsManager
 	private let imagePickerController = UIImagePickerController()
 	private var messages = [Message]()
 	
