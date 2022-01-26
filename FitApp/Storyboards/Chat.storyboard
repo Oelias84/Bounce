@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ddp-KK-7Jr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="b67-AI-gGU">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -42,7 +42,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ygL-Cw-cgQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="974" y="784"/>
+            <point key="canvasLocation" x="1704" y="108"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fwc-jR-EZM">
@@ -70,14 +70,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zhA-De-oAp">
-                                <rect key="frame" x="0.0" y="214" width="414" height="682"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="3WV-NT-5lt" id="Xoa-t9-Hx0"/>
-                                    <outlet property="delegate" destination="3WV-NT-5lt" id="xHm-6D-wTq"/>
-                                </connections>
-                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1Su-bJ-hxW">
+                                <rect key="frame" x="0.0" y="226" width="414" height="670"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UR8-14-inc">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="179"/>
+                                        <subviews>
+                                            <searchBar contentMode="redraw" searchBarStyle="minimal" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ga-4E-DJu">
+                                                <rect key="frame" x="12" y="0.0" width="390" height="179"/>
+                                                <color key="barTintColor" name="ProjectBackground"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="3WV-NT-5lt" id="cao-kI-sb3"/>
+                                                </connections>
+                                            </searchBar>
+                                        </subviews>
+                                        <color key="backgroundColor" name="ProjectBackground"/>
+                                        <constraints>
+                                            <constraint firstItem="0ga-4E-DJu" firstAttribute="top" secondItem="UR8-14-inc" secondAttribute="top" id="9vQ-X3-PNS"/>
+                                            <constraint firstAttribute="trailing" secondItem="0ga-4E-DJu" secondAttribute="trailing" constant="12" id="Bnc-IL-hQ0"/>
+                                            <constraint firstItem="0ga-4E-DJu" firstAttribute="leading" secondItem="UR8-14-inc" secondAttribute="leading" constant="12" id="Wjd-1M-upu"/>
+                                            <constraint firstAttribute="bottom" secondItem="0ga-4E-DJu" secondAttribute="bottom" id="e3o-Ad-p94"/>
+                                        </constraints>
+                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zhA-De-oAp">
+                                        <rect key="frame" x="0.0" y="179" width="414" height="491"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="3WV-NT-5lt" id="Xoa-t9-Hx0"/>
+                                            <outlet property="delegate" destination="3WV-NT-5lt" id="xHm-6D-wTq"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6I-dd-rQg" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="214"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -85,21 +110,39 @@
                                     <constraint firstAttribute="height" constant="214" id="i21-gk-7UK"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jNX-IN-22o">
+                                <rect key="frame" x="360" y="138" width="26" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="J4H-Pj-eZv"/>
+                                    <constraint firstAttribute="width" secondItem="jNX-IN-22o" secondAttribute="height" multiplier="1:1" id="gKX-Cr-591"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="BroadcastMessageIcon">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                </state>
+                                <connections>
+                                    <action selector="broadcastMessageButtonAction:" destination="3WV-NT-5lt" eventType="touchUpInside" id="gNM-i4-Fhn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="56i-w5-PJG"/>
                         <color key="backgroundColor" name="ProjectBackground"/>
                         <constraints>
-                            <constraint firstItem="zhA-De-oAp" firstAttribute="leading" secondItem="56i-w5-PJG" secondAttribute="leading" id="1Nv-nG-jIb"/>
-                            <constraint firstItem="zhA-De-oAp" firstAttribute="top" secondItem="F6I-dd-rQg" secondAttribute="bottom" id="Phd-G0-TNU"/>
-                            <constraint firstItem="zhA-De-oAp" firstAttribute="trailing" secondItem="56i-w5-PJG" secondAttribute="trailing" id="QHY-Mi-jB1"/>
-                            <constraint firstItem="zhA-De-oAp" firstAttribute="bottom" secondItem="k8C-70-xjZ" secondAttribute="bottom" id="UG4-tj-4ix"/>
+                            <constraint firstItem="1Su-bJ-hxW" firstAttribute="top" secondItem="F6I-dd-rQg" secondAttribute="bottom" constant="12" id="2te-ak-cuj"/>
+                            <constraint firstItem="1Su-bJ-hxW" firstAttribute="top" secondItem="jNX-IN-22o" secondAttribute="bottom" constant="62" id="8NA-qg-Rpy"/>
+                            <constraint firstAttribute="bottom" secondItem="1Su-bJ-hxW" secondAttribute="bottom" id="Gsk-fa-y64"/>
+                            <constraint firstItem="56i-w5-PJG" firstAttribute="trailing" secondItem="jNX-IN-22o" secondAttribute="trailing" constant="28" id="HUB-vl-D84"/>
+                            <constraint firstItem="1Su-bJ-hxW" firstAttribute="trailing" secondItem="56i-w5-PJG" secondAttribute="trailing" id="Yje-bE-sN9"/>
                             <constraint firstItem="F6I-dd-rQg" firstAttribute="leading" secondItem="56i-w5-PJG" secondAttribute="leading" id="bP8-Qq-Xcm"/>
                             <constraint firstItem="F6I-dd-rQg" firstAttribute="top" secondItem="k8C-70-xjZ" secondAttribute="top" id="czQ-3b-BY7"/>
+                            <constraint firstItem="1Su-bJ-hxW" firstAttribute="leading" secondItem="56i-w5-PJG" secondAttribute="leading" id="eAf-Bj-OtP"/>
                             <constraint firstItem="F6I-dd-rQg" firstAttribute="trailing" secondItem="56i-w5-PJG" secondAttribute="trailing" id="oFp-y4-vX0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="6PT-1W-are"/>
                     <connections>
+                        <outlet property="broadcastMessageButton" destination="jNX-IN-22o" id="203-uE-Ahy"/>
+                        <outlet property="searchControllerView" destination="0ga-4E-DJu" id="fEp-by-Jdt"/>
                         <outlet property="tableView" destination="zhA-De-oAp" id="8Pe-1K-LBq"/>
                         <outlet property="topBarView" destination="F6I-dd-rQg" id="rdJ-zB-arK"/>
                     </connections>
@@ -108,54 +151,9 @@
             </objects>
             <point key="canvasLocation" x="974" y="108"/>
         </scene>
-        <!--New Chat View Controller-->
-        <scene sceneID="f0I-ZN-eqH">
-            <objects>
-                <viewController storyboardIdentifier="NewChatViewController" id="Sj6-oV-FMS" customClass="NewChatViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Kxq-dX-uZk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OKa-a0-vuu">
-                                <rect key="frame" x="0.0" y="214" width="414" height="682"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="Sj6-oV-FMS" id="Jbl-rM-mc6"/>
-                                    <outlet property="delegate" destination="Sj6-oV-FMS" id="JbJ-e4-nKQ"/>
-                                </connections>
-                            </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gPA-6x-ikX" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="214"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="214" id="EvM-nt-xa0"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="HT3-lc-KaG"/>
-                        <color key="backgroundColor" name="ProjectBackground"/>
-                        <constraints>
-                            <constraint firstItem="OKa-a0-vuu" firstAttribute="trailing" secondItem="HT3-lc-KaG" secondAttribute="trailing" id="7sq-b1-kdD"/>
-                            <constraint firstItem="OKa-a0-vuu" firstAttribute="leading" secondItem="HT3-lc-KaG" secondAttribute="leading" id="7yY-4q-P9k"/>
-                            <constraint firstItem="gPA-6x-ikX" firstAttribute="top" secondItem="Kxq-dX-uZk" secondAttribute="top" id="fqn-6H-gNZ"/>
-                            <constraint firstItem="OKa-a0-vuu" firstAttribute="top" secondItem="gPA-6x-ikX" secondAttribute="bottom" id="hZh-dl-1pD"/>
-                            <constraint firstItem="OKa-a0-vuu" firstAttribute="bottom" secondItem="Kxq-dX-uZk" secondAttribute="bottom" id="scw-YI-QtQ"/>
-                            <constraint firstItem="gPA-6x-ikX" firstAttribute="trailing" secondItem="HT3-lc-KaG" secondAttribute="trailing" id="svq-oG-yhj"/>
-                            <constraint firstItem="gPA-6x-ikX" firstAttribute="leading" secondItem="HT3-lc-KaG" secondAttribute="leading" id="u42-a3-3oq"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="WVv-W8-6Hp"/>
-                    <connections>
-                        <outlet property="tableView" destination="OKa-a0-vuu" id="dXA-PU-85I"/>
-                        <outlet property="topBarView" destination="gPA-6x-ikX" id="AOm-UQ-UVF"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FbU-k3-mAX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1700" y="108"/>
-        </scene>
     </scenes>
     <resources>
+        <image name="BroadcastMessageIcon" width="155.21000671386719" height="155.24000549316406"/>
         <namedColor name="ProjectBackground">
             <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

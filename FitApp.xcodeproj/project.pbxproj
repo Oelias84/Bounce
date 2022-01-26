@@ -65,7 +65,6 @@
 		7C74350325CDBAE900D33A9A /* ChatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74350225CDBAE900D33A9A /* ChatsViewModel.swift */; };
 		7C74350825CDBB4C00D33A9A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74350725CDBB4C00D33A9A /* Message.swift */; };
 		7C74350D25CDBBE900D33A9A /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74350C25CDBBE900D33A9A /* Sender.swift */; };
-		7C74352525CDC56300D33A9A /* NewChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74352425CDC56300D33A9A /* NewChatViewController.swift */; };
 		7C74352D25D056A900D33A9A /* GoogleStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74352C25D056A900D33A9A /* GoogleStorageManager.swift */; };
 		7C74353225D07DB800D33A9A /* GoogleDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74353125D07DB800D33A9A /* GoogleDatabaseManager.swift */; };
 		7C74357D25D0824D00D33A9A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74357C25D0824D00D33A9A /* User.swift */; };
@@ -266,7 +265,6 @@
 		7C74350225CDBAE900D33A9A /* ChatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewModel.swift; sourceTree = "<group>"; };
 		7C74350725CDBB4C00D33A9A /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7C74350C25CDBBE900D33A9A /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
-		7C74352425CDC56300D33A9A /* NewChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewController.swift; sourceTree = "<group>"; };
 		7C74352C25D056A900D33A9A /* GoogleStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleStorageManager.swift; sourceTree = "<group>"; };
 		7C74353125D07DB800D33A9A /* GoogleDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleDatabaseManager.swift; sourceTree = "<group>"; };
 		7C74357C25D0824D00D33A9A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -603,7 +601,6 @@
 			children = (
 				7C7434F425CD9DD700D33A9A /* ChatViewController.swift */,
 				7C7434EF25CD9D9D00D33A9A /* ChatsViewController.swift */,
-				7C74352425CDC56300D33A9A /* NewChatViewController.swift */,
 				7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */,
 			);
 			name = Chat;
@@ -1536,7 +1533,6 @@
 				B3DB751B259F8773002CF48B /* ConsumptionManager.swift in Sources */,
 				B3CA0CE3258111FD00923902 /* CircularProgressView.swift in Sources */,
 				7C89AA59256D6FDB009AD87C /* Constants.swift in Sources */,
-				7C74352525CDC56300D33A9A /* NewChatViewController.swift in Sources */,
 				7C71BB4725D869AC00FBEB96 /* AddWeightAlertView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
