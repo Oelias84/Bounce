@@ -16,7 +16,7 @@ import InputBarAccessoryView
 
 class ChatViewController: MessagesViewController {
 	
-	private var viewModel: ChatViewModel!
+	var viewModel: ChatViewModel!
 	
 	private let isAdmin: Bool = UserProfile.defaults.getIsManager
 	private let imagePickerController = UIImagePickerController()
@@ -25,8 +25,7 @@ class ChatViewController: MessagesViewController {
 		self.viewModel = viewModel
 		super.init(nibName: nil, bundle: nil)
 		
-		self.setupController()
-		self.setupInputButton()
+		loadFirstMessages()
 	}
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -35,7 +34,8 @@ class ChatViewController: MessagesViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		loadFirstMessages()
+		setupController()
+		setupInputButton()
 	}
 }
 
@@ -56,12 +56,12 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 			guard let self = self else { return }
 			
 			if let error = error {
-				#warning("Handel Error")
+				self.presentOkAlert(withTitle: "אופס",withMessage: "שליחת הודעה נכשלה")
 				print("Error:", error.localizedDescription)
 				return
 			}
 			self.ableInteraction()
-			self.messageInputBar.inputTextView.text = ""
+			self.messageInputBar.inputTextView.text = nil
 		}
 	}
 }
@@ -82,15 +82,11 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 	func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
 		viewModel.getMessageAt(indexPath)
 	}
-	func configureAccessoryView(_ accessoryView: UIView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-		accessoryView.backgroundColor = .red
-	}
 	func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
 		guard let message = message as? Message else {
 			return
 		}
-		switch message.kind {
-		case .photo(let media):
+		switch message.kind {		case .photo(let media):
 			guard let imageUrl = media.url else {
 				return
 			}
@@ -104,7 +100,10 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 	func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
 		let name = message.sender.displayName.splitFullName
 		
-		let presentingInitials = "\(name.0.first ?? "N")\(name.1.first ?? "A")"
+		let presentingInitials = "\(name.0.first ?? "N")/\(name.1.first ?? "A")"
+		avatarView.placeholderFont = UIFont(name: "Assistant-Regular", size: 12)!
+		avatarView.backgroundColor = message.sender.senderId != currentSender().senderId ? .projectIncomingMessageBubble : .projectOutgoingMessageBubble
+		avatarView.placeholderTextColor = .black
 		avatarView.initials = presentingInitials
 	}
 	
@@ -161,7 +160,7 @@ extension ChatViewController: CropViewControllerDelegate, UINavigationController
 					guard let self = self else { return }
 					
 					if let error = error {
-#warning("Handel Error")
+						self.presentOkAlert(withTitle: "אופס",withMessage: "שליחת תמונה נכשלה")
 						print("Error:", error)
 						return
 					}
@@ -182,7 +181,7 @@ extension ChatViewController: CropViewControllerDelegate, UINavigationController
 				guard let self = self else { return }
 				
 				if let error = error {
-#warning("Handel Error")
+					self.presentOkAlert(withTitle: "אופס",withMessage: "שליחת וידאו נכשל")
 					print("Error:", error)
 					return
 				}
@@ -203,6 +202,7 @@ extension ChatViewController {
 		showMessageTimestampOnSwipeLeft = true
 		
 		messageInputBar.delegate = self
+		messageInputBar.inputTextView.font = UIFont(name: "Assistant-Regular", size: 18)!
 		imagePickerController.delegate = self
 		messagesCollectionView.messagesDataSource = self
 		messagesCollectionView.messageCellDelegate = self

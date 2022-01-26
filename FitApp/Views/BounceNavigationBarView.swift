@@ -151,15 +151,23 @@ extension BounceNavigationBarView {
 	}
 	private func openChat() {
 		let storyboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
-		let chatContainerVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.ChatContainerViewController) as ChatContainerViewController
-		chatContainerVC.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: nil))
 		
-		if let vc = delegate as? UIViewController {
-			vc.navigationController?.pushViewController(chatContainerVC, animated: true)
+		if UserProfile.defaults.getIsManager {
+			let chatsVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.ChatsViewController) as ChatsViewController
+			
+			if let vc = delegate as? UIViewController {
+				vc.navigationController?.pushViewController(chatsVC, animated: true)
+			}
+		} else {
+			let chatContainerVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.ChatContainerViewController) as ChatContainerViewController
+			chatContainerVC.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: nil))
+			
+			if let vc = delegate as? UIViewController {
+				vc.navigationController?.pushViewController(chatContainerVC, animated: true)
+			}
 		}
 	}
 	private func openSettings() {
-		
 		let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
 		let settingsVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsViewController)
 		
@@ -169,7 +177,7 @@ extension BounceNavigationBarView {
 	}
 	func setImage() {
 		if let image = UserProfile.defaults.profileImageImageUrl, let url = URL(string: image) {
-
+			
 			DispatchQueue.main.async {
 				let imageView = UIImageView()
 				imageView.sd_setImage(with: url) {
@@ -185,4 +193,3 @@ extension BounceNavigationBarView {
 		}
 	}
 }
-

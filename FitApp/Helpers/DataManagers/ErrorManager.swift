@@ -37,6 +37,7 @@ struct ErrorManager: Error {
 	
 	enum DatabaseError: Error {
 		
+		case noUID
 		case failedToUpdate
 		case failedToFetch
 		case failedToDecodeData

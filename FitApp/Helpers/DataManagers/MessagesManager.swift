@@ -68,18 +68,6 @@ extension MessagesManager {
 		return chats
 	}
 	
-	//Setters
-	public func setChat(chat: Chat, completion: @escaping ([Message]) -> ()) {
-		chats.removeAll()
-		chats.append(chat)
-		
-		fetchMessagesFor(chat) {
-			messages in
-			
-			completion(messages ?? [])
-		}
-	}
-	
 	private func sendNotification(to tokens: [String], name: String, text: String) {
 		let notification = PushNotificationSender()
 		
@@ -100,7 +88,7 @@ extension MessagesManager {
 				case .success(_):
 					
 					completion(nil)
-					guard let userName = self.userName, let otherUserPushTokens = chat.otherUserPushTokens else { return }
+					guard let userName = self.userName, let otherUserPushTokens = chat.pushTokens else { return }
 					self.sendNotification(to: otherUserPushTokens, name: userName, text: text)
 				case .failure(let error):
 					
@@ -137,7 +125,7 @@ extension MessagesManager {
 							
 						case .success():
 							completion(nil)
-							guard let userName = self.userName, let otherUserPushTokens = chat.otherUserPushTokens else { return }
+							guard let userName = self.userName, let otherUserPushTokens = chat.pushTokens else { return }
 							self.sendNotification(to: otherUserPushTokens, name: userName, text: "הודעת תמונה")
 							
 						case .failure(let error):
@@ -173,7 +161,7 @@ extension MessagesManager {
 							
 						case .success():
 							completion(nil)
-							guard let userName = self.userName, let otherUserPushTokens = chat.otherUserPushTokens else { return }
+							guard let userName = self.userName, let otherUserPushTokens = chat.pushTokens else { return }
 							self.sendNotification(to: otherUserPushTokens, name: userName, text: "הודעת וידאו")
 							
 						case .failure(let error):
@@ -190,7 +178,7 @@ extension MessagesManager {
 		}
 	}
 	
-	private func fetchSupportChats() {
+	public func  fetchSupportChats() {
 		guard let userId = self.userId else { return }
 		
 		GoogleDatabaseManager.shared.getAllChats(userId: userId) {
@@ -234,7 +222,7 @@ extension MessagesManager {
 			}
 		}
 	}
-	public func fetchMessagesFor(_ chat: Chat, completion: @escaping ([Message]?) -> ()) {
+	public func  fetchMessagesFor(_ chat: Chat, completion: @escaping ([Message]?) -> ()) {
 		
 		googleManager.getAllMessagesForChat(chat: chat) {
 			result in
@@ -286,31 +274,11 @@ extension MessagesManager {
 		//		}
 	}
 	
-	//	public func postBroadcast(text: String, chatUsers: [ChatUser]) {
-	//		let usersWithExistingChats: [Chat] = userChats ?? []
-	//		var usersWithoutChats: [ChatUser] = [ChatUser]()
-	//
-	//		//Filter users without chats
-	////		let existingChatUserNames = usersWithExistingChats.map { $0.otherUserEmail }
-	////		for user in chatUsers {
-	////			if !existingChatUserNames.contains(where: { $0 == user.email }) {
-	////				usersWithoutChats.append(user)
-	////			}
-	////		}
-	//
-	//		//Create new chats and send messages for users without chats
-	//		for user in usersWithoutChats {
-	//			guard let userToken = user.tokens, let messageId = generateMessageIdForBroadcast(otherUserEmail: user.email), let selfSender = generateSelfSender() else { return }
-	//			let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text), isIncoming: false)
-	//
-	//			createChat(otherUserEmail: user.email, otherTokens: userToken, name: user.name, message: message, notificationSenderName: "Bounce", notificationText: text)
-	//		}
-	//		//Send messages for users with chats
-	//		for userChat in usersWithExistingChats {
-	////			guard let userToken = userChat.otherUserTokens , let messageId = generateMessageIdForBroadcast(otherUserEmail: userChat.otherUserEmail), let selfSender = generateSelfSender() else { return }
-	////			let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
-	//
-	////			sendMessageToChat(chatId: userChat.id, otherUserEmail: userChat.otherUserEmail, otherTokens: userToken, name: "Bounce", message: message, notificationSenderName: "Bounce", notificationText: text)
-	//		}
-	//	}
+	public func postBroadcast(text: String) {
+		for chat in chats {
+			self.sendTextMessageToChat(chat: chat, text: text) {_ in
+				
+			}
+		}
+	}
 }

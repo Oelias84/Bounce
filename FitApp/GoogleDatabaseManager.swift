@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import MessageKit
+import FirebaseAuth
 import FirebaseDatabase
 import FirebaseMessaging
 
@@ -20,11 +21,10 @@ final class GoogleDatabaseManager {
 //MARK: - Chat functionality
 extension GoogleDatabaseManager {
 	
-	
 	//MARK: - Updated
 	func createChat(userId: String, isAdmin: Bool, completion: @escaping (Result<Chat, ErrorManager.DatabaseError>) -> Void) {
 		let newChatData = createChatData()
-
+		
 		chatRef(userId: userId).setValue(newChatData) {
 			error, ref in
 			if let error = error {
@@ -33,7 +33,7 @@ extension GoogleDatabaseManager {
 			}
 			
 			let chat = Chat(userId: userId, isAdmin: isAdmin)
-			
+			self.updateUserChatImagePath()
 			self.updateOtherUserPushToken(chat: chat) {
 				completion(Result.success(chat))
 			}
@@ -60,7 +60,12 @@ extension GoogleDatabaseManager {
 	func sendMessageToChat(chat: Chat, content: String, link: String?, previewData: Data?, kind: MessageKind, completion: @escaping(Result<Void, Error>) -> ()) {
 		let date = Date().millisecondsSince2020
 		let messageId = "\(chat.userId)_\(date)"
-		let newMessagesData = createMessageData(senderId: chat.userId, kind: kind.rawValue, timestamp: date, content: content, mediaPath: link, mediaPreview: previewData?.base64EncodedString())
+		guard let senderId = Auth.auth().currentUser?.uid else {
+			completion(.failure(ErrorManager.DatabaseError.noUID))
+			return
+		}
+		
+		let newMessagesData = createMessageData(senderId: senderId, kind: kind.rawValue, timestamp: date, content: content, mediaPath: link, mediaPreview: previewData?.base64EncodedString())
 		
 		chatMessagesRef(userId: chat.userId).child(messageId).setValue(newMessagesData) {
 			error, data in
@@ -77,6 +82,8 @@ extension GoogleDatabaseManager {
 	func getAllChats(userId: String, completion: @escaping ([Chat]) -> Void) {
 		chatsRef().observe(.value) {
 			snapshot in
+			self.updateUserChatImagePath()
+
 			let chats = self.parseChatsData(userId: userId, snapshot: snapshot)
 			completion(chats)
 		}
@@ -90,12 +97,13 @@ extension GoogleDatabaseManager {
 				completion(.failure(.dataIsEmpty))
 				return
 			}
-			
+
 			self.updateOtherUserPushToken(chat: chat) {
+				self.updateUserChatImagePath()
 				completion(.success(chat))
 			}
 		}
-	 }
+	}
 	func getAllMessagesForChat(chat: Chat, completion: @escaping (Result<[Message], ErrorManager.DatabaseError>) -> Void) {
 		updateOtherUserPushToken(chat: chat) {
 			self.chatMessagesRef(userId: chat.userId).queryOrdered(byChild: "timestamp").observe(.value) {
@@ -109,7 +117,7 @@ extension GoogleDatabaseManager {
 			}
 		}
 	}
-
+	
 	//Create
 	private func createChatData() -> [String: Any] {
 		let messageData = createMessageData(senderId: "", kind: MessageKind.text("").rawValue, timestamp: 0, content: "", mediaPath: nil, mediaPreview: nil)
@@ -139,33 +147,61 @@ extension GoogleDatabaseManager {
 				print("no Tokens")
 				return
 			}
-			chat.otherUserPushTokens = tokens
+			chat.pushTokens = tokens
 			completion()
 		}
 	}
 	private func updateLatestMessage(chat: Chat, latestMessageData: [String: Any]) {
 		chatRef(userId: chat.userId).child("latest_message").setValue(latestMessageData)
 	}
+	private func updateUserChatImagePath() {
+		guard let userId = Auth.auth().currentUser?.uid else { return }
+		
+		let path = "\(userId)_profile_picture.jpeg"
+		GoogleStorageManager.shared.downloadImageURL(from: .profileImage , path: path) {
+			result in
+
+			switch result {
+			case .success(let url):
+				self.chatRef(userId: userId).child("display_image").setValue(url.absoluteString)
+			case .failure(let error):
+				print("no image exist", error)
+			}
+		}
+	}
 	//Parse
 	private func parseChatsData(userId: String, snapshot: DataSnapshot) -> [Chat] {
-		guard let chatsData = snapshot.value as? [[String: Any]] else  { return [] }
 		var chats: [Chat] = []
 		
-		for chatData in chatsData {
+		snapshot.children.forEach {
+			data in
+			guard let data = data as? DataSnapshot,
+				  let chatData = data.value as? [String: Any] else  { return }
+			var displayName: String? {
+				return chatData["display_name"] as? String
+			}
+			var latestMessage: Message? {
+				let messageSnapshot = data.childSnapshot(forPath: "latest_message")
+				return parseLatestMessageData(userId: "", snapshot: messageSnapshot)
+			}
 			var lastSeenMessageTimestamp: Int64? {
 				return chatData["support_last_seen_message_timestamp"] as? Int64
+			}
+			var imagePath: String? {
+				return chatData["display_image"] as? String
 			}
 			var pushTokens: [String] {
 				let data = chatData["push_tokens"] as? [String: Int64]
 				return data?.keys.compactMap { $0 } ?? []
 			}
-			chats.append(Chat(userId: userId, isAdmin: true, otherUserPushTokens: pushTokens, lastSeenMessageDate: lastSeenMessageTimestamp?.dateFromMillisecondsSince2020))
+			
+			chats.append(Chat(userId: data.key, isAdmin: true, imagePath: imagePath ?? "", displayName: displayName, latestMessage: latestMessage, pushTokens: pushTokens, lastSeenMessageDate: lastSeenMessageTimestamp?.dateFromMillisecondsSince2020))
 		}
 		return chats
 	}
 	private func parseChatData(userId: String, isAdmin: Bool, snapshot: DataSnapshot) -> Chat? {
 		guard let chatData = snapshot.value as? [String: Any] else  { return nil }
-
+		
 		var lastSeenMessageTimestamp: Int64? {
 			if isAdmin {
 				return chatData["support_last_seen_message_timestamp"] as? Int64
@@ -177,8 +213,7 @@ extension GoogleDatabaseManager {
 			let data = chatData["push_tokens"] as? [String: Int64]
 			return data?.keys.compactMap { $0 } ?? []
 		}
-		
-		return Chat(userId: userId, isAdmin: isAdmin, otherUserPushTokens: pushTokens, lastSeenMessageDate: lastSeenMessageTimestamp?.dateFromMillisecondsSince2020)
+		return Chat(userId: userId, isAdmin: isAdmin, pushTokens: pushTokens, lastSeenMessageDate: lastSeenMessageTimestamp?.dateFromMillisecondsSince2020)
 	}
 	private func parseMessagesData(userId: String, snapshot: DataSnapshot) -> [Message]? {
 		guard let value = snapshot.value as? [String: Any] else {
@@ -228,6 +263,33 @@ extension GoogleDatabaseManager {
 		}
 		return messages
 	}
+	private func parseLatestMessageData(userId: String, snapshot: DataSnapshot) -> Message? {
+		guard let value = snapshot.value as? [String: Any] else {
+			return nil
+		}
+		guard let content = value["content"] as? String,
+			  let senderId = value["sender_id"] as? String,
+			  let timestamp = value["timestamp"] as? Int64,
+			  let type = value["type"] as? String else { return nil }
+		
+		let date = timestamp.dateFromMillisecondsSince2020
+		
+		var kind: MessageKind?
+		
+		switch type {
+			
+		case "TEXT":
+			kind = .text(content)
+		case "PHOTO":
+			kind = .text("תמונה")
+		case "VIDEO":
+			kind = .text("וידאו")
+		default:
+			break
+		}
+		return Message(sender: Sender(photoURL: "", senderId: senderId, displayName: ""), messageId: "", sentDate: date, kind: kind ?? .text(""), isIncoming: senderId != userId, content: content)
+	}
+	
 	//Read
 	private func chatsRef() -> DatabaseReference {
 		return database.child("support").child("chats")
@@ -239,11 +301,12 @@ extension GoogleDatabaseManager {
 		return database.child("support").child("messages").child(userId)
 	}
 	
-	
-	func convertBase64StringToImage (imageBase64String: String) -> UIImage! {
-		let imageData = Data.init(base64Encoded: imageBase64String, options: .init(rawValue: 0))
-		let image = UIImage(data: imageData!)
-		return image!
+	func convertBase64StringToImage (imageBase64String: String) -> UIImage? {
+		if let imageData = Data.init(base64Encoded: imageBase64String, options: .init(rawValue: 0)) {
+			let image = UIImage(data: imageData)
+			return image
+		}
+		return nil
 	}
 }
 

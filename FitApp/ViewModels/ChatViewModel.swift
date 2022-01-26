@@ -20,21 +20,20 @@ class ChatViewModel {
 	required init(chat: Chat?) {
 		
 		if let chat = chat {
-			messagesManager.setChat(chat: chat) {
-				[weak self] messages in
-				guard let self = self else { return }
-				self.messages = messages
-			}
+			self.chat = chat
 		} else {
 			self.chat = messagesManager.getUserChat()
 		}
 	}
 	
 	//getters
+	var getDisplayName: String? {
+		chat?.displayName
+	}
 	var messagesCount: Int {
 		messages.count
 	}
-	var getlastMessage: Message? {
+	var getLastMessage: Message? {
 		messages.last
 	}
 	var getAllMassages: [Message] {

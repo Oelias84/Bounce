@@ -7,101 +7,60 @@
 
 import Foundation
 
-class ChatsViewModel: NSObject {
+class ChatsViewModel {
 	
-	var chats: [Chat]? {
-		didSet {
-			self.bindChatsViewModelToController()
-		}
-	}
-	var isNewChat = false
+	private var chats: [Chat]?
+	private var flitteredChats: [Chat]?
 	
-	var bindChatsViewModelToController : (() -> ()) = {}
+	private let imageLoader = ImageLoader()
+	private let messagesManager = MessagesManager.shared
 
-	override init() {
-		super.init()
-		startListeningForChats()
+	var chatsViewModelBinder: (() -> ()) = {}
+
+	init() {
+		messagesManager.bindMessageManager = {
+			self.chats = self.messagesManager.getSupportChats()?.sorted()
+			self.flitteredChats = self.chats
+			self.chatsViewModelBinder()
+		}
 	}
 	
+	//Getters
 	var getChatsCount: Int? {
-		guard chats != nil else {
-			return nil
-		}
-		return self.chats?.count
+		flitteredChats?.count
 	}
 	func getChatFor(row: Int) -> Chat {
-		return self.chats![row]
+		flitteredChats![row]
 	}
-	public func updateChatState(chat: Chat) {
-		GoogleDatabaseManager.shared.updateChat(chat: chat) { result in
-			
-			switch result {
-			case .success(_):
-				print("Chat was updated")
-			case .failure(_):
-				print("Chat isRead did not update")
-			}
+	func getChats(completion: @escaping ()->()) {
+		if let chats = messagesManager.getSupportChats() {
+			self.chats = chats.sorted()
+			self.flitteredChats = self.chats
+			completion()
+		} else {
+			messagesManager.fetchSupportChats()
+			completion()
 		}
+	}
+	public func filterUsers(with term: String?, completion: ()->()) {
+		Spinner.shared.stop()
+		guard let term = term else {
+			flitteredChats = chats
+			return
+		}
+		
+		guard let chats = chats else { return }
+		
+		let results = chats.filter({
+			let name = $0.displayName?.lowercased() ?? ""
+			return name.hasPrefix(term.lowercased())
+		})
+		
+		flitteredChats = results
+		completion()
 	}
 	
-	private func startListeningForChats() {
-		guard let email = UserProfile.defaults.email?.safeEmail else { return }
-		
-		GoogleDatabaseManager.shared.getAllChats(for: email) { [weak self] result in
-			guard let self = self else { return }
-			
-			switch result {
-			case .success(let chats):
-				guard !chats.isEmpty else {
-					return
-				}
-				self.isNewChat = false
-				self.chats = chats
-			case .failure(let error):
-				if error == ErrorManager.DatabaseError.noFetch {
-					self.isNewChat = true
-					self.addSupportUser { chat in
-						if let chat = chat {
-							self.chats = [chat]
-						} else {
-							self.bindChatsViewModelToController()
-						}
-					}
-				} else {
-					self.bindChatsViewModelToController()
-				}
-			}
-		}
-	}
-	private func addSupportUser(completion: @escaping (Chat?) -> Void) {
-		let database = GoogleDatabaseManager.shared
-		var chat: Chat?
-		
-		database.getChatUsers { result in
-			switch result {
-			case .success(let users):
-				
-				for user in users {
-					if user.email == "support-mail-com" {
-						
-						let userEmail = UserProfile.defaults.email!.safeEmail
-						
-						let name = "דברי אלינו"
-						let otherUserEmail = user.email
-						let tokens = user.tokens
-						let chatId = "\(userEmail)_\(otherUserEmail)_\(Date().dateStringForDB)"
-						let latestMessage = LatestMessage (date: Date().dateStringForDB,
-														   text: "כיתבי לנו כאן ואנו מבטיחים לחזור אליך בהקדם האפשרי",
-														   isRead: false)
-						
-						chat = Chat(id: chatId, name: name, otherUserEmail: otherUserEmail, otherUserTokens: tokens, latestMessage: latestMessage)
-						completion(chat)
-					}
-				}
-			case .failure(let error):
-				print(error.localizedDescription)
-				completion(chat)
-			}
-		}
+	public func sendBroadcastMessage(text: String) {
+		messagesManager.postBroadcast(text: text)
 	}
 }

@@ -538,13 +538,6 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
-		7C4554FB27A15C560077791B /* TextInputPopupAlertView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = TextInputPopupAlertView;
-			sourceTree = "<group>";
-		};
 		7C481C7026FA17B1002FB8BF /* DataManagers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1055,7 +1048,6 @@
 		B3B2A245256EDDCA0052E6C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7C4554FB27A15C560077791B /* TextInputPopupAlertView */,
 				7C1ACD082670C9D2008079C9 /* CellViews */,
 				7C32C586278E368C00B97642 /* PopupAlertView */,
 				7C4EB828276E57FE00DA1407 /* TextFieldView */,
