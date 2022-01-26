@@ -28,7 +28,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="pgN-ey-J43">
-                                <rect key="frame" x="36" y="563" width="342" height="164"/>
+                                <rect key="frame" x="36" y="638" width="342" height="164"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yE7-lp-Gan">
                                         <rect key="frame" x="0.0" y="0.0" width="342" height="60"/>
@@ -123,20 +123,6 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Qxp-hK-VYv">
                                 <rect key="frame" x="32" y="288" width="350" height="48"/>
                             </imageView>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i19-kb-Ti8">
-                                <rect key="frame" x="32" y="791" width="350" height="31"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="14"/>
-                                <color key="tintColor" red="0.08235294118" green="0.39607843139999999" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="אין לך חשבון? הרשמו עכשיו">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
-                                        <color key="value" red="0.95686274770000002" green="0.9568628669" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FdR-RX-Yjo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -145,22 +131,18 @@
                             <constraint firstItem="Qxp-hK-VYv" firstAttribute="leading" secondItem="FdR-RX-Yjo" secondAttribute="leading" constant="32" id="9cH-Kc-whE"/>
                             <constraint firstItem="FdR-RX-Yjo" firstAttribute="trailing" secondItem="Qxp-hK-VYv" secondAttribute="trailing" constant="32" id="Ggf-uu-71u"/>
                             <constraint firstItem="HmD-X6-g4v" firstAttribute="trailing" secondItem="FdR-RX-Yjo" secondAttribute="trailing" id="H0H-NO-hzU"/>
-                            <constraint firstItem="i19-kb-Ti8" firstAttribute="top" secondItem="pgN-ey-J43" secondAttribute="bottom" constant="64" id="HfN-b0-Ysg"/>
                             <constraint firstItem="HmD-X6-g4v" firstAttribute="top" secondItem="bQr-ey-eT9" secondAttribute="top" id="Jsg-Qz-IqR"/>
-                            <constraint firstItem="i19-kb-Ti8" firstAttribute="leading" secondItem="FdR-RX-Yjo" secondAttribute="leading" constant="32" id="RxO-ld-KUa"/>
                             <constraint firstItem="FdR-RX-Yjo" firstAttribute="trailing" secondItem="pgN-ey-J43" secondAttribute="trailing" constant="36" id="Xbo-RB-T6e"/>
-                            <constraint firstItem="FdR-RX-Yjo" firstAttribute="bottom" secondItem="i19-kb-Ti8" secondAttribute="bottom" constant="40" id="Yjh-7J-E4R"/>
                             <constraint firstAttribute="bottom" secondItem="HmD-X6-g4v" secondAttribute="bottom" id="aCm-8B-umB"/>
                             <constraint firstItem="pgN-ey-J43" firstAttribute="leading" secondItem="FdR-RX-Yjo" secondAttribute="leading" constant="36" id="bKe-ee-vRO"/>
                             <constraint firstItem="HmD-X6-g4v" firstAttribute="leading" secondItem="FdR-RX-Yjo" secondAttribute="leading" id="kz8-Tp-ipD"/>
-                            <constraint firstItem="FdR-RX-Yjo" firstAttribute="trailing" secondItem="i19-kb-Ti8" secondAttribute="trailing" constant="32" id="ntm-CS-YJC"/>
+                            <constraint firstItem="FdR-RX-Yjo" firstAttribute="bottom" secondItem="pgN-ey-J43" secondAttribute="bottom" constant="60" id="qt2-a4-vZI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title=" " largeTitleDisplayMode="always" id="d9Q-Z7-ggA"/>
                     <connections>
                         <outlet property="buttonsStackView" destination="pgN-ey-J43" id="GB2-V0-fru"/>
                         <outlet property="emailTextfield" destination="fUu-i7-zcc" id="7kp-iG-FMj"/>
-                        <outlet property="noAccountButton" destination="i19-kb-Ti8" id="QWK-6B-MvP"/>
                         <outlet property="passwordTextfield" destination="4Cp-jt-yuu" id="28Y-eI-nfH"/>
                     </connections>
                 </viewController>
