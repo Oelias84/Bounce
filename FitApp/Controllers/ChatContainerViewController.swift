@@ -61,7 +61,7 @@ extension ChatContainerViewController {
 	}
 	private func setupChat() {
 
-  §		chatViewController.willMove(toParent: self)
+		chatViewController.willMove(toParent: self)
 		addChild(chatViewController)
 		view.addSubview(chatViewController.view)
 		chatViewController.didMove(toParent: self)
