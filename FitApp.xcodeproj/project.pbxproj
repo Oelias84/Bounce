@@ -42,6 +42,8 @@
 		7C33B661266A587D00E16A1C /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C33B660266A587D00E16A1C /* CommentsViewModel.swift */; };
 		7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F4F3125C2D31300EE3758 /* SettingsOptionsTableViewController.swift */; };
 		7C3F4F8C25C9E2AF00EE3758 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F4F8B25C9E2AF00EE3758 /* ResetPasswordViewController.swift */; };
+		7C4554F827A0A8A10077791B /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4554F727A0A8A10077791B /* ImageCache.swift */; };
+		7C4554FA27A0A8D30077791B /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4554F927A0A8D30077791B /* ImageLoader.swift */; };
 		7C481C7226FA1883002FB8BF /* MealsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C481C7126FA1883002FB8BF /* MealsManager.swift */; };
 		7C48D1B5278CEFDE00A53AF2 /* AddMealTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C48D1B4278CEFDD00A53AF2 /* AddMealTextFieldView.swift */; };
 		7C4EB82A276E586300DA1407 /* LoginTextFiels.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4EB829276E586300DA1407 /* LoginTextFiels.xib */; };
@@ -241,6 +243,8 @@
 		7C33B660266A587D00E16A1C /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
 		7C3F4F3125C2D31300EE3758 /* SettingsOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOptionsTableViewController.swift; sourceTree = "<group>"; };
 		7C3F4F8B25C9E2AF00EE3758 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		7C4554F727A0A8A10077791B /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		7C4554F927A0A8D30077791B /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		7C481C7126FA1883002FB8BF /* MealsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsManager.swift; sourceTree = "<group>"; };
 		7C48D1B4278CEFDD00A53AF2 /* AddMealTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealTextFieldView.swift; sourceTree = "<group>"; };
 		7C4EB829276E586300DA1407 /* LoginTextFiels.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginTextFiels.xib; sourceTree = "<group>"; };
@@ -550,6 +554,8 @@
 				7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */,
 				B367F18725B1EEC200DF21D7 /* LocalNotificationManager.swift */,
 				7C481C7126FA1883002FB8BF /* MealsManager.swift */,
+				7C4554F727A0A8A10077791B /* ImageCache.swift */,
+				7C4554F927A0A8D30077791B /* ImageLoader.swift */,
 			);
 			path = DataManagers;
 			sourceTree = "<group>";
@@ -1415,6 +1421,7 @@
 				B3E6E9AD25714C1400958C48 /* MealPlanTableViewCell.swift in Sources */,
 				B38068C625B7197E005C4A24 /* WorkoutTableViewCell.swift in Sources */,
 				B358227825ACA2F800C91295 /* CollapsibleTableViewHeader.swift in Sources */,
+				7C4554F827A0A8A10077791B /* ImageCache.swift in Sources */,
 				B341E230257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift in Sources */,
 				7C74AF9E264336EA001D0F5D /* PushNotificationSender.swift in Sources */,
 				B38397F625B4A1BE00154697 /* WorkoutViewModel.swift in Sources */,
@@ -1433,6 +1440,7 @@
 				7C33B661266A587D00E16A1C /* CommentsViewModel.swift in Sources */,
 				7C1ACCF5266FCBC6008079C9 /* ChangeDateView.swift in Sources */,
 				7C98731E26F4A7C8000E5299 /* CaloriesProgressState.swift in Sources */,
+				7C4554FA27A0A8D30077791B /* ImageLoader.swift in Sources */,
 				B358222825AC9A2F00C91295 /* ArticlesViewController.swift in Sources */,
 				B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */,
 				7C32C588278E370500B97642 /* PopupAlertView.swift in Sources */,
