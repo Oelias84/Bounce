@@ -53,11 +53,11 @@ extension ChatContainerViewController {
 	
 	private func setupTopBarView() {
 		topBarView.delegate = self
-		topBarView.nameTitle = "דברי אלינו"
 		topBarView.isDayWelcomeHidden = true
 		topBarView.isMotivationHidden = true
 		topBarView.isBackButtonHidden = false
 		topBarView.isMessageButtonHidden = true
+		topBarView.nameTitle = UserProfile.defaults.getIsManager ? chatViewController.viewModel.getDisplayName ?? "" : "דברי אלינו" 
 	}
 	private func setupChat() {
 
