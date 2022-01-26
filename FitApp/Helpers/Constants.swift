@@ -186,6 +186,7 @@ struct K {
 		static let addMealAlertView = "AddMealAlertView"
 		static let addMealAlertDishView = "AddMealAlertDishView"
 		static let bounceNavigationBarView = "BounceNavigationBarView"
+		static let popupAlertView = "PopupAlertView"
     }
 	
 	struct Units {
