@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol weightTableViewCellDelegate {
+	
 	func presentImage(url: URL)
 }
 
@@ -69,31 +71,47 @@ class weightTableViewCell: UITableViewCell {
 	}
 	
 	private func setWeightImage() {
-		let userEmail = UserProfile.defaults.email!.safeEmail
-		let path = "\(userEmail)_\(weight.date.dateStringForDB)_weight_image.jpeg"
+		guard let userID = Auth.auth().currentUser?.uid else {
+			DispatchQueue.main.async {
+				[weak self] in
+				guard let self = self else { return }
+				
+				self.weightImageView.image = UIImage().imageWith(name: "N A")
+				self.dateImageStackView.spacing = 6
+			}
+			return
+		}
+		let path = "\(userID)/weight_images/\(weight.date.dateStringForDB).jpeg"
 
-		GoogleStorageManager.shared.downloadImageURL(from: .weightImage, path: path) {
-			[weak self] result in
-			guard let self = self else { return }
+		DispatchQueue.global(qos: .background).async {
+			GoogleStorageManager.shared.downloadURL(path: path) {
+				[weak self] result in
+				guard let self = self else { return }
 
-			switch result {
-			case .success(let url):
-				DispatchQueue.main.async { [weak self] in
-					guard let self = self else { return }
-					self.imageUrl = url
-					self.weightImageView.contentMode = .scaleToFill
-					self.weightImageView.sd_setImage(with: url)
-					self.dateImageStackView.spacing = 4
+				switch result {
+				case .success(let url):
+					DispatchQueue.main.async {
+						[weak self] in
+						guard let self = self else { return }
+						
+						self.imageUrl = url
+						self.weightImageView.contentMode = .scaleToFill
+						self.weightImageView.sd_setImage(with: url)
+						self.dateImageStackView.spacing = 4
+					}
+				case .failure(let error):
+					DispatchQueue.main.async {
+						[weak self] in
+						guard let self = self else { return }
+						
+						self.weightImageView.image = UIImage().imageWith(name: "N A")
+						self.dateImageStackView.spacing = 6
+					}
+					print("fail to get image url", error)
 				}
-			case .failure(let error):
-				DispatchQueue.main.async { [weak self] in
-					guard let self = self else { return }
-					self.weightImageView.image = UIImage().imageWith(name: "N A")
-					self.dateImageStackView.spacing = 6  
-				}
-				print("fail to get image url", error)
 			}
 		}
+
 	}
 	@objc private func imageTapped() {
 		if let url = imageUrl {

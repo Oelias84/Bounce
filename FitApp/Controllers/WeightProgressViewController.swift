@@ -9,6 +9,7 @@ import UIKit
 import Charts
 import SDWebImage
 import Foundation
+import FirebaseAuth
 import DateToolsSwift
 import CropViewController
 import BetterSegmentedControl
@@ -278,9 +279,7 @@ extension WeightProgressViewController {
 		todayButtonAction(self)
 		let weight = Weight(dateString: (date ?? Date()).dateStringForDB, weight: Double(weight)!)
 		
-		getImageUrl(weightDate: weight.date) {
-			[weak self] image in
-			guard let self = self else { return }
+		uploadWeightImage(weightDate: weight.date) {
 			
 			self.weightViewModel.weights?.removeAll(where: { $0.date.onlyDate == date?.onlyDate })
 			self.weightViewModel.weights?.append(weight)
@@ -309,26 +308,28 @@ extension WeightProgressViewController {
 			self.updateDataSource()
 		}
 	}
-	private func getImageUrl(weightDate: Date?, completion: @escaping (String?) -> ()) {
-		var weightImageUrl: String {
-			let userEmail = UserProfile.defaults.email!
-			return "\(userEmail.safeEmail)_\((weightDate ?? Date()).dateStringForDB)_weight_image.jpeg"
-		}
+	private func uploadWeightImage(weightDate: Date?, completion: @escaping () -> ()) {
+		
+		guard let userID = Auth.auth().currentUser?.uid else { return }
+		let imagePath = "\(userID)/weight_images/\((weightDate ?? Date()).dateStringForDB).jpeg"
 		
 		if let image = self.weightImage {
-			GoogleStorageManager.shared.uploadImage(from: .weightImage, data: image.jpegData(compressionQuality: 3)!, fileName: weightImageUrl){
-				result in
-				
-				switch result {
-				case .success(let url):
-					completion(url)
-				case .failure(let error):
-					completion(nil)
-					print(error)
+			DispatchQueue.global(qos: .background).async {
+				GoogleStorageManager.shared.uploadImage(from: .weightImage, data: image.jpegData(compressionQuality: 1)!, fileName: imagePath) {
+					result in
+
+					switch result {
+					case .success(_):
+						completion()
+					case .failure(let error):
+						completion()
+						self.presentOkAlert(withTitle: "אופס", withMessage: "שמירת התמונה נכלשה", buttonText: "אישור")
+						print("Error: ", error.localizedDescription)
+					}
 				}
 			}
 		} else {
-			completion(nil)
+			completion()
 		}
 	}
 	
