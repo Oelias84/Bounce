@@ -171,7 +171,7 @@ extension UserProfile {
 	}
 	var getIsManager: Bool {
 		get {
-			return true//permissionLevel == 99
+			return permissionLevel == 99
 		}
 	}
 	static func getLifeStyleText() -> String {

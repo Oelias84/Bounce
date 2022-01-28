@@ -272,24 +272,19 @@ extension MessagesManager {
 			return UIImage(named: "plus")
 		}
 	}
-	public func sendMassageToSupport(existingChatId: String?, otherUserEmail: String? ,messageText: String, chatOtherTokens: [String]?) {
-		//		guard let otherUserEmail = otherUserEmail, let messageId = generateMessageId(otherUserEmail: otherUserEmail), let selfSender = generateSelfSender(), let userName = userName else { return }
-		//		let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(messageText), isIncoming: false)
-		//
-		//		if existingChatId == nil {
-		//			guard let otherTokens = supportTokens else { return }
-		//			createChat(otherUserEmail: otherUserEmail, otherTokens: otherTokens, name: userName, message: message, notificationText: messageText)
-		//		} else {
-		//			guard let chatID = existingChatId, let otherTokens = supportTokens else { return }
-		//			sendMessageToChat(chatId: chatID, otherUserEmail: otherUserEmail, otherTokens: otherTokens, name: userName, message: message, notificationText: messageText)
-		//		}
+	public func sendMassageToSupport(messageText: String) {
+		guard let chat = chats.first else { return }
+		
+		sendTextMessageToChat(chat: chat, text: messageText) { error in
+			if let error = error {
+				print("Error: ", error.localizedDescription)
+			}
+		}
 	}
 	
 	public func postBroadcast(text: String) {
 		for chat in chats {
-			self.sendTextMessageToChat(chat: chat, text: text) {_ in
-				
-			}
+			self.sendTextMessageToChat(chat: chat, text: text) { _ in }
 		}
 	}
 }

@@ -236,43 +236,9 @@ extension WeightAlertsManager {
 	
 	//MARK: - Notification
 	private func sendMessageToManager(title: String, text: String) {
-		
-		//If chat exist send message and notification to support
-		if let supportChat = self.messagesManager.userChats?.first(where: { $0.otherUserEmail == "support-mail-com" }) {
-			self.messagesManager.postMassageToSupport(existingChatId: supportChat.id, otherUserEmail: supportChat.otherUserEmail, messageText: title + "\n" + text, chatOtherTokens: nil)
-			
-			//Chat dose not exist generate new support chat and send message and notification
-		} else {
-			self.messagesManager.generateUserSupportChat(completion: {
-				newSupportChat in
-				
-				if let newChat = newSupportChat, let recipientTokens = newChat.otherUserTokens {
-					self.messagesManager.postMassageToSupport(existingChatId: nil, otherUserEmail: newSupportChat?.otherUserEmail, messageText: title + "\n" + text, chatOtherTokens: recipientTokens)
-				}
-			})
-		}
+		messagesManager.sendMassageToSupport(messageText: title + "/n/n" + text)
 	}
-	private func getManagerTokens(completion: @escaping ([String]) -> ()) {
-		let database = GoogleDatabaseManager.shared
-		
-		DispatchQueue.global(qos: .background).async {
-			database.getChatUsers { result in
-				switch result {
-				case .success(let users):
-					
-					for user in users {
-						if user.email == "support-mail-com" {
-							if let tokens = user.tokens {
-								completion(tokens)
-							}
-						}
-					}
-				case .failure(let error):
-					print(error.localizedDescription)
-				}
-			}
-		}
-	}
+
 	
 	//MARK: - Alerts
 	private func presentAlertForUserState() {
