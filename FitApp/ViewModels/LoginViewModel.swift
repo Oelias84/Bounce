@@ -12,7 +12,7 @@ import FirebaseDatabase
 
 class LoginViewModel {
 	
-	private let googleManager = GoogleApiManager()
+	private let googleManager = GoogleApiManager.shared
 	
 	func login(email: String?, password: String?, completion: @escaping (Bool, String?) -> () ) throws {
 		
@@ -41,7 +41,6 @@ class LoginViewModel {
 					switch result {
 					case .success(let isApproved):
 						if isApproved {
-							self.getUserImageProfileUrl(with: email)
 							
 							self.googleManager.getUserData { result in
 
@@ -51,11 +50,7 @@ class LoginViewModel {
 									
 									if let user = user?.user, let data = userData {
 										UserProfile.defaults.updateUserProfileData(data, id: user.uid)
-										if let token =  UserProfile.defaults.fcmToken {
-											if let userName = data.name?.splitFullName {
-												GoogleDatabaseManager.shared.add(token: token, for: User(firsName: userName.0, lastName: userName.1, email: user.email!, deviceToken: token))
-											}
-										}
+										let _ = MessagesManager.shared
 									}
 									UserProfile.defaults.email = email
 									completion(true, nil)
@@ -71,22 +66,6 @@ class LoginViewModel {
 						completion(false, "נראה שיש בעיה: \(error.localizedDescription)")
 					}
 				}
-			}
-		}
-	}
-	
-	func getUserImageProfileUrl(with email: String) {
-		let path = "\(email.safeEmail)_profile_picture.jpeg"
-		GoogleStorageManager.shared.downloadImageURL(from: .profileImage , path: path) {
-			result in
-
-			switch result {
-			case .success(let url):
-				DispatchQueue.main.async {
-					UserProfile.defaults.profileImageImageUrl = url.absoluteString
-				}
-			case .failure(let error):
-				print("no image exist", error)
 			}
 		}
 	}
