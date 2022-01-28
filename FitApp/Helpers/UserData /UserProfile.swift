@@ -17,6 +17,8 @@ struct UserProfile {
 	
 	static var defaults = UserProfile()
 	
+	var userProfileImage: UIImage?
+	
 	var termsApproval: TermsAgreeDataModel? {
 		set {
 			self.encodeTermAndSet(name: "termsApproval", newValue)
@@ -145,7 +147,6 @@ struct UserProfile {
 		
 		do {
 			let termsAgreeData = try userDefaults.getObject(forKey: name, castTo: TermsAgreeDataModel.self)
-			print(termsAgreeData)
 			return termsAgreeData
 		} catch {
 			print(error.localizedDescription)
@@ -170,7 +171,7 @@ extension UserProfile {
 	}
 	var getIsManager: Bool {
 		get {
-			return permissionLevel == 99
+			return true//permissionLevel == 99
 		}
 	}
 	static func getLifeStyleText() -> String {

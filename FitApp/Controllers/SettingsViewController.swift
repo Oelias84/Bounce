@@ -403,18 +403,19 @@ extension SettingsViewController {
 	}
 	
 	private func saveImage(_ image: UIImage) {
-		guard let userSafeEmail = UserProfile.defaults.email?.safeEmail else { return }
-		let profileImageUrl = "\(userSafeEmail)_profile_picture.jpeg"
+		guard let userId = Auth.auth().currentUser?.uid else { return }
+		let profileImagePath = "\(userId)/profile_image.jpeg"
 		
-		// If contain User image upload to server
-		self.saveUserImage(image: image, for: profileImageUrl) {
+		self.saveUserImage(image: image, for: profileImagePath) {
 			[weak self] result in
 			guard let self = self else { return }
 			
 			switch result {
 			case .success(let imageUrl):
 				// Saves image url to user defaults
-				UserProfile.defaults.profileImageImageUrl = imageUrl
+				
+				UserProfile.defaults.profileImageImageUrl = imageUrl.absoluteString
+				self.topBarView.changeImage = true
 				self.topBarView.setImage()
 				Spinner.shared.stop()
 			case .failure(let error):
@@ -424,10 +425,13 @@ extension SettingsViewController {
 			}
 		}
 	}
-	private func saveUserImage(image: UIImage, for url: String, completion: @escaping (Result<String, Error>) -> Void) {
-		GoogleStorageManager.shared.uploadImage(from: .profileImage, data: image.jpegData(compressionQuality: 0.2)!, fileName: url) {
-			result in
-			completion(result)
+	private func saveUserImage(image: UIImage, for url: String, completion: @escaping (Result<URL, Error>) -> Void) {
+		let storageManager = GoogleStorageManager.shared
+		
+		DispatchQueue.global(qos: .background).async {
+			storageManager.uploadImage(from: .profileImage, data: image.jpegData(compressionQuality: 0.2)!, fileName: url) { _ in
+				storageManager.downloadURL(path: url,completion: completion)
+			}
 		}
 	}
 }

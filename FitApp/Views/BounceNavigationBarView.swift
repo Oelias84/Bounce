@@ -16,13 +16,21 @@ import Foundation
 
 final class BounceNavigationBarView: UIView {
 	
+	var changeImage: Bool = false
+	
 	@IBOutlet private var view: UIView!
 	
 	@IBOutlet private weak var clearView: UIView!
 	@IBOutlet private weak var backButton: UIButton!
 	@IBOutlet private weak var messageButton: UIButton!
 	@IBOutlet private weak var informationButton: UIButton!
-	@IBOutlet private weak var userProfileButton: UIButton!
+	@IBOutlet private weak var userProfileButton: UIButton! {
+		didSet {
+			if let image = UserProfile.defaults.userProfileImage {
+				userProfileButton.setImage(image.circleMasked, for: .normal)
+			}
+		}
+	}
 	
 	@IBOutlet private weak var nameTitleLabel: UILabel!
 	@IBOutlet private weak var dayWelcomeLabel: UILabel!
@@ -107,6 +115,9 @@ final class BounceNavigationBarView: UIView {
 		}
 	}
 	
+	override func layoutSubviews() {
+		setImage()
+	}
 	override func awakeFromNib() {
 		initWithNib()
 	}
@@ -147,7 +158,6 @@ extension BounceNavigationBarView {
 				messageButton.isHidden = true
 			}
 		}
-		setImage()
 	}
 	private func openChat() {
 		let storyboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
@@ -176,17 +186,26 @@ extension BounceNavigationBarView {
 		}
 	}
 	func setImage() {
-		if let image = UserProfile.defaults.profileImageImageUrl, let url = URL(string: image) {
-			
+		
+		if !changeImage, let image = UserProfile.defaults.userProfileImage {
 			DispatchQueue.main.async {
-				let imageView = UIImageView()
-				imageView.sd_setImage(with: url) {
-					[weak self] image, error, type, url  in
-					guard let self = self else { return }
+				self.userProfileButton.setImage(image.circleMasked, for: .normal)
+			}
+		} else if let imageURLString = UserProfile.defaults.profileImageImageUrl, let imageURL = URL(string: imageURLString) {
+			
+			let imageView = UIImageView()
+			
+			imageView.sd_setImage(with: imageURL) {
+				[weak self] image, error, type, url  in
+				guard let self = self else { return }
+				
+				if let image = imageView.image {
 					
-					if let image = imageView.image {
-						Spinner.shared.stop()
+					UserProfile.defaults.userProfileImage = image
+					
+					DispatchQueue.main.async {
 						self.userProfileButton.setImage(image.circleMasked, for: .normal)
+						self.changeImage = false
 					}
 				}
 			}

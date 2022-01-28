@@ -73,11 +73,12 @@ class HomeViewController: UIViewController {
 		setupProgressLabels()
 		checkWeightState()
 		checkMealsState()
-		topBarView.setImage()
 	}
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
+		
 		setUpProgressView()
+		topBarView.setImage()
 	}
 }
 
