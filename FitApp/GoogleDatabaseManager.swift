@@ -21,7 +21,6 @@ final class GoogleDatabaseManager {
 //MARK: - Chat functionality
 extension GoogleDatabaseManager {
 	
-	//MARK: - Updated
 	func createChat(userId: String, isAdmin: Bool, completion: @escaping (Result<Chat, ErrorManager.DatabaseError>) -> Void) {
 		let newChatData = createChatData()
 		
@@ -32,9 +31,24 @@ extension GoogleDatabaseManager {
 				return
 			}
 			
+			let queue = DispatchQueue.global()
+			let dispatchGroup = DispatchGroup()
+			
 			let chat = Chat(userId: userId, isAdmin: isAdmin)
-			self.updateUserChatImagePath()
-			self.updateOtherUserPushToken(chat: chat) {
+			
+			dispatchGroup.enter()
+			queue.async(group: dispatchGroup) {
+				self.downloadUserChatImagePath(chats: [chat]) {
+					dispatchGroup.leave()
+				}
+			}
+			dispatchGroup.enter()
+			queue.async(group: dispatchGroup) {
+				self.updateOtherUserPushToken(chat: chat) {
+					dispatchGroup.leave()
+				}
+			}
+			dispatchGroup.notify(queue: .global()) {
 				completion(Result.success(chat))
 			}
 		}
@@ -43,7 +57,7 @@ extension GoogleDatabaseManager {
 		guard let token = UserProfile.defaults.fcmToken else { return }
 		let timestamp = Date().millisecondsSince2020
 		if isAdmin {
-			database.child("admin_push_token").child(token).setValue(timestamp)
+			database.child("support").child("admin_push_tokens").child(token).setValue(timestamp)
 		} else {
 			chatRef(userId: userId).child("push_tokens").child(token).setValue(timestamp)
 		}
@@ -82,8 +96,7 @@ extension GoogleDatabaseManager {
 	func getAllChats(userId: String, completion: @escaping ([Chat]) -> Void) {
 		chatsRef().observe(.value) {
 			snapshot in
-			self.updateUserChatImagePath()
-
+			
 			let chats = self.parseChatsData(userId: userId, snapshot: snapshot)
 			completion(chats)
 		}
@@ -97,10 +110,23 @@ extension GoogleDatabaseManager {
 				completion(.failure(.dataIsEmpty))
 				return
 			}
-
-			self.updateOtherUserPushToken(chat: chat) {
-				self.updateUserChatImagePath()
-				completion(.success(chat))
+			let queue = DispatchQueue.global()
+			let dispatchGroup = DispatchGroup()
+			
+			dispatchGroup.enter()
+			queue.async(group: dispatchGroup) {
+				self.downloadUserChatImagePath(chats: [chat]) {
+					dispatchGroup.leave()
+				}
+			}
+			dispatchGroup.enter()
+			queue.async(group: dispatchGroup) {
+				self.updateOtherUserPushToken(chat: chat) {
+					dispatchGroup.leave()
+				}
+			}
+			dispatchGroup.notify(queue: .global()) {
+				completion(Result.success(chat))
 			}
 		}
 	}
@@ -138,6 +164,7 @@ extension GoogleDatabaseManager {
 			"media_preview": mediaPreview as Any
 		]
 	}
+	
 	//Update
 	private func updateOtherUserPushToken(chat: Chat, completion: @escaping () ->()) {
 		database.child("support").child("admin_push_tokens").observe(.value) {
@@ -154,27 +181,14 @@ extension GoogleDatabaseManager {
 	private func updateLatestMessage(chat: Chat, latestMessageData: [String: Any]) {
 		chatRef(userId: chat.userId).child("latest_message").setValue(latestMessageData)
 	}
-	private func updateUserChatImagePath() {
-		guard let userId = Auth.auth().currentUser?.uid else { return }
-		
-		let path = "\(userId)_profile_picture.jpeg"
-		GoogleStorageManager.shared.downloadImageURL(from: .profileImage , path: path) {
-			result in
-
-			switch result {
-			case .success(let url):
-				self.chatRef(userId: userId).child("display_image").setValue(url.absoluteString)
-			case .failure(let error):
-				print("no image exist", error)
-			}
-		}
-	}
+	
 	//Parse
 	private func parseChatsData(userId: String, snapshot: DataSnapshot) -> [Chat] {
 		var chats: [Chat] = []
 		
 		snapshot.children.forEach {
 			data in
+			
 			guard let data = data as? DataSnapshot,
 				  let chatData = data.value as? [String: Any] else  { return }
 			var displayName: String? {
@@ -187,15 +201,11 @@ extension GoogleDatabaseManager {
 			var lastSeenMessageTimestamp: Int64? {
 				return chatData["support_last_seen_message_timestamp"] as? Int64
 			}
-			var imagePath: String? {
-				return chatData["display_image"] as? String
-			}
 			var pushTokens: [String] {
 				let data = chatData["push_tokens"] as? [String: Int64]
 				return data?.keys.compactMap { $0 } ?? []
 			}
-			
-			chats.append(Chat(userId: data.key, isAdmin: true, imagePath: imagePath ?? "", displayName: displayName, latestMessage: latestMessage, pushTokens: pushTokens, lastSeenMessageDate: lastSeenMessageTimestamp?.dateFromMillisecondsSince2020))
+			chats.append(Chat(userId: data.key, isAdmin: true, displayName: displayName, latestMessage: latestMessage, pushTokens: pushTokens, lastSeenMessageDate: lastSeenMessageTimestamp?.dateFromMillisecondsSince2020))
 		}
 		return chats
 	}
@@ -223,37 +233,39 @@ extension GoogleDatabaseManager {
 		let messages: [Message] = value.compactMap { entry in
 			
 			let messageId = entry.key
-			
 			guard let messageData = entry.value as? [String: Any],
 				  let content = messageData["content"] as? String,
 				  let senderId = messageData["sender_id"] as? String,
 				  let timestamp = messageData["timestamp"] as? Int64,
 				  let type = messageData["type"] as? String else { return nil }
 			
+			let mediaPath = messageData["media_path"] as? String
 			let date = timestamp.dateFromMillisecondsSince2020
 			
 			var kind: MessageKind?
-			let link = messageData["media_path"] as? String
-			
 			switch type {
 				
 			case "TEXT":
 				kind = .text(content)
 			case "PHOTO":
-				guard let link = link, let photoUrl = URL(string: link), let placeHolder = UIImage(systemName: "plus") else { break }
-				
-				let media = Media(url: photoUrl, placeholderImage: placeHolder, size: CGSize(width: 300, height: 300))
-				kind = .photo(media)
+				if let base64BitmapData = messageData["media_preview"] as? String, base64BitmapData != "", let placeHolder: UIImage = convertBase64StringToImage(imageBase64String: base64BitmapData) {
+					let media = Media(mediaURLString: mediaPath, placeholderImage: placeHolder, size: CGSize(width: 150, height: 150))
+					
+					kind = .photo(media)
+				} else {
+					guard let placeHolder = UIImage(systemName: "plus") else { break }
+					let media = Media(mediaURLString: mediaPath, placeholderImage: placeHolder, size: CGSize(width: 150, height: 150))
+					
+					kind = .photo(media)
+				}
 			case "VIDEO":
 				if let base64BitmapData = messageData["media_preview"] as? String, base64BitmapData != "", let placeHolder: UIImage = convertBase64StringToImage(imageBase64String: base64BitmapData) {
-					guard let link = link, let photoUrl = URL(string: link) else { break }
+					let media = Media(mediaURLString: mediaPath, placeholderImage: placeHolder, size: CGSize(width: 150, height: 150))
 					
-					let media = Media(url: photoUrl, placeholderImage: placeHolder, size: CGSize(width: 300, height: 300))
 					kind = .video(media)
-				} else if let defaultPlaceHolderImage = UIImage(systemName: "video.fill")?.imageWithSize(CGSize(width: 30, height: 30)) {
-					guard let link = link, let photoUrl = URL(string: link) else { break }
+				} else if let defaultPlaceHolderImage = UIImage(systemName: "video.fill")?.imageWithSize(CGSize(width: 150, height: 150)) {
+					let media = Media(mediaURLString: mediaPath, placeholderImage: defaultPlaceHolderImage, size: CGSize(width: 150, height: 150))
 					
-					let media = Media(url: photoUrl, placeholderImage: defaultPlaceHolderImage, size: CGSize(width: 100, height: 100))
 					kind = .video(media)
 				}
 			default:
@@ -289,8 +301,36 @@ extension GoogleDatabaseManager {
 		}
 		return Message(sender: Sender(photoURL: "", senderId: senderId, displayName: ""), messageId: "", sentDate: date, kind: kind ?? .text(""), isIncoming: senderId != userId, content: content)
 	}
+	private func downloadUserChatImagePath(chats: [Chat], completion: @escaping () ->()) {
+		
+		let queue = DispatchQueue.global()
+		let dispatchGroup = DispatchGroup()
+		
+		queue.async(group: dispatchGroup) {
+			chats.forEach {
+				chat in
+				dispatchGroup.enter()
+				let path = "\(chat.userId)/profile_image.jpeg"
+				GoogleStorageManager.shared.downloadURL(path: path) {
+					result in
+					
+					switch result {
+					case .success(let url):
+						chat.imagePath = url
+						dispatchGroup.leave()
+					case .failure(let error):
+						dispatchGroup.leave()
+						print("no image exist", error)
+					}
+				}
+			}
+		}
+		dispatchGroup.notify(queue: .global()) {
+			completion()
+		}
+	}
 	
-	//Read
+	//Reference
 	private func chatsRef() -> DatabaseReference {
 		return database.child("support").child("chats")
 	}

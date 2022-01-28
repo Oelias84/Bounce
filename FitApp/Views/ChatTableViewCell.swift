@@ -53,7 +53,7 @@ class ChatTableViewCell: UITableViewCell {
 	private func loadImage(for chat: Chat) -> AnyPublisher<UIImage?, Never> {
 		return Just(chat.imagePath)
 		.flatMap({ poster -> AnyPublisher<UIImage?, Never> in
-			guard let url = URL(string: chat.imagePath) else { return Just(UIImage().imageWith(name: "N /A")).eraseToAnyPublisher() }
+			guard let url = chat.imagePath else { return Just(UIImage().imageWith(name: "N /A")).eraseToAnyPublisher() }
 			return ImageLoader.shared.loadImage(from: url)
 		})
 		.eraseToAnyPublisher()

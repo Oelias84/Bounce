@@ -18,6 +18,7 @@ struct Media: MediaItem {
 	
 	var url: URL?
 	var image: UIImage?
+	var mediaURLString: String?
 	var previewBitmap: UIImage?
 	var placeholderImage: UIImage
 	var size: CGSize

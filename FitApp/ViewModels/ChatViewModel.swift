@@ -51,21 +51,6 @@ class ChatViewModel {
 		return Sender(photoURL: "", senderId: senderId, displayName: name)
 	}
 	
-	public func sendMessage(messageKind: MessageKind, completion: @escaping (Error?) -> ()) {
-		guard let chat = chat else { return }
-		
-		switch messageKind {
-		case .text(let string):
-			messagesManager.sendTextMessageToChat(chat: chat, text: string, completion: completion)
-		case .photo(_):
-			messagesManager.sendMediaMessageFor(chat: chat, messageKind: messageKind, completion: completion)
-		case .video(_):
-			messagesManager.sendMediaMessageFor(chat: chat, messageKind: messageKind, completion: completion)
-		default:
-			break
-		}
-	}
-	
 	public func listenToMessages(completion: @escaping () -> ()) {
 		guard let chat = chat else {
 			completion()
@@ -78,6 +63,21 @@ class ChatViewModel {
 			
 			self.messages = messages
 			completion()
+		}
+	}
+	public func getMediaUrlFor(_ urlString: String, completion: @escaping (URL?) -> ()) {
+		messagesManager.downloadMediaURL(urlString: urlString, completion: completion)
+	}
+	public func sendMessage(messageKind: MessageKind, completion: @escaping (Error?) -> ()) {
+		guard let chat = chat else { return }
+		
+		switch messageKind {
+		case .text(let string):
+			messagesManager.sendTextMessageToChat(chat: chat, text: string, completion: completion)
+		case .photo(_), .video(_):
+			messagesManager.sendMediaMessageFor(chat: chat, messageKind: messageKind, completion: completion)
+		default:
+			break
 		}
 	}
 }

@@ -86,12 +86,8 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		guard let message = message as? Message else {
 			return
 		}
-		switch message.kind {		case .photo(let media):
-			guard let imageUrl = media.url else {
-				return
-			}
-			imageView.sd_setImage(with: imageUrl)
-		case .video(let media):
+		switch message.kind {
+		case .photo(let media), .video(let media):
 			imageView.image = media.placeholderImage
 		default:
 			break
@@ -131,10 +127,10 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		
 		switch message.kind {
 		case .photo(let media):
-			guard let imageUrl = media.url else { return }
+			guard let media = media as? Media, let imageUrl = media.mediaURLString else { return }
 			presentImageFor(imageUrl)
 		case .video(let media):
-			guard let videoUrl = media.url else { return }
+			guard let media = media as? Media, let videoUrl = media.mediaURLString else { return }
 			presentVideoFor(videoUrl)
 		default:
 			break
@@ -143,13 +139,15 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 }
 extension ChatViewController: CropViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 	
-	//Image Picker
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 		
 		picker.dismiss(animated: true) {
+			
+			//Image Picker
 			if let image = info[.originalImage] as? UIImage {
 				self.presentCropViewController(image: image, type: .default)
 				
+			//Video Picker
 			} else if let videoUrl = info[.mediaURL] as? URL  {
 				guard let placeholder = MessagesManager.generateThumbnailFrom(videoURL: videoUrl) else { return }
 				let media = Media(url: videoUrl, image: nil, placeholderImage: placeholder, size: .zero)
@@ -181,7 +179,7 @@ extension ChatViewController: CropViewControllerDelegate, UINavigationController
 				guard let self = self else { return }
 				
 				if let error = error {
-					self.presentOkAlert(withTitle: "אופס",withMessage: "שליחת וידאו נכשל")
+					self.presentOkAlert(withTitle: "אופס",withMessage: "שליחת וידאו נכשלה")
 					print("Error:", error)
 					return
 				}
@@ -269,17 +267,44 @@ extension ChatViewController {
 		present(actionSheet, animated: true)
 	}
 	
-	private func presentImageFor(_ url: URL) {
-		let photoViewer = PhotoViewerViewController(with: url)
+	private func presentImageFor(_ urlString: String) {
+		Spinner.shared.show(self.view)
 		
-		self.parent?.present(photoViewer, animated: true)
+		viewModel.getMediaUrlFor(urlString) {
+			[weak self] url in
+			guard let self = self else {
+				Spinner.shared.stop()
+				return
+			}
+			Spinner.shared.stop()
+			if let url = url {
+				let photoViewer = PhotoViewerViewController(with: url)
+				self.parent?.present(photoViewer, animated: true)
+			} else {
+				self.presentOkAlert(withTitle: "", withMessage: "", buttonText: "סגירה")
+			}
+		}
 	}
-	private func presentVideoFor(_ url: URL) {
-		let videoVC = AVPlayerViewController()
+	private func presentVideoFor(_ urlString: String) {
+		Spinner.shared.show(self.view)
 		
-		videoVC.player = AVPlayer(url: url)
-		self.parent?.present(videoVC, animated: true)
-		videoVC.player?.play()
+		viewModel.getMediaUrlFor(urlString) {
+			[weak self] url in
+			guard let self = self else {
+				Spinner.shared.stop()
+				return
+			}
+			Spinner.shared.stop()
+			if let url = url {
+				let videoVC = AVPlayerViewController()
+				
+				videoVC.player = AVPlayer(url: url)
+				self.parent?.present(videoVC, animated: true)
+				videoVC.player?.play()
+			} else {
+				self.presentOkAlert(withTitle: "", withMessage: "", buttonText: "סגירה")
+			}
+		}
 	}
 	
 	private func disableInteraction() {
