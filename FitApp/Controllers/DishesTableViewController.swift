@@ -39,11 +39,6 @@ class DishesTableViewController: UIViewController {
 		
 		configure()
 	}
-	override func viewWillDisappear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		
-		self.delegate?.didPickDish(name: self.selectedDish)
-	}
 	
 	@IBAction func otherButtonAction(_ sender: Any) {
 		
@@ -131,11 +126,16 @@ extension DishesTableViewController: PopupAlertViewDelegate {
 	}
 	func cancelButtonTapped(alertNumber: Int) {
 		dismiss(animated: true)
+		self.selectedDish = nil
 	}
 	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
-		self.selectedDish = nil
+		
 		if let indexPath = indexPath {
 			self.tableView.deselectRow(at: indexPath, animated: true)
+			self.delegate?.didPickDish(name: self.selectedDish)
+			dismiss(animated: true) {
+				self.dismiss(animated: true)
+			}
 		}
 	}
 }
@@ -160,7 +160,7 @@ extension DishesTableViewController {
 		
 		switch state {
 		case .normal:
-			presentAlert(withTitle: "החלפת מנה" , withMessage: "האם ברצונך להחליף \nאת- \(self.originalDish.getDishName)\n ב- \(selectedDish)", options: "ביטול", "אישור")
+			presentAlert(withTitle: "החלפת מנה" , withMessage: "האם ברצונך להחליף \nאת- \(self.originalDish.getDishName)\n ב- \(selectedDish)", options: "אישור", "ביטול")
 		case .exceptional:
 			dismiss(animated: true)
 		default:
