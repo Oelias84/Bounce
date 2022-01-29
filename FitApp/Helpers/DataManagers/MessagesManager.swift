@@ -105,7 +105,7 @@ extension MessagesManager {
 				  let fileName = self.remoteFileName(chat: chat, folderName: "messages_images", suffix: ".jpeg") else { return }
 			
 			//Send Photo message
-			GoogleStorageManager.shared.uploadImage(from: .messagesImage, data: imageData, fileName: fileName) {
+			GoogleStorageManager.shared.uploadImage(data: imageData, fileName: fileName) {
 				result in
 				
 				switch result {

@@ -17,7 +17,6 @@ class CommentsViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
-		
 		registerCells()
 		setupTopBarView()
 		
@@ -45,25 +44,11 @@ extension CommentsViewController: UITableViewDataSource, UITableViewDelegate {
 		return viewModel.getSectionCollapsed(for: section) ? 0 : viewModel.getCommentsCount(for: section)
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
-		switch viewModel.getSectionTitle(for: indexPath.section) {
-		case "טבלת המרות":
-			let cell = tableView.dequeueReusableCell(withIdentifier:  K.CellId.collapsibleSpreadsheetCell, for: indexPath) as! CollapsibleSpreadsheetTableViewCell
-			cell.type = .conversion
-			cell.setupData(fileName: "ConversionTable")
-			return cell
-		case "טבלת ג׳אנק פוד":
-			let cell = tableView.dequeueReusableCell(withIdentifier:  K.CellId.collapsibleSpreadsheetCell, for: indexPath) as! CollapsibleSpreadsheetTableViewCell
-			cell.type = .junkFood
-			cell.setupData(fileName: "JunkFoodTable")
-			return cell
-		default:
-			let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.collapsibleCell, for: indexPath) as! CollapsibleTableViewCell
-			let text = viewModel.getComment(for: indexPath)
+		let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.collapsibleCell, for: indexPath) as! CollapsibleTableViewCell
+		let text = viewModel.getComment(for: indexPath)
 
-			cell.articleTextLabel.text = text.replacingOccurrences(of: "\\n", with: "\n")
-			return cell
-		}
+		cell.articleTextLabel.text = text.replacingOccurrences(of: "\\n", with: "\n")
+		return cell
 	}
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		let header = tableView.dequeueReusableHeaderFooterView(withIdentifier:  K.CellId.collapsibleHeader) as! CollapsibleTableViewHeader
@@ -80,10 +65,25 @@ extension CommentsViewController:  CollapsibleTableViewHeaderDelegate {
 	func toggleSection(header: CollapsibleTableViewHeader, section: Int) {
 		let collapsed = !viewModel.getSectionCollapsed(for: section)
 		
-		// Toggle collapse
-		viewModel.updateSection(at: section, collapsed: collapsed)
-		header.setCollapsed(collapsed: collapsed)
-		tableView.reloadSections(NSIndexSet(index: section) as IndexSet, with: .automatic)
+		switch viewModel.getSectionTitle(for: section) {
+		case  "טבלת ג׳אנק פוד":
+			if let commentVC = storyboard?.instantiateViewController(identifier: K.ViewControllerId.commentViewController) as? CommentViewController {
+				commentVC.comment = viewModel.getCommentForCell(at: section)
+				commentVC.photoName = "junk_food_spreadsheet"
+				navigationController?.pushViewController(commentVC, animated: true)
+			}
+		case "טבלת המרות":
+			if let commentVC = storyboard?.instantiateViewController(identifier: K.ViewControllerId.commentViewController) as? CommentViewController {
+				commentVC.comment = viewModel.getCommentForCell(at: section)
+				commentVC.photoName = "conversion_spreadsheat"
+				navigationController?.pushViewController(commentVC, animated: true)
+			}
+		default:
+			// Toggle collapse
+			viewModel.updateSection(at: section, collapsed: collapsed)
+			header.setCollapsed(collapsed: collapsed)
+			tableView.reloadSections(NSIndexSet(index: section) as IndexSet, with: .automatic)
+		}
 	}
 }
 extension CommentsViewController: BounceNavigationBarDelegate {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol CommentViewDelegate: AnyObject {
 	
@@ -16,72 +17,92 @@ class CommentViewController: UIViewController {
 	
 	var comment: Comment!
 	
-	@IBOutlet weak var commentScrollView: UIScrollView!
-	@IBOutlet weak var commentTextView: UITextView!
-	@IBOutlet weak var commentImageView: UIImageView!
-	@IBOutlet weak var commentImageHeight: NSLayoutConstraint!
+	@IBOutlet weak var topBarView: BounceNavigationBarView!
 	
+	@IBOutlet weak var imageView: UIImageView!
+	@IBOutlet weak var scrollView: UIScrollView!
+	@IBOutlet weak var imageViewBottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var imageViewLeadingConstraint: NSLayoutConstraint!
+	@IBOutlet weak var imageViewTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var imageViewTrailingConstraint: NSLayoutConstraint!
+
+	var photoName: String?
+
 	weak var delegate: CommentViewDelegate?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		updateCommentImage()
-		updateTextView()
+		setupView()
+		setupTopBarView()
+		
+		if let photoName = photoName {
+			self.imageView.image = UIImage(named: photoName)
+		}
+	}
+	
+	override func viewWillLayoutSubviews() {
+	  super.viewWillLayoutSubviews()
+		updateMinZoomScaleForSize(view.bounds.size)
 	}
 }
 
+//MARK: - Delegate
+extension CommentViewController: BounceNavigationBarDelegate {
+	
+	func backButtonTapped() {
+		navigationController?.popViewController(animated: true)
+	}
+}
+//MARK: - Functions
 extension CommentViewController {
 
-	private func updateTextView() {
-		var text = ""
-		guard let commentText = comment.text else { return }
-		
-		if commentText.count > 1 {
-			for i in 0...commentText.count-1 {
-				let commentNumber = "\(i+1). "
-				let commentText = commentText[i].replacingOccurrences(of: "\\n", with: "\n")
-				text.append(commentNumber + commentText + "\n\n")
-			}
-		} else {
-			text = commentText[0].replacingOccurrences(of: "\\n", with: "\n")
-		}
-		
-		DispatchQueue.main.async {
-			self.commentTextView.isHidden = false
-			self.commentImageView.isHidden = true
-			self.commentTextView.text = text
-		}
+	private func setupView() {
+		scrollView.delegate = self
+		scrollView.showsHorizontalScrollIndicator = false
+		scrollView.showsVerticalScrollIndicator = false
 	}
-	private func updateCommentImage() {
-		guard let imagePath = comment.image else { return }
-		Spinner.shared.show(self.view)
+	private func setupTopBarView() {
 		
-		GoogleStorageManager.shared.downloadImageURL(from: .profileImage, path: imagePath) {
-			[weak self] result in
-			guard let self = self else { return }
-			Spinner.shared.stop()
-			
-			switch result {
-			case .success(let imageUrl):
-				DispatchQueue.main.async {
-					self.commentTextView.isHidden = true
-					self.commentImageView.isHidden = false
-					
-					self.getData(from: imageUrl) {
-						[weak self] data, URL, error in
-						guard let self = self, let data = data, error == nil else { return }
-						DispatchQueue.main.async {
-							self.commentImageView.image = UIImage(data: data)!
-						}
-					}
-				}
-			case .failure(let error):
-				print(error.localizedDescription)
-			}
-		}
+		topBarView.delegate = self
+		topBarView.nameTitle = comment.title
+		topBarView.isMotivationHidden = true
+		topBarView.isDayWelcomeHidden = true
+		topBarView.isDayWelcomeHidden = true
+		topBarView.isMessageButtonHidden = true
 	}
-	func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-		URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+}
+
+//MARK:- Sizing
+extension CommentViewController {
+	
+  func updateMinZoomScaleForSize(_ size: CGSize) {
+	let widthScale = size.width / imageView.bounds.width
+	let heightScale = size.height / imageView.bounds.height
+	let minScale = min(widthScale, heightScale)
+	  
+	scrollView.minimumZoomScale = minScale
+	scrollView.zoomScale = minScale
+  }
+  
+  func updateConstraintsForSize(_ size: CGSize) {
+	let yOffset = max(0, (size.height - imageView.frame.height) / 2)
+	imageViewTopConstraint.constant = yOffset
+	imageViewBottomConstraint.constant = yOffset
+	
+	let xOffset = max(0, (size.width - imageView.frame.width) / 2)
+	imageViewLeadingConstraint.constant = xOffset
+	imageViewTrailingConstraint.constant = xOffset
+	  
+	view.layoutIfNeeded()
+  }
+}
+extension CommentViewController: UIScrollViewDelegate {
+
+	func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+		return imageView
+	}
+	func scrollViewDidZoom(_ scrollView: UIScrollView) {
+	  updateConstraintsForSize(view.bounds.size)
 	}
 }

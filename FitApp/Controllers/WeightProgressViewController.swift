@@ -315,7 +315,7 @@ extension WeightProgressViewController {
 		
 		if let image = self.weightImage {
 			DispatchQueue.global(qos: .background).async {
-				GoogleStorageManager.shared.uploadImage(from: .weightImage, data: image.jpegData(compressionQuality: 1)!, fileName: imagePath) {
+				GoogleStorageManager.shared.uploadImage(data: image.jpegData(compressionQuality: 1)!, fileName: imagePath) {
 					result in
 
 					switch result {

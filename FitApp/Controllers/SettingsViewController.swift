@@ -429,7 +429,7 @@ extension SettingsViewController {
 		let storageManager = GoogleStorageManager.shared
 		
 		DispatchQueue.global(qos: .background).async {
-			storageManager.uploadImage(from: .profileImage, data: image.jpegData(compressionQuality: 0.2)!, fileName: url) { _ in
+			storageManager.uploadImage(data: image.jpegData(compressionQuality: 0.2)!, fileName: url) { _ in
 				storageManager.downloadURL(path: url,completion: completion)
 			}
 		}
