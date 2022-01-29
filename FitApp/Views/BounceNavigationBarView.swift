@@ -66,6 +66,14 @@ final class BounceNavigationBarView: UIView {
 			}
 		}
 	}
+	var isProfileButtonHidden: Bool {
+		set {
+			userProfileButton.isHidden = newValue
+		}
+		get {
+			return userProfileButton.isHidden
+		}
+	}
 	var isDayWelcomeHidden: Bool {
 		set {
 			dayWelcomeLabel.isHidden = newValue
@@ -124,7 +132,9 @@ final class BounceNavigationBarView: UIView {
 	
 	@IBAction func userProfileButtonTapped(_ sender: Any) {
 		openSettings()
-		delegate?.cameraButtonTapped?()
+		if ((delegate as? SettingsViewController) != nil) {
+			delegate?.cameraButtonTapped?()
+		}
 	}
 	@IBAction func messageButtonTapped(_ sender: Any) {
 		openChat()
@@ -181,8 +191,21 @@ extension BounceNavigationBarView {
 		let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
 		let settingsVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsViewController)
 		
-		if let vc = delegate as? HomeViewController {
-			vc.navigationController?.pushViewController(settingsVC, animated: true)
+		if let delegate = delegate as? HomeViewController {
+			
+			delegate.navigationController?.pushViewController(settingsVC, animated: true)
+		} else if let delegate = delegate as? MealPlanViewController {
+			
+			delegate.navigationController?.pushViewController(settingsVC, animated: true)
+		} else if let delegate = delegate as? WorkoutTableViewController {
+			
+			delegate.navigationController?.pushViewController(settingsVC, animated: true)
+		} else if let delegate = delegate as? WeightProgressViewController {
+			
+			delegate.navigationController?.pushViewController(settingsVC, animated: true)
+		} else if let delegate = delegate as? ArticlesViewController {
+			
+			delegate.navigationController?.pushViewController(settingsVC, animated: true)
 		}
 	}
 	func setImage() {

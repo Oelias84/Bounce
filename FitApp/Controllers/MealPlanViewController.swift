@@ -30,6 +30,7 @@ class MealPlanViewController: UIViewController {
 		topBarView.isDayWelcomeHidden = true
 		topBarView.isBackButtonHidden = true
 		topBarView.isDayWelcomeHidden = true
+		topBarView.isProfileButtonHidden = false
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)

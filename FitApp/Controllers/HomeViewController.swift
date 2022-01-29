@@ -217,6 +217,7 @@ extension HomeViewController {
 	}
 	private func setupNavigationBarView() {
 		topBarView.delegate = self
+		topBarView.isProfileButtonHidden = false
 		topBarView.nameTitle = UserProfile.defaults.name  ?? ""
 		topBarView.isBackButtonHidden = true
 		topBarView.isClearButtonHidden = true

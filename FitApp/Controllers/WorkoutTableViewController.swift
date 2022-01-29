@@ -114,6 +114,7 @@ extension WorkoutTableViewController {
 		topBarView.isMotivationHidden = true
 		topBarView.isDayWelcomeHidden = true
 		topBarView.isBackButtonHidden = true
+		topBarView.isProfileButtonHidden = false
 	}
 	private func setUpTableView() {
 		tableView.delegate = self

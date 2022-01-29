@@ -125,6 +125,7 @@ extension ArticlesViewController {
 		topBarView.isMotivationHidden = true
 		topBarView.isDayWelcomeHidden = true
 		topBarView.isBackButtonHidden = true
+		topBarView.isProfileButtonHidden = false
 		registerCells()
 	}
 	private func checkTopic() {

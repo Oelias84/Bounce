@@ -237,6 +237,7 @@ extension WeightProgressViewController {
 		topBarView.isDayWelcomeHidden = true
 		topBarView.isBackButtonHidden = true
 		topBarView.isDayWelcomeHidden = true
+		topBarView.isProfileButtonHidden = false
 	}
 	private func updateDateLabels() {
 		switch timePeriod {

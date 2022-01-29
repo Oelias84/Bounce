@@ -103,38 +103,40 @@
                                 </label>
                             </subviews>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="k0w-Wr-2EH" userLabel="Right Stack View">
-                            <rect key="frame" x="297" y="105.5" width="93" height="40"/>
+                        <stackView opaque="NO" contentMode="scaleAspectFit" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="k0w-Wr-2EH" userLabel="Right Stack View">
+                            <rect key="frame" x="350" y="105.5" width="40" height="40"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="odj-pP-h1t" userLabel="Right Stack View">
-                                    <rect key="frame" x="0.0" y="0.0" width="93" height="40"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Oc-Oq-zBg" userLabel="messageButton" colorLabel="IBBuiltInLabel-Orange">
-                                            <rect key="frame" x="0.0" y="0.0" width="53" height="40"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="ChatIcon" title=" " titleAlignment="center"/>
-                                            <connections>
-                                                <action selector="messageButtonTapped:" destination="-1" eventType="touchUpInside" id="msY-Ea-g2i"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f51-iL-U68" userLabel="userProfileButton">
-                                            <rect key="frame" x="53" y="0.0" width="40" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="B8L-nH-W0L"/>
-                                                <constraint firstAttribute="width" constant="40" id="SXh-J8-9Ir"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <state key="normal">
-                                                <imageReference key="image" image="person.circle" catalog="system" symbolScale="large"/>
-                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24" scale="large" weight="regular"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="userProfileButtonTapped:" destination="-1" eventType="touchUpInside" id="Rr2-Ox-SVR"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Oc-Oq-zBg" userLabel="messageButton" colorLabel="IBBuiltInLabel-Orange">
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="Ark-HG-ktm"/>
+                                        <constraint firstAttribute="width" secondItem="5Oc-Oq-zBg" secondAttribute="height" multiplier="1:1" id="E1G-VP-UN8"/>
+                                    </constraints>
+                                    <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title=" " image="message.fill" catalog="system">
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="messageButtonTapped:" destination="-1" eventType="touchUpInside" id="msY-Ea-g2i"/>
+                                    </connections>
+                                </button>
+                                <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f51-iL-U68" userLabel="userProfileButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="f51-iL-U68" secondAttribute="height" multiplier="1:1" id="9iF-bA-jJd"/>
+                                        <constraint firstAttribute="height" constant="40" id="B8L-nH-W0L"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal">
+                                        <imageReference key="image" image="person.circle" catalog="system" symbolScale="large"/>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" scale="large" weight="regular"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="userProfileButtonTapped:" destination="-1" eventType="touchUpInside" id="Rr2-Ox-SVR"/>
+                                    </connections>
+                                </button>
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwy-Dd-NNS" userLabel="Buttom Stack View">
@@ -151,10 +153,10 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="5Oc-Oq-zBg" firstAttribute="centerY" secondItem="IjQ-B2-AI0" secondAttribute="centerY" id="2Hx-Rj-b2U"/>
                         <constraint firstAttribute="trailing" secondItem="c7x-sx-FM9" secondAttribute="trailing" id="7E9-Ac-7iy"/>
                         <constraint firstItem="fkT-0R-CAW" firstAttribute="leading" secondItem="7Vb-0t-tKu" secondAttribute="leading" constant="24" id="bg6-su-zXD"/>
                         <constraint firstItem="fkT-0R-CAW" firstAttribute="top" secondItem="7Vb-0t-tKu" secondAttribute="top" constant="56" id="lZ8-fH-lgY"/>
+                        <constraint firstItem="k0w-Wr-2EH" firstAttribute="centerY" secondItem="IjQ-B2-AI0" secondAttribute="centerY" id="oOT-Fy-khb"/>
                         <constraint firstItem="c7x-sx-FM9" firstAttribute="leading" secondItem="7Vb-0t-tKu" secondAttribute="leading" id="poL-tY-Fuz"/>
                         <constraint firstAttribute="trailing" secondItem="dwy-Dd-NNS" secondAttribute="trailing" constant="24" id="q9K-ZS-qdD"/>
                         <constraint firstItem="dwK-09-zWj" firstAttribute="top" secondItem="k0w-Wr-2EH" secondAttribute="bottom" constant="4" id="sBn-EV-090"/>
@@ -178,10 +180,10 @@
         </view>
     </objects>
     <resources>
-        <image name="ChatIcon" width="25.261999130249023" height="23.416000366210938"/>
         <image name="NavigationBackground" width="377" height="220.13999938964844"/>
         <image name="chevron.backward.circle.fill" catalog="system" width="128" height="121"/>
         <image name="info.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
     </resources>
 </document>

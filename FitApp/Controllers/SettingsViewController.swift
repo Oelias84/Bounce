@@ -235,6 +235,7 @@ extension SettingsViewController {
 		topBarView.isBackButtonHidden = false
 		topBarView.isMotivationHidden = true
 		topBarView.isDayWelcomeHidden = true
+		topBarView.isProfileButtonHidden = false
 	}
 	private func registerCells() {
 		tableView.delegate = self
