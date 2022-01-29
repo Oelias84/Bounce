@@ -28,10 +28,12 @@ class WeightProgressViewController: UIViewController {
 	private var filteredArray: [Weight]? {
 		didSet {
 			DispatchQueue.main.async {
-				[unowned self] in
-				populateChart()
-				addChartView()
-				tableView.reloadData()
+				self.populateChart()
+				self.addChartView()
+				self.tableView.reloadData()
+				if let wights = self.filteredArray {
+					self.tableView.scrollToRow(at: IndexPath(row: wights.count - 1, column: 0), at: .bottom, animated: true)
+				}
 			}
 		}
 	}
@@ -79,9 +81,11 @@ class WeightProgressViewController: UIViewController {
 		callToViewModelForUIUpdate()
 		dateRightButton.isHidden = true
 		tableView.sectionHeaderHeight = 46
+
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		
 		topBarView.setImage()
 	}
 	
@@ -273,6 +277,9 @@ extension WeightProgressViewController {
 									height: UIScreen.main.bounds.size.height)
 		if let alert = weightAlert {
 			window?.addSubview(alert)
+			if let navView = self.navigationController?.view {
+				Spinner.shared.show(navView)
+			}
 		}
 	}
 	private func addWeight(weight: String, image: UIImage?, date: Date? = nil) {
@@ -280,7 +287,7 @@ extension WeightProgressViewController {
 		let weight = Weight(dateString: (date ?? Date()).dateStringForDB, weight: Double(weight)!)
 		
 		uploadWeightImage(weightDate: weight.date) {
-			
+			Spinner.shared.stop()
 			self.weightViewModel.weights?.removeAll(where: { $0.date.onlyDate == date?.onlyDate })
 			self.weightViewModel.weights?.append(weight)
 			self.weightViewModel.addWeight()
@@ -377,6 +384,7 @@ extension WeightProgressViewController: AddWeightAlertViewDelegate {
 	func cancelButtonAction() {
 		weightAlert?.removeFromSuperview()
 		weightAlert = nil
+		Spinner.shared.stop()
 	}
 	func cameraButtonTapped() {
 		presentImagePickerActionSheet(imagePicker: imagePickerController) {_ in}
