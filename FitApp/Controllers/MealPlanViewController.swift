@@ -188,14 +188,7 @@ extension MealPlanViewController: AddingTableViewCellDelegate {
 extension MealPlanViewController: PopupAlertViewDelegate {
 	
 	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
-		switch alertNumber {
-		case 1:
-			self.presentAddMealAlert()
-		case 2:
-			self.presentAddMealAlert()
-		default:
-			break
-		}
+		presentAddMealAlert()
 	}
 	func cancelButtonTapped(alertNumber: Int) {
 		return

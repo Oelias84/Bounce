@@ -26,8 +26,8 @@ class DishesTableViewController: UIViewController {
 	private var dishes: [ServerDish]!
 	private var otherDishes: [String]?
 	private var selectedDish: String?
-	private let mealViewModel = MealViewModel.shared
 	private var indexPath: IndexPath?
+	private let mealViewModel = MealViewModel.shared
 	
 	var delegate: DishesTableViewControllerDelegate?
 	
@@ -111,6 +111,7 @@ extension DishesTableViewController: UITableViewDataSource, UITableViewDelegate 
 		switch indexPath.section {
 		case 0:
 			self.selectedDish = self.dishes[indexPath.row].name
+			self.delegate?.didPickDish(name: self.selectedDish)
 		case 1:
 			self.selectedDish = self.otherDishes![indexPath.row]
 		default:

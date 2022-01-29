@@ -125,14 +125,13 @@ extension AddMealAlertDishView: UITextFieldDelegate {
 }
 
 extension AddMealAlertDishView: PopupAlertViewDelegate {
+	
 	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
 		self.dishAmountTextField.becomeFirstResponder()
 	}
-	
 	func cancelButtonTapped(alertNumber: Int) {
 		return
 	}
-	
 	func thirdButtonTapped(alertNumber: Int) {
 		return
 	}
@@ -158,6 +157,11 @@ extension AddMealAlertDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 		let selectedName = typeNames[row]
 		dish.type = DishType.init(rawValue: selectedName)!
 		dishTypeTextField.text = selectedName
+		
+		dishNameTextField.text = ""
+		dishAmountTextField.text = ""
+		dish.setName(name: "")
+		dish.amount = 0
 	}
 }
 
