@@ -31,7 +31,7 @@ class WeightProgressViewController: UIViewController {
 				self.populateChart()
 				self.addChartView()
 				self.tableView.reloadData()
-				if let wights = self.filteredArray {
+				if let wights = self.filteredArray, !wights.isEmpty {
 					self.tableView.scrollToRow(at: IndexPath(row: wights.count - 1, column: 0), at: .bottom, animated: true)
 				}
 			}
