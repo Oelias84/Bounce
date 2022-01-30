@@ -12,7 +12,7 @@ import BetterSegmentedControl
 class ArticlesViewController: UIViewController {
 	private var filteredArticles: [Article]? {
 		didSet {
-			self.sections = filteredArticles?.map { return ExpandableSectionData(name: $0.title, text: [$0.text]) }
+			self.sections = filteredArticles?.map { return ExpandableSectionData(name: $0.title, text: [$0.getArticleText]) }
 		}
 	}
 	private var sections: [ExpandableSectionData]? {

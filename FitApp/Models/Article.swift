@@ -12,6 +12,17 @@ struct Article: Codable {
     
     let title: String
     let text: String
+	let maleText: String?
+
+	var getArticleText: String {
+		let userGender = UserProfile.defaults.getGender
+		switch userGender {
+		case .male:
+			return maleText ?? text
+		default:
+			return text
+		}
+	}
 }
 
 struct ServerArticles: Codable {
