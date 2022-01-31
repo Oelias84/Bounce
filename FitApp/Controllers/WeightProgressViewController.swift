@@ -23,7 +23,6 @@ enum TimePeriod {
 
 class WeightProgressViewController: UIViewController {
 	
-	
 	private var weightViewModel: WeightViewModel!
 	private var filteredArray: [Weight]? {
 		didSet {
@@ -81,7 +80,6 @@ class WeightProgressViewController: UIViewController {
 		callToViewModelForUIUpdate()
 		dateRightButton.isHidden = true
 		tableView.sectionHeaderHeight = 46
-
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -149,7 +147,59 @@ class WeightProgressViewController: UIViewController {
 	}
 }
 
-//MARK: - TableView
+//MARK: - Delegates
+extension WeightProgressViewController: CropViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+	
+	func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+		cropViewController.dismiss(animated: true) {
+			self.weightImage = image
+			self.weightAlert?.chageCheckMarkState()
+		}
+	}
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+		let tempoImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+		
+		picker.dismiss(animated: true)
+		presentCropViewController(image: tempoImage, type: .default)
+	}
+	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+		picker.dismiss(animated: true)
+	}
+}
+extension WeightProgressViewController: AddWeightAlertViewDelegate {
+	
+	func cancelButtonAction() {
+		weightAlert?.removeFromSuperview()
+		weightAlert = nil
+		Spinner.shared.stop()
+	}
+	func cameraButtonTapped() {
+		presentImagePickerActionSheet(imagePicker: imagePickerController) {_ in}
+	}
+	func confirmButtonAction(weight: String, date: Date?) {
+		if let weightTab = self.tabBarController?.tabBar.items?[3] {
+			weightTab.image = UIImage(named:"Weight")
+		}
+		addWeight(weight: weight, image: weightImage, date: date)
+		weightAlert?.removeFromSuperview()
+		weightAlert = nil
+	}
+}
+extension WeightProgressViewController: weightTableViewCellDelegate {
+	
+	func presentImage(url: URL) {
+		let photoViewr = PhotoViewerViewController(with: url)
+		present(photoViewr, animated: true)
+	}
+}
+extension WeightProgressViewController: ChartViewDelegate {
+	
+	func getChartData() {}
+}
+extension WeightProgressViewController: BounceNavigationBarDelegate {
+	
+	func backButtonTapped() {}
+}
 extension WeightProgressViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -358,61 +408,4 @@ extension WeightProgressViewController {
 			getChartData()
 		}
 	}
-}
-
-//MARK: - Delegates
-extension WeightProgressViewController: CropViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-	
-	func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
-		cropViewController.dismiss(animated: true) {
-			self.weightImage = image
-			self.weightAlert?.chageCheckMarkState()
-		}
-	}
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-		let tempoImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-		
-		picker.dismiss(animated: true)
-		presentCropViewController(image: tempoImage, type: .default)
-	}
-	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-		picker.dismiss(animated: true)
-	}
-}
-
-extension WeightProgressViewController: AddWeightAlertViewDelegate {
-	
-	func cancelButtonAction() {
-		weightAlert?.removeFromSuperview()
-		weightAlert = nil
-		Spinner.shared.stop()
-	}
-	func cameraButtonTapped() {
-		presentImagePickerActionSheet(imagePicker: imagePickerController) {_ in}
-	}
-	func confirmButtonAction(weight: String, date: Date?) {
-		if let weightTab = self.tabBarController?.tabBar.items?[3] {
-			weightTab.image = UIImage(named:"Weight")
-		}
-		addWeight(weight: weight, image: weightImage, date: date)
-		weightAlert?.removeFromSuperview()
-		weightAlert = nil
-	}
-}
-
-extension WeightProgressViewController: weightTableViewCellDelegate {
-	
-	func presentImage(url: URL) {
-		let photoViewr = PhotoViewerViewController(with: url)
-		present(photoViewr, animated: true)
-	}
-}
-
-extension WeightProgressViewController: ChartViewDelegate {
-	
-	func getChartData() {}
-}
-extension WeightProgressViewController: BounceNavigationBarDelegate {
-	
-	func backButtonTapped() {}
 }

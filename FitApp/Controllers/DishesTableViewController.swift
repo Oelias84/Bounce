@@ -15,14 +15,17 @@ enum DishesState {
 
 protocol DishesTableViewControllerDelegate {
 	
+	func cancelButtonTapped()
 	func didPickDish(name: String?)
 }
 
 class DishesTableViewController: UIViewController {
 	
 	var state: DishesState!
-	var originalDish: Dish!
-
+	
+	var type: DishType!
+	var originalDishName: String!
+	
 	private var dishes: [ServerDish]!
 	private var otherDishes: [String]?
 	private var selectedDish: String?
@@ -45,7 +48,7 @@ class DishesTableViewController: UIViewController {
 		changeOtherDishAlert()
 	}
 	@IBAction func cancelButtonAction(_ sender: Any) {
-		
+		delegate?.cancelButtonTapped()
 		dismiss(animated: true)
 	}
 }
@@ -145,9 +148,9 @@ extension DishesTableViewController: PopupAlertViewDelegate {
 extension DishesTableViewController {
 	
 	private func configure() {
-		dishes = mealViewModel.mealManager.getDishesFor(type: originalDish.type)
+		dishes = mealViewModel.mealManager.getDishesFor(type: type)
 		
-		titleTextLabel.text = "מנות " + originalDish.printDishType
+		titleTextLabel.text = "מנות " + type.rawValue
 		if let otherDishes = UserProfile.defaults.otherDishes {
 			self.otherDishes = otherDishes
 			DispatchQueue.main.async {
@@ -157,11 +160,11 @@ extension DishesTableViewController {
 		}
 	}
 	private func changeDishAlert() {
-		guard let selectedDish = self.selectedDish else { return }
+		guard let selectedDish = self.selectedDish, let originalDishName = originalDishName else { return }
 		
 		switch state {
 		case .normal:
-			presentAlert(withTitle: "החלפת מנה" , withMessage: "האם ברצונך להחליף \nאת- \(self.originalDish.getDishName)\n ב- \(selectedDish)", options: "אישור", "ביטול")
+			presentAlert(withTitle: "החלפת מנה" , withMessage: "האם ברצונך להחליף \nאת- \(originalDishName)\n ב- \(selectedDish)", options: "אישור", "ביטול")
 		case .exceptional:
 			dismiss(animated: true)
 		default:

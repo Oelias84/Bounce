@@ -63,6 +63,7 @@ extension DishView {
 		Bundle.main.loadNibNamed(K.NibName.dishView, owner: self)
 		view.fixInView(self)
 		
+		dishNameTextField.inputView = UIView()
 		dishNameTextField.delegate = self
 		dishPickerView.backgroundColor = .white
 	}
@@ -70,7 +71,6 @@ extension DishView {
 		amountLabel.text = "x\(dish.amount)"
 		dishTypeLabel.text = dish.printDishType
 		dishNameTextField.text = dish.getDishName
-		dishNameTextField.inputView = UIView(frame: .zero)
 		checkBoxButton.isSelected = dish.isDishDone
 	}
 }
@@ -82,14 +82,20 @@ extension DishView: UITextFieldDelegate {
 		let dishesListVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.dishesListViewController) as DishesTableViewController
 		
 		dishesListVC.delegate = self
-		dishesListVC.originalDish = dish
 		dishesListVC.state = .normal
+		dishesListVC.type = dish.type
+		dishesListVC.originalDishName = dish.getDishName
+		
 		self.parentViewController?.present(dishesListVC, animated: true)
     }
 }
 
 extension DishView: DishesTableViewControllerDelegate {
 	
+	func cancelButtonTapped() {
+		dishNameTextField.inputView = UIView()
+		dishNameTextField.endEditing(true)
+	}
 	func didPickDish(name: String?) {
 		
 		if let name = name {
@@ -97,6 +103,7 @@ extension DishView: DishesTableViewControllerDelegate {
 			dishNameTextField.text = name
 			delegate?.didCheck(dish: dish)
 		}
+		dishNameTextField.inputView = UIView()
 		dishNameTextField.endEditing(true)
 	}
 }

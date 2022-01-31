@@ -65,8 +65,10 @@ extension AddMealAlertDishView {
 		let dishesListVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.dishesListViewController) as DishesTableViewController
 		
 		dishesListVC.delegate = self
-		dishesListVC.originalDish = dish
+		dishesListVC.type = dish.type
 		dishesListVC.state = .exceptional
+		dishesListVC.originalDishName = dish.getDishName
+
 		self.parentViewController?.present(dishesListVC, animated: true, completion: nil)
 	}
 	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
@@ -167,12 +169,17 @@ extension AddMealAlertDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 
 extension AddMealAlertDishView: DishesTableViewControllerDelegate {
 	
+	func cancelButtonTapped() {
+		dishNameTextField.inputView = UIView()
+		dishNameTextField.endEditing(true)
+	}
 	func didPickDish(name: String?) {
 		
 		if let name = name {
 			dish.setName(name: name)
 			dishNameTextField.text = name
 		}
+		dishNameTextField.inputView = UIView()
 		dishNameTextField.endEditing(true)
 	}
 }
