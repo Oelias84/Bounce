@@ -62,7 +62,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ej-kL-Lb3">
                                                 <rect key="frame" x="0.0" y="10" width="285" height="40"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" placeholder="סיסמא" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Cp-jt-yuu">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" placeholder="סיסמה" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Cp-jt-yuu">
                                                         <rect key="frame" x="32" y="0.0" width="253" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="9J8-yQ-pl2"/>
@@ -111,7 +111,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="12" id="lcb-HJ-DIx"/>
                                         </constraints>
-                                        <state key="normal" title="שחכתי סיסמא?">
+                                        <state key="normal" title="שכחתי  סיסמה">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -197,7 +197,7 @@
                                             <constraint firstAttribute="height" constant="40" id="ABl-x6-8GS"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                                        <state key="normal" title="שחזר סיסמא">
+                                        <state key="normal" title="שחזר סיסמה">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
