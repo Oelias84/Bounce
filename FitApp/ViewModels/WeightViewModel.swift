@@ -25,6 +25,11 @@ class WeightViewModel: NSObject {
         googleService = GoogleApiManager()
         fetchWeights()
     }
+	
+	func getLastWeightDate() -> Date? {
+		guard let weights = weights else { return nil }
+		return weights.last?.date.onlyDate
+	}
     
     func getWeekBy(_ date: Date) -> [Weight] {
         guard let weights = self.weights else { return [] }

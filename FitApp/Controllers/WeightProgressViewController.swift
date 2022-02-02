@@ -96,9 +96,11 @@ class WeightProgressViewController: UIViewController {
 		updateFiltersArray()
 	}
 	@IBAction func addWeightButtonAction(_ sender: Any) {
-		if let weights = weightViewModel.weights, !weights.isEmpty, weights.last!.date.onlyDate == Date().onlyDate {
+		guard let lastWeightDate = weightViewModel.getLastWeightDate() else { return }
+		let currentDate = Date().onlyDate
+
+		if lastWeightDate == currentDate {
 			presentOkAlert(withMessage: "כבר נשקלת היום")
-			return
 		} else {
 			presentAddWeightAlert()
 		}
@@ -107,7 +109,7 @@ class WeightProgressViewController: UIViewController {
 		
 		switch timePeriod {
 		case .week:
-			if sender == dateRightButton {
+			if sender == dateRightButton { 
 				selectedDate = selectedDate.startOfWeek?.add(1.weeks)
 			} else {
 				selectedDate = selectedDate.startOfWeek?.subtract(1.weeks)
