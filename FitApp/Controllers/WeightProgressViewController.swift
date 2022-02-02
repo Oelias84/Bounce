@@ -49,7 +49,11 @@ class WeightProgressViewController: UIViewController {
 	
 	internal var values = [Double]()
 	internal var timeLinePeriod = [Date]()
-	internal var timePeriod: TimePeriod = .week
+	internal var timePeriod: TimePeriod = .week {
+		didSet {
+			addWeightButton.isHidden = timePeriod != .week
+		}
+	}
 	
 	@IBOutlet weak var chartView: UIView!
 	@IBOutlet weak var chartViewContainer: UIView! {
@@ -62,6 +66,7 @@ class WeightProgressViewController: UIViewController {
 	@IBOutlet weak var dateRightButton: UIButton!
 	@IBOutlet weak var dateTextLabel: UILabel!
 	@IBOutlet weak var dateLeftButton: UIButton!
+	@IBOutlet weak var addWeightButton: UIButton!
 	
 	@IBOutlet weak var topBarView: BounceNavigationBarView!
 	@IBOutlet weak var segmentedControl: BetterSegmentedControl!

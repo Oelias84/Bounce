@@ -296,6 +296,7 @@
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="J6d-R0-ADY"/>
                     <connections>
+                        <outlet property="addWeightButton" destination="mRF-da-tSi" id="lCu-at-tQS"/>
                         <outlet property="chartView" destination="sbm-f2-dKc" id="plI-bd-gLK"/>
                         <outlet property="chartViewContainer" destination="vc1-z7-vmc" id="T7J-Ob-N7p"/>
                         <outlet property="dateLeftButton" destination="wqJ-n8-SiV" id="H8J-A5-Xil"/>
