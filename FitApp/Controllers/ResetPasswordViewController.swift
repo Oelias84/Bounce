@@ -29,23 +29,33 @@ class ResetPasswordViewController: UIViewController {
 	
 	@IBAction func resetButtonAction(_ sender: Any) {
 		guard let email = emailTextField.text, email != "" else {
-			self.presentOkAlert(withTitle:"!אימייל ריק", withMessage: "בכדי לאפס סיסמא יש להזין את כתובת האימייל הרצויה")
+			presentOkAlert(withTitle:"!אימייל ריק", withMessage: "בכדי לאפס סיסמא יש להזין את כתובת האימייל הרצויה")
 			return
 		}
-		resetPassword(email: email)
+		resetPasswordButton.isUserInteractionEnabled = true
+		
+		if !email.isValidEmail {
+			presentOkAlert(withTitle: "אופס!", withMessage: "נראה שכתובת האמייל שגויה")
+		} else {
+			resetPassword(email: email)
+		}
 	}
 	
 	func resetPassword(email: String) {
-		resetPasswordButton.isUserInteractionEnabled = false
-		Auth.auth().sendPasswordReset(withEmail: email) {
-			[weak self] error in
-			guard let self = self else { return }
-			
-			self.resetPasswordButton.isUserInteractionEnabled = false
-			if let error = error {
-				print(error.localizedDescription)
-			} else {
-				self.presentOkAlertWithDelegate(withTitle: "איפוס סיסמא", withMessage: "נשלח אליך מייל לאיפוס הסיסמא")
+		DispatchQueue.global(qos: .userInteractive).async {
+			Auth.auth().sendPasswordReset(withEmail: email) {
+				[weak self] error in
+				guard let self = self else { return }
+				
+				self.resetPasswordButton.isUserInteractionEnabled = false
+				DispatchQueue.main.async {
+					if let error = error {
+						self.presentOkAlert(withTitle: "אופס!", withMessage: error.localizedDescription)
+						print(error.localizedDescription)
+					} else {
+						self.presentOkAlertWithDelegate(withTitle: "איפוס סיסמא", withMessage: "נשלח אליך מייל לאיפוס הסיסמא")
+					}
+				}
 			}
 		}
 	}
