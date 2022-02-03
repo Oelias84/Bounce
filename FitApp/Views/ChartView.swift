@@ -56,8 +56,6 @@ class ChartView: UIView {
 	
 	func cubicLineChart(dataPoints: [Date], values: [Double]) {
 		
-		lineChartView.noDataText = "לא נמצאו שקילות"
-		lineChartView.noDataTextColor = .black
 		lineChartView.backgroundColor = .white
 
 		for i in 0..<weights.count {
@@ -70,18 +68,20 @@ class ChartView: UIView {
 		
 		chartData.addDataSet(chartDataSet)
 		
-		chartDataSet.colors = [.systemBlue]
-		chartDataSet.setCircleColor(.blue)
+		chartDataSet.colors = [.black]
+		chartDataSet.setCircleColor(.projectTail)
 		chartDataSet.mode = .cubicBezier
-		
 
-		chartDataSet.circleRadius = 4.0
-		chartDataSet.cubicIntensity = 0.1
+		chartDataSet.lineWidth = 0
+		chartDataSet.circleHoleRadius = 5
+		chartDataSet.circleRadius = 5
+		chartDataSet.cubicIntensity = 1
 		chartDataSet.drawCirclesEnabled = true
+		chartDataSet.valueFormatter = ChartValuesFormatter()
 		chartDataSet.valueFont = UIFont(name: "Helvetica", size: 10.0)!
 		
 		//Adding gradient
-		let gradientColors = [UIColor.systemBlue.cgColor, UIColor.clear.cgColor] as CFArray
+		let gradientColors = [UIColor.projectGreen.cgColor, UIColor.clear.cgColor] as CFArray
 		let colorLocation: [CGFloat] = [1.0, 0.0]
 		guard let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(),
 										colors: gradientColors, locations: colorLocation) else { return }
@@ -108,3 +108,5 @@ class ChartView: UIView {
 		lineChartView.data = chartData
 	}
 }
+
+
