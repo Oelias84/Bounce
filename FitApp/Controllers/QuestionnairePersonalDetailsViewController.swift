@@ -71,7 +71,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 				presentOkAlert(withTitle: "אופס!",withMessage: "יש להזין שם ושם משפחה")
 				presentOkAlertWithDelegate(withTitle: "אופס",withMessage: "יש להזין שם ושם משפחה", alertNumber: 1)
 			} else if birthDate.onlyDate.isLaterThanOrEqual(to: Date().onlyDate) {
-				presentOkAlertWithDelegate(withTitle: "אופס", withMessage: "תאריך הלידה לא יכול גדול או שווה מהתאריך הנוחכי", alertNumber: 2)
+				presentOkAlertWithDelegate(withTitle: "אופס", withMessage: "תאריך הלידה לא יכול גדול או שווה מהתאריך הנוכחי", alertNumber: 2)
 			} else if height<100 {
 				presentOkAlertWithDelegate(withTitle: "אופס", withMessage: "גובה שגויי אנא בדקי את הנתונים שהזנת", alertNumber: 3)
 			} else if weight<30.0 {

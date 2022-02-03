@@ -57,7 +57,7 @@ class LocalNotificationManager {
 		dateComponents.minute = time.minute
 		dateComponents.second = time.second
 		
-		self.postNotifications.insert(Notification(id: NotificationTypes.mealNotification.rawValue, title: "אופס", body: "נראה ששחכת לעדכן את הארוחות היום, לחצי כאן כדי לעבור למסך הארוחות", dateTime: dateComponents))
+		self.postNotifications.insert(Notification(id: NotificationTypes.mealNotification.rawValue, title: "אופס", body:  StaticStringsManager.shared.getGenderString?[29] ?? "", dateTime: dateComponents))
 		self.schedule()
 	}
 	func showNotificationAlert(withTitle: String, withMessage: String, type: NotificationTypes, vc: UIViewController) {
@@ -80,9 +80,9 @@ class LocalNotificationManager {
 				
 				switch type {
 				case .waterNotification:
-					self.postNotifications.insert(Notification(title: "זמן לישתות", body: "נראה שהגיע הזמן לישתות", dateTime: dateComponents))
+					self.postNotifications.insert(Notification(title: "זמן לשתות", body: "נראה שהגיע הזמן לשתות", dateTime: dateComponents))
 				case .weightNotification:
-					self.postNotifications.insert(Notification(title: "זמן להישקל", body: "לחצי כאן בכדי להזין את השקילה היומית שלך", dateTime: dateComponents))
+					self.postNotifications.insert(Notification(title: "זמן להישקל", body: StaticStringsManager.shared.getGenderString?[28] ?? "", dateTime: dateComponents))
 				case .mealNotification:
 					break
 				}
