@@ -36,7 +36,12 @@ class ResetPasswordViewController: UIViewController {
 	}
 	
 	func resetPassword(email: String) {
-		Auth.auth().sendPasswordReset(withEmail: email) { error in
+		resetPasswordButton.isUserInteractionEnabled = false
+		Auth.auth().sendPasswordReset(withEmail: email) {
+			[weak self] error in
+			guard let self = self else { return }
+			
+			self.resetPasswordButton.isUserInteractionEnabled = false
 			if let error = error {
 				print(error.localizedDescription)
 			} else {
