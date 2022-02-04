@@ -122,9 +122,6 @@ extension MealPlanViewController {
 		view.addSubview(addMealAlert)
 	}
 	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., alertNumber: Int) {
-		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
-			return
-		}
 		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
 		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
 		
@@ -151,7 +148,7 @@ extension MealPlanViewController {
 			break
 		}
 		
-		window.rootViewController?.present(customAlert, animated: true, completion: nil)
+		tabBarController?.present(customAlert, animated: true, completion: nil)
 	}
 }
 

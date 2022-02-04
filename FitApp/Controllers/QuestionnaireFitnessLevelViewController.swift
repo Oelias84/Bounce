@@ -45,6 +45,9 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 		setupCheckMarks()
 	}
 	
+	@IBAction func infoButtonAction(_ UIButton: Any) {
+		presentOkAlert(withTitle: StaticStringsManager.shared.getGenderString?[32] ?? "" ,withMessage: StaticStringsManager.shared.getGenderString?[33] ?? "")
+	}
 	@IBAction func backButtonAction(_ sender: Any) {
 		navigationController?.popViewController(animated: true)
 	}

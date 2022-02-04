@@ -120,7 +120,7 @@
                                 <rect key="frame" x="24" y="206" width="327" height="400"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="haf-7R-eyy">
-                                        <rect key="frame" x="97" y="88.333333333333314" width="133" height="279.66666666666669"/>
+                                        <rect key="frame" x="92" y="88.333333333333314" width="143" height="279.66666666666669"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1Jf-CB-fAV">
                                             <size key="itemSize" width="254" height="374"/>
@@ -162,10 +162,10 @@
                                         </connections>
                                     </collectionView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsp-EA-oMM" userLabel="scrollBackButton">
-                                        <rect key="frame" x="37" y="197" width="36" height="62.666666666666686"/>
+                                        <rect key="frame" x="24" y="197" width="56" height="62.666666666666686"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="contentEdgeInsets" minX="20" minY="20" maxX="0.0" maxY="20"/>
+                                        <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
                                         <state key="normal" image="chevron.backward" catalog="system">
                                             <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
@@ -186,10 +186,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OqG-Qw-7Gl" userLabel="scrollForwordButton">
-                                        <rect key="frame" x="254" y="197" width="36" height="62.666666666666686"/>
+                                        <rect key="frame" x="247" y="197" width="56" height="62.666666666666686"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="20" maxX="20" maxY="20"/>
+                                        <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
                                         <state key="normal" image="chevron.forward" catalog="system">
                                             <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
@@ -206,13 +206,13 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.95686274770000002" green="0.9568628669" blue="0.95686274770000002" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="haf-7R-eyy" firstAttribute="leading" secondItem="vsp-EA-oMM" secondAttribute="trailing" constant="24" id="1Bw-fB-Atj"/>
+                                    <constraint firstItem="haf-7R-eyy" firstAttribute="leading" secondItem="vsp-EA-oMM" secondAttribute="trailing" constant="12" id="1Bw-fB-Atj"/>
                                     <constraint firstAttribute="bottom" secondItem="haf-7R-eyy" secondAttribute="bottom" constant="32" id="1fD-FG-DLs"/>
                                     <constraint firstItem="OqG-Qw-7Gl" firstAttribute="centerY" secondItem="haf-7R-eyy" secondAttribute="centerY" id="A71-jX-6rh"/>
-                                    <constraint firstItem="vsp-EA-oMM" firstAttribute="leading" secondItem="qi4-k2-q5h" secondAttribute="leading" constant="37" id="Bog-HX-uKs"/>
+                                    <constraint firstItem="vsp-EA-oMM" firstAttribute="leading" secondItem="qi4-k2-q5h" secondAttribute="leading" constant="24" id="Bog-HX-uKs"/>
                                     <constraint firstAttribute="trailing" secondItem="Zyd-iD-ZRb" secondAttribute="trailing" constant="14" id="T73-Fg-0ZY"/>
-                                    <constraint firstAttribute="trailing" secondItem="OqG-Qw-7Gl" secondAttribute="trailing" constant="37" id="U0D-4S-yfX"/>
-                                    <constraint firstItem="OqG-Qw-7Gl" firstAttribute="leading" secondItem="haf-7R-eyy" secondAttribute="trailing" constant="24" id="ao2-gT-2tc"/>
+                                    <constraint firstAttribute="trailing" secondItem="OqG-Qw-7Gl" secondAttribute="trailing" constant="24" id="U0D-4S-yfX"/>
+                                    <constraint firstItem="OqG-Qw-7Gl" firstAttribute="leading" secondItem="haf-7R-eyy" secondAttribute="trailing" constant="12" id="ao2-gT-2tc"/>
                                     <constraint firstItem="vsp-EA-oMM" firstAttribute="centerY" secondItem="haf-7R-eyy" secondAttribute="centerY" id="dIA-tK-aDR"/>
                                     <constraint firstItem="Zyd-iD-ZRb" firstAttribute="leading" secondItem="qi4-k2-q5h" secondAttribute="leading" constant="14" id="dPj-iC-cMZ"/>
                                     <constraint firstAttribute="height" constant="400" id="g5c-Ic-L2f"/>
@@ -1162,11 +1162,24 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Uif-GP-3Po">
                                                 <rect key="frame" x="0.0" y="342.66666666666663" width="299" height="69.666666666666686"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="sHj-HQ-m5i">
-                                                        <rect key="frame" x="1" y="0.0" width="297" height="36.666666666666664"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sHj-HQ-m5i">
+                                                        <rect key="frame" x="0.0" y="0.0" width="299" height="36.666666666666664"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="במידה ואת מבצעת אימונים נוספים מחוץ לאפליקציה, אנא צייני כאן" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqR-gX-XNc">
-                                                                <rect key="frame" x="0.0" y="0.0" width="297" height="36.666666666666664"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAQ-NW-bH4">
+                                                                <rect key="frame" x="0.0" y="0.0" width="14" height="36.666666666666664"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="14" id="szq-ab-Jpa"/>
+                                                                </constraints>
+                                                                <color key="tintColor" name="ProjectTail"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="Button" image="info.circle.fill" catalog="system"/>
+                                                                <buttonConfiguration key="configuration" style="plain" image="info.circle.fill" catalog="system" title=" "/>
+                                                                <connections>
+                                                                    <action selector="infoButtonAction:" destination="tgm-97-b7M" eventType="touchUpInside" id="pvg-na-wYj"/>
+                                                                </connections>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" text="במידה ואת מבצעת אימונים נוספים מחוץ לאפליקציה, אנא צייני כאן" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqR-gX-XNc">
+                                                                <rect key="frame" x="14" y="0.0" width="285" height="36.666666666666664"/>
                                                                 <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -1183,6 +1196,10 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="sHj-HQ-m5i" secondAttribute="trailing" id="4g8-3F-xqt"/>
+                                                    <constraint firstItem="sHj-HQ-m5i" firstAttribute="leading" secondItem="Uif-GP-3Po" secondAttribute="leading" id="RRi-DY-Bx9"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                     </stackView>
@@ -2293,6 +2310,11 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="127.66666666666667" height="260"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Button" image="20 women"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="self.imageView.contentMode">
+                                                                <integer key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="womenCheckBoxButtonAction:" destination="htj-Oh-lK9" eventType="touchUpInside" id="hJA-qG-uLi"/>
                                                         </connections>
@@ -2332,6 +2354,12 @@
                                                         </constraints>
                                                     </stackView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="iVb-hf-uJG" firstAttribute="top" secondItem="HvH-9Y-JEQ" secondAttribute="bottom" id="BYK-fY-3jV"/>
+                                                    <constraint firstAttribute="trailing" secondItem="HvH-9Y-JEQ" secondAttribute="trailing" id="GLv-Xj-29C"/>
+                                                    <constraint firstItem="HvH-9Y-JEQ" firstAttribute="leading" secondItem="Ike-G0-g6p" secondAttribute="leading" id="Sd7-sx-D5A"/>
+                                                    <constraint firstItem="HvH-9Y-JEQ" firstAttribute="top" secondItem="Ike-G0-g6p" secondAttribute="top" id="lFM-Gt-Xne"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.95686274770000002" green="0.9568628669" blue="0.95686274770000002" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2351,18 +2379,23 @@
                                         <rect key="frame" x="175.66666666666663" y="0.0" width="151.33333333333337" height="332"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yzy-tT-7x7">
-                                                <rect key="frame" x="22.999999999999993" y="24" width="105.33333333333331" height="284"/>
+                                                <rect key="frame" x="11.999999999999993" y="24" width="127.33333333333331" height="284"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTj-b2-MYs">
-                                                        <rect key="frame" x="0.0" y="0.0" width="105.33333333333333" height="260"/>
+                                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTj-b2-MYs">
+                                                        <rect key="frame" x="0.0" y="0.0" width="127.33333333333333" height="260"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="Button" image="20 men"/>
+                                                        <state key="normal" image="20 men"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="self.imageView.contentMode">
+                                                                <integer key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="menCheckBoxButtonAction:" destination="htj-Oh-lK9" eventType="touchUpInside" id="lYQ-37-elv"/>
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="bw0-md-guM">
-                                                        <rect key="frame" x="25.333333333333339" y="260" width="54.666666666666657" height="24"/>
+                                                        <rect key="frame" x="36.333333333333343" y="260" width="54.666666666666657" height="24"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csB-tM-6Q7" userLabel="male ceck box">
                                                                 <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -2396,14 +2429,20 @@
                                                         </constraints>
                                                     </stackView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="TTj-b2-MYs" secondAttribute="trailing" id="PFd-zA-xwR"/>
+                                                    <constraint firstItem="TTj-b2-MYs" firstAttribute="top" secondItem="yzy-tT-7x7" secondAttribute="top" id="hIs-9V-Vq4"/>
+                                                    <constraint firstItem="TTj-b2-MYs" firstAttribute="leading" secondItem="yzy-tT-7x7" secondAttribute="leading" id="kHi-1a-Qfd"/>
+                                                    <constraint firstItem="bw0-md-guM" firstAttribute="top" secondItem="TTj-b2-MYs" secondAttribute="bottom" id="zdd-ok-crG"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.95686274770000002" green="0.9568628669" blue="0.95686274770000002" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="yzy-tT-7x7" secondAttribute="bottom" constant="24" id="2AX-RU-0xi"/>
-                                            <constraint firstItem="yzy-tT-7x7" firstAttribute="leading" secondItem="g7x-HT-cIR" secondAttribute="leading" constant="23" id="35F-gH-37D"/>
+                                            <constraint firstItem="yzy-tT-7x7" firstAttribute="leading" secondItem="g7x-HT-cIR" secondAttribute="leading" constant="12" id="35F-gH-37D"/>
                                             <constraint firstItem="yzy-tT-7x7" firstAttribute="top" secondItem="g7x-HT-cIR" secondAttribute="top" constant="24" id="G7y-ys-nND"/>
-                                            <constraint firstAttribute="trailing" secondItem="yzy-tT-7x7" secondAttribute="trailing" constant="23" id="yIL-Mg-U8h"/>
+                                            <constraint firstAttribute="trailing" secondItem="yzy-tT-7x7" secondAttribute="trailing" constant="12" id="yIL-Mg-U8h"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
@@ -2464,6 +2503,7 @@
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
         <image name="circle" catalog="system" width="128" height="121"/>
         <image name="circle.inset.filled" catalog="system" width="128" height="121"/>
+        <image name="info.circle.fill" catalog="system" width="128" height="121"/>
         <image name="square" catalog="system" width="128" height="114"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -22,16 +22,6 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	@IBOutlet weak var healthTermsViewButton: UIButton!
 	@IBOutlet weak var nextButton: UIButton!
 	
-	private lazy var pdfView: PDFView = {
-		let pdfView = PDFView(frame: self.view.bounds)
-		pdfView.translatesAutoresizingMaskIntoConstraints = false
-		pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		view.addSubview(pdfView)
-		pdfView.autoScales = true
-
-		return pdfView
-	}()
-	
 	private let numberPicker = UIPickerView()
 	private let weightNumberArray = Array(30...150)
     private let fractionNumberArray = Array(0...99)
@@ -77,7 +67,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 				presentOkAlertWithDelegate(withTitle: "אופס", withMessage: "גובה שגויי אנא בדקי את הנתונים שהזנת", alertNumber: 3)
 			} else if weight<30.0 {
 				presentOkAlertWithDelegate(withTitle: "אופס", withMessage: "משקל שגויי אנא בדקי את הנתונים שהזנת", alertNumber: 4)
-			} else if userHasCheckedTermOfUse == false, userHasCheckedHealth == false {
+			} else if userHasCheckedTermOfUse == false || userHasCheckedHealth == false {
 				presentOkAlertWithDelegate(withTitle: "תנאי השירות לא אושרו", withMessage: "נראה כי לא אשרת את תנאי השירות והצהרת הבריאות, בכדי להמשיך אנא סמני את התיבה שמאשרת את תנאי השימוש.", alertNumber: 5)
 			} else {
 				UserProfile.defaults.name = userName
@@ -105,7 +95,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	}
 	@IBAction func termsOfUseCheckMarkButtonAction(_ sender: UIButton) {
 		sender.isSelected = !sender.isSelected
-		userHasCheckedTermOfUse = sender.isSelected
+		userHasCheckedTermOfUse.toggle()
 	}
 
 	@IBAction func heathViewButtonAction(_ sender: UIButton) {
@@ -115,7 +105,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	}
 	@IBAction func heathCheckMarkButtonAction(_ sender: UIButton) {
 			sender.isSelected = !sender.isSelected
-			userHasCheckedTermOfUse = sender.isSelected
+		userHasCheckedHealth.toggle()
 	}
 }
 
@@ -160,7 +150,7 @@ extension QuestionnairePersonalDetailsViewController: UIPickerViewDelegate, UIPi
 			} else {
 				weightFractionString = "\(fractionNumberArray[row])"
 			}
-			weightString = "\(weighWholeString ?? "0").\(weightFractionString ?? "0")"
+			weightString = "\(weighWholeString ?? "30").\(weightFractionString ?? "0")"
 			weightTextField.text = weightString
 			weight = Double(weightString!)
 		}
