@@ -72,8 +72,6 @@ class LoginViewController: UIViewController {
 			presentAlert(withTitle: "אופס", withMessage: "נראה ששכחת להזין סיסמא", options: "אישור", alertNumber: 4)
 		} catch ErrorManager.LoginError.invalidEmail {
 			presentAlert(withTitle: "אופס", withMessage: "נראה שכתובת האמייל שגויה", options: "אישור", alertNumber: 5)
-		} catch ErrorManager.LoginError.incorrectPassword {
-			presentAlert(withTitle: "אופס", withMessage: "אורך הסיסמא חייב להיות בעל 6 תווים", options: "אישור", alertNumber: 6)
 		} catch {
 			print("Something went wrong!")
 		}
@@ -97,8 +95,6 @@ extension LoginViewController: PopupAlertViewDelegate {
 			self.passwordTextfield.becomeFirstResponder()
 		case 5:
 			self.emailTextfield.becomeFirstResponder()
-		case 6:
-			self.passwordTextfield.becomeFirstResponder()
 		default:
 			break
 		}
