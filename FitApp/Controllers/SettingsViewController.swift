@@ -145,7 +145,17 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 			}
 		case 2:
 			//Fitness Level
-			stepperCell.settingsCellData = tableViewData[.fitness]![indexPath.row]
+			switch indexPath.row {
+			case 1:
+				//workout
+				stepperCell.settingsCellData = tableViewData[.fitness]![indexPath.row]
+			case 2:
+				//external workout
+				stepperCell.settingsCellData = tableViewData[.fitness]![indexPath.row]
+				stepperCell.infoButton.isHidden = false
+			default:
+				break
+			}
 		case 3:
 			stepperCell.settingsCellData = tableViewData[.system]![indexPath.row]
 		default:
