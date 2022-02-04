@@ -92,6 +92,10 @@ extension DishView: UITextFieldDelegate {
 
 extension DishView: DishesTableViewControllerDelegate {
 	
+	func didDissmisView() {
+		dishNameTextField.inputView = UIView()
+		dishNameTextField.endEditing(true)
+	}
 	func cancelButtonTapped() {
 		dishNameTextField.inputView = UIView()
 		dishNameTextField.endEditing(true)

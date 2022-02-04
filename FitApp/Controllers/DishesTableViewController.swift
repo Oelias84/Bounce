@@ -15,6 +15,7 @@ enum DishesState {
 
 protocol DishesTableViewControllerDelegate {
 	
+	func didDissmisView()
 	func cancelButtonTapped()
 	func didPickDish(name: String?)
 }
@@ -41,6 +42,10 @@ class DishesTableViewController: UIViewController {
 		super.viewDidLoad()
 		
 		configure()
+	}
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		delegate?.didDissmisView()
 	}
 	
 	@IBAction func otherButtonAction(_ sender: Any) {

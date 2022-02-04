@@ -74,6 +74,62 @@ extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 }
 
+//MARK: - Delegates
+extension MealPlanViewController: ChangeDateViewDelegate {
+	
+	func dateDidChange(_ date: Date) {
+		Spinner.shared.show(self.view)
+		self.date = date
+		mealViewModel.fetchMealsBy(date: date) {
+			[weak self] hasMeal in
+			guard let self = self else { return }
+			Spinner.shared.stop()
+			self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
+		}
+	}
+}
+extension MealPlanViewController: TableViewEmptyViewDelegate {
+	
+	func createNewMealButtonTapped() {
+		Spinner.shared.show(view)
+		tableView.backgroundView = nil
+		mealViewModel.fetchData(date: date)	}
+}
+extension MealPlanViewController: AddingTableViewCellDelegate {
+	
+	func didTapped() {
+		if mealViewModel.checkIfCurrentMealIsDone() {
+			presentAlert(withTitle: "הוספת ארוחת חריגה", withMessage: "האם ברצונך להוסיף ארוחה לתפריט היום?", options: "אישור", "ביטול", alertNumber: 1)
+		} else {
+			presentAlert(withTitle: "הוספת ארוחת חריגה", withMessage: "שמנו לב שלא סימנת את כל הארוחות היום, אולי בכלל אין צורך בארוחת חריגה :)", options: "אישור", "ביטול", alertNumber: 2)
+		}
+	}
+}
+extension MealPlanViewController: PopupAlertViewDelegate {
+	
+	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
+		presentAddMealAlert()
+	}
+	func cancelButtonTapped(alertNumber: Int) {
+		return
+	}
+	func thirdButtonTapped(alertNumber: Int) {
+		return
+	}
+}
+extension MealPlanViewController: AddMealAlertViewDelegate {
+	
+	func didFinish(with: Meal) {
+		mealViewModel.meals?.append(with)
+		mealViewModel.updateMeals(for: date)
+	}
+}
+extension MealPlanViewController: BounceNavigationBarDelegate {
+	
+	func backButtonTapped() {}
+}
+
+//MARK: - Functions
 extension MealPlanViewController {
 	
 	private func updateDataSource() {
@@ -152,57 +208,3 @@ extension MealPlanViewController {
 	}
 }
 
-//MARK: - Delegates
-extension MealPlanViewController: ChangeDateViewDelegate {
-	
-	func dateDidChange(_ date: Date) {
-		Spinner.shared.show(self.view)
-		self.date = date
-		mealViewModel.fetchMealsBy(date: date) {
-			[weak self] hasMeal in
-			guard let self = self else { return }
-			Spinner.shared.stop()
-			self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
-		}
-	}
-}
-extension MealPlanViewController: TableViewEmptyViewDelegate {
-	
-	func createNewMealButtonTapped() {
-		Spinner.shared.show(view)
-		tableView.backgroundView = nil
-		mealViewModel.fetchData(date: date)	}
-}
-extension MealPlanViewController: AddingTableViewCellDelegate {
-	
-	func didTapped() {
-		if mealViewModel.checkIfCurrentMealIsDone() {
-			presentAlert(withTitle: "הוספת ארוחת חריגה", withMessage: "האם ברצונך להוסיף ארוחה לתפריט היום?", options: "אישור", "ביטול", alertNumber: 1)
-		} else {
-			presentAlert(withTitle: "הוספת ארוחת חריגה", withMessage: "שמנו לב שלא סימנת את כל הארוחות היום, אולי בכלל אין צורך בארוחת חריגה :)", options: "אישור", "ביטול", alertNumber: 2)
-		}
-	}
-}
-extension MealPlanViewController: PopupAlertViewDelegate {
-	
-	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
-		presentAddMealAlert()
-	}
-	func cancelButtonTapped(alertNumber: Int) {
-		return
-	}
-	func thirdButtonTapped(alertNumber: Int) {
-		return
-	}
-}
-extension MealPlanViewController: AddMealAlertViewDelegate {
-	
-	func didFinish(with: Meal) {
-		mealViewModel.meals?.append(with)
-		mealViewModel.updateMeals(for: date)
-	}
-}
-extension MealPlanViewController: BounceNavigationBarDelegate {
-	
-	func backButtonTapped() {}
-}

@@ -169,6 +169,10 @@ extension AddMealAlertDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 
 extension AddMealAlertDishView: DishesTableViewControllerDelegate {
 	
+	func didDissmisView() {
+		dishNameTextField.inputView = UIView()
+		dishNameTextField.endEditing(true)
+	}
 	func cancelButtonTapped() {
 		dishNameTextField.inputView = UIView()
 		dishNameTextField.endEditing(true)
