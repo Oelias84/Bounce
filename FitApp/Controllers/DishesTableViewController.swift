@@ -122,6 +122,7 @@ extension DishesTableViewController: UITableViewDataSource, UITableViewDelegate 
 			self.delegate?.didPickDish(name: self.selectedDish)
 		case 1:
 			self.selectedDish = self.otherDishes![indexPath.row]
+			self.delegate?.didPickDish(name: self.selectedDish)
 		default:
 			break
 		}
