@@ -1162,11 +1162,18 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Uif-GP-3Po">
                                                 <rect key="frame" x="0.0" y="342.66666666666663" width="299" height="69.666666666666686"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sHj-HQ-m5i">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="sHj-HQ-m5i">
                                                         <rect key="frame" x="0.0" y="0.0" width="299" height="36.666666666666664"/>
                                                         <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" text="במידה ואת מבצעת אימונים נוספים מחוץ לאפליקציה, אנא צייני כאן" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqR-gX-XNc">
+                                                                <rect key="frame" x="0.0" y="0.0" width="269" height="36.666666666666664"/>
+                                                                <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <size key="shadowOffset" width="0.0" height="-2"/>
+                                                            </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAQ-NW-bH4">
-                                                                <rect key="frame" x="0.0" y="0.0" width="14" height="36.666666666666664"/>
+                                                                <rect key="frame" x="285" y="0.0" width="14" height="36.666666666666664"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="14" id="szq-ab-Jpa"/>
                                                                 </constraints>
@@ -1178,13 +1185,6 @@
                                                                     <action selector="infoButtonAction:" destination="tgm-97-b7M" eventType="touchUpInside" id="pvg-na-wYj"/>
                                                                 </connections>
                                                             </button>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" text="במידה ואת מבצעת אימונים נוספים מחוץ לאפליקציה, אנא צייני כאן" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqR-gX-XNc">
-                                                                <rect key="frame" x="14" y="0.0" width="285" height="36.666666666666664"/>
-                                                                <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <nil key="highlightedColor"/>
-                                                                <size key="shadowOffset" width="0.0" height="-2"/>
-                                                            </label>
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i1P-Tw-VkB" customClass="GMStepper" customModule="GMStepper">
