@@ -208,6 +208,9 @@ extension SettingsViewController: SettingsStepperViewCellDelegate {
 			}
 		}
 	}
+	func infoButtonDidTapped() {
+		presentOkAlert(withTitle: StaticStringsManager.shared.getGenderString?[32] ?? "" ,withMessage: StaticStringsManager.shared.getGenderString?[33] ?? "")
+	}
 }
 extension SettingsViewController: BounceNavigationBarDelegate {
 	

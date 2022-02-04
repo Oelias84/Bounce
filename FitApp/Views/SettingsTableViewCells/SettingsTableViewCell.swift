@@ -12,6 +12,7 @@ import Foundation
 protocol SettingsStepperViewCellDelegate: AnyObject {
 	
 	func valueChanged(_ newValue: Double, cell: UITableViewCell)
+	func infoButtonDidTapped()
 }
 
 class SettingsTableViewCell: UITableViewCell {
@@ -25,6 +26,7 @@ class SettingsTableViewCell: UITableViewCell {
 	@IBOutlet weak var secondaryLabel: UILabel!
 	@IBOutlet weak var stepperView: GMStepper!
 	@IBOutlet weak var labelStackView: UIStackView!
+	@IBOutlet weak var infoButton: UIButton!
 	
 	weak var delegate: SettingsStepperViewCellDelegate?
 	
@@ -38,6 +40,10 @@ class SettingsTableViewCell: UITableViewCell {
 	@objc func stepperValueChanged(stepper: GMStepper) {
 		delegate?.valueChanged(stepper.value, cell: self)
 		print(stepper.value, terminator: "")
+	}
+	
+	@IBAction func infoButtonAction(_ sender: Any) {
+		delegate?.infoButtonDidTapped()
 	}
 }
 

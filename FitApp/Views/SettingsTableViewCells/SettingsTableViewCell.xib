@@ -25,12 +25,26 @@
                 <rect key="frame" x="0.0" y="0.0" width="551" height="174"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v6P-iY-TxZ">
-                        <rect key="frame" x="20" y="78" width="32" height="18.5"/>
-                        <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="fHu-LG-2eq">
+                        <rect key="frame" x="20" y="76" width="32" height="22"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v6P-iY-TxZ">
+                                <rect key="frame" x="0.0" y="0.0" width="32" height="22"/>
+                                <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAI-Ny-yUw" userLabel="Info">
+                                <rect key="frame" x="32" y="0.0" width="0.0" height="22"/>
+                                <color key="tintColor" name="ProjectTail"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="info.circle.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="infoButtonAction:" destination="wrz-ce-7bP" eventType="touchUpInside" id="G5h-mO-BKG"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bbJ-r8-Dy2">
                         <rect key="frame" x="431" y="0.0" width="100" height="174"/>
                         <subviews>
@@ -71,14 +85,16 @@
                 <color key="backgroundColor" name="ProjectBackground"/>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="bbJ-r8-Dy2" secondAttribute="trailing" id="I3g-vD-N2w"/>
-                    <constraint firstItem="v6P-iY-TxZ" firstAttribute="centerY" secondItem="nnp-rw-8qG" secondAttribute="centerY" id="KaT-x9-VNI"/>
                     <constraint firstAttribute="bottom" secondItem="bbJ-r8-Dy2" secondAttribute="bottom" id="M3C-Ku-JDz"/>
                     <constraint firstItem="bbJ-r8-Dy2" firstAttribute="centerY" secondItem="nnp-rw-8qG" secondAttribute="centerY" id="OAZ-5j-S2n"/>
-                    <constraint firstItem="v6P-iY-TxZ" firstAttribute="leading" secondItem="nnp-rw-8qG" secondAttribute="leadingMargin" id="PZw-6p-1Dc"/>
+                    <constraint firstItem="fHu-LG-2eq" firstAttribute="centerY" secondItem="nnp-rw-8qG" secondAttribute="centerY" id="axJ-06-BI2"/>
                     <constraint firstItem="bbJ-r8-Dy2" firstAttribute="top" secondItem="nnp-rw-8qG" secondAttribute="top" id="b2y-GQ-gYp"/>
+                    <constraint firstItem="fHu-LG-2eq" firstAttribute="leading" secondItem="nnp-rw-8qG" secondAttribute="leadingMargin" id="cZf-aT-e33"/>
+                    <constraint firstItem="bbJ-r8-Dy2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fHu-LG-2eq" secondAttribute="trailing" constant="16" id="zJI-ic-HCv"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="infoButton" destination="kAI-Ny-yUw" id="Rbw-07-BzN"/>
                 <outlet property="labelStackView" destination="30Q-cA-ivM" id="NSJ-Yj-1R5"/>
                 <outlet property="secondaryLabel" destination="p1a-bD-W2s" id="NFt-ZQ-wwq"/>
                 <outlet property="stepperView" destination="Vhm-rz-8Xe" id="CeJ-Sy-e4x"/>
@@ -89,6 +105,7 @@
     </objects>
     <resources>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
+        <image name="info.circle.fill" catalog="system" width="128" height="121"/>
         <namedColor name="ProjectBackground">
             <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
