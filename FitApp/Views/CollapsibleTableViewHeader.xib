@@ -26,15 +26,15 @@
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="HSL-fU-Ax4">
                             <rect key="frame" x="20" y="0.0" width="326" height="87"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="chevron.forward" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="N7r-bl-IHr">
-                                    <rect key="frame" x="0.0" y="2" width="10" height="83.5"/>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="chevron.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="N7r-bl-IHr">
+                                    <rect key="frame" x="0.0" y="5" width="12" height="77.5"/>
                                     <color key="tintColor" name="ProjectTail"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="10" id="3ax-rW-VYH"/>
+                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="12" id="slg-Ph-CSj"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vnd-7X-EBY">
-                                    <rect key="frame" x="22" y="0.0" width="304" height="87"/>
+                                    <rect key="frame" x="24" y="0.0" width="302" height="87"/>
                                     <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="16"/>
                                     <color key="textColor" name="ProjectLightGreen"/>
                                     <nil key="highlightedColor"/>
@@ -76,7 +76,7 @@
         </view>
     </objects>
     <resources>
-        <image name="chevron.forward" catalog="system" width="96" height="128"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
         <namedColor name="ProjectLightGreen">
             <color red="0.28600001335144043" green="0.57599997520446777" blue="0.56099998950958252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
