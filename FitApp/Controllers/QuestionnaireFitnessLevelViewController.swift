@@ -83,7 +83,9 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 			beginnerCheckBox.isSelected = false
 			intermediateCheckBox.isSelected = true
 			advancedCheckBox.isSelected = false
-
+			
+			threeWeeklyWorkoutsButton.backgroundColor = .clear
+			threeWeeklyWorkoutsButton.borderColorV = .white
 			towWeeklyWorkoutsButton.backgroundColor = .clear
 			towWeeklyWorkoutsButton.borderColorV = .white
 		case advancedCheckBox:
@@ -92,7 +94,9 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 			beginnerCheckBox.isSelected = false
 			intermediateCheckBox.isSelected = false
 			advancedCheckBox.isSelected = true
-
+			
+			threeWeeklyWorkoutsButton.backgroundColor = .clear
+			threeWeeklyWorkoutsButton.borderColorV = .white
 			towWeeklyWorkoutsButton.backgroundColor = .clear
 			towWeeklyWorkoutsButton.borderColorV = .white
 		default:

@@ -82,29 +82,39 @@ class QuestionnaireActivityViewController: UIViewController {
 		}
 	}
 	@IBAction func kilometersSliderAction(_ sender: UISlider) {
+		stepsSlider.value = 0
+		stepsCheckBox.isSelected = false
+		kilometersCheckBox.isSelected = true
+		stepsLabel.text = "100"
 		kilometersLabel.text = String(format: "%.1f", sender.value) + " " + K.Units.kilometers
 	}
 	@IBAction func stepsSliderAction(_ sender: UISlider) {
+		kilometersSlider.value = 0
+		stepsCheckBox.isSelected = true
+		kilometersCheckBox.isSelected = false
+		kilometersLabel.text = "0.1" + " " + K.Units.kilometers
 		stepsLabel.text = String(format: "%.0f", sender.value)
 	}
 	@IBAction func checkBoxes(sender: UIButton) {
 		sender.isSelected = !sender.isSelected
 		
-		if sender.isSelected {
-			switch sender.tag {
-			case 1:
-				stepsCheckBox.isSelected = false
-				stepsSlider.isEnabled = false
-				stepsLabel.text = String(minimumSteps)
-				kilometersSlider.isEnabled = true
-			case 2:
-				kilometersCheckBox.isSelected = false
-				stepsSlider.isEnabled = true
-				kilometersSlider.isEnabled = false
-				kilometersLabel.text =  String(minimumKilometers) + " " + K.Units.kilometers
-			default:
-				return
-			}
+		switch sender.tag {
+		//Steps
+		case 1:
+			kilometersLabel.text = "0.1" + " " + K.Units.kilometers
+
+			stepsSlider.value = 0
+			stepsCheckBox.isSelected = false
+			stepsLabel.text = String(minimumSteps)
+		
+		case 2:
+			stepsLabel.text = "100"
+			
+			kilometersSlider.value = 0
+			kilometersCheckBox.isSelected = false
+			kilometersLabel.text =  String(minimumKilometers) + " " + K.Units.kilometers
+		default:
+			return
 		}
 	}
 }

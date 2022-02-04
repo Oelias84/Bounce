@@ -23,12 +23,10 @@ class QuestionnaireGanderViewController: UIViewController {
 	}
 	
 	@IBAction func womenCheckBoxButtonAction(_ sender: UIButton) {
-		sender.isSelected = !sender.isSelected
-		userSelect(sender)
+		userSelect(womenCheckBoxButton)
 	}
 	@IBAction func menCheckBoxButtonAction(_ sender: UIButton) {
-		sender.isSelected = !sender.isSelected
-		userSelect(sender)
+		userSelect(menCheckBoxButton)
 	}
 	@IBAction func continueButtonAction(_ sender: UIButton) {
 		if gender == nil {
@@ -36,13 +34,10 @@ class QuestionnaireGanderViewController: UIViewController {
 			return
 		} else {
 			UserProfile.defaults.gender = gender?.rawValue
-			performSegue(withIdentifier: K.SegueId.moveToFatPercentage, sender: self)
+			performSegue(withIdentifier: K.SegueId.moveToPersonalDetails, sender: self)
 		}
 	}
-	@IBAction func backButtonAction(_ sender: Any) {
-		navigationController?.popViewController(animated: true)
-	}
-
+	
 	private func setUpCheckBox() {
 		let userData = UserProfile.defaults
 		
@@ -61,10 +56,12 @@ class QuestionnaireGanderViewController: UIViewController {
 		switch sender {
 		case womenCheckBoxButton:
 			gender = .female
+			womenCheckBoxButton.isSelected = true
 			menCheckBoxButton.isSelected = false
 		case menCheckBoxButton:
 			gender = .male
 			womenCheckBoxButton.isSelected = false
+			menCheckBoxButton.isSelected = true
 		default :
 			break
 		}

@@ -19,6 +19,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	@IBOutlet weak var termsOfUseViewButton: UIButton!
 	@IBOutlet weak var termsOfUseCheckMarkButton: UIButton!
 	
+	@IBOutlet weak var healthTermsViewButton: UIButton!
 	@IBOutlet weak var nextButton: UIButton!
 	
 	private lazy var pdfView: PDFView = {
@@ -87,13 +88,16 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 				UserProfile.defaults.healthApproval = TermsAgreeDataModel()
 				googleManager.updateWeights(weights: Weights(weights: [Weight(dateString: Date().dateStringForDB, weight: weight)]))
 				
-				self.performSegue(withIdentifier: K.SegueId.moveToFatGender, sender: self)
+				self.performSegue(withIdentifier: K.SegueId.moveToFatPercentage, sender: self)
 			}
         } else {
 			presentOkAlertWithDelegate(withTitle: "אופס", withMessage: "יש למלא את כל השדות", alertNumber: 2)
 			return
         }
     }
+	@IBAction func backButtonAction(_ sender: Any) {
+		navigationController?.popViewController(animated: true)
+	}
 	@IBAction func termsOfUseViewButtonAction(_ sender: UIButton) {
 		if let url = URL(string: "https://bouncefit.co.il/privacy-policy/") {
 			UIApplication.shared.open(url)
@@ -115,6 +119,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	}
 }
 
+//MARK: - Delegates
 extension QuestionnairePersonalDetailsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 	
 	func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -165,30 +170,6 @@ extension QuestionnairePersonalDetailsViewController: UIPickerViewDelegate, UIPi
 		birthDate = sender.date
 	}
 }
-extension QuestionnairePersonalDetailsViewController: UITextFieldDelegate {
-	
-	func textFieldDidEndEditing(_ textField: UITextField) {
-		
-        if let text = textField.text, text != "" {
-            switch textField {
-			case userNameTextField:
-				userName = text
-            case heightTextField:
-                height = Int(text)
-            case weightTextField:
-                weight = Double(text)
-            default:
-                break
-            }
-        }
-	}
-	func textFieldDidBeginEditing(_ textField: UITextField) {
-		
-		numberPicker.selectRow(getIndex(textField: textField), inComponent: 0, animated: true)
-		numberPicker.reloadAllComponents()
-		numberPicker.reloadInputViews()
-	}
-}
 extension QuestionnairePersonalDetailsViewController: PopupAlertViewDelegate {
 	
 	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
@@ -212,15 +193,72 @@ extension QuestionnairePersonalDetailsViewController: PopupAlertViewDelegate {
 		return
 	}
 }
+extension QuestionnairePersonalDetailsViewController: UITextFieldDelegate {
+	
+	func textFieldDidEndEditing(_ textField: UITextField) {
+		
+		if let text = textField.text, text != "" {
+			switch textField {
+			case userNameTextField:
+				userName = text
+			case heightTextField:
+				height = Int(text)
+			case weightTextField:
+				guard let value = Double(text) else { return }
+				
+				if value < 30.0 {
+					weight = 30
+					weightTextField.text = String(30.0)
+				} else {
+					weight = value
+				}
+				
+			default:
+				break
+			}
+		}
+	}
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		
+		numberPicker.selectRow(getIndex(textField: textField), inComponent: 0, animated: true)
+		numberPicker.reloadAllComponents()
+		numberPicker.reloadInputViews()
+	}
+}
+extension QuestionnairePersonalDetailsViewController: UITextViewDelegate {
+	
+	func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+		UIApplication.shared.open(URL)
+		return false
+	}
+}
+
+
+//MARK: - Functions
 extension QuestionnairePersonalDetailsViewController {
 	
 	private func configurePicker() {
+
 		numberPicker.delegate = self
 		numberPicker.dataSource = self
 		numberPicker.backgroundColor = .white
 		numberPicker.semanticContentAttribute = .forceLeftToRight
 	}
 	private func setupTextfieldText() {
+		let termsOfUseAttributedString = NSMutableAttributedString(string: StaticStringsManager.shared.getGenderString?[30] ?? "")
+		let termsOfUseCount = termsOfUseAttributedString.string.count
+		termsOfUseAttributedString.addAttribute(.link, value: "https://bouncefit.co.il/privacy-policy/",
+												range: NSRange(location: termsOfUseCount-16, length: 16))
+		
+		
+		let healthTermsAttributedString = NSMutableAttributedString(string: StaticStringsManager.shared.getGenderString?[31] ?? "")
+		let healthTermsCount = healthTermsAttributedString.string.count
+		healthTermsAttributedString.addAttribute(.link, value: "https://bouncefit.co.il/health/",
+												 range: NSRange(location: healthTermsCount-13, length: 13))
+		
+		healthTermsViewButton.setAttributedTitle(healthTermsAttributedString, for: .normal)
+		termsOfUseViewButton.setAttributedTitle(termsOfUseAttributedString, for: .normal)
+
 		let userData = UserProfile.defaults
 		
 		if let height = userData.height {
@@ -255,6 +293,11 @@ extension QuestionnairePersonalDetailsViewController {
 		heightTextField.delegate = self
 		weightTextField.delegate = self
 		userNameTextField.delegate = self
+		
+		if let minData = "1900-01-01".dateFromString {
+			birthdayDatePicker.minimumDate = minData
+		}
+		birthdayDatePicker.maximumDate = Calendar.current.date(byAdding: .year, value: -18, to: Date())
 		birthdayDatePicker.addTarget(self, action: #selector(pickerChanged), for: .valueChanged)
 	}
 	private func getIndex(textField: UITextField) -> Int {
@@ -269,8 +312,8 @@ extension QuestionnairePersonalDetailsViewController {
 			return 0
 		}
 		
-		let floatText = Float(text)
-		let intNum = Int(floatText!)
+		guard let floatText = Float(text) else { return 0 }
+		let intNum = Int(floatText)
 		
 		switch textField {
 		case weightTextField:

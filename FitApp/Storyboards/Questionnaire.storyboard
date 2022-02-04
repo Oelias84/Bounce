@@ -40,7 +40,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="PzG-Rq-Lca" kind="relationship" relationship="rootViewController" id="BbD-AK-dsr"/>
+                        <segue destination="htj-Oh-lK9" kind="relationship" relationship="rootViewController" id="cA2-rA-U4D"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N2R-iR-yyi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -64,16 +64,17 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="wKv-Jp-Dby">
-                                <rect key="frame" x="97.666666666666671" y="697" width="179.66666666666663" height="73"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wKv-Jp-Dby">
+                                <rect key="frame" x="79.000000000000014" y="703" width="217.33333333333337" height="67"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="Znh-S2-ct8">
-                                        <rect key="frame" x="21.333333333333329" y="0.0" width="137.33333333333337" height="22"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="217.33333333333334" height="42"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qvf-2M-hH7" userLabel="backButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="25.666666666666668" height="22"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="42"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="20"/>
                                                 <state key="normal" image="arrow.backward" catalog="system">
                                                     <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
@@ -88,9 +89,10 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5kA-PG-Jlw" userLabel="cuntinueButton">
-                                                <rect key="frame" x="111.66666666666666" y="0.0" width="25.666666666666657" height="22"/>
+                                                <rect key="frame" x="151.66666666666666" y="0.0" width="65.666666666666657" height="42"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="20"/>
                                                 <state key="normal" image="arrow.forward" catalog="system">
                                                     <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
@@ -107,7 +109,7 @@
                                         </subviews>
                                     </stackView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="2" translatesAutoresizingMaskIntoConstraints="NO" id="2lU-vA-2Wz">
-                                        <rect key="frame" x="0.0" y="48" width="179.66666666666666" height="25"/>
+                                        <rect key="frame" x="18.666666666666671" y="42" width="179.66666666666663" height="25"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -118,7 +120,7 @@
                                 <rect key="frame" x="24" y="206" width="327" height="400"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="haf-7R-eyy">
-                                        <rect key="frame" x="77" y="88.333333333333314" width="173" height="279.66666666666669"/>
+                                        <rect key="frame" x="97" y="88.333333333333314" width="133" height="279.66666666666669"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1Jf-CB-fAV">
                                             <size key="itemSize" width="254" height="374"/>
@@ -160,9 +162,10 @@
                                         </connections>
                                     </collectionView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsp-EA-oMM" userLabel="scrollBackButton">
-                                        <rect key="frame" x="37" y="217" width="16" height="22.666666666666657"/>
+                                        <rect key="frame" x="37" y="197" width="36" height="62.666666666666686"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="contentEdgeInsets" minX="20" minY="20" maxX="0.0" maxY="20"/>
                                         <state key="normal" image="chevron.backward" catalog="system">
                                             <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
@@ -183,9 +186,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OqG-Qw-7Gl" userLabel="scrollForwordButton">
-                                        <rect key="frame" x="274" y="217" width="16" height="22.666666666666657"/>
+                                        <rect key="frame" x="254" y="197" width="36" height="62.666666666666686"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="20" maxX="20" maxY="20"/>
                                         <state key="normal" image="chevron.forward" catalog="system">
                                             <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
@@ -262,16 +266,17 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GradientBackground" translatesAutoresizingMaskIntoConstraints="NO" id="6BI-gY-XsL">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="jvZ-Dn-3ZE">
-                                <rect key="frame" x="97.666666666666671" y="697" width="179.66666666666663" height="73"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jvZ-Dn-3ZE">
+                                <rect key="frame" x="79.000000000000014" y="703" width="217.33333333333337" height="67"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="wil-t5-hOU">
-                                        <rect key="frame" x="21.333333333333329" y="0.0" width="137.33333333333337" height="22"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="217.33333333333334" height="42"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKy-Rk-2Lc" userLabel="backButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="25.666666666666668" height="22"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="42"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="20"/>
                                                 <state key="normal" image="arrow.backward" catalog="system">
                                                     <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
@@ -286,9 +291,10 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTk-67-1kY" userLabel="cuntinueButton">
-                                                <rect key="frame" x="111.66666666666666" y="0.0" width="25.666666666666657" height="22"/>
+                                                <rect key="frame" x="151.66666666666666" y="0.0" width="65.666666666666657" height="42"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="20"/>
                                                 <state key="normal" image="arrow.forward" catalog="system">
                                                     <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
@@ -305,7 +311,7 @@
                                         </subviews>
                                     </stackView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="4" translatesAutoresizingMaskIntoConstraints="NO" id="2St-up-K8c">
-                                        <rect key="frame" x="0.0" y="48" width="179.66666666666666" height="25"/>
+                                        <rect key="frame" x="18.666666666666671" y="42" width="179.66666666666663" height="25"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -602,16 +608,17 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GradientBackground" translatesAutoresizingMaskIntoConstraints="NO" id="vTr-gK-WTT">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="v98-4V-ug1">
-                                <rect key="frame" x="97.666666666666671" y="697" width="179.66666666666663" height="73"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="v98-4V-ug1">
+                                <rect key="frame" x="79.000000000000014" y="703" width="217.33333333333337" height="67"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="ELa-CX-NAF">
-                                        <rect key="frame" x="21.333333333333329" y="0.0" width="137.33333333333337" height="22"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="217.33333333333334" height="42"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vxv-XO-CCI" userLabel="backButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="25.666666666666668" height="22"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="42"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="20"/>
                                                 <state key="normal" image="arrow.backward" catalog="system">
                                                     <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
@@ -626,9 +633,10 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UdX-kv-G2S" userLabel="cuntinueButton">
-                                                <rect key="frame" x="111.66666666666666" y="0.0" width="25.666666666666657" height="22"/>
+                                                <rect key="frame" x="151.66666666666666" y="0.0" width="65.666666666666657" height="42"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="20"/>
                                                 <state key="normal" image="arrow.forward" catalog="system">
                                                     <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
@@ -645,7 +653,7 @@
                                         </subviews>
                                     </stackView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="3" translatesAutoresizingMaskIntoConstraints="NO" id="Log-jh-iNu">
-                                        <rect key="frame" x="0.0" y="48" width="179.66666666666666" height="25"/>
+                                        <rect key="frame" x="18.666666666666671" y="42" width="179.66666666666663" height="25"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -862,16 +870,17 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="7Nq-Er-Cjc">
-                                <rect key="frame" x="97.666666666666671" y="697" width="179.66666666666663" height="73"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7Nq-Er-Cjc">
+                                <rect key="frame" x="79.000000000000014" y="703" width="217.33333333333337" height="67"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="yy0-hM-jDT">
-                                        <rect key="frame" x="21.333333333333329" y="0.0" width="137.33333333333337" height="22"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="217.33333333333334" height="42"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8zO-dJ-s9E" userLabel="backButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="25.666666666666668" height="22"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="42"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="20"/>
                                                 <state key="normal" image="arrow.backward" catalog="system">
                                                     <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
@@ -887,9 +896,10 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFF-Mj-IMh" userLabel="cuntinueButton">
-                                                <rect key="frame" x="111.66666666666666" y="0.0" width="25.666666666666657" height="22"/>
+                                                <rect key="frame" x="151.66666666666666" y="0.0" width="65.666666666666657" height="42"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="20"/>
                                                 <state key="normal" image="arrow.forward" catalog="system">
                                                     <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
@@ -907,7 +917,7 @@
                                         </subviews>
                                     </stackView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="5" translatesAutoresizingMaskIntoConstraints="NO" id="jag-Hx-QQj">
-                                        <rect key="frame" x="0.0" y="48" width="179.66666666666666" height="25"/>
+                                        <rect key="frame" x="18.666666666666671" y="42" width="179.66666666666663" height="25"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1244,16 +1254,17 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GradientBackground" translatesAutoresizingMaskIntoConstraints="NO" id="W8W-8x-gZj">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="ygw-ub-OuK">
-                                <rect key="frame" x="97.666666666666671" y="679" width="179.66666666666663" height="91"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ygw-ub-OuK">
+                                <rect key="frame" x="97.666666666666671" y="683" width="179.66666666666663" height="87"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="nCE-Cw-Kyc">
-                                        <rect key="frame" x="32.999999999999979" y="0.0" width="113.66666666666669" height="40"/>
+                                        <rect key="frame" x="4" y="0.0" width="171.66666666666666" height="62"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTJ-hG-67b" userLabel="backButton">
-                                                <rect key="frame" x="0.0" y="9" width="25.666666666666668" height="22"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="62"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
                                                 <state key="normal" image="arrow.backward" catalog="system">
                                                     <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
@@ -1270,11 +1281,11 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxd-dP-u5a">
-                                                <rect key="frame" x="49.666666666666686" y="0.0" width="64" height="40"/>
+                                                <rect key="frame" x="89.666666666666686" y="11" width="82" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Ene-MW-PxM"/>
-                                                    <constraint firstAttribute="width" constant="64" id="wbx-F0-Xm8"/>
                                                 </constraints>
+                                                <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
                                                 <state key="normal" title="התחל">
                                                     <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
@@ -1296,7 +1307,7 @@
                                         </subviews>
                                     </stackView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="6" translatesAutoresizingMaskIntoConstraints="NO" id="bpe-VB-k6d">
-                                        <rect key="frame" x="0.0" y="66" width="179.66666666666666" height="25"/>
+                                        <rect key="frame" x="0.0" y="62" width="179.66666666666666" height="25"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1570,11 +1581,18 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="סיכום" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZb-eu-Ybr">
+                                <rect key="frame" x="156.66666666666666" y="68" width="61.666666666666657" height="36.666666666666657"/>
+                                <fontDescription key="fontDescription" name="Assistant-Bold" family="Assistant" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KLP-Lh-Swu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="KLP-Lh-Swu" firstAttribute="trailing" secondItem="F6H-3D-LF4" secondAttribute="trailing" constant="24" id="3Ah-lZ-Z1K"/>
+                            <constraint firstItem="wZb-eu-Ybr" firstAttribute="centerX" secondItem="0fz-KW-KiP" secondAttribute="centerX" id="6jD-OF-pH1"/>
                             <constraint firstItem="KLP-Lh-Swu" firstAttribute="bottom" secondItem="ygw-ub-OuK" secondAttribute="bottom" constant="8" id="AO0-O3-5X1"/>
                             <constraint firstItem="W8W-8x-gZj" firstAttribute="top" secondItem="0fz-KW-KiP" secondAttribute="top" id="JvR-7j-f2r"/>
                             <constraint firstItem="W8W-8x-gZj" firstAttribute="trailing" secondItem="KLP-Lh-Swu" secondAttribute="trailing" id="Run-8o-lHL"/>
@@ -1583,6 +1601,7 @@
                             <constraint firstItem="W8W-8x-gZj" firstAttribute="leading" secondItem="KLP-Lh-Swu" secondAttribute="leading" id="haF-Gd-nKR"/>
                             <constraint firstItem="F6H-3D-LF4" firstAttribute="centerY" secondItem="0fz-KW-KiP" secondAttribute="centerY" id="vxQ-Sh-NCA"/>
                             <constraint firstItem="ygw-ub-OuK" firstAttribute="centerX" secondItem="0fz-KW-KiP" secondAttribute="centerX" id="weZ-RY-KZe"/>
+                            <constraint firstItem="wZb-eu-Ybr" firstAttribute="top" secondItem="KLP-Lh-Swu" secondAttribute="top" constant="24" id="zSz-Dg-RLV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="E7P-AJ-OeW"/>
@@ -1612,28 +1631,52 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GradientBackground" translatesAutoresizingMaskIntoConstraints="NO" id="iOP-hg-d34">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="YNz-La-yd4">
-                                <rect key="frame" x="97.666666666666671" y="697" width="179.66666666666663" height="73"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VZl-a7-8fP">
+                                <rect key="frame" x="79.000000000000014" y="703" width="217.33333333333337" height="67"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pvx-WA-0Gs">
-                                        <rect key="frame" x="76.999999999999986" y="0.0" width="25.666666666666671" height="22"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.forward" catalog="system">
-                                            <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="nextButtonAction:" destination="PzG-Rq-Lca" eventType="touchUpInside" id="qo9-E9-Zpr"/>
-                                        </connections>
-                                    </button>
-                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" translatesAutoresizingMaskIntoConstraints="NO" id="eMt-gE-Yei">
-                                        <rect key="frame" x="0.0" y="48" width="179.66666666666666" height="25"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="btT-aK-j6L">
+                                        <rect key="frame" x="0.0" y="0.0" width="217.33333333333334" height="42"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8PC-Cd-jZU" userLabel="backButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="42"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="20"/>
+                                                <state key="normal" image="arrow.backward" catalog="system">
+                                                    <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="backButtonAction:" destination="PzG-Rq-Lca" eventType="touchUpInside" id="Xpm-P4-XAs"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZtV-6k-fYv" userLabel="cuntinueButton">
+                                                <rect key="frame" x="151.66666666666666" y="0.0" width="65.666666666666657" height="42"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="20"/>
+                                                <state key="normal" image="arrow.forward" catalog="system">
+                                                    <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="nextButtonAction:" destination="PzG-Rq-Lca" eventType="touchUpInside" id="LPg-xv-Yd7"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="1" translatesAutoresizingMaskIntoConstraints="NO" id="1uD-ro-OkP">
+                                        <rect key="frame" x="18.666666666666671" y="42" width="179.66666666666663" height="25"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1858,16 +1901,16 @@
                             <constraint firstItem="iOP-hg-d34" firstAttribute="leading" secondItem="leC-CB-Otm" secondAttribute="leading" id="5mY-m5-zyk"/>
                             <constraint firstItem="Q1y-Nt-BZc" firstAttribute="leading" secondItem="leC-CB-Otm" secondAttribute="leading" constant="24" id="AAy-Gy-rfq"/>
                             <constraint firstItem="pK0-lB-4bo" firstAttribute="top" secondItem="leC-CB-Otm" secondAttribute="top" constant="24" id="BoU-AY-nvZ"/>
+                            <constraint firstItem="VZl-a7-8fP" firstAttribute="centerX" secondItem="ddk-lb-smK" secondAttribute="centerX" id="DWh-Vn-3AX"/>
                             <constraint firstItem="leC-CB-Otm" firstAttribute="trailing" secondItem="Q1y-Nt-BZc" secondAttribute="trailing" constant="24" id="GC3-Yz-fCO"/>
                             <constraint firstItem="8R4-T8-Vmf" firstAttribute="top" secondItem="Q1y-Nt-BZc" secondAttribute="bottom" constant="26" id="HNM-5O-6QP"/>
                             <constraint firstAttribute="bottom" secondItem="iOP-hg-d34" secondAttribute="bottom" id="JIL-BM-lBJ"/>
                             <constraint firstItem="iOP-hg-d34" firstAttribute="top" secondItem="ddk-lb-smK" secondAttribute="top" id="OBo-R0-DAJ"/>
-                            <constraint firstItem="leC-CB-Otm" firstAttribute="bottom" secondItem="YNz-La-yd4" secondAttribute="bottom" constant="8" id="QzN-eQ-QYR"/>
                             <constraint firstItem="Q1y-Nt-BZc" firstAttribute="centerY" secondItem="ddk-lb-smK" secondAttribute="centerY" id="gfD-cB-0wS"/>
                             <constraint firstItem="pK0-lB-4bo" firstAttribute="centerX" secondItem="ddk-lb-smK" secondAttribute="centerX" id="i71-h1-dIz"/>
                             <constraint firstItem="leC-CB-Otm" firstAttribute="trailing" secondItem="iOP-hg-d34" secondAttribute="trailing" id="l28-1y-GKv"/>
+                            <constraint firstItem="leC-CB-Otm" firstAttribute="bottom" secondItem="VZl-a7-8fP" secondAttribute="bottom" constant="8" id="lKO-rc-Mvr"/>
                             <constraint firstItem="8R4-T8-Vmf" firstAttribute="centerX" secondItem="ddk-lb-smK" secondAttribute="centerX" id="rxR-vw-mGg"/>
-                            <constraint firstItem="YNz-La-yd4" firstAttribute="centerX" secondItem="ddk-lb-smK" secondAttribute="centerX" id="vte-qP-C1H"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="T2e-jV-uX7">
@@ -1875,19 +1918,20 @@
                     </navigationItem>
                     <connections>
                         <outlet property="birthdayDatePicker" destination="0SS-cS-gO4" id="MK8-yb-l9O"/>
+                        <outlet property="healthTermsViewButton" destination="0nE-1c-rf5" id="aFb-ob-RrS"/>
                         <outlet property="heightTextField" destination="kyL-fV-kv6" id="JZQ-ql-ywO"/>
-                        <outlet property="nextButton" destination="pvx-WA-0Gs" id="5ab-w9-VOf"/>
-                        <outlet property="pageControl" destination="eMt-gE-Yei" id="fE1-RY-36Q"/>
+                        <outlet property="nextButton" destination="ZtV-6k-fYv" id="AvV-Gv-JGh"/>
+                        <outlet property="pageControl" destination="1uD-ro-OkP" id="OiD-ZI-sBH"/>
                         <outlet property="termsOfUseCheckMarkButton" destination="cYe-mE-TEK" id="5L0-XX-Qql"/>
                         <outlet property="termsOfUseViewButton" destination="m1f-9o-ze9" id="6J3-ry-M6Z"/>
                         <outlet property="userNameTextField" destination="8gV-cB-1TH" id="A75-dM-j7k"/>
                         <outlet property="weightTextField" destination="Ivh-Kg-Zbh" id="CTE-aO-rOs"/>
-                        <segue destination="htj-Oh-lK9" kind="show" identifier="moveToFatGender" id="MnI-N3-oFi"/>
+                        <segue destination="pSN-kH-Eth" kind="show" identifier="moveToFatPercentage" id="Seb-Sd-ldh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GCH-Sz-wML" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="353" y="-70"/>
+            <point key="canvasLocation" x="1076" y="-71"/>
         </scene>
         <!--Questionnaire Second Activity Level-->
         <scene sceneID="WKq-US-gew">
@@ -2201,6 +2245,35 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GradientBackground" translatesAutoresizingMaskIntoConstraints="NO" id="epY-Bv-gqA">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6Lj-oo-xnE">
+                                <rect key="frame" x="97.666666666666671" y="703" width="179.66666666666663" height="67"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ha4-S3-x9N">
+                                        <rect key="frame" x="56.999999999999979" y="0.0" width="65.666666666666686" height="42"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="20"/>
+                                        <state key="normal" image="arrow.forward" catalog="system">
+                                            <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="continueButtonAction:" destination="htj-Oh-lK9" eventType="touchUpInside" id="GsG-RE-ORy"/>
+                                        </connections>
+                                    </button>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" translatesAutoresizingMaskIntoConstraints="NO" id="1Bs-9a-6ZI">
+                                        <rect key="frame" x="0.0" y="42" width="179.66666666666666" height="25"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </pageControl>
+                                </subviews>
+                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="מגדר" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hp3-wN-PSo">
                                 <rect key="frame" x="46" y="68" width="283" height="36.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Assistant-Bold" family="Assistant" pointSize="28"/>
@@ -2216,12 +2289,14 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ike-G0-g6p">
                                                 <rect key="frame" x="12.000000000000007" y="24" width="127.66666666666669" height="284"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="20 women" translatesAutoresizingMaskIntoConstraints="NO" id="AEA-Jh-bKP">
-                                                        <rect key="frame" x="13.666666666666664" y="0.0" width="100" height="260"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="100" id="lId-lh-stc"/>
-                                                        </constraints>
-                                                    </imageView>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HvH-9Y-JEQ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="127.66666666666667" height="260"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Button" image="20 women"/>
+                                                        <connections>
+                                                            <action selector="womenCheckBoxButtonAction:" destination="htj-Oh-lK9" eventType="touchUpInside" id="hJA-qG-uLi"/>
+                                                        </connections>
+                                                    </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="iVb-hf-uJG">
                                                         <rect key="frame" x="30.333333333333329" y="260" width="67" height="24"/>
                                                         <subviews>
@@ -2278,12 +2353,14 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yzy-tT-7x7">
                                                 <rect key="frame" x="22.999999999999993" y="24" width="105.33333333333331" height="284"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="20 men" translatesAutoresizingMaskIntoConstraints="NO" id="q9m-2G-Fsu">
-                                                        <rect key="frame" x="2.6666666666666856" y="0.0" width="100" height="260"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="100" id="FLt-vE-f0W"/>
-                                                        </constraints>
-                                                    </imageView>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTj-b2-MYs">
+                                                        <rect key="frame" x="0.0" y="0.0" width="105.33333333333333" height="260"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Button" image="20 men"/>
+                                                        <connections>
+                                                            <action selector="menCheckBoxButtonAction:" destination="htj-Oh-lK9" eventType="touchUpInside" id="lYQ-37-elv"/>
+                                                        </connections>
+                                                    </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="bw0-md-guM">
                                                         <rect key="frame" x="25.333333333333339" y="260" width="54.666666666666657" height="24"/>
                                                         <subviews>
@@ -2339,62 +2416,14 @@
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="332" id="C9l-09-B7q"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="NHc-qf-2l6">
-                                <rect key="frame" x="97.666666666666671" y="697" width="179.66666666666663" height="73"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="dvi-64-3q8">
-                                        <rect key="frame" x="21.333333333333329" y="0.0" width="137.33333333333337" height="22"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8V-YX-osU" userLabel="backButton">
-                                                <rect key="frame" x="0.0" y="0.0" width="25.666666666666668" height="22"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" image="arrow.backward" catalog="system">
-                                                    <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
-                                                        <real key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="backButtonAction:" destination="htj-Oh-lK9" eventType="touchUpInside" id="Vv3-PZ-5TR"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LWP-Ub-n5d" userLabel="cuntinueButton">
-                                                <rect key="frame" x="111.66666666666666" y="0.0" width="25.666666666666657" height="22"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" image="arrow.forward" catalog="system">
-                                                    <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="medium"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
-                                                        <real key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="continueButtonAction:" destination="htj-Oh-lK9" eventType="touchUpInside" id="3hR-Se-woV"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="1" translatesAutoresizingMaskIntoConstraints="NO" id="EVn-Gh-PpF">
-                                        <rect key="frame" x="0.0" y="48" width="179.66666666666666" height="25"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </pageControl>
-                                </subviews>
-                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="drG-AJ-A1W"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="epY-Bv-gqA" firstAttribute="trailing" secondItem="drG-AJ-A1W" secondAttribute="trailing" id="37w-Ph-uvK"/>
+                            <constraint firstItem="6Lj-oo-xnE" firstAttribute="centerX" secondItem="rjG-Zc-wax" secondAttribute="centerX" id="7Zj-vP-VjY"/>
                             <constraint firstAttribute="bottom" secondItem="epY-Bv-gqA" secondAttribute="bottom" id="806-Ba-lpa"/>
+                            <constraint firstItem="drG-AJ-A1W" firstAttribute="bottom" secondItem="6Lj-oo-xnE" secondAttribute="bottom" constant="8" id="EY5-d0-fTX"/>
                             <constraint firstItem="qJW-is-xFg" firstAttribute="leading" secondItem="drG-AJ-A1W" secondAttribute="leading" constant="24" id="HfI-5e-DwO"/>
                             <constraint firstItem="drG-AJ-A1W" firstAttribute="trailing" secondItem="qJW-is-xFg" secondAttribute="trailing" constant="24" id="PDg-fS-2eZ"/>
                             <constraint firstItem="Hp3-wN-PSo" firstAttribute="top" secondItem="drG-AJ-A1W" secondAttribute="top" constant="24" id="PZ0-7h-uHN"/>
@@ -2402,8 +2431,6 @@
                             <constraint firstItem="epY-Bv-gqA" firstAttribute="leading" secondItem="drG-AJ-A1W" secondAttribute="leading" id="Yp7-hh-eGf"/>
                             <constraint firstItem="qJW-is-xFg" firstAttribute="centerY" secondItem="rjG-Zc-wax" secondAttribute="centerY" id="bEq-XN-A69"/>
                             <constraint firstItem="epY-Bv-gqA" firstAttribute="top" secondItem="rjG-Zc-wax" secondAttribute="top" id="dKo-eM-H9z"/>
-                            <constraint firstItem="NHc-qf-2l6" firstAttribute="centerX" secondItem="rjG-Zc-wax" secondAttribute="centerX" id="jiU-px-JO2"/>
-                            <constraint firstItem="drG-AJ-A1W" firstAttribute="bottom" secondItem="NHc-qf-2l6" secondAttribute="bottom" constant="8" id="wVo-VE-A0g"/>
                             <constraint firstItem="Hp3-wN-PSo" firstAttribute="leading" secondItem="drG-AJ-A1W" secondAttribute="leading" constant="46" id="y1G-HU-HaY"/>
                         </constraints>
                     </view>
@@ -2413,16 +2440,16 @@
                     <connections>
                         <outlet property="menCheckBoxButton" destination="csB-tM-6Q7" id="qWR-4l-Vfw"/>
                         <outlet property="womenCheckBoxButton" destination="7xi-ld-Xbz" id="Q0W-5V-VRe"/>
-                        <segue destination="pSN-kH-Eth" kind="show" identifier="moveToFatPercentage" id="OXv-lZ-MYG"/>
+                        <segue destination="PzG-Rq-Lca" kind="show" identifier="moveToPersonalDetails" id="Ayr-CN-IfI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hGK-KV-lFO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1121" y="-69"/>
+            <point key="canvasLocation" x="308" y="-69"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3yk-Xy-vQY"/>
+        <segue reference="qiK-vY-Riw"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="20 men" width="3159" height="6209"/>
