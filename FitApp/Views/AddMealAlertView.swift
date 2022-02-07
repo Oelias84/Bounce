@@ -54,7 +54,7 @@ class AddMealAlertView: UIView {
 		let dishWithoutAmount = dishes.first(where: {$0.amount == 0})
 		
 		if dishWithoutName != nil {
-			let alert = UIAlertController(title: "אופס", message: "נראה ששחכת לבחור במנה", preferredStyle: .alert)
+			let alert = UIAlertController(title: "אופס", message: "נראה ששכחת לבחור במנה", preferredStyle: .alert)
 			alert.addAction(UIAlertAction(title: "הבנתי", style: .cancel))
 			self.parentViewController?.present(alert, animated: true)
 			return

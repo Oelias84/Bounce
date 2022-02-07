@@ -15,7 +15,7 @@ class ChatViewModel {
 	private var messages = [Message]()
 	private let messagesManager = MessagesManager.shared
 	
-	lazy var chatViewModelBinder: (() -> ()) = {}
+	var chatViewModelBinder: (() -> ()) = {}
 	
 	required init(chat: Chat?) {
 		
@@ -36,9 +36,6 @@ class ChatViewModel {
 	var getLastMessage: Message? {
 		messages.last
 	}
-	var getAllMassages: [Message] {
-		messages
-	}
 	func getMessageAt(_ indexPath: IndexPath) -> Message {
 		messages[indexPath.section]
 	}
@@ -52,6 +49,7 @@ class ChatViewModel {
 	}
 	
 	public func listenToMessages(completion: @escaping () -> ()) {
+		print("listenToMassage: ", Date().minute,":",Date().second)
 		guard let chat = chat else {
 			completion()
 			return
@@ -59,10 +57,18 @@ class ChatViewModel {
 		
 		messagesManager.fetchMessagesFor(chat) {
 			[weak self] messages in
-			guard let self = self, let messages = messages else { return }
-			
-			self.messages = messages
+			guard let self = self, let messages = messages else {
+				completion()
+				return
+			}
+			print("sorting: ", Date().minute,":",Date().second)
+			let sorted = messages.sorted { ms1, ms2 in
+				ms1.sentDate < ms2.sentDate
+			}
+			print("finish sorting: ", Date().minute,":",Date().second)
+			self.messages = sorted
 			completion()
+			print(Date().minute,":",Date().second)
 		}
 	}
 	public func getMediaUrlFor(_ urlString: String, completion: @escaping (URL?) -> ()) {

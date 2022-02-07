@@ -223,12 +223,10 @@ extension MessagesManager {
 			
 			switch result {
 			case .success(let messages):
-				if messages.isEmpty {
-					completion([])
-					return
-				}
+			
 				completion(messages)
 			case .failure(let error):
+				completion(nil)
 				print("Error:", error.localizedDescription)
 			}
 		}

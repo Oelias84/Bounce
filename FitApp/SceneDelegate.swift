@@ -41,7 +41,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 						if isApproved {
 							
 							if UserProfile.defaults.finishOnboarding == true {
-								self.goToHome(window)
+								MessagesManager.shared.bindMessageManager = {
+									DispatchQueue.main.async {
+										self.goToHome(window)
+									}
+								}
 							} else {
 								self.goToQuestionnaire(window)
 							}

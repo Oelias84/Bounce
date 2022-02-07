@@ -25,7 +25,6 @@ class ChatViewController: MessagesViewController {
 		self.viewModel = viewModel
 		super.init(nibName: nil, bundle: nil)
 		
-		loadFirstMessages()
 	}
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -36,6 +35,7 @@ class ChatViewController: MessagesViewController {
 		
 		setupController()
 		setupInputButton()
+		loadFirstMessages()
 	}
 }
 
@@ -308,44 +308,25 @@ extension ChatViewController {
 	}
 	
 	private func disableInteraction() {
-		Spinner.shared.show(view)
-		messageInputBar.isUserInteractionEnabled = false
+		if let parentView = self.tabBarController?.view {
+			Spinner.shared.show(parentView)
+		}
 	}
 	private func ableInteraction() {
 		Spinner.shared.stop()
-		messageInputBar.isUserInteractionEnabled = true
 	}
 	
 	private func loadFirstMessages() {
 		var firstLoad = true
-		viewModel.listenToMessages {
-			DispatchQueue.global(qos: .userInitiated).async {
+		DispatchQueue.global().async {
+			self.viewModel.listenToMessages {
+				Spinner.shared.stop()
 				DispatchQueue.main.async {
-					if firstLoad {
-						firstLoad = false
-						Spinner.shared.stop()
 						self.messagesCollectionView.reloadData()
-						self.messagesCollectionView.scrollToLastItem(at: .bottom, animated: false)
-					} else {
-						self.insertMessage()
-					}
+						self.messagesCollectionView.scrollToLastItem()
 				}
 			}
 		}
-	}
-	private func insertMessage() {
-		DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1) {
-			DispatchQueue.main.async {
-				self.messagesCollectionView.reloadDataAndKeepOffset()
-			}
-		}
-	}
-	private func isLastSectionVisible() -> Bool {
-		guard viewModel.getAllMassages.isEmpty else { return false }
-		
-		let count = self.viewModel.messagesCount
-		let lastIndexPath = IndexPath(item: 0, section: count - 1)
-		return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
 	}
 }
 

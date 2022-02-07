@@ -52,7 +52,6 @@ class WeightAlertsManager {
 	private var firstWeekAverageWeight: Double!
 	private var secondWeekAverageWeight: Double!
 	
-	private let messagesManager = MessagesManager.shared
 	
 	required init() {
 		
@@ -236,6 +235,7 @@ extension WeightAlertsManager {
 	
 	//MARK: - Notification
 	private func sendMessageToManager(title: String, text: String) {
+		let messagesManager = MessagesManager.shared
 		messagesManager.sendMassageToSupport(messageText: title + "/n/n" + text)
 	}
 

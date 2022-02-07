@@ -103,7 +103,7 @@ extension GoogleDatabaseManager {
 	}
 	func getChat(userId: String, isAdmin: Bool, completion: @escaping (Result<Chat, ErrorManager.DatabaseError>) -> Void) {
 		
-		chatRef(userId: userId).observe(.value) {
+		chatRef(userId: userId).observeSingleEvent(of: .value) {
 			snapshot in
 			
 			guard let chat = self.parseChatData(userId: userId, isAdmin: isAdmin, snapshot: snapshot) else {
@@ -131,16 +131,13 @@ extension GoogleDatabaseManager {
 		}
 	}
 	func getAllMessagesForChat(chat: Chat, completion: @escaping (Result<[Message], ErrorManager.DatabaseError>) -> Void) {
-		updateOtherUserPushToken(chat: chat) {
-			self.chatMessagesRef(userId: chat.userId).queryOrdered(byChild: "timestamp").observe(.value) {
-				snapshot in
-				guard var messages = self.parseMessagesData(userId: chat.userId, snapshot: snapshot) else {
-					completion(.failure(.noFetch))
-					return
-				}
-				messages.sort()
-				completion(Result.success(messages))
+		chatMessagesRef(userId: chat.userId).queryOrdered(byChild: "timestamp").observe(.value) {
+			snapshot in
+			guard let messages = self.parseMessagesData(userId: chat.userId, snapshot: snapshot) else {
+				completion(.failure(.noFetch))
+				return
 			}
+			completion(.success(messages))
 		}
 	}
 	
@@ -167,7 +164,7 @@ extension GoogleDatabaseManager {
 	
 	//Update
 	private func updateOtherUserPushToken(chat: Chat, completion: @escaping () ->()) {
-		database.child("support").child("admin_push_tokens").observe(.value) {
+		database.child("support").child("admin_push_tokens").observeSingleEvent(of: .value) {
 			snapshot in
 			guard let tokens = snapshot.value as? [String] else {
 				completion()

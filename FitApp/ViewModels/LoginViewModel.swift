@@ -50,10 +50,12 @@ class LoginViewModel {
 									
 									if let user = user?.user, let data = userData {
 										UserProfile.defaults.updateUserProfileData(data, id: user.uid)
-										let _ = MessagesManager.shared
+										
 									}
 									UserProfile.defaults.email = email
-									completion(true, nil)
+									MessagesManager.shared.bindMessageManager = {
+										completion(true, nil)
+									}
 								case .failure(let error):
 									print("Error fetching user data: ", error)
 									completion(false, nil)
