@@ -23,17 +23,6 @@ class HomeViewController: UIViewController {
 	private var hasProgressView = false
 	private var didFinishOnboarding = false
 	
-	let shared = Spinner()
-	var hud = JGProgressHUD()
-	
-	private lazy var titleStackView: UIStackView = {
-		let titleLabel = UILabel()
-		titleLabel.textAlignment = .center
-		titleLabel.text = "מעקב שקילה"
-		let stackView = UIStackView(arrangedSubviews: [titleLabel])
-		return stackView
-	}()
-	
 	@IBOutlet weak var tipContainerView: UIView!
 	
 	@IBOutlet weak var caloriesLabel: UILabel!
@@ -52,7 +41,6 @@ class HomeViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		showLoading()
 		changeStackSpacing()
 		
 		if (UserProfile.defaults.finishOnboarding ?? false) {
@@ -60,7 +48,8 @@ class HomeViewController: UIViewController {
 			viewModel.bindToMealViewModel {
 				[weak self] in
 				guard let self = self else { return }
-				self.stopLoading()
+				
+				Spinner.shared.stop()
 				self.setupProgressLabels()
 				self.setUpProgressView()
 			}
@@ -190,10 +179,6 @@ extension HomeViewController {
 			carbsCountLabel.text = viewModel.getCarbsCurrentValue
 			proteinCountLabel.text = viewModel.getProteinCurrentValue
 			caloriesLabel.text = viewModel.getUserExceptionalCalories
-			
-			if let view = titleStackView.subviews[0] as? UILabel {
-				view.text = viewModel.getMealDate
-			}
 		}
 	}
 	private func setupMotivationText() {
@@ -257,15 +242,6 @@ extension HomeViewController {
 		let safeFrame = window.safeAreaLayoutGuide.layoutFrame
 		let height = safeFrame.height
 		progressStackView.spacing = height > 647.0 ? 84 : 24
-	}
-	
-	func showLoading() {
-		hud.backgroundColor = #colorLiteral(red: 0.6394728422, green: 0.659519434, blue: 0.6805263758, alpha: 0.2546477665)
-		hud.textLabel.text = "טוען"
-		hud.show(in: self.view)
-	}
-	func stopLoading() {
-		hud.dismiss()
 	}
 	
 	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., alertNumber: Int) {
