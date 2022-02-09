@@ -57,7 +57,7 @@ extension ChatContainerViewController {
 		topBarView.isMotivationHidden = true
 		topBarView.isBackButtonHidden = false
 		topBarView.isMessageButtonHidden = true
-		topBarView.nameTitle = UserProfile.defaults.getIsManager ? chatViewController.viewModel.getDisplayName ?? "" : "דברי אלינו" 
+		topBarView.nameTitle = UserProfile.defaults.getIsManager ? chatViewController.viewModel.getDisplayName ?? "" : StaticStringsManager.shared.getGenderString?[25] ?? ""
 	}
 	private func setupChat() {
 
