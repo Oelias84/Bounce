@@ -128,7 +128,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 				}
 			}
 		} else {
-			moveTo(storyboardId: K.StoryboardName.chat, vcId: K.ViewControllerId.ChatsViewController)
+			if UserProfile.defaults.getIsManager {
+				moveTo(storyboardId: K.StoryboardName.chat, vcId: K.ViewControllerId.ChatsViewController)
+			} else {
+				moveTo(storyboardId: K.StoryboardName.chat, vcId: K.ViewControllerId.ChatContainerViewController)
+			}
 		}
 		completionHandler()
 	}
@@ -151,7 +155,15 @@ extension AppDelegate {
 	
 	private var presentMessageNotifications: Bool {
 		if let firstVC = (UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.rootViewController?.topMostViewController()) {
-			return !(firstVC.isKind(of: ChatsViewController.self) || firstVC.isKind(of: ChatViewController.self))
+			
+//			if firstVC.isKind(of: ChatContainerViewController.self) {
+//				guard let chatContainerVC = firstVC as? ChatContainerViewController else { return true }
+//				let chatVC: ChatViewController = chatContainerVC.chatViewController
+//				let userToken: String = chatVC.viewModel.getOtherUserToken
+//
+//			}
+			
+			return !(firstVC.isKind(of: ChatsViewController.self) || firstVC.isKind(of: ChatContainerViewController.self))
 		}
 		return true
 	}
