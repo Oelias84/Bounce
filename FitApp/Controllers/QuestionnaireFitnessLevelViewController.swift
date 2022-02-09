@@ -37,6 +37,7 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationItem.setHidesBackButton(true, animated: false)
+		setupTextLabels()
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)

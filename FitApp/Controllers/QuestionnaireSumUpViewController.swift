@@ -7,11 +7,12 @@
 
 import UIKit
 import Foundation
+import FirebaseAuth
 
 class QuestionnaireSumUpViewController: UIViewController {
 	
-    private let manager = GoogleApiManager()
     private var userData = UserProfile.defaults
+	private let googleManager = GoogleDatabaseManager.shared
 
 	@IBOutlet weak var ageLabel: UITextField!
 	@IBOutlet weak var weightLabel: UITextField!
@@ -47,7 +48,24 @@ class QuestionnaireSumUpViewController: UIViewController {
 		}
 
 		UserProfile.updateServer()
-		moveToHomeViewController()
+		
+		DispatchQueue.global(qos: .userInteractive).async {
+			guard let userID = Auth.auth().currentUser?.uid else { return }
+			
+			self.googleManager.createChat(userId: userID, isAdmin: false) {
+				[weak self] result in
+				guard let self = self else { return }
+				
+				switch result {
+				case .success(_):
+					DispatchQueue.main.async {
+						self.moveToHomeViewController()
+					}
+				case .failure(let error):
+					print("Error:", error.localizedDescription)
+				}
+			}
+		}
 	}
 }
 extension QuestionnaireSumUpViewController: UITextFieldDelegate {

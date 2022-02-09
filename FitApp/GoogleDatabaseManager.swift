@@ -44,8 +44,12 @@ extension GoogleDatabaseManager {
 			}
 			dispatchGroup.enter()
 			queue.async(group: dispatchGroup) {
-				self.updateOtherUserPushToken(chat: chat) {
+				if isAdmin {
 					dispatchGroup.leave()
+				} else {
+					self.updateOtherUserPushToken(chat: chat) {
+						dispatchGroup.leave()
+					}
 				}
 			}
 			dispatchGroup.notify(queue: .global()) {
@@ -121,8 +125,12 @@ extension GoogleDatabaseManager {
 			}
 			dispatchGroup.enter()
 			queue.async(group: dispatchGroup) {
-				self.updateOtherUserPushToken(chat: chat) {
+				if isAdmin {
 					dispatchGroup.leave()
+				} else {
+					self.updateOtherUserPushToken(chat: chat) {
+						dispatchGroup.leave()
+					}
 				}
 			}
 			dispatchGroup.notify(queue: .global()) {
@@ -131,7 +139,7 @@ extension GoogleDatabaseManager {
 		}
 	}
 	func getAllMessagesForChat(chat: Chat, completion: @escaping (Result<[Message], ErrorManager.DatabaseError>) -> Void) {
-		chatMessagesRef(userId: chat.userId).queryOrdered(byChild: "timestamp").observe(.value) {
+		chatMessagesRef(userId: chat.userId).observe(.value) {
 			snapshot in
 			guard let messages = self.parseMessagesData(userId: chat.userId, snapshot: snapshot) else {
 				completion(.failure(.noFetch))
@@ -146,6 +154,7 @@ extension GoogleDatabaseManager {
 		let messageData = createMessageData(senderId: "", kind: MessageKind.text("").rawValue, timestamp: 0, content: "", mediaPath: nil, mediaPreview: nil)
 		
 		return [
+			"display_name": "\(UserProfile.defaults.name ?? "")",
 			"latest_message": messageData,
 			"last_seen_message_timestamp": 0,
 			"support_last_seen_message_timestamp": 0
@@ -166,12 +175,16 @@ extension GoogleDatabaseManager {
 	private func updateOtherUserPushToken(chat: Chat, completion: @escaping () ->()) {
 		database.child("support").child("admin_push_tokens").observeSingleEvent(of: .value) {
 			snapshot in
-			guard let tokens = snapshot.value as? [String] else {
+			
+			guard let tokens = snapshot.value as? [String: Int64] else {
 				completion()
 				print("no Tokens")
 				return
 			}
-			chat.pushTokens = tokens
+			var pushTokens: [String] {
+				return tokens.keys.compactMap { $0 }
+			}
+			chat.pushTokens = pushTokens
 			completion()
 		}
 	}
@@ -339,7 +352,7 @@ extension GoogleDatabaseManager {
 	}
 	
 	func convertBase64StringToImage (imageBase64String: String) -> UIImage? {
-		if let imageData = Data.init(base64Encoded: imageBase64String, options: .init(rawValue: 0)) {
+		if let imageData = Data(base64Encoded: imageBase64String, options: .init(rawValue: 0)) {
 			let image = UIImage(data: imageData)
 			return image
 		}

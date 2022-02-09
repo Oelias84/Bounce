@@ -251,7 +251,7 @@ extension ChatViewController {
 			self?.present(picker, animated: true)
 			
 		}))
-		actionSheet.addAction(UIAlertAction(title: "ספרייה", style: .default, handler: { [weak self] _ in
+		actionSheet.addAction(UIAlertAction(title: "גלריה", style: .default, handler: { [weak self] _ in
 			
 			let picker = UIImagePickerController()
 			picker.sourceType = .photoLibrary
@@ -281,7 +281,7 @@ extension ChatViewController {
 				let photoViewer = PhotoViewerViewController(with: url)
 				self.parent?.present(photoViewer, animated: true)
 			} else {
-				self.presentOkAlert(withTitle: "", withMessage: "", buttonText: "סגירה")
+				self.presentOkAlert(withTitle: "אופס!", withMessage: "נראה שאין אפשרות להציג תמונה זאת", buttonText: "סגירה")
 			}
 		}
 	}
@@ -302,7 +302,7 @@ extension ChatViewController {
 				self.parent?.present(videoVC, animated: true)
 				videoVC.player?.play()
 			} else {
-				self.presentOkAlert(withTitle: "", withMessage: "", buttonText: "סגירה")
+				self.presentOkAlert(withTitle: "אופס!", withMessage: "נראה שהסירטון אינו זמין לצפייה", buttonText: "סגירה")
 			}
 		}
 	}
@@ -317,8 +317,7 @@ extension ChatViewController {
 	}
 	
 	private func loadFirstMessages() {
-		var firstLoad = true
-		DispatchQueue.global().async {
+		DispatchQueue.global(qos: .userInteractive).async {
 			self.viewModel.listenToMessages {
 				Spinner.shared.stop()
 				DispatchQueue.main.async {

@@ -9,9 +9,9 @@ import UIKit
 import FirebaseAuth
 
 class LoginViewController: UIViewController {
-
+	
 	private let viewModel = LoginViewModel()
-
+	
 	@IBOutlet weak var emailTextfield: UITextField!
 	@IBOutlet weak var passwordTextfield: UITextField!
 	@IBOutlet weak var buttonsStackView: UIStackView!
@@ -30,9 +30,9 @@ class LoginViewController: UIViewController {
 	
 	@IBAction func signInButtonAction(_ sender: Any) {
 		view.endEditing(true)
-		
+		Spinner.shared.show(view)
+
 		do {
-			Spinner.shared.show(view)
 			try viewModel.login(email: emailTextfield.text, password: passwordTextfield.text) {
 				[weak self] login, error in
 				guard let self = self else { return }
@@ -115,14 +115,18 @@ extension LoginViewController {
 		let questionnaireVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation)
 		
 		questionnaireVC.modalPresentationStyle = .fullScreen
-		present(questionnaireVC, animated: true)
+		DispatchQueue.main.async {
+			self.present(questionnaireVC, animated: true)
+		}
 	}
 	private func moveToHomeViewController() {
 		let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
 		let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar)
 		
 		homeVC.modalPresentationStyle = .fullScreen
-		present(homeVC, animated: true)
+		DispatchQueue.main.async {
+			self.present(homeVC, animated: true)
+		}
 	}
 	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., alertNumber: Int) {
 		Spinner.shared.stop()
@@ -143,7 +147,7 @@ extension LoginViewController {
 		customAlert.messageText = message
 		customAlert.alertNumber = alertNumber
 		customAlert.okButtonText = options[0]
-
+		
 		switch options.count {
 		case 1:
 			customAlert.cancelButtonIsHidden = true
@@ -155,7 +159,8 @@ extension LoginViewController {
 		default:
 			break
 		}
-		
-		window.rootViewController?.present(customAlert, animated: true, completion: nil)
+		DispatchQueue.main.async {
+			window.rootViewController?.present(customAlert, animated: true, completion: nil)
+		}
 	}
 }

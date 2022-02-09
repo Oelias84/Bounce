@@ -27,6 +27,9 @@ class ChatViewModel {
 	}
 	
 	//getters
+	var getOtherUserToken: String {
+		chat?.pushTokens?.first ?? ""
+	}
 	var getDisplayName: String? {
 		chat?.displayName
 	}
@@ -49,7 +52,6 @@ class ChatViewModel {
 	}
 	
 	public func listenToMessages(completion: @escaping () -> ()) {
-		print("listenToMassage: ", Date().minute,":",Date().second)
 		guard let chat = chat else {
 			completion()
 			return
@@ -61,14 +63,11 @@ class ChatViewModel {
 				completion()
 				return
 			}
-			print("sorting: ", Date().minute,":",Date().second)
 			let sorted = messages.sorted { ms1, ms2 in
 				ms1.sentDate < ms2.sentDate
 			}
-			print("finish sorting: ", Date().minute,":",Date().second)
 			self.messages = sorted
 			completion()
-			print(Date().minute,":",Date().second)
 		}
 	}
 	public func getMediaUrlFor(_ urlString: String, completion: @escaping (URL?) -> ()) {

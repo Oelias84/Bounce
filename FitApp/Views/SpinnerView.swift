@@ -19,12 +19,16 @@ struct Spinner {
 	}
 	
 	func show(_ view: UIView) {
-		hud.backgroundColor = #colorLiteral(red: 0.6394728422, green: 0.659519434, blue: 0.6805263758, alpha: 0.2546477665)
-		hud.textLabel.text = "טוען"
-		hud.show(in: view)
+		DispatchQueue.main.async {
+			hud.backgroundColor = #colorLiteral(red: 0.6394728422, green: 0.659519434, blue: 0.6805263758, alpha: 0.2546477665)
+			hud.textLabel.text = "טוען"
+			hud.show(in: view)
+		}
 	}
 	
 	func stop() {
-		hud.dismiss()
+		DispatchQueue.main.async {
+			hud.dismiss()
+		}
 	}
 }

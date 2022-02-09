@@ -23,7 +23,8 @@ class ChatsViewController: UIViewController {
 
 		chatsViewModel = ChatsViewModel()
 		chatsViewModel.chatsViewModelBinder = {
-			[unowned self] in
+			[weak self] in
+			guard let self = self else { return }
 			self.updateUI()
 		}
 		

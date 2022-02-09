@@ -40,10 +40,10 @@ class LoginViewModel {
 					
 					switch result {
 					case .success(let isApproved):
+						
 						if isApproved {
-							
 							self.googleManager.getUserData { result in
-
+								
 								switch result {
 								case .success(let userData):
 									LocalNotificationManager.shared.setMealNotification()
@@ -53,9 +53,7 @@ class LoginViewModel {
 										
 									}
 									UserProfile.defaults.email = email
-									MessagesManager.shared.bindMessageManager = {
 										completion(true, nil)
-									}
 								case .failure(let error):
 									print("Error fetching user data: ", error)
 									completion(false, nil)

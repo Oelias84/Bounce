@@ -71,7 +71,6 @@ class HomeViewModel {
 	}
 	func fetchMeals() {
 		
-		MealViewModel.shared.fetchData()
 	}
 	
 	var getFatColor: UIColor {
@@ -86,7 +85,7 @@ class HomeViewModel {
 	
 	// Meals Binder
 	func bindToMealViewModel(completion: @escaping ()->()) {
-		fetchMeals()
+		MealViewModel.shared.fetchData()
 		MealViewModel.shared.bindMealViewModelToController = {
 			completion()
 		}

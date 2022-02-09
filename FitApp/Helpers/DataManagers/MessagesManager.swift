@@ -32,7 +32,7 @@ class MessagesManager {
 	private let userEmail = UserProfile.defaults.email
 	private let userName = UserProfile.defaults.name
 	private let isAdmin = UserProfile.defaults.getIsManager
-
+	
 	var bindMessageManager: (() -> ()) = {}
 	
 	private init() {
@@ -69,30 +69,32 @@ extension MessagesManager {
 	
 	private func sendNotification(to tokens: [String], name: String, text: String) {
 		let notification = PushNotificationSender()
+
+		var notificationTitle: String {
+			return isAdmin ? "הודעה נשלחה מ BOUNCE" : "הודעה נשלחה מ- \(name)"
+		}
 		
 		DispatchQueue.global(qos: .background).async {
 			tokens.forEach {
-				notification.sendPushNotification(to: $0, title: "הודעה נשלחה מ- \(name)", body: text)
+				notification.sendPushNotification(to: $0, title: notificationTitle, body: text)
 			}
 		}
 	}
 	public func sendTextMessageToChat(chat: Chat, text: String, completion: @escaping (Error?) -> ()) {
 		
-		DispatchQueue.global(qos: .background).async {
-			GoogleDatabaseManager.shared.sendMessageToChat(chat: chat, content: text, kind: .text(text)) {
-				[weak self] result in
-				guard let self = self else { return }
+		googleManager.sendMessageToChat(chat: chat, content: text, kind: .text(text)) {
+			[weak self] result in
+			guard let self = self else { return }
+			
+			switch result {
+			case .success(_):
+				completion(nil)
+				guard let userName = self.userName, let otherUserPushTokens = chat.pushTokens else { return }
+				self.sendNotification(to: otherUserPushTokens, name: userName, text: text)
+			case .failure(let error):
 				
-				switch result {
-				case .success(_):
-					completion(nil)
-						guard let userName = self.userName, let otherUserPushTokens = chat.pushTokens else { return }
-						self.sendNotification(to: otherUserPushTokens, name: userName, text: text)
-				case .failure(let error):
-					
-					completion(error)
-					print("Error:", error.localizedDescription)
-				}
+				completion(error)
+				print("Error:", error.localizedDescription)
 			}
 		}
 	}
@@ -101,20 +103,20 @@ extension MessagesManager {
 		switch messageKind {
 		case .photo(let media):
 			guard let image = media.image,
-				  let imageData = image.jpegData(compressionQuality: 0.5),
+				  let imageData = image.jpegData(compressionQuality: 0.2),
 				  let fileName = self.remoteFileName(chat: chat, folderName: "messages_images", suffix: ".jpeg") else { return }
 			
 			//Send Photo message
-			GoogleStorageManager.shared.uploadImage(data: imageData, fileName: fileName) {
+			googleStorageManager.uploadImage(data: imageData, fileName: fileName) {
 				result in
 				
 				switch result {
 				case .success():
 					
-					guard let placeholder = image.jpegData(compressionQuality: 0.8) else { return }
+					guard let placeholder = image.jpegData(compressionQuality: 0.05) else { return }
 					let media = Media(url: nil, image: nil, mediaURLString: fileName, placeholderImage: image, size: .zero)
 					
-					GoogleDatabaseManager.shared.sendMessageToChat(chat: chat, content: "", link: fileName, previewData: placeholder, kind: .photo(media)) {
+					self.googleManager.sendMessageToChat(chat: chat, content: "", link: fileName, previewData: placeholder, kind: .photo(media)) {
 						[weak self] result in
 						guard let self = self else { return }
 						
@@ -147,13 +149,12 @@ extension MessagesManager {
 				case .success(_):
 					guard let placeholder = MessagesManager.generateThumbnailFrom(videoURL: fileUrl) else { return }
 					let media = Media(url: nil, image: nil, mediaURLString: fileName, placeholderImage: placeholder, size: .zero)
-
-					GoogleDatabaseManager.shared.sendMessageToChat(chat: chat, content: "", link: fileName, previewData: placeholder.jpegData(compressionQuality: 0.8), kind: .video(media)) {
+					
+					self.googleManager.sendMessageToChat(chat: chat, content: "", link: fileName, previewData: placeholder.jpegData(compressionQuality: 0.05), kind: .video(media)) {
 						[weak self] result in
 						guard let self = self else { return }
-
+						
 						switch result {
-
 						case .success():
 							completion(nil)
 							guard let userName = self.userName, let otherUserPushTokens = chat.pushTokens else { return }
@@ -175,7 +176,7 @@ extension MessagesManager {
 	public func fetchSupportChats() {
 		guard let userId = self.userId else { return }
 		
-		GoogleDatabaseManager.shared.getAllChats(userId: userId) {
+		self.googleManager.getAllChats(userId: userId) {
 			[weak self] chats in
 			guard let self = self else { return }
 			
@@ -190,15 +191,14 @@ extension MessagesManager {
 			
 			switch result {
 			case .success(let chat):
-				
 				self.chats.append(chat)
+				
 			case .failure(let error):
 				
 				switch error {
 				case .dataIsEmpty:
-					
 					//If chat dose not exist, create new Chat
-					GoogleDatabaseManager.shared.createChat(userId: userId, isAdmin: self.isAdmin) {
+					self.googleManager.createChat(userId: userId, isAdmin: self.isAdmin) {
 						[weak self] result in
 						guard let self = self else { return }
 						
@@ -223,7 +223,6 @@ extension MessagesManager {
 			
 			switch result {
 			case .success(let messages):
-			
 				completion(messages)
 			case .failure(let error):
 				completion(nil)
@@ -234,17 +233,15 @@ extension MessagesManager {
 	
 	public func downloadMediaURL(urlString: String, completion: @escaping (URL?) ->()) {
 		
-		DispatchQueue.global().sync {
-			GoogleStorageManager.shared.downloadURL(path: urlString) {
-				result in
-				
-				switch result {
-				case .success(let url):
-					completion(url)
-				case .failure(let error):
-					completion(nil)
-					print("no image exist", error)
-				}
+		googleStorageManager.downloadURL(path: urlString) {
+			result in
+			
+			switch result {
+			case .success(let url):
+				completion(url)
+			case .failure(let error):
+				completion(nil)
+				print("no image exist", error)
 			}
 		}
 	}
