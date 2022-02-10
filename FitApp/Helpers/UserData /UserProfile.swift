@@ -244,7 +244,8 @@ extension UserProfile {
 	}
 	func resetUserProfileData() {
 		var userProfile = UserProfile.defaults
-		
+
+		userProfile.userProfileImage = nil
 		userProfile.permissionLevel = nil
 		userProfile.healthApproval = nil
 		userProfile.termsApproval = nil
