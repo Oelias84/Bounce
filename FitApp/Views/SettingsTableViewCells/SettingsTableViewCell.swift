@@ -34,6 +34,10 @@ class SettingsTableViewCell: UITableViewCell {
 		super.awakeFromNib()
 		setupView()
 	}
+	override func prepareForReuse() {
+		super.prepareForReuse()
+		infoButton.isHidden = true
+	}
 	override func setSelected(_ selected: Bool, animated: Bool) {
 		super.setSelected(selected, animated: animated)
 	}
