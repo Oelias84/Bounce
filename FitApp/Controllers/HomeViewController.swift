@@ -58,16 +58,24 @@ class HomeViewController: UIViewController {
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-	
+
 		setupProgressLabels()
-		checkWeightState()
-		checkMealsState()
+		topBarView.setImage()
+		
+		let queue = OperationQueue()
+
+		queue.addOperation {
+			self.checkWeightAlert()
+		}
+		queue.addOperation {
+			self.checkMealsState()
+		}
+		queue.waitUntilAllOperationsAreFinished()
 	}
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
 		setUpProgressView()
-		topBarView.setImage()
 	}
 }
 
@@ -218,18 +226,33 @@ extension HomeViewController {
 	
 	private func checkMealsState() {
 		viewModel.checkDidFinishDailyMeals {
-			self.presentAlert(withTitle: "מעקב ארוחות", withMessage: "ראינו שלא השלמת את מעקב האורחות היומי שלך", options: "עבור למסך ארוחות", "ביטול", alertNumber: 1)
+			DispatchQueue.main.async {
+				self.presentAlert(withTitle: "מעקב ארוחות", withMessage: "ראינו שלא השלמת את מעקב האורחות היומי שלך", options: "עבור למסך ארוחות", "ביטול", alertNumber: 1)
+			}
 		}
 	}
-	private func checkWeightState() {
+	private func checkWeightAlert() {
+		let lastDate = UserProfile.defaults.lastWeightAlertPresentedDate
+			
+		if lastDate == nil {
+			UserProfile.defaults.lastWeightAlertPresentedDate = Date()
+			presentWeightAlert()
+		} else if lastDate?.onlyDate != Date().onlyDate {
+			UserProfile.defaults.lastWeightAlertPresentedDate = Date()
+			presentWeightAlert()
+		}
+	}
+	
+	private func presentWeightAlert() {
 		viewModel.checkAddWeight {
-			self.presentAlert(withTitle: "זמן להישקל", withMessage: "תזכורת קטנה לא לשכוח להישקל הבוקר לפני שאת מתחילה את היום :)", options: "עבור למסך שקילה", "ביטול", alertNumber: 2)
+			DispatchQueue.main.async {
+				self.presentAlert(withTitle: "זמן להישקל", withMessage: "תזכורת קטנה לא לשכוח להישקל הבוקר לפני שאת מתחילה את היום :)", options: "עבור למסך שקילה", "ביטול", alertNumber: 2)
+			}
 		}
 	}
 	
 	@objc func animateProgress() {
 		DispatchQueue.main.async {
-			[unowned self] in
 			UIView.animate(withDuration: 1.0) {
 				self.proteinRingLayer.progress = self.viewModel.proteinPercentage
 				self.carbsRingLayer.progress = self.viewModel.carbsPercentage

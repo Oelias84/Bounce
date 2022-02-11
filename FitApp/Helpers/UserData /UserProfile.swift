@@ -78,6 +78,9 @@ struct UserProfile {
 	@UserDefault(key: .profileImageImageUrl)
 	var profileImageImageUrl: String?
 	
+	@UserDefault(key: .lastWeightAlertPresentedDate)
+	var lastWeightAlertPresentedDate: Date?
+
 	@UserDefault(key: .lastWightImageUrl)
 	var lastWightImageUrl: String?
 	
@@ -156,7 +159,7 @@ struct UserProfile {
 }
 
 extension UserProfile {
-	
+		
 	var getGender: Gender? {
 		get {
 			switch gender {
@@ -267,6 +270,7 @@ extension UserProfile {
 		userProfile.fitnessLevel = nil
 		userProfile.weaklyWorkouts = nil
 		userProfile.externalWorkout = nil
+		userProfile.lastWeightAlertPresentedDate = nil
 	}
 }
 
@@ -320,6 +324,7 @@ extension Key {
 	static let lastCaloriesCheckDateString: Key = "lastCaloriesCheckDateString"
 	
 	//user data
+	static let lastWeightAlertPresentedDate: Key = "lastWeightAlertPresentedDate"
 	static let permissionLevel: Key = "permissionLevel"
 	static let termsApproval: Key = "termsApproval"
 	static let healthApproval: Key = "healthApproval"
