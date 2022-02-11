@@ -33,7 +33,11 @@ class Chat: Comparable {
 		false
 	}
 	static func < (lhs: Chat, rhs: Chat) -> Bool {
-		lhs.latestMessage!.sentDate > rhs.latestMessage!.sentDate
+		if let lhsDate = lhs.latestMessage?.sentDate, let rhsDate = rhs.latestMessage?.sentDate {
+			return lhsDate > rhsDate
+		} else {
+			return false
+		}
 	}
 }
 
