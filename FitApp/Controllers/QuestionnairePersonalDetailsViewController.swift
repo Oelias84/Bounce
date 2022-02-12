@@ -24,7 +24,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	
 	private let numberPicker = UIPickerView()
 	private let weightNumberArray = Array(30...150)
-    private let fractionNumberArray = Array(0...99)
+	private let fractionNumberArray = Array(0...9)
     private let heightNumberArray = Array(100...250)
 
     private var height: Int?
@@ -202,7 +202,6 @@ extension QuestionnairePersonalDetailsViewController: UITextFieldDelegate {
 				} else {
 					weight = value
 				}
-				
 			default:
 				break
 			}
