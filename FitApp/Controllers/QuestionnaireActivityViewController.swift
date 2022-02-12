@@ -131,11 +131,9 @@ extension QuestionnaireActivityViewController {
 		if let steps = userData.steps {
 			stepsLabel.text = String(steps)
 			stepsCheckBox.isSelected = true
-			kilometersSlider.isEnabled = false
 		} else if let kilometers = userData.kilometer {
 			kilometersLabel.text = String(kilometers)
 			kilometersCheckBox.isSelected = true
-			stepsSlider.isEnabled = false
 		} else {
 			kilometersLabel.text = String(minimumKilometers) + " " + K.Units.kilometers
 			stepsLabel.text = String(minimumSteps)
