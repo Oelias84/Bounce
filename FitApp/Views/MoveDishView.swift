@@ -112,7 +112,7 @@ extension MoveDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 		switch pickerView {
 		case dishPickerView:
 			let dish = meal.dishes[row]
-			return dish.getDishName + " " + dish.type.rawValue
+			return  dish.getDishName
 		case destinationPickerView:
 			return mealViewModel.meals![row].name
 		default:
