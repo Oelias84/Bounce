@@ -10,6 +10,7 @@ import UIKit
 enum PopupType {
 	
 	case normal
+	case textBox
 	case textField
 }
 
@@ -30,6 +31,8 @@ class PopupAlertView: UIViewController {
 	@IBOutlet weak var messageLabel: UILabel!
 	
 	@IBOutlet weak var textBox: UITextView!
+	@IBOutlet weak var textField: DishCellTextFieldView!
+	
 	@IBOutlet weak var cancelButton: UIButton!
 	@IBOutlet weak var okButton: UIButton!
 	@IBOutlet weak var thirdButton: UIButton!
@@ -53,8 +56,10 @@ class PopupAlertView: UIViewController {
 		switch popupType {
 		case .normal:
 			break
-		case .textField:
+		case .textBox:
 			textBox.isHidden = false
+		case .textField:
+			textField.isHidden = false
 		}
 		
 		if titleText != nil {
@@ -92,7 +97,10 @@ class PopupAlertView: UIViewController {
 	
 	@IBAction func onTapOkButton(_ sender: UIButton) {
 		textBox.resignFirstResponder()
-		delegate?.okButtonTapped(alertNumber: alertNumber, selectedOption: nil, textFieldValue: textBox.text)
+		delegate?.okButtonTapped(alertNumber: alertNumber,
+								 selectedOption: nil,
+								 textFieldValue: popupType == .textBox ? textBox.text : textField.text)
+		
 		self.dismiss(animated: true, completion: nil)
 	}
 	@IBAction func onTapCancelButton(_ sender: UIButton) {
@@ -109,17 +117,32 @@ class PopupAlertView: UIViewController {
 extension PopupAlertView: UITextViewDelegate  {
 	
 	func textViewDidBeginEditing(_ textView: UITextView) {
-
 		if textBox.textColor == UIColor.lightGray {
 			textBox.text = ""
 			textBox.textColor = .black
 		}
 	}
 	func textViewDidEndEditing(_ textView: UITextView) {
-
 		if textBox.text == "" {
 			textBox.text = "כתבו את תוכן ההודעה…"
 			textBox.textColor = .lightGray
+		}
+	}
+}
+
+extension PopupAlertView: UITextFieldDelegate {
+	
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		if textField.textColor == UIColor.lightGray {
+			textField.text = ""
+			textField.textColor = .black
+		}
+	}
+	
+	func textFieldDidEndEditing(_ textField: UITextField) {
+		if textField.text == "" {
+			textField.text = "הזינו את שם המנה..."
+			textField.textColor = .lightGray
 		}
 	}
 }
@@ -134,6 +157,11 @@ extension PopupAlertView {
 		textBox.delegate = self
 		textBox.text = "כתבו את תוכן ההודעה…"
 		textBox.textColor = .lightGray
+		
+		textField.delegate = self
+		textField.addPadding(padding: .right(4))
+		textField.text = "הזינו את שם המנה..."
+		textField.textColor = .lightGray
 	}
 	private func animateView() {
 		alertView.alpha = 0;

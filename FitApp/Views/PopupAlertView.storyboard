@@ -107,7 +107,7 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OEI-P5-R1f">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OEI-P5-R1f" userLabel="Text Stack View">
                                         <rect key="frame" x="12" y="77" width="287" height="0.0"/>
                                         <subviews>
                                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Zir-D3-t4s">
@@ -125,6 +125,17 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textView>
+                                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZBg-AP-Uq4" customClass="DishCellTextFieldView" customModule="FitApp" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="287" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="TGa-rc-Stw"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="sFZ-PF-moY" id="7pE-Vz-MAh"/>
+                                                </connections>
+                                            </textField>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -160,6 +171,7 @@
                         <outlet property="messageLabel" destination="iJe-te-LIp" id="68R-AC-imQ"/>
                         <outlet property="okButton" destination="zYg-vi-d0a" id="MQD-Rj-HDh"/>
                         <outlet property="textBox" destination="Zir-D3-t4s" id="isK-zm-Qkz"/>
+                        <outlet property="textField" destination="ZBg-AP-Uq4" id="etP-L5-d9r"/>
                         <outlet property="thirdButton" destination="H57-eg-TeL" id="9uZ-YW-NgW"/>
                         <outlet property="titleLabel" destination="Q9A-L3-03r" id="rsB-P0-gFT"/>
                     </connections>

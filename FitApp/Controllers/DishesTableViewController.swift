@@ -49,8 +49,7 @@ class DishesTableViewController: UIViewController {
 	}
 	
 	@IBAction func otherButtonAction(_ sender: Any) {
-		
-		changeOtherDishAlert()
+		presentAlert(withTitle: "הזנת מנה" , withMessage: "אנא הזינו את שם המנה הרצויה ולאחר מכן אישור בכדי לבצע את ההחלפה", options: "אישור", "ביטול", alertNumber: 1)
 	}
 	@IBAction func cancelButtonAction(_ sender: Any) {
 		delegate?.cancelButtonTapped()
@@ -140,10 +139,20 @@ extension DishesTableViewController: PopupAlertViewDelegate {
 	}
 	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
 		
-		if let indexPath = indexPath {
-			self.tableView.deselectRow(at: indexPath, animated: true)
-			self.delegate?.didPickDish(name: self.selectedDish)
+		if let text = textFieldValue, text != "" {
+			if UserProfile.defaults.otherDishes == nil {
+				UserProfile.defaults.otherDishes = [text]
+			} else {
+				UserProfile.defaults.otherDishes?.append(text)
+			}
 			dismiss(animated: true) {
+				self.delegate?.didPickDish(name: text)
+				self.dismiss(animated: true)
+			}
+		} else if let indexPath = indexPath {
+			self.tableView.deselectRow(at: indexPath, animated: true)
+			dismiss(animated: true) {
+				self.delegate?.didPickDish(name: self.selectedDish)
 				self.dismiss(animated: true)
 			}
 		}
@@ -160,7 +169,6 @@ extension DishesTableViewController {
 		if let otherDishes = UserProfile.defaults.otherDishes {
 			self.otherDishes = otherDishes
 			DispatchQueue.main.async {
-				[unowned self] in
 				self.tableView.reloadData()
 			}
 		}
@@ -170,7 +178,7 @@ extension DishesTableViewController {
 		
 		switch state {
 		case .normal:
-			presentAlert(withTitle: "החלפת מנה" , withMessage: "האם ברצונך להחליף \nאת- \(originalDishName)\n ב- \(selectedDish)", options: "אישור", "ביטול")
+			presentAlert(withTitle: "החלפת מנה" , withMessage: "האם ברצונך להחליף \nאת- \(originalDishName)\n ב- \(selectedDish)", options: "אישור", "ביטול", alertNumber: 0)
 		case .exceptional:
 			dismiss(animated: true)
 		default:
@@ -178,29 +186,31 @@ extension DishesTableViewController {
 		}
 	}
 	private func changeOtherDishAlert() {
-		let alert = UIAlertController(title: "הזנת מנה", message: "אנא הזינו את שם המנה הרצויה ולאחר מכן אישור בכדי לבצע את ההחלפה", preferredStyle: .alert)
 		
-		alert.addTextField { textField in
-			textField.placeholder = "הזינו את שם המנה"
-		}
-		alert.addAction(UIAlertAction(title: "אישור", style: .default) { _ in
-			guard let textField = alert.textFields?[0] ,let otherDishText = textField.text else { return }
-			
-			if UserProfile.defaults.otherDishes == nil {
-				UserProfile.defaults.otherDishes = [otherDishText]
-			} else {
-				UserProfile.defaults.otherDishes?.append(otherDishText)
-			}
-			self.selectedDish = textField.text
-			self.dismiss(animated: true)
-		})
-		alert.addAction(UIAlertAction(title: "ביטול", style: .cancel) { _ in
-			self.selectedDish = nil
-		})
-		present(alert, animated: true)
+		presentAlert(withTitle: "הזנת מנה" , withMessage: "אנא הזינו את שם המנה הרצויה ולאחר מכן אישור בכדי לבצע את ההחלפה", options: "אישור", "ביטול", alertNumber: 1)
+		
+//		let alert = UIAlertController(title: "הזנת מנה", message: "אנא הזינו את שם המנה הרצויה ולאחר מכן אישור בכדי לבצע את ההחלפה", preferredStyle: .alert)
+//
+//		alert.addTextField { textField in
+//			textField.placeholder = "הזינו את שם המנה"
+//		}
+//		alert.addAction(UIAlertAction(title: "אישור", style: .default) { _ in
+//			guard let textField = alert.textFields?[0] ,let otherDishText = textField.text else { return }
+//
+//			if UserProfile.defaults.otherDishes == nil {
+//				UserProfile.defaults.otherDishes = [otherDishText]
+//			} else {
+//				UserProfile.defaults.otherDishes?.append(otherDishText)
+//			}
+//			self.selectedDish = textField.text
+//			self.dismiss(animated: true)
+//		})
+//		alert.addAction(UIAlertAction(title: "ביטול", style: .cancel) { _ in
+//			self.selectedDish = nil
+//		})
+//		present(alert, animated: true)
 	}
-	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
-		
+	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., alertNumber: Int) {
 		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
 		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
 		
@@ -208,16 +218,47 @@ extension DishesTableViewController {
 		customAlert.definesPresentationContext = true
 		customAlert.modalPresentationStyle = .overCurrentContext
 		customAlert.modalTransitionStyle = .crossDissolve
-
+		
 		customAlert.delegate = self
 		customAlert.titleText = title
 		customAlert.messageText = message
+		customAlert.alertNumber = alertNumber
 		customAlert.okButtonText = options[0]
-		customAlert.cancelButtonText = options[1]
-		
-		if options.count == 3 {
+		if alertNumber == 1 { customAlert.popupType = .textField }
+
+		switch options.count {
+		case 1:
+			customAlert.cancelButtonIsHidden = true
+		case 2:
+			customAlert.cancelButtonText = options[1]
+		case 3:
+			customAlert.cancelButtonText = options[1]
 			customAlert.doNotShowText = options.last
+		default:
+			break
 		}
+		
 		present(customAlert, animated: true)
 	}
+//	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
+//
+//		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
+//		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
+//
+//		customAlert.providesPresentationContextTransitionStyle = true
+//		customAlert.definesPresentationContext = true
+//		customAlert.modalPresentationStyle = .overCurrentContext
+//		customAlert.modalTransitionStyle = .crossDissolve
+//
+//		customAlert.delegate = self
+//		customAlert.titleText = title
+//		customAlert.messageText = message
+//		customAlert.okButtonText = options[0]
+//		customAlert.cancelButtonText = options[1]
+//
+//		if options.count == 3 {
+//			customAlert.doNotShowText = options.last
+//		}
+//		present(customAlert, animated: true)
+//	}
 }
