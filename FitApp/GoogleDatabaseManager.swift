@@ -98,7 +98,7 @@ extension GoogleDatabaseManager {
 	}
 	
 	func getAllChats(userId: String, completion: @escaping ([Chat]) -> Void) {
-		chatsRef().observe(.value) {
+		chatsRef().observeSingleEvent(of: .value) {
 			snapshot in
 			
 			let chats = self.parseChatsData(userId: userId, snapshot: snapshot)
