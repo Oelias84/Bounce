@@ -44,6 +44,10 @@ class MoveDishView: UIView {
 	@IBOutlet weak var dishAmountLabel: UILabel!
 	@IBOutlet weak var bottomViewConstrain: NSLayoutConstraint!
 	
+	deinit {
+		removeKeyboardListener()
+	}
+	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		commonInit()
@@ -59,9 +63,6 @@ class MoveDishView: UIView {
 		UIView.animate(withDuration: 0.2) {
 			self.alpha = 1
 		}
-	}
-	deinit {
-		removeKeyboardListener()
 	}
 	
 	@IBAction func confirmButtonAction(_ sender: Any) {

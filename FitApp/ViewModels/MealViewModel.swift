@@ -247,7 +247,7 @@ class MealViewModel: NSObject {
 			}
 		}
 		//Append the dish with the desire portion to the destinationMeal
-		destinationMeal.dishes.append(Dish(name: dish.getDishName, type: dish.type, amount: portion))
+		destinationMeal.dishes.append(Dish(name: dish.getDishName, type: dish.type, amount: portion, isDishDone: dish.isDishDone))
 		
 		updateMeals(for: meal.date)
 		fetchMealsBy(date: meal.date) {_ in}

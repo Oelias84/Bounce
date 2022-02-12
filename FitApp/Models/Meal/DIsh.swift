@@ -28,12 +28,12 @@ class Dish: Codable  {
     var amount: Double
     var isDishDone: Bool
     
-    init(name: String, type: DishType, amount: Double) {
+	init(name: String, type: DishType, amount: Double, isDishDone: Bool = false) {
         self.id = UUID()
         self.dishName = name
         self.type = type
         self.amount = amount
-        self.isDishDone = false
+        self.isDishDone = isDishDone
     }
     
     var getDishName: String {
