@@ -42,6 +42,19 @@
                                     <action selector="todayButtonAction:" destination="Mxh-5B-SBV" eventType="touchUpInside" id="1Md-9X-Nc1"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grU-tT-GdU">
+                                <rect key="frame" x="12" y="44" width="111.5" height="31"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="titleEdgeInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system" title="הוספת שקילה  ">
+                                    <fontDescription key="titleFontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="12"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="addWeightButtonAction:" destination="Mxh-5B-SBV" eventType="touchUpInside" id="C6D-Dc-AAH"/>
+                                    <action selector="todayButtonAction:" destination="Mxh-5B-SBV" eventType="touchUpInside" id="09s-32-Cma"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jok-No-7Ae" customClass="BetterSegmentedControl" customModule="BetterSegmentedControl">
                                 <rect key="frame" x="24" y="214" width="366" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -120,7 +133,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CkF-ZQ-fGy">
-                                <rect key="frame" x="0.0" y="472" width="414" height="326"/>
+                                <rect key="frame" x="0.0" y="472" width="414" height="390"/>
                                 <color key="backgroundColor" name="ProjectBackground"/>
                                 <inset key="separatorInset" minX="22" minY="0.0" maxX="22" maxY="0.0"/>
                                 <prototypes>
@@ -246,32 +259,11 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRF-da-tSi">
-                                <rect key="frame" x="187" y="810" width="40" height="40"/>
-                                <color key="backgroundColor" name="ProjectTail"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="b5s-xe-htm"/>
-                                    <constraint firstAttribute="height" constant="40" id="gXO-Qx-4gM"/>
-                                </constraints>
-                                <color key="tintColor" name="ProjectBackground"/>
-                                <state key="normal">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="regular"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
-                                        <real key="value" value="20"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="addWeightButtonAction:" destination="Mxh-5B-SBV" eventType="touchUpInside" id="ArA-3Y-HfQ"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wzd-di-cCp"/>
                         <color key="backgroundColor" name="ProjectBackground"/>
                         <constraints>
+                            <constraint firstItem="grU-tT-GdU" firstAttribute="top" secondItem="wzd-di-cCp" secondAttribute="top" id="1ha-Ib-KKT"/>
                             <constraint firstItem="jok-No-7Ae" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" constant="24" id="37d-ud-TnU"/>
                             <constraint firstItem="wzd-di-cCp" firstAttribute="trailing" secondItem="L5X-A7-qr1" secondAttribute="trailing" id="3Gg-A5-HrK"/>
                             <constraint firstItem="a46-U0-wHL" firstAttribute="top" secondItem="wzd-di-cCp" secondAttribute="top" id="4fh-ge-rZM"/>
@@ -279,24 +271,23 @@
                             <constraint firstItem="jok-No-7Ae" firstAttribute="top" secondItem="L5X-A7-qr1" secondAttribute="bottom" id="BBI-YG-Cbx"/>
                             <constraint firstItem="wzd-di-cCp" firstAttribute="trailing" secondItem="0AR-6a-gI9" secondAttribute="trailing" constant="12" id="Bt9-Cq-sXR"/>
                             <constraint firstItem="vc1-z7-vmc" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" constant="24" id="DAt-sK-cT1"/>
-                            <constraint firstItem="wzd-di-cCp" firstAttribute="bottom" secondItem="mRF-da-tSi" secondAttribute="bottom" constant="12" id="EIs-6P-UJ4"/>
                             <constraint firstItem="0AR-6a-gI9" firstAttribute="top" secondItem="jok-No-7Ae" secondAttribute="bottom" constant="12" id="Fh5-Wf-l9g"/>
-                            <constraint firstItem="mRF-da-tSi" firstAttribute="centerX" secondItem="ra4-ZC-RFT" secondAttribute="centerX" id="IFi-Lb-2d2"/>
                             <constraint firstItem="wzd-di-cCp" firstAttribute="trailing" secondItem="vc1-z7-vmc" secondAttribute="trailing" constant="24" id="KQ4-Dr-MNg"/>
                             <constraint firstItem="L5X-A7-qr1" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" id="NIb-1y-a5L"/>
                             <constraint firstItem="vc1-z7-vmc" firstAttribute="top" secondItem="0AR-6a-gI9" secondAttribute="bottom" constant="8" id="Stb-1G-VeW"/>
                             <constraint firstItem="wzd-di-cCp" firstAttribute="trailing" secondItem="jok-No-7Ae" secondAttribute="trailing" constant="24" id="YsM-N4-MkS"/>
+                            <constraint firstItem="CkF-ZQ-fGy" firstAttribute="bottom" secondItem="wzd-di-cCp" secondAttribute="bottom" id="aH5-09-Nrk"/>
                             <constraint firstItem="wzd-di-cCp" firstAttribute="trailing" secondItem="a46-U0-wHL" secondAttribute="trailing" constant="12" id="crG-iE-9Es"/>
                             <constraint firstItem="CkF-ZQ-fGy" firstAttribute="top" secondItem="vc1-z7-vmc" secondAttribute="bottom" constant="8" id="gj7-cE-u3x"/>
                             <constraint firstItem="L5X-A7-qr1" firstAttribute="top" secondItem="ra4-ZC-RFT" secondAttribute="top" id="hES-fH-O8m"/>
                             <constraint firstItem="0AR-6a-gI9" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" constant="12" id="hZo-oL-ERq"/>
-                            <constraint firstItem="mRF-da-tSi" firstAttribute="top" secondItem="CkF-ZQ-fGy" secondAttribute="bottom" constant="12" id="rVW-h3-HBU"/>
+                            <constraint firstItem="grU-tT-GdU" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" constant="12" id="htf-na-cQW"/>
                             <constraint firstItem="CkF-ZQ-fGy" firstAttribute="leading" secondItem="wzd-di-cCp" secondAttribute="leading" id="sOy-Gh-EHh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="J6d-R0-ADY"/>
                     <connections>
-                        <outlet property="addWeightButton" destination="mRF-da-tSi" id="lCu-at-tQS"/>
+                        <outlet property="addWeightButton" destination="grU-tT-GdU" id="NbR-wN-t9J"/>
                         <outlet property="chartView" destination="sbm-f2-dKc" id="plI-bd-gLK"/>
                         <outlet property="chartViewContainer" destination="vc1-z7-vmc" id="T7J-Ob-N7p"/>
                         <outlet property="dateLeftButton" destination="wqJ-n8-SiV" id="H8J-A5-Xil"/>
@@ -324,9 +315,6 @@
         </namedColor>
         <namedColor name="ProjectLightGreen">
             <color red="0.28600001335144043" green="0.57599997520446777" blue="0.56099998950958252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="ProjectTail">
-            <color red="0.067000001668930054" green="0.47499999403953552" blue="0.45100000500679016" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
