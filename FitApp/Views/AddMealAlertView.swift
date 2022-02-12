@@ -119,7 +119,8 @@ class AddMealAlertView: UIView {
 	}
 	private func shouldHideButtons() {
 		let stackCount = self.dishStackView.arrangedSubviews.count
-		UIView.animate(withDuration: 0.3) { [unowned self] in
+		
+		UIView.animate(withDuration: 0.3) {
 			self.addButton.isHidden = (stackCount == 3)
 			self.removeButton.isHidden = (stackCount == 1)
 		}

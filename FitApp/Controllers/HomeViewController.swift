@@ -125,8 +125,7 @@ extension HomeViewController {
 	
 	private func updateWheels() {
 		DispatchQueue.main.async {
-			[unowned self] in
-			perform(#selector(animateProgress), with: nil, afterDelay: 0.5)
+			self.perform(#selector(self.animateProgress), with: nil, afterDelay: 0.5)
 		}
 	}
 	private func setUpProgressView() {
@@ -178,15 +177,13 @@ extension HomeViewController {
 		}
 	}
 	private func setupProgressLabels() {
-		DispatchQueue.main.async {
-			[unowned self] in
+		DispatchQueue.main.async {			
+			self.setUpProgressTextFields()
 			
-			setUpProgressTextFields()
-			
-			fatCountLabel.text = viewModel.getFatCurrentValue
-			carbsCountLabel.text = viewModel.getCarbsCurrentValue
-			proteinCountLabel.text = viewModel.getProteinCurrentValue
-			caloriesLabel.text = viewModel.getUserExceptionalCalories
+			self.fatCountLabel.text = self.viewModel.getFatCurrentValue
+			self.carbsCountLabel.text = self.viewModel.getCarbsCurrentValue
+			self.proteinCountLabel.text = self.viewModel.getProteinCurrentValue
+			self.caloriesLabel.text = self.viewModel.getUserExceptionalCalories
 		}
 	}
 	private func setupMotivationText() {
@@ -203,7 +200,6 @@ extension HomeViewController {
 				UserProfile.defaults.motivationText = motivation
 			}
 			DispatchQueue.main.async {
-				[unowned self] in
 				self.topBarView.motivationText = UserProfile.defaults.motivationText
 			}
 		}
