@@ -11,13 +11,15 @@ import MessageKit
 import SDWebImage
 import FirebaseAuth
 import AVFoundation
+import JGProgressHUD
 import CropViewController
 import InputBarAccessoryView
 
 class ChatViewController: MessagesViewController {
 	
 	var viewModel: ChatViewModel!
-	
+
+	private let hud = JGProgressHUD()
 	private let isAdmin: Bool = UserProfile.defaults.getIsManager
 	private let imagePickerController = UIImagePickerController()
 	
@@ -35,7 +37,7 @@ class ChatViewController: MessagesViewController {
 		
 		setupController()
 		setupInputButton()
-		loadFirstMessages()
+		loadMessages()
 	}
 }
 
@@ -47,7 +49,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 		disableInteraction()
 		
 		guard !text.replacingOccurrences(of: " ", with: "").isEmpty else {
-			Spinner.shared.stop()
+			self.disableInteraction()
 			return
 		}
 		
@@ -60,7 +62,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 				print("Error:", error.localizedDescription)
 				return
 			}
-			self.ableInteraction()
+			self.loadMessages()
 			self.messageInputBar.inputTextView.text = nil
 		}
 	}
@@ -268,15 +270,15 @@ extension ChatViewController {
 	}
 	
 	private func presentImageFor(_ urlString: String) {
-		Spinner.shared.show(self.view)
+		ableInteraction()
 		
 		viewModel.getMediaUrlFor(urlString) {
 			[weak self] url in
 			guard let self = self else {
-				Spinner.shared.stop()
+				self?.disableInteraction()
 				return
 			}
-			Spinner.shared.stop()
+			self.disableInteraction()
 			if let url = url {
 				let photoViewer = PhotoViewerViewController(with: url)
 				self.parent?.present(photoViewer, animated: true)
@@ -286,15 +288,15 @@ extension ChatViewController {
 		}
 	}
 	private func presentVideoFor(_ urlString: String) {
-		Spinner.shared.show(self.view)
+		ableInteraction()
 		
 		viewModel.getMediaUrlFor(urlString) {
 			[weak self] url in
 			guard let self = self else {
-				Spinner.shared.stop()
+				self?.disableInteraction()
 				return
 			}
-			Spinner.shared.stop()
+			self.disableInteraction()
 			if let url = url {
 				let videoVC = AVPlayerViewController()
 				
@@ -306,23 +308,37 @@ extension ChatViewController {
 			}
 		}
 	}
-	
-	private func disableInteraction() {
-		if let parentView = self.tabBarController?.view {
-			Spinner.shared.show(parentView)
-		}
-	}
-	private func ableInteraction() {
-		Spinner.shared.stop()
-	}
-	
-	private func loadFirstMessages() {
+	private func loadMessages() {
 		DispatchQueue.global(qos: .userInteractive).async {
 			self.viewModel.listenToMessages {
-				Spinner.shared.stop()
 				DispatchQueue.main.async {
-						self.messagesCollectionView.reloadData()
-						self.messagesCollectionView.scrollToLastItem()
+					self.messagesCollectionView.reloadData()
+					self.messagesCollectionView.scrollToLastItem()
+					self.ableInteraction()
+				}
+			}
+		}
+	}
+
+	private func disableInteraction() {
+		spinner(run: true)
+	}
+	private func ableInteraction() {
+		spinner(run: false)
+	}
+	private func spinner(run: Bool) {
+		switch run {
+		case false:
+			DispatchQueue.main.async {
+				Spinner.shared.stop()
+				self.hud.dismiss()
+			}
+		case true:
+			DispatchQueue.main.async {
+				self.hud.backgroundColor = #colorLiteral(red: 0.6394728422, green: 0.659519434, blue: 0.6805263758, alpha: 0.2546477665)
+				self.hud.textLabel.text = "טוען"
+				if let parentView = self.tabBarController?.view {
+					self.hud.show(in: parentView)
 				}
 			}
 		}

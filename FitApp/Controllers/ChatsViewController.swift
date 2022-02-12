@@ -152,7 +152,7 @@ extension ChatsViewController {
 
 		customAlert.delegate = self
 		customAlert.titleText = title
-		customAlert.popupType = .textField
+		customAlert.popupType = .textBox
 		customAlert.messageText = message
 		customAlert.okButtonText = options[0]
 		customAlert.cancelButtonText = options[1]
