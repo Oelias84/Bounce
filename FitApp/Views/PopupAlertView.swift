@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 enum PopupType {
 	
@@ -36,6 +37,12 @@ class PopupAlertView: UIViewController {
 	@IBOutlet weak var cancelButton: UIButton!
 	@IBOutlet weak var okButton: UIButton!
 	@IBOutlet weak var thirdButton: UIButton!
+	
+	@IBOutlet weak var verticallyConstraint: NSLayoutConstraint!
+	
+	deinit {
+		removeKeyboardListener()
+	}
 	
 	weak var delegate: PopupAlertViewDelegate?
 	
@@ -86,6 +93,10 @@ class PopupAlertView: UIViewController {
 			thirdButton.tintColor = .red
 			thirdButton.setTitle(doNotShowText, for: .normal)
 		}
+		NotificationCenter.default.addObserver(self,
+											   selector: #selector(handle(_:)),
+											   name: UIResponder.keyboardWillShowNotification,
+											   object: nil)
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -132,6 +143,18 @@ extension PopupAlertView: UITextViewDelegate  {
 
 extension PopupAlertView: UITextFieldDelegate {
 	
+	@objc private func handle(_ notification: NSNotification) {
+		if let userInfo = notification.userInfo,
+			let keyboardRectangle = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+			
+			let center = keyboardRectangle.height - 164
+			self.verticallyConstraint.constant -= center
+			
+			UIView.animate(withDuration: 1, animations: {
+				self.view.layoutIfNeeded()
+			})
+		}
+	}
 	func textFieldDidBeginEditing(_ textField: UITextField) {
 		if textField.textColor == UIColor.lightGray {
 			textField.text = ""
@@ -164,12 +187,12 @@ extension PopupAlertView {
 		textField.textColor = .lightGray
 	}
 	private func animateView() {
-		alertView.alpha = 0;
-		alertView.frame.origin.y = self.alertView.frame.origin.y + 50
+		alertView.alpha = 0
+		alertView.frame.origin.y = self.alertView.frame.origin.y + 100
 		
 		UIView.animate(withDuration: 0.4, animations: { () -> Void in
-			self.alertView.alpha = 1.0;
-			self.alertView.frame.origin.y = self.alertView.frame.origin.y - 50
+			self.alertView.alpha = 1.0
+			self.alertView.frame.origin.y = self.alertView.frame.origin.y - 100
 		})
 	}
 }

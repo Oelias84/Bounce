@@ -30,7 +30,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="baN-VD-dsB">
-                                <rect key="frame" x="32" y="255" width="311" height="157"/>
+                                <rect key="frame" x="32" y="279" width="311" height="157"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9A-L3-03r">
                                         <rect key="frame" x="139" y="16" width="33" height="22.5"/>
@@ -159,10 +159,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="baN-VD-dsB" secondAttribute="trailing" constant="16" id="9bz-IW-n9H"/>
+                            <constraint firstItem="baN-VD-dsB" firstAttribute="centerY" secondItem="xrO-SC-JvE" secondAttribute="centerY" constant="24" id="JS3-it-a0z"/>
                             <constraint firstItem="baN-VD-dsB" firstAttribute="leading" secondItem="xrO-SC-JvE" secondAttribute="leadingMargin" constant="16" id="YuK-gM-g2z"/>
                             <constraint firstItem="Q9A-L3-03r" firstAttribute="centerX" secondItem="xrO-SC-JvE" secondAttribute="centerX" id="mgW-Nf-fVD"/>
                             <constraint firstItem="baN-VD-dsB" firstAttribute="centerX" secondItem="xrO-SC-JvE" secondAttribute="centerX" id="nC7-WG-Jvi"/>
-                            <constraint firstItem="baN-VD-dsB" firstAttribute="centerY" secondItem="xrO-SC-JvE" secondAttribute="centerY" id="wpn-WB-vx2"/>
                         </constraints>
                     </view>
                     <connections>
@@ -174,6 +174,7 @@
                         <outlet property="textField" destination="ZBg-AP-Uq4" id="etP-L5-d9r"/>
                         <outlet property="thirdButton" destination="H57-eg-TeL" id="9uZ-YW-NgW"/>
                         <outlet property="titleLabel" destination="Q9A-L3-03r" id="rsB-P0-gFT"/>
+                        <outlet property="verticallyConstraint" destination="JS3-it-a0z" id="5bH-BS-ioK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Yi-wb-Us2" userLabel="First Responder" sceneMemberID="firstResponder"/>
