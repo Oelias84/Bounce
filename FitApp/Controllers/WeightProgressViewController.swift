@@ -369,8 +369,8 @@ extension WeightProgressViewController {
 		self.weightViewModel = WeightViewModel()
 		
 		self.weightViewModel!.bindWeightViewModelToController = {
-			[unowned self] in
-			self.updateDataSource()
+			[weak self] in
+			self?.updateDataSource()
 		}
 	}
 	private func uploadWeightImage(weightDate: Date?, completion: @escaping () -> ()) {
