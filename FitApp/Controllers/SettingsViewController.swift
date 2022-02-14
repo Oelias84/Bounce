@@ -33,6 +33,7 @@ class SettingsViewController: UIViewController {
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == K.SegueId.moveToSettingsOptions {
+			
 			let settingsOptionsVC = segue.destination as! SettingsOptionsTableViewController
 			settingsOptionsVC.contentType = optionContentType
 		}
@@ -40,6 +41,7 @@ class SettingsViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
 		setupTopBar()
 		registerCells()
 		imagePickerController.delegate = self
@@ -383,9 +385,10 @@ extension SettingsViewController {
 	private func nutritionDetailsTappedAt(_ row: Int) {
 		switch row {
 		case 1:
-			optionContentType = .mostHungry
-			performSegue(withIdentifier: K.SegueId.moveToSettingsOptions, sender: self)
-		default:
+			let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
+			let vc = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsOptionsTableViewController) as! SettingsOptionsTableViewController
+				vc.contentType = .mostHungry
+			self.navigationController?.pushViewController(vc, animated: true)		default:
 			break
 		}
 	}
@@ -393,7 +396,10 @@ extension SettingsViewController {
 		switch row {
 		case 0:
 			optionContentType = .fitnessLevel
-			performSegue(withIdentifier: K.SegueId.moveToSettingsOptions, sender: self)
+			let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
+			let vc = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsOptionsTableViewController) as! SettingsOptionsTableViewController
+				vc.contentType = .fitnessLevel
+			self.navigationController?.pushViewController(vc, animated: true)
 		default:
 			break
 		}

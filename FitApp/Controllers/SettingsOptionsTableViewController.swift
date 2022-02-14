@@ -14,14 +14,19 @@ enum SettingsContentType {
 	case notifications
 }
 
-class SettingsOptionsTableViewController: UITableViewController {
+class SettingsOptionsTableViewController: UIViewController {
+	
 	
 	var contentType: SettingsContentType!
 	private var viewModel: SettingTableViewModel!
 	
+	@IBOutlet weak var topBarView: BounceNavigationBarView!
+	@IBOutlet weak var tableView: UITableView!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		setupTopBar()
 		viewModel = SettingTableViewModel(contentType: contentType, for: self)
 		if contentType == .notifications {
 			let notificationNib = UINib(nibName: K.NibName.notificationTableViewCell, bundle: nil)
@@ -41,24 +46,32 @@ class SettingsOptionsTableViewController: UITableViewController {
 			viewModel.updateNotification()
 		}
 	}
+}
+
+//MARK: - Delegate
+extension SettingsOptionsTableViewController: BounceNavigationBarDelegate {
 	
-	// MARK: - Table view data source
-	override func numberOfSections(in tableView: UITableView) -> Int {
+	func backButtonTapped() {
+		navigationController?.popViewController(animated: true)
+	}
+}
+extension SettingsOptionsTableViewController: UITableViewDelegate, UITableViewDataSource {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return viewModel.getNumberOfSections()
 	}
-	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
 		if section == 1 {
 			return viewModel.getNumberOfNotificationsRows()
 		}
 		return viewModel.getNumberOfRows()
 	}
-	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		
 		if section == 1 {
 			let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
 			let label = UILabel()
-
+			
 			label.frame = CGRect(x: 0, y: 0, width: headerView.frame.width-20, height: headerView.frame.height-10)
 			label.text = "התראות פעילות:"
 			label.font = .systemFont(ofSize: 20, weight: .medium)
@@ -67,7 +80,7 @@ class SettingsOptionsTableViewController: UITableViewController {
 		}
 		return nil
 	}
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		switch indexPath.section {
 		case 1:
@@ -85,17 +98,17 @@ class SettingsOptionsTableViewController: UITableViewController {
 			return cell
 		}
 	}
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
 		viewModel.didSelect(at: indexPath)
 	}
-	override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
 		
 		guard contentType == .notifications && indexPath.section == 1 else { return false }
 		return true
 	}
 	
-	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		
 		if (editingStyle == .delete) {
 			self.tableView.beginUpdates()
@@ -104,8 +117,33 @@ class SettingsOptionsTableViewController: UITableViewController {
 			self.tableView.endUpdates()
 		}
 	}
-	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		
 		return section == 1 ? UIView() : nil
 	}
 }
+
+//MARK: - Functions
+extension SettingsOptionsTableViewController {
+	
+	private func setupTopBar() {
+		
+		topBarView.delegate = self
+		switch contentType {
+		case .fitnessLevel:
+			topBarView.nameTitle = "רמת פעילות"
+		case .mostHungry:
+			topBarView.nameTitle = StaticStringsManager.shared.getGenderString?[21] ?? ""
+		default:
+			topBarView.nameTitle = "רמת קושי"
+		}
+		topBarView.isCameraButton = true
+		topBarView.isBackButtonHidden = false
+		topBarView.isMotivationHidden = true
+		topBarView.isDayWelcomeHidden = true
+		topBarView.isProfileButtonHidden = true
+		topBarView.isDayWelcomeHidden = true
+		topBarView.isMessageButtonHidden = true
+	}
+}
+

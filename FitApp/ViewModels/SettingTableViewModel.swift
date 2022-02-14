@@ -9,7 +9,7 @@ import UIKit
 
 class SettingTableViewModel {
 	
-	var vc: UITableViewController!
+	var vc: UIViewController!
 	var contentType: SettingsContentType!
 	private let notificationManager = LocalNotificationManager.shared
 	
@@ -24,7 +24,7 @@ class SettingTableViewModel {
 	
 	var bindNotificationViewModelToController : (() -> ()) = {}
 	
-	init(contentType: SettingsContentType, for vc: UITableViewController) {
+	init(contentType: SettingsContentType, for vc: UIViewController) {
 		
 		self.contentType = contentType
 		self.vc = vc
