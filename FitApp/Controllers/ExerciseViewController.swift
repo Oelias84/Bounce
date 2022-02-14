@@ -14,7 +14,8 @@ class ExerciseViewController: UIViewController {
 	private var player: AVPlayer!
 	private var urlVideos: [URL]!
 	private var currentVideoUrlIndex = 0
-	
+	private let fullViewPlayer = AVPlayerViewController()
+
 	private let googleManager = GoogleApiManager()
 	
 	private var playerContainerView: UIView!
@@ -48,14 +49,14 @@ class ExerciseViewController: UIViewController {
 		let string = exercise.getExerciseText.replacingOccurrences(of: "\\n", with: "\n")
 		textTitleLabel.text = title
 		textLabel.text = string
+		
+		setUpPlayerContainerView()
+		playVideo(userString: exercise.videos)
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		topBarView.setImage()
-		setUpPlayerContainerView()
-		playActivity()
-		playVideo(userString: exercise.videos)
 	}
 	
 	@IBAction func fullScreenButtonAction(_ sender: Any) {
@@ -76,12 +77,12 @@ class ExerciseViewController: UIViewController {
 		play(urlVideos[currentVideoUrlIndex])
 	}
 	@IBAction func playButtonAction(_ sender: Any) {
-		playButton.isHidden = true
 		let playerTimescale = self.player.currentItem?.asset.duration.timescale ?? 1
 		let time =  CMTime(seconds: 1, preferredTimescale: playerTimescale)
-		player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) { (finished) in
-			DispatchQueue.main.async { [weak self] in
-				guard let self = self else { return }
+		
+		player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) { _ in
+			DispatchQueue.main.async {
+				self.playButton.isHidden = true
 				self.player.play()
 			}
 		}
@@ -104,6 +105,17 @@ class ExerciseViewController: UIViewController {
 }
 
 //MARK: - Delegate
+extension ExerciseViewController: AVPlayerViewControllerDelegate {
+	
+	func playerViewController(_ playerViewController: AVPlayerViewController, willEndFullScreenPresentationWithAnimationCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+		playButton.isHidden = false
+		let playerTimescale = self.player.currentItem?.asset.duration.timescale ?? 1
+		let time =  CMTime(seconds: 1, preferredTimescale: playerTimescale)
+		player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) { _ in
+			self.player.play()
+		}
+	}
+}
 extension ExerciseViewController: BounceNavigationBarDelegate {
 	
 	func backButtonTapped() {
@@ -218,17 +230,14 @@ extension ExerciseViewController {
 	}
 	
 	@objc func playFull() {
-		let vc = AVPlayerViewController()
-		vc.player = self.player
+		fullViewPlayer.player = self.player
+		fullViewPlayer.delegate = self
 		
-		present(vc, animated: true) {
+		present(fullViewPlayer, animated: true) {
 			let playerTimescale = self.player.currentItem?.asset.duration.timescale ?? 1
 			let time =  CMTime(seconds: 1, preferredTimescale: playerTimescale)
-			vc.player!.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) { (finished) in
-				DispatchQueue.main.async {
-					vc.player!.play()
-				}
-			}
+			
+			self.fullViewPlayer.player!.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero)
 		}
 	}
 }
