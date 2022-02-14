@@ -41,11 +41,13 @@ class WorkoutTableViewCell: UITableViewCell {
 
 		workout.exercises.forEach {
 			exercise in
-			numberOfSets += exercise.sets.count
+			if let set = Int(exercise.sets) {
+				numberOfSets += set
+			}
 		}
 		
 		exerciseLabel.text = "\(numberOfExercise) תרגילים"
-		setsLabel.text = "\(numberOfSets * numberOfExercise) סטים"
+		setsLabel.text = "\(numberOfSets) סטים"
 		timeLabel.text = workout.time
 		workoutTitleLabel.text = workoutType == .home ? "אימון בית \(workoutNumber!)" : "אימון חד״כ \(workoutNumber!)"
         workoutDescriptionLabel.text = workout.name

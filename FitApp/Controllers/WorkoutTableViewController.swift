@@ -50,9 +50,6 @@ class WorkoutTableViewController: UIViewController {
 		}
 		
 		DispatchQueue.main.async {
-			
-			[weak self] in
-			guard let self = self else { return }
 			self.tableView.reloadData()
 		}
 	}
