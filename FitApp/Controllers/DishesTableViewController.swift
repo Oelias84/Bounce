@@ -186,29 +186,7 @@ extension DishesTableViewController {
 		}
 	}
 	private func changeOtherDishAlert() {
-		
 		presentAlert(withTitle: "הזנת מנה" , withMessage: "אנא הזינו את שם המנה הרצויה ולאחר מכן אישור בכדי לבצע את ההחלפה", options: "אישור", "ביטול", alertNumber: 1)
-		
-//		let alert = UIAlertController(title: "הזנת מנה", message: "אנא הזינו את שם המנה הרצויה ולאחר מכן אישור בכדי לבצע את ההחלפה", preferredStyle: .alert)
-//
-//		alert.addTextField { textField in
-//			textField.placeholder = "הזינו את שם המנה"
-//		}
-//		alert.addAction(UIAlertAction(title: "אישור", style: .default) { _ in
-//			guard let textField = alert.textFields?[0] ,let otherDishText = textField.text else { return }
-//
-//			if UserProfile.defaults.otherDishes == nil {
-//				UserProfile.defaults.otherDishes = [otherDishText]
-//			} else {
-//				UserProfile.defaults.otherDishes?.append(otherDishText)
-//			}
-//			self.selectedDish = textField.text
-//			self.dismiss(animated: true)
-//		})
-//		alert.addAction(UIAlertAction(title: "ביטול", style: .cancel) { _ in
-//			self.selectedDish = nil
-//		})
-//		present(alert, animated: true)
 	}
 	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., alertNumber: Int) {
 		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
@@ -240,25 +218,4 @@ extension DishesTableViewController {
 		
 		present(customAlert, animated: true)
 	}
-//	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
-//
-//		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
-//		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
-//
-//		customAlert.providesPresentationContextTransitionStyle = true
-//		customAlert.definesPresentationContext = true
-//		customAlert.modalPresentationStyle = .overCurrentContext
-//		customAlert.modalTransitionStyle = .crossDissolve
-//
-//		customAlert.delegate = self
-//		customAlert.titleText = title
-//		customAlert.messageText = message
-//		customAlert.okButtonText = options[0]
-//		customAlert.cancelButtonText = options[1]
-//
-//		if options.count == 3 {
-//			customAlert.doNotShowText = options.last
-//		}
-//		present(customAlert, animated: true)
-//	}
 }

@@ -183,7 +183,7 @@ extension PopupAlertView {
 		
 		textField.delegate = self
 		textField.addPadding(padding: .right(4))
-		textField.text = "הזינו את שם המנה..."
+		textField.placeholder = "הזינו את שם המנה..."
 		textField.textColor = .lightGray
 	}
 	private func animateView() {
