@@ -42,7 +42,7 @@ class AddMealAlertView: UIView {
 		addButton.layer.cornerRadius = addButton.frame.height/2
 		removeButton.layer.cornerRadius = removeButton.frame.height/2
 	}
-	
+		
 	@IBAction func addButtonAction(_ sender: Any) {
 		addDish()
 	}

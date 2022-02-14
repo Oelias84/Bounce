@@ -13,7 +13,11 @@ class AddMealAlertDishView: UIView {
 	
 	@IBOutlet weak var dishTypeTextField: UITextField!
 	@IBOutlet weak var dishNameTextField: UITextField!
-	@IBOutlet weak var dishAmountTextField: UITextField!
+	@IBOutlet weak var dishAmountTextField: UITextField! {
+		didSet {
+			dishAmountTextField.addTarget(self, action: #selector(amountChanged(textField:)), for: .editingChanged)
+		}
+	}
 	
 	private var dishTypePicker: UIPickerView = {
 		let picker = UIPickerView()
@@ -105,6 +109,7 @@ extension AddMealAlertDishView: UITextFieldDelegate {
 			getDishName()
 		case dishAmountTextField:
 			dishAmountTextField.text = ""
+			
 		default:
 			break
 		}
@@ -122,6 +127,13 @@ extension AddMealAlertDishView: UITextFieldDelegate {
 			}
 		default:
 			break
+		}
+	}
+	@objc final private func amountChanged(textField: UITextField) {
+		if let amountText = textField.text, !amountText.isEmpty {
+			let amount = amountText.toDecimalDouble
+			dish.amount = amount
+			dishAmountTextField.text = String(amount)
 		}
 	}
 }
