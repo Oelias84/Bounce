@@ -56,19 +56,21 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
     
     @IBAction func nextButtonAction(_ sender: Any) {
 		
-        if let birthDate = birthDate, let height = height, let weight = weight, let userName = userName {
-			
+		if userName == nil {
+			presentOkAlertWithDelegate(withTitle: "אופס",withMessage: "יש להזין שם ושם משפחה", alertNumber: 1)
+		} else if birthDate == nil {
+			presentOkAlertWithDelegate(withTitle: "אופס", withMessage: "נא להזין תאריך לידה", alertNumber: 2)
+		} else if let birthDate = birthDate, let height = height, let weight = weight, let userName = userName {
 			if userName != "", !userName.isValidFullName {
-				presentOkAlert(withTitle: "אופס!",withMessage: "יש להזין שם ושם משפחה")
 				presentOkAlertWithDelegate(withTitle: "אופס",withMessage: "יש להזין שם ושם משפחה", alertNumber: 1)
 			} else if birthDate.onlyDate.isLaterThanOrEqual(to: Date().onlyDate) {
 				presentOkAlertWithDelegate(withTitle: "אופס", withMessage: "תאריך הלידה לא יכול גדול או שווה מהתאריך הנוכחי", alertNumber: 2)
 			} else if height<100 {
-				presentOkAlertWithDelegate(withTitle: "אופס", withMessage: "גובה שגויי אנא בדקי את הנתונים שהזנת", alertNumber: 3)
+				presentOkAlertWithDelegate(withTitle: "אופס", withMessage: StaticStringsManager.shared.getGenderString?[35] ?? "", alertNumber: 3)
 			} else if weight<30.0 {
-				presentOkAlertWithDelegate(withTitle: "אופס", withMessage: "משקל שגויי אנא בדקי את הנתונים שהזנת", alertNumber: 4)
+				presentOkAlertWithDelegate(withTitle: "אופס", withMessage: StaticStringsManager.shared.getGenderString?[34] ?? "", alertNumber: 4)
 			} else if userHasCheckedTermOfUse == false || userHasCheckedHealth == false {
-				presentOkAlertWithDelegate(withTitle: "תנאי השירות לא אושרו", withMessage: "נראה כי לא אשרת את תנאי השירות והצהרת הבריאות, בכדי להמשיך אנא סמני את התיבה שמאשרת את תנאי השימוש.", alertNumber: 5)
+				presentOkAlertWithDelegate(withTitle: "תנאי השירות לא אושרו", withMessage: StaticStringsManager.shared.getGenderString?[36] ?? "", alertNumber: 5)
 			} else {
 				UserProfile.defaults.name = userName
 				UserProfile.defaults.height = height
@@ -82,7 +84,6 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 			}
         } else {
 			presentOkAlertWithDelegate(withTitle: "אופס", withMessage: "יש למלא את כל השדות", alertNumber: 2)
-			return
         }
     }
 	@IBAction func backButtonAction(_ sender: Any) {
