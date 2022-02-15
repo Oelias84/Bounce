@@ -10,9 +10,16 @@ import Foundation
 import BetterSegmentedControl
 
 class ArticlesViewController: UIViewController {
+	
 	private var filteredArticles: [Article]? {
 		didSet {
-			self.sections = filteredArticles?.map { return ExpandableSectionData(name: $0.title, text: [$0.getArticleText]) }
+			if UserProfile.defaults.getGender == .male {
+				var sections = filteredArticles?.map { return ExpandableSectionData(name: $0.title, text: [$0.getArticleText]) }
+				sections?.removeAll(where: {$0.name.contains("מחזור")})
+				self.sections = sections
+			} else {
+				self.sections = filteredArticles?.map { return ExpandableSectionData(name: $0.title, text: [$0.getArticleText]) }
+			}
 		}
 	}
 	private var sections: [ExpandableSectionData]? {
