@@ -103,7 +103,7 @@ class WeightProgressViewController: UIViewController {
 	@IBAction func addWeightButtonAction(_ sender: Any) {
 		guard let lastWeightDate = weightViewModel.getLastWeightDate() else { return }
 		let currentDate = Date().onlyDate
-
+		
 		if lastWeightDate == currentDate {
 			presentOkAlert(withMessage: "כבר נשקלת היום")
 		} else {
@@ -114,7 +114,7 @@ class WeightProgressViewController: UIViewController {
 		
 		switch timePeriod {
 		case .week:
-			if sender == dateRightButton { 
+			if sender == dateRightButton {
 				selectedDate = selectedDate.startOfWeek?.add(1.weeks)
 			} else {
 				selectedDate = selectedDate.startOfWeek?.subtract(1.weeks)
@@ -184,12 +184,21 @@ extension WeightProgressViewController: AddWeightAlertViewDelegate {
 		presentImagePickerActionSheet(imagePicker: imagePickerController) {_ in}
 	}
 	func confirmButtonAction(weight: String, date: Date?) {
-		if let weightTab = self.tabBarController?.tabBar.items?[3] {
-			weightTab.image = UIImage(named:"Weight")
-		}
-		addWeight(weight: weight, image: weightImage, date: date)
 		weightAlert?.removeFromSuperview()
-		weightAlert = nil
+		Spinner.shared.stop()
+		guard let weightInt = Int(weight) else { return }
+		
+		if weightInt>150 || weightInt<30  {
+			weightAlert = nil
+			self.presentOkAlert(withTitle: "אופס", withMessage: StaticStringsManager.shared.getGenderString?[34] ?? "")
+		} else {
+			if let weightTab = self.tabBarController?.tabBar.items?[3] {
+				weightTab.image = UIImage(named:"Weight")
+			}
+			self.addWeight(weight: weight, image: self.weightImage, date: date)
+			self.weightAlert?.removeFromSuperview()
+			self.weightAlert = nil
+		}
 	}
 }
 extension WeightProgressViewController: weightTableViewCellDelegate {
@@ -382,7 +391,7 @@ extension WeightProgressViewController {
 			DispatchQueue.global(qos: .background).async {
 				GoogleStorageManager.shared.uploadImage(data: image.jpegData(compressionQuality: 1)!, fileName: imagePath) {
 					result in
-
+					
 					switch result {
 					case .success(_):
 						completion()
