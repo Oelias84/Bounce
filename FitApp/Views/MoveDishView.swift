@@ -37,6 +37,11 @@ class MoveDishView: UIView {
 	private var dishAmount: Double?
 	
 	@IBOutlet var contentView: UIView!
+	
+	@IBOutlet weak var dishToMoveTextLabel: UILabel!
+	@IBOutlet weak var dishAmountTextLabel: UILabel!
+	@IBOutlet weak var mealToMoveTextLabel: UILabel!
+	
 	@IBOutlet weak var mealTitleLabel: UILabel!
 	@IBOutlet weak var dishToMoveTextfield: UITextField!
 	@IBOutlet weak var destinationMealTextfield: UITextField!
@@ -179,6 +184,7 @@ extension MoveDishView {
 		destinationMealTextfield.delegate = self
 		dishToMoveTextfield.inputView = dishPickerView
 		destinationMealTextfield.inputView = destinationPickerView
+		dishToMoveTextLabel.text = StaticStringsManager.shared.getGenderString?[23] ?? ""
 		dishAmountStepper.minimumValue = 0.5
 		dishAmountStepper.stepValue = 0.5
 		dishToMoveTextfield.becomeFirstResponder()

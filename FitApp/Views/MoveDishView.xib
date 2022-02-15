@@ -26,8 +26,11 @@
                 <outlet property="destinationMealTextfield" destination="e5K-xz-DdD" id="Spz-hI-4uz"/>
                 <outlet property="dishAmountLabel" destination="kNi-Iw-Ifk" id="Oic-5U-fyN"/>
                 <outlet property="dishAmountStepper" destination="Icy-HU-eQQ" id="aWh-b8-XU9"/>
+                <outlet property="dishAmountTextLabel" destination="ay9-Ei-7Av" id="y3G-0h-E6Y"/>
+                <outlet property="dishToMoveTextLabel" destination="vdQ-Am-1WM" id="szU-Ta-mwh"/>
                 <outlet property="dishToMoveTextfield" destination="uuz-Sd-dKA" id="OFk-g8-5dE"/>
                 <outlet property="mealTitleLabel" destination="7B6-3Z-kzY" id="7ol-Qa-lv6"/>
+                <outlet property="mealToMoveTextLabel" destination="axE-vB-sDr" id="PZk-iQ-TV8"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
