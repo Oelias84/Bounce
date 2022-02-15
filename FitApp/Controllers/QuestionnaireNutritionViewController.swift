@@ -44,10 +44,10 @@ class QuestionnaireNutritionViewController: UIViewController {
 			UserProfile.defaults.mostHungry = mostHunger
 			performSegue(withIdentifier: K.SegueId.moveToFitnessLevel, sender: self)
 		} else if numberOfMeals == 0 {
-			presentOkAlert(withTitle: "אופס",withMessage: "נראה כי לא נעשתה בחירה של מספר ארוחות, יש לבחור כמה ארוחות תרצי לאכול ביום", buttonText: "הבנתי")
+			presentOkAlert(withTitle: "אופס",withMessage: StaticStringsManager.shared.getGenderString?[37] ?? "", buttonText: "הבנתי")
 			return
 		} else {
-			presentOkAlert(withTitle: "אופס",withMessage: "נראה כי לא נעשתה בחירה של הזמן ביום שבו את הכי רעבה, יש לבחור באחת מהאפשרויות", buttonText: "הבנתי")
+			presentOkAlert(withTitle: "אופס",withMessage: StaticStringsManager.shared.getGenderString?[38] ?? "" , buttonText: "הבנתי")
 			return
 		}
 	}

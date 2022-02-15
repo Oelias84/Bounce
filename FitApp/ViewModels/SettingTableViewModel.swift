@@ -157,7 +157,7 @@ extension SettingTableViewModel {
 	}
 	func presentFitnessAlert(_ level: Int) {
 		self.level = level
-		presentAlert(withTitle: "שינוי רמת קושי", withMessage: "שימי לב! בעקבות שינוי ברמת הקושי גם כמות האימונים תשתנה לכמות דיפולטיבית שאותה את תוכלי לשנות ממסך ההגדרות, האם ברצונך לאשר את השינוי?", options: "אישור", "ביטול")
+		presentAlert(withTitle: "שינוי רמת קושי", withMessage: StaticStringsManager.shared.getGenderString?[37] ?? "", options: "אישור", "ביטול")
 		
 	}
 	func notificationsPressed(at row: Int) {
