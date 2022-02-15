@@ -161,8 +161,8 @@ extension QuestionnaireNutritionViewController {
 				mostHungerCheckSecond.backgroundColor = .projectTail
 				mostHungerCheckSecond.borderColorV = .projectTail
 			case 3:
-				mostHungerCheckSecond.backgroundColor = .projectTail
-				mostHungerCheckSecond.borderColorV = .projectTail
+				mostHungerCheckThird.backgroundColor = .projectTail
+				mostHungerCheckThird.borderColorV = .projectTail
 			case 4:
 				mostHungerCheckForth.backgroundColor = .projectTail
 				mostHungerCheckForth.borderColorV = .projectTail
