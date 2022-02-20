@@ -74,12 +74,12 @@ extension CommentViewController {
 extension CommentViewController {
 	
   func updateMinZoomScaleForSize(_ size: CGSize) {
-//	let widthScale = size.width / imageView.bounds.width
-//	let heightScale = size.height / imageView.bounds.height
-//	let minScale = min(widthScale, heightScale)
-//
-//	scrollView.minimumZoomScale = minScale
-//	scrollView.zoomScale = minScale
+	let widthScale = size.width / imageView.bounds.width
+	let heightScale = size.height / imageView.bounds.height
+	let minScale = min(widthScale, heightScale)
+
+	scrollView.minimumZoomScale = minScale
+	scrollView.zoomScale = minScale
   }
 }
 extension CommentViewController: UIScrollViewDelegate {

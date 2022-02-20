@@ -75,7 +75,7 @@ extension CommentsViewController:  CollapsibleTableViewHeaderDelegate {
 		case "טבלת המרות":
 			if let commentVC = storyboard?.instantiateViewController(identifier: K.ViewControllerId.commentViewController) as? CommentViewController {
 				commentVC.comment = viewModel.getCommentForCell(at: section)
-				commentVC.photoName = "conversion_spreadsheat"
+				commentVC.photoName = "conversion_spreadsheet"
 				navigationController?.pushViewController(commentVC, animated: true)
 			}
 		default:
