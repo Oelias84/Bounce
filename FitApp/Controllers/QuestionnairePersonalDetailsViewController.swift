@@ -315,9 +315,7 @@ extension QuestionnairePersonalDetailsViewController {
 		}
 	}
 	private func presentOkAlertWithDelegate(withTitle title: String? = nil, withMessage message: String, buttonText: String = "אישור", alertNumber: Int) {
-		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
-			return
-		}
+
 		let storyboard = UIStoryboard(name: "PopupAlertView", bundle: nil)
 		let customAlert = storyboard.instantiateViewController(identifier: "PopupAlertView") as! PopupAlertView
 		
@@ -333,6 +331,6 @@ extension QuestionnairePersonalDetailsViewController {
 		customAlert.okButtonText = buttonText
 		customAlert.cancelButtonIsHidden = true
 		
-		window.rootViewController?.present(customAlert, animated: true, completion: nil)
+		present(customAlert, animated: true, completion: nil)
 	}
 }

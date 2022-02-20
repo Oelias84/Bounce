@@ -23,7 +23,7 @@ class ExerciseTableViewCell: UITableViewCell {
     var exerciseNumber: Int!
     var indexPath: IndexPath!
 
-    @IBOutlet weak var exerciseTypeView: UIView!
+    @IBOutlet weak var exerciseTypeView: ExerciseCategoryView!
     @IBOutlet weak var exerciseNumberLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var cellBackgroundView: UIView! {

@@ -275,7 +275,7 @@ extension SettingsViewController {
 		if let steps = userData.steps {
 			return "\(steps) צעדים"
 		} else if let kilometers = userData.kilometer {
-			return "\(kilometers) ק״מ"
+			return String(format: "%.1f", kilometers) + "ק״מ"
 		} else {
 			return UserProfile.getLifeStyleText()
 		}
@@ -366,8 +366,10 @@ extension SettingsViewController {
 	private func systemTappedAt(_ row: Int) {
 		switch row {
 		case 0:
-			optionContentType = .notifications
-			performSegue(withIdentifier: K.SegueId.moveToSettingsOptions, sender: self)
+			let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
+			let vc = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsOptionsTableViewController) as! SettingsOptionsTableViewController
+				vc.contentType = .notifications
+			self.navigationController?.pushViewController(vc, animated: true)
 		case 1:
 			presentLogoutAlert()
 		default:
@@ -388,14 +390,14 @@ extension SettingsViewController {
 			let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
 			let vc = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsOptionsTableViewController) as! SettingsOptionsTableViewController
 				vc.contentType = .mostHungry
-			self.navigationController?.pushViewController(vc, animated: true)		default:
+			self.navigationController?.pushViewController(vc, animated: true)
+		default:
 			break
 		}
 	}
 	private func fitnessLevelDetailsTappedAt(_ row: Int) {
 		switch row {
 		case 0:
-			optionContentType = .fitnessLevel
 			let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
 			let vc = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsOptionsTableViewController) as! SettingsOptionsTableViewController
 				vc.contentType = .fitnessLevel
@@ -415,6 +417,7 @@ extension SettingsViewController {
 	
 	private func saveImage(_ image: UIImage) {
 		guard let userId = Auth.auth().currentUser?.uid else { return }
+		topBarView.userProfileButton.isEnabled = false
 		let profileImagePath = "\(userId)/profile_image.jpeg"
 		
 		self.saveUserImage(image: image, for: profileImagePath) {
@@ -424,7 +427,6 @@ extension SettingsViewController {
 			switch result {
 			case .success(let imageUrl):
 				// Saves image url to user defaults
-				
 				UserProfile.defaults.profileImageImageUrl = imageUrl.absoluteString
 				self.topBarView.changeImage = true
 				self.topBarView.setImage()
@@ -432,6 +434,7 @@ extension SettingsViewController {
 			case .failure(let error):
 				print(error.localizedDescription)
 				Spinner.shared.stop()
+				self.topBarView.userProfileButton.isEnabled = true
 				self.presentOkAlert(withMessage: "נכשל לשמור את התמונה אנא נסו שנית")
 			}
 		}
@@ -439,8 +442,8 @@ extension SettingsViewController {
 	private func saveUserImage(image: UIImage, for url: String, completion: @escaping (Result<URL, Error>) -> Void) {
 		let storageManager = GoogleStorageManager.shared
 		
-		DispatchQueue.global(qos: .background).async {
-			storageManager.uploadImage(data: image.jpegData(compressionQuality: 0.2)!, fileName: url) { _ in
+		DispatchQueue.global(qos: .userInteractive).async {
+			storageManager.uploadImage(data: image.jpegData(compressionQuality: 0.1)!, fileName: url) { _ in
 				storageManager.downloadURL(path: url,completion: completion)
 			}
 		}

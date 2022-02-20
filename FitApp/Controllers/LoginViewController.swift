@@ -67,11 +67,11 @@ class LoginViewController: UIViewController {
 				}
 			}
 		} catch ErrorManager.LoginError.emptyEmail {
-			presentAlert(withTitle: "אופס", withMessage: "נראה ששכחת להזין כתובת האמייל", options: "אישור", alertNumber: 3)
+			presentAlert(withTitle: "אופס", withMessage: "נראה ששכחת להזין כתובת האימייל", options: "אישור", alertNumber: 3)
 		} catch ErrorManager.LoginError.emptyPassword {
 			presentAlert(withTitle: "אופס", withMessage: "נראה ששכחת להזין סיסמא", options: "אישור", alertNumber: 4)
 		} catch ErrorManager.LoginError.invalidEmail {
-			presentAlert(withTitle: "אופס", withMessage: "נראה שכתובת האמייל שגויה", options: "אישור", alertNumber: 5)
+			presentAlert(withTitle: "אופס", withMessage: "נראה שכתובת האימייל שגויה", options: "אישור", alertNumber: 5)
 		} catch {
 			print("Something went wrong!")
 		}

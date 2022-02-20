@@ -83,8 +83,11 @@ extension MealPlanViewController: ChangeDateViewDelegate {
 		mealViewModel.fetchMealsBy(date: date) {
 			[weak self] hasMeal in
 			guard let self = self else { return }
-			Spinner.shared.stop()
-			self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
+			
+			DispatchQueue.main.async {
+				Spinner.shared.stop()
+				self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
+			}
 		}
 	}
 }

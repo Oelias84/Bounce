@@ -118,6 +118,7 @@ extension DishesTableViewController: UITableViewDataSource, UITableViewDelegate 
 		switch indexPath.section {
 		case 0:
 			self.selectedDish = self.dishes[indexPath.row].name
+			self.delegate?.didPickDish(name: selectedDish)
 		case 1:
 			self.selectedDish = self.otherDishes![indexPath.row]
 		default:

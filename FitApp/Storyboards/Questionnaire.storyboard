@@ -1275,7 +1275,7 @@
                                 <rect key="frame" x="97.666666666666671" y="683" width="179.66666666666663" height="87"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="nCE-Cw-Kyc">
-                                        <rect key="frame" x="4" y="0.0" width="171.66666666666666" height="62"/>
+                                        <rect key="frame" x="9.6666666666666572" y="0.0" width="160.66666666666666" height="62"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTJ-hG-67b" userLabel="backButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="62"/>
@@ -1298,12 +1298,12 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxd-dP-u5a">
-                                                <rect key="frame" x="89.666666666666686" y="11" width="82" height="40"/>
+                                                <rect key="frame" x="89.666666666666671" y="11" width="71.000000000000014" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Ene-MW-PxM"/>
                                                 </constraints>
                                                 <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
-                                                <state key="normal" title="התחל">
+                                                <state key="normal" title="סיום">
                                                     <color key="titleColor" red="1" green="0.99998813870000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>

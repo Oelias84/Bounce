@@ -18,7 +18,7 @@ import InputBarAccessoryView
 class ChatViewController: MessagesViewController {
 	
 	var viewModel: ChatViewModel!
-
+	
 	private let hud = JGProgressHUD()
 	private let isAdmin: Bool = UserProfile.defaults.getIsManager
 	private let imagePickerController = UIImagePickerController()
@@ -96,13 +96,22 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		}
 	}
 	func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-		let name = message.sender.displayName.splitFullName
 		
-		let presentingInitials = "\(name.0.first ?? "N")/\(name.1.first ?? "A")"
+		let presentingName: String = {
+			if message.sender.senderId != currentSender().senderId {
+				let senderName = viewModel.getDisplayName?.splitFullName
+				let presentingInitials = "\(senderName?.0.first ?? " ")\(senderName?.1.first ?? " ")"
+				return presentingInitials
+			} else {
+				let senderName = UserProfile.defaults.name?.splitFullName
+				let presentingInitials = "\(senderName?.0.first ?? " ")\(senderName?.1.first ?? " ")"
+				return presentingInitials
+			}
+		}()
 		avatarView.placeholderFont = UIFont(name: "Assistant-Regular", size: 12)!
 		avatarView.backgroundColor = message.sender.senderId != currentSender().senderId ? .projectIncomingMessageBubble : .projectOutgoingMessageBubble
 		avatarView.placeholderTextColor = .black
-		avatarView.initials = presentingInitials
+		avatarView.initials = presentingName
 	}
 	
 	//Custom cell view
@@ -149,7 +158,7 @@ extension ChatViewController: CropViewControllerDelegate, UINavigationController
 			if let image = info[.originalImage] as? UIImage {
 				self.presentCropViewController(image: image, type: .default)
 				
-			//Video Picker
+				//Video Picker
 			} else if let videoUrl = info[.mediaURL] as? URL  {
 				guard let placeholder = MessagesManager.generateThumbnailFrom(videoURL: videoUrl) else { return }
 				let media = Media(url: videoUrl, image: nil, placeholderImage: placeholder, size: .zero)
@@ -319,7 +328,7 @@ extension ChatViewController {
 			}
 		}
 	}
-
+	
 	private func disableInteraction() {
 		spinner(run: true)
 	}

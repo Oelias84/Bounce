@@ -76,6 +76,7 @@ class ChangeDateView: UIView {
 		if #available(iOS 13.4, *) {
 			picker.preferredDatePickerStyle = .wheels
 		}
+		picker.minimumDate = "2022-01-01".dateFromString
 		picker.datePickerMode = .date
 		picker.backgroundColor = .white
 		

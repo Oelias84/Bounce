@@ -73,7 +73,7 @@ extension SettingTableViewModel {
 		case .fitnessLevel:
 			tableViewTitle = "רמת כושר"
 		case .mostHungry:
-			tableViewTitle = "מתי אני הכי רעבה"
+			tableViewTitle = StaticStringsManager.shared.getGenderString?[21] ?? ""
 		case .notifications:
 			tableViewTitle = "התראות"
 		default:
@@ -84,7 +84,7 @@ extension SettingTableViewModel {
 		
 		switch contentType {
 		case .fitnessLevel:
-			tableViewItemArray = ["מתחיל", "בינוני", "מתקדם"]
+			tableViewItemArray = [StaticStringsManager.shared.getGenderString?[14] ?? "מתחיל", "ביניים", StaticStringsManager.shared.getGenderString?[17] ?? "מתקדם"]
 		case .mostHungry:
 			tableViewItemArray = ["בוקר", "צהריים", "ערב", "לא ידוע"]
 		case .notifications:
@@ -157,8 +157,7 @@ extension SettingTableViewModel {
 	}
 	func presentFitnessAlert(_ level: Int) {
 		self.level = level
-		presentAlert(withTitle: "שינוי רמת קושי", withMessage: StaticStringsManager.shared.getGenderString?[37] ?? "", options: "אישור", "ביטול")
-		
+		presentAlert(withTitle: "שינוי רמת קושי", withMessage: StaticStringsManager.shared.getGenderString?[38] ?? "", options: "אישור", "ביטול")
 	}
 	func notificationsPressed(at row: Int) {
 		

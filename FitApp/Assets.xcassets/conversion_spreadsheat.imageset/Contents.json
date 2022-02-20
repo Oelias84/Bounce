@@ -1,7 +1,10 @@
 {
   "images" : [
     {
-      "filename" : "conversion_spreadsheat.png",
+      "filename" : "conversion_spreadsheet.png",
+      "idiom" : "universal"
+    },
+    {
       "idiom" : "universal",
       "scale" : "1x"
     },

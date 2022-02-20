@@ -242,7 +242,7 @@ extension HomeViewController {
 	private func presentWeightAlert() {
 		viewModel.checkAddWeight {
 			DispatchQueue.main.async {
-				self.presentAlert(withTitle: "זמן להישקל", withMessage: "תזכורת קטנה לא לשכוח להישקל הבוקר לפני שאת מתחילה את היום :)", options: "מעבור למסך שקילה", "ביטול", alertNumber: 2)
+				self.presentAlert(withTitle: "זמן להישקל", withMessage: "תזכורת קטנה לא לשכוח להישקל הבוקר לפני שאת מתחילה את היום :)", options: "מעבר למסך שקילה", "ביטול", alertNumber: 2)
 			}
 		}
 	}

@@ -160,25 +160,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X1M-Hk-c2t">
-                                <rect key="frame" x="0.0" y="214" width="414" height="627"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vd7-lu-XtP">
-                                        <rect key="frame" x="18" y="34" width="379" height="574"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" name="ProjectBackground"/>
-                                <constraints>
-                                    <constraint firstItem="Vd7-lu-XtP" firstAttribute="height" secondItem="2p2-hm-NmW" secondAttribute="height" priority="700" id="0Pq-DG-neM"/>
-                                    <constraint firstAttribute="bottom" secondItem="Vd7-lu-XtP" secondAttribute="bottom" id="1mH-ar-1Nz"/>
-                                    <constraint firstItem="Vd7-lu-XtP" firstAttribute="top" secondItem="X1M-Hk-c2t" secondAttribute="top" id="GP6-hr-xCr"/>
-                                    <constraint firstItem="Vd7-lu-XtP" firstAttribute="width" secondItem="2p2-hm-NmW" secondAttribute="width" priority="700" id="V6Z-MI-paa"/>
-                                    <constraint firstAttribute="trailing" secondItem="Vd7-lu-XtP" secondAttribute="trailing" id="rls-cZ-iFD"/>
-                                    <constraint firstItem="Vd7-lu-XtP" firstAttribute="leading" secondItem="X1M-Hk-c2t" secondAttribute="leading" id="zEQ-bx-tLS"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="2p2-hm-NmW"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="EID-oh-0sV"/>
-                            </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HMS-hY-kCC" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="214"/>
                                 <color key="backgroundColor" name="ProjectBackground"/>
@@ -186,27 +167,39 @@
                                     <constraint firstAttribute="height" constant="214" id="NB0-87-pt5"/>
                                 </constraints>
                             </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="ZIT-p1-Gyr">
+                                <rect key="frame" x="0.0" y="214" width="414" height="682"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SeA-CO-wAy">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="682"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="SeA-CO-wAy" secondAttribute="trailing" id="Ipe-hV-TTW"/>
+                                    <constraint firstItem="SeA-CO-wAy" firstAttribute="width" secondItem="ZIT-p1-Gyr" secondAttribute="width" id="JAK-EL-v2F"/>
+                                    <constraint firstItem="SeA-CO-wAy" firstAttribute="leading" secondItem="ZIT-p1-Gyr" secondAttribute="leading" id="Q4i-JJ-dQo"/>
+                                    <constraint firstAttribute="bottom" secondItem="SeA-CO-wAy" secondAttribute="bottom" id="UEY-fm-XMM"/>
+                                    <constraint firstItem="SeA-CO-wAy" firstAttribute="height" secondItem="ZIT-p1-Gyr" secondAttribute="height" id="dPb-Wd-G2e"/>
+                                    <constraint firstItem="SeA-CO-wAy" firstAttribute="top" secondItem="ZIT-p1-Gyr" secondAttribute="top" id="sLK-ik-Y0S"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fCv-hA-mVg"/>
                         <color key="backgroundColor" name="ProjectBackground"/>
                         <constraints>
+                            <constraint firstItem="ZIT-p1-Gyr" firstAttribute="leading" secondItem="DmU-a0-f9i" secondAttribute="leading" id="5YF-MT-Nb5"/>
                             <constraint firstItem="HMS-hY-kCC" firstAttribute="leading" secondItem="fCv-hA-mVg" secondAttribute="leading" id="HbM-mn-Fwb"/>
-                            <constraint firstItem="X1M-Hk-c2t" firstAttribute="trailing" secondItem="fCv-hA-mVg" secondAttribute="trailing" id="Vva-f1-CZz"/>
+                            <constraint firstAttribute="bottom" secondItem="ZIT-p1-Gyr" secondAttribute="bottom" id="LtC-Nm-Tcn"/>
+                            <constraint firstItem="ZIT-p1-Gyr" firstAttribute="top" secondItem="HMS-hY-kCC" secondAttribute="bottom" id="QOp-XC-9v0"/>
                             <constraint firstItem="HMS-hY-kCC" firstAttribute="top" secondItem="DmU-a0-f9i" secondAttribute="top" id="Wji-b6-gJC"/>
+                            <constraint firstItem="ZIT-p1-Gyr" firstAttribute="trailing" secondItem="DmU-a0-f9i" secondAttribute="trailing" id="eG3-00-ImZ"/>
                             <constraint firstAttribute="trailing" secondItem="HMS-hY-kCC" secondAttribute="trailing" id="jNz-BX-1ed"/>
-                            <constraint firstItem="X1M-Hk-c2t" firstAttribute="leading" secondItem="fCv-hA-mVg" secondAttribute="leading" id="kMl-2Q-Dvo"/>
-                            <constraint firstItem="X1M-Hk-c2t" firstAttribute="top" secondItem="HMS-hY-kCC" secondAttribute="bottom" id="kiP-L6-Syb"/>
-                            <constraint firstItem="fCv-hA-mVg" firstAttribute="bottom" secondItem="X1M-Hk-c2t" secondAttribute="bottom" id="pCV-3v-qBt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pfU-tq-LTb"/>
                     <connections>
-                        <outlet property="imageView" destination="Vd7-lu-XtP" id="ztt-R5-Ag0"/>
-                        <outlet property="imageViewBottomConstraint" destination="1mH-ar-1Nz" id="Q3Q-cs-KaP"/>
-                        <outlet property="imageViewLeadingConstraint" destination="zEQ-bx-tLS" id="F6a-7z-OGa"/>
-                        <outlet property="imageViewTopConstraint" destination="GP6-hr-xCr" id="bVp-FJ-YUb"/>
-                        <outlet property="imageViewTrailingConstraint" destination="rls-cZ-iFD" id="Bbf-pt-isi"/>
-                        <outlet property="scrollView" destination="X1M-Hk-c2t" id="VJD-bU-RLC"/>
+                        <outlet property="imageView" destination="SeA-CO-wAy" id="RNl-DZ-0wa"/>
+                        <outlet property="scrollView" destination="ZIT-p1-Gyr" id="yuN-Eh-fwq"/>
                         <outlet property="topBarView" destination="HMS-hY-kCC" id="Tfx-iG-9sr"/>
                     </connections>
                 </viewController>

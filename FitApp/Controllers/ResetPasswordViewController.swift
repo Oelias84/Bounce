@@ -35,7 +35,7 @@ class ResetPasswordViewController: UIViewController {
 		resetPasswordButton.isUserInteractionEnabled = true
 		
 		if !email.isValidEmail {
-			presentOkAlert(withTitle: "אופס!", withMessage: "נראה שכתובת האמייל שגויה")
+			presentOkAlert(withTitle: "אופס!", withMessage: "נראה שכתובת האימייל שגויה")
 		} else {
 			resetPassword(email: email)
 		}

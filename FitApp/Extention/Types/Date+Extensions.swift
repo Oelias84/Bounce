@@ -84,10 +84,12 @@ extension Date {
 	}
 	
 	var age: String? {
-		let now = Date()
+
 		let birthday: Date = self
+		let timeInterval = birthday.timeIntervalSinceNow
+		let age = abs(Int(timeInterval / 31556926.0)).years.years
 		
-		return "\(now.year - birthday.year)"
+		return "\(age)"
 	}
 }
 

@@ -103,6 +103,7 @@ class WeightProgressViewController: UIViewController {
 	@IBAction func addWeightButtonAction(_ sender: Any) {
 		guard let lastWeightDate = weightViewModel.getLastWeightDate() else { return }
 		let currentDate = Date().onlyDate
+		addWeightButton.isEnabled = false
 		
 		if lastWeightDate == currentDate {
 			presentOkAlert(withMessage: "כבר נשקלת היום")
@@ -159,15 +160,19 @@ extension WeightProgressViewController: CropViewControllerDelegate, UINavigation
 	
 	func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
 		cropViewController.dismiss(animated: true) {
-			self.weightImage = image
-			self.weightAlert?.chageCheckMarkState()
+			if let imageData = image.jpegData(compressionQuality: 0.2) {
+				self.weightImage = UIImage(data: imageData)
+				self.weightAlert?.chageCheckMarkState()
+			}
 		}
 	}
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-		let tempoImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
 		
-		picker.dismiss(animated: true)
-		presentCropViewController(image: tempoImage, type: .default)
+		if let image = info[.originalImage] as? UIImage {
+			picker.dismiss(animated: true) {
+				self.presentCropViewController(image: image, type: .default)
+			}
+		}
 	}
 	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		picker.dismiss(animated: true)
@@ -179,25 +184,30 @@ extension WeightProgressViewController: AddWeightAlertViewDelegate {
 		weightAlert?.removeFromSuperview()
 		weightAlert = nil
 		Spinner.shared.stop()
+		addWeightButton.isEnabled = true
 	}
 	func cameraButtonTapped() {
 		presentImagePickerActionSheet(imagePicker: imagePickerController) {_ in}
 	}
 	func confirmButtonAction(weight: String, date: Date?) {
 		weightAlert?.removeFromSuperview()
-		Spinner.shared.stop()
-		guard let weightInt = Int(weight) else { return }
+		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
+			return
+		}
+		Spinner.shared.show(window)
+		guard let weightInt = Double(weight) else { return }
 		
 		if weightInt>150 || weightInt<30  {
 			weightAlert = nil
+			Spinner.shared.stop()
 			self.presentOkAlert(withTitle: "אופס", withMessage: StaticStringsManager.shared.getGenderString?[34] ?? "")
 		} else {
 			if let weightTab = self.tabBarController?.tabBar.items?[3] {
 				weightTab.image = UIImage(named:"Weight")
 			}
-			self.addWeight(weight: weight, image: self.weightImage, date: date)
 			self.weightAlert?.removeFromSuperview()
 			self.weightAlert = nil
+			self.addWeight(weight: weight, image: self.weightImage, date: date)
 		}
 	}
 }
@@ -360,6 +370,7 @@ extension WeightProgressViewController {
 			self.weightViewModel.addWeight()
 			self.updateDateLabels()
 			self.updateFiltersArray()
+			self.addWeightButton.isEnabled = true
 		}
 	}
 	

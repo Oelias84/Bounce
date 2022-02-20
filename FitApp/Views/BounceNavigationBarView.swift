@@ -24,7 +24,7 @@ final class BounceNavigationBarView: UIView {
 	@IBOutlet private weak var backButton: UIButton!
 	@IBOutlet private weak var messageButton: UIButton!
 	@IBOutlet private weak var informationButton: UIButton!
-	@IBOutlet private weak var userProfileButton: UIButton! {
+	@IBOutlet public weak var userProfileButton: UIButton! {
 		didSet {
 			if let image = UserProfile.defaults.userProfileImage {
 				userProfileButton.setImage(image.circleMasked, for: .normal)
@@ -209,29 +209,32 @@ extension BounceNavigationBarView {
 		}
 	}
 	func setImage() {
-		
+		userProfileButton.isEnabled = false
 		if !changeImage, let image = UserProfile.defaults.userProfileImage {
+			
 			DispatchQueue.main.async {
 				self.userProfileButton.setImage(image.circleMasked, for: .normal)
+				self.userProfileButton.isEnabled = true
 			}
 		} else if let imageURLString = UserProfile.defaults.profileImageImageUrl, let imageURL = URL(string: imageURLString) {
-			
 			let imageView = UIImageView()
 			
 			imageView.sd_setImage(with: imageURL) {
 				[weak self] image, error, type, url  in
 				guard let self = self else { return }
-				
+				self.userProfileButton.isEnabled = true
+
 				if let image = imageView.image {
 					
 					UserProfile.defaults.userProfileImage = image
-					
 					DispatchQueue.main.async {
 						self.userProfileButton.setImage(image.circleMasked, for: .normal)
 						self.changeImage = false
 					}
 				}
 			}
+		} else {
+			self.userProfileButton.isEnabled = true
 		}
 	}
 }
