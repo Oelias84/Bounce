@@ -97,14 +97,16 @@ extension ConsumptionManager {
 		
 		let LBM = weight * ((100 - fatPercentage) / 100)
 		let BMR = (LBM * 22.0) + 500.0
+		
 		var EAT: Double {
 			switch gender {
-			case .male:
-				return (150.0 * Double(numberOfTrainings)) / 7.0
 			case .female:
+				return (150.0 * Double(numberOfTrainings)) / 7.0
+			case .male:
 				return (250.0 * Double(numberOfTrainings)) / 7.0
 			}
 		}
+		
 		var NIT: Double!
 		
 		if let Kilometer = Kilometer {
@@ -169,10 +171,10 @@ extension ConsumptionManager {
 		if let externalTraining = externalNumberOfTraining { numberOfTrainings += externalTraining }
 		guard let calculatedCalories = TDEE(gender: gender, weight: currentAverageWeight ?? weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings) else { return }
 		
-		self.dailyCalories = calculatedCalories
-		self.dailyFatPortion = portionFat(tdee: dailyCalories!)
-		self.dailyProteinPortion = proteinPortion(proteinGrams: proteinGrams(weight: weight, fatPercentage: fatPercentage))
-		self.dailyCarbsPortion = portionCarbs(fatPortion: self.dailyFatPortion!, proteinPortion: self.dailyProteinPortion!, calories: dailyCalories!)
+		dailyCalories = calculatedCalories
+		dailyFatPortion = portionFat(tdee: dailyCalories!)
+		dailyProteinPortion = proteinPortion(proteinGrams: proteinGrams(weight: weight, fatPercentage: fatPercentage))
+		dailyCarbsPortion = portionCarbs(fatPortion: self.dailyFatPortion!, proteinPortion: self.dailyProteinPortion!, calories: dailyCalories!)
 	}
 
 	func stepsToKilometers(steps: Int, height: Int) -> Double {
