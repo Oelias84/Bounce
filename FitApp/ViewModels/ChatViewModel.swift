@@ -18,7 +18,6 @@ class ChatViewModel {
 	var chatViewModelBinder: (() -> ()) = {}
 	
 	required init(chat: Chat?) {
-		
 		if let chat = chat {
 			self.chat = chat
 		} else {
