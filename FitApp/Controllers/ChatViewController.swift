@@ -279,7 +279,6 @@ extension ChatViewController {
 	}
 	
 	private func presentImageFor(_ urlString: String) {
-		ableInteraction()
 		
 		viewModel.getMediaUrlFor(urlString) {
 			[weak self] url in
@@ -287,7 +286,7 @@ extension ChatViewController {
 				self?.disableInteraction()
 				return
 			}
-			self.disableInteraction()
+			self.ableInteraction()
 			if let url = url {
 				let photoViewer = PhotoViewerViewController(with: url)
 				self.parent?.present(photoViewer, animated: true)
@@ -297,7 +296,6 @@ extension ChatViewController {
 		}
 	}
 	private func presentVideoFor(_ urlString: String) {
-		ableInteraction()
 		
 		viewModel.getMediaUrlFor(urlString) {
 			[weak self] url in
@@ -305,7 +303,7 @@ extension ChatViewController {
 				self?.disableInteraction()
 				return
 			}
-			self.disableInteraction()
+			self.ableInteraction()
 			if let url = url {
 				let videoVC = AVPlayerViewController()
 				
