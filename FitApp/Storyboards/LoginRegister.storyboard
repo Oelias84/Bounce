@@ -59,11 +59,23 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="HEj-fF-PCc">
                                         <rect key="frame" x="0.0" y="76" width="342" height="60"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZV-LL-uju">
+                                                <rect key="frame" x="0.0" y="10" width="57" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="57" id="NIY-xd-7Au"/>
+                                                    <constraint firstAttribute="height" constant="40" id="tRW-hJ-35n"/>
+                                                </constraints>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="eye" catalog="system">
+                                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ej-kL-Lb3">
-                                                <rect key="frame" x="0.0" y="10" width="285" height="40"/>
+                                                <rect key="frame" x="57" y="10" width="228" height="40"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" placeholder="סיסמה" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Cp-jt-yuu">
-                                                        <rect key="frame" x="32" y="0.0" width="253" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="228" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="9J8-yQ-pl2"/>
                                                         </constraints>
@@ -74,25 +86,25 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="4Cp-jt-yuu" firstAttribute="leading" secondItem="9ej-kL-Lb3" secondAttribute="leading" constant="32" id="FCM-Lt-iMM"/>
+                                                    <constraint firstItem="4Cp-jt-yuu" firstAttribute="leading" secondItem="9ej-kL-Lb3" secondAttribute="leading" id="DIc-Cy-dhL"/>
                                                     <constraint firstAttribute="bottom" secondItem="4Cp-jt-yuu" secondAttribute="bottom" id="MOd-HC-quL"/>
                                                     <constraint firstItem="4Cp-jt-yuu" firstAttribute="top" secondItem="9ej-kL-Lb3" secondAttribute="top" id="UvT-iQ-nT8"/>
                                                     <constraint firstAttribute="trailing" secondItem="4Cp-jt-yuu" secondAttribute="trailing" id="cpW-VP-Ba8"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZV-LL-uju">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cmy-34-2kf">
                                                 <rect key="frame" x="285" y="10" width="57" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="57" id="NIY-xd-7Au"/>
-                                                    <constraint firstAttribute="height" constant="40" id="tRW-hJ-35n"/>
+                                                    <constraint firstAttribute="width" constant="57" id="4rh-uB-oll"/>
+                                                    <constraint firstAttribute="height" constant="40" id="NQC-lt-rnd"/>
                                                 </constraints>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="arrow.forward" catalog="system">
                                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="signInButtonAction:" destination="yBW-kw-QQl" eventType="touchUpInside" id="Ydl-iI-q78"/>
+                                                    <action selector="signInButtonAction:" destination="yBW-kw-QQl" eventType="touchUpInside" id="cZH-fQ-Cuq"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -143,7 +155,9 @@
                     <connections>
                         <outlet property="buttonsStackView" destination="pgN-ey-J43" id="GB2-V0-fru"/>
                         <outlet property="emailTextfield" destination="fUu-i7-zcc" id="7kp-iG-FMj"/>
+                        <outlet property="noAccountButton" destination="4xK-ZN-8Vf" id="D6u-Dz-kda"/>
                         <outlet property="passwordTextfield" destination="4Cp-jt-yuu" id="28Y-eI-nfH"/>
+                        <outlet property="showPasswordButton" destination="yZV-LL-uju" id="fk8-SM-VvG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CJD-Tw-XMm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -482,6 +496,7 @@
         <image name="arrow.forward" catalog="system" width="128" height="98"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
         <image name="checkmark.square" catalog="system" width="128" height="114"/>
+        <image name="eye" catalog="system" width="128" height="81"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="square" catalog="system" width="128" height="114"/>
         <namedColor name="AccentColor">

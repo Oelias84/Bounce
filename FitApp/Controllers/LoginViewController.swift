@@ -16,6 +16,12 @@ class LoginViewController: UIViewController {
 	@IBOutlet weak var passwordTextfield: UITextField!
 	@IBOutlet weak var buttonsStackView: UIStackView!
 	@IBOutlet weak var noAccountButton: UIButton!
+	@IBOutlet weak var showPasswordButton: UIButton! {
+		didSet {
+			showPasswordButton.addTarget(self, action: #selector(thumbsUpButtonPressed(_:)), for: .touchDown)
+			showPasswordButton.addTarget(self, action: #selector(thumbsUpButtonCancelled(_:)), for: .touchUpInside)
+		}
+	}
 	
 	deinit {
 		removeKeyboardListener()
@@ -26,8 +32,16 @@ class LoginViewController: UIViewController {
 		
 		raiseScreenWhenKeyboardAppears()
 		addScreenTappGesture()
+		passwordTextfield.isSecureTextEntry = true
+		passwordTextfield.keyboardType = .alphabet
 	}
-	
+
+	@objc func thumbsUpButtonPressed(_ sender: Any) {
+		passwordTextfield.isSecureTextEntry = false
+	}
+	@objc func thumbsUpButtonCancelled(_ sender: Any) {
+		passwordTextfield.isSecureTextEntry = true
+	}
 	@IBAction func signInButtonAction(_ sender: Any) {
 		view.endEditing(true)
 		Spinner.shared.show(view)
