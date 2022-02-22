@@ -137,24 +137,14 @@ class WeightsManager {
 	}
 	
 	func checkAddWeight(completion: @escaping (Bool) -> ()) {
-		let calendar = Calendar.current
-		let startHour = calendar.dateComponents([.hour,.minute,.second], from: "05:00".timeFromString!)
-		let endHour = calendar.dateComponents([.hour,.minute,.second], from: "12:00".timeFromString!)
-		let time = calendar.dateComponents([.hour,.minute,.second], from: Date())
-		
-		guard time.hour! >= startHour.hour! && time.hour! <= endHour.hour! else {
-			completion(false)
-			return
-		}
 		GoogleApiManager.shared.getWeights { result in
 			switch result {
 			case .success(let weights):
 				if let weights = weights {
-					var shouldWeight = false
 					if weights.last!.date.onlyDate < Date().onlyDate {
-						shouldWeight = true
+						completion(true)
 					}
-					completion(shouldWeight)
+					completion(false)
 				}
 			case .failure(_):
 				completion(false)

@@ -233,7 +233,7 @@ extension HomeViewController {
 		if lastDate == nil {
 			UserProfile.defaults.lastWeightAlertPresentedDate = Date()
 			presentWeightAlert()
-		} else if lastDate?.onlyDate != Date().onlyDate {
+		} else if let lastDate = lastDate?.onlyDate, lastDate.isEarlier(than: Date().onlyDate) {
 			UserProfile.defaults.lastWeightAlertPresentedDate = Date()
 			presentWeightAlert()
 		}
