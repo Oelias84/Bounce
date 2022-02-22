@@ -23,15 +23,18 @@ final class GoogleStorageManager {
 		}
 	}
 	public func uploadVideo(fileUrl: URL, fileName: String, completion: @escaping (Result<Void, Error>) -> Void) {
-		
-		storage.child(fileName).putFile(from: fileUrl, metadata: nil) {
-			metadata, error in
-			if let error = error {
-				print(error.localizedDescription)
-				completion(.failure(error))
-				return
+		if let videoData = NSData(contentsOf: fileUrl) as Data? {
+			storage.child(fileName).putData(videoData, metadata: nil) {
+				metadata, error in
+				if let error = error {
+					print(error.localizedDescription)
+					completion(.failure(error))
+					return
+				}
+				completion(.success(()))
 			}
-			completion(.success(()))
+		} else {
+			completion(.failure(ErrorManager.DatabaseError.failedToDecodeData))
 		}
 	}
 	public func downloadURL(path: String, completion: @escaping (Result<URL, Error>) -> Void) {

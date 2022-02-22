@@ -165,7 +165,7 @@ extension MessagesManager {
 						}
 					}
 				case .failure(let error):
-					print("message photo upload error:", error)
+					print("message video upload error:", error)
 				}
 			}
 		default:
