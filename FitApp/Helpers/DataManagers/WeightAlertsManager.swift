@@ -55,7 +55,7 @@ class WeightAlertsManager {
 	
 	required init() {
 		
-		if UserProfile.defaults.getIsManager {
+		if !UserProfile.defaults.getIsManager {
 			
 			setUserData() {
 				self.configureData() {
