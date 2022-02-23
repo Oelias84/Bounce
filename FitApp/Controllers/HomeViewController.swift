@@ -91,14 +91,7 @@ extension HomeViewController: PopupAlertViewDelegate {
 		case 1:
 			self.tabBarController?.selectedIndex = 1
 		case 2:
-			if let navC = self.tabBarController?.viewControllers?[3] as? UINavigationController {
-				let weightVC = navC.viewControllers.last as! WeightProgressViewController
-				
-				self.tabBarController?.selectedIndex = 3
-				DispatchQueue.main.async {
-					weightVC.addWeightButtonAction(self)
-				}
-			}
+			self.tabBarController?.selectedIndex = 3
 		default:
 			break
 		}
@@ -242,7 +235,7 @@ extension HomeViewController {
 	private func presentWeightAlert() {
 		viewModel.checkAddWeight {
 			DispatchQueue.main.async {
-				self.presentAlert(withTitle: "זמן להישקל", withMessage: "תזכורת קטנה לא לשכוח להישקל הבוקר לפני שאת מתחילה את היום :)", options: "מעבר למסך שקילה", "ביטול", alertNumber: 2)
+				self.presentAlert(withTitle: "זמן להישקל", withMessage: StaticStringsManager.shared.getGenderString?[39] ?? "", options: "מעבר למסך שקילה", "ביטול", alertNumber: 2)
 			}
 		}
 	}
