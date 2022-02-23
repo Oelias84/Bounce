@@ -51,7 +51,7 @@ class ExerciseViewController: UIViewController {
 		textLabel.text = string
 		
 		setUpPlayerContainerView()
-		playVideo(userString: exercise.videos)
+		playVideo(for: exercise.videos)
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -202,29 +202,19 @@ extension ExerciseViewController {
 		playerContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
 		playerContainerView.heightAnchor.constraint(equalTo: containerView.heightAnchor ).isActive = true
 	}
-	private func playVideo(userString: [String]) {
+	private func playVideo(for exerciseNumbers: [String]) {
 		playButton.isHidden = true
 		
-		googleManager.getExerciseVideo(videoNumber: userString) {
+		googleManager.getExerciseVideo(videoNumber: exerciseNumbers) {
 			result in
-				switch result {
-				case .success(let urls):
-					if self.exercise.name == "Push-Ups" {
-						let order = ["F17","F16","F22","F23","F44","F18"]
-						let orderUrls = order.compactMap({
-							order in urls.first(where: {
-								$0.absoluteString.contains(order)
-							})
-						})
-						
-						self.urlVideos = orderUrls
-						self.play(self.urlVideos.first!)
-					} else {
-						self.urlVideos = urls
-						self.play(self.urlVideos.first!)
-					}
-				case .failure(let error):
-					print(error)
+			switch result {
+			case .success(let urls):
+				DispatchQueue.main.async {
+					self.urlVideos = urls
+					self.play(self.urlVideos.first!)
+				}
+			case .failure(let error):
+				print(error)
 			}
 		}
 	}
