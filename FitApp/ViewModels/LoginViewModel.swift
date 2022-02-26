@@ -26,44 +26,45 @@ class LoginViewModel {
 			throw ErrorManager.LoginError.invalidEmail
 		}
 		
-		Auth.auth().signIn(withEmail: email, password: password) {
-			[weak self] (user, error) in
-			guard let self = self else { return }
-			
-			if let error = error {
-				completion(false, error.localizedDescription)
-			} else {
+		DispatchQueue.global(qos: .userInteractive).async {
+			Auth.auth().signIn(withEmail: email, password: password) {
+				[weak self] (user, error) in
+				guard let self = self else { return }
 				
-				//Check if the user is approved in data base
-				GoogleApiManager.shared.checkUserApproved() {
-					result in
+				if let error = error {
+					completion(false, error.localizedDescription)
+				} else {
 					
-					switch result {
-					case .success(let isApproved):
+					//Check if the user is approved in data base
+					GoogleApiManager.shared.checkUserApproved() {
+						result in
 						
-						if isApproved {
-							self.googleManager.getUserData { result in
-								
-								switch result {
-								case .success(let userData):
-									LocalNotificationManager.shared.setMealNotification()
+						switch result {
+						case .success(let isApproved):
+							
+							if isApproved {
+								self.googleManager.getUserData { result in
 									
-									if let user = user?.user, let data = userData {
-										UserProfile.defaults.updateUserProfileData(data, id: user.uid)
-										
-									}
-									UserProfile.defaults.email = email
+									switch result {
+									case .success(let userData):
+										LocalNotificationManager.shared.setMealNotification()
+										if let user = user?.user, let data = userData {
+											UserProfile.defaults.updateUserProfileData(data, id: user.uid)
+											
+										}
+										UserProfile.defaults.email = email
 										completion(true, nil)
-								case .failure(let error):
-									print("Error fetching user data: ", error)
-									completion(false, nil)
+									case .failure(let error):
+										print("Error fetching user data: ", error)
+										completion(false, nil)
+									}
 								}
+							} else {
+								completion(false, "אין באפשרוך להתחבר, אנא צרי איתנו קשר")
 							}
-						} else {
-							completion(false, "אין באפשרוך להתחבר, אנא צרי איתנו קשר")
+						case .failure(let error):
+							completion(false, "נראה שיש בעיה: \(error.localizedDescription)")
 						}
-					case .failure(let error):
-						completion(false, "נראה שיש בעיה: \(error.localizedDescription)")
 					}
 				}
 			}
