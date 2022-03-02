@@ -34,7 +34,8 @@ extension GoogleDatabaseManager {
 			let queue = DispatchQueue.global()
 			let dispatchGroup = DispatchGroup()
 			
-			let chat = Chat(userId: userId, isAdmin: isAdmin)
+			let sender = Sender(photoURL: "", senderId: userId, displayName: UserProfile.defaults.name ?? "")
+			let chat = Chat(userId: userId, isAdmin: isAdmin, latestMessage: Message(sender: sender, messageId: Auth.auth().currentUser?.uid ?? "", sentDate: Date(), kind: .text(""), isIncoming: false))
 			
 			dispatchGroup.enter()
 			queue.async(group: dispatchGroup) {
