@@ -15,20 +15,13 @@ struct GoogleApiManager {
 	
 	let db = Firestore.firestore()
 	let storage = Storage.storage()
-	private let userUID = Auth.auth().currentUser!.uid
 	
 	static let shared = GoogleApiManager()
-	
-	static func safeEmail(emailAddress: String) -> String {
-		var safeEmail = emailAddress.replacingOccurrences(of: ".", with: "-")
-		safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
-		return safeEmail
-	}
 	
 	//MARK: - ApprovedUsersCheck
 	func checkUserApproved(completion: @escaping (Result<Bool, Error>) -> Void) {
 		do {
-			db.collection("users").document("\(userUID)").collection("profile-data").document("data").getDocument {
+			db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("data").getDocument {
 				(data, error) in
 				
 				if let error = error {
@@ -55,13 +48,13 @@ struct GoogleApiManager {
 	//MARK: - UserData
 	func updateUserData(userData: ServerUserData) {
 		do {
-			try db.collection("users").document("\(userUID)").collection("profile-data").document("data").setData(from: userData.self)
+			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("data").setData(from: userData.self)
 		} catch {
 			print(error)
 		}
 	}
 	func getUserData(completion: @escaping (Result<ServerUserData?, Error>) -> Void) {
-		db.collection("users").document("\(userUID)").collection("profile-data").document("data")
+		db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("data")
 			.getDocument(source: .default, completion: {
 				(data, error) in
 				if let error = error {
@@ -86,20 +79,20 @@ struct GoogleApiManager {
 		let dailyMeals = DailyMeal(meals: meals)
 		
 		do {
-			try db.collection("users").document("\(userUID)").collection("user-daily-meals").document("\(currentDate)").setData(from: dailyMeals.self)
+			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-daily-meals").document("\(currentDate)").setData(from: dailyMeals.self)
 		} catch {
 			print(error)
 		}
 	}
 	func updateMealBy(date: Date, dailyMeal: DailyMeal) {
 		do {
-			try db.collection("users").document("\(userUID)").collection("user-daily-meals").document("\(date.dateStringForDB)").setData(from: dailyMeal.self)
+			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-daily-meals").document("\(date.dateStringForDB)").setData(from: dailyMeal.self)
 		} catch {
 			print(error)
 		}
 	}
 	func getMealFor( _ date: Date, completion: @escaping (Result<DailyMeal?, Error>) -> Void) {
-		db.collection("users").document("\(userUID)").collection("user-daily-meals").document("\(date.dateStringForDB)")
+		db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-daily-meals").document("\(date.dateStringForDB)")
 			.getDocument(source: .default, completion: { (data, error) in
 				if let error = error {
 					print(error)
@@ -117,7 +110,7 @@ struct GoogleApiManager {
 	}
 	func getAllMeals(completion: @escaping (Result<[DailyMeal]?, Error>) -> Void) {
 		
-		db.collection("users").document("\(userUID)").collection("user-daily-meals").getDocuments {
+		db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-daily-meals").getDocuments {
 			data, error in
 			
 			if let error = error {
@@ -138,14 +131,14 @@ struct GoogleApiManager {
 	//MARK: - Weights
 	func updateWeights(weights: Weights) {
 		do {
-			try db.collection("users").document("\(userUID)").collection("user-weights").document("weights").setData(from: weights.self)
+			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-weights").document("weights").setData(from: weights.self)
 		} catch {
 			print(error)
 		}
 	}
 	func getWeights(completion: @escaping (Result<[Weight]?, Error>) -> Void) {
 		do {
-			db.collection("users").document("\(userUID)").collection("user-weights").document("weights").getDocument(source: .default, completion: { (data, error) in
+			db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-weights").document("weights").getDocument(source: .default, completion: { (data, error) in
 				if let error = error {
 					print(error)
 				} else if let data = data {
@@ -166,7 +159,7 @@ struct GoogleApiManager {
 	//MARK: - User Calories Progress Sate
 	func updateCaloriesProgressState(data: CaloriesProgressState) {
 		do {
-			try db.collection("users").document("\(userUID)").collection("user-calories-progress").document(data.date.dateStringForDB).setData(from: data.self)
+			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-calories-progress").document(data.date.dateStringForDB).setData(from: data.self)
 		} catch {
 			print(error)
 		}
