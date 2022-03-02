@@ -96,7 +96,8 @@ extension MealPlanViewController: TableViewEmptyViewDelegate {
 	func createNewMealButtonTapped() {
 		Spinner.shared.show(view)
 		tableView.backgroundView = nil
-		mealViewModel.fetchData(date: date)	}
+		mealViewModel.fetchData(date: date)
+	}
 }
 extension MealPlanViewController: AddingTableViewCellDelegate {
 	
