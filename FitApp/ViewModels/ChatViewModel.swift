@@ -21,7 +21,9 @@ class ChatViewModel {
 		if let chat = chat {
 			self.chat = chat
 		} else {
-			self.chat = messagesManager.getUserChat()
+			messagesManager.bindMessageManager = {
+				self.chat = self.messagesManager.getUserChat()
+			}
 		}
 	}
 	

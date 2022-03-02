@@ -39,18 +39,20 @@ class MessagesManager {
 		guard let userId = self.userId else { return }
 		let queue = OperationQueue()
 		
-		queue.addOperation {
-			// Update tokens
-			self.googleManager.updatePushToken(userId: userId, isAdmin: self.isAdmin)
-		}
-		queue.addOperation {
-			if self.isAdmin {
-				self.fetchSupportChats()
-			} else {
-				self.fetchUserChat(userId: userId, isAdmin: self.isAdmin)
+		DispatchQueue.global().sync {
+			queue.addOperation {
+				if self.isAdmin {
+					self.fetchSupportChats()
+				} else {
+					self.fetchUserChat(userId: userId, isAdmin: self.isAdmin)
+				}
 			}
+			queue.addOperation {
+				// Update tokens
+				self.googleManager.updatePushToken(userId: userId, isAdmin: self.isAdmin)
+			}
+			queue.waitUntilAllOperationsAreFinished()
 		}
-		queue.waitUntilAllOperationsAreFinished()
 	}
 }
 
@@ -69,7 +71,7 @@ extension MessagesManager {
 	
 	private func sendNotification(to tokens: [String], name: String, text: String) {
 		let notification = PushNotificationSender()
-
+		
 		var notificationTitle: String {
 			return isAdmin ? "הודעה נשלחה מ BOUNCE" : "הודעה נשלחה מ- \(name)"
 		}

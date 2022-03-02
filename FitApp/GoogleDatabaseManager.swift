@@ -16,10 +16,6 @@ final class GoogleDatabaseManager {
 	
 	static let shared = GoogleDatabaseManager()
 	private let database = Database.database().reference()
-}
-
-//MARK: - Chat functionality
-extension GoogleDatabaseManager {
 	
 	func createChat(userId: String, isAdmin: Bool, completion: @escaping (Result<Chat, ErrorManager.DatabaseError>) -> Void) {
 		let newChatData = createChatData()
