@@ -26,7 +26,6 @@ class ChatViewController: MessagesViewController {
 	init(viewModel: ChatViewModel) {
 		self.viewModel = viewModel
 		super.init(nibName: nil, bundle: nil)
-		
 	}
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -37,7 +36,14 @@ class ChatViewController: MessagesViewController {
 		
 		setupController()
 		setupInputButton()
-		loadMessages()
+		
+		self.viewModel.chatViewModelBinder = {
+			DispatchQueue.main.async {
+				self.messagesCollectionView.reloadData()
+				self.messagesCollectionView.scrollToLastItem()
+				self.ableInteraction()
+			}
+		}
 	}
 }
 
@@ -62,7 +68,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 				print("Error:", error.localizedDescription)
 				return
 			}
-			self.loadMessages()
 			self.messageInputBar.inputTextView.text = nil
 		}
 	}
@@ -315,18 +320,6 @@ extension ChatViewController {
 			}
 		}
 	}
-	private func loadMessages() {
-		DispatchQueue.global(qos: .userInteractive).async {
-			self.viewModel.listenToMessages {
-				DispatchQueue.main.async {
-					self.messagesCollectionView.reloadData()
-					self.messagesCollectionView.scrollToLastItem()
-					self.ableInteraction()
-				}
-			}
-		}
-	}
-	
 	private func disableInteraction() {
 		spinner(run: true)
 	}

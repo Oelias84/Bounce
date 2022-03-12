@@ -18,11 +18,21 @@ class ChatViewModel {
 	var chatViewModelBinder: (() -> ()) = {}
 	
 	required init(chat: Chat?) {
+		
 		if let chat = chat {
 			self.chat = chat
+			self.listenToMessages()
+
 		} else {
-			messagesManager.bindMessageManager = {
-				self.chat = self.messagesManager.getUserChat()
+			if let chat = self.messagesManager.getUserChat() {
+				self.chat = chat
+				self.listenToMessages()
+
+			} else {
+				messagesManager.bindMessageManager = {
+					self.chat = self.messagesManager.getUserChat()
+					self.listenToMessages()
+				}
 			}
 		}
 	}
@@ -52,23 +62,22 @@ class ChatViewModel {
 		return Sender(photoURL: "", senderId: senderId, displayName: name)
 	}
 	
-	public func listenToMessages(completion: @escaping () -> ()) {
+	public func listenToMessages() {
 		guard let chat = chat else {
-			completion()
+			print("chat not fetched")
 			return
 		}
 		
 		messagesManager.fetchMessagesFor(chat) {
 			[weak self] messages in
 			guard let self = self, let messages = messages else {
-				completion()
 				return
 			}
 			let sorted = messages.sorted { ms1, ms2 in
 				ms1.sentDate < ms2.sentDate
 			}
 			self.messages = sorted
-			completion()
+			self.chatViewModelBinder()
 		}
 	}
 	public func getMediaUrlFor(_ urlString: String, completion: @escaping (URL?) -> ()) {
