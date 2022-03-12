@@ -19,10 +19,8 @@ struct Message: MessageType, Comparable {
 	var isPending: Bool = false
 	
 	static func < (lhs: Message, rhs: Message) -> Bool {
-		print("\((lhs.sentDate)) < \(rhs.sentDate)")
 		return lhs.sentDate < rhs.sentDate
 	}
-	
 	static func == (lhs: Message, rhs: Message) -> Bool {
 		false
 	}

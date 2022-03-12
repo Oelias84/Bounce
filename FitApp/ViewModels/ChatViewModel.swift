@@ -22,12 +22,10 @@ class ChatViewModel {
 		if let chat = chat {
 			self.chat = chat
 			self.listenToMessages()
-
 		} else {
 			if let chat = self.messagesManager.getUserChat() {
 				self.chat = chat
 				self.listenToMessages()
-
 			} else {
 				messagesManager.bindMessageManager = {
 					self.chat = self.messagesManager.getUserChat()
@@ -71,12 +69,11 @@ class ChatViewModel {
 		messagesManager.fetchMessagesFor(chat) {
 			[weak self] messages in
 			guard let self = self, let messages = messages else {
+				self?.chatViewModelBinder()
 				return
 			}
-			let sorted = messages.sorted { ms1, ms2 in
-				ms1.sentDate < ms2.sentDate
-			}
-			self.messages = sorted
+			
+			self.messages = messages.sorted()
 			self.chatViewModelBinder()
 		}
 	}
