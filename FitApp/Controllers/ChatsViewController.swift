@@ -131,7 +131,7 @@ extension ChatsViewController {
 		tableView.register(UINib(nibName: K.NibName.chatTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.chatCell)
 	}
 		
-	private func moveToChatContainerVC(chatData: Chat) {
+	public func moveToChatContainerVC(chatData: Chat) {
 		let storyboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
 		let chatContainerVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.ChatContainerViewController) as ChatContainerViewController
 		

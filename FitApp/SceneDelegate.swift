@@ -22,7 +22,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		window.overrideUserInterfaceStyle = .light
 			
 		//Add loading screen here
-		
 		if !(UserProfile.defaults.hasRunBefore ?? false) {
 			//Sign out User
 			signOutCurrentUser()
@@ -43,7 +42,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 							
 							if isApproved {
 								if UserProfile.defaults.finishOnboarding == true {
-									self.goToHome(window)
+									self.goToHome(window) {
+										if let notificationResponse = connectionOptions.notificationResponse {
+											guard let userChatId = notificationResponse.notification.request.content.userInfo["id"] as? String else { return }
+											Spinner.shared.show(window)
+											self.goToChatFromNotification(with: userChatId)
+										}
+									}
 								} else {
 									self.goToQuestionnaire(window)
 								}
@@ -64,30 +69,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 			}
 		}
 	}
-	
 	func sceneDidDisconnect(_ scene: UIScene) {
 		// Called as the scene is being released by the system.
 		// This occurs shortly after the scene enters the background, or when its session is discarded.
 		// Release any resources associated with this scene that can be re-created the next time the scene connects.
 		// The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
 	}
-	
 	func sceneDidBecomeActive(_ scene: UIScene) {
 		// Called when the scene has moved from an inactive state to an active state.
 		// Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
 		
 	}
-	
 	func sceneWillResignActive(_ scene: UIScene) {
 		// Called when the scene will move from an active state to an inactive state.
 		// This may occur due to temporary interruptions (ex. an incoming phone call).
 	}
-	
 	func sceneWillEnterForeground(_ scene: UIScene) {
 		// Called as the scene transitions from the background to the foreground.
 		// Use this method to undo the changes made on entering the background.
 	}
-	
 	func sceneDidEnterBackground(_ scene: UIScene) {
 		// Called as the scene transitions from the foreground to the background.
 		// Use this method to save data, release shared resources, and store enough scene-specific state information
@@ -121,9 +121,8 @@ extension SceneDelegate {
 			window.makeKeyAndVisible()
 		}
 	}
-	private func goToHome(_ window: UIWindow) {
+	private func goToHome(_ window: UIWindow, completion: @escaping ()->()) {
 		DispatchQueue.main.async {
-			
 			let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
 			let homeVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.HomeTabBar) as! UITabBarController
 			
@@ -131,8 +130,39 @@ extension SceneDelegate {
 			window.rootViewController = homeVC
 			self.window = window
 			window.makeKeyAndVisible()
+			completion()
 		}
 	}
+	private func goToChatFromNotification(with chatId: String) {
+		let googleManager = GoogleDatabaseManager()
+		let storyboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
+		let destinationViewController = storyboard.instantiateViewController(withIdentifier: K.ViewControllerId.ChatContainerViewController)
+		
+		if let tabBarController = self.window?.rootViewController as? UITabBarController {
+			let navController = tabBarController.selectedViewController as? UINavigationController
+			
+			if let chatViewContainer = destinationViewController as? ChatContainerViewController {
+				
+				DispatchQueue.global(qos: .userInteractive).async {
+					googleManager.getChat(userId: chatId, isAdmin: true) {
+						result in
+						
+						switch result {
+						case .success(let chat):
+							DispatchQueue.main.sync {
+								let chatViewModel = ChatViewModel(chat: chat)
+								chatViewContainer.chatViewController = ChatViewController(viewModel: chatViewModel)
+								navController?.pushViewController(chatViewContainer, animated: true)
+							}
+						case .failure(let error):
+							print("Error:", error.localizedDescription)
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	private func signOutCurrentUser() {
 		do {
 			try Auth.auth().signOut()

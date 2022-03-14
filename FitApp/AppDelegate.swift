@@ -93,7 +93,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
 	
 	func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-
 		let id = notification.request.identifier
 		print("Will present notification with ID = \(id)")
 		
@@ -103,13 +102,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 				completionHandler([.sound, .alert, .badge])
 			}
 		default:
-			if presentMessageNotifications {
-				completionHandler([.sound, .alert, .badge])
+			if let userInfo = notification.request.content.userInfo as? [String: Any], let userId = userInfo["id"] as? String {
+				if presentMessageNotifications(chatUserId: userId) {
+					completionHandler([.sound, .alert, .badge])
+				}
 			}
 		}
 	}
 	func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-		
 		let id = response.notification.request.identifier
 		print("Did receive notification with ID = \(id)")
 
@@ -129,7 +129,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 			}
 		} else {
 			if UserProfile.defaults.getIsManager {
-				moveTo(storyboardId: K.StoryboardName.chat, vcId: K.ViewControllerId.ChatsViewController)
+				guard let notificationData = response.notification.request.content.userInfo as? [String: Any],
+					  let userChatId = notificationData["id"] as? String else { return }
+
+				moveTo(storyboardId: K.StoryboardName.chat, vcId: K.ViewControllerId.ChatContainerViewController, userChatId: userChatId)
 			} else {
 				moveTo(storyboardId: K.StoryboardName.chat, vcId: K.ViewControllerId.ChatContainerViewController)
 			}
@@ -153,49 +156,70 @@ extension AppDelegate: MessagingDelegate {
 
 extension AppDelegate {
 	
-	private var presentMessageNotifications: Bool {
-		if let firstVC = (UIApplication.shared.windows.filter { $0.isKeyWindow }.first?.rootViewController?.topMostViewController()) {
+	private func presentMessageNotifications(chatUserId: String) -> Bool {
+		window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window
+		
+		if let tabBarController = window?.rootViewController as? UITabBarController,
+		   let navController = tabBarController.selectedViewController as? UINavigationController {
 			
-//			if firstVC.isKind(of: ChatContainerViewController.self) {
-//				guard let chatContainerVC = firstVC as? ChatContainerViewController else { return true }
-//				let chatVC: ChatViewController = chatContainerVC.chatViewController
-//				let userToken: String = chatVC.viewModel.getOtherUserToken
-//
-//			}
-			
-			return !(firstVC.isKind(of: ChatsViewController.self) || firstVC.isKind(of: ChatContainerViewController.self))
+			if !UserProfile.defaults.getIsManager {
+				return navController.viewControllers.first(where: {$0.isKind(of: ChatContainerViewController.self)}) == nil
+			} else if let chatContainer = navController.viewControllers.first(where: {$0.isKind(of: ChatContainerViewController.self)}) as? ChatContainerViewController {
+				if chatContainer.chatViewController.viewModel.getChatUserId == chatUserId {
+					return false
+				}
+			}
 		}
 		return true
 	}
 	
-	private func mainView() {
-		let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
-		let nav = storyboard.instantiateViewController(withIdentifier: K.ViewControllerId.HomeTabBar)
-		
-		window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window
-		window!.rootViewController = nav
-		window!.makeKeyAndVisible()
-	}
-	private func moveTo(storyboardId: String, vcId: String) {
-		mainView()
+	private func moveTo(storyboardId: String, vcId: String, userChatId: String? = nil) {
+		let googleManager = GoogleDatabaseManager()
 		let storyboard = UIStoryboard(name: storyboardId, bundle: nil)
-		let toVc = storyboard.instantiateViewController(withIdentifier: vcId)
+		let destinationViewController = storyboard.instantiateViewController(withIdentifier: vcId)
+		window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window
 		
-		if let tabBar = window?.rootViewController as? UITabBarController {
+		if let tabBarController = window?.rootViewController as? UITabBarController,
+		   let navController = tabBarController.selectedViewController as? UINavigationController {
+			
 			switch vcId {
 			case K.ViewControllerId.weightViewController:
-				tabBar.selectedIndex = 3
+				tabBarController.selectedIndex = 3
 			case K.ViewControllerId.mealViewController:
-				tabBar.selectedIndex = 1
-			default:
-				tabBar.selectedIndex = 0
-				if let nav = tabBar.viewControllers?.first as? UINavigationController {
-					let homeVc = nav.viewControllers.first {
-						vc in
-						vc is HomeViewController
+				tabBarController.selectedIndex = 1
+			case K.ViewControllerId.ChatContainerViewController:
+				// Manager
+				Spinner.shared.show(window!)
+				
+				 if let chatViewContainer = destinationViewController as? ChatContainerViewController {
+					
+					if let id = userChatId {
+						DispatchQueue.global(qos: .userInteractive).async {
+							googleManager.getChat(userId: id, isAdmin: true) {
+								result in
+								
+								switch result {
+								case .success(let chat):
+									DispatchQueue.main.sync {
+										let chatViewModel = ChatViewModel(chat: chat)
+										chatViewContainer.chatViewController = ChatViewController(viewModel: chatViewModel)
+
+										navController.popToRootViewController(animated: false)
+										navController.pushViewController(chatViewContainer, animated: true)
+									}
+								case .failure(let error):
+									print("Error:", error.localizedDescription)
+								}
+							}
+						}
+					} else {
+						// User
+						chatViewContainer.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: nil))
+						navController.pushViewController(chatViewContainer, animated: true)
 					}
-					homeVc?.navigationController?.pushViewController(toVc, animated: true)
 				}
+			default:
+				return
 			}
 		}
 	}

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import FirebaseAuth
 
 class PushNotificationSender {
 	
@@ -18,7 +18,7 @@ class PushNotificationSender {
 		let paramString: [String : Any] = [
 			"to" : token,
 			"notification" : ["title" : title, "body" : body],
-			"data" : ["id" : ""]
+			"data" : ["id" : Auth.auth().currentUser?.uid ?? ""]
 		]
 
 		let urlRequest:URLRequest = {
@@ -31,7 +31,8 @@ class PushNotificationSender {
 			return request
 		}()
 		
-		let task = URLSession.shared.dataTask(with: urlRequest as URLRequest) { data, response, error in
+		let task = URLSession.shared.dataTask(with: urlRequest as URLRequest) {
+			data, response, error in
 			
 			guard let data = data, error == nil else {
 				// check for fundamental networking error

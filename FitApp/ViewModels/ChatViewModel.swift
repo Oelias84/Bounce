@@ -36,6 +36,9 @@ class ChatViewModel {
 	}
 	
 	//getters
+	var getChatUserId: String {
+		chat?.userId ?? ""
+	}
 	var getOtherUserToken: String {
 		chat?.pushTokens?.first ?? ""
 	}

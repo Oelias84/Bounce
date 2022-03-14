@@ -95,7 +95,7 @@ final class GoogleDatabaseManager {
 	}
 	
 	func getAllChats(userId: String, completion: @escaping ([Chat]) -> Void) {
-		chatsRef().observeSingleEvent(of: .value) {
+		chatsRef().observe(.value) {
 			snapshot in
 			
 			let chats = self.parseChatsData(userId: userId, snapshot: snapshot)
@@ -219,7 +219,15 @@ final class GoogleDatabaseManager {
 	private func parseChatData(userId: String, isAdmin: Bool, snapshot: DataSnapshot) -> Chat? {
 		guard let chatData = snapshot.value as? [String: Any] else  { return nil }
 		
+		var displayName: String? {
+			if isAdmin {
+				return chatData["display_name"] as? String
+			} else {
+				return nil
+			}
+		}
 		var lastSeenMessageTimestamp: Int64? {
+			
 			if isAdmin {
 				return chatData["support_last_seen_message_timestamp"] as? Int64
 			} else {
@@ -230,7 +238,8 @@ final class GoogleDatabaseManager {
 			let data = chatData["push_tokens"] as? [String: Int64]
 			return data?.keys.compactMap { $0 } ?? []
 		}
-		return Chat(userId: userId, isAdmin: isAdmin, pushTokens: pushTokens, lastSeenMessageDate: lastSeenMessageTimestamp?.dateFromMillisecondsSince2020)
+
+		return Chat(userId: userId, isAdmin: isAdmin, displayName: displayName, pushTokens: pushTokens, lastSeenMessageDate: lastSeenMessageTimestamp?.dateFromMillisecondsSince2020)
 	}
 	private func parseMessagesData(userId: String, snapshot: DataSnapshot) -> [Message]? {
 		guard let value = snapshot.value as? [String: Any] else {
