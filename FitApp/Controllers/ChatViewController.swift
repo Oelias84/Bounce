@@ -40,7 +40,7 @@ class ChatViewController: MessagesViewController {
 		self.viewModel.chatViewModelBinder = {
 			DispatchQueue.main.async {
 				self.messagesCollectionView.reloadData()
-				self.messagesCollectionView.scrollToLastItem()
+				self.messagesCollectionView.scrollToLastItem(animated: false)
 				self.ableInteraction()
 			}
 		}
@@ -81,7 +81,12 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		}
 		fatalError("Self Sender in nil, email should cached")
 	}
-	
+	func isFromCurrentSender(message: MessageType) -> Bool {
+		if isAdmin {
+			return message.sender.senderId != viewModel.getChatUserId
+		}
+		return message.sender.senderId == currentSender().senderId
+	}
 	//Collection view dataSource
 	func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
 		viewModel.messagesCount
@@ -102,10 +107,17 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 	}
 	func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
 		
+		//Name Config
 		let presentingName: String = {
+			if isAdmin {
+				if message.sender.senderId != viewModel.getChatUserId {
+					let presentingInitials = "B"
+					return presentingInitials
+				}
+			}
 			if message.sender.senderId != currentSender().senderId {
 				let senderName = viewModel.getDisplayName?.splitFullName
-				let presentingInitials = "\(senderName?.0.first ?? " ")\(senderName?.1.first ?? " ")"
+				let presentingInitials = "B"
 				return presentingInitials
 			} else {
 				let senderName = UserProfile.defaults.name?.splitFullName
@@ -113,8 +125,14 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 				return presentingInitials
 			}
 		}()
+		
+		//Avatar Config
+		if isAdmin {
+			avatarView.backgroundColor = message.sender.senderId == viewModel.getChatUserId  ? .projectIncomingMessageBubble : .projectOutgoingMessageBubble
+		} else {
+			avatarView.backgroundColor = message.sender.senderId != currentSender().senderId ? .projectIncomingMessageBubble : .projectOutgoingMessageBubble
+		}
 		avatarView.placeholderFont = UIFont(name: "Assistant-Regular", size: 12)!
-		avatarView.backgroundColor = message.sender.senderId != currentSender().senderId ? .projectIncomingMessageBubble : .projectOutgoingMessageBubble
 		avatarView.placeholderTextColor = .black
 		avatarView.initials = presentingName
 	}
