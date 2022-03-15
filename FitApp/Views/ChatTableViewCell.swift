@@ -12,6 +12,7 @@ class ChatTableViewCell: UITableViewCell {
 	
 	private var cancellable: AnyCancellable?
 	private var animator: UIViewPropertyAnimator?
+	private weak var googleDatabaseManager = GoogleDatabaseManager.shared
 	
 	@IBOutlet weak var userImageView: UIImageView!
 	@IBOutlet weak var userNameLabel: UILabel!
@@ -19,27 +20,34 @@ class ChatTableViewCell: UITableViewCell {
 	@IBOutlet weak var lastSentMessageTime: UILabel!
 	
 	@IBOutlet weak var unreadMessageCounterView: UIView!
-	@IBOutlet weak var unreadMessageCounterLabel: UILabel!
-	
 
 	override func awakeFromNib() {
 		super.awakeFromNib()
 	}
-	
 	override public func prepareForReuse() {
 		super.prepareForReuse()
+		
 		userImageView.image = nil
 		userImageView.alpha = 0.0
+		unreadMessageCounterView.isHidden = false
 		animator?.stopAnimation(true)
 		cancellable?.cancel()
 	}
+}
+
+extension ChatTableViewCell {
 	
 	public func configure(with chat: Chat) {
+
 		userNameLabel.text = chat.displayName
 		usrMessageLabel.text = "\(chat.latestMessage?.content ?? "")"
 		lastSentMessageTime.text = chat.latestMessage?.sentDate.timeString
+		unreadMessageCounterView.isHidden = isLastMessageReadFor(chat: chat)
 		
-		cancellable = loadImage(for: chat).sink { [unowned self] image in self.showImage(image: image) }
+		cancellable = loadImage(for: chat).sink {
+			[unowned self] image in
+			self.showImage(image: image)
+		}
 	}
 	
 	private func showImage(image: UIImage?) {
@@ -53,9 +61,13 @@ class ChatTableViewCell: UITableViewCell {
 	private func loadImage(for chat: Chat) -> AnyPublisher<UIImage?, Never> {
 		return Just(chat.imagePath)
 		.flatMap({ poster -> AnyPublisher<UIImage?, Never> in
-			guard let url = chat.imagePath else { return Just(UIImage(systemName: "")).eraseToAnyPublisher() }
+			guard let url = chat.imagePath else { return Just(UIImage(systemName:"person.circle")).eraseToAnyPublisher() }
 			return ImageLoader.shared.loadImage(from: url)
 		})
 		.eraseToAnyPublisher()
+	}
+	private func isLastMessageReadFor(chat: Chat) -> Bool {
+		guard let lastSeen = chat.lastSeenMessageDate, let lastMessage = chat.latestMessage?.sentDate else { return false }
+		return lastSeen > lastMessage
 	}
 }

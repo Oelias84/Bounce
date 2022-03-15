@@ -60,7 +60,7 @@ extension ChatsViewController: UITableViewDataSource, UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 		let chatData = chatsViewModel.getChatFor(row:indexPath.row)
-
+		
 		moveToChatContainerVC(chatData: chatData)
 	}
 }

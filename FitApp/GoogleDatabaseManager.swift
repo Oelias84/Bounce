@@ -64,9 +64,7 @@ final class GoogleDatabaseManager {
 		}
 	}
 	func updateLastSeenMessageDate(chat: Chat) {
-		guard let date = chat.lastSeenMessageDate else { return }
-		
-		chatRef(userId: chat.userId).child(chat.isAdmin == true ? "support_last_seen_message_timestamp" : "last_seen_message_timestamp").setValue(date.millisecondsSince2020)
+		chatRef(userId: chat.userId).child(chat.isAdmin == true ? "support_last_seen_message_timestamp" : "last_seen_message_timestamp").setValue(Date().millisecondsSince2020)
 	}
 	
 	func sendMessageToChat(chat: Chat, content: String, kind: MessageKind, completion: @escaping (Result<Void, Error>) -> ()) {
@@ -206,6 +204,11 @@ final class GoogleDatabaseManager {
 				return parseLatestMessageData(userId: "", snapshot: messageSnapshot)
 			}
 			var lastSeenMessageTimestamp: Int64? {
+				if let lastSeen = chatData["support_last_seen_message_timestamp"] as? Int64 {
+					if lastSeen == 0 {
+						return nil
+					}
+				}
 				return chatData["support_last_seen_message_timestamp"] as? Int64
 			}
 			var pushTokens: [String] {

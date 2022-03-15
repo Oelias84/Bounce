@@ -111,14 +111,11 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		let presentingName: String = {
 			if isAdmin {
 				if message.sender.senderId != viewModel.getChatUserId {
-					let presentingInitials = "B"
-					return presentingInitials
+					return "B"
 				}
 			}
 			if message.sender.senderId != currentSender().senderId {
-				let senderName = viewModel.getDisplayName?.splitFullName
-				let presentingInitials = "B"
-				return presentingInitials
+				return "B"
 			} else {
 				let senderName = UserProfile.defaults.name?.splitFullName
 				let presentingInitials = "\(senderName?.0.first ?? " ")\(senderName?.1.first ?? " ")"

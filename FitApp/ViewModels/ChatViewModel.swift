@@ -22,6 +22,7 @@ class ChatViewModel {
 		if let chat = chat {
 			self.chat = chat
 			self.listenToMessages()
+			self.updateLastSeenDate()
 		} else {
 			if let chat = self.messagesManager.getUserChat() {
 				self.chat = chat
@@ -79,6 +80,10 @@ class ChatViewModel {
 			self.messages = messages.sorted()
 			self.chatViewModelBinder()
 		}
+	}
+	public func updateLastSeenDate() {
+		guard let chat = chat else { return }
+		messagesManager.googleManager.updateLastSeenMessageDate(chat: chat)
 	}
 	public func getMediaUrlFor(_ urlString: String, completion: @escaping (URL?) -> ()) {
 		messagesManager.downloadMediaURL(urlString: urlString, completion: completion)
