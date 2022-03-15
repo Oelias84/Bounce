@@ -44,9 +44,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 								if UserProfile.defaults.finishOnboarding == true {
 									self.goToHome(window) {
 										if let notificationResponse = connectionOptions.notificationResponse {
-											guard let userChatId = notificationResponse.notification.request.content.userInfo["id"] as? String else { return }
+											let id = notificationResponse.notification.request.identifier
 											Spinner.shared.show(window)
-											self.goToChatFromNotification(with: userChatId)
+
+											switch id {
+											case NotificationTypes.mealNotification.rawValue:
+												self.moveToFromNotification(storyboardId: K.StoryboardName.mealPlan, vcId: K.ViewControllerId.mealViewController)
+											case NotificationTypes.weightNotification.rawValue:
+												self.moveToFromNotification(storyboardId: K.StoryboardName.weightProgress, vcId: K.ViewControllerId.weightViewController)
+											default:
+												if UserProfile.defaults.getIsManager {
+													guard let userChatId = notificationResponse.notification.request.content.userInfo["id"] as? String else { return }
+													self.moveToFromNotification(storyboardId: K.StoryboardName.chat, vcId: K.ViewControllerId.ChatContainerViewController, userChatId: userChatId)
+												} else {
+													self.moveToFromNotification(storyboardId: K.StoryboardName.chat, vcId: K.ViewControllerId.ChatContainerViewController)
+												}
+											}
 										}
 									}
 								} else {
@@ -159,6 +172,55 @@ extension SceneDelegate {
 						}
 					}
 				}
+			}
+		}
+	}
+	
+	private func moveToFromNotification(storyboardId: String, vcId: String, userChatId: String? = nil) {
+		let googleManager = GoogleDatabaseManager()
+		let storyboard = UIStoryboard(name: storyboardId, bundle: nil)
+		let destinationViewController = storyboard.instantiateViewController(withIdentifier: vcId)
+		window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window
+		
+		if let tabBarController = window?.rootViewController as? UITabBarController,
+		   let navController = tabBarController.selectedViewController as? UINavigationController {
+			
+			switch vcId {
+			case K.ViewControllerId.weightViewController:
+				tabBarController.selectedIndex = 3
+			case K.ViewControllerId.mealViewController:
+				tabBarController.selectedIndex = 1
+			case K.ViewControllerId.ChatContainerViewController:
+				// Manager
+				Spinner.shared.show(window!)
+				
+				 if let chatViewContainer = destinationViewController as? ChatContainerViewController {
+					
+					if let id = userChatId {
+						DispatchQueue.global(qos: .userInteractive).async {
+							googleManager.getChat(userId: id, isAdmin: true) {
+								result in
+								
+								switch result {
+								case .success(let chat):
+									DispatchQueue.main.sync {
+										let chatViewModel = ChatViewModel(chat: chat)
+										chatViewContainer.chatViewController = ChatViewController(viewModel: chatViewModel)
+										navController.pushViewController(chatViewContainer, animated: false)
+									}
+								case .failure(let error):
+									print("Error:", error.localizedDescription)
+								}
+							}
+						}
+					} else {
+						// User
+						chatViewContainer.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: nil))
+						navController.pushViewController(chatViewContainer, animated: false)
+					}
+				}
+			default:
+				return
 			}
 		}
 	}

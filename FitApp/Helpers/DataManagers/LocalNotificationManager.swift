@@ -80,9 +80,9 @@ class LocalNotificationManager {
 				
 				switch type {
 				case .waterNotification:
-					self.postNotifications.insert(Notification(title: "זמן לשתות", body: "נראה שהגיע הזמן לשתות", dateTime: dateComponents))
+					self.postNotifications.insert(Notification(id: type.rawValue, title: "זמן לשתות", body: "נראה שהגיע הזמן לשתות", dateTime: dateComponents))
 				case .weightNotification:
-					self.postNotifications.insert(Notification(title: "זמן להישקל", body: StaticStringsManager.shared.getGenderString?[28] ?? "", dateTime: dateComponents))
+					self.postNotifications.insert(Notification(id: type.rawValue, title: "זמן להישקל", body: StaticStringsManager.shared.getGenderString?[28] ?? "", dateTime: dateComponents))
 				case .mealNotification:
 					break
 				}
