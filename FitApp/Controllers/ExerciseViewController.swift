@@ -51,6 +51,8 @@ class ExerciseViewController: UIViewController {
 		textLabel.text = string
 		
 		setUpPlayerContainerView()
+		shouldHideButtons(true)
+		playActivity()
 		playVideo(for: exercise.videos)
 	}
 	override func viewWillAppear(_ animated: Bool) {
@@ -59,8 +61,16 @@ class ExerciseViewController: UIViewController {
 		topBarView.setImage()
 	}
 	
-	@IBAction func fullScreenButtonAction(_ sender: Any) {
-		playFull()
+	@IBAction func playButtonAction(_ sender: Any) {
+		let playerTimescale = self.player.currentItem?.asset.duration.timescale ?? 1
+		let time =  CMTime(seconds: 1, preferredTimescale: playerTimescale)
+		
+		player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) { _ in
+			DispatchQueue.main.async {
+				self.playButton.isHidden = true
+				self.player.play()
+			}
+		}
 	}
 	@IBAction func forwardButtonAction(_ sender: Any) {
 		player?.pause()
@@ -76,17 +86,6 @@ class ExerciseViewController: UIViewController {
 		videoPageIndicator.currentPage = currentVideoUrlIndex
 		play(urlVideos[currentVideoUrlIndex])
 	}
-	@IBAction func playButtonAction(_ sender: Any) {
-		let playerTimescale = self.player.currentItem?.asset.duration.timescale ?? 1
-		let time =  CMTime(seconds: 1, preferredTimescale: playerTimescale)
-		
-		player.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero) { _ in
-			DispatchQueue.main.async {
-				self.playButton.isHidden = true
-				self.player.play()
-			}
-		}
-	}
 	@IBAction func backwardsButtonAction(_ sender: Any) {
 		player.pause()
 		playButton.isHidden = true
@@ -101,6 +100,9 @@ class ExerciseViewController: UIViewController {
 		if currentVideoUrlIndex == 0 { backwardsButton.isHidden = true }
 		videoPageIndicator.currentPage = currentVideoUrlIndex
 		play(urlVideos[currentVideoUrlIndex])
+	}
+	@IBAction func fullScreenButtonAction(_ sender: Any) {
+		playFull()
 	}
 }
 
@@ -145,6 +147,7 @@ extension ExerciseViewController {
 			DispatchQueue.main.async { [weak self] in
 				guard let self = self else { return }
 				self.player.play()
+				self.shouldHideButtons(false)
 			}
 		}
 	}
@@ -152,14 +155,13 @@ extension ExerciseViewController {
 		player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 10), queue: DispatchQueue.main) {
 			[weak self] (progressTime) in
 			if let duration = self?.player.currentItem?.duration {
-				
+
 				let durationSeconds = CMTimeGetSeconds(duration)
 				let seconds = CMTimeGetSeconds(progressTime)
 				let progress = Float(seconds/durationSeconds)
-				
-				if progress >= 0.0 {
+
+				if progress >= 0.0, progress <= 0.01 {
 					self?.activityIndicator.stopAnimating()
-					self?.fullScreenButton.isHidden = false
 				}
 				if progress >= 1.0 {
 					self?.playButton.isHidden = false
@@ -218,7 +220,14 @@ extension ExerciseViewController {
 			}
 		}
 	}
-	
+	private func shouldHideButtons(_ isHidden: Bool) {
+		
+		if isHidden {
+			[self.forwardButton, self.fullScreenButton, self.videoPageIndicator].forEach { $0?.fadeOut() }
+		} else {
+			[self.forwardButton, self.fullScreenButton, self.videoPageIndicator].forEach { $0?.fadeIn() }
+		}
+	}
 	@objc func playFull() {
 		fullViewPlayer.player = self.player
 		fullViewPlayer.delegate = self
