@@ -54,7 +54,6 @@ class WeightAlertsManager {
 	
 	
 	required init() {
-		
 		if !UserProfile.defaults.getIsManager {
 			setUserData() {
 				self.configureData() {
@@ -318,7 +317,10 @@ extension WeightAlertsManager {
 	
 	//MARK: - Notification
 	private func sendMessageToManager(title: String, text: String) {
-		let messagesManager = MessagesManager.shared
-		messagesManager.sendMassageToSupport(messageText: title + "/n/n" + text)
+		DispatchQueue.global(qos: .background).async {
+			MessagesManager.shared.bindMessageManager = {
+				MessagesManager.shared.sendMassageToSupport(messageText: title + "\n\n" + text)
+			}
+		}
 	}
 }
