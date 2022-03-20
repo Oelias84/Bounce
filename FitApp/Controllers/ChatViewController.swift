@@ -112,6 +112,10 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 			if isAdmin {
 				if message.sender.senderId != viewModel.getChatUserId {
 					return "B"
+				} else {
+					let senderName = viewModel.getDisplayName?.splitFullName
+					let presentingInitials = "\(senderName?.0.first ?? " ")\(senderName?.1.first ?? " ")"
+					return presentingInitials
 				}
 			}
 			if message.sender.senderId != currentSender().senderId {
