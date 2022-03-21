@@ -65,6 +65,7 @@ class PopupAlertView: UIViewController {
 			break
 		case .textBox:
 			textBox.isHidden = false
+			textBox.becomeFirstResponder()
 		case .textField:
 			textField.isHidden = false
 		}
@@ -143,18 +144,6 @@ extension PopupAlertView: UITextViewDelegate  {
 
 extension PopupAlertView: UITextFieldDelegate {
 	
-	@objc private func handle(_ notification: NSNotification) {
-		if let userInfo = notification.userInfo,
-			let keyboardRectangle = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-			
-			let center = keyboardRectangle.height - 164
-			self.verticallyConstraint.constant -= center
-			
-			UIView.animate(withDuration: 1, animations: {
-				self.view.layoutIfNeeded()
-			})
-		}
-	}
 	func textFieldDidBeginEditing(_ textField: UITextField) {
 		if textField.textColor == UIColor.lightGray {
 			textField.text = ""
@@ -194,6 +183,44 @@ extension PopupAlertView {
 			self.alertView.alpha = 1.0
 			self.alertView.frame.origin.y = self.alertView.frame.origin.y - 100
 		})
+	}
+	
+//	@objc private func handle(_ notification: NSNotification) {
+//		if let userInfo = notification.userInfo,
+//			let keyboardRectangle = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+//
+//			let center = keyboardRectangle.height - 164
+//			self.verticallyConstraint.constant -= center
+//
+//			UIView.animate(withDuration: 1, animations: {
+//				self.view.layoutIfNeeded()
+//			})
+//		}
+//	}
+	
+	@objc func handle(_ notification: NSNotification) {
+		guard let userInfo = notification.userInfo else { return }
+		
+		let endFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
+		let endFrameY = endFrame?.origin.y ?? 0
+		let duration:TimeInterval = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+		let animationCurveRawNSN = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
+		let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
+		let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
+		let center = endFrame!.height - 164
+		
+		if endFrameY >= UIScreen.main.bounds.size.height {
+			self.verticallyConstraint?.constant = 24
+		} else if verticallyConstraint.constant != -(center - 24) {
+			self.verticallyConstraint.constant -= center
+		}
+		
+		UIView.animate(
+			withDuration: duration,
+			delay: TimeInterval(0),
+			options: animationCurve,
+			animations: { self.view.layoutIfNeeded() },
+			completion: nil)
 	}
 }
 
