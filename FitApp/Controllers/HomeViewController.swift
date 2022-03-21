@@ -216,7 +216,7 @@ extension HomeViewController {
 	private func checkMealsState() {
 		viewModel.checkDidFinishDailyMeals {
 			DispatchQueue.main.async {
-				self.presentAlert(withTitle: "מעקב ארוחות", withMessage: "ראינו שלא השלמת את מעקב האורחות היומי שלך", options: "עבור למסך ארוחות", "ביטול", alertNumber: 1)
+				self.presentAlert(withTitle: "מעקב ארוחות", withMessage: "ראינו שלא השלמת את מעקב הארחות היומי שלך", options: "עבור למסך ארוחות", "ביטול", alertNumber: 1)
 			}
 		}
 	}
