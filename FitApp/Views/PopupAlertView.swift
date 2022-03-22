@@ -185,19 +185,6 @@ extension PopupAlertView {
 		})
 	}
 	
-//	@objc private func handle(_ notification: NSNotification) {
-//		if let userInfo = notification.userInfo,
-//			let keyboardRectangle = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-//
-//			let center = keyboardRectangle.height - 164
-//			self.verticallyConstraint.constant -= center
-//
-//			UIView.animate(withDuration: 1, animations: {
-//				self.view.layoutIfNeeded()
-//			})
-//		}
-//	}
-	
 	@objc func handle(_ notification: NSNotification) {
 		guard let userInfo = notification.userInfo else { return }
 		
