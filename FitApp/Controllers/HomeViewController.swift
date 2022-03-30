@@ -44,7 +44,6 @@ class HomeViewController: UIViewController {
 		changeStackSpacing()
 		
 		if (UserProfile.defaults.finishOnboarding ?? false) {
-			setupMotivationText()
 			viewModel.bindToMealViewModel {
 				[weak self] in
 				guard let self = self else { return }
@@ -58,12 +57,13 @@ class HomeViewController: UIViewController {
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-
 		setupProgressLabels()
 		topBarView.setImage()
 		
 		let queue = OperationQueue()
-
+		queue.addOperation {
+			self.setupMotivationText()
+		}
 		queue.addOperation {
 			self.checkWeightAlert()
 		}
@@ -180,20 +180,23 @@ extension HomeViewController {
 		}
 	}
 	private func setupMotivationText() {
-		topBarView.motivationText = UserProfile.defaults.motivationText
-		
-		viewModel.getMotivationText() {
-			[weak self] motivation in
-			guard let self = self else { return }
-			
-			let lastMotivationDate = UserProfile.defaults.lastMotivationDate
-			
-			if lastMotivationDate == nil || lastMotivationDate!.onlyDate > Date().onlyDate {
-				UserProfile.defaults.lastMotivationDate = Date()
-				UserProfile.defaults.motivationText = motivation
-			}
-			DispatchQueue.main.async {
-				self.topBarView.motivationText = UserProfile.defaults.motivationText
+		DispatchQueue.main.async {
+			self.topBarView.motivationText = UserProfile.defaults.motivationText
+		}
+		DispatchQueue.global(qos: .background).async {
+			self.viewModel.getMotivationText() {
+				[weak self] motivation in
+				guard let self = self else { return }
+				
+				let lastMotivationDate = UserProfile.defaults.lastMotivationDate
+				
+				if lastMotivationDate == nil || lastMotivationDate!.onlyDate > Date().onlyDate {
+					UserProfile.defaults.lastMotivationDate = Date()
+					UserProfile.defaults.motivationText = motivation
+				}
+				DispatchQueue.main.async {
+					self.topBarView.motivationText = UserProfile.defaults.motivationText
+				}
 			}
 		}
 	}
