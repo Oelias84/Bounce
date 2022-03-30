@@ -189,9 +189,12 @@ final class GoogleDatabaseManager {
 	}
 	
 	///Delete
-	public func deleteAdminToken() {
-		
+	public func removeUserPushTokenFromChat() {
+		guard let userID = Auth.auth().currentUser?.uid else { return }
+		let userChat = chatRef(userId: userID)
+		userChat.child("push_tokens").removeValue()
 	}
+	
 	///Parse
 	private func parseChatsData(userId: String, snapshot: DataSnapshot) -> [Chat] {
 		var chats: [Chat] = []

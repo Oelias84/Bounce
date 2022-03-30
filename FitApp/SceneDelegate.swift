@@ -227,6 +227,7 @@ extension SceneDelegate {
 	
 	private func signOutCurrentUser() {
 		do {
+			UserProfile.defaults.resetUserData()
 			try Auth.auth().signOut()
 		} catch {
 			print("could not signOut")

@@ -272,6 +272,12 @@ extension UserProfile {
 		userProfile.externalWorkout = nil
 		userProfile.lastWeightAlertPresentedDate = nil
 	}
+	func resetUserData() {
+		UserDefaults.resetDefaults()
+		UserProfile.defaults.resetUserProfileData()
+		ConsumptionManager.shared.resetConsumptionManager()
+		GoogleDatabaseManager.shared.removeUserPushTokenFromChat()
+	}
 }
 
 struct ServerUserData: Codable {

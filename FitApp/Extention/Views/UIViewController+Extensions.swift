@@ -62,15 +62,10 @@ extension UIViewController {
 		
 		signOutAlert.addAction(UIAlertAction(title: "אישור", style: .default) { _ in
 			do {
-				guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
-					return
-				}
+				UserProfile.defaults.resetUserData()
 				try Auth.auth().signOut()
-				UserDefaults.resetDefaults()
-				UserProfile.defaults.resetUserProfileData()
-				ConsumptionManager.shared.resetConsumptionManager()
 				
-				UserProfile.defaults.hasRunBefore = true
+				guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else { return }
 				let storyboard = UIStoryboard(name: K.StoryboardName.loginRegister, bundle: nil)
 				let startNav = storyboard.instantiateViewController(withIdentifier: K.ViewControllerId.startNavigationViewController)
 				

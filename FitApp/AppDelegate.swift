@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			
 			if !(UserProfile.defaults.hasRunBefore ?? false) {
 				do {
+					UserProfile.defaults.resetUserData()
 					try Auth.auth().signOut()
 				} catch {
 					print("could not signOut")
