@@ -308,7 +308,7 @@ extension WeightAlertsManager {
 			self.shouldShowAlertToUser = false
 			UserProfile.defaults.shouldShowCaloriesCheckAlert = self.shouldShowAlertToUser
 
-			if let text = weightAlert.message, self.lastCaloriesCheckDateString != Date().onlyDate {
+			if let text = weightAlert.message {
 				self.sendMessageToManager(title: title, text: text)
 			}
 		})
