@@ -86,10 +86,11 @@ final class GoogleDatabaseManager {
 			if let error = error {
 				completion(.failure(error))
 			} else {
+				self.updateLastSeenMessageDate(chat: chat)
+				self.updateLatestMessage(chat: chat, latestMessageData: newMessagesData)
 				completion(.success(()))
 			}
 		}
-		updateLatestMessage(chat: chat, latestMessageData: newMessagesData)
 	}
 	
 	func getAllChats(userId: String, completion: @escaping ([Chat]) -> Void) {
@@ -144,7 +145,7 @@ final class GoogleDatabaseManager {
 		}
 	}
 	
-	//Create
+	///Create
 	private func createChatData() -> [String: Any] {
 		let messageData = createMessageData(senderId: "", kind: MessageKind.text("").rawValue, timestamp: 0, content: "", mediaPath: nil, mediaPreview: nil)
 		
@@ -166,7 +167,7 @@ final class GoogleDatabaseManager {
 		]
 	}
 	
-	//Update
+	///Update
 	private func updateOtherUserPushToken(chat: Chat, completion: @escaping () ->()) {
 		database.child("support").child("admin_push_tokens").observeSingleEvent(of: .value) {
 			snapshot in
@@ -187,7 +188,11 @@ final class GoogleDatabaseManager {
 		chatRef(userId: chat.userId).child("latest_message").setValue(latestMessageData)
 	}
 	
-	//Parse
+	///Delete
+	public func deleteAdminToken() {
+		
+	}
+	///Parse
 	private func parseChatsData(userId: String, snapshot: DataSnapshot) -> [Chat] {
 		var chats: [Chat] = []
 		
@@ -349,7 +354,7 @@ final class GoogleDatabaseManager {
 		}
 	}
 	
-	//Reference
+	///Reference
 	private func chatsRef() -> DatabaseReference {
 		return database.child("support").child("chats")
 	}
