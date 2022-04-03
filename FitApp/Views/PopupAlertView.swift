@@ -26,7 +26,8 @@ class PopupAlertView: UIViewController {
 	
 	var alertNumber: Int = 1
 	var popupType: PopupType = .normal
-	
+	private var didChangeHeightKeyboard = false
+
 	@IBOutlet weak var alertView: UIView!
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var messageLabel: UILabel!
@@ -198,8 +199,9 @@ extension PopupAlertView {
 		
 		if endFrameY >= UIScreen.main.bounds.size.height {
 			self.verticallyConstraint?.constant = 24
-		} else if verticallyConstraint.constant != -(center - 24) {
+		} else if !didChangeHeightKeyboard {
 			self.verticallyConstraint.constant -= center
+			self.didChangeHeightKeyboard = true
 		}
 		
 		UIView.animate(
