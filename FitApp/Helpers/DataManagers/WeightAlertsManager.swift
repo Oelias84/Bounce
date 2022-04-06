@@ -255,6 +255,22 @@ extension WeightAlertsManager {
 				//Check average calories consumed from the last week
 				if userConsumedCalories < userExpectedDailyCalories {
 					//Send Message 1
+					let message = MessagesTextManager(weightState: .gainWeight, calorieState: .smallerThenAverage, newCalories: Double(newCalories) ?? 0).composeMessage()
+					self.presentAlert(title: message.0, message: message.1)
+				} else if userConsumedCalories > userExpectedDailyCalories {
+					//Send Message 2
+					let message = MessagesTextManager(weightState: .gainWeight, calorieState: .higherThenAverage, newCalories: Double(newCalories) ?? 0).composeMessage()
+					self.presentAlert(title: message.0, message: message.1)
+				} else {
+					//Send Message 3
+					let message = MessagesTextManager(weightState: .gainWeight, calorieState: .average, newCalories: Double(newCalories) ?? 0).composeMessage()
+					self.presentAlert(title: message.0, message: message.1)
+				}
+			} else if differenceBetweenWeightPercentage > expectedWeightRange.upperBound {
+
+				//Check average calories consumed from the last week
+				if userConsumedCalories < userExpectedDailyCalories {
+					//Send Message 1
 					let message = MessagesTextManager(weightState: .lowerThenExpected, calorieState: .smallerThenAverage, newCalories: Double(newCalories) ?? 0).composeMessage()
 					self.presentAlert(title: message.0, message: message.1)
 				} else if userConsumedCalories > userExpectedDailyCalories {
@@ -264,22 +280,6 @@ extension WeightAlertsManager {
 				} else {
 					//Send Message 3
 					let message = MessagesTextManager(weightState: .lowerThenExpected, calorieState: .average, newCalories: Double(newCalories) ?? 0).composeMessage()
-					self.presentAlert(title: message.0, message: message.1)
-				}
-			} else if differenceBetweenWeightPercentage > expectedWeightRange.upperBound {
-
-				//Check average calories consumed from the last week
-				if userConsumedCalories < userExpectedDailyCalories {
-					//Send Message 1
-					let message = MessagesTextManager(weightState: .gainWeight, calorieState: .higherThenAverage, newCalories: Double(newCalories) ?? 0).composeMessage()
-					self.presentAlert(title: message.0, message: message.1)
-				} else if userConsumedCalories > userExpectedDailyCalories {
-					//Send Message 2
-					let message = MessagesTextManager(weightState: .gainWeight, calorieState: .higherThenAverage, newCalories: Double(newCalories) ?? 0).composeMessage()
-					self.presentAlert(title: message.0, message: message.1)
-				} else {
-					//Send Message 3
-					let message = MessagesTextManager(weightState: .gainWeight, calorieState: .average, newCalories: Double(newCalories) ?? 0).composeMessage()
 					self.presentAlert(title: message.0, message: message.1)
 				}
 			} else if expectedWeightRange.contains(differenceBetweenWeightPercentage) {
@@ -312,7 +312,9 @@ extension WeightAlertsManager {
 				self.sendMessageToManager(title: title, text: text)
 			}
 		})
-		weightAlert.showAlert()
+		DispatchQueue.main.async {
+			weightAlert.showAlert()
+		}
 	}
 	
 	//MARK: - Notification
