@@ -15,13 +15,14 @@ class LoginViewController: UIViewController {
 	@IBOutlet weak var emailTextfield: UITextField!
 	@IBOutlet weak var passwordTextfield: UITextField!
 	@IBOutlet weak var buttonsStackView: UIStackView!
-	@IBOutlet weak var noAccountButton: UIButton!
+	@IBOutlet weak var forgotPasswordButton: UIButton!
 	@IBOutlet weak var showPasswordButton: UIButton! {
 		didSet {
 			showPasswordButton.addTarget(self, action: #selector(thumbsUpButtonPressed(_:)), for: .touchDown)
 			showPasswordButton.addTarget(self, action: #selector(thumbsUpButtonCancelled(_:)), for: .touchUpInside)
 		}
 	}
+	@IBOutlet weak var noAccountButton: UIButton!
 	
 	deinit {
 		removeKeyboardListener()
@@ -90,12 +91,17 @@ class LoginViewController: UIViewController {
 			print("Something went wrong!")
 		}
 	}
+	@IBAction func noAccountButtonAction(_ sender: Any) {
+		presentAlert(withTitle: "שימו לב!", withMessage: "הרכישה דרך החנות כוללת את האפליקציה בלבד. על מנת לרכוש את הסדנה אנא עברו לאתר המקושר.", options: "המשך ברכישה", "מעבר לאתר", "ביטול", alertNumber: 6)
+	}
 }
 
 //MARK: - Delegates
 extension LoginViewController: PopupAlertViewDelegate {
 	
 	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
+		view.endEditing(true)
+		
 		switch alertNumber {
 		case 1:
 			if let url = URL(string: "https://www.bouncefit.co.il") {
@@ -109,15 +115,27 @@ extension LoginViewController: PopupAlertViewDelegate {
 			self.passwordTextfield.becomeFirstResponder()
 		case 5:
 			self.emailTextfield.becomeFirstResponder()
+		case 6:
+			self.moveToRegisterViewController()
 		default:
 			break
 		}
 	}
 	func cancelButtonTapped(alertNumber: Int) {
-		return
+		if alertNumber == 6 {
+			if let url = URL(string: "https://www.bouncefit.co.il") {
+				UIApplication.shared.open(url)
+			}
+		} else {
+			return
+		}
 	}
 	func thirdButtonTapped(alertNumber: Int) {
-		return
+		if alertNumber == 6 {
+			return
+		} else {
+			return
+		}
 	}
 }
 
@@ -140,6 +158,13 @@ extension LoginViewController {
 		homeVC.modalPresentationStyle = .fullScreen
 		DispatchQueue.main.async {
 			self.present(homeVC, animated: true)
+		}
+	}
+	private func moveToRegisterViewController() {
+		guard let registerVC = storyboard?.instantiateViewController(identifier: K.ViewControllerId.registerViewController) else { return }
+		
+		DispatchQueue.main.async {
+			self.navigationController?.pushViewController(registerVC, animated: true)
 		}
 	}
 	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., alertNumber: Int) {

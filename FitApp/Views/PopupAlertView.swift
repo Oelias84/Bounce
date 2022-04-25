@@ -126,6 +126,7 @@ class PopupAlertView: UIViewController {
 		self.dismiss(animated: true, completion: nil)
 	}
 }
+
 //MARK: - Delegates
 extension PopupAlertView: UITextViewDelegate  {
 	
@@ -142,7 +143,6 @@ extension PopupAlertView: UITextViewDelegate  {
 		}
 	}
 }
-
 extension PopupAlertView: UITextFieldDelegate {
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -151,7 +151,6 @@ extension PopupAlertView: UITextFieldDelegate {
 			textField.textColor = .black
 		}
 	}
-	
 	func textFieldDidEndEditing(_ textField: UITextField) {
 		if textField.text == "" {
 			textField.text = "הזינו את שם המנה..."
@@ -159,6 +158,7 @@ extension PopupAlertView: UITextFieldDelegate {
 		}
 	}
 }
+
 //MARK: - Functions
 extension PopupAlertView {
 	
