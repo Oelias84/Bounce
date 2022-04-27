@@ -24,8 +24,30 @@ struct User: Codable {
 		return "\(safeEmail)_\(Date().dateStringForDB)_weight_image.jpeg"
 	}
 }
-
-struct approvedUser: Codable {
+struct UserOrderData: Codable {
+	
+	let currentOrderId: String
+	let dateOfTransaction: String
+	let orderIds: [String]
+	let period: Int
+}
+struct PermissionLevel: Codable {
 	
 	let permissionLevel: Int?
+}
+struct OrderData: Codable {
+	
+	var address: String?
+	var city: String?
+	var companyName: String?
+	var country: String?
+	var dateOfTranasction: String
+	var email: String?
+	var period: Int
+	var phoneNumberL: String?
+	var postCode: Int?
+	var productName: String
+	var state: String?
+	var transactionAmount: String
+	var userType: String?
 }

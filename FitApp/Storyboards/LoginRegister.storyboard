@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -311,34 +312,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="mqO-Gd-3Q3">
                                 <rect key="frame" x="36" y="482" width="342" height="344"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qwr-cu-j8f" userLabel="User Name TextField">
-                                        <rect key="frame" x="0.0" y="0.0" width="342" height="60"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" placeholder="שם מלא" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pe8-MZ-zJf">
-                                                <rect key="frame" x="32" y="10" width="278" height="40"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="BnD-uJ-bVZ"/>
-                                                </constraints>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
-                                            </textField>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="pe8-MZ-zJf" firstAttribute="centerY" secondItem="qwr-cu-j8f" secondAttribute="centerY" id="GCZ-Ii-DVx"/>
-                                            <constraint firstItem="pe8-MZ-zJf" firstAttribute="leading" secondItem="qwr-cu-j8f" secondAttribute="leading" constant="32" id="TGn-Sb-XuQ"/>
-                                            <constraint firstAttribute="trailing" secondItem="pe8-MZ-zJf" secondAttribute="trailing" constant="32" id="Yvh-eI-Xfd"/>
-                                            <constraint firstAttribute="height" constant="60" id="vji-eR-BwC"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
-                                                <real key="value" value="18"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xER-Yd-ILN" userLabel="Email TextField">
-                                        <rect key="frame" x="0.0" y="76" width="342" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="342" height="60"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" placeholder="אימייל" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Uw-9q-QlN">
                                                 <rect key="frame" x="32" y="10" width="278" height="40"/>
@@ -364,7 +339,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0z1-gI-rI7" userLabel="Password TextField">
-                                        <rect key="frame" x="0.0" y="152" width="342" height="60"/>
+                                        <rect key="frame" x="0.0" y="76" width="342" height="60"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" placeholder="סיסמה" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zl4-Kv-00V">
                                                 <rect key="frame" x="32" y="10" width="278" height="40"/>
@@ -390,7 +365,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="reM-LZ-VI0" userLabel="Confirm Password TextField">
-                                        <rect key="frame" x="0.0" y="228" width="342" height="60"/>
+                                        <rect key="frame" x="0.0" y="152" width="342" height="60"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" placeholder="אישור סיסמה" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jgj-My-iY8">
                                                 <rect key="frame" x="32" y="10" width="278" height="40"/>
@@ -415,6 +390,78 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="MH8-Ig-2dm" userLabel="Terms of use Stack View">
+                                        <rect key="frame" x="0.0" y="228" width="342" height="60"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Nmp-3X-GCj">
+                                                <rect key="frame" x="0.0" y="0.0" width="239" height="30"/>
+                                                <subviews>
+                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gry-fu-lcb" userLabel="Terrms Checkbox">
+                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <imageReference key="image" image="square" catalog="system" symbolScale="large"/>
+                                                        </state>
+                                                        <state key="disabled" image="square" catalog="system"/>
+                                                        <state key="selected">
+                                                            <imageReference key="image" image="checkmark.square" catalog="system" symbolScale="large"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="termsOfUseCheckMarkButtonAction:" destination="kJX-hb-JXs" eventType="touchUpInside" id="9fl-EB-TOQ"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFZ-Ah-8Yb" userLabel="Terms View Button">
+                                                        <rect key="frame" x="29" y="0.0" width="210" height="30"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="קראתי ואני מאשר תקנון תנאי שימוש">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="termsOfUseViewButtonAction:" destination="kJX-hb-JXs" eventType="touchUpInside" id="o7O-AF-trL"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Gry-fu-lcb" firstAttribute="centerY" secondItem="Nmp-3X-GCj" secondAttribute="centerY" id="6xC-zg-gme"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="OJg-kM-teA">
+                                                <rect key="frame" x="0.0" y="30" width="255" height="30"/>
+                                                <subviews>
+                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N16-FM-H4X" userLabel="Terrms Checkbox">
+                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <imageReference key="image" image="square" catalog="system" symbolScale="large"/>
+                                                        </state>
+                                                        <state key="disabled" image="square" catalog="system"/>
+                                                        <state key="selected">
+                                                            <imageReference key="image" image="checkmark.square" catalog="system" symbolScale="large"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="heathCheckMarkButtonAction:" destination="kJX-hb-JXs" eventType="touchUpInside" id="XVt-ku-5zY"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IXQ-2Z-4fM" userLabel="Terms View Button">
+                                                        <rect key="frame" x="29" y="0.0" width="226" height="30"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="קראתי ואני מאשר את הצהרת הבריאות">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="heathViewButtonAction:" destination="kJX-hb-JXs" eventType="touchUpInside" id="cPE-aw-mnq"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="IXQ-2Z-4fM" firstAttribute="centerY" secondItem="N16-FM-H4X" secondAttribute="centerY" id="fgE-OJ-iRp"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Qc-De-Kop">
                                         <rect key="frame" x="0.0" y="304" width="342" height="40"/>
                                         <subviews>
@@ -440,7 +487,7 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="JSX-ne-XUd">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="JSX-ne-XUd">
                                 <rect key="frame" x="107" y="218.5" width="200" height="199"/>
                                 <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -448,7 +495,7 @@
                                     <constraint firstAttribute="height" constant="200" id="CkB-lm-juj"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xc-FG-bbk">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xc-FG-bbk">
                                 <rect key="frame" x="249" y="360" width="50" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -493,10 +540,11 @@
                     <connections>
                         <outlet property="confirmPasswordTextfield" destination="Jgj-My-iY8" id="46v-aT-yPm"/>
                         <outlet property="emailTextfield" destination="0Uw-9q-QlN" id="KLl-pB-r68"/>
+                        <outlet property="healthTermsViewButton" destination="IXQ-2Z-4fM" id="mpV-6i-nvc"/>
                         <outlet property="passwordTextfield" destination="Zl4-Kv-00V" id="JQb-S9-rbo"/>
                         <outlet property="profileImageButton" destination="3Xc-FG-bbk" id="2GS-L9-3Z4"/>
                         <outlet property="profileImageView" destination="JSX-ne-XUd" id="0Cu-lL-peS"/>
-                        <outlet property="userNameTextfield" destination="pe8-MZ-zJf" id="p0R-g1-7ff"/>
+                        <outlet property="termsOfUseViewButton" destination="eFZ-Ah-8Yb" id="g6F-aG-n9J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10Y-mR-Khy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -509,8 +557,10 @@
         <image name="WhiteLogo" width="282.14999389648438" height="48.220001220703125"/>
         <image name="arrow.forward" catalog="system" width="128" height="98"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
+        <image name="checkmark.square" catalog="system" width="128" height="114"/>
         <image name="eye" catalog="system" width="128" height="81"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="square" catalog="system" width="128" height="114"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

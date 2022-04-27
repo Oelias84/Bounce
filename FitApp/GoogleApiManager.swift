@@ -28,7 +28,7 @@ struct GoogleApiManager {
 					completion(.failure(error))
 				} else if let data = data {
 					do {
-						if let decodedData = try data.data(as: approvedUser.self) {
+						if let decodedData = try data.data(as: PermissionLevel.self) {
 							if let permissionLevel = decodedData.permissionLevel, permissionLevel > 0 {
 								UserProfile.defaults.permissionLevel = decodedData.permissionLevel
 								completion(.success(true))
@@ -48,28 +48,41 @@ struct GoogleApiManager {
 	//MARK: - UserData
 	func updateUserData(userData: ServerUserData) {
 		do {
-			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("data").setData(from: userData.self)
+			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("data").setData(from: userData)
+		} catch {
+			print(error)
+		}
+	}
+	func addUserOrderData(userOrderData: UserOrderData, completion: ((Error?) -> Void)? = nil) {
+		do {
+			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("order-data").setData(from: userOrderData, merge: true, completion: completion)
+		} catch {
+			print(error)
+		}
+	}
+	func addOrderData(data: OrderData, with orderNumber: String, completion: ((Error?) -> Void)? = nil) {
+		do {
+			try db.collection("orders-data").document("order-\(orderNumber)").setData(from: data, completion: completion)
 		} catch {
 			print(error)
 		}
 	}
 	func getUserData(completion: @escaping (Result<ServerUserData?, Error>) -> Void) {
-		db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("data")
-			.getDocument(source: .default, completion: {
-				(data, error) in
-				if let error = error {
+		db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("data").getDocument(source: .default) {
+			(data, error) in
+			if let error = error {
+				print(error)
+			} else if let data = data {
+				do {
+					var userData: ServerUserData? = nil
+					userData = try data.data(as: ServerUserData.self)
+					completion(.success(userData))
+				} catch {
 					print(error)
-				} else if let data = data {
-					do {
-						var userData: ServerUserData? = nil
-						userData = try data.data(as: ServerUserData.self)
-						completion(.success(userData))
-					} catch {
-						print(error)
-						completion(.failure(error))
-					}
+					completion(.failure(error))
 				}
-			})
+			}
+		}
 	}
 	
 	//MARK: - Meals

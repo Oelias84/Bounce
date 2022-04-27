@@ -7,21 +7,30 @@
 
 import UIKit
 import PDFKit
+import StoreKit
 import CropViewController
 
 class RegisterViewController: UIViewController {
 	
+	var products: [SKProduct]?
+	
 	private let viewModel = RegisterViewModel()
 	private let imagePickerController = UIImagePickerController()
 	private var profileImage: UIImage?
+
 	private var userHasCheckedTermOfUse = false
+	private var userHasCheckedHealth = false
 	
-	@IBOutlet weak var userNameTextfield: UITextField!
 	@IBOutlet weak var emailTextfield: UITextField!
 	@IBOutlet weak var passwordTextfield: UITextField!
 	@IBOutlet weak var confirmPasswordTextfield: UITextField!
+	
+	@IBOutlet weak var termsOfUseViewButton: UIButton!
+	@IBOutlet weak var healthTermsViewButton: UIButton!
+
 	@IBOutlet weak var profileImageButton: UIButton!
 	@IBOutlet weak var profileImageView: UIImageView!
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -29,18 +38,53 @@ class RegisterViewController: UIViewController {
 		imagePickerController.delegate = self
 		raiseScreenWhenKeyboardAppears()
 		addScreenTappGesture()
+		setupView()
+		
+		fetchProducts()
 	}
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		
 		removeKeyboardListener()
 	}
+	
 	@IBAction func profileImageButtonAction(_ sender: UIButton) {
 		presentImagePickerActionSheet(imagePicker: imagePickerController) { _ in }
 	}
 	@IBAction func singUpButtonAction(_ sender: Any) {
 		Spinner.shared.show(self.view)
-		signUp()
+		purchase(product: .monthlySubID)
+
+		
+		
+		//		let data = OrderData(address: "תפארת ישראל",
+	 //							 city: "Ramat Gan",
+	 //							 companyName: nil,
+	 //							 country: "Israel",
+	 //							 dateOfTranasction: Date().fullDateStringForDB,
+	 //							 email: "mail", period: 1,
+	 //							 phoneNumberL: "05478948489", postCode: 654654,
+	 //							 productName: "Apple in app Purchase", state: nil,
+	 //							 transactionAmount: "299", userType: "No Chat User")
+	}
+	
+	@IBAction func termsOfUseViewButtonAction(_ sender: UIButton) {
+		if let url = URL(string: "https://bouncefit.co.il/privacy-policy/") {
+			UIApplication.shared.open(url)
+		}
+	}
+	@IBAction func termsOfUseCheckMarkButtonAction(_ sender: UIButton) {
+		sender.isSelected = !sender.isSelected
+		userHasCheckedTermOfUse.toggle()
+	}
+	@IBAction func heathViewButtonAction(_ sender: UIButton) {
+		if let url = URL(string: "https://bouncefit.co.il/health/") {
+			UIApplication.shared.open(url)
+		}
+	}
+	@IBAction func heathCheckMarkButtonAction(_ sender: UIButton) {
+			sender.isSelected = !sender.isSelected
+		userHasCheckedHealth.toggle()
 	}
 }
 
@@ -71,8 +115,6 @@ extension RegisterViewController: PopupAlertViewDelegate {
 			if let url = URL(string: "https://www.bouncefit.co.il") {
 				UIApplication.shared.open(url)
 			}
-		case 2:
-			self.userNameTextfield.becomeFirstResponder()
 		case 3:
 			self.emailTextfield.becomeFirstResponder()
 		case 4:
@@ -80,7 +122,6 @@ extension RegisterViewController: PopupAlertViewDelegate {
 		case 5:
 			self.confirmPasswordTextfield.becomeFirstResponder()
 		case 6:
-			self.userNameTextfield.text?.removeAll()
 			self.emailTextfield.text?.removeAll()
 			self.passwordTextfield.text?.removeAll()
 			self.confirmPasswordTextfield.text?.removeAll()
@@ -96,20 +137,58 @@ extension RegisterViewController: PopupAlertViewDelegate {
 	}
 }
 
-//MARK: - Functions
+//MARK: - IAP Functions
 extension RegisterViewController {
 	
-	private func signUp() {
+	private func fetchProducts() {
+		
+		IAPManager.shared.fetchAvailableProducts { (products) in
+			self.products = products
+		}
+	}
+	private func purchase(product: IAPProducts) {
+		guard let _product = products?.first(where: {$0.productIdentifier == product.rawValue}) else {
+			print("Product: \(product.rawValue) not found in Products Set")
+			return
+		}
+				
+		IAPManager.shared.purchase(product: _product) { (message, product, transaction) in
+			
+			if let transaction = transaction, let product = product {
+				print("Transaction : \(transaction)")
+				print("Product: \(product.productIdentifier)")
+				
+				if transaction.error == nil {
+					if transaction.transactionState == .purchased {
+
+						
+					} else if transaction.transactionState == .failed {
+
+						
+					}
+				} else {
+					
+				}
+			}
+		}
+	}
+}
+//MARK: - Class Functions
+extension RegisterViewController {
+	
+	
+	private func registerUser(orderId: String, order: OrderData) {
 		
 		do {
-			try viewModel.register(userName: userNameTextfield.text, email: emailTextfield.text, password: passwordTextfield.text, confirmPassword: confirmPasswordTextfield.text, userImage: profileImage, termsOfUse: userHasCheckedTermOfUse) {
+			try viewModel.register(orderId: orderId, order: order, email: emailTextfield.text, password: passwordTextfield.text, confirmPassword: confirmPasswordTextfield.text, termsOfUse: userHasCheckedTermOfUse) {
 				[weak self] result in
 				guard let self = self else { return }
 				Spinner.shared.stop()
 				
 				switch result {
 				case .success(_):
-					self.moveToHomeViewController()
+					
+					self.startQuestionnaire()
 				case .failure(let error):
 					
 					switch error {
@@ -131,9 +210,6 @@ extension RegisterViewController {
 					}
 				}
 			}
-		} catch ErrorManager.RegisterError.emptyUserName {
-			Spinner.shared.stop()
-			presentAlert(withTitle: "אופס", withMessage: "נראה ששחכת להזין שם משתמש", alertNumber: 2)
 		} catch ErrorManager.RegisterError.emptyEmail {
 			Spinner.shared.stop()
 			presentAlert(withTitle: "אופס", withMessage: "נראה ששחכת להזין כתובת אימייל", alertNumber: 3)
@@ -163,13 +239,29 @@ extension RegisterViewController {
 			presentAlert(withTitle: "אופס", withMessage: "נראה שמשהו לא צפוי קרה, אנא נסי להרשם יותר מאוחר", alertNumber: 0)
 		}
 	}
-	private func moveToHomeViewController() {
-		let storyboard = UIStoryboard(name: K.StoryboardName.home, bundle: nil)
-		let homeVC = storyboard.instantiateViewController(withIdentifier: K.ViewControllerId.HomeTabBar)
+	private func setupView() {
+		let termsOfUseAttributedString = NSMutableAttributedString(string: "קראתי ואני מאשר/ת תקנון תנאי שימוש")
+		let termsOfUseCount = termsOfUseAttributedString.string.count
+		termsOfUseAttributedString.addAttribute(.link, value: "https://bouncefit.co.il/privacy-policy/",
+												range: NSRange(location: termsOfUseCount-16, length: 16))
 		
-		homeVC.modalPresentationStyle = .fullScreen
-		self.present(homeVC, animated: true)
-		Spinner.shared.stop()
+		
+		let healthTermsAttributedString = NSMutableAttributedString(string: "קראתי ואני מאשר/ת את הצהרת הבריאות")
+		let healthTermsCount = healthTermsAttributedString.string.count
+		healthTermsAttributedString.addAttribute(.link, value: "https://bouncefit.co.il/health/",
+												 range: NSRange(location: healthTermsCount-13, length: 13))
+		
+		healthTermsViewButton.setAttributedTitle(healthTermsAttributedString, for: .normal)
+		termsOfUseViewButton.setAttributedTitle(termsOfUseAttributedString, for: .normal)
+	}
+	private func startQuestionnaire() {
+		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
+		let questionnaireVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation)
+		
+		questionnaireVC.modalPresentationStyle = .fullScreen
+		DispatchQueue.main.async {
+			self.present(questionnaireVC, animated: true)
+		}
 	}
 	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., alertNumber: Int) {
 		Spinner.shared.stop()
@@ -189,10 +281,11 @@ extension RegisterViewController {
 		customAlert.titleText = title
 		customAlert.messageText = message
 		customAlert.alertNumber = alertNumber
-		customAlert.okButtonText = options[0]
-		
+		customAlert.cancelButtonIsHidden = true
+
 		switch options.count {
 		case 1:
+			customAlert.okButtonText = options[0]
 			customAlert.cancelButtonIsHidden = true
 		case 2:
 			customAlert.cancelButtonText = options[1]
