@@ -236,6 +236,9 @@ extension ChatViewController {
 		
 		messageInputBar.delegate = self
 		messageInputBar.inputTextView.font = UIFont(name: "Assistant-Regular", size: 18)!
+		messageInputBar.maxTextViewHeight = 96
+		messageInputBar.shouldAutoUpdateMaxTextViewHeight = false
+		
 		imagePickerController.delegate = self
 		messagesCollectionView.messagesDataSource = self
 		messagesCollectionView.messageCellDelegate = self
