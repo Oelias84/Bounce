@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O8A-Ws-eqf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O8A-Ws-eqf">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -1939,6 +1939,7 @@
                         <outlet property="heightTextField" destination="kyL-fV-kv6" id="JZQ-ql-ywO"/>
                         <outlet property="nextButton" destination="ZtV-6k-fYv" id="AvV-Gv-JGh"/>
                         <outlet property="pageControl" destination="1uD-ro-OkP" id="OiD-ZI-sBH"/>
+                        <outlet property="termsButtonsStackView" destination="8R4-T8-Vmf" id="Ede-Si-XIH"/>
                         <outlet property="termsOfUseCheckMarkButton" destination="cYe-mE-TEK" id="5L0-XX-Qql"/>
                         <outlet property="termsOfUseViewButton" destination="m1f-9o-ze9" id="6J3-ry-M6Z"/>
                         <outlet property="userNameTextField" destination="8gV-cB-1TH" id="A75-dM-j7k"/>

@@ -15,11 +15,13 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	@IBOutlet weak var heightTextField: UITextField!
 	@IBOutlet weak var weightTextField: UITextField!
 	@IBOutlet weak var pageControl: UIPageControl!
-
+ 
 	@IBOutlet weak var termsOfUseViewButton: UIButton!
 	@IBOutlet weak var termsOfUseCheckMarkButton: UIButton!
-	
 	@IBOutlet weak var healthTermsViewButton: UIButton!
+	
+	@IBOutlet weak var termsButtonsStackView: UIStackView!
+	
 	@IBOutlet weak var nextButton: UIButton!
 	
 	private let numberPicker = UIPickerView()
@@ -266,6 +268,11 @@ extension QuestionnairePersonalDetailsViewController {
 		if let name = userData.name {
 			userNameTextField.text = name
 			self.userName = name
+		}
+		if userData.termsApproval != nil {
+			termsButtonsStackView.isHidden = true
+			userHasCheckedTermOfUse = true
+			userHasCheckedHealth = true
 		}
 	}
 	private func configureTextFields() {
