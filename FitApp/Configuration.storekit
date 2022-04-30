@@ -1,0 +1,33 @@
+{
+  "identifier" : "35AC21B0",
+  "nonRenewingSubscriptions" : [
+    {
+      "displayPrice" : "299.99",
+      "familyShareable" : false,
+      "internalID" : "B94F5855",
+      "localizations" : [
+        {
+          "description" : "רכישה זו תאפשר לכם להשתמש בממשק האפליקציה",
+          "displayName" : "חשבון חודשי",
+          "locale" : "he"
+        }
+      ],
+      "productID" : "com.bouncefit.ios",
+      "referenceName" : "Monthly Access",
+      "type" : "NonRenewingSubscription"
+    }
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 2
+  }
+}
