@@ -20,13 +20,6 @@ class QuestionnaireGanderViewController: UIViewController {
 		navigationItem.setHidesBackButton(true, animated: false)
 
 		setUpCheckBox()
-		
-		let data: UserOrderData = {
-			return UserOrderData(currentOrderId: "1234", dateOfTransaction: Date().fullDateStringForDB, orderIds: ["order-\(124)"], period: 1)
-		}()
-		DispatchQueue.global().async {
-			GoogleApiManager.shared.addUserOrderData(userOrderData: data)
-		}
 	}
 	
 	@IBAction func womenCheckBoxButtonAction(_ sender: UIButton) {

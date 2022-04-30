@@ -16,8 +16,9 @@ class RegisterViewController: UIViewController {
 	
 	private let viewModel = RegisterViewModel()
 	private let imagePickerController = UIImagePickerController()
+	
+	private var orderId: String?
 	private var profileImage: UIImage?
-
 	private var userHasCheckedTermOfUse = false
 	private var userHasCheckedHealth = false
 	
@@ -27,7 +28,7 @@ class RegisterViewController: UIViewController {
 	
 	@IBOutlet weak var termsOfUseViewButton: UIButton!
 	@IBOutlet weak var healthTermsViewButton: UIButton!
-
+	
 	@IBOutlet weak var profileImageButton: UIButton!
 	@IBOutlet weak var profileImageView: UIImageView!
 	
@@ -36,6 +37,7 @@ class RegisterViewController: UIViewController {
 		super.viewDidLoad()
 		
 		imagePickerController.delegate = self
+		generateOrderId()
 		raiseScreenWhenKeyboardAppears()
 		addScreenTappGesture()
 		setupView()
@@ -53,19 +55,53 @@ class RegisterViewController: UIViewController {
 	}
 	@IBAction func singUpButtonAction(_ sender: Any) {
 		Spinner.shared.show(self.view)
-		purchase(product: .monthlySubID)
-
+		view.endEditing(true)
 		
-		
-		//		let data = OrderData(address: "תפארת ישראל",
-	 //							 city: "Ramat Gan",
-	 //							 companyName: nil,
-	 //							 country: "Israel",
-	 //							 dateOfTranasction: Date().fullDateStringForDB,
-	 //							 email: "mail", period: 1,
-	 //							 phoneNumberL: "05478948489", postCode: 654654,
-	 //							 productName: "Apple in app Purchase", state: nil,
-	 //							 transactionAmount: "299", userType: "No Chat User")
+		do {
+			try viewModel.validateData(email: emailTextfield.text, password: passwordTextfield.text, confirmPassword: confirmPasswordTextfield.text, termsOfUse: userHasCheckedTermOfUse) {
+				error in
+				
+				if let error = error {
+					if error as? ErrorManager.RegisterError == ErrorManager.RegisterError.emailExist {
+						Spinner.shared.stop()
+						self.presentAlert(withTitle: "שמשתמש קיים", withMessage: "נראה שכתובת האימייל שהזנת כבר קיימת במערכת, אנא נסי שנית", alertNumber: 6)
+					} else {
+						Spinner.shared.stop()
+						self.presentAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה ביצירת המשתמש, אנא נסה שנית מאוחר יותר", alertNumber: 0)
+					}
+					return
+				} else {
+					self.purchase(product: .monthlySubID)
+				}
+			}
+		} catch ErrorManager.RegisterError.emptyEmail {
+			Spinner.shared.stop()
+			presentAlert(withTitle: "אופס", withMessage: "נראה ששחכת להזין כתובת אימייל", alertNumber: 3)
+		} catch ErrorManager.RegisterError.emptyPassword {
+			Spinner.shared.stop()
+			presentAlert(withTitle: "אופס", withMessage: "נראה ששחכת להזין סיסמא", alertNumber: 4)
+		} catch ErrorManager.RegisterError.emptyConfirmPassword {
+			Spinner.shared.stop()
+			presentAlert(withTitle: "אופס", withMessage: "נראה ששחכת להזין את אישור הסיסמא", alertNumber: 5)
+		} catch ErrorManager.RegisterError.userNameNotFullName {
+			Spinner.shared.stop()
+			presentAlert(withTitle: "אופס", withMessage: "יש להזין שם ושם משפחה", alertNumber: 1)
+		} catch ErrorManager.RegisterError.incorrectEmail {
+			Spinner.shared.stop()
+			presentAlert(withTitle: "אופס", withMessage: "נראה כי כתובת האימייל שגויה", alertNumber: 3)
+		} catch ErrorManager.RegisterError.shortPassword {
+			Spinner.shared.stop()
+			presentAlert(withTitle: "אופס", withMessage: "הסיסמא חייבת לכלול רק 6 תווים", alertNumber: 5)
+		} catch ErrorManager.RegisterError.confirmPasswordDoNotMatch {
+			Spinner.shared.stop()
+			presentAlert(withTitle: "אופס", withMessage: "הסיסמא אינה תואמת, אנא נסי שנית", alertNumber: 5)
+		} catch ErrorManager.RegisterError.termsOfUse {
+			Spinner.shared.stop()
+			presentAlert(withTitle: "תנאי השירות לא אושרו", withMessage: "נראה כי לא אשרת את תנאי השירות, בכדי להמשיך בהרשמה אנא סמני את התיבה שמאשרת את תנאי השימוש.", alertNumber: 0)
+		} catch {
+			Spinner.shared.stop()
+			presentAlert(withTitle: "אופס", withMessage: "נראה שמשהו לא צפוי קרה, אנא נסי להרשם יותר מאוחר", alertNumber: 0)
+		}
 	}
 	
 	@IBAction func termsOfUseViewButtonAction(_ sender: UIButton) {
@@ -83,7 +119,7 @@ class RegisterViewController: UIViewController {
 		}
 	}
 	@IBAction func heathCheckMarkButtonAction(_ sender: UIButton) {
-			sender.isSelected = !sender.isSelected
+		sender.isSelected = !sender.isSelected
 		userHasCheckedHealth.toggle()
 	}
 }
@@ -137,37 +173,98 @@ extension RegisterViewController: PopupAlertViewDelegate {
 	}
 }
 
-//MARK: - IAP Functions
+//MARK: - Register Functions
 extension RegisterViewController {
 	
 	private func fetchProducts() {
-		
 		IAPManager.shared.fetchAvailableProducts { (products) in
 			self.products = products
 		}
 	}
+	private func generateOrderId() {
+		GoogleApiManager.shared.generatOrderId  {
+			[weak self] result in
+			guard let self = self else { return }
+			
+			switch result {
+			case .success(let orderId):
+				self.orderId = orderId
+			case .failure(_):
+				self.presentOkAlert(withMessage: "משהו השתבש, אנא נסו שוב מאוחר יותר")
+			}
+		}
+	}
 	private func purchase(product: IAPProducts) {
-		guard let _product = products?.first(where: {$0.productIdentifier == product.rawValue}) else {
+		guard let _product = products?.first(where: {$0.productIdentifier == product.rawValue}), let orderId = self.orderId else {
 			print("Product: \(product.rawValue) not found in Products Set")
+			self.presentAlert(withTitle: "אופס", withMessage: "הרכישה נכשלה, נסו שוב", alertNumber: 3)
+			Spinner.shared.stop()
 			return
 		}
-				
-		IAPManager.shared.purchase(product: _product) { (message, product, transaction) in
+		
+		IAPManager.shared.purchase(product: _product) {
+			[weak self] (message, product, transaction) in
+			guard let self = self else { return }
 			
 			if let transaction = transaction, let product = product {
 				print("Transaction : \(transaction)")
 				print("Product: \(product.productIdentifier)")
-				
+			
 				if transaction.error == nil {
-					if transaction.transactionState == .purchased {
-
+					
+					switch transaction.transactionState {
+					case .purchased:
+						let orderData = OrderData(address: nil,
+												  city: nil,
+												  companyName: nil,
+												  country: nil,
+												  dateOfTranasction: transaction.transactionDate?.fullDateStringForDB ?? Date().fullDateStringForDB,
+												  email: self.emailTextfield.text, period: 1,
+												  phoneNumberL: nil, postCode: nil,
+												  productName: "Apple In App Purchase", state: nil,
+												  transactionAmount: "\(product.price)", userType: "No Chat User")
 						
-					} else if transaction.transactionState == .failed {
-
-						
+						self.registerUser(orderId: orderId, order: orderData)
+					case .failed:
+						Spinner.shared.stop()
+						self.presentAlert(withTitle: "אופס", withMessage: message, alertNumber: 3)
+					default:
+						Spinner.shared.stop()
+						self.presentAlert(withTitle: "אופס", withMessage: "הרכישה נכשלה, נסו שוב", alertNumber: 3)
 					}
 				} else {
-					
+					Spinner.shared.stop()
+					self.presentAlert(withTitle: "אופס", withMessage: "הרכישה נכשלה, נסו שוב", alertNumber: 3)
+				}
+			}
+		}
+	}
+	private func registerUser(orderId: String, order: OrderData) {
+		self.viewModel.register(orderId: orderId, order: order) { result in
+			Spinner.shared.stop()
+			
+			switch result {
+			case .success(_):
+				
+				self.startQuestionnaire()
+			case .failure(let error):
+				
+				switch error {
+				case ErrorManager.RegisterError.emailExist:
+					Spinner.shared.stop()
+					self.presentAlert(withTitle: "שמשתמש קיים", withMessage: "נראה שכתובת האימייל שהזנת כבר קיימת במערכת, אנא נסי שנית", alertNumber: 6)
+				case ErrorManager.RegisterError.userNotApproved:
+					Spinner.shared.stop()
+					self.presentAlert(withTitle: "אופס",withMessage: "אין באפשרוך להתחבר, אנא צרי איתנו קשר", alertNumber: 0)
+				case ErrorManager.RegisterError.failToRegister:
+					Spinner.shared.stop()
+					self.presentAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה ביצירת המשתמש, אנא נסה שנית מאוחר יותר", alertNumber: 0)
+				case ErrorManager.RegisterError.userNotSaved:
+					Spinner.shared.stop()
+					self.presentAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה ביצירת המשתמש \(error.localizedDescription)", alertNumber: 0)
+				default:
+					Spinner.shared.stop()
+					self.presentAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה: \(error.localizedDescription)", alertNumber: 0)
 				}
 			}
 		}
@@ -176,69 +273,6 @@ extension RegisterViewController {
 //MARK: - Class Functions
 extension RegisterViewController {
 	
-	
-	private func registerUser(orderId: String, order: OrderData) {
-		
-		do {
-			try viewModel.register(orderId: orderId, order: order, email: emailTextfield.text, password: passwordTextfield.text, confirmPassword: confirmPasswordTextfield.text, termsOfUse: userHasCheckedTermOfUse) {
-				[weak self] result in
-				guard let self = self else { return }
-				Spinner.shared.stop()
-				
-				switch result {
-				case .success(_):
-					
-					self.startQuestionnaire()
-				case .failure(let error):
-					
-					switch error {
-					case ErrorManager.RegisterError.emailExist:
-						Spinner.shared.stop()
-						self.presentAlert(withTitle: "שמשתמש קיים", withMessage: "נראה שכתובת האימייל שהזנת כבר קיימת במערכת, אנא נסי שנית", alertNumber: 6)
-					case ErrorManager.RegisterError.userNotApproved:
-						Spinner.shared.stop()
-						self.presentAlert(withTitle: "אופס",withMessage: "אין באפשרוך להתחבר, אנא צרי איתנו קשר", alertNumber: 0)
-					case ErrorManager.RegisterError.failToRegister:
-						Spinner.shared.stop()
-						self.presentAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה ביצירת המשתמש, אנא נסה שנית מאוחר יותר", alertNumber: 0)
-					case ErrorManager.RegisterError.userNotSaved:
-						Spinner.shared.stop()
-						self.presentAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה ביצירת המשתמש \(error.localizedDescription)", alertNumber: 0)
-					default:
-						Spinner.shared.stop()
-						self.presentAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה: \(error.localizedDescription)", alertNumber: 0)
-					}
-				}
-			}
-		} catch ErrorManager.RegisterError.emptyEmail {
-			Spinner.shared.stop()
-			presentAlert(withTitle: "אופס", withMessage: "נראה ששחכת להזין כתובת אימייל", alertNumber: 3)
-		} catch ErrorManager.RegisterError.emptyPassword {
-			Spinner.shared.stop()
-			presentAlert(withTitle: "אופס", withMessage: "נראה ששחכת להזין סיסמא", alertNumber: 4)
-		} catch ErrorManager.RegisterError.emptyConfirmPassword {
-			Spinner.shared.stop()
-			presentAlert(withTitle: "אופס", withMessage: "נראה ששחכת להזין את אישור הסיסמא", alertNumber: 5)
-		} catch ErrorManager.RegisterError.userNameNotFullName {
-			Spinner.shared.stop()
-			presentAlert(withTitle: "אופס", withMessage: "יש להזין שם ושם משפחה", alertNumber: 1)
-		} catch ErrorManager.RegisterError.incorrectEmail {
-			Spinner.shared.stop()
-			presentAlert(withTitle: "אופס", withMessage: "נראה כי כתובת האימייל שגויה", alertNumber: 3)
-		} catch ErrorManager.RegisterError.shortPassword {
-			Spinner.shared.stop()
-			presentAlert(withTitle: "אופס", withMessage: "הסיסמא חייבת לכלול רק 6 תווים", alertNumber: 5)
-		} catch ErrorManager.RegisterError.confirmPasswordDoNotMatch {
-			Spinner.shared.stop()
-			presentAlert(withTitle: "אופס", withMessage: "הסיסמא אינה תואמת, אנא נסי שנית", alertNumber: 5)
-		} catch ErrorManager.RegisterError.termsOfUse {
-			Spinner.shared.stop()
-			presentAlert(withTitle: "תנאי השירות לא אושרו", withMessage: "נראה כי לא אשרת את תנאי השירות, בכדי להמשיך בהרשמה אנא סמני את התיבה שמאשרת את תנאי השימוש.", alertNumber: 0)
-		} catch {
-			Spinner.shared.stop()
-			presentAlert(withTitle: "אופס", withMessage: "נראה שמשהו לא צפוי קרה, אנא נסי להרשם יותר מאוחר", alertNumber: 0)
-		}
-	}
 	private func setupView() {
 		let termsOfUseAttributedString = NSMutableAttributedString(string: "קראתי ואני מאשר/ת תקנון תנאי שימוש")
 		let termsOfUseCount = termsOfUseAttributedString.string.count
@@ -255,11 +289,11 @@ extension RegisterViewController {
 		termsOfUseViewButton.setAttributedTitle(termsOfUseAttributedString, for: .normal)
 	}
 	private func startQuestionnaire() {
-		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
-		let questionnaireVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation)
-		
-		questionnaireVC.modalPresentationStyle = .fullScreen
 		DispatchQueue.main.async {
+			let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
+			let questionnaireVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation)
+		
+			questionnaireVC.modalPresentationStyle = .fullScreen
 			self.present(questionnaireVC, animated: true)
 		}
 	}
@@ -282,7 +316,7 @@ extension RegisterViewController {
 		customAlert.messageText = message
 		customAlert.alertNumber = alertNumber
 		customAlert.cancelButtonIsHidden = true
-
+		
 		switch options.count {
 		case 1:
 			customAlert.okButtonText = options[0]

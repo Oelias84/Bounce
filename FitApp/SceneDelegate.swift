@@ -66,11 +66,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 									self.goToQuestionnaire(window)
 								}
 							} else {
-								self.signOutCurrentUser()
+								//Sign out if signed in
+								//Go To Login Screen
 								Spinner.shared.stop()
+								self.signOutCurrentUser()
 								self.goToLogin(window)
 							}
 						case .failure(let error):
+							//Sign out if signed in
+							//Go To Login Screen
+							self.signOutCurrentUser()
 							self.goToLogin(window)
 							self.window?.rootViewController?.presentOkAlert(withTitle: "אופס",withMessage: "נראה שיש בעיה: \(error.localizedDescription)")
 						}

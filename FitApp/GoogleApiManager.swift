@@ -36,6 +36,8 @@ struct GoogleApiManager {
 								completion(.success(false))
 								return
 							}
+						} else {
+							completion(.failure(ErrorManager.DatabaseError.failedToDecodeData))
 						}
 					} catch {
 						completion(.failure(ErrorManager.DatabaseError.failedToDecodeData))
@@ -62,9 +64,27 @@ struct GoogleApiManager {
 	}
 	func addOrderData(data: OrderData, with orderNumber: String, completion: ((Error?) -> Void)? = nil) {
 		do {
-			try db.collection("orders-data").document("order-\(orderNumber)").setData(from: data, completion: completion)
+			try db.collection("orders-data").document(orderNumber).setData(from: data, completion: completion)
 		} catch {
 			print(error)
+		}
+	}
+	func generatOrderId(completion: @escaping (Result<String, Error>) -> Void) {
+		
+		db.collection("orders-data").getDocuments {
+			(data, error) in
+			if let error = error {
+				completion(.failure(error))
+			} else if let data = data, let lastId = data.documents.last?.documentID {
+				if let orderNumber = lastId.components(separatedBy: "-").last {
+					let newOrderId = Int(orderNumber)! + 1
+					completion(.success("order-\(newOrderId)"))
+				} else {
+					completion(.failure(ErrorManager.DatabaseError.failedToDecodeData))
+				}
+			} else {
+				completion(.failure(ErrorManager.DatabaseError.failedToDecodeData))
+			}
 		}
 	}
 	func getUserData(completion: @escaping (Result<ServerUserData?, Error>) -> Void) {
