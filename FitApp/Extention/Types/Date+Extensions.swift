@@ -92,7 +92,7 @@ extension Date {
 
 		if #available(iOS 15, *) {
 			let dateComponent = calendar.components(.year, from: self, to: .now, options: [])
-			return "\(dateComponent.year! + 1)"
+			return "\(dateComponent.year!)"
 		} else {
 			// Fallback on earlier versions
 			let calendar: NSCalendar! = NSCalendar(calendarIdentifier: .gregorian)
