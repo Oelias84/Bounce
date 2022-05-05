@@ -74,6 +74,7 @@ extension IAPManager: SKProductsRequestDelegate, SKPaymentTransactionObserver {
 		}
 	}
 	func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+		
 		for transaction in transactions {
 			switch transaction.transactionState {
 			case .failed:
