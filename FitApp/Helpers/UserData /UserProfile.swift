@@ -282,27 +282,53 @@ extension UserProfile {
 
 struct ServerUserData: Codable {
 	
-	let permissionLevel: Int?
-	var termsApproval: TermsAgreeDataModel?
-	var healthApproval: TermsAgreeDataModel?
-	let gender: String?
-	let lastCaloriesCheckDateString: String?
-	let birthDate: String?
-	let email: String?
-	let name: String?
-	let weight: Double?
-	let currentAverageWeight: Double?
-	let height: Int?
-	let fatPercentage: Double?
-	let steps: Int?
-	let kilometer: Double?
-	let lifeStyle: Double?
-	let mealsPerDay: Int?
-	let mostHungry: Int?
-	let fitnessLevel: Int?
-	let weaklyWorkouts: Int?
-	let externalWorkout: Int?
-	let finishOnboarding: Bool?
+	var permissionLevel: Int? = nil
+	var termsApproval: TermsAgreeDataModel? = nil
+	var healthApproval: TermsAgreeDataModel? = nil
+	var gender: String? = nil
+	var lastCaloriesCheckDateString: String? = nil
+	var birthDate: String? = nil
+	var email: String? = nil
+	var name: String? = nil
+	var weight: Double? = nil
+	var currentAverageWeight: Double? = nil
+	var height: Int? = nil
+	var fatPercentage: Double? = nil
+	var steps: Int? = nil
+	var kilometer: Double? = nil
+	var lifeStyle: Double? = nil
+	var mealsPerDay: Int? = nil
+	var mostHungry: Int? = nil
+	var fitnessLevel: Int? = nil
+	var weaklyWorkouts: Int? = nil
+	var externalWorkout: Int? = nil
+	var finishOnboarding: Bool? = nil
+	
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.container(keyedBy: CodingKeys.self)
+		try container.encode(permissionLevel, forKey: .permissionLevel)
+		try container.encode(termsApproval, forKey: .termsApproval)
+		try container.encode(healthApproval, forKey: .healthApproval)
+		try container.encode(gender, forKey: .gender)
+		try container.encode(lastCaloriesCheckDateString, forKey: .lastCaloriesCheckDateString)
+		try container.encode(birthDate, forKey: .birthDate)
+		try container.encode(email, forKey: .email)
+		try container.encode(name, forKey: .name)
+		try container.encode(weight, forKey: .weight)
+		try container.encode(currentAverageWeight, forKey: .currentAverageWeight)
+		try container.encode(height, forKey: .height)
+		try container.encode(fatPercentage, forKey: .fatPercentage)
+		try container.encode(steps, forKey: .steps)
+		try container.encode(kilometer, forKey: .kilometer)
+		try container.encode(lifeStyle, forKey: .lifeStyle)
+		try container.encode(mealsPerDay, forKey: .mealsPerDay)
+		try container.encode(mostHungry, forKey: .mostHungry)
+		try container.encode(fitnessLevel, forKey: .fitnessLevel)
+		try container.encode(weaklyWorkouts, forKey: .weaklyWorkouts)
+		try container.encode(externalWorkout, forKey: .externalWorkout)
+		try container.encode(finishOnboarding, forKey: .finishOnboarding)
+
+	}
 }
 class TermsAgreeDataModel: Codable {
 	

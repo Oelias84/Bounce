@@ -50,7 +50,7 @@ struct GoogleApiManager {
 	//MARK: - UserData
 	func updateUserData(userData: ServerUserData) {
 		do {
-			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("data").setData(from: userData)
+			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("data").setData(from: userData, merge: true)
 		} catch {
 			print(error)
 		}
@@ -95,6 +95,7 @@ struct GoogleApiManager {
 			} else if let data = data {
 				do {
 					var userData: ServerUserData? = nil
+					
 					userData = try data.data(as: ServerUserData.self)
 					completion(.success(userData))
 				} catch {
