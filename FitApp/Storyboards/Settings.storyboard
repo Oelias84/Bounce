@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iMS-3j-yxR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iMS-3j-yxR">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Assistant-SemiBold.ttf">
+            <string>Assistant-SemiBold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Settings Options Table View Controller-->
         <scene sceneID="X0c-wz-NW9">
@@ -74,7 +79,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="40" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="XwV-hr-CWG">
-                                <rect key="frame" x="0.0" y="202" width="414" height="660"/>
+                                <rect key="frame" x="0.0" y="202" width="414" height="634"/>
                                 <color key="backgroundColor" name="ProjectBackground"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
@@ -85,6 +90,17 @@
                                     <constraint firstAttribute="height" constant="214" id="FDm-6R-pRt"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tPA-24-aOH">
+                                <rect key="frame" x="0.0" y="836" width="414" height="26"/>
+                                <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="10"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="*קישורים למקורות מידע">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="resourcesButtonAction" destination="0bX-ah-pd7" eventType="touchUpInside" id="yNh-4h-05E"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Nj6-9j-anZ"/>
                         <color key="backgroundColor" name="ProjectBackground"/>
@@ -93,9 +109,12 @@
                             <constraint firstAttribute="trailing" secondItem="pBe-wa-3Vn" secondAttribute="trailing" id="FxH-L7-cjj"/>
                             <constraint firstItem="pBe-wa-3Vn" firstAttribute="leading" secondItem="Nj6-9j-anZ" secondAttribute="leading" id="Nze-4h-nh6"/>
                             <constraint firstItem="pBe-wa-3Vn" firstAttribute="top" secondItem="8C0-RX-9xZ" secondAttribute="top" id="RLm-aH-nOy"/>
+                            <constraint firstItem="tPA-24-aOH" firstAttribute="leading" secondItem="Nj6-9j-anZ" secondAttribute="leading" id="RMP-xf-Ffj"/>
                             <constraint firstItem="XwV-hr-CWG" firstAttribute="top" secondItem="pBe-wa-3Vn" secondAttribute="bottom" constant="-12" id="YCO-Oc-HOy"/>
+                            <constraint firstItem="tPA-24-aOH" firstAttribute="top" secondItem="XwV-hr-CWG" secondAttribute="bottom" id="hf7-9Q-HiX"/>
                             <constraint firstItem="Nj6-9j-anZ" firstAttribute="trailing" secondItem="XwV-hr-CWG" secondAttribute="trailing" id="kn0-Eh-VHN"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="XwV-hr-CWG" secondAttribute="bottom" id="pdH-cm-Vrz"/>
+                            <constraint firstItem="Nj6-9j-anZ" firstAttribute="trailing" secondItem="tPA-24-aOH" secondAttribute="trailing" id="r0Z-JM-yxY"/>
+                            <constraint firstItem="Nj6-9j-anZ" firstAttribute="bottom" secondItem="tPA-24-aOH" secondAttribute="bottom" id="wL1-0I-kYC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xEQ-X1-eIO">
@@ -108,7 +127,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5HZ-n5-MuT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2246" y="-218"/>
+            <point key="canvasLocation" x="2243.4782608695655" y="-218.30357142857142"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wXj-CK-6AV">

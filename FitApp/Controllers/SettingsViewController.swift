@@ -45,7 +45,6 @@ class SettingsViewController: UIViewController {
 		setupTopBar()
 		registerCells()
 		imagePickerController.delegate = self
-
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -55,6 +54,13 @@ class SettingsViewController: UIViewController {
 		
 		if !inCameraMode {
 //			navigationController?.popViewController(animated: false)
+		}
+	}
+	
+	@objc private func resourcesButtonAction() {
+		let url = "https://bouncefit.co.il/%d7%a7%d7%99%d7%a9%d7%95%d7%a8%d7%99%d7%9d-%d7%9c%d7%9e%d7%a7%d7%95%d7%a8%d7%95%d7%aa-%d7%9e%d7%99%d7%93%d7%a2/"
+		if let url = URL(string: url) {
+			UIApplication.shared.open(url)
 		}
 	}
 }
