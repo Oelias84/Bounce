@@ -273,10 +273,15 @@ extension UserProfile {
 		userProfile.lastWeightAlertPresentedDate = nil
 	}
 	func resetUserData() {
+
+		if getIsManager {
+			GoogleDatabaseManager.shared.removeAdminTokenFromChat()
+		} else {
+			GoogleDatabaseManager.shared.removeUserPushTokenFromChat()
+		}
 		UserDefaults.resetDefaults()
 		UserProfile.defaults.resetUserProfileData()
 		ConsumptionManager.shared.resetConsumptionManager()
-		GoogleDatabaseManager.shared.removeUserPushTokenFromChat()
 	}
 }
 
