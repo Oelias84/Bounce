@@ -26,6 +26,18 @@ class ChatViewController: MessagesViewController {
 	init(viewModel: ChatViewModel) {
 		self.viewModel = viewModel
 		super.init(nibName: nil, bundle: nil)
+		
+		if !viewModel.containChat {
+			disableInteraction()
+			
+			viewModel.chatViewModelBinder = {
+				DispatchQueue.main.async {
+					self.messagesCollectionView.reloadData()
+					self.messagesCollectionView.scrollToLastItem(animated: false)
+					self.ableInteraction()
+				}
+			}
+		}
 	}
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
@@ -36,13 +48,13 @@ class ChatViewController: MessagesViewController {
 		
 		setupController()
 		setupInputButton()
+	}
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
 		
-		self.viewModel.chatViewModelBinder = {
-			DispatchQueue.main.async {
-				self.messagesCollectionView.reloadData()
-				self.messagesCollectionView.scrollToLastItem(animated: false)
-				self.ableInteraction()
-			}
+		if viewModel.containChat {
+			messagesCollectionView.scrollToLastItem(animated: false)
+			messagesCollectionView.reloadDataAndKeepOffset()
 		}
 	}
 }
@@ -87,6 +99,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		}
 		return message.sender.senderId == currentSender().senderId
 	}
+	
 	//Collection view dataSource
 	func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
 		viewModel.messagesCount
@@ -154,6 +167,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 			return .bubble
 		}
 	}
+	
 	//Cell delegate
 	func didTapImage(in cell: MessageCollectionViewCell) {
 		messagesCollectionView.endEditing(true)
@@ -342,11 +356,12 @@ extension ChatViewController {
 			}
 		}
 	}
-	private func disableInteraction() {
-		spinner(run: true)
-	}
-	private func ableInteraction() {
+	
+	public func ableInteraction() {
 		spinner(run: false)
+	}
+	public func disableInteraction() {
+		spinner(run: true)
 	}
 	private func spinner(run: Bool) {
 		switch run {
@@ -359,9 +374,15 @@ extension ChatViewController {
 			DispatchQueue.main.async {
 				self.hud.backgroundColor = #colorLiteral(red: 0.6394728422, green: 0.659519434, blue: 0.6805263758, alpha: 0.2546477665)
 				self.hud.textLabel.text = "טוען"
-				if let parentView = self.tabBarController?.view {
-					self.hud.show(in: parentView)
+				
+				if let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window,
+					let view = window.rootViewController?.view {
+					self.hud.show(in: view)
 				}
+
+//				if let parentView = self.tabBarController?.view {
+//					self.hud.show(in: parentView)
+//				}
 			}
 		}
 	}

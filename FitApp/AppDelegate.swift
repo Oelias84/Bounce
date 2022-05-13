@@ -166,7 +166,7 @@ extension AppDelegate {
 			if !UserProfile.defaults.getIsManager {
 				return navController.viewControllers.first(where: {$0.isKind(of: ChatContainerViewController.self)}) == nil
 			} else if let chatContainer = navController.viewControllers.first(where: {$0.isKind(of: ChatContainerViewController.self)}) as? ChatContainerViewController {
-				if chatContainer.chatViewController.viewModel.getChatUserId == chatUserId {
+				if chatContainer.chatViewController?.viewModel.getChatUserId == chatUserId {
 					return false
 				}
 			}

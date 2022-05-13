@@ -37,6 +37,9 @@ class ChatViewModel {
 	}
 	
 	//getters
+	var containChat: Bool {
+		return chat != nil
+	}
 	var getChatUserId: String {
 		chat?.userId ?? ""
 	}
