@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SwiftUI
+
 import Foundation
 
 @objc protocol BounceNavigationBarDelegate: AnyObject {
@@ -123,6 +125,7 @@ final class BounceNavigationBarView: UIView {
 		}
 	}
 	
+	
 	override func layoutSubviews() {
 		setImage()
 	}
@@ -167,18 +170,21 @@ extension BounceNavigationBarView {
 			if permission < 10 {
 				messageButton.isHidden = true
 			}
+			messageButton.setImage(UIImage(systemName: "a.circle.fill"), for: .normal)
 		}
 	}
+	
 	private func openChat() {
-		let storyboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
 		
 		if UserProfile.defaults.getIsManager {
-			let chatsVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.ChatsViewController) as ChatsViewController
-			
+			let adminStoryBoard = UIStoryboard(name: K.StoryboardName.adminMenu, bundle: nil)
+			let chatsVC = adminStoryBoard.instantiateViewController(identifier: K.ViewControllerId.usersListViewController) as UsersListViewController
+
 			if let vc = delegate as? UIViewController {
 				vc.navigationController?.pushViewController(chatsVC, animated: true)
 			}
 		} else {
+			let storyboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
 			let chatContainerVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.ChatContainerViewController) as ChatContainerViewController
 			chatContainerVC.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: nil))
 			

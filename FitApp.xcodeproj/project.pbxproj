@@ -105,6 +105,12 @@
 		7CADF750278CAEBC0020CD83 /* StaticStringsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */; };
 		7CB0E179278775B400D6EDA5 /* ChatContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */; };
 		7CB0E17B2787764B00D6EDA5 /* LoginRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */; };
+		7CB37011283570ED0010E8EC /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB37010283570ED0010E8EC /* ObservableObject.swift */; };
+		7CB37013283573430010E8EC /* AdminMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB37012283573430010E8EC /* AdminMenu.storyboard */; };
+		7CB370162835767A0010E8EC /* UsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB370152835767A0010E8EC /* UsersListViewController.swift */; };
+		7CB37018283576FA0010E8EC /* UsersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB37017283576FA0010E8EC /* UsersListViewModel.swift */; };
+		7CB3701E28358D180010E8EC /* AdminUserMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB3701C28358D180010E8EC /* AdminUserMenuTableViewCell.swift */; };
+		7CB3701F28358D180010E8EC /* AdminUserMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB3701D28358D180010E8EC /* AdminUserMenuTableViewCell.xib */; };
 		7CB9ADE5268B12290009B42A /* ChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE4268B12290009B42A /* ChartFormatter.swift */; };
 		7CB9ADE7268CB7140009B42A /* ChartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE6268CB7140009B42A /* ChartView.xib */; };
 		7CB9ADE9268CB72B0009B42A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE8268CB72B0009B42A /* ChartView.swift */; };
@@ -317,6 +323,12 @@
 		7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticStringsManager.swift; sourceTree = "<group>"; };
 		7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatContainerViewController.swift; sourceTree = "<group>"; };
 		7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginRegister.storyboard; sourceTree = "<group>"; };
+		7CB37010283570ED0010E8EC /* ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
+		7CB37012283573430010E8EC /* AdminMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminMenu.storyboard; sourceTree = "<group>"; };
+		7CB370152835767A0010E8EC /* UsersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewController.swift; sourceTree = "<group>"; };
+		7CB37017283576FA0010E8EC /* UsersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewModel.swift; sourceTree = "<group>"; };
+		7CB3701C28358D180010E8EC /* AdminUserMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminUserMenuTableViewCell.swift; sourceTree = "<group>"; };
+		7CB3701D28358D180010E8EC /* AdminUserMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdminUserMenuTableViewCell.xib; sourceTree = "<group>"; };
 		7CB9ADE4268B12290009B42A /* ChartFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFormatter.swift; sourceTree = "<group>"; };
 		7CB9ADE6268CB7140009B42A /* ChartView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartView.xib; sourceTree = "<group>"; };
 		7CB9ADE8268CB72B0009B42A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -687,6 +699,7 @@
 			isa = PBXGroup;
 			children = (
 				7C89AA35256D6D3D009AD87C /* Application */,
+				7CC61E28283289660018B443 /* Admin */,
 				B36B71902577BEFC001CD393 /* Models */,
 				B3DB7511259F8254002CF48B /* ViewModels */,
 				7C89AA6E256D7132009AD87C /* Storyboards */,
@@ -748,6 +761,7 @@
 				7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */,
 				7CE086262761482A00BF3CF3 /* ProjectColors.swift */,
 				7CBBF1EC28197A8600EE55F1 /* IAPManager.swift */,
+				7CB37010283570ED0010E8EC /* ObservableObject.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -863,6 +877,58 @@
 			name = LoginAndRegister;
 			sourceTree = "<group>";
 		};
+		7CB3700928354B460010E8EC /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				7CB3701A28358CD50010E8EC /* Cells */,
+				7CB370142835765B0010E8EC /* Controllers */,
+				7CB3700A28354B840010E8EC /* Storyboards */,
+				7CB3701928357D8F0010E8EC /* ViewModels */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		7CB3700A28354B840010E8EC /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7CB37012283573430010E8EC /* AdminMenu.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7CB370142835765B0010E8EC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7CB370152835767A0010E8EC /* UsersListViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		7CB3701928357D8F0010E8EC /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7CB37017283576FA0010E8EC /* UsersListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7CB3701A28358CD50010E8EC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7CB3701B28358CE10010E8EC /* Menu */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		7CB3701B28358CE10010E8EC /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				7CB3701C28358D180010E8EC /* AdminUserMenuTableViewCell.swift */,
+				7CB3701D28358D180010E8EC /* AdminUserMenuTableViewCell.xib */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		7CB9ADEA268CB72F0009B42A /* ChartView */ = {
 			isa = PBXGroup;
 			children = (
@@ -871,6 +937,14 @@
 				7CB9ADE4268B12290009B42A /* ChartFormatter.swift */,
 			);
 			name = ChartView;
+			sourceTree = "<group>";
+		};
+		7CC61E28283289660018B443 /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				7CB3700928354B460010E8EC /* Menu */,
+			);
+			path = Admin;
 			sourceTree = "<group>";
 		};
 		7CCC0E65262B2E2D006E2E35 /* EmptyTabelViewView */ = {
@@ -1255,6 +1329,7 @@
 				7C8F51362671F9E3001FF0EE /* AddMealAlertDishView.xib in Resources */,
 				7C0F703A276CEA5900964004 /* SettingsTableViewCell.xib in Resources */,
 				7CE1ED1527737A5C00337304 /* CollapsibleTableViewCell.xib in Resources */,
+				7CB37013283573430010E8EC /* AdminMenu.storyboard in Resources */,
 				B330B87625757C1000BDB206 /* Workout.storyboard in Resources */,
 				7C10BA7A276BCFBE00B5860C /* Assistant-Regular.ttf in Resources */,
 				7C7C382F2790F97F0075B64A /* ConversionTable.tsv in Resources */,
@@ -1278,6 +1353,7 @@
 				7C7434FB25CD9F0000D33A9A /* Chat.storyboard in Resources */,
 				7CE1ED132773633500337304 /* CollapsibleTableViewHeader.xib in Resources */,
 				7C149C8E25D85A7600B0864F /* AddWeightAlertView.xib in Resources */,
+				7CB3701F28358D180010E8EC /* AdminUserMenuTableViewCell.xib in Resources */,
 				B3E36E7025727F63006CE558 /* Home.storyboard in Resources */,
 				7C7435DC25D31A0000D33A9A /* ChatTableViewCell.xib in Resources */,
 				7C1ACCF7266FD6A5008079C9 /* ChangeDateView.xib in Resources */,
@@ -1465,6 +1541,7 @@
 				B368DFE025A6247600BD1937 /* SpinnerView.swift in Sources */,
 				7C62181026F4F2F20019FD25 /* UIAlertController+Extensions.swift in Sources */,
 				B341E236257FA6F500EE05A7 /* Date+Extensions.swift in Sources */,
+				7CB370162835767A0010E8EC /* UsersListViewController.swift in Sources */,
 				B3DB750D259F4850002CF48B /* FloatingPoint+Extensions.swift in Sources */,
 				7C74353225D07DB800D33A9A /* GoogleDatabaseManager.swift in Sources */,
 				B3E36E75257285F3006CE558 /* HomeViewController.swift in Sources */,
@@ -1476,6 +1553,7 @@
 				7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */,
 				B368E07F25A8819100BD1937 /* Key.swift in Sources */,
 				7CB9ADE5268B12290009B42A /* ChartFormatter.swift in Sources */,
+				7CB37011283570ED0010E8EC /* ObservableObject.swift in Sources */,
 				7C74350825CDBB4C00D33A9A /* Message.swift in Sources */,
 				B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */,
 				B368E08725A8820E00BD1937 /* PropertyListValue.swift in Sources */,
@@ -1519,12 +1597,14 @@
 				7C658ABE25D992D200CA75B2 /* Comments.swift in Sources */,
 				7CFCAF4726BD58DA008A24F8 /* HomeViewModel.swift in Sources */,
 				7C0F703C276CEA8600964004 /* SettingsTableViewCell.swift in Sources */,
+				7CB37018283576FA0010E8EC /* UsersListViewModel.swift in Sources */,
 				7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */,
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
 				7C83152525E053B100335601 /* ExerciseCategoryView.swift in Sources */,
 				7C10BA70276BCB9C00B5860C /* UINavigationController+Extensions.swift in Sources */,
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
 				7C54164D269D951C00C22859 /* LoginViewModel.swift in Sources */,
+				7CB3701E28358D180010E8EC /* AdminUserMenuTableViewCell.swift in Sources */,
 				7CFE0C0E276936330077D16F /* BounceNavigationBarView.swift in Sources */,
 				7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */,
 				7CD1817B2647E80F0054DB9C /* NotificationTableViewCell.swift in Sources */,

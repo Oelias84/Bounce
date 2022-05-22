@@ -58,6 +58,7 @@ struct K {
         static let articles = "Articles"
 		static let settings = "Settings"
 		static let chat = "Chat"
+		static let adminMenu = "AdminMenu"
 	}
 	
 	struct ViewControllerId {
@@ -85,7 +86,6 @@ struct K {
         static let questionnaireSixth = "QuestionnaireSixth"
         static let questionnaireSeventh = "QuestionnaireSeventh"
 		static let questionnaireEighth = "QuestionnaireEighth"
-
 		//Workout
         static let workoutTableViewController = "WorkoutTableViewController"
         static let exercisesTableViewController = "ExercisesTableViewController"
@@ -104,6 +104,10 @@ struct K {
 		static let ChatContainerViewController = "ChatContainerViewController"
 		//Settings
 		static let SettingsOptionsTableViewController = "SettingsOptionsTableViewController"
+		//Admin
+		static let usersListViewController = "UsersListViewController"
+		
+		
 	}
 	
 	struct NavigationId {
@@ -156,6 +160,9 @@ struct K {
 		static let numberOfWorkoutsExternal = "numberOfWorkoutsExternal"
 		static let logoutCell = "logoutCell"
 		
+		//Admin
+		static let adminUserMenuCell = "adminUserMenuCell"
+		
     }
 	
     struct NibName {
@@ -190,6 +197,9 @@ struct K {
 		static let addMealAlertDishView = "AddMealAlertDishView"
 		static let bounceNavigationBarView = "BounceNavigationBarView"
 		static let popupAlertView = "PopupAlertView"
+		
+		//Admin
+		static let adminUserMenuTableViewCell = "AdminUserMenuTableViewCell"
     }
 	
 	struct Units {

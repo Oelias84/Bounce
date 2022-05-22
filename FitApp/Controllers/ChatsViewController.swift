@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatsViewController: UIViewController {
+final class ChatsViewController: UIViewController {
 	
 	private var chatsViewModel: ChatsViewModel!
 	private var isManager = UserProfile.defaults.getIsManager
