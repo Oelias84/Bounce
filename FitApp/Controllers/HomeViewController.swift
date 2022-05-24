@@ -14,7 +14,7 @@ import MKRingProgressView
 class HomeViewController: UIViewController {
 	
 	private var viewModel = HomeViewModel()
-	private let weightAlertsManager = WeightAlertsManager()
+	private var weightAlertsManager: WeightAlertsManager!
 
 	private var carbsRingLayer: RingProgressView!
 	private var fatRingLayer: RingProgressView!
@@ -42,6 +42,7 @@ class HomeViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		changeStackSpacing()
+		weightAlertsManager = WeightAlertsManager()
 		
 		if (UserProfile.defaults.finishOnboarding ?? false) {
 			viewModel.bindToMealViewModel {
