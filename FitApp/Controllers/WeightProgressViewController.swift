@@ -23,7 +23,8 @@ enum TimePeriod {
 
 class WeightProgressViewController: UIViewController {
 	
-	private var weightViewModel: WeightViewModel!
+	public var isFromAdmin: Bool = false
+	public var weightViewModel: WeightViewModel?
 	private var filteredArray: [Weight]? {
 		didSet {
 			DispatchQueue.main.async {
@@ -51,7 +52,9 @@ class WeightProgressViewController: UIViewController {
 	internal var timeLinePeriod = [Date]()
 	internal var timePeriod: TimePeriod = .week {
 		didSet {
-			addWeightButton.isHidden = timePeriod != .week
+			if !isFromAdmin {
+				addWeightButton.isHidden = timePeriod != .week
+			}
 		}
 	}
 	
@@ -93,6 +96,8 @@ class WeightProgressViewController: UIViewController {
 	}
 	
 	@IBAction func todayButtonAction(_ sender: Any) {
+		guard let weightViewModel = weightViewModel else { return }
+		
 		selectedDate = Date()
 		filteredArray = weightViewModel.getWeekBy(selectedDate.startOfWeek!)
 		segmentedControl.setIndex(0)
@@ -101,7 +106,13 @@ class WeightProgressViewController: UIViewController {
 		updateFiltersArray()
 	}
 	@IBAction func addWeightButtonAction(_ sender: Any) {
-		guard let lastWeightDate = weightViewModel.getLastWeightDate() else { return }
+		if isFromAdmin {
+			dismiss(animated: true)
+			return
+		}
+		guard let weightViewModel = weightViewModel,
+				let lastWeightDate = weightViewModel.getLastWeightDate() else { return }
+		
 		let currentDate = Date().onlyDate
 		addWeightButton.isEnabled = false
 		
@@ -273,6 +284,7 @@ extension WeightProgressViewController: UITableViewDelegate, UITableViewDataSour
 		if let cell = filteredArray?[indexPath.row] {
 			switch timePeriod {
 			case .week:
+				if isFromAdmin { return }
 				presentAddWeightAlert(weight: cell)
 			case .month:
 				selectedDate = cell.date
@@ -314,6 +326,11 @@ extension WeightProgressViewController {
 		topBarView.isBackButtonHidden = true
 		topBarView.isDayWelcomeHidden = true
 		topBarView.isProfileButtonHidden = false
+		
+		if isFromAdmin {
+			addWeightButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+			addWeightButton.setTitle("", for: .normal)
+		}
 	}
 	private func updateDateLabels() {
 		switch timePeriod {
@@ -335,6 +352,8 @@ extension WeightProgressViewController {
 		}
 	}
 	private func updateFiltersArray() {
+		guard let weightViewModel = weightViewModel else { return }
+		
 		switch timePeriod {
 		case .week:
 			filteredArray = weightViewModel.getWeekBy(selectedDate).sorted()
@@ -364,10 +383,12 @@ extension WeightProgressViewController {
 		let weight = Weight(dateString: (date ?? Date()).dateStringForDB, weight: Double(weight)!)
 		
 		uploadWeightImage(weightDate: weight.date) {
+			guard let weightViewModel = self.weightViewModel else { return }
+			
 			Spinner.shared.stop()
-			self.weightViewModel.weights?.removeAll(where: { $0.date.onlyDate == date?.onlyDate })
-			self.weightViewModel.weights?.append(weight)
-			self.weightViewModel.addWeight()
+			weightViewModel.weights?.removeAll(where: { $0.date.onlyDate == date?.onlyDate })
+			weightViewModel.weights?.append(weight)
+			weightViewModel.addWeight()
 			self.updateDateLabels()
 			self.updateFiltersArray()
 			self.addWeightButton.isEnabled = true
@@ -376,6 +397,8 @@ extension WeightProgressViewController {
 	
 	private func updateDataSource() {
 		Spinner.shared.stop()
+		guard let weightViewModel = weightViewModel else { return }
+		
 		filteredArray = weightViewModel.getWeekBy(selectedDate.startOfWeek!)
 		DispatchQueue.main.async {
 			[unowned self] in
@@ -386,7 +409,9 @@ extension WeightProgressViewController {
 		if let navView = navigationController?.view {
 			Spinner.shared.show(navView)
 		}
-		self.weightViewModel = WeightViewModel()
+		if weightViewModel == nil {
+			self.weightViewModel = WeightViewModel()
+		}
 		
 		self.weightViewModel!.bindWeightViewModelToController = {
 			[weak self] in

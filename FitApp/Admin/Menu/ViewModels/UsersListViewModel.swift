@@ -11,7 +11,7 @@ import FirebaseAuth
 
 class UsersListViewModel {
 	
-	private let userId = Auth.auth().currentUser!.uid
+	private let adminId = Auth.auth().currentUser!.uid
 	private let googleDatabase =  GoogleDatabaseManager.shared
 	
 	private var users: [Chat]? {
@@ -24,7 +24,6 @@ class UsersListViewModel {
 	init() {
 		fetchChats()
 	}
-	
 	
 	//Getters
 	var getChatsCount: Int? {
@@ -54,7 +53,7 @@ class UsersListViewModel {
 	
 	private func fetchChats() {
 		
-		self.googleDatabase.getAllChats(userId: userId) {
+		self.googleDatabase.getAllChats(userId: adminId) {
 			[weak self] chats in
 			guard let self = self else { return }
 			

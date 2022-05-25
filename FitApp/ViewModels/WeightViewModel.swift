@@ -19,11 +19,11 @@ class WeightViewModel: NSObject {
     
     var bindWeightViewModelToController : (() -> ()) = {}
     
-    override init() {
+	init(userUID: String? = nil) {
         super.init()
         
         googleService = GoogleApiManager()
-        fetchWeights()
+		fetchWeights(userUID: userUID)
     }
 	
 	func getLastWeightDate() -> Date? {
@@ -155,8 +155,8 @@ class WeightViewModel: NSObject {
 		
 		googleService.updateWeights(weights: weightsModel)
 	}
-    func fetchWeights() {
-        googleService.getWeights { result in
+	func fetchWeights(userUID: String? = nil) {
+		googleService.getWeights(userUID: userUID) { result in
             switch result {
             case .success(let weights):
                 if let weights = weights {

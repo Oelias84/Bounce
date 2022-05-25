@@ -16,10 +16,15 @@ class UsersListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+		
+		Spinner.shared.show(view)
 		setupView()
 		bindViewModel()
     }
+	
+	@IBAction func closeButtonAction(_ sender: Any) {
+		dismiss(animated: true)
+	}
 }
 
 //MARK: - Delegates
@@ -48,6 +53,10 @@ extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
 		cell.configure(with: cellData)
 		return cell
 	}
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let userData = viewModel.getChatFor(row: indexPath.row)
+		moveToUserDetails(userData: userData)
+	}
 }
 
 //MARK: - Functions
@@ -59,9 +68,20 @@ extension UsersListViewController {
 	}
 	private func bindViewModel() {
 		
-		viewModel.filteredUsers.bind { users in
-			self.tableView.reloadData()
+		viewModel.filteredUsers.bind { _ in
+			UIView.animate(withDuration: 0, delay: 0, options: .curveEaseIn, animations: {
+				self.tableView.reloadData()
+			}) { _ in
+				Spinner.shared.stop()
+			}
 		}
+	}
+	private func moveToUserDetails(userData: Chat) {
+		guard let userDetailVC = storyboard?.instantiateViewController(withIdentifier: K.ViewControllerId.userDetailsViewController) as? UserDetailsViewController else { return }
+		
+		userDetailVC.title = userData.displayName ?? "אין שם"
+		userDetailVC.viewModel = UserDetailsViewModel(userData: userData)
+		navigationController?.pushViewController(userDetailVC, animated: true)
 	}
 }
 

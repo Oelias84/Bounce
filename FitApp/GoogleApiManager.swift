@@ -170,9 +170,9 @@ struct GoogleApiManager {
 			print(error)
 		}
 	}
-	func getWeights(completion: @escaping (Result<[Weight]?, Error>) -> Void) {
+	func getWeights(userUID: String? = nil, completion: @escaping (Result<[Weight]?, Error>) -> Void) {
 		do {
-			db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-weights").document("weights").getDocument(source: .default, completion: { (data, error) in
+			db.collection("users").document(userUID ?? Auth.auth().currentUser!.uid).collection("user-weights").document("weights").getDocument(source: .default, completion: { (data, error) in
 				if let error = error {
 					print(error)
 				} else if let data = data {

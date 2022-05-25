@@ -179,9 +179,12 @@ extension BounceNavigationBarView {
 		if UserProfile.defaults.getIsManager {
 			let adminStoryBoard = UIStoryboard(name: K.StoryboardName.adminMenu, bundle: nil)
 			let chatsVC = adminStoryBoard.instantiateViewController(identifier: K.ViewControllerId.usersListViewController) as UsersListViewController
-
+			let navigationController = UINavigationController(rootViewController: chatsVC)
+			
+			navigationController.modalPresentationStyle = .fullScreen
+			
 			if let vc = delegate as? UIViewController {
-				vc.navigationController?.pushViewController(chatsVC, animated: true)
+				vc.present(navigationController ,animated: true)
 			}
 		} else {
 			let storyboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)

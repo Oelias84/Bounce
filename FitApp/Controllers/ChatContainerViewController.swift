@@ -19,7 +19,7 @@ class ChatContainerViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		Spinner.shared.show((navigationController?.view)!)
+		Spinner.shared.show(self.view)
 		setupChat()
 		setupTopBarView()
 	}
@@ -46,7 +46,11 @@ class ChatContainerViewController: UIViewController {
 extension ChatContainerViewController: BounceNavigationBarDelegate {
 	
 	func backButtonTapped() {
-		navigationController?.popViewController(animated: true)
+		if UserProfile.defaults.getIsManager {
+			dismiss(animated: true)
+		} else {
+			navigationController?.popViewController(animated: true)
+		}
 	}
 }
 extension ChatContainerViewController {

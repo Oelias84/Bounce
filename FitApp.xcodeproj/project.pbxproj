@@ -100,13 +100,15 @@
 		7C98731E26F4A7C8000E5299 /* CaloriesProgressState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98731D26F4A7C8000E5299 /* CaloriesProgressState.swift */; };
 		7C9B345E2583C5B400D30480 /* QuestionnaireSumUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */; };
 		7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */; };
+		7C9F7BF2283E9F7B006868F4 /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9F7BF1283E9F7B006868F4 /* UserDetailsViewController.swift */; };
+		7C9F7BF4283EA32B006868F4 /* UserDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9F7BF3283EA32B006868F4 /* UserDetailsViewModel.swift */; };
 		7CADF74C278CADDE0020CD83 /* StaticText.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CADF74B278CADDE0020CD83 /* StaticText.json */; };
 		7CADF74E278CADFF0020CD83 /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CADF74D278CADFF0020CD83 /* Static.swift */; };
 		7CADF750278CAEBC0020CD83 /* StaticStringsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */; };
 		7CB0E179278775B400D6EDA5 /* ChatContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */; };
 		7CB0E17B2787764B00D6EDA5 /* LoginRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */; };
 		7CB37011283570ED0010E8EC /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB37010283570ED0010E8EC /* ObservableObject.swift */; };
-		7CB37013283573430010E8EC /* AdminMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB37012283573430010E8EC /* AdminMenu.storyboard */; };
+		7CB37013283573430010E8EC /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB37012283573430010E8EC /* Admin.storyboard */; };
 		7CB370162835767A0010E8EC /* UsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB370152835767A0010E8EC /* UsersListViewController.swift */; };
 		7CB37018283576FA0010E8EC /* UsersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB37017283576FA0010E8EC /* UsersListViewModel.swift */; };
 		7CB3701E28358D180010E8EC /* AdminUserMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB3701C28358D180010E8EC /* AdminUserMenuTableViewCell.swift */; };
@@ -318,13 +320,15 @@
 		7C98731D26F4A7C8000E5299 /* CaloriesProgressState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesProgressState.swift; sourceTree = "<group>"; };
 		7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSumUpViewController.swift; sourceTree = "<group>"; };
 		7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7C9F7BF1283E9F7B006868F4 /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
+		7C9F7BF3283EA32B006868F4 /* UserDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewModel.swift; sourceTree = "<group>"; };
 		7CADF74B278CADDE0020CD83 /* StaticText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StaticText.json; sourceTree = "<group>"; };
 		7CADF74D278CADFF0020CD83 /* Static.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
 		7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticStringsManager.swift; sourceTree = "<group>"; };
 		7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatContainerViewController.swift; sourceTree = "<group>"; };
 		7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginRegister.storyboard; sourceTree = "<group>"; };
 		7CB37010283570ED0010E8EC /* ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
-		7CB37012283573430010E8EC /* AdminMenu.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminMenu.storyboard; sourceTree = "<group>"; };
+		7CB37012283573430010E8EC /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
 		7CB370152835767A0010E8EC /* UsersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewController.swift; sourceTree = "<group>"; };
 		7CB37017283576FA0010E8EC /* UsersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewModel.swift; sourceTree = "<group>"; };
 		7CB3701C28358D180010E8EC /* AdminUserMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminUserMenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -882,7 +886,6 @@
 			children = (
 				7CB3701A28358CD50010E8EC /* Cells */,
 				7CB370142835765B0010E8EC /* Controllers */,
-				7CB3700A28354B840010E8EC /* Storyboards */,
 				7CB3701928357D8F0010E8EC /* ViewModels */,
 			);
 			path = Menu;
@@ -891,7 +894,7 @@
 		7CB3700A28354B840010E8EC /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				7CB37012283573430010E8EC /* AdminMenu.storyboard */,
+				7CB37012283573430010E8EC /* Admin.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -900,6 +903,7 @@
 			isa = PBXGroup;
 			children = (
 				7CB370152835767A0010E8EC /* UsersListViewController.swift */,
+				7C9F7BF1283E9F7B006868F4 /* UserDetailsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -908,6 +912,7 @@
 			isa = PBXGroup;
 			children = (
 				7CB37017283576FA0010E8EC /* UsersListViewModel.swift */,
+				7C9F7BF3283EA32B006868F4 /* UserDetailsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -942,6 +947,7 @@
 		7CC61E28283289660018B443 /* Admin */ = {
 			isa = PBXGroup;
 			children = (
+				7CB3700A28354B840010E8EC /* Storyboards */,
 				7CB3700928354B460010E8EC /* Menu */,
 			);
 			path = Admin;
@@ -1329,7 +1335,7 @@
 				7C8F51362671F9E3001FF0EE /* AddMealAlertDishView.xib in Resources */,
 				7C0F703A276CEA5900964004 /* SettingsTableViewCell.xib in Resources */,
 				7CE1ED1527737A5C00337304 /* CollapsibleTableViewCell.xib in Resources */,
-				7CB37013283573430010E8EC /* AdminMenu.storyboard in Resources */,
+				7CB37013283573430010E8EC /* Admin.storyboard in Resources */,
 				B330B87625757C1000BDB206 /* Workout.storyboard in Resources */,
 				7C10BA7A276BCFBE00B5860C /* Assistant-Regular.ttf in Resources */,
 				7C7C382F2790F97F0075B64A /* ConversionTable.tsv in Resources */,
@@ -1526,6 +1532,7 @@
 				7C4554FA27A0A8D30077791B /* ImageLoader.swift in Sources */,
 				B358222825AC9A2F00C91295 /* ArticlesViewController.swift in Sources */,
 				B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */,
+				7C9F7BF4283EA32B006868F4 /* UserDetailsViewModel.swift in Sources */,
 				7C32C588278E370500B97642 /* PopupAlertView.swift in Sources */,
 				7C182FE4279DF26B00796693 /* ChatViewModel.swift in Sources */,
 				B3DB753525A09133002CF48B /* Double+Extensions.swift in Sources */,
@@ -1607,6 +1614,7 @@
 				7CB3701E28358D180010E8EC /* AdminUserMenuTableViewCell.swift in Sources */,
 				7CFE0C0E276936330077D16F /* BounceNavigationBarView.swift in Sources */,
 				7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */,
+				7C9F7BF2283E9F7B006868F4 /* UserDetailsViewController.swift in Sources */,
 				7CD1817B2647E80F0054DB9C /* NotificationTableViewCell.swift in Sources */,
 				B358223025AC9DA800C91295 /* Article.swift in Sources */,
 				7C7434F025CD9D9D00D33A9A /* ChatsViewController.swift in Sources */,

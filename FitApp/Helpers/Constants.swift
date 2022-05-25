@@ -58,7 +58,7 @@ struct K {
         static let articles = "Articles"
 		static let settings = "Settings"
 		static let chat = "Chat"
-		static let adminMenu = "AdminMenu"
+		static let adminMenu = "Admin"
 	}
 	
 	struct ViewControllerId {
@@ -106,8 +106,7 @@ struct K {
 		static let SettingsOptionsTableViewController = "SettingsOptionsTableViewController"
 		//Admin
 		static let usersListViewController = "UsersListViewController"
-		
-		
+		static let userDetailsViewController = "UserDetailsViewController"
 	}
 	
 	struct NavigationId {
@@ -131,6 +130,8 @@ struct K {
         static let moveToSumup = "moveToSumup"
 		//Settings
 		static let moveToSettingsOptions = "moveToSettingsOptions"
+		//Admin
+		static let moveToUserDetails = "moveToUserDetails"
     }
     
     struct CellId {

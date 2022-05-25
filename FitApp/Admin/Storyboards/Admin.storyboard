@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ydg-4U-IWK">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--רשימת משתמשים-->
+        <scene sceneID="R2M-Xa-C0n">
+            <objects>
+                <viewController storyboardIdentifier="UsersListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qg4-fl-pb9" customClass="UsersListViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wLS-qk-Xhf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vDv-sv-UoL">
+                                <rect key="frame" x="12" y="139" width="390" height="757"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Qg4-fl-pb9" id="2hD-GE-sj5"/>
+                                    <outlet property="delegate" destination="Qg4-fl-pb9" id="hd6-8e-Y94"/>
+                                </connections>
+                            </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="BXZ-yh-M5A">
+                                <rect key="frame" x="0.0" y="88" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Qg4-fl-pb9" id="MqH-Gd-UFv"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tzH-lP-OgY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BXZ-yh-M5A" firstAttribute="top" secondItem="tzH-lP-OgY" secondAttribute="top" id="2N3-It-8xJ"/>
+                            <constraint firstItem="vDv-sv-UoL" firstAttribute="leading" secondItem="tzH-lP-OgY" secondAttribute="leading" constant="12" id="KTj-bq-YdB"/>
+                            <constraint firstAttribute="trailing" secondItem="BXZ-yh-M5A" secondAttribute="trailing" id="RIz-PD-kVr"/>
+                            <constraint firstItem="vDv-sv-UoL" firstAttribute="top" secondItem="BXZ-yh-M5A" secondAttribute="bottom" id="WNS-T9-zAo"/>
+                            <constraint firstItem="tzH-lP-OgY" firstAttribute="trailing" secondItem="vDv-sv-UoL" secondAttribute="trailing" constant="12" id="feA-2T-esq"/>
+                            <constraint firstItem="BXZ-yh-M5A" firstAttribute="leading" secondItem="tzH-lP-OgY" secondAttribute="leading" id="kU2-VJ-JOx"/>
+                            <constraint firstAttribute="bottom" secondItem="vDv-sv-UoL" secondAttribute="bottom" id="nH7-uT-itG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="רשימת משתמשים" largeTitleDisplayMode="always" id="8xh-GU-2R7">
+                        <barButtonItem key="backBarButtonItem" title="חזרה" id="vdM-Vm-B86"/>
+                        <barButtonItem key="leftBarButtonItem" id="d8O-Dc-Fqc">
+                            <imageReference key="image" image="xmark" catalog="system" symbolScale="default"/>
+                            <connections>
+                                <action selector="closeButtonAction:" destination="Qg4-fl-pb9" id="XdV-fW-822"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchControllerView" destination="BXZ-yh-M5A" id="g93-yQ-P8g"/>
+                        <outlet property="tableView" destination="vDv-sv-UoL" id="9CW-Ch-gRj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5wq-3d-itN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2384" y="-34"/>
+        </scene>
+        <!--User Details View Controller-->
+        <scene sceneID="gAx-ho-NiL">
+            <objects>
+                <viewController storyboardIdentifier="UserDetailsViewController" id="UDD-We-5as" customClass="UserDetailsViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9lh-lF-b2Y">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHq-mT-hpc">
+                                <rect key="frame" x="56" y="112" width="302" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="משקלים"/>
+                                <connections>
+                                    <action selector="weightsButtonAction:" destination="UDD-We-5as" eventType="touchUpInside" id="bRI-C5-UnP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="cr6-LZ-kaN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="oHq-mT-hpc" firstAttribute="leading" secondItem="cr6-LZ-kaN" secondAttribute="leading" constant="56" id="JcW-JD-tVJ"/>
+                            <constraint firstItem="cr6-LZ-kaN" firstAttribute="trailing" secondItem="oHq-mT-hpc" secondAttribute="trailing" constant="56" id="YrU-o6-2yq"/>
+                            <constraint firstItem="oHq-mT-hpc" firstAttribute="top" secondItem="cr6-LZ-kaN" secondAttribute="top" constant="24" id="l2j-xv-zzP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="Rvt-yq-ioE">
+                        <barButtonItem key="rightBarButtonItem" image="bubble.left.fill" catalog="system" id="G6c-7s-tnc">
+                            <connections>
+                                <action selector="chatButtonAction:" destination="UDD-We-5as" id="pqu-kX-2Pf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="av0-Oz-BZ3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3094" y="-34"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Xa3-PO-2g0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ydg-4U-IWK" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RTj-yG-UnT">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="scrollEdgeAppearance"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Qg4-fl-pb9" kind="relationship" relationship="rootViewController" id="f1b-fA-Lhq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VXi-cc-Xhs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1636.2318840579712" y="-34.151785714285715"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bubble.left.fill" catalog="system" width="128" height="110"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
