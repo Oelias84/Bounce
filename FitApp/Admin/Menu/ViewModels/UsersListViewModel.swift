@@ -57,7 +57,7 @@ class UsersListViewModel {
 			[weak self] chats in
 			guard let self = self else { return }
 			
-			self.users = chats
+			self.users = chats.sorted()
 		}
 	}
 }

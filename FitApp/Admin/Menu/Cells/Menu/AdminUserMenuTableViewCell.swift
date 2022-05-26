@@ -10,12 +10,14 @@ import Combine
 
 class AdminUserMenuTableViewCell: UITableViewCell {
 	
+	private var chat: Chat!
 	private var cancellable: AnyCancellable?
 	private var animator: UIViewPropertyAnimator?
 	
 	@IBOutlet weak var userImageView: UIImageView!
 	@IBOutlet weak var userNameLabel: UILabel!
-
+	@IBOutlet weak var messageButton: UIButton!
+	
 	override func awakeFromNib() {
 		super.awakeFromNib()
 	}
@@ -27,11 +29,16 @@ class AdminUserMenuTableViewCell: UITableViewCell {
 		animator?.stopAnimation(true)
 		cancellable?.cancel()
 	}
+	
+	@IBAction private func messageButtonAction(_ sender: Any) {
+		moveToChatContainerVC(chatData: chat)
+	}
 }
 
 extension AdminUserMenuTableViewCell {
 	
 	public func configure(with chat: Chat) {
+		self.chat = chat
 		
 		if let userName = chat.displayName {
 			userNameLabel.text =  userName
@@ -40,14 +47,14 @@ extension AdminUserMenuTableViewCell {
 			userNameLabel.text = "שם לא נמצא"
 			userNameLabel.textColor = .red
 		}
-		
 		cancellable = loadImage(for: chat).sink {
 			[unowned self] image in
 			self.showImage(image: image)
 		}
+		messageButton.isHidden = isLastMessageReadFor(chat: chat)
 	}
 	
-	private func showImage(image: UIImage?) {
+	fileprivate func showImage(image: UIImage?) {
 		userImageView.alpha = 0.0
 		animator?.stopAnimation(false)
 		userImageView.image = image
@@ -55,7 +62,7 @@ extension AdminUserMenuTableViewCell {
 			self.userImageView.alpha = 1.0
 		})
 	}
-	private func loadImage(for chat: Chat) -> AnyPublisher<UIImage?, Never> {
+	fileprivate func loadImage(for chat: Chat) -> AnyPublisher<UIImage?, Never> {
 		return Just(chat.imagePath)
 		.flatMap({ poster -> AnyPublisher<UIImage?, Never> in
 			guard let url = chat.imagePath else { return Just(UIImage(systemName:"person.circle")).eraseToAnyPublisher() }
@@ -63,8 +70,16 @@ extension AdminUserMenuTableViewCell {
 		})
 		.eraseToAnyPublisher()
 	}
-	private func isLastMessageReadFor(chat: Chat) -> Bool {
+	fileprivate func isLastMessageReadFor(chat: Chat) -> Bool {
 		guard let lastSeen = chat.lastSeenMessageDate, let lastMessage = chat.latestMessage?.sentDate else { return false }
 		return lastSeen > lastMessage
+	}
+	fileprivate func moveToChatContainerVC(chatData: Chat) {
+		let storyboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
+		let chatContainerVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.ChatContainerViewController) as ChatContainerViewController
+		
+		chatContainerVC.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: chatData))
+		chatContainerVC.modalPresentationStyle = .fullScreen
+		parentViewController?.present(chatContainerVC, animated: true)
 	}
 }

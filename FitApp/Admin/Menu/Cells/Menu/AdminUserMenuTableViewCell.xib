@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -48,12 +49,26 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ejk-KH-loI">
-                                        <rect key="frame" x="245.5" y="2" width="12.5" height="26.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="JUS-Qm-0z3"/>
-                                        </constraints>
-                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Gdf-N6-nif">
+                                        <rect key="frame" x="199.5" y="0.0" width="58.5" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6z-qF-fPd">
+                                                <rect key="frame" x="0.0" y="0.0" width="22" height="30"/>
+                                                <color key="tintColor" systemColor="systemPinkColor"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" image="message.fill" catalog="system"/>
+                                                <connections>
+                                                    <action selector="messageButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lvq-9k-jtU"/>
+                                                </connections>
+                                            </button>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ejk-KH-loI">
+                                                <rect key="frame" x="46" y="2" width="12.5" height="26.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="JUS-Qm-0z3"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -78,6 +93,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="messageButton" destination="I6z-qF-fPd" id="s6b-DB-Hhr"/>
                 <outlet property="userImageView" destination="aNu-Xf-2Mf" id="L1V-gh-HOv"/>
                 <outlet property="userNameLabel" destination="Ga3-Yu-Npz" id="BmC-hW-F56"/>
             </connections>
@@ -86,9 +102,13 @@
     </objects>
     <resources>
         <image name="chevron.forward" catalog="system" width="96" height="128"/>
+        <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <namedColor name="ProjectLightGreen">
             <color red="0.28600001335144043" green="0.57599997520446777" blue="0.56099998950958252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

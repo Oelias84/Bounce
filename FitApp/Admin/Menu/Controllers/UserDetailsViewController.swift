@@ -10,6 +10,19 @@ import UIKit
 class UserDetailsViewController: UIViewController {
 	
 	var viewModel: UserDetailsViewModel!
+
+	@IBOutlet weak private var gender: UILabel!
+	@IBOutlet weak private var birthDate: UILabel!
+	@IBOutlet weak private var startWeight: UILabel!
+	@IBOutlet weak private var averageCurrentWeight: UILabel!
+	@IBOutlet weak private var weeklyNumberOfTraining: UILabel!
+	@IBOutlet weak private var weaklyNumberOfExternalTraining: UILabel!
+	@IBOutlet weak private var fatPercentage: UILabel!
+	@IBOutlet weak private var trainingLevel: UILabel!
+	@IBOutlet weak private var lifeStyle: UILabel!
+	@IBOutlet weak private var dailyNumberOfMeals: UILabel!
+	@IBOutlet weak private var mostHungry: UILabel!
+	@IBOutlet weak private var steps: UILabel!
 	
 	override func viewDidLoad() {
         super.viewDidLoad()

@@ -13,9 +13,11 @@ class UserDetailsViewModel {
 	
 	init(userData: Chat) {
 		self.userData = userData
+		
 	}
 	
 	var getUserChat: Chat {
 		return userData
 	}
+	
 }
