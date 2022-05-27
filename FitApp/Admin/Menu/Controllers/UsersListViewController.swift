@@ -13,17 +13,20 @@ class UsersListViewController: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var searchControllerView: UISearchBar!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		
 		Spinner.shared.show(view)
 		setupView()
 		bindViewModel()
-    }
+	}
 	
 	@IBAction func closeButtonAction(_ sender: Any) {
 		dismiss(animated: true)
+	}
+	@IBAction func broadcastButtonAction(_ sender: Any) {
+		presentTextFieldAlert(withTitle: "מה תרצו לכתוב?", withMessage: "", options: "שלח", "ביטול")
 	}
 }
 
@@ -59,6 +62,21 @@ extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 }
 
+extension UsersListViewController: PopupAlertViewDelegate {
+	
+	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
+		if let textFieldValue = textFieldValue {
+			viewModel.sendBroadcastMessage(text: textFieldValue)
+		}
+	}
+	func cancelButtonTapped(alertNumber: Int) {
+		return
+	}
+	func thirdButtonTapped(alertNumber: Int) {
+		UserProfile.defaults.showQaAlert = false
+	}
+}
+
 //MARK: - Functions
 extension UsersListViewController {
 	
@@ -82,6 +100,28 @@ extension UsersListViewController {
 		userDetailVC.title = userData.displayName ?? "אין שם"
 		userDetailVC.viewModel = UserDetailsViewModel(userData: userData)
 		navigationController?.pushViewController(userDetailVC, animated: true)
+	}
+	private func presentTextFieldAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
+		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else { return }
+		let storyboard = UIStoryboard(name: K.NibName.popupAlertView, bundle: nil)
+		let customAlert = storyboard.instantiateViewController(identifier: K.NibName.popupAlertView) as! PopupAlertView
+		
+		customAlert.providesPresentationContextTransitionStyle = true
+		customAlert.definesPresentationContext = true
+		customAlert.modalPresentationStyle = .overCurrentContext
+		customAlert.modalTransitionStyle = .crossDissolve
+		
+		customAlert.delegate = self
+		customAlert.titleText = title
+		customAlert.popupType = .textBox
+		customAlert.messageText = message
+		customAlert.okButtonText = options[0]
+		customAlert.cancelButtonText = options[1]
+		
+		if options.count == 3 {
+			customAlert.doNotShowText = options.last
+		}
+		window.rootViewController?.present(customAlert, animated: true, completion: nil)
 	}
 }
 

@@ -19,5 +19,4 @@ class UserDetailsViewModel {
 	var getUserChat: Chat {
 		return userData
 	}
-	
 }

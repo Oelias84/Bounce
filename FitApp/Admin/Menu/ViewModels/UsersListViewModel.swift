@@ -51,6 +51,12 @@ class UsersListViewModel {
 		completion()
 	}
 	
+	//Broadcast message
+	public func sendBroadcastMessage(text: String) {
+		MessagesManager.shared.postBroadcast(text: text)
+	}
+	
+	
 	private func fetchChats() {
 		
 		self.googleDatabase.getAllChats(userId: adminId) {

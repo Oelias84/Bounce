@@ -62,6 +62,7 @@
                                 <action selector="closeButtonAction:" destination="Qg4-fl-pb9" id="XdV-fW-822"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="bubble.left.and.bubble.right.fill" catalog="system" id="pYN-LX-C2H"/>
                     </navigationItem>
                     <connections>
                         <outlet property="searchControllerView" destination="BXZ-yh-M5A" id="g93-yQ-P8g"/>
@@ -367,6 +368,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bubble.left.and.bubble.right.fill" catalog="system" width="128" height="97"/>
         <image name="bubble.left.fill" catalog="system" width="128" height="110"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
