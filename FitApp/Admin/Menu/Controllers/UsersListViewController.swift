@@ -102,7 +102,6 @@ extension UsersListViewController {
 		navigationController?.pushViewController(userDetailVC, animated: true)
 	}
 	private func presentTextFieldAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
-		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else { return }
 		let storyboard = UIStoryboard(name: K.NibName.popupAlertView, bundle: nil)
 		let customAlert = storyboard.instantiateViewController(identifier: K.NibName.popupAlertView) as! PopupAlertView
 		
@@ -121,7 +120,7 @@ extension UsersListViewController {
 		if options.count == 3 {
 			customAlert.doNotShowText = options.last
 		}
-		window.rootViewController?.present(customAlert, animated: true, completion: nil)
+		present(customAlert, animated: true, completion: nil)
 	}
 }
 

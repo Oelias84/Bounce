@@ -62,7 +62,11 @@
                                 <action selector="closeButtonAction:" destination="Qg4-fl-pb9" id="XdV-fW-822"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="bubble.left.and.bubble.right.fill" catalog="system" id="pYN-LX-C2H"/>
+                        <barButtonItem key="rightBarButtonItem" image="bubble.left.and.bubble.right.fill" catalog="system" id="pYN-LX-C2H">
+                            <connections>
+                                <action selector="broadcastButtonAction:" destination="Qg4-fl-pb9" id="2Kp-6B-iRj"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="searchControllerView" destination="BXZ-yh-M5A" id="g93-yQ-P8g"/>
@@ -321,7 +325,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="Rvt-yq-ioE">
-                        <barButtonItem key="rightBarButtonItem" image="bubble.left.fill" catalog="system" id="G6c-7s-tnc">
+                        <barButtonItem key="rightBarButtonItem" image="message" catalog="system" id="G6c-7s-tnc">
                             <connections>
                                 <action selector="chatButtonAction:" destination="UDD-We-5as" id="pqu-kX-2Pf"/>
                             </connections>
@@ -369,7 +373,7 @@
     </scenes>
     <resources>
         <image name="bubble.left.and.bubble.right.fill" catalog="system" width="128" height="97"/>
-        <image name="bubble.left.fill" catalog="system" width="128" height="110"/>
+        <image name="message" catalog="system" width="128" height="113"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
