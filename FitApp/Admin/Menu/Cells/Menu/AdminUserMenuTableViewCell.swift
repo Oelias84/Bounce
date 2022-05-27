@@ -51,7 +51,8 @@ extension AdminUserMenuTableViewCell {
 			[unowned self] image in
 			self.showImage(image: image)
 		}
-		messageButton.isHidden = isLastMessageReadFor(chat: chat)
+		isLastMessageReadFor(chat: chat) ? messageButton.setImage(UIImage(systemName: "message"), for: .normal)
+		: messageButton.setImage(UIImage(systemName: "message.fill"), for: .normal)
 	}
 	
 	fileprivate func showImage(image: UIImage?) {
