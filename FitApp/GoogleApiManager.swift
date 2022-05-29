@@ -87,8 +87,8 @@ struct GoogleApiManager {
 			}
 		}
 	}
-	func getUserData(completion: @escaping (Result<ServerUserData?, Error>) -> Void) {
-		db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("data").getDocument(source: .default) {
+	func getUserData(userID: String? = nil, completion: @escaping (Result<ServerUserData?, Error>) -> Void) {
+		db.collection("users").document(userID ?? Auth.auth().currentUser!.uid).collection("profile-data").document("data").getDocument(source: .default) {
 			(data, error) in
 			if let error = error {
 				print(error)

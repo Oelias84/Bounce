@@ -9,8 +9,18 @@ import UIKit
 
 class UserDetailsViewController: UIViewController {
 	
+	private enum cellsTitle: String, CaseIterable {
+		
+		case weights = "משקלים"
+		case orders = "רכישות"
+		case meals = "ארוחות"
+		case calorieProgress = "חישוב נתונים"
+	}
+	
 	var viewModel: UserDetailsViewModel!
-
+	
+	@IBOutlet weak private var detailsView: UIView!
+	
 	@IBOutlet weak private var gender: UILabel!
 	@IBOutlet weak private var birthDate: UILabel!
 	@IBOutlet weak private var startWeight: UILabel!
@@ -24,41 +34,88 @@ class UserDetailsViewController: UIViewController {
 	@IBOutlet weak private var mostHungry: UILabel!
 	@IBOutlet weak private var steps: UILabel!
 	
+	@IBOutlet weak private var tableView: UITableView!
+	
 	override func viewDidLoad() {
-        super.viewDidLoad()
+		super.viewDidLoad()
 		
-    }
+		setupView()
+		registerCell()
+	}
 	
 	@IBAction func chatButtonAction(_ sender: UIBarButtonItem) {
-		moveToChatContainerVC(chatData: viewModel.getUserChat)
-	}
-	@IBAction func weightsButtonAction(_ sender: UIButton) {
-		moveToWeightProgressVC(chatData: viewModel.getUserChat)
+		moveToChatContainerVC()
 	}
 }
 
 //MARK: - Functions
 extension UserDetailsViewController {
 	
-	private func moveToChatContainerVC(chatData: Chat) {
+	private func setupView() {
+		detailsView.dropShadow()
+		
+		self.viewModel.userDetails.bind {
+			[weak self] data in
+			guard let data = data, let self = self else { return }
+			
+			DispatchQueue.main.async {
+				self.gender.text = String(data.gender ?? "")
+				self.birthDate.text = String(data.birthDate ?? "")
+				self.startWeight.text = String(data.weight ?? 0)
+				self.averageCurrentWeight.text = String(data.currentAverageWeight ?? 0)
+				self.weeklyNumberOfTraining.text = String(data.weaklyWorkouts ?? 0)
+				self.weaklyNumberOfExternalTraining.text = String(data.externalWorkout ?? 0)
+				self.fatPercentage.text = String(data.fatPercentage ?? 0)
+				self.trainingLevel.text = String(data.fitnessLevel ?? 0)
+				self.lifeStyle.text = String(data.lifeStyle ?? 0)
+				self.dailyNumberOfMeals.text = String(data.mealsPerDay ?? 0)
+				self.mostHungry.text = String(data.mostHungry ?? 0)
+				self.steps.text = String(data.steps ?? 0)
+			}
+		}
+	}
+	private func registerCell() {
+		let cell = UINib(nibName: K.NibName.userDetailTableViewCell, bundle: nil)
+		tableView.register(cell, forCellReuseIdentifier: K.CellId.userDetailCell)
+	}
+	private func moveToChatContainerVC() {
 		let storyboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
 		let chatContainerVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.ChatContainerViewController) as ChatContainerViewController
 		
-		chatContainerVC.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: chatData))
+		chatContainerVC.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: viewModel.getUserChat))
 		chatContainerVC.modalPresentationStyle = .fullScreen
 		present(chatContainerVC, animated: true)
 	}
-	private func moveToWeightProgressVC(chatData: Chat) {
+	private func moveToWeightProgressVC() {
 		let storyboard = UIStoryboard(name: K.StoryboardName.weightProgress, bundle: nil)
 		let weightProgressVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.weightViewController) as WeightProgressViewController
 		
 		weightProgressVC.isFromAdmin = true
-		weightProgressVC.weightViewModel = WeightViewModel(userUID: chatData.userId)
+		weightProgressVC.weightViewModel = WeightViewModel(userUID: viewModel.getUserChat.userId)
 		weightProgressVC.modalPresentationStyle = .fullScreen
 		present(weightProgressVC, animated: true)
 	}
 }
-////MARK: - Delegates
-//extension <#code#>: <#code#>  {
-//	<#code#>
-//}
+//MARK: - Delegates
+extension UserDetailsViewController: UITableViewDelegate, UITableViewDataSource  {
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		cellsTitle.allCases.count
+	}
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.userDetailCell) as! UserDetailTableViewCell
+		
+		cell.label.text = cellsTitle.allCases[indexPath.row].rawValue
+		return cell
+	}
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let row = indexPath.row
+		
+		switch row {
+		case 0:
+			moveToWeightProgressVC()
+		default:
+			return
+		}
+	}
+}

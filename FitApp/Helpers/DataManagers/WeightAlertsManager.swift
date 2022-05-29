@@ -52,7 +52,6 @@ class WeightAlertsManager {
 	private var firstWeekAverageWeight: Double!
 	private var secondWeekAverageWeight: Double!
 	
-	
 	required init() {
 		if !UserProfile.defaults.getIsManager {
 			setUserData() {

@@ -24,10 +24,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Dr9-db-OgR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+                        <rect key="frame" x="12" y="0.0" width="296" height="111"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="aNu-Xf-2Mf">
-                                <rect key="frame" x="0.0" y="28.5" width="54" height="53"/>
+                                <rect key="frame" x="0.0" y="29" width="54" height="53"/>
                                 <color key="tintColor" name="ProjectLightGreen"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="aNu-Xf-2Mf" secondAttribute="height" multiplier="1:1" id="7XA-cV-hvx"/>
@@ -40,7 +40,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SqO-Un-LVo">
-                                <rect key="frame" x="62" y="41" width="258" height="28.5"/>
+                                <rect key="frame" x="62" y="41.5" width="234" height="28.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="700" verticalCompressionResistancePriority="1000" text="Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ga3-Yu-Npz">
                                         <rect key="frame" x="0.0" y="2" width="45.5" height="24"/>
@@ -49,7 +49,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="QBo-62-43N">
-                                        <rect key="frame" x="153" y="0.0" width="105" height="28.5"/>
+                                        <rect key="frame" x="129" y="0.0" width="105" height="28.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6z-qF-fPd">
                                                 <rect key="frame" x="0.0" y="0.0" width="28.5" height="28.5"/>
@@ -77,22 +77,12 @@
                             </stackView>
                         </subviews>
                     </stackView>
-                    <view alpha="0.10000000149011612" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N71-Pl-CpT" userLabel="Separator Line View">
-                        <rect key="frame" x="0.0" y="110" width="320" height="1"/>
-                        <color key="backgroundColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="1" id="zyR-e3-94x"/>
-                        </constraints>
-                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="Dr9-db-OgR" secondAttribute="trailing" id="57K-Mx-p7f"/>
-                    <constraint firstItem="N71-Pl-CpT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="D4D-VO-uP8"/>
-                    <constraint firstAttribute="bottom" secondItem="N71-Pl-CpT" secondAttribute="bottom" id="RSw-K7-eOc"/>
-                    <constraint firstAttribute="trailing" secondItem="N71-Pl-CpT" secondAttribute="trailing" id="Y6f-0v-iZa"/>
-                    <constraint firstItem="Dr9-db-OgR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ZVg-AD-cT2"/>
+                    <constraint firstAttribute="trailing" secondItem="Dr9-db-OgR" secondAttribute="trailing" constant="12" id="57K-Mx-p7f"/>
+                    <constraint firstItem="Dr9-db-OgR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="ZVg-AD-cT2"/>
                     <constraint firstItem="Dr9-db-OgR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="e8D-4s-nBt"/>
-                    <constraint firstItem="N71-Pl-CpT" firstAttribute="top" secondItem="Dr9-db-OgR" secondAttribute="bottom" id="gRv-oX-FrS"/>
+                    <constraint firstAttribute="bottom" secondItem="Dr9-db-OgR" secondAttribute="bottom" id="j5b-az-Wod"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

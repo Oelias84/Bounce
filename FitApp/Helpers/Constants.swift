@@ -163,7 +163,7 @@ struct K {
 		
 		//Admin
 		static let adminUserMenuCell = "adminUserMenuCell"
-		
+		static let userDetailCell = "userDetailTableViewCell"
     }
 	
     struct NibName {
@@ -186,6 +186,9 @@ struct K {
 		static let questionnaireFatCollectionViewCell = "QuestionnaireFatCollectionViewCell"
 		static let collapsibleTableViewHeader = "CollapsibleTableViewHeader"
 
+		static let adminUserMenuTableViewCell = "AdminUserMenuTableViewCell"
+		static let userDetailTableViewCell = "UserDetailTableViewCell"
+
 		//Views
 		static let dishView = "DishView"
 		static let chartView = "ChartView"
@@ -198,9 +201,7 @@ struct K {
 		static let addMealAlertDishView = "AddMealAlertDishView"
 		static let bounceNavigationBarView = "BounceNavigationBarView"
 		static let popupAlertView = "PopupAlertView"
-		
-		//Admin
-		static let adminUserMenuTableViewCell = "AdminUserMenuTableViewCell"
+
     }
 	
 	struct Units {

@@ -102,6 +102,8 @@
 		7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */; };
 		7C9F7BF2283E9F7B006868F4 /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9F7BF1283E9F7B006868F4 /* UserDetailsViewController.swift */; };
 		7C9F7BF4283EA32B006868F4 /* UserDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9F7BF3283EA32B006868F4 /* UserDetailsViewModel.swift */; };
+		7C9F7BFA2843B9AD006868F4 /* UserDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9F7BF82843B9AC006868F4 /* UserDetailTableViewCell.swift */; };
+		7C9F7BFB2843B9AD006868F4 /* UserDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C9F7BF92843B9AC006868F4 /* UserDetailTableViewCell.xib */; };
 		7CADF74C278CADDE0020CD83 /* StaticText.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CADF74B278CADDE0020CD83 /* StaticText.json */; };
 		7CADF74E278CADFF0020CD83 /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CADF74D278CADFF0020CD83 /* Static.swift */; };
 		7CADF750278CAEBC0020CD83 /* StaticStringsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */; };
@@ -322,6 +324,8 @@
 		7C9B346B2583ECB800D30480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C9F7BF1283E9F7B006868F4 /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		7C9F7BF3283EA32B006868F4 /* UserDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewModel.swift; sourceTree = "<group>"; };
+		7C9F7BF82843B9AC006868F4 /* UserDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailTableViewCell.swift; sourceTree = "<group>"; };
+		7C9F7BF92843B9AC006868F4 /* UserDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserDetailTableViewCell.xib; sourceTree = "<group>"; };
 		7CADF74B278CADDE0020CD83 /* StaticText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StaticText.json; sourceTree = "<group>"; };
 		7CADF74D278CADFF0020CD83 /* Static.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
 		7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticStringsManager.swift; sourceTree = "<group>"; };
@@ -881,6 +885,15 @@
 			name = LoginAndRegister;
 			sourceTree = "<group>";
 		};
+		7C9F7BF72843B980006868F4 /* User Details */ = {
+			isa = PBXGroup;
+			children = (
+				7C9F7BF82843B9AC006868F4 /* UserDetailTableViewCell.swift */,
+				7C9F7BF92843B9AC006868F4 /* UserDetailTableViewCell.xib */,
+			);
+			path = "User Details";
+			sourceTree = "<group>";
+		};
 		7CB3700928354B460010E8EC /* Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -920,6 +933,7 @@
 		7CB3701A28358CD50010E8EC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				7C9F7BF72843B980006868F4 /* User Details */,
 				7CB3701B28358CE10010E8EC /* Menu */,
 			);
 			path = Cells;
@@ -1346,6 +1360,7 @@
 				7C1ACD0A2670D145008079C9 /* AddMealAlertView.xib in Resources */,
 				B3C390F725B7700A00C7E23D /* ExerciseCategoryView.xib in Resources */,
 				7C10BA79276BCFB900B5860C /* Assistant-Bold.ttf in Resources */,
+				7C9F7BFB2843B9AD006868F4 /* UserDetailTableViewCell.xib in Resources */,
 				7C1ACCEC266F8F8F008079C9 /* CommentTableViewCell.xib in Resources */,
 				B34397A7258A7F720073A59B /* DishView.xib in Resources */,
 				7C9B346C2583ECB800D30480 /* GoogleService-Info.plist in Resources */,
@@ -1590,6 +1605,7 @@
 				7C658AA825D9873C00CA75B2 /* Motivations.swift in Sources */,
 				7C7C381D2790B52F0075B64A /* SpreadsheetViewCells.swift in Sources */,
 				B358227F25ACA40D00C91295 /* ArticleViewModel.swift in Sources */,
+				7C9F7BFA2843B9AD006868F4 /* UserDetailTableViewCell.swift in Sources */,
 				B34397AD258A7FA50073A59B /* DishView.swift in Sources */,
 				7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */,
 				7C48D1B5278CEFDE00A53AF2 /* AddMealTextFieldView.swift in Sources */,

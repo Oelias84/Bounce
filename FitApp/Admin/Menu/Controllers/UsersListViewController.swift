@@ -11,6 +11,7 @@ class UsersListViewController: UIViewController {
 	
 	private let viewModel = UsersListViewModel()
 	
+	@IBOutlet weak var detailsView: UIView!
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var searchControllerView: UISearchBar!
 	
