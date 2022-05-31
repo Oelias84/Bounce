@@ -15,7 +15,7 @@ class Chat: Comparable {
 	var imagePath: URL?
 	var displayName: String?
 	var pushTokens: [String]?
-
+	
 	var latestMessage: Message?
 	var lastSeenMessageDate: Date?
 	
@@ -35,13 +35,17 @@ class Chat: Comparable {
 	static func < (lhs: Chat, rhs: Chat) -> Bool {
 		
 		if let lastSeen = lhs.lastSeenMessageDate, let lastMessage = lhs.latestMessage?.sentDate {
-			if lastSeen > lastMessage {
-				return false
-			} else {
+			if lastSeen < lastMessage {
 				return true
+			} else {
+				if let lhsDate = lhs.latestMessage?.sentDate, let rhsDate = rhs.latestMessage?.sentDate {
+					return lhsDate > rhsDate
+				} else {
+					return false
+				}
 			}
 		} else {
-			return true
+			return false
 		}
 	}
 }

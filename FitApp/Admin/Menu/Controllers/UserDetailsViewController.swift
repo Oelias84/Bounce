@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UserDetailsViewController: UIViewController {
+final class UserDetailsViewController: UIViewController {
 	
 	private enum cellsTitle: String, CaseIterable {
 		
@@ -20,7 +20,6 @@ class UserDetailsViewController: UIViewController {
 	var viewModel: UserDetailsViewModel!
 	
 	@IBOutlet weak private var detailsView: UIView!
-	
 	@IBOutlet weak private var gender: UILabel!
 	@IBOutlet weak private var birthDate: UILabel!
 	@IBOutlet weak private var startWeight: UILabel!
@@ -28,11 +27,11 @@ class UserDetailsViewController: UIViewController {
 	@IBOutlet weak private var weeklyNumberOfTraining: UILabel!
 	@IBOutlet weak private var weaklyNumberOfExternalTraining: UILabel!
 	@IBOutlet weak private var fatPercentage: UILabel!
-	@IBOutlet weak private var trainingLevel: UILabel!
-	@IBOutlet weak private var lifeStyle: UILabel!
+	@IBOutlet weak private var activityLevelLabel: UILabel!
+	@IBOutlet weak private var activityLevel: UILabel!
 	@IBOutlet weak private var dailyNumberOfMeals: UILabel!
+	@IBOutlet weak private var fitnessLevel: UILabel!
 	@IBOutlet weak private var mostHungry: UILabel!
-	@IBOutlet weak private var steps: UILabel!
 	
 	@IBOutlet weak private var tableView: UITableView!
 	
@@ -52,6 +51,7 @@ class UserDetailsViewController: UIViewController {
 extension UserDetailsViewController {
 	
 	private func setupView() {
+		Spinner.shared.show(detailsView)
 		detailsView.dropShadow()
 		
 		self.viewModel.userDetails.bind {
@@ -60,18 +60,19 @@ extension UserDetailsViewController {
 			
 			DispatchQueue.main.async {
 				self.gender.text = String(data.gender ?? "")
-				self.birthDate.text = String(data.birthDate ?? "")
+				self.birthDate.text = data.birthDate ?? ""
 				self.startWeight.text = String(data.weight ?? 0)
-				self.averageCurrentWeight.text = String(data.currentAverageWeight ?? 0)
+				self.averageCurrentWeight.text = String(format: "%.2f",data.currentAverageWeight ?? 0)
 				self.weeklyNumberOfTraining.text = String(data.weaklyWorkouts ?? 0)
 				self.weaklyNumberOfExternalTraining.text = String(data.externalWorkout ?? 0)
 				self.fatPercentage.text = String(data.fatPercentage ?? 0)
-				self.trainingLevel.text = String(data.fitnessLevel ?? 0)
-				self.lifeStyle.text = String(data.lifeStyle ?? 0)
+				self.fitnessLevel.text = self.viewModel.getFitnessLevelTitle
+				self.activityLevelLabel.text = self.viewModel.getActivityTitle.0
+				self.activityLevel.text = self.viewModel.getActivityTitle.1
 				self.dailyNumberOfMeals.text = String(data.mealsPerDay ?? 0)
-				self.mostHungry.text = String(data.mostHungry ?? 0)
-				self.steps.text = String(data.steps ?? 0)
+				self.mostHungry.text = self.viewModel.getMostHungryTitle
 			}
+			Spinner.shared.stop()
 		}
 	}
 	private func registerCell() {
@@ -96,6 +97,7 @@ extension UserDetailsViewController {
 		present(weightProgressVC, animated: true)
 	}
 }
+
 //MARK: - Delegates
 extension UserDetailsViewController: UITableViewDelegate, UITableViewDataSource  {
 	
