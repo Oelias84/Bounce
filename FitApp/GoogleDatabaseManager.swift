@@ -194,6 +194,11 @@ final class GoogleDatabaseManager {
 		let userChat = chatRef(userId: userID)
 		userChat.child("push_tokens").removeValue()
 	}
+	public func removeAdminTokenFromChat() {
+		guard let userToken = UserProfile.defaults.fcmToken else { return }
+		print(userToken)
+		database.child("support").child("admin_push_tokens").child(userToken).removeValue()
+	}
 	
 	///Parse
 	private func parseChatsData(userId: String, snapshot: DataSnapshot) -> [Chat] {
