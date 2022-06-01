@@ -158,14 +158,12 @@ extension AppDelegate: MessagingDelegate {
 extension AppDelegate {
 	
 	private func presentMessageNotifications(chatUserId: String) -> Bool {
-		
-		
 		window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window
-		
 		
 		if UserProfile.defaults.getIsManager {
 			if let nav = window?.rootViewController?.presentedViewController as? UINavigationController {
 				if let chatVC = nav.viewControllers.last as? ChatViewController {
+					
 					if chatVC.viewModel.getChatUserId == chatUserId {
 						return false
 					}
@@ -177,12 +175,7 @@ extension AppDelegate {
 			if let tabBarController = window?.rootViewController as? UITabBarController,
 			   let navController = tabBarController.selectedViewController as? UINavigationController {
 				
-				if let chat = navController.viewControllers.first(where: {$0.isKind(of: ChatViewController.self)}) as? ChatViewController {
-					
-					if chat.viewModel.getChatUserId == chatUserId {
-						return false
-					}
-				}
+				return navController.viewControllers.first(where: {$0.isKind(of: ChatContainerViewController.self)}) == nil
 			}
 		}
 		return true

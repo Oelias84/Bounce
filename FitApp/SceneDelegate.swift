@@ -200,7 +200,6 @@ extension SceneDelegate {
 				Spinner.shared.show(window!)
 				
 				 if let chatViewContainer = destinationViewController as? ChatContainerViewController {
-					
 					if let id = userChatId {
 						DispatchQueue.global(qos: .userInteractive).async {
 							googleManager.getChat(userId: id, isAdmin: true) {
@@ -209,9 +208,13 @@ extension SceneDelegate {
 								switch result {
 								case .success(let chat):
 									DispatchQueue.main.sync {
-										let chatViewModel = ChatViewModel(chat: chat)
-										chatViewContainer.chatViewController = ChatViewController(viewModel: chatViewModel)
-										navController.pushViewController(chatViewContainer, animated: false)
+										let adminStoryBoard = UIStoryboard(name: K.StoryboardName.adminChat, bundle: nil)
+										let adminUserChat = adminStoryBoard.instantiateViewController(identifier: K.NavigationId.adminChatNavigationController) as UINavigationController
+										guard let chatVC = adminUserChat.viewControllers.first as? ChatViewController else { return }
+										
+										chatVC.viewModel = ChatViewModel(chat: chat)
+										adminUserChat.modalPresentationStyle = .fullScreen
+										navController.present(adminUserChat, animated: true)
 									}
 								case .failure(let error):
 									print("Error:", error.localizedDescription)
