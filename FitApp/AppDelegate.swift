@@ -113,7 +113,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 	func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
 		let id = response.notification.request.identifier
 		print("Did receive notification with ID = \(id)")
-
+		
 		if response.notification.request.content.categoryIdentifier == "REMAINDER_INVITATION" {
 			switch response.actionIdentifier {
 			case "DECLINE_ACTION":
@@ -132,8 +132,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 			if UserProfile.defaults.getIsManager {
 				guard let notificationData = response.notification.request.content.userInfo as? [String: Any],
 					  let userChatId = notificationData["id"] as? String else { return }
-
-				moveTo(storyboardId: K.StoryboardName.chat, vcId: K.ViewControllerId.ChatContainerViewController, userChatId: userChatId)
+				
+				moveTo(storyboardId: K.StoryboardName.adminChat, vcId: K.ViewControllerId.ChatViewController, userChatId: userChatId)
 			} else {
 				moveTo(storyboardId: K.StoryboardName.chat, vcId: K.ViewControllerId.ChatContainerViewController)
 			}
@@ -158,72 +158,36 @@ extension AppDelegate: MessagingDelegate {
 extension AppDelegate {
 	
 	private func presentMessageNotifications(chatUserId: String) -> Bool {
+		
+		
 		window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window
 		
-		if let tabBarController = window?.rootViewController as? UITabBarController,
-		   let navController = tabBarController.selectedViewController as? UINavigationController {
-			
-			if !UserProfile.defaults.getIsManager {
-				return navController.viewControllers.first(where: {$0.isKind(of: ChatContainerViewController.self)}) == nil
-			} else if let chatContainer = navController.viewControllers.first(where: {$0.isKind(of: ChatContainerViewController.self)}) as? ChatContainerViewController {
-				if chatContainer.chatViewController.viewModel.getChatUserId == chatUserId {
-					return false
+		
+		if UserProfile.defaults.getIsManager {
+			if let nav = window?.rootViewController?.presentedViewController as? UINavigationController {
+				if let chatVC = nav.viewControllers.last as? ChatViewController {
+					if chatVC.viewModel.getChatUserId == chatUserId {
+						return false
+					}
+				} else {
+					return true
+				}
+			}
+		} else {
+			if let tabBarController = window?.rootViewController as? UITabBarController,
+			   let navController = tabBarController.selectedViewController as? UINavigationController {
+				
+				if let chat = navController.viewControllers.first(where: {$0.isKind(of: ChatViewController.self)}) as? ChatViewController {
+					
+					if chat.viewModel.getChatUserId == chatUserId {
+						return false
+					}
 				}
 			}
 		}
 		return true
 	}
 	
-	private func moveTo(storyboardId: String, vcId: String, userChatId: String? = nil) {
-		let googleManager = GoogleDatabaseManager()
-		let storyboard = UIStoryboard(name: storyboardId, bundle: nil)
-		let destinationViewController = storyboard.instantiateViewController(withIdentifier: vcId)
-		window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window
-		
-		if let tabBarController = window?.rootViewController as? UITabBarController,
-		   let navController = tabBarController.selectedViewController as? UINavigationController {
-			
-			switch vcId {
-			case K.ViewControllerId.weightViewController:
-				tabBarController.selectedIndex = 3
-			case K.ViewControllerId.mealViewController:
-				tabBarController.selectedIndex = 1
-			case K.ViewControllerId.ChatContainerViewController:
-				// Manager
-				Spinner.shared.show(window!)
-				
-				 if let chatViewContainer = destinationViewController as? ChatContainerViewController {
-					
-					if let id = userChatId {
-						DispatchQueue.global(qos: .userInteractive).async {
-							googleManager.getChat(userId: id, isAdmin: true) {
-								result in
-								
-								switch result {
-								case .success(let chat):
-									DispatchQueue.main.sync {
-										let chatViewModel = ChatViewModel(chat: chat)
-										chatViewContainer.chatViewController = ChatViewController(viewModel: chatViewModel)
-
-										navController.popToRootViewController(animated: false)
-										navController.pushViewController(chatViewContainer, animated: true)
-									}
-								case .failure(let error):
-									print("Error:", error.localizedDescription)
-								}
-							}
-						}
-					} else {
-						// User
-						chatViewContainer.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: nil))
-						navController.pushViewController(chatViewContainer, animated: true)
-					}
-				}
-			default:
-				return
-			}
-		}
-	}
 	private func startQuestionnaire() {
 		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
 		let questionnaireVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireNavigation)
@@ -237,5 +201,67 @@ extension AppDelegate {
 		
 		questionnaireVC.modalPresentationStyle = .fullScreen
 		self.window!.rootViewController = questionnaireVC
+	}
+	private func moveTo(storyboardId: String, vcId: String, userChatId: String? = nil) {
+		let googleManager = GoogleDatabaseManager()
+		let storyboard = UIStoryboard(name: storyboardId, bundle: nil)
+		let destinationViewController = storyboard.instantiateViewController(withIdentifier: vcId)
+		
+		window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window
+		guard let window = window else { return }
+		
+		if let tabBarController = window.rootViewController as? UITabBarController,
+		   let navController = tabBarController.selectedViewController as? UINavigationController {
+			
+			switch vcId {
+			case K.ViewControllerId.weightViewController:
+				tabBarController.selectedIndex = 3
+			case K.ViewControllerId.mealViewController:
+				tabBarController.selectedIndex = 1
+			case K.ViewControllerId.ChatViewController:
+				
+				if let id = userChatId {
+					
+					DispatchQueue.global(qos: .userInteractive).async {
+						googleManager.getChat(userId: id, isAdmin: true) {
+							result in
+							
+							switch result {
+							case .success(let chat):
+								DispatchQueue.main.sync {
+									
+									guard var chatVC = destinationViewController as? ChatViewController else  { return }
+									chatVC = ChatViewController(viewModel: ChatViewModel(chat: chat))
+									
+									if let adminNavigation = navController.presentedViewController as? UINavigationController {
+										if let adminUserListVC = adminNavigation.viewControllers.first {
+											if adminUserListVC.isKind(of: UsersListViewController.self) {
+												adminNavigation.pushViewController(chatVC, animated: true)
+											}
+										}
+									} else {
+										let adminStoryBoard = UIStoryboard(name: K.StoryboardName.adminChat, bundle: nil)
+										let adminUserChat = adminStoryBoard.instantiateViewController(identifier: K.NavigationId.adminChatNavigationController) as UINavigationController
+										guard let chatVC = adminUserChat.viewControllers.first as? ChatViewController else { return }
+										
+										chatVC.viewModel = ChatViewModel(chat: chat)
+										adminUserChat.modalPresentationStyle = .fullScreen
+										navController.present(adminUserChat, animated: true)
+									}
+								}
+							case .failure(let error):
+								print("Error:", error.localizedDescription)
+							}
+						}
+					}
+				}
+			case K.ViewControllerId.ChatContainerViewController:
+				guard let chatViewContainerVC = destinationViewController as? ChatContainerViewController else  { return }
+				chatViewContainerVC.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: nil))
+				navController.pushViewController(chatViewContainerVC, animated: true)
+			default:
+				return
+			}
+		}
 	}
 }

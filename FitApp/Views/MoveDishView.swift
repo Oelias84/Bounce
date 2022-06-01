@@ -108,7 +108,7 @@ extension MoveDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 		case dishPickerView:
 			return meal.dishes.count
 		case destinationPickerView:
-			return mealViewModel.meals!.count
+			return mealViewModel.meals.value?.count ?? 0
 		default:
 			return 0
 		}
@@ -120,7 +120,7 @@ extension MoveDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 			let dish = meal.dishes[row]
 			return  dish.getDishName
 		case destinationPickerView:
-			return mealViewModel.meals![row].name
+			return mealViewModel.meals.value?[row].name
 		default:
 			return nil
 		}
@@ -135,8 +135,8 @@ extension MoveDishView: UIPickerViewDelegate, UIPickerViewDataSource {
 			dishToMove = meal.dishes[row]
 			updateAmountLabel()
 		case destinationPickerView:
-			destinationMealTextfield.text = mealViewModel.meals![row].name
-			moveToMealIndex = mealViewModel.meals![row]
+			destinationMealTextfield.text = mealViewModel.meals.value?[row].name
+			moveToMealIndex = mealViewModel.meals.value?[row]
 		default:
 			break
 		}
@@ -155,11 +155,11 @@ extension MoveDishView: UITextFieldDelegate {
 				textField.text = meal.dishes.first?.getDishName
 			}
 		case destinationMealTextfield:
-			if let mealNameIndex = mealViewModel.meals?.firstIndex(where: {$0.name == dishName }) {
+			if let mealNameIndex = mealViewModel.meals.value?.firstIndex(where: {$0.name == dishName }) {
 				dishPickerView.selectRow(mealNameIndex, inComponent: 0, animated: false)
 			} else {
-				textField.text = mealViewModel.meals!.first?.name
-				moveToMealIndex = mealViewModel.meals!.first
+				textField.text = mealViewModel.meals.value?.first?.name
+				moveToMealIndex = mealViewModel.meals.value?.first
 			}
 		default:
 			break

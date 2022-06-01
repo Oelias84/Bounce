@@ -167,10 +167,15 @@ extension BounceNavigationBarView {
 			]
 		)
 		if let permission = UserProfile.defaults.permissionLevel {
-			if permission < 10 {
-				messageButton.isHidden = true
+			
+			switch permission {
+			case _ where permission < 10:
+				self.messageButton.isHidden = true
+			case 99:
+				messageButton.setImage(UIImage(systemName: "a.circle.fill"), for: .normal)
+			default:
+				break
 			}
-			messageButton.setImage(UIImage(systemName: "a.circle.fill"), for: .normal)
 		}
 	}
 	
@@ -178,22 +183,16 @@ extension BounceNavigationBarView {
 		
 		if UserProfile.defaults.getIsManager {
 			let adminStoryBoard = UIStoryboard(name: K.StoryboardName.adminMenu, bundle: nil)
-			let chatsVC = adminStoryBoard.instantiateViewController(identifier: K.ViewControllerId.usersListViewController) as UsersListViewController
-			let navigationController = UINavigationController(rootViewController: chatsVC)
+			let adminUsersList = adminStoryBoard.instantiateViewController(identifier: K.NavigationId.adminBaseNavigationController) as UINavigationController
 			
-			navigationController.modalPresentationStyle = .fullScreen
-			
-			if let vc = delegate as? UIViewController {
-				vc.present(navigationController ,animated: true)
-			}
+			adminUsersList.modalPresentationStyle = .fullScreen
+			parentViewController?.present(adminUsersList, animated: true)
 		} else {
 			let storyboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
 			let chatContainerVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.ChatContainerViewController) as ChatContainerViewController
 			chatContainerVC.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: nil))
-			
-			if let vc = delegate as? UIViewController {
-				vc.navigationController?.pushViewController(chatContainerVC, animated: true)
-			}
+
+			parentViewController?.navigationController?.pushViewController(chatContainerVC, animated: true)
 		}
 	}
 	private func openSettings() {

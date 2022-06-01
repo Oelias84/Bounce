@@ -11,9 +11,22 @@ class UsersListViewController: UIViewController {
 	
 	private let viewModel = UsersListViewModel()
 	
-	@IBOutlet weak var detailsView: UIView!
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var searchControllerView: UISearchBar!
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "moveToUserDetails" {
+			if let userDetailsVC = segue.destination as? UserDetailsViewController {
+				
+				guard let sender = sender as? [String: Chat], let userData = sender["userChat"] else { return }
+				userDetailsVC.modalPresentationStyle = .fullScreen
+				userDetailsVC.navigationItem.largeTitleDisplayMode = .always
+				
+				userDetailsVC.title = userData.displayName ?? "אין שם"
+				userDetailsVC.viewModel = UserDetailsViewModel(userData: userData)
+			}
+		}
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -86,21 +99,20 @@ extension UsersListViewController {
 		tableView.register(UINib(nibName: K.NibName.adminUserMenuTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.adminUserMenuCell)
 	}
 	private func bindViewModel() {
-		
-		viewModel.filteredUsers.bind { _ in
-			UIView.animate(withDuration: 0, delay: 0, options: .curveEaseIn, animations: {
-				self.tableView.reloadData()
-			}) { _ in
-				Spinner.shared.stop()
+
+		viewModel.filteredUsers.bind {
+			users in
+			if users != nil {
+				DispatchQueue.main.async {
+					self.tableView.reloadData()
+					Spinner.shared.stop()
+				}
 			}
 		}
 	}
 	private func moveToUserDetails(userData: Chat) {
-		guard let userDetailVC = storyboard?.instantiateViewController(withIdentifier: K.ViewControllerId.userDetailsViewController) as? UserDetailsViewController else { return }
-		
-		userDetailVC.title = userData.displayName ?? "אין שם"
-		userDetailVC.viewModel = UserDetailsViewModel(userData: userData)
-		navigationController?.pushViewController(userDetailVC, animated: true)
+		let sender: [String: Chat?] = ["userChat": userData]
+		performSegue(withIdentifier: K.SegueId.moveToUserDetails, sender: sender)
 	}
 	private func presentTextFieldAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
 		let storyboard = UIStoryboard(name: K.NibName.popupAlertView, bundle: nil)

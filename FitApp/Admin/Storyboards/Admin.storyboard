@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ydg-4U-IWK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dvY-pG-DzY">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -56,10 +56,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="רשימת משתמשים" largeTitleDisplayMode="always" id="8xh-GU-2R7">
                         <barButtonItem key="backBarButtonItem" title="חזרה" id="vdM-Vm-B86"/>
-                        <barButtonItem key="leftBarButtonItem" id="d8O-Dc-Fqc">
+                        <barButtonItem key="leftBarButtonItem" id="ARW-xB-IZP">
                             <imageReference key="image" image="xmark" catalog="system" symbolScale="default"/>
                             <connections>
-                                <action selector="closeButtonAction:" destination="Qg4-fl-pb9" id="XdV-fW-822"/>
+                                <action selector="closeButtonAction:" destination="Qg4-fl-pb9" id="gpj-bJ-qZp"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="bubble.left.and.bubble.right.fill" catalog="system" id="pYN-LX-C2H">
@@ -71,11 +71,12 @@
                     <connections>
                         <outlet property="searchControllerView" destination="BXZ-yh-M5A" id="g93-yQ-P8g"/>
                         <outlet property="tableView" destination="vDv-sv-UoL" id="9CW-Ch-gRj"/>
+                        <segue destination="UDD-We-5as" kind="show" identifier="moveToUserDetails" id="yOc-nJ-qJq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5wq-3d-itN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2384" y="-34"/>
+            <point key="canvasLocation" x="4932" y="-34"/>
         </scene>
         <!--User Details View Controller-->
         <scene sceneID="gAx-ho-NiL">
@@ -325,6 +326,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="Rvt-yq-ioE">
+                        <barButtonItem key="backBarButtonItem" title="חזרה" id="xEg-Gz-8Vb"/>
                         <barButtonItem key="rightBarButtonItem" image="message" catalog="system" id="G6c-7s-tnc">
                             <connections>
                                 <action selector="chatButtonAction:" destination="UDD-We-5as" id="pqu-kX-2Pf"/>
@@ -351,26 +353,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="av0-Oz-BZ3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3120" y="-34"/>
+            <point key="canvasLocation" x="5646" y="-34"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="Xa3-PO-2g0">
+        <scene sceneID="nVW-6U-dSc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ydg-4U-IWK" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AdminBaseNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="dvY-pG-DzY" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="RTj-yG-UnT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="4TY-m6-Zg7">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <navigationBarAppearance key="scrollEdgeAppearance"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Qg4-fl-pb9" kind="relationship" relationship="rootViewController" id="f1b-fA-Lhq"/>
+                        <segue destination="Qg4-fl-pb9" kind="relationship" relationship="rootViewController" id="0gL-Yc-b6C"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VXi-cc-Xhs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="phC-eR-fft" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1636.2318840579712" y="-34.151785714285715"/>
+            <point key="canvasLocation" x="4202.898550724638" y="-34.151785714285715"/>
         </scene>
     </scenes>
     <resources>

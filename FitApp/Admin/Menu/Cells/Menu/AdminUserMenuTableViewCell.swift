@@ -31,7 +31,7 @@ class AdminUserMenuTableViewCell: UITableViewCell {
 	}
 	
 	@IBAction private func messageButtonAction(_ sender: Any) {
-		moveToChatContainerVC(chatData: chat)
+		moveToChatContainerVC()
 	}
 }
 
@@ -75,12 +75,8 @@ extension AdminUserMenuTableViewCell {
 		guard let lastSeen = chat.lastSeenMessageDate, let lastMessage = chat.latestMessage?.sentDate else { return false }
 		return lastSeen > lastMessage
 	}
-	fileprivate func moveToChatContainerVC(chatData: Chat) {
-		let storyboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
-		let chatContainerVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.ChatContainerViewController) as ChatContainerViewController
-		
-		chatContainerVC.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: chatData))
-		chatContainerVC.modalPresentationStyle = .fullScreen
-		parentViewController?.present(chatContainerVC, animated: true)
+	fileprivate func moveToChatContainerVC() {
+		let chatVC = ChatViewController(viewModel: ChatViewModel(chat: chat))
+		parentViewController?.navigationController?.show(chatVC, sender: nil)
 	}
 }

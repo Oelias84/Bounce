@@ -18,24 +18,18 @@ class MealViewModel: NSObject {
 	
 	static let shared = MealViewModel()
 	private let consumptionManager = ConsumptionManager.shared
+	var meals: ObservableObject<[Meal]?> = ObservableObject(nil)
 	
-	var meals: [Meal]? {
-		didSet {
-			self.bindMealViewModelToController()
-		}
-	}
 	private var currentMealDate: Date?
 	let mealManager = MealManager.shared
-	
-	var bindMealViewModelToController: (() -> ()) = {}
-	
+		
 	private override init() {
 		super.init()
 	}
 	
 	func fetchData(date: Date? = Date()) {
 		consumptionManager.calculateUserData()
-		if self.meals == nil || date?.onlyDate != Date().onlyDate {
+		if self.meals.value == nil || date?.onlyDate != Date().onlyDate {
 			let userData = UserProfile.defaults
 			var preferredMeal: MealType?
 			switch userData.mostHungry {
@@ -71,9 +65,9 @@ class MealViewModel: NSObject {
 		return meals
 	}
 	
-	//MARK: - Meals Progressb
-	func getMealDate() -> Date {
-		return meals!.first!.date
+	//MARK: - Meals Progressbar
+	func getMealDate() -> Date? {
+		return meals.value?.first!.date
 	}
 	func getProgress() -> (MealProgress, MealTarget) {
 		var carbs: Double
@@ -84,7 +78,7 @@ class MealViewModel: NSObject {
 		var fatsTarget: Double
 		var proteinTarget: Double
 		
-		guard let meals = meals else {
+		guard let meals = meals.value else {
 			LocalNotificationManager.shared.setMealNotification()
 			return (MealProgress(carbs: 0.0, fats: 0.0, protein: 0.0), MealTarget(carbs: 0.0, fats: 0.0, protein: 0.0))
 		}
@@ -137,7 +131,7 @@ class MealViewModel: NSObject {
 		return (currentMealDate ?? Date()).dateStringDisplay + " " + (currentMealDate ?? Date()).displayDayName
 	}
 	func getExceptionalCalories() -> String? {
-		if let meals = meals, meals.contains(where: {$0.mealType != .other}) {
+		if let meals = meals.value, meals.contains(where: {$0.mealType != .other}) {
 			var mealCalorieSum: Double = 0.0
 			
 			meals.forEach {
@@ -157,7 +151,7 @@ class MealViewModel: NSObject {
 	func getCurrentMealCalories() -> String {
 		var mealCalorieSum: Double = 0.0
 		
-		meals?.forEach {
+		meals.value?.forEach {
 			$0.dishes.forEach {
 				switch $0.type {
 				case .protein:
@@ -199,19 +193,19 @@ class MealViewModel: NSObject {
 	
 	//MARK: - Meals
 	func getMealsCount() -> Int {
-		if let meals = meals, meals.first(where: {$0.mealType == .other}) == nil, !meals.isEmpty {
+		if let meals = meals.value, meals.first(where: {$0.mealType == .other}) == nil, !meals.isEmpty {
 			return (meals.count) + 1
 		}
-		return meals?.count ?? 0
+		return meals.value?.count ?? 0
 	}
 	func updateMeals(for date: Date) {
-		guard let meals = self.meals else { return }
+		guard let meals = meals.value else { return }
 		let dailyMeal = DailyMeal(meals: meals)
 		getProgress()
 		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal)
 	}
 	func removeExceptionalMeal(for date: Date) {
-		guard var meals = self.meals else { return }
+		guard var meals = meals.value else { return }
 		meals.removeAll(where: { $0.name == "ארוחת חריגה" })
 		let dailyMeal = DailyMeal(meals: meals)
 		getProgress()
@@ -224,11 +218,11 @@ class MealViewModel: NSObject {
 			switch result {
 			case .success(let dailyMeal):
 				if let dailyMeal = dailyMeal {
-					self.meals = dailyMeal.meals
+					self.meals.value = dailyMeal.meals
 					self.currentMealDate = date
 					completion(true)
 				} else {
-					self.meals = []
+					self.meals.value = []
 					completion(false)
 				}
 			case .failure(let error):
@@ -258,10 +252,10 @@ class MealViewModel: NSObject {
 			switch result {
 			case .success(let dailyMeal):
 				if let dailyMeal = dailyMeal {
-					self.meals = dailyMeal.meals
+					self.meals.value = dailyMeal.meals
 					self.currentMealDate = date
 				} else {
-					self.meals = self.populateMeals(date: date, hasPrefer: prefer, numberOfMeals: numberOfMeals, protein: protein, carbs: carbs, fat: fat)
+					self.meals.value = self.populateMeals(date: date, hasPrefer: prefer, numberOfMeals: numberOfMeals, protein: protein, carbs: carbs, fat: fat)
 					UserProfile.defaults.showMealNotFinishedAlert = true
 				}
 			case .failure(let error):
@@ -290,7 +284,7 @@ class MealViewModel: NSObject {
 	}
 	func checkIfCurrentMealIsDone() -> Bool {
 		
-		if let meals = meals {
+		if let meals = meals.value {
 			if (meals.first(where: {!$0.isMealDone}) != nil) { return false }
 		}
 		return true

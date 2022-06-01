@@ -18,10 +18,6 @@ class MealsManager {
 	private var dailyMealsProgress: MealProgress!
 	
 	var bindMealViewModelToController: (() -> ()) = {}
-
-	private init() {
-		
-	}
 }
 
 extension MealsManager {

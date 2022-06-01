@@ -86,7 +86,8 @@ class HomeViewModel {
 	// Meals Binder
 	func bindToMealViewModel(completion: @escaping ()->()) {
 		MealViewModel.shared.fetchData()
-		MealViewModel.shared.bindMealViewModelToController = {
+		MealViewModel.shared.meals.bind { meals in
+			guard meals != nil else { return }
 			completion()
 		}
 	}

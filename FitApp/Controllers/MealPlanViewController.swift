@@ -58,12 +58,14 @@ extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
 		mealViewModel.getMealsCount()
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		if indexPath.row == mealViewModel.meals!.count {
+		guard let meals = mealViewModel.meals.value else { return UITableViewCell() }
+		
+		if indexPath.row == meals.count {
 			let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.addingCell, for: indexPath) as! AddingTableViewCell
 			cell.delegate = self
 			return cell
 		} else {
-			let mealData = mealViewModel.meals![indexPath.row]
+			let mealData = meals[indexPath.row]
 			let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.mealCell, for: indexPath) as! MealPlanTableViewCell
 			cell.mealViewModel = self.mealViewModel
 			cell.meal = mealData
@@ -124,7 +126,7 @@ extension MealPlanViewController: PopupAlertViewDelegate {
 extension MealPlanViewController: AddMealAlertViewDelegate {
 	
 	func didFinish(with: Meal) {
-		mealViewModel.meals?.append(with)
+		mealViewModel.meals.value?.append(with)
 		mealViewModel.updateMeals(for: date)
 	}
 }
@@ -144,19 +146,22 @@ extension MealPlanViewController {
 		}
 	}
 	private func callToViewModelForUIUpdate() {
-		if let navView = navigationController?.view {
-			Spinner.shared.show(navView)
-		}
-		if mealViewModel.meals == nil {
+		if mealViewModel.meals.value == nil {
 			mealViewModel.fetchData()
 		} else {
 			updateDataSource()
 		}
-		mealViewModel.bindMealViewModelToController = {
-			[unowned self] in
-			Spinner.shared.stop()
+		mealViewModel.meals.bind {
+			[weak self] meals in
+			guard let self = self else { return }
+			
+			if meals == nil {
+				if let navView = self.navigationController?.view {
+					Spinner.shared.show(navView)
+				}
+			}
 			DispatchQueue.main.async {
-				if let meals = self.mealViewModel.meals, meals.isEmpty {
+				if let meals = meals, meals.isEmpty {
 					self.tableView.backgroundView = self.presentEmptyTableViewBackground(self.date)
 				} else {
 					self.tableView.backgroundView = nil

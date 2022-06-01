@@ -59,6 +59,7 @@ struct K {
 		static let settings = "Settings"
 		static let chat = "Chat"
 		static let adminMenu = "Admin"
+		static let adminChat = "AdminChat"
 	}
 	
 	struct ViewControllerId {
@@ -107,12 +108,15 @@ struct K {
 		//Admin
 		static let usersListViewController = "UsersListViewController"
 		static let userDetailsViewController = "UserDetailsViewController"
+		static let chatViewController = "ChatViewController"
 	}
 	
 	struct NavigationId {
 		
 		static let homeNavigation = "HomeNavigation"
 		static let QuestionnaireNavigation = "QuestionnaireNavigation"
+		static let adminBaseNavigationController = "AdminBaseNavigationController"
+		static let adminChatNavigationController = "AdminChatNavigationController"
 	}
     
     struct SegueId {

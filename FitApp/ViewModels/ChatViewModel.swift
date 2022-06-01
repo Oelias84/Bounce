@@ -12,11 +12,10 @@ import FirebaseAuth
 class ChatViewModel {
 	
 	private var chat: Chat?
-	private var messages = [Message]()
 	private let messagesManager = MessagesManager.shared
 	
-	var chatViewModelBinder: (() -> ()) = {}
-	
+	var messages: ObservableObject<[Message]?> = ObservableObject(nil)
+		
 	required init(chat: Chat?) {
 		
 		if let chat = chat {
@@ -47,13 +46,13 @@ class ChatViewModel {
 		chat?.displayName
 	}
 	var messagesCount: Int {
-		messages.count
+		messages.value?.count ?? 0
 	}
 	var getLastMessage: Message? {
-		messages.last
+		messages.value?.last
 	}
 	func getMessageAt(_ indexPath: IndexPath) -> Message {
-		messages[indexPath.section]
+		messages.value![indexPath.section]
 	}
 	
 	var getSelfSender: Sender? {
@@ -66,19 +65,15 @@ class ChatViewModel {
 	
 	public func listenToMessages() {
 		guard let chat = chat else {
-			print("chat not fetched")
 			return
 		}
 		
 		messagesManager.fetchMessagesFor(chat) {
 			[weak self] messages in
 			guard let self = self, let messages = messages else {
-				self?.chatViewModelBinder()
 				return
 			}
-			
-			self.messages = messages.sorted()
-			self.chatViewModelBinder()
+			self.messages.value = messages.sorted()
 		}
 	}
 	public func updateLastSeenDate() {

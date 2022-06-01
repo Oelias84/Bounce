@@ -40,6 +40,7 @@ final class UserDetailsViewController: UIViewController {
 		
 		setupView()
 		registerCell()
+		navigationItem.largeTitleDisplayMode = .always
 	}
 	
 	@IBAction func chatButtonAction(_ sender: UIBarButtonItem) {
@@ -80,12 +81,8 @@ extension UserDetailsViewController {
 		tableView.register(cell, forCellReuseIdentifier: K.CellId.userDetailCell)
 	}
 	private func moveToChatContainerVC() {
-		let storyboard = UIStoryboard(name: K.StoryboardName.chat, bundle: nil)
-		let chatContainerVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.ChatContainerViewController) as ChatContainerViewController
-		
-		chatContainerVC.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: viewModel.getUserChat))
-		chatContainerVC.modalPresentationStyle = .fullScreen
-		present(chatContainerVC, animated: true)
+		let chatVC = ChatViewController(viewModel: ChatViewModel(chat: viewModel.getUserChat))
+		navigationController?.pushViewController(chatVC, animated: true)
 	}
 	private func moveToWeightProgressVC() {
 		let storyboard = UIStoryboard(name: K.StoryboardName.weightProgress, bundle: nil)

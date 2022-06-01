@@ -27,8 +27,6 @@ struct Spinner {
 	}
 	
 	func stop() {
-		DispatchQueue.main.async {
-			hud.dismiss()
-		}
+		hud.dismiss()
 	}
 }

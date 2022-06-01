@@ -15,7 +15,7 @@ import JGProgressHUD
 import CropViewController
 import InputBarAccessoryView
 
-class ChatViewController: MessagesViewController {
+final class ChatViewController: MessagesViewController {
 	
 	var viewModel: ChatViewModel!
 	
@@ -28,22 +28,18 @@ class ChatViewController: MessagesViewController {
 		super.init(nibName: nil, bundle: nil)
 	}
 	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
+		super.init(coder: coder)
 	}
-	
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+			
+		bindViewModel()
 		setupController()
 		setupInputButton()
-		
-		self.viewModel.chatViewModelBinder = {
-			DispatchQueue.main.async {
-				self.messagesCollectionView.reloadData()
-				self.messagesCollectionView.scrollToLastItem(animated: false)
-				self.ableInteraction()
-			}
-		}
+	}
+	@IBAction func closeButtonAction(_ sender: Any) {
+		dismiss(animated: true)
 	}
 }
 
@@ -72,6 +68,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 		}
 	}
 }
+
 //Media Messages
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate {
 	
@@ -87,6 +84,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		}
 		return message.sender.senderId == currentSender().senderId
 	}
+	
 	//Collection view dataSource
 	func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
 		viewModel.messagesCount
@@ -137,7 +135,6 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		avatarView.placeholderTextColor = .black
 		avatarView.initials = presentingName
 	}
-	
 	//Custom cell view
 	func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
 		.black
@@ -230,9 +227,28 @@ extension ChatViewController: CropViewControllerDelegate, UINavigationController
 //MARK: - Functions
 extension ChatViewController {
 	
+	private func bindViewModel() {
+		self.viewModel.messages.bind {
+			messages in
+			
+			if messages == nil {
+				self.disableInteraction()
+			} else {
+				DispatchQueue.main.async {
+					self.messagesCollectionView.reloadData()
+				}
+				DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
+					self.ableInteraction()
+					self.messagesCollectionView.scrollToLastItem(animated: false)
+				}
+			}
+		}
+	}
 	private func setupController() {
 		
 		showMessageTimestampOnSwipeLeft = true
+		title = self.viewModel.getDisplayName
+		navigationItem.largeTitleDisplayMode = .never
 		
 		messageInputBar.delegate = self
 		messageInputBar.inputTextView.font = UIFont(name: "Assistant-Regular", size: 18)!
@@ -343,27 +359,12 @@ extension ChatViewController {
 		}
 	}
 	private func disableInteraction() {
-		spinner(run: true)
+		if let view = navigationController?.view {
+			Spinner.shared.show(view)
+		}
 	}
 	private func ableInteraction() {
-		spinner(run: false)
-	}
-	private func spinner(run: Bool) {
-		switch run {
-		case false:
-			DispatchQueue.main.async {
-				Spinner.shared.stop()
-				self.hud.dismiss()
-			}
-		case true:
-			DispatchQueue.main.async {
-				self.hud.backgroundColor = #colorLiteral(red: 0.6394728422, green: 0.659519434, blue: 0.6805263758, alpha: 0.2546477665)
-				self.hud.textLabel.text = "טוען"
-				if let parentView = self.tabBarController?.view {
-					self.hud.show(in: parentView)
-				}
-			}
-		}
+		Spinner.shared.stop()
 	}
 }
 

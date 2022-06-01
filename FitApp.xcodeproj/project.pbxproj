@@ -35,6 +35,7 @@
 		7C1ACD0A2670D145008079C9 /* AddMealAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1ACD092670D145008079C9 /* AddMealAlertView.xib */; };
 		7C1ACD0C2670D170008079C9 /* AddMealAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ACD0B2670D170008079C9 /* AddMealAlertView.swift */; };
 		7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */; };
+		7C2812972847CF0C004385DD /* AdminChat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C2812962847CF0B004385DD /* AdminChat.storyboard */; };
 		7C2BD810267212C7006A1736 /* MealManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2BD80F267212C7006A1736 /* MealManager.swift */; };
 		7C32C588278E370500B97642 /* PopupAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C32C587278E370500B97642 /* PopupAlertView.swift */; };
 		7C32C58E278E3E2400B97642 /* PopupAlertView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C32C58D278E3E2400B97642 /* PopupAlertView.storyboard */; };
@@ -247,6 +248,7 @@
 		7C1ACD092670D145008079C9 /* AddMealAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMealAlertView.xib; sourceTree = "<group>"; };
 		7C1ACD0B2670D170008079C9 /* AddMealAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealAlertView.swift; sourceTree = "<group>"; };
 		7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSecondActivityViewController.swift; sourceTree = "<group>"; };
+		7C2812962847CF0B004385DD /* AdminChat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminChat.storyboard; sourceTree = "<group>"; };
 		7C2BD80F267212C7006A1736 /* MealManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealManager.swift; sourceTree = "<group>"; };
 		7C32C587278E370500B97642 /* PopupAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAlertView.swift; sourceTree = "<group>"; };
 		7C32C58D278E3E2400B97642 /* PopupAlertView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopupAlertView.storyboard; sourceTree = "<group>"; };
@@ -908,6 +910,7 @@
 			isa = PBXGroup;
 			children = (
 				7CB37012283573430010E8EC /* Admin.storyboard */,
+				7C2812962847CF0B004385DD /* AdminChat.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1367,6 +1370,7 @@
 				7CADF74C278CADDE0020CD83 /* StaticText.json in Resources */,
 				7C7C38302790F97F0075B64A /* JunkFoodTable.tsv in Resources */,
 				7C1ACD052670C25B008079C9 /* AddingTableViewCell.xib in Resources */,
+				7C2812972847CF0C004385DD /* AdminChat.storyboard in Resources */,
 				B38068C725B7197E005C4A24 /* WorkoutTableViewCell.xib in Resources */,
 				7C10BA7D276BCFBE00B5860C /* Assistant-Light.ttf in Resources */,
 				B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */,
