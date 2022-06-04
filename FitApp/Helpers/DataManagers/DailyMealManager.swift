@@ -69,4 +69,17 @@ class DailyMealManager {
 		}
 		return "\(mealCalorieSum)"
 	}
+	static func getMealCaloriesSum(dishes: [Dish]) -> String {
+		var mealCalorieSum: Double = 0.0
+		
+		dishes.forEach {
+			switch $0.type {
+			case .protein:
+				mealCalorieSum += $0.amount * 150.0
+			case .carbs, .fat:
+				mealCalorieSum += $0.amount * 100
+			}
+		}
+		return String(format: "%.0f", mealCalorieSum)
+	}
 }

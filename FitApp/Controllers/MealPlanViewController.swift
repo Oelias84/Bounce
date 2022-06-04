@@ -11,8 +11,9 @@ import UIKit
 class MealPlanViewController: UIViewController {
 	
 	private var date = Date()
-	private var mealViewModel = MealViewModel.shared
 	private var selectedCellIndexPath: IndexPath?
+	
+	var mealViewModel = MealViewModel.shared
 	
 	@IBOutlet weak var topBarView: BounceNavigationBarView!
 	@IBOutlet weak var changeDateView: ChangeDateView!

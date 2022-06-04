@@ -36,6 +36,11 @@
 		7C1ACD0C2670D170008079C9 /* AddMealAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ACD0B2670D170008079C9 /* AddMealAlertView.swift */; };
 		7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */; };
 		7C2812972847CF0C004385DD /* AdminChat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C2812962847CF0B004385DD /* AdminChat.storyboard */; };
+		7C281299284B7E8C004385DD /* AdminMeal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C281298284B7E8C004385DD /* AdminMeal.storyboard */; };
+		7C28129E284B8386004385DD /* UserMealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C28129D284B8386004385DD /* UserMealsViewController.swift */; };
+		7C2812A0284B83A5004385DD /* UserMealsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C28129F284B83A5004385DD /* UserMealsViewModel.swift */; };
+		7C2812A4284B8791004385DD /* UserMealTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2812A2284B8791004385DD /* UserMealTableViewCell.swift */; };
+		7C2812A5284B8791004385DD /* UserMealTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2812A3284B8791004385DD /* UserMealTableViewCell.xib */; };
 		7C2BD810267212C7006A1736 /* MealManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2BD80F267212C7006A1736 /* MealManager.swift */; };
 		7C32C588278E370500B97642 /* PopupAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C32C587278E370500B97642 /* PopupAlertView.swift */; };
 		7C32C58E278E3E2400B97642 /* PopupAlertView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C32C58D278E3E2400B97642 /* PopupAlertView.storyboard */; };
@@ -249,6 +254,11 @@
 		7C1ACD0B2670D170008079C9 /* AddMealAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealAlertView.swift; sourceTree = "<group>"; };
 		7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSecondActivityViewController.swift; sourceTree = "<group>"; };
 		7C2812962847CF0B004385DD /* AdminChat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminChat.storyboard; sourceTree = "<group>"; };
+		7C281298284B7E8C004385DD /* AdminMeal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminMeal.storyboard; sourceTree = "<group>"; };
+		7C28129D284B8386004385DD /* UserMealsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMealsViewController.swift; sourceTree = "<group>"; };
+		7C28129F284B83A5004385DD /* UserMealsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMealsViewModel.swift; sourceTree = "<group>"; };
+		7C2812A2284B8791004385DD /* UserMealTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMealTableViewCell.swift; sourceTree = "<group>"; };
+		7C2812A3284B8791004385DD /* UserMealTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserMealTableViewCell.xib; sourceTree = "<group>"; };
 		7C2BD80F267212C7006A1736 /* MealManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealManager.swift; sourceTree = "<group>"; };
 		7C32C587278E370500B97642 /* PopupAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAlertView.swift; sourceTree = "<group>"; };
 		7C32C58D278E3E2400B97642 /* PopupAlertView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopupAlertView.storyboard; sourceTree = "<group>"; };
@@ -546,6 +556,41 @@
 				7C8F51392671FAE5001FF0EE /* DishView */,
 			);
 			name = AddMealAlertView;
+			sourceTree = "<group>";
+		};
+		7C28129A284B7F20004385DD /* UserMeals */ = {
+			isa = PBXGroup;
+			children = (
+				7C2812A1284B876E004385DD /* Cell */,
+				7C28129C284B7F8D004385DD /* ViewModel */,
+				7C28129B284B7F78004385DD /* Controller */,
+			);
+			path = UserMeals;
+			sourceTree = "<group>";
+		};
+		7C28129B284B7F78004385DD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7C28129D284B8386004385DD /* UserMealsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7C28129C284B7F8D004385DD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7C28129F284B83A5004385DD /* UserMealsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7C2812A1284B876E004385DD /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7C2812A2284B8791004385DD /* UserMealTableViewCell.swift */,
+				7C2812A3284B8791004385DD /* UserMealTableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		7C32C586278E368C00B97642 /* PopupAlertView */ = {
@@ -911,6 +956,7 @@
 			children = (
 				7CB37012283573430010E8EC /* Admin.storyboard */,
 				7C2812962847CF0B004385DD /* AdminChat.storyboard */,
+				7C281298284B7E8C004385DD /* AdminMeal.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -966,6 +1012,7 @@
 			children = (
 				7CB3700A28354B840010E8EC /* Storyboards */,
 				7CB3700928354B460010E8EC /* Menu */,
+				7C28129A284B7F20004385DD /* UserMeals */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -1333,11 +1380,13 @@
 				7CD1817C2647E80F0054DB9C /* NotificationTableViewCell.xib in Resources */,
 				7C89AA07256D69CB009AD87C /* LaunchScreen.storyboard in Resources */,
 				B367F18025B1DE4F00DF21D7 /* DishesStrings.strings in Resources */,
+				7C281299284B7E8C004385DD /* AdminMeal.storyboard in Resources */,
 				7C10BA7E276BCFBE00B5860C /* Assistant-VariableFont_wght.ttf in Resources */,
 				7C10BA7C276BCFBE00B5860C /* Assistant-SemiBold.ttf in Resources */,
 				B3E6E98D257142CD00958C48 /* MealPlan.storyboard in Resources */,
 				7C7C38252790C3760075B64A /* CollapsibleSpreadsheetTableViewCell.xib in Resources */,
 				7C10BA80276BCFBE00B5860C /* Assistant-ExtraLight.ttf in Resources */,
+				7C2812A5284B8791004385DD /* UserMealTableViewCell.xib in Resources */,
 				7C857BA5262C4D68006AB0BD /* TableViewEmptyView.xib in Resources */,
 				B358222325AC930B00C91295 /* Articles.storyboard in Resources */,
 				7C5262B725BC756700694007 /* Settings.storyboard in Resources */,
@@ -1515,6 +1564,7 @@
 				B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */,
 				7C149C7925D817DD00B0864F /* PhotoViewerViewController.swift in Sources */,
 				B330B88A257581AA00BDB206 /* ExerciseTableViewCell.swift in Sources */,
+				7C2812A0284B83A5004385DD /* UserMealsViewModel.swift in Sources */,
 				7C7434EB25CD906500D33A9A /* MailComposerViewController.swift in Sources */,
 				7CADF74E278CADFF0020CD83 /* Static.swift in Sources */,
 				B3DB7513259F8270002CF48B /* MealViewModel.swift in Sources */,
@@ -1533,6 +1583,7 @@
 				B341E230257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift in Sources */,
 				7C74AF9E264336EA001D0F5D /* PushNotificationSender.swift in Sources */,
 				B38397F625B4A1BE00154697 /* WorkoutViewModel.swift in Sources */,
+				7C2812A4284B8791004385DD /* UserMealTableViewCell.swift in Sources */,
 				B30069D325926F090025FA0E /* WeightProgressViewController.swift in Sources */,
 				7CB0E179278775B400D6EDA5 /* ChatContainerViewController.swift in Sources */,
 				B367F18825B1EEC200DF21D7 /* LocalNotificationManager.swift in Sources */,
@@ -1629,6 +1680,7 @@
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
 				7C83152525E053B100335601 /* ExerciseCategoryView.swift in Sources */,
 				7C10BA70276BCB9C00B5860C /* UINavigationController+Extensions.swift in Sources */,
+				7C28129E284B8386004385DD /* UserMealsViewController.swift in Sources */,
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
 				7C54164D269D951C00C22859 /* LoginViewModel.swift in Sources */,
 				7CB3701E28358D180010E8EC /* AdminUserMenuTableViewCell.swift in Sources */,

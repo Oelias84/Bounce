@@ -20,6 +20,7 @@ class DishView: UIView {
         }
     }
     var dishes: [ServerDish]!
+	private let isFromAdmin: Bool!
     private let dishPickerView = UIPickerView()
 
     @IBOutlet weak var dishTypeLabel: UILabel!
@@ -31,16 +32,17 @@ class DishView: UIView {
     
     var delegate: DishViewDelegate?
     
-    override init(frame: CGRect) {
+	init(frame: CGRect, isFromAdmin: Bool? = false) {
+		self.isFromAdmin = isFromAdmin
         super.init(frame: frame)
         commonInit()
     }
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
+		fatalError("init(coder:) has not been implemented")
     }
 	
     @IBAction func checkBoxButtonAction(_ sender: UIButton) {
+		if isFromAdmin { return }
         checkBoxButton.isSelected = !sender.isSelected
         dish.isDishDone.toggle()
         delegate?.didCheck(dish: dish)
@@ -78,6 +80,8 @@ extension DishView {
 extension DishView: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+		if isFromAdmin { return }
+		
 		let storyboard = UIStoryboard(name: K.StoryboardName.mealPlan, bundle: nil)
 		let dishesListVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.dishesListViewController) as DishesTableViewController
 		

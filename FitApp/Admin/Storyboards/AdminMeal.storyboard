@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--ארוחות-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="UserMealViewController" id="Y6W-OH-hqX" customClass="UserMealsViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="BSe-OM-ztb">
+                                <rect key="frame" x="0.0" y="140" width="414" height="650"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="vkW-dI-JmB"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="HdZ-Gm-lVH"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sSd-0P-4Be" userLabel="Date Change View" customClass="ChangeDateView" customModule="FitApp" customModuleProvider="target">
+                                <rect key="frame" x="40" y="806" width="334" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="upS-Wm-nBl"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="sSd-0P-4Be" secondAttribute="bottom" constant="16" id="7MI-aw-HTB"/>
+                            <constraint firstItem="sSd-0P-4Be" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="Kaj-4P-8XK"/>
+                            <constraint firstItem="BSe-OM-ztb" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="PG8-I4-Hkx"/>
+                            <constraint firstItem="sSd-0P-4Be" firstAttribute="top" secondItem="BSe-OM-ztb" secondAttribute="bottom" constant="16" id="PYE-pX-CdY"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sSd-0P-4Be" secondAttribute="trailing" constant="40" id="Qv8-h1-Vqy"/>
+                            <constraint firstItem="BSe-OM-ztb" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="mzo-6j-ngY"/>
+                            <constraint firstItem="BSe-OM-ztb" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="wvb-qN-Dwl"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="ארוחות" id="fw5-vI-3Mi">
+                        <barButtonItem key="rightBarButtonItem" id="0h7-9V-KoQ">
+                            <imageReference key="image" image="calendar" catalog="system" symbolScale="large"/>
+                            <color key="tintColor" name="incomingAudioMessageTint"/>
+                            <connections>
+                                <action selector="todayButtonAction:" destination="Y6W-OH-hqX" id="Aov-tw-wFz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="changeDateView" destination="sSd-0P-4Be" id="XzQ-wV-CaL"/>
+                        <outlet property="tableView" destination="BSe-OM-ztb" id="hOE-nm-Efd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="896" y="139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6Al-Sz-jV0">
+            <objects>
+                <navigationController storyboardIdentifier="AdminUserMealNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="eQv-tv-F5Z" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="ZWS-32-h72">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="W5D-yW-9OU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Mi-h6-z87" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140.57971014492756" y="138.61607142857142"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="calendar" catalog="system" width="128" height="106"/>
+        <namedColor name="incomingAudioMessageTint">
+            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

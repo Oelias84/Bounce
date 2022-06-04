@@ -125,8 +125,8 @@ struct GoogleApiManager {
 			print(error)
 		}
 	}
-	func getMealFor( _ date: Date, completion: @escaping (Result<DailyMeal?, Error>) -> Void) {
-		db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-daily-meals").document("\(date.dateStringForDB)")
+	func getMealFor(userID: String? = nil,_ date: Date, completion: @escaping (Result<DailyMeal?, Error>) -> Void) {
+		db.collection("users").document(userID ?? Auth.auth().currentUser!.uid).collection("user-daily-meals").document("\(date.dateStringForDB)")
 			.getDocument(source: .default, completion: { (data, error) in
 				if let error = error {
 					print(error)

@@ -24,6 +24,9 @@ final class UserDetailsViewModel {
 extension UserDetailsViewModel {
 	
 	//Getters
+	var getUserId: String {
+		return userData.userId
+	}
 	var getUserChat: Chat {
 		return userData
 	}

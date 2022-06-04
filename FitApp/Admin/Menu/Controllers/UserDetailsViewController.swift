@@ -12,8 +12,8 @@ final class UserDetailsViewController: UIViewController {
 	private enum cellsTitle: String, CaseIterable {
 		
 		case weights = "משקלים"
-		case orders = "רכישות"
 		case meals = "ארוחות"
+		case orders = "רכישות"
 		case calorieProgress = "חישוב נתונים"
 	}
 	
@@ -89,9 +89,17 @@ extension UserDetailsViewController {
 		let weightProgressVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.weightViewController) as WeightProgressViewController
 		
 		weightProgressVC.isFromAdmin = true
-		weightProgressVC.weightViewModel = WeightViewModel(userUID: viewModel.getUserChat.userId)
+		weightProgressVC.weightViewModel = WeightViewModel(userUID: viewModel.getUserId)
 		weightProgressVC.modalPresentationStyle = .fullScreen
 		present(weightProgressVC, animated: true)
+	}
+	private func moveToUserMealsVC() {
+		let storyboard = UIStoryboard(name: K.StoryboardName.adminMeal, bundle: nil)
+		let userMealsVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.userMealViewController) as UserMealsViewController
+		
+		userMealsVC.viewModel = UserMealsViewModel(userID: viewModel.getUserId)
+		userMealsVC.modalPresentationStyle = .fullScreen
+		navigationController?.show(userMealsVC, sender: nil)
 	}
 }
 
@@ -113,6 +121,8 @@ extension UserDetailsViewController: UITableViewDelegate, UITableViewDataSource 
 		switch row {
 		case 0:
 			moveToWeightProgressVC()
+		case 1:
+			moveToUserMealsVC()
 		default:
 			return
 		}

@@ -98,7 +98,7 @@ extension MealPlanTableViewCell {
 		}
 		mealNameLabel.text = meal.name
 		meal.dishes.forEach {
-			let view = DishView()
+			let view = DishView(frame: .zero)
 			view.tag = tag
 			tag += 1
 			view.delegate = self

@@ -60,6 +60,7 @@ struct K {
 		static let chat = "Chat"
 		static let adminMenu = "Admin"
 		static let adminChat = "AdminChat"
+		static let adminMeal = "AdminMeal"
 	}
 	
 	struct ViewControllerId {
@@ -109,6 +110,7 @@ struct K {
 		static let usersListViewController = "UsersListViewController"
 		static let userDetailsViewController = "UserDetailsViewController"
 		static let chatViewController = "ChatViewController"
+		static let userMealViewController = "UserMealViewController"
 	}
 	
 	struct NavigationId {
@@ -117,6 +119,7 @@ struct K {
 		static let QuestionnaireNavigation = "QuestionnaireNavigation"
 		static let adminBaseNavigationController = "AdminBaseNavigationController"
 		static let adminChatNavigationController = "AdminChatNavigationController"
+		static let adminUserMealNavigationController = "AdminUserMealNavigationController"
 	}
     
     struct SegueId {
@@ -168,6 +171,7 @@ struct K {
 		//Admin
 		static let adminUserMenuCell = "adminUserMenuCell"
 		static let userDetailCell = "userDetailTableViewCell"
+		static let adminUserMealCell = "adminUserMealCell"
     }
 	
     struct NibName {
@@ -192,6 +196,7 @@ struct K {
 
 		static let adminUserMenuTableViewCell = "AdminUserMenuTableViewCell"
 		static let userDetailTableViewCell = "UserDetailTableViewCell"
+		static let userMealTableViewCell = "UserMealTableViewCell"
 
 		//Views
 		static let dishView = "DishView"

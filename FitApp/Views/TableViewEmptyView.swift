@@ -18,6 +18,7 @@ class TableViewEmptyView: UIView {
 	private var presentingVC: UIViewController?
 	
 	@IBOutlet var contentView: UIView!
+	@IBOutlet weak var backgroundView: UIView!
 	@IBOutlet weak var button: UIButton!
 	
 	var delegate: TableViewEmptyViewDelegate?

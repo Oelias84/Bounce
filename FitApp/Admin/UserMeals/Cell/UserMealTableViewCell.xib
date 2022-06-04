@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Assistant-Regular.ttf">
+            <string>Assistant-Regular</string>
+        </array>
+        <array key="Assistant-SemiBold.ttf">
+            <string>Assistant-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="adminUserMealCell" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="137" id="piX-ZP-Mme" customClass="UserMealTableViewCell" customModule="FitApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="420" height="137"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="piX-ZP-Mme" id="TUd-Iv-2Iz">
+                <rect key="frame" x="0.0" y="0.0" width="420" height="137"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zOB-bg-paZ">
+                        <rect key="frame" x="24" y="10" width="380" height="117"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8Io-gH-l49" userLabel="Meal Stack View">
+                                <rect key="frame" x="16" y="16" width="348" height="57"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Dhh-GA-fn0">
+                                        <rect key="frame" x="0.0" y="8.5" width="348" height="40"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="שם הארוחה" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWX-1D-XhD">
+                                                <rect key="frame" x="0.0" y="0.0" width="348" height="24"/>
+                                                <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
+                                                <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="18"/>
+                                                <color key="textColor" name="ProjectLightGreen"/>
+                                                <nil key="highlightedColor"/>
+                                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nvH-Xo-uzD">
+                                                <rect key="frame" x="0.0" y="24" width="348" height="16"/>
+                                                <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vSC-LL-qd1" userLabel="Dishes Stack View">
+                                <rect key="frame" x="16" y="77" width="348" height="24"/>
+                                <subviews>
+                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="iMt-Dd-owH" userLabel="Dish Headline Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="348" height="16"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lcg-ZD-4yP">
+                                                <rect key="frame" x="0.0" y="0.0" width="116" height="16"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="Fw4-8T-OSf"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="כמות מנה" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4n-10-PfE">
+                                                <rect key="frame" x="116" y="0.0" width="116" height="16"/>
+                                                <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="שם מנה" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ueq-iS-loY">
+                                                <rect key="frame" x="232" y="0.0" width="116" height="16"/>
+                                                <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="16" id="tTT-Mq-f8H"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Aee-iM-97j">
+                                        <rect key="frame" x="0.0" y="24" width="348" height="0.0"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="8B3-xU-NWK"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="8Io-gH-l49" secondAttribute="trailing" constant="16" id="3Bq-ks-GYD"/>
+                            <constraint firstItem="8Io-gH-l49" firstAttribute="top" secondItem="zOB-bg-paZ" secondAttribute="top" constant="16" id="4E9-Wx-93Y"/>
+                            <constraint firstItem="8Io-gH-l49" firstAttribute="leading" secondItem="zOB-bg-paZ" secondAttribute="leading" constant="16" id="DkG-c1-bav"/>
+                            <constraint firstAttribute="bottom" secondItem="vSC-LL-qd1" secondAttribute="bottom" constant="16" id="PDS-2a-8AD"/>
+                            <constraint firstAttribute="trailing" secondItem="vSC-LL-qd1" secondAttribute="trailing" constant="16" id="Uwn-Wu-Twe"/>
+                            <constraint firstItem="vSC-LL-qd1" firstAttribute="top" secondItem="8Io-gH-l49" secondAttribute="bottom" constant="4" id="bu4-hS-xzr"/>
+                            <constraint firstItem="vSC-LL-qd1" firstAttribute="leading" secondItem="zOB-bg-paZ" secondAttribute="leading" constant="16" id="mcO-Dq-w0a"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidthV">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
+                                <color key="value" name="ProjectTurquoise"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="zOB-bg-paZ" secondAttribute="bottom" constant="10" id="24w-i1-k6R"/>
+                    <constraint firstAttribute="trailing" secondItem="zOB-bg-paZ" secondAttribute="trailing" constant="24" id="Yyy-Kn-NNw"/>
+                    <constraint firstItem="zOB-bg-paZ" firstAttribute="top" secondItem="TUd-Iv-2Iz" secondAttribute="top" constant="10" id="e47-Jw-odf"/>
+                    <constraint firstItem="zOB-bg-paZ" firstAttribute="leading" secondItem="TUd-Iv-2Iz" secondAttribute="leading" constant="24" id="rlp-eD-vs4"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                    <real key="value" value="0.0"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="borderWidthV">
+                    <real key="value" value="0.0"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="cellBackgroundView" destination="zOB-bg-paZ" id="Ipy-CN-wac"/>
+                <outlet property="dishStackView" destination="Aee-iM-97j" id="xYM-Xb-1mB"/>
+                <outlet property="dishesHeadLineStackView" destination="iMt-Dd-owH" id="P5h-UW-qni"/>
+                <outlet property="dishesStackViewHeight" destination="8B3-xU-NWK" id="s5R-Av-c5a"/>
+                <outlet property="mealCaloriesSumLabel" destination="nvH-Xo-uzD" id="Iz0-yF-RFh"/>
+                <outlet property="mealNameLabel" destination="WWX-1D-XhD" id="KCF-dh-RSa"/>
+            </connections>
+            <point key="canvasLocation" x="1842.0289855072465" y="-286.94196428571428"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="ProjectLightGreen">
+            <color red="0.28600001335144043" green="0.57599997520446777" blue="0.56099998950958252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ProjectTurquoise">
+            <color red="0.46700000762939453" green="0.6940000057220459" blue="0.67799997329711914" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
