@@ -61,6 +61,7 @@ struct K {
 		static let adminMenu = "Admin"
 		static let adminChat = "AdminChat"
 		static let adminMeal = "AdminMeal"
+		static let adminUserCalorieProgress = "AdminUserCalorieProgress"
 	}
 	
 	struct ViewControllerId {
@@ -111,6 +112,7 @@ struct K {
 		static let userDetailsViewController = "UserDetailsViewController"
 		static let chatViewController = "ChatViewController"
 		static let userMealViewController = "UserMealViewController"
+		static let userCalorieProgressViewController = "UserCalorieProgressViewController"
 	}
 	
 	struct NavigationId {
@@ -139,6 +141,7 @@ struct K {
 		static let moveToSettingsOptions = "moveToSettingsOptions"
 		//Admin
 		static let moveToUserDetails = "moveToUserDetails"
+		static let moveToUserProgressDetails = "moveToUserProgressDetails"
     }
     
     struct CellId {
@@ -210,7 +213,6 @@ struct K {
 		static let addMealAlertDishView = "AddMealAlertDishView"
 		static let bounceNavigationBarView = "BounceNavigationBarView"
 		static let popupAlertView = "PopupAlertView"
-
     }
 	
 	struct Units {

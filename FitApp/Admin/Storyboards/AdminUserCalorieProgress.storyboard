@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Assistant-Regular.ttf">
+            <string>Assistant-Regular</string>
+        </array>
+        <array key="Assistant-SemiBold.ttf">
+            <string>Assistant-SemiBold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--חישוב קלורי-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="UserCalorieProgressViewController" id="Y6W-OH-hqX" customClass="UserCalorieProgressViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="h0O-x8-QN7">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="cell" id="rOh-03-Wwp">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="64"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rOh-03-Wwp" id="lwv-Ck-GrC">
+                                            <rect key="frame" x="0.0" y="0.0" width="373.5" height="64"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="aV2-ov-bBf"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="2le-Ko-FA5"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="h0O-x8-QN7" secondAttribute="bottom" id="1vD-Rj-H4i"/>
+                            <constraint firstItem="h0O-x8-QN7" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="GFm-SE-w7o"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="h0O-x8-QN7" secondAttribute="trailing" id="VtV-bM-h0P"/>
+                            <constraint firstItem="h0O-x8-QN7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Y10-5K-O4O"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="חישוב קלורי" largeTitleDisplayMode="always" id="rFv-rn-Vmv"/>
+                    <connections>
+                        <outlet property="tableView" destination="h0O-x8-QN7" id="6Z5-2c-Ksd"/>
+                        <segue destination="ByS-Gl-o1Q" kind="showDetail" identifier="moveToUserProgressDetails" id="g59-kX-ar6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="903" y="139"/>
+        </scene>
+        <!--פירטי חישוב קלורי-->
+        <scene sceneID="EF6-3Q-xB7">
+            <objects>
+                <viewController storyboardIdentifier="UserProgressDetailsViewController" title="פירטי חישוב קלורי" id="ByS-Gl-o1Q" customClass="UserProgressDetailsViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2bi-4d-H2f">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d8P-P6-dBb">
+                                <rect key="frame" x="12" y="96" width="390" height="446"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="nZ1-pH-hGa">
+                                        <rect key="frame" x="12" y="12" width="366" height="422"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="bO6-OJ-IHw">
+                                                <rect key="frame" x="0.0" y="0.0" width="366" height="47.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="תאריך החישוב:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fod-bY-dB7">
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="22.5"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sul-4E-OMM">
+                                                        <rect key="frame" x="0.0" y="26.5" width="366" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="16"/>
+                                                        <color key="textColor" systemColor="systemIndigoColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="la3-63-iCq">
+                                                <rect key="frame" x="0.0" y="53.5" width="366" height="47.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="הפרש ממוצעי משקל:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiY-BL-jNJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="22.5"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oh4-z9-zsg">
+                                                        <rect key="frame" x="0.0" y="26.5" width="366" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="16"/>
+                                                        <color key="textColor" systemColor="systemIndigoColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="X18-vg-Xhr">
+                                                <rect key="frame" x="0.0" y="107" width="366" height="47.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="הפרש ממוצעי שקילה באחוזים:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKY-Uv-stc">
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="22.5"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUh-dd-X6x">
+                                                        <rect key="frame" x="0.0" y="26.5" width="366" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="16"/>
+                                                        <color key="textColor" systemColor="systemIndigoColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="fB8-oX-Yc8">
+                                                <rect key="frame" x="0.0" y="160.5" width="366" height="47.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="הפרש צריכה קלורית בין מה שניתן למה שניצרך:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1Y-6r-hG4">
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="22.5"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lvO-94-jPy">
+                                                        <rect key="frame" x="0.0" y="26.5" width="366" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="16"/>
+                                                        <color key="textColor" systemColor="systemIndigoColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Kcg-N4-WRQ">
+                                                <rect key="frame" x="0.0" y="214" width="366" height="47.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="צריכה שבועית" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJb-5Q-OVL">
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="22.5"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3sa-ff-Kp7">
+                                                        <rect key="frame" x="0.0" y="26.5" width="366" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="16"/>
+                                                        <color key="textColor" systemColor="systemIndigoColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="B9J-6e-gRw">
+                                                <rect key="frame" x="0.0" y="267.5" width="366" height="47.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="צריכה שבועית רצויה" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3d0-A9-Cx6">
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="22.5"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4h3-rk-grE">
+                                                        <rect key="frame" x="0.0" y="26.5" width="366" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="16"/>
+                                                        <color key="textColor" systemColor="systemIndigoColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ToL-5x-Lhk">
+                                                <rect key="frame" x="0.0" y="321" width="366" height="47.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ממוצע שבועי ראשון:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jZF-7w-Fr1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="22.5"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfF-vp-ygg">
+                                                        <rect key="frame" x="0.0" y="26.5" width="366" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="16"/>
+                                                        <color key="textColor" systemColor="systemIndigoColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="1DK-1F-sdJ">
+                                                <rect key="frame" x="0.0" y="374.5" width="366" height="47.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ממוצע שבועי שני:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsm-ZI-YaK">
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="22.5"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toe-e0-pZG">
+                                                        <rect key="frame" x="0.0" y="26.5" width="366" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="16"/>
+                                                        <color key="textColor" systemColor="systemIndigoColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="nZ1-pH-hGa" firstAttribute="leading" secondItem="d8P-P6-dBb" secondAttribute="leading" constant="12" id="9d3-YN-cAA"/>
+                                    <constraint firstItem="nZ1-pH-hGa" firstAttribute="top" secondItem="d8P-P6-dBb" secondAttribute="top" constant="12" id="9y6-fS-8dn"/>
+                                    <constraint firstAttribute="trailing" secondItem="nZ1-pH-hGa" secondAttribute="trailing" constant="12" id="D4S-80-L4M"/>
+                                    <constraint firstAttribute="bottom" secondItem="nZ1-pH-hGa" secondAttribute="bottom" constant="12" id="pin-bU-zaa"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidthV">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F3t-C3-VRU">
+                                <rect key="frame" x="100" y="56" width="214" height="4"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="Sw5-BJ-sXa"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="x8L-pm-MvL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="x8L-pm-MvL" firstAttribute="trailing" secondItem="F3t-C3-VRU" secondAttribute="trailing" constant="100" id="706-tb-YAT"/>
+                            <constraint firstItem="F3t-C3-VRU" firstAttribute="leading" secondItem="x8L-pm-MvL" secondAttribute="leading" constant="100" id="8AE-Q9-BFA"/>
+                            <constraint firstItem="x8L-pm-MvL" firstAttribute="trailing" secondItem="d8P-P6-dBb" secondAttribute="trailing" constant="12" id="GjF-i1-mtc"/>
+                            <constraint firstItem="d8P-P6-dBb" firstAttribute="top" secondItem="F3t-C3-VRU" secondAttribute="bottom" constant="36" id="NER-uB-qSN"/>
+                            <constraint firstItem="d8P-P6-dBb" firstAttribute="leading" secondItem="x8L-pm-MvL" secondAttribute="leading" constant="12" id="Trm-yx-vgh"/>
+                            <constraint firstItem="F3t-C3-VRU" firstAttribute="top" secondItem="x8L-pm-MvL" secondAttribute="top" constant="12" id="v0u-6w-wGP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="P6w-9A-lSJ"/>
+                    <connections>
+                        <outlet property="date" destination="sul-4E-OMM" id="mKI-0x-rs9"/>
+                        <outlet property="detailsView" destination="2bi-4d-H2f" id="7Jk-YS-eFg"/>
+                        <outlet property="differenceBetweenAverageWeight" destination="oh4-z9-zsg" id="jeq-KP-XaR"/>
+                        <outlet property="differenceBetweenAverageWeightPercentage" destination="nUh-dd-X6x" id="iWw-on-5Fv"/>
+                        <outlet property="firstWeekAverageWeight" destination="VfF-vp-ygg" id="Kkd-Zm-iGk"/>
+                        <outlet property="secondWeekAverageWeight" destination="toe-e0-pZG" id="K3Z-zV-qWu"/>
+                        <outlet property="userCaloriesBetweenConsumedAndGiven" destination="lvO-94-jPy" id="J6a-50-C81"/>
+                        <outlet property="userWeekConsumedCalories" destination="3sa-ff-Kp7" id="SBq-SY-2O4"/>
+                        <outlet property="userWeekExpectedCalories" destination="4h3-rk-grE" id="UuO-zR-W0g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K3I-bH-yKp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1624.6376811594205" y="138.61607142857142"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="70N-TK-BgJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2h1-sZ-eom" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="OgA-DC-Adp">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="IJZ-Q6-BeM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X2c-Xq-LQc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="138.61607142857142"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

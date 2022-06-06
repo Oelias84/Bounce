@@ -13,8 +13,8 @@ final class UserDetailsViewController: UIViewController {
 		
 		case weights = "משקלים"
 		case meals = "ארוחות"
-		case orders = "רכישות"
 		case calorieProgress = "חישוב נתונים"
+		case orders = "רכישות"
 	}
 	
 	var viewModel: UserDetailsViewModel!
@@ -80,6 +80,7 @@ extension UserDetailsViewController {
 		let cell = UINib(nibName: K.NibName.userDetailTableViewCell, bundle: nil)
 		tableView.register(cell, forCellReuseIdentifier: K.CellId.userDetailCell)
 	}
+	
 	private func moveToChatContainerVC() {
 		let chatVC = ChatViewController(viewModel: ChatViewModel(chat: viewModel.getUserChat))
 		navigationController?.pushViewController(chatVC, animated: true)
@@ -100,6 +101,14 @@ extension UserDetailsViewController {
 		userMealsVC.viewModel = UserMealsViewModel(userID: viewModel.getUserId)
 		userMealsVC.modalPresentationStyle = .fullScreen
 		navigationController?.show(userMealsVC, sender: nil)
+	}
+	private func moveToUserCalorieCalculationList() {
+		let storyboard = UIStoryboard(name: K.StoryboardName.adminUserCalorieProgress, bundle: nil)
+		let userColorieProgressVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.userCalorieProgressViewController) as UserCalorieProgressViewController
+		
+		userColorieProgressVC.viewModel = UserCalorieProgressViewModel(userID: viewModel.getUserId)
+		userColorieProgressVC.modalPresentationStyle = .fullScreen
+		navigationController?.show(userColorieProgressVC, sender: nil)
 	}
 }
 
@@ -123,6 +132,8 @@ extension UserDetailsViewController: UITableViewDelegate, UITableViewDataSource 
 			moveToWeightProgressVC()
 		case 1:
 			moveToUserMealsVC()
+		case 2:
+			moveToUserCalorieCalculationList()
 		default:
 			return
 		}

@@ -113,6 +113,11 @@
 		7CADF74C278CADDE0020CD83 /* StaticText.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CADF74B278CADDE0020CD83 /* StaticText.json */; };
 		7CADF74E278CADFF0020CD83 /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CADF74D278CADFF0020CD83 /* Static.swift */; };
 		7CADF750278CAEBC0020CD83 /* StaticStringsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */; };
+		7CAE9B35284E1C3A00B409E9 /* UserCalorieProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE9B34284E1C3A00B409E9 /* UserCalorieProgressViewController.swift */; };
+		7CAE9B3A284E1EC800B409E9 /* UserCalorieProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE9B39284E1EC800B409E9 /* UserCalorieProgressViewModel.swift */; };
+		7CAE9B3C284E260500B409E9 /* AdminUserCalorieProgress.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CAE9B3B284E260500B409E9 /* AdminUserCalorieProgress.storyboard */; };
+		7CAE9B3E284E330300B409E9 /* UserProgressDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE9B3D284E330300B409E9 /* UserProgressDetailsViewController.swift */; };
+		7CAE9B40284E333D00B409E9 /* UserProgressDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE9B3F284E333D00B409E9 /* UserProgressDetailsViewModel.swift */; };
 		7CB0E179278775B400D6EDA5 /* ChatContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */; };
 		7CB0E17B2787764B00D6EDA5 /* LoginRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */; };
 		7CB37011283570ED0010E8EC /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB37010283570ED0010E8EC /* ObservableObject.swift */; };
@@ -341,6 +346,11 @@
 		7CADF74B278CADDE0020CD83 /* StaticText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StaticText.json; sourceTree = "<group>"; };
 		7CADF74D278CADFF0020CD83 /* Static.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
 		7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticStringsManager.swift; sourceTree = "<group>"; };
+		7CAE9B34284E1C3A00B409E9 /* UserCalorieProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCalorieProgressViewController.swift; sourceTree = "<group>"; };
+		7CAE9B39284E1EC800B409E9 /* UserCalorieProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCalorieProgressViewModel.swift; sourceTree = "<group>"; };
+		7CAE9B3B284E260500B409E9 /* AdminUserCalorieProgress.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminUserCalorieProgress.storyboard; sourceTree = "<group>"; };
+		7CAE9B3D284E330300B409E9 /* UserProgressDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProgressDetailsViewController.swift; sourceTree = "<group>"; };
+		7CAE9B3F284E333D00B409E9 /* UserProgressDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProgressDetailsViewModel.swift; sourceTree = "<group>"; };
 		7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatContainerViewController.swift; sourceTree = "<group>"; };
 		7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginRegister.storyboard; sourceTree = "<group>"; };
 		7CB37010283570ED0010E8EC /* ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
@@ -941,6 +951,33 @@
 			path = "User Details";
 			sourceTree = "<group>";
 		};
+		7CAE9B33284E1C1400B409E9 /* UserProgress */ = {
+			isa = PBXGroup;
+			children = (
+				7CAE9B38284E1C5E00B409E9 /* ViewModel */,
+				7CAE9B36284E1C4400B409E9 /* Controller */,
+			);
+			path = UserProgress;
+			sourceTree = "<group>";
+		};
+		7CAE9B36284E1C4400B409E9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7CAE9B34284E1C3A00B409E9 /* UserCalorieProgressViewController.swift */,
+				7CAE9B3D284E330300B409E9 /* UserProgressDetailsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7CAE9B38284E1C5E00B409E9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7CAE9B39284E1EC800B409E9 /* UserCalorieProgressViewModel.swift */,
+				7CAE9B3F284E333D00B409E9 /* UserProgressDetailsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		7CB3700928354B460010E8EC /* Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -957,6 +994,7 @@
 				7CB37012283573430010E8EC /* Admin.storyboard */,
 				7C2812962847CF0B004385DD /* AdminChat.storyboard */,
 				7C281298284B7E8C004385DD /* AdminMeal.storyboard */,
+				7CAE9B3B284E260500B409E9 /* AdminUserCalorieProgress.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1013,6 +1051,7 @@
 				7CB3700A28354B840010E8EC /* Storyboards */,
 				7CB3700928354B460010E8EC /* Menu */,
 				7C28129A284B7F20004385DD /* UserMeals */,
+				7CAE9B33284E1C1400B409E9 /* UserProgress */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -1422,6 +1461,7 @@
 				7C2812972847CF0C004385DD /* AdminChat.storyboard in Resources */,
 				B38068C725B7197E005C4A24 /* WorkoutTableViewCell.xib in Resources */,
 				7C10BA7D276BCFBE00B5860C /* Assistant-Light.ttf in Resources */,
+				7CAE9B3C284E260500B409E9 /* AdminUserCalorieProgress.storyboard in Resources */,
 				B3B2A252256EE0700052E6C8 /* QuestionnaireFatCollectionViewCell.xib in Resources */,
 				7CB0E17B2787764B00D6EDA5 /* LoginRegister.storyboard in Resources */,
 				7C7434FB25CD9F0000D33A9A /* Chat.storyboard in Resources */,
@@ -1591,6 +1631,7 @@
 				B302982025793BBA00CF41F0 /* UserProgress.swift in Sources */,
 				B3BB8F4125826FEB00D70628 /* QuestionnaireNutritionViewController.swift in Sources */,
 				B36B71922577BF0C001CD393 /* Exercise.swift in Sources */,
+				7CAE9B35284E1C3A00B409E9 /* UserCalorieProgressViewController.swift in Sources */,
 				B368DF4F25A5F24E00BD1937 /* GoogleApiManager.swift in Sources */,
 				7CFA85CF26ED1A8A00296B53 /* WeightsManager.swift in Sources */,
 				7C7434F525CD9DD700D33A9A /* ChatViewController.swift in Sources */,
@@ -1605,12 +1646,14 @@
 				7C9F7BF4283EA32B006868F4 /* UserDetailsViewModel.swift in Sources */,
 				7C32C588278E370500B97642 /* PopupAlertView.swift in Sources */,
 				7C182FE4279DF26B00796693 /* ChatViewModel.swift in Sources */,
+				7CAE9B3E284E330300B409E9 /* UserProgressDetailsViewController.swift in Sources */,
 				B3DB753525A09133002CF48B /* Double+Extensions.swift in Sources */,
 				7CE086272761482A00BF3CF3 /* ProjectColors.swift in Sources */,
 				7C74357D25D0824D00D33A9A /* User.swift in Sources */,
 				7CADF750278CAEBC0020CD83 /* StaticStringsManager.swift in Sources */,
 				7C481C7226FA1883002FB8BF /* MealsManager.swift in Sources */,
 				7C5262BF25BC79B200694007 /* SettingsViewController.swift in Sources */,
+				7CAE9B40284E333D00B409E9 /* UserProgressDetailsViewModel.swift in Sources */,
 				7C1ACCE7266F8D19008079C9 /* CommentsViewController.swift in Sources */,
 				7CE1ED0F277126B800337304 /* ExpandableSectionData.swift in Sources */,
 				7CE1ED0D2771100A00337304 /* CollapsibleTableViewCell.swift in Sources */,
@@ -1677,6 +1720,7 @@
 				7C0F703C276CEA8600964004 /* SettingsTableViewCell.swift in Sources */,
 				7CB37018283576FA0010E8EC /* UsersListViewModel.swift in Sources */,
 				7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */,
+				7CAE9B3A284E1EC800B409E9 /* UserCalorieProgressViewModel.swift in Sources */,
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
 				7C83152525E053B100335601 /* ExerciseCategoryView.swift in Sources */,
 				7C10BA70276BCB9C00B5860C /* UINavigationController+Extensions.swift in Sources */,
