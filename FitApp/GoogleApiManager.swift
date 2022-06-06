@@ -105,6 +105,31 @@ struct GoogleApiManager {
 			}
 		}
 	}
+	func getUserOrderData(userID: String? = nil, completion: @escaping (Result<[String: CaloriesProgressState]?, Error>) -> Void) {
+		db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-calories-progress").getDocuments {
+			data, error in
+			
+			var calorieCalculationList = [String: CaloriesProgressState]()
+			
+			if let error = error {
+				completion(.failure(error))
+				return
+			} else if let data = data {
+				
+				for document in data.documents {
+					var documentData: CaloriesProgressState?
+					do {
+						documentData = try document.data(as: CaloriesProgressState.self)
+					} catch {
+						completion(.failure(error))
+					}
+					
+					calorieCalculationList[document.documentID] = documentData
+				}
+				completion(.success(calorieCalculationList))
+			}
+		}
+	}
 	
 	//MARK: - Meals
 	func createDailyMeal(meals: [Meal], date: Date) {
