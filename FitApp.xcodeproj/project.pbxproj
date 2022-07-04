@@ -142,6 +142,9 @@
 		7CE1ED132773633500337304 /* CollapsibleTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE1ED122773633500337304 /* CollapsibleTableViewHeader.xib */; };
 		7CE1ED1527737A5C00337304 /* CollapsibleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE1ED1427737A5C00337304 /* CollapsibleTableViewCell.xib */; };
 		7CE1ED1627738D3700337304 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA03256D69CB009AD87C /* Assets.xcassets */; };
+		7CE9BB702871F3D600FB3328 /* UserAdminCommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE9BB6F2871F3D600FB3328 /* UserAdminCommentsTableViewController.swift */; };
+		7CE9BB732871F79300FB3328 /* UserCommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE9BB722871F79300FB3328 /* UserCommentsTableViewCell.swift */; };
+		7CE9BB752871F89000FB3328 /* UserAdminCommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE9BB742871F89000FB3328 /* UserAdminCommentsViewModel.swift */; };
 		7CFA5FF7262A0F5800A3F401 /* MoveDishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */; };
 		7CFA5FFF262A10E600A3F401 /* MoveDishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */; };
 		7CFA85CB26ECDEA000296B53 /* WeightAlertsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */; };
@@ -377,6 +380,9 @@
 		7CE1ED0E277126B800337304 /* ExpandableSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableSectionData.swift; sourceTree = "<group>"; };
 		7CE1ED122773633500337304 /* CollapsibleTableViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollapsibleTableViewHeader.xib; sourceTree = "<group>"; };
 		7CE1ED1427737A5C00337304 /* CollapsibleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollapsibleTableViewCell.xib; sourceTree = "<group>"; };
+		7CE9BB6F2871F3D600FB3328 /* UserAdminCommentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAdminCommentsTableViewController.swift; sourceTree = "<group>"; };
+		7CE9BB722871F79300FB3328 /* UserCommentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCommentsTableViewCell.swift; sourceTree = "<group>"; };
+		7CE9BB742871F89000FB3328 /* UserAdminCommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAdminCommentsViewModel.swift; sourceTree = "<group>"; };
 		7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoveDishView.xib; sourceTree = "<group>"; };
 		7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDishView.swift; sourceTree = "<group>"; };
 		7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightAlertsManager.swift; sourceTree = "<group>"; };
@@ -1004,6 +1010,7 @@
 			children = (
 				7CB370152835767A0010E8EC /* UsersListViewController.swift */,
 				7C9F7BF1283E9F7B006868F4 /* UserDetailsViewController.swift */,
+				7CE9BB6F2871F3D600FB3328 /* UserAdminCommentsTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1013,6 +1020,7 @@
 			children = (
 				7CB37017283576FA0010E8EC /* UsersListViewModel.swift */,
 				7C9F7BF3283EA32B006868F4 /* UserDetailsViewModel.swift */,
+				7CE9BB742871F89000FB3328 /* UserAdminCommentsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1020,6 +1028,7 @@
 		7CB3701A28358CD50010E8EC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				7CE9BB712871F77500FB3328 /* Comments */,
 				7C9F7BF72843B980006868F4 /* User Details */,
 				7CB3701B28358CE10010E8EC /* Menu */,
 			);
@@ -1090,6 +1099,14 @@
 				7CE1ED1427737A5C00337304 /* CollapsibleTableViewCell.xib */,
 			);
 			path = CollapsibleTableViewCell;
+			sourceTree = "<group>";
+		};
+		7CE9BB712871F77500FB3328 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				7CE9BB722871F79300FB3328 /* UserCommentsTableViewCell.swift */,
+			);
+			path = Comments;
 			sourceTree = "<group>";
 		};
 		7CFA5FF5262A0F1C00A3F401 /* MoveDishView */ = {
@@ -1696,6 +1713,7 @@
 				7C33B65F26690A3800E16A1C /* Notification.swift in Sources */,
 				7C1ACD0C2670D170008079C9 /* AddMealAlertView.swift in Sources */,
 				B35111CA25962D41001B2B9B /* weightTableViewCell.swift in Sources */,
+				7CE9BB752871F89000FB3328 /* UserAdminCommentsViewModel.swift in Sources */,
 				7C74350325CDBAE900D33A9A /* ChatsViewModel.swift in Sources */,
 				7CCC0E67262B2E79006E2E35 /* TableViewEmptyView.swift in Sources */,
 				B330B88F257583D200BDB206 /* ExercisesTableViewController.swift in Sources */,
@@ -1711,6 +1729,7 @@
 				7C567110277F43C400B7346A /* QuestionnaireGanderViewController.swift in Sources */,
 				7CFA85CB26ECDEA000296B53 /* WeightAlertsManager.swift in Sources */,
 				7C7C38202790B6EA0075B64A /* CollapsibleSpreadsheetTableViewCell.swift in Sources */,
+				7CE9BB702871F3D600FB3328 /* UserAdminCommentsTableViewController.swift in Sources */,
 				7C1ACD042670C25B008079C9 /* AddingTableViewCell.swift in Sources */,
 				7C54164B269D923800C22859 /* ErrorManager.swift in Sources */,
 				B38397FB25B4A21F00154697 /* Workout.swift in Sources */,
@@ -1727,6 +1746,7 @@
 				7C28129E284B8386004385DD /* UserMealsViewController.swift in Sources */,
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
 				7C54164D269D951C00C22859 /* LoginViewModel.swift in Sources */,
+				7CE9BB732871F79300FB3328 /* UserCommentsTableViewCell.swift in Sources */,
 				7CB3701E28358D180010E8EC /* AdminUserMenuTableViewCell.swift in Sources */,
 				7CFE0C0E276936330077D16F /* BounceNavigationBarView.swift in Sources */,
 				7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */,

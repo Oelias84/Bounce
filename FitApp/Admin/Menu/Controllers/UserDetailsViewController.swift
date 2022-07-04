@@ -35,6 +35,18 @@ final class UserDetailsViewController: UIViewController {
 	
 	@IBOutlet weak private var tableView: UITableView!
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == K.SegueId.moveToAdminComment {
+			if let userAdminCommentsVC = segue.destination as? UserAdminCommentsTableViewController {
+				
+				userAdminCommentsVC.modalPresentationStyle = .fullScreen
+				userAdminCommentsVC.navigationItem.largeTitleDisplayMode = .always
+				
+				userAdminCommentsVC.viewModel = UserAdminCommentsViewModel(userUID: viewModel.getUserId)
+			}
+		}
+	}
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		

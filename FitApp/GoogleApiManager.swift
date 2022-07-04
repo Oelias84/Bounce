@@ -321,6 +321,34 @@ struct GoogleApiManager {
 			}
 		}
 	}
+	func updateUserAdminComment(userUID: String, comments: UserAdminCommentsData, completion: ((Error?) -> Void)? = nil) {
+		do {
+			try db.collection("users").document(userUID).collection("user-admin-comments").document("comments").setData(from: comments.self, merge: true, completion: completion)
+		} catch {
+			print(error)
+			completion!(error)
+		}
+	}
+	func getUserAdminComments(userUID: String, completion: @escaping (Result<UserAdminCommentsData?, Error>) -> Void) {
+		do {
+			db.collection("users").document(userUID).collection("user-admin-comments").document("comments").addSnapshotListener{ documentSnapshot, error in
+				guard let data = documentSnapshot else {
+					print("Error fetching document: \(error!)")
+					completion(.failure(error!))
+					return
+				}
+				
+				do {
+					let adminUserComment = try data.data(as: UserAdminCommentsData.self)
+					completion(.success(adminUserComment))
+				} catch {
+					print(error)
+					completion(.failure(error))
+				}
+				print("Current data: \(data)")
+			}
+		}
+	}
 	
 	//MARK: - Workouts
 	func getWorkouts(forFitnessLevel: Int, completion: @escaping (Result<[Workout], Error>) -> Void) {

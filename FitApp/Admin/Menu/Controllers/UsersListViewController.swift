@@ -79,8 +79,8 @@ extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
 extension UsersListViewController: PopupAlertViewDelegate {
 	
 	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
-		if let textFieldValue = textFieldValue {
-			viewModel.sendBroadcastMessage(text: textFieldValue)
+		if let text = textFieldValue {
+			viewModel.sendBroadcastMessage(text: text)
 		}
 	}
 	func cancelButtonTapped(alertNumber: Int) {
@@ -108,6 +108,7 @@ extension UsersListViewController {
 					Spinner.shared.stop()
 				}
 			}
+			Spinner.shared.stop()
 		}
 	}
 	private func moveToUserDetails(userData: Chat) {

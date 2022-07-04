@@ -113,6 +113,7 @@ struct K {
 		static let chatViewController = "ChatViewController"
 		static let userMealViewController = "UserMealViewController"
 		static let userCalorieProgressViewController = "UserCalorieProgressViewController"
+		static let userCommentsTableViewController = "UserCommentsTableViewController"
 	}
 	
 	struct NavigationId {
@@ -142,6 +143,7 @@ struct K {
 		//Admin
 		static let moveToUserDetails = "moveToUserDetails"
 		static let moveToUserProgressDetails = "moveToUserProgressDetails"
+		static let moveToAdminComment = "moveToAdminComment"
     }
     
     struct CellId {
@@ -175,6 +177,7 @@ struct K {
 		static let adminUserMenuCell = "adminUserMenuCell"
 		static let userDetailCell = "userDetailTableViewCell"
 		static let adminUserMealCell = "adminUserMealCell"
+		static let userCommentsCell = "userCommentsCell"
     }
 	
     struct NibName {

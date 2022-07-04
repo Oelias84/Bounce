@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 
+
 enum PopupType {
 	
 	case normal
@@ -26,6 +27,7 @@ class PopupAlertView: UIViewController {
 	
 	var alertNumber: Int = 1
 	var popupType: PopupType = .normal
+	let defaultText = "כתבו את תוכן ההודעה…"
 	private var didChangeHeightKeyboard = false
 
 	@IBOutlet weak var alertView: UIView!
@@ -52,6 +54,7 @@ class PopupAlertView: UIViewController {
 		
 	var titleText: String?
 	var messageText: String?
+	var textBoxText: String?
 	var okButtonText: String?
 	var cancelButtonText: String?
 	var doNotShowText: String?
@@ -110,6 +113,8 @@ class PopupAlertView: UIViewController {
 	
 	@IBAction func onTapOkButton(_ sender: UIButton) {
 		textBox.resignFirstResponder()
+		if textBox.text == defaultText { textBox.text = nil }
+		
 		delegate?.okButtonTapped(alertNumber: alertNumber,
 								 selectedOption: nil,
 								 textFieldValue: popupType == .textBox ? textBox.text : textField.text)
@@ -131,14 +136,14 @@ class PopupAlertView: UIViewController {
 extension PopupAlertView: UITextViewDelegate  {
 	
 	func textViewDidBeginEditing(_ textView: UITextView) {
-		if textBox.textColor == UIColor.lightGray {
+		if textBox.textColor == UIColor.lightGray && textBoxText == nil {
 			textBox.text = ""
 			textBox.textColor = .black
 		}
 	}
 	func textViewDidEndEditing(_ textView: UITextView) {
 		if textBox.text == "" {
-			textBox.text = "כתבו את תוכן ההודעה…"
+			textBox.text = defaultText
 			textBox.textColor = .lightGray
 		}
 	}
@@ -168,8 +173,14 @@ extension PopupAlertView {
 	}
 	private func setupTextView() {
 		textBox.delegate = self
-		textBox.text = "כתבו את תוכן ההודעה…"
-		textBox.textColor = .lightGray
+		
+		if textBoxText != nil {
+			textBox.text = textBoxText
+			textBox.textColor = .black
+		} else {
+			textBox.text = defaultText
+			textBox.textColor = .lightGray
+		}
 		
 		textField.delegate = self
 		textField.addPadding(padding: .right(4))
