@@ -106,7 +106,7 @@ struct GoogleApiManager {
 		}
 	}
 	func getUserCaloriesProgressData(userID: String? = nil, completion: @escaping (Result<[String: CaloriesProgressState]?, Error>) -> Void) {
-		db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-calories-progress").getDocuments {
+		db.collection("users").document(userID ?? Auth.auth().currentUser!.uid).collection("user-calories-progress").getDocuments {
 			data, error in
 			
 			var calorieCalculationList = [String: CaloriesProgressState]()
