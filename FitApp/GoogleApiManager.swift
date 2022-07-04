@@ -105,11 +105,11 @@ struct GoogleApiManager {
 			}
 		}
 	}
-	func getUserCaloriesProgressData(userID: String? = nil, completion: @escaping (Result<[String: CaloriesProgressState]?, Error>) -> Void) {
+	func getUserCaloriesProgressData(userID: String? = nil, completion: @escaping (Result<[CaloriesProgressState]?, Error>) -> Void) {
 		db.collection("users").document(userID ?? Auth.auth().currentUser!.uid).collection("user-calories-progress").getDocuments {
 			data, error in
 			
-			var calorieCalculationList = [String: CaloriesProgressState]()
+			var calorieCalculationList = [CaloriesProgressState]()
 			
 			if let error = error {
 				completion(.failure(error))
@@ -117,14 +117,13 @@ struct GoogleApiManager {
 			} else if let data = data {
 				
 				for document in data.documents {
-					var documentData: CaloriesProgressState?
 					do {
-						documentData = try document.data(as: CaloriesProgressState.self)
+						if let documentData = try document.data(as: CaloriesProgressState.self) {
+							calorieCalculationList.append(documentData)
+						}
 					} catch {
 						completion(.failure(error))
 					}
-					
-					calorieCalculationList[document.documentID] = documentData
 				}
 				completion(.success(calorieCalculationList))
 			}

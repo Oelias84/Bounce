@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct CaloriesProgressState: Codable {
-	
+struct CaloriesProgressState: Codable, Comparable {
+
 	let date: Date
 	let differenceBetweenAverageWeight: Double
 	let differenceBetweenAverageWeightPercentage: Double
@@ -33,5 +33,9 @@ struct CaloriesProgressState: Codable {
 		self.firstWeekAverageWeight = firstWeekAverageWeight
 		self.secondWeekAverageWeight = secondWeekAverageWeight
 		self.userCaloriesBetweenConsumedAndGiven = userCaloriesBetweenConsumedAndGiven
+	}
+	
+	static func < (lhs: CaloriesProgressState, rhs: CaloriesProgressState) -> Bool {
+		lhs.date > rhs.date
 	}
 }

@@ -33,7 +33,7 @@ class UserAdminComment: Codable, Comparable {
 	
 	static func < (lhs: UserAdminComment, rhs: UserAdminComment) -> Bool {
 		
-		return lhs.commentDate.fullDateFromString! < rhs.commentDate.fullDateFromString!
+		return lhs.commentDate.fullDateFromString! > rhs.commentDate.fullDateFromString!
 	}
 	static func == (lhs: UserAdminComment, rhs: UserAdminComment) -> Bool {
 		true

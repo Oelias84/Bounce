@@ -42,7 +42,7 @@ extension UserAdminCommentsViewModel {
 			
 			switch result {
 			case .success(let data):
-				self.comments.value = data?.comments
+				self.comments.value = data?.comments.sorted()
 			case .failure(let error):
 				print("Error:", error.localizedDescription)
 			}

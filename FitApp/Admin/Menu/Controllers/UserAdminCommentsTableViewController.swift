@@ -132,7 +132,6 @@ extension UserAdminCommentsTableViewController: PopupAlertViewDelegate  {
 		switch alertNumber {
 		case 1:
 			guard let selectedCellRow = selectedEditCellIndex?.row else { return }
-			let cellData = viewModel.getCommentsFor(row: selectedCellRow)
 			viewModel.updateComment(text: commentText, row: selectedCellRow)
 		default:
 			viewModel.addNewComment(with: commentText) { error in

@@ -10,7 +10,7 @@ import Foundation
 final class UserCalorieProgressViewModel {
 	
 	var userID: String!
-	var userProgress: ObservableObject<[String: CaloriesProgressState]?> = ObservableObject(nil)
+	var userProgress: ObservableObject<[CaloriesProgressState]?> = ObservableObject(nil)
 	
 	init(userID: String) {
 		self.userID = userID
@@ -25,10 +25,10 @@ final class UserCalorieProgressViewModel {
 		return userProgress.value?.count ?? 0
 	}
 	func getTitle(at row: Int) -> String {
-		return Array(userProgress.value!.keys)[row]
+		return userProgress.value?[row].date.dateStringDisplay ?? "no date"
 	}
 	func getProgressData(at row: Int) -> CaloriesProgressState {
-		return Array(userProgress.value!.values)[row]
+		return userProgress.value![row]
 	}
 }
 
@@ -41,7 +41,7 @@ extension UserCalorieProgressViewModel {
 			
 			switch result {
 			case .success(let data):
-				guard let data = data else { return }
+				guard let data = data?.sorted() else { return }
 				
 				self.userProgress.value = data
 			case .failure(let error):
