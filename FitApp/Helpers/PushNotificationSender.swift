@@ -17,7 +17,9 @@ class PushNotificationSender {
 		
 		let paramString: [String : Any] = [
 			"to" : token,
-			"notification" : ["title" : title, "body" : body],
+			"notification" : ["title" : title,
+							  "body" : body,
+							  "sound" : "default"],
 			"data" : ["id" : Auth.auth().currentUser?.uid ?? ""]
 		]
 
