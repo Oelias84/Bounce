@@ -16,9 +16,11 @@ class PushNotificationSender {
 		guard let url = URL(string: "https://fcm.googleapis.com/fcm/send") else { return }
 		
 		let paramString: [String : Any] = [
-			"to" : token,
-			"notification" : ["title" : title, "body" : body],
-			"data" : ["id" : Auth.auth().currentUser?.uid ?? ""]
+			"to": token,
+			"notification": ["title": title,
+							  "body": body,
+							  "sound": "default"],
+			"data": ["id": Auth.auth().currentUser?.uid ?? ""]
 		]
 
 		let urlRequest:URLRequest = {
