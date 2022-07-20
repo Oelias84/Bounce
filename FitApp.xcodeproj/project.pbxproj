@@ -617,14 +617,14 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
-		7C74353925D07DBD00D33A9A /* GoogleServices */ = {
+		7C74353925D07DBD00D33A9A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
 				B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */,
 				7C74352C25D056A900D33A9A /* GoogleStorageManager.swift */,
 				7C74353125D07DB800D33A9A /* GoogleDatabaseManager.swift */,
 			);
-			name = GoogleServices;
+			name = Networking;
 			sourceTree = "<group>";
 		};
 		7C7435E025D31A0600D33A9A /* ChatTabelViewCell */ = {
@@ -694,6 +694,7 @@
 				B3B2A245256EDDCA0052E6C8 /* Views */,
 				7C89AA6D256D70FE009AD87C /* Helpers */,
 				7C89AA6C256D70E5009AD87C /* Extention */,
+				7C74353925D07DBD00D33A9A /* Networking */,
 				7C89AA7C256D717F009AD87C /* Resources */,
 			);
 			path = FitApp;
@@ -784,7 +785,6 @@
 				7C10BA74276BCFAF00B5860C /* Assistant-VariableFont_wght.ttf */,
 				7C89AA03256D69CB009AD87C /* Assets.xcassets */,
 				B367F17725B1BDF600DF21D7 /* DishesGenerator.swift */,
-				7C74353925D07DBD00D33A9A /* GoogleServices */,
 				7CBBF1F0281C54F000EE55F1 /* Configuration.storekit */,
 			);
 			name = Resources;
