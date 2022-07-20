@@ -48,7 +48,12 @@ struct GoogleApiManager {
 	}
 	
 	//MARK: - UserData
-	func updateUserData(userData: ServerUserData) {
+	func deleteUser() {
+		guard let user = Auth.auth().currentUser else { return }
+		db.collection("users").document(user.uid).delete()
+		user.delete()
+	}
+ 	func updateUserData(userData: ServerUserData) {
 		do {
 			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("data").setData(from: userData, merge: true)
 		} catch {
