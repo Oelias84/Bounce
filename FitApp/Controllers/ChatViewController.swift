@@ -155,6 +155,17 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		}
 	}
 	//Cell delegate
+
+	func didTapMessage(in cell: MessageCollectionViewCell) {
+		guard let indexPath = messagesCollectionView.indexPath(for: cell) else { return }
+		let message = viewModel.getMessageAt(indexPath)
+		switch message.kind {
+		case .linkPreview(let linkItem):
+			UIApplication.shared.open(linkItem.url)
+		default:
+			break
+		}
+	}
 	func didTapImage(in cell: MessageCollectionViewCell) {
 		messagesCollectionView.endEditing(true)
 		guard let indexPath = messagesCollectionView.indexPath(for: cell) else { return }
@@ -367,3 +378,14 @@ extension ChatViewController {
 	}
 }
 
+extension String {
+	var isValidURL: Bool {
+		let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+		if let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count)) {
+			// it is a link, if the match covers the whole string
+			return match.range.length == self.utf16.count
+		} else {
+			return false
+		}
+	}
+}

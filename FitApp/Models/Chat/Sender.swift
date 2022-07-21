@@ -23,3 +23,13 @@ struct Media: MediaItem {
 	var placeholderImage: UIImage
 	var size: CGSize
 }
+
+struct LinkedItem: LinkItem {
+	
+	var text: String?
+	var attributedText: NSAttributedString?
+	var url: URL
+	var title: String?
+	var teaser: String
+	var thumbnailImage: UIImage
+}
