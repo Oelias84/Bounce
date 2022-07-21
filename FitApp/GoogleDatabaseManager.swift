@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import MessageKit
+import AVFoundation
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseMessaging
@@ -278,7 +279,18 @@ final class GoogleDatabaseManager {
 			switch type {
 				
 			case "TEXT":
-				kind = .text(content)
+				if let url = findIfURLExistIn(content) {
+					let attributedString = NSMutableAttributedString(string: content)
+					attributedString.addAttribute(.link, value: content,
+												  range: NSRange(location: 0, length: Array(url.absoluteString).count))
+					print(attributedString)
+					let linkedItem = LinkedItem(text: "!ליחצו על הלינק", attributedText: attributedString, url: url,
+												title: url.absoluteString, teaser: "ליחצו על הלינק",
+												thumbnailImage: UIImage(systemName: "safari")!)
+					kind = .linkPreview(linkedItem)
+				} else {
+					kind = .text(content)
+				}
 			case "PHOTO":
 				if let base64BitmapData = messageData["media_preview"] as? String, base64BitmapData != "", let placeHolder: UIImage = convertBase64StringToImage(imageBase64String: base64BitmapData) {
 					let media = Media(mediaURLString: mediaPath, placeholderImage: placeHolder, size: CGSize(width: 150, height: 150))
@@ -377,6 +389,30 @@ final class GoogleDatabaseManager {
 		if let imageData = Data(base64Encoded: imageBase64String, options: .init(rawValue: 0)) {
 			let image = UIImage(data: imageData)
 			return image
+		}
+		return nil
+	}
+	func getThumbnailImage(forUrl url: URL) -> UIImage? {
+		let asset: AVAsset = AVAsset(url: url)
+		let imageGenerator = AVAssetImageGenerator(asset: asset)
+
+		do {
+			let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60), actualTime: nil)
+			return UIImage(cgImage: thumbnailImage)
+		} catch let error {
+			print(error)
+		}
+
+		return nil
+	}
+	func findIfURLExistIn(_ input: String) -> URL? {
+		let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+		let matches = detector.matches(in: input, options: [], range: NSRange(location: 0, length: input.utf16.count))
+
+		for match in matches {
+			guard let range = Range(match.range, in: input) else { continue }
+			let url = input[range]
+			return URL(string: String(url))
 		}
 		return nil
 	}
