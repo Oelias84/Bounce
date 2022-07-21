@@ -233,6 +233,30 @@
 			"key": "39",
 			"male": "תזכורת קטנה להישקל היום 🙂 מומלץ להישקל בשעות הבוקר לפני שאתה מתחיל את היום.",
 			"female": "תזכורת קטנה להישקל היום 🙂 מומלץ להישקל בשעות הבוקר לפני שאת מתחילה את היום.",
+		},
+		{
+			"name": "delete_account_button",
+			"key": "40",
+			"male": "מחק חשבון",
+			"female": "מחק חשבון",
+		},
+		{
+			"name": "delete_account_title",
+			"key": "41",
+			"male": "מחיקת חשבון!",
+			"female": "מחיקת חשבון!",
+		},
+		{
+			"name": "delete_account",
+			"key": "42",
+			"male": "האם ברצונך למחוק את חשבונך?\n פעולה זו תמחק את כול המידע שלך לצמיתות",
+			"female": "האם ברצונך למחוק את חשבונך?\n פעולה זו תמחק את כול המידע שלך לצמיתות",
+		},
+		{
+			"name": "delete_account",
+			"key": "43",
+			"male": "מחיקה ניכשלה אנה נסה במועד מאוחר יותר",
+			"female": "מחיקה ניכשלה אנה נסי במועד מאוחר יותר",
 		}
 	]
 }

@@ -156,7 +156,16 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 			stepperCell.settingsCellData = tableViewData[.fitness]![indexPath.row]
 			stepperCell.infoButton.isHidden = !(indexPath.row == 2)
 		case 3:
-			stepperCell.settingsCellData = tableViewData[.system]![indexPath.row]
+			//System
+			switch indexPath.row {
+			case 0:
+				stepperCell.settingsCellData = tableViewData[.system]![indexPath.row]
+			default:
+				stepperCell.settingsCellData = tableViewData[.system]![indexPath.row]
+				stepperCell.titleLabel.textColor = .red
+				stepperCell.labelStackView.isHidden = true
+				stepperCell.titleLabel.font = UIFont(name: "Assistant-SemiBold", size: 14.0)
+			}
 		default:
 			return UITableViewCell()
 		}
@@ -239,7 +248,7 @@ extension SettingsViewController: BounceNavigationBarDelegate {
 //MARK: - Functions
 extension SettingsViewController {
 	
-	private func setupTopBar() {
+	fileprivate func setupTopBar() {
 		
 		topBarView.delegate = self
 		topBarView.nameTitle = "הגדרות"
@@ -249,19 +258,18 @@ extension SettingsViewController {
 		topBarView.isDayWelcomeHidden = true
 		topBarView.isProfileButtonHidden = false
 	}
-	private func registerCells() {
+	fileprivate func registerCells() {
 		tableView.delegate = self
 		tableView.dataSource = self
 		tableView.register(UINib(nibName: K.NibName.SettingsTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.settingCell)
 	}
-	private func setupTableViewData() {
+	fileprivate func setupTableViewData() {
 		
 		let setupNumberOfMealsStepper = setupNumberOfMealsStepper()
 		let setupNumberOfTrainingsStepper = setupNumberOfTrainingsStepper()
 		let setupNumberOfExternalTrainingsStepper = setupNumberOfExternalTrainingsStepper()
 		
-		tableViewData =
-		[
+		tableViewData = [
 			.activity: [SettingsCell(title: "רמת פעילות", secondaryTitle: setupActivityTitle())],
 			
 				.nutrition: [SettingsCell(title: "מספר ארוחות", stepperValue: setupNumberOfMealsStepper.2, stepperMin: setupNumberOfMealsStepper.0, stepperMax: setupNumberOfMealsStepper.1),
@@ -272,12 +280,13 @@ extension SettingsViewController {
 						   SettingsCell(title: "מספר אימונים שבועי חיצוני", stepperValue: setupNumberOfExternalTrainingsStepper.2, stepperMin: setupNumberOfExternalTrainingsStepper.0, stepperMax: setupNumberOfExternalTrainingsStepper.1)],
 			
 				.system: [SettingsCell(title: "התראות", secondaryTitle: ""),
-						  SettingsCell(title:  StaticStringsManager.shared.getGenderString?[22] ?? "", secondaryTitle: "")]
+						  SettingsCell(title:  StaticStringsManager.shared.getGenderString?[22] ?? "", secondaryTitle: ""),
+						  SettingsCell(title:  StaticStringsManager.shared.getGenderString?[40] ?? "", secondaryTitle: "")]
 		]
 		tableView.reloadData()
 	}
 	
-	private func setupActivityTitle() -> String {
+	fileprivate func setupActivityTitle() -> String {
 		if let steps = userData.steps {
 			return "\(steps) צעדים"
 		} else if let kilometers = userData.kilometer {
@@ -286,7 +295,7 @@ extension SettingsViewController {
 			return UserProfile.getLifeStyleText()
 		}
 	}
-	private func setupMostHungryTitle() -> String {
+	fileprivate func setupMostHungryTitle() -> String {
 		var hungerTitle: String {
 			switch userData.mostHungry  {
 			case 1:
@@ -301,7 +310,7 @@ extension SettingsViewController {
 		}
 		return hungerTitle
 	}
-	private func setupFitnessLevelTitle() -> String {
+	fileprivate func setupFitnessLevelTitle() -> String {
 		
 		var fitnessTitle: String {
 			switch userData.fitnessLevel  {
@@ -318,13 +327,13 @@ extension SettingsViewController {
 		return fitnessTitle
 	}
 	
-	private func setupNumberOfMealsStepper() -> (Int,Int,Double) {
+	fileprivate func setupNumberOfMealsStepper() -> (Int,Int,Double) {
 		if let meals = userData.mealsPerDay {
 			return (3, 5, Double(meals))
 		}
 		return (0, 0, 0)
 	}
-	private func setupNumberOfTrainingsStepper() -> (Int,Int,Double) {
+	fileprivate func setupNumberOfTrainingsStepper() -> (Int,Int,Double) {
 		var min = 0
 		var max = 0
 		
@@ -346,7 +355,7 @@ extension SettingsViewController {
 		}
 		return (min, max, 0)
 	}
-	private func setupNumberOfExternalTrainingsStepper() -> (Int,Int,Double) {
+	fileprivate func setupNumberOfExternalTrainingsStepper() -> (Int,Int,Double) {
 		let min = 0
 		let max = 3
 		
@@ -356,20 +365,20 @@ extension SettingsViewController {
 		return (min, max, 0)
 	}
 	
-	private func mealStepperAction(_ value: Double) {
+	fileprivate func mealStepperAction(_ value: Double) {
 		UserProfile.defaults.mealsPerDay = Int(value)
 		UserProfile.updateServer()
 	}
-	private func workoutStepperAction(_ value: Double) {
+	fileprivate func workoutStepperAction(_ value: Double) {
 		UserProfile.defaults.weaklyWorkouts = Int(value)
 		UserProfile.updateServer()
 	}
-	private func externalWorkoutAction(_ value: Double) {
+	fileprivate func externalWorkoutAction(_ value: Double) {
 		UserProfile.defaults.externalWorkout = Int(value)
 		UserProfile.updateServer()
 	}
 	
-	private func systemTappedAt(_ row: Int) {
+	fileprivate func systemTappedAt(_ row: Int) {
 		switch row {
 		case 0:
 			let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
@@ -378,11 +387,13 @@ extension SettingsViewController {
 			self.navigationController?.pushViewController(vc, animated: true)
 		case 1:
 			presentLogoutAlert()
+		case 2:
+			presentDeleteAccountAlert()
 		default:
 			break
 		}
 	}
-	private func personalDetailsTappedAt() {
+	fileprivate func personalDetailsTappedAt() {
 		let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
 		let activityLevelVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireForth)
 		as! QuestionnaireActivityViewController
@@ -390,7 +401,7 @@ extension SettingsViewController {
 		activityLevelVC.isFromSettings = true
 		navigationController?.pushViewController(activityLevelVC, animated: true)
 	}
-	private func nutritionDetailsTappedAt(_ row: Int) {
+	fileprivate func nutritionDetailsTappedAt(_ row: Int) {
 		switch row {
 		case 1:
 			let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
@@ -401,7 +412,7 @@ extension SettingsViewController {
 			break
 		}
 	}
-	private func fitnessLevelDetailsTappedAt(_ row: Int) {
+	fileprivate func fitnessLevelDetailsTappedAt(_ row: Int) {
 		switch row {
 		case 0:
 			let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
@@ -413,7 +424,7 @@ extension SettingsViewController {
 		}
 	}
 	
-	private func sendSupportEmail() {
+	fileprivate func sendSupportEmail() {
 		let subject = ""
 		let messageBody = "<h1>יש לכתוב כאן את ההודעה</h1>"
 		let mailVC = MailComposerViewController(recipients: ["Fitappsupport@gmail.com"], subject: subject, messageBody: messageBody, messageBodyIsHtml: true)
@@ -421,7 +432,7 @@ extension SettingsViewController {
 		present(mailVC, animated: true)
 	}
 	
-	private func saveImage(_ image: UIImage) {
+	fileprivate func saveImage(_ image: UIImage) {
 		guard let userId = Auth.auth().currentUser?.uid else { return }
 		topBarView.userProfileButton.isEnabled = false
 		let profileImagePath = "\(userId)/profile_image.jpeg"
@@ -445,7 +456,7 @@ extension SettingsViewController {
 			}
 		}
 	}
-	private func saveUserImage(image: UIImage, for url: String, completion: @escaping (Result<URL, Error>) -> Void) {
+	fileprivate func saveUserImage(image: UIImage, for url: String, completion: @escaping (Result<URL, Error>) -> Void) {
 		let storageManager = GoogleStorageManager.shared
 		
 		DispatchQueue.global(qos: .userInteractive).async {
@@ -453,6 +464,40 @@ extension SettingsViewController {
 				storageManager.downloadURL(path: url,completion: completion)
 			}
 		}
+	}
+	fileprivate func presentDeleteAccountAlert() {
+		Spinner.shared.show(view)
+		let deleteAlert = UIAlertController(title: StaticStringsManager.shared.getGenderString?[41] ?? "",
+											 message: StaticStringsManager.shared.getGenderString?[42] ?? "", preferredStyle: .alert)
+		deleteAlert.addTextField { emailTextField in
+			emailTextField.placeholder = "הזן אימייל"
+			emailTextField.textAlignment = .center
+		}
+		deleteAlert.addTextField { emailTextField in
+			emailTextField.placeholder = "הזן סיסמה"
+			emailTextField.textAlignment = .center
+		}
+		deleteAlert.addAction(UIAlertAction(title: StaticStringsManager.shared.getGenderString?[40] ?? "", style: .default) { _ in
+			let email = deleteAlert.textFields?[0].text
+			let password = deleteAlert.textFields?[1].text
+			
+			if let email = email, email.isValidEmail, let password = password {
+				GoogleApiManager.shared.deleteUser(email: email, password: password) {
+					error in
+					Spinner.shared.stop()
+					if let error = error {
+						self.presentOkAlert(withMessage: error.localizedDescription)
+					} else {
+						exit(0)
+					}
+				}
+			} else {
+				Spinner.shared.stop()
+				self.presentOkAlert(withMessage: "נראה כי הפרטים שהוזנו אינם נכונים, אנא נסו שנית")
+			}
+		})
+		deleteAlert.addAction(UIAlertAction(title: "ביטול", style: .cancel))
+		present(deleteAlert, animated: true)
 	}
 }
 

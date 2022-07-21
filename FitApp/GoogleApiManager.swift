@@ -48,12 +48,34 @@ struct GoogleApiManager {
 	}
 	
 	//MARK: - UserData
-	func deleteUser() {
-		guard let user = Auth.auth().currentUser else { return }
-		db.collection("users").document(user.uid).delete()
-		user.delete()
+	func deleteUser(email: String, password: String, completion: @escaping ((Error?) -> Void)) {
+		let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+		
+		Auth.auth().currentUser?.reauthenticate(with: credential) {
+			data, error in
+			
+			if error != nil {
+				completion(error)
+			}
+			Auth.auth().currentUser?.delete {
+				error in
+				
+				if error != nil {
+					completion(error)
+				}
+				completion(nil)
+			}
+			//			db.collection("users").document(Auth.auth().currentUser!.uid).delete {
+			//				error in
+			//				if error != nil {
+			//					completion(error)
+			//				} else {
+			//
+			//				}
+			//			}
+		}
 	}
- 	func updateUserData(userData: ServerUserData) {
+	func updateUserData(userData: ServerUserData) {
 		do {
 			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("data").setData(from: userData, merge: true)
 		} catch {
