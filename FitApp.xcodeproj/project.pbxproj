@@ -22,6 +22,9 @@
 		7C10BA7E276BCFBE00B5860C /* Assistant-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C10BA74276BCFAF00B5860C /* Assistant-VariableFont_wght.ttf */; };
 		7C10BA7F276BCFBE00B5860C /* Assistant-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C10BA77276BCFAF00B5860C /* Assistant-Medium.ttf */; };
 		7C10BA80276BCFBE00B5860C /* Assistant-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C10BA76276BCFAF00B5860C /* Assistant-ExtraLight.ttf */; };
+		7C1284362881CAE500E735D8 /* WeightsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1284352881CAE500E735D8 /* WeightsViewModel.swift */; };
+		7C1284382881CB2200E735D8 /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1284372881CB2200E735D8 /* ObservableObject.swift */; };
+		7C12843A2881CD6500E735D8 /* WeightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1284392881CD6500E735D8 /* WeightsViewController.swift */; };
 		7C149C7925D817DD00B0864F /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */; };
 		7C149C8E25D85A7600B0864F /* AddWeightAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C149C8D25D85A7600B0864F /* AddWeightAlertView.xib */; };
 		7C182FE4279DF26B00796693 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C182FE3279DF26A00796693 /* ChatViewModel.swift */; };
@@ -224,6 +227,9 @@
 		7C10BA76276BCFAF00B5860C /* Assistant-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-ExtraLight.ttf"; sourceTree = "<group>"; };
 		7C10BA77276BCFAF00B5860C /* Assistant-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-Medium.ttf"; sourceTree = "<group>"; };
 		7C10BA78276BCFAF00B5860C /* Assistant-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Assistant-Bold.ttf"; sourceTree = "<group>"; };
+		7C1284352881CAE500E735D8 /* WeightsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsViewModel.swift; sourceTree = "<group>"; };
+		7C1284372881CB2200E735D8 /* ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
+		7C1284392881CD6500E735D8 /* WeightsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsViewController.swift; sourceTree = "<group>"; };
 		7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
 		7C149C8D25D85A7600B0864F /* AddWeightAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddWeightAlertView.xib; sourceTree = "<group>"; };
 		7C182FE3279DF26A00796693 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
@@ -749,6 +755,7 @@
 				7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */,
 				7CE086262761482A00BF3CF3 /* ProjectColors.swift */,
 				7CBBF1EC28197A8600EE55F1 /* IAPManager.swift */,
+				7C1284372881CB2200E735D8 /* ObservableObject.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1035,6 +1042,7 @@
 			isa = PBXGroup;
 			children = (
 				B30069D225926F090025FA0E /* WeightProgressViewController.swift */,
+				7C1284392881CD6500E735D8 /* WeightsViewController.swift */,
 			);
 			name = Weight;
 			sourceTree = "<group>";
@@ -1090,6 +1098,7 @@
 				7C54164E26AACC9900C22859 /* RegisterViewModel.swift */,
 				B3DB7512259F8270002CF48B /* MealViewModel.swift */,
 				B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */,
+				7C1284352881CAE500E735D8 /* WeightsViewModel.swift */,
 				B358227E25ACA40D00C91295 /* ArticleViewModel.swift */,
 				B38397F525B4A1BE00154697 /* WorkoutViewModel.swift */,
 				7C74350225CDBAE900D33A9A /* ChatsViewModel.swift */,
@@ -1443,6 +1452,7 @@
 				7CFA85CF26ED1A8A00296B53 /* WeightsManager.swift in Sources */,
 				7C7434F525CD9DD700D33A9A /* ChatViewController.swift in Sources */,
 				B368DFFB25A76A2C00BD1937 /* WeightViewModel.swift in Sources */,
+				7C1284382881CB2200E735D8 /* ObservableObject.swift in Sources */,
 				7CE0862527613FE000BF3CF3 /* UiColor+Extensions.swift in Sources */,
 				7C33B661266A587D00E16A1C /* CommentsViewModel.swift in Sources */,
 				7C1ACCF5266FCBC6008079C9 /* ChangeDateView.swift in Sources */,
@@ -1488,6 +1498,7 @@
 				7C3F4F8C25C9E2AF00EE3758 /* ResetPasswordViewController.swift in Sources */,
 				B368E04925A790D200BD1937 /* ServerDishs.swift in Sources */,
 				B3BB8F3B2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift in Sources */,
+				7C12843A2881CD6500E735D8 /* WeightsViewController.swift in Sources */,
 				7CFFAD9C261DEF1000C05C66 /* DishesTableViewController.swift in Sources */,
 				7C1ACCEB266F8F8F008079C9 /* CommentTableViewCell.swift in Sources */,
 				7C7C38352793630A0075B64A /* DishCellTextFieldView.swift in Sources */,
@@ -1502,6 +1513,7 @@
 				7CCC0E67262B2E79006E2E35 /* TableViewEmptyView.swift in Sources */,
 				B330B88F257583D200BDB206 /* ExercisesTableViewController.swift in Sources */,
 				7C89AA61256D700F009AD87C /* UserProfile.swift in Sources */,
+				7C1284362881CAE500E735D8 /* WeightsViewModel.swift in Sources */,
 				7C658AA825D9873C00CA75B2 /* Motivations.swift in Sources */,
 				7C7C381D2790B52F0075B64A /* SpreadsheetViewCells.swift in Sources */,
 				B358227F25ACA40D00C91295 /* ArticleViewModel.swift in Sources */,
