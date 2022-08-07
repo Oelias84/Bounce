@@ -62,9 +62,9 @@ extension Date {
 		formatter.timeZone = .current
 		return formatter.string(from: self)
 	}
-	var displayYear: String {
+	var displayOnlyMonth: String {
 		let formatter = DateFormatter()
-		formatter.dateFormat = "MM/yy"
+		formatter.dateFormat = "MM"
 		formatter.locale = Locale(identifier: "en_Us")
 		formatter.timeZone = .current
 		return formatter.string(from: self)

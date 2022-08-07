@@ -38,7 +38,7 @@ class ChartFormatter: NSObject, IAxisValueFormatter {
 		case .month:
 			return "\(dates[index].startOfWeek!.displayDay)-\(dates[index].endOfWeek!.displayDayInMonth)"
 		case .year:
-			return dates[index].displayYear
+			return dates[index].displayOnlyMonth
 		}
 	}
 }
