@@ -64,11 +64,9 @@ class WeightsViewController: UIViewController {
 		updateView()
 	}
 	@IBAction func addWeightButtonAction(_ sender: Any) {
-		let lastWeightDate = viewModel.lastWeightingDate
-		let currentDate = Date().onlyDate
 		
 		addWeightButton.isEnabled = false
-		if lastWeightDate == currentDate {
+		if viewModel.didWeightForCurrentDate {
 			presentOkAlert(withMessage: "כבר נשקלת היום")
 		} else {
 			presentAddWeightAlert()
@@ -109,6 +107,7 @@ class WeightsViewController: UIViewController {
 		default:
 			break
 		}
+		viewModel.updateSplittedWeights(for: timePeriod)
 		updateView()
 	}
 }
@@ -146,7 +145,7 @@ extension WeightsViewController: AddWeightAlertViewDelegate {
 	func cameraButtonTapped() {
 		presentImagePickerActionSheet(imagePicker: imagePickerController) {_ in}
 	}
-	func confirmButtonAction(weight: String, date: Date?) {
+	func confirmButtonAction(weight: String, date: Date?, imagePath: String?) {
 		guard let weightDouble = Double(weight) else { return }
 		Spinner.shared.show(self.view)
 		
@@ -162,7 +161,7 @@ extension WeightsViewController: AddWeightAlertViewDelegate {
 			self.weightAlert?.removeFromSuperview()
 			self.weightAlert = nil
 			
-			self.viewModel.addWeight(weight: weightDouble, image: weightImage, date: date) {
+			self.viewModel.addWeight(weight: weightDouble, image: weightImage, imagePath: imagePath, date: date) {
 				error in
 				Spinner.shared.stop()
 				self.addWeightButton.isEnabled = true

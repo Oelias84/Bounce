@@ -11,7 +11,7 @@ protocol AddWeightAlertViewDelegate {
 	
 	func cancelButtonAction()
 	func cameraButtonTapped()
-	func confirmButtonAction(weight: String, date: Date?)
+	func confirmButtonAction(weight: String, date: Date?, imagePath: String?)
 }
 
 class AddWeightAlertView: UIView {
@@ -51,7 +51,7 @@ class AddWeightAlertView: UIView {
 			Spinner.shared.show(perentVC.view)
 		}
 		if let weight = weightTextField.text, !weight.isEmpty {
-			delegate?.confirmButtonAction(weight: weight, date: editWeight?.date)
+			delegate?.confirmButtonAction(weight: weight, date: editWeight?.date, imagePath: editWeight?.imagePath)
 		} else {
 			weightTextField.becomeFirstResponder()
 			weightTextField.layer.borderColor = UIColor.red.cgColor
