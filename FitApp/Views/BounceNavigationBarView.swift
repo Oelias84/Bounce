@@ -200,7 +200,7 @@ extension BounceNavigationBarView {
 		} else if let delegate = delegate as? WorkoutTableViewController {
 			
 			delegate.navigationController?.pushViewController(settingsVC, animated: true)
-		} else if let delegate = delegate as? WeightProgressViewController {
+		} else if let delegate = delegate as? WeightsViewController {
 			
 			delegate.navigationController?.pushViewController(settingsVC, animated: true)
 		} else if let delegate = delegate as? ArticlesViewController {

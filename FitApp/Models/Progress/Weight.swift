@@ -45,3 +45,19 @@ struct Weights: Codable {
     
     let weights: [Weight]
 }
+
+class WeightPeriod {
+	
+	let startDate: Date
+	let endDate: Date
+	var weightsArray: [Weight]?
+	
+	init(startDate: Date, endDate: Date, weightsArray: [Weight]? = nil) {
+		self.startDate = startDate
+		self.endDate = endDate
+		self.weightsArray = weightsArray
+	}
+	func canContain(_ date: Date) -> Bool {
+		startDate.onlyDate <= date.onlyDate && date.onlyDate <= endDate.onlyDate
+	}
+}

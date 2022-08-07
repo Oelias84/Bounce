@@ -190,6 +190,16 @@ struct GoogleApiManager {
 	}
 	
 	//MARK: - Weights
+	func updateWeights(weights: [Weight]?, completion: @escaping (Error?) -> ()) {
+		guard let weights = weights else { return }
+		let weightsModel = Weights(weights: weights)
+		
+		do {
+			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-weights").document("weights").setData(from: weightsModel.self, merge: true, completion: completion)
+		} catch {
+			print(error)
+		}
+	}
 	func updateWeights(weights: Weights) {
 		do {
 			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-weights").document("weights").setData(from: weights.self)
@@ -199,10 +209,10 @@ struct GoogleApiManager {
 	}
 	func getWeights(completion: @escaping (Result<[Weight]?, Error>) -> Void) {
 		do {
-			db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-weights").document("weights").getDocument(source: .default, completion: { (data, error) in
+			db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-weights").document("weights").addSnapshotListener( {(documentSnapshot, error) in
 				if let error = error {
 					print(error)
-				} else if let data = data {
+				} else if let data = documentSnapshot {
 					do {
 						var weights: [Weight]? = nil
 						let weightData = try data.data(as: Weights.self)
@@ -214,6 +224,23 @@ struct GoogleApiManager {
 					}
 				}
 			})
+			
+//
+//			db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-weights").document("weights").getDocument(source: .default, completion: { (data, error) in
+//				if let error = error {
+//					print(error)
+//				} else if let data = data {
+//					do {
+//						var weights: [Weight]? = nil
+//						let weightData = try data.data(as: Weights.self)
+//						weights = weightData?.weights
+//						completion(.success(weights))
+//					} catch {
+//						print(error)
+//						completion(.failure(error))
+//					}
+//				}
+//			})
 		}
 	}
 	

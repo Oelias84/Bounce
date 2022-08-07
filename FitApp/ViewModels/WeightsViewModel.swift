@@ -187,47 +187,6 @@ extension WeightsViewModel {
 				}
 			}
 		}
-		
-		
-//		for i in 0...weights.count-1 {
-//			let weight = weights[i]
-//
-//			if i == weights.count-1 {
-//				if tempWeightPeriod.weightsArray != nil {
-//					tempWeightPeriod.weightsArray?.append(weight)
-//				} else {
-//					tempWeightPeriod.weightsArray = [weight]
-//				}
-//				weightPeriodArray.append(tempWeightPeriod)
-//
-//				while startDate.isEarlierThanOrEqual(to: Date().onlyDate) {
-//					startDate = startDate.add(7.days)
-//					endDate = startDate.add(6.days)
-//					tempWeightPeriod = WeightPeriod(startDate: startDate, endDate: endDate, weightsArray: [])
-//					weightPeriodArray.append(tempWeightPeriod)
-//				}
-//			} else {
-//				if tempWeightPeriod.weightsArray != nil {
-//					if tempWeightPeriod.canContain(weight.date) {
-//						tempWeightPeriod.weightsArray?.append(weight)
-//					} else {
-//						weightPeriodArray.append(tempWeightPeriod)
-//						startDate = startDate.add(7.days)
-//						endDate = startDate.add(6.days)
-//						tempWeightPeriod = WeightPeriod(startDate: startDate, endDate: endDate, weightsArray: [weight])
-//					}
-//				} else {
-//					if tempWeightPeriod.canContain(weight.date) {
-//						tempWeightPeriod.weightsArray = [weight]
-//					} else {
-//						weightPeriodArray.append(tempWeightPeriod)
-//						startDate = startDate.add(7.days)
-//						endDate = startDate.add(6.days)
-//						tempWeightPeriod = WeightPeriod(startDate: startDate, endDate: endDate, weightsArray: [weight])
-//					}
-//				}
-//			}
-//		}
 		return weightPeriodArray
 	}
 	fileprivate func splitToMonthsArray() -> [WeightPeriod]? {
@@ -262,46 +221,6 @@ extension WeightsViewModel {
 				}
 			}
 		}
-		
-//		for i in 0...weights.count-1 {
-//			let weight = weights[i]
-//
-//			if i == weights.count-1 {
-//				if tempWeightPeriod.weightsArray != nil {
-//					tempWeightPeriod.weightsArray?.append(weight)
-//				} else {
-//					tempWeightPeriod.weightsArray = [weight]
-//				}
-//				weightPeriodArray.append(tempWeightPeriod)
-//
-//				while startDate.isEarlierThanOrEqual(to: Date().onlyDate) {
-//					startDate = startDate.add(1.months).onlyDate
-//					endDate = startDate.add(1.months).subtract(1.days).onlyDate
-//					tempWeightPeriod = WeightPeriod(startDate: startDate, endDate: endDate, weightsArray: [])
-//					weightPeriodArray.append(tempWeightPeriod)
-//				}
-//			} else {
-//				if tempWeightPeriod.weightsArray != nil {
-//					if tempWeightPeriod.canContain(weight.date.onlyDate) {
-//						tempWeightPeriod.weightsArray?.append(weight)
-//					} else {
-//						weightPeriodArray.append(tempWeightPeriod)
-//						startDate = startDate.add(1.months).onlyDate
-//						endDate = startDate.add(1.months).subtract(1.days).onlyDate
-//						tempWeightPeriod = WeightPeriod(startDate: startDate, endDate: endDate, weightsArray: [weight])
-//					}
-//				} else {
-//					if tempWeightPeriod.canContain(weight.date.onlyDate) {
-//						tempWeightPeriod.weightsArray = [weight]
-//					} else {
-//						weightPeriodArray.append(tempWeightPeriod)
-//						startDate = startDate.add(1.months).onlyDate
-//						endDate = startDate.add(1.months).subtract(1.days).onlyDate
-//						tempWeightPeriod = WeightPeriod(startDate: startDate, endDate: endDate, weightsArray: [weight])
-//					}
-//				}
-//			}
-//		}
 		return weightPeriodArray
 	}
 	
@@ -368,7 +287,7 @@ extension WeightsViewModel {
 				let weight = Weight(dateString: weightDate.dateStringForDB, weight: weight, imagePath: path?.absoluteString)
 				self.replaceElseInsert(weight: weight)
 
-				self.googleService.updateWeights(weight: self.weights ?? [weight]) {
+				self.googleService.updateWeights(weights: self.weights ?? [weight]) {
 					error in
 					if error != nil {
 						completion(error)
@@ -382,7 +301,7 @@ extension WeightsViewModel {
 			
 			self.weights?.append(weight)
 			
-			self.googleService.updateWeights(weight: self.weights ?? [weight]) {
+			self.googleService.updateWeights(weights: self.weights ?? [weight]) {
 				error in
 				if error != nil {
 					completion(error)

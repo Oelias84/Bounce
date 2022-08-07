@@ -46,9 +46,6 @@ class AddWeightAlertView: UIView {
 		removeKeyboardListener()
 	}
 	
-	@objc func cameraButtonAction() {
-		delegate?.cameraButtonTapped()
-	}
 	@IBAction func confirmButtonAction(_ sender: Any) {
 		if let perentVC = parentViewController {
 			Spinner.shared.show(perentVC.view)
@@ -88,10 +85,13 @@ class AddWeightAlertView: UIView {
 		weightTextField.layer.borderColor = UIColor.systemBlue.cgColor
 		weightImageButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cameraButtonAction)))
 	}
-	func chageCheckMarkState() {
+	func changeCheckMarkState() {
 		DispatchQueue.main.async { [weak self] in
 			guard let self = self else { return }
 			self.checkMarkImageView.isHidden = false
 		}
+	}
+	@objc func cameraButtonAction() {
+		delegate?.cameraButtonTapped()
 	}
 }

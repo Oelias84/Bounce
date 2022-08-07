@@ -219,7 +219,6 @@ extension WeightsViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.weightCell) as! weightTableViewCell
-		
 		let weight = viewModel.getWeight(for: timePeriod, at: indexPath.row)
 
 		if indexPath.row == 0 {
@@ -262,9 +261,7 @@ extension WeightsViewController: UITableViewDelegate, UITableViewDataSource {
 			segmentedControl.setIndex(0)
 			timePeriod = .week
 		case .year:
-			viewModel.selectedDate = weight?.date
-			segmentedControl.setIndex(1)
-			timePeriod = .month
+			return
 		}
 		updateView()
 	}
@@ -303,6 +300,12 @@ extension WeightsViewController {
 		updateDateLabels()
 		updateTableView()
 	}
+	fileprivate func addChartView() {
+		let lineChat = ChartView(frame: CGRect(x: 0, y: 0, width: self.chartView.frame.width, height: self.chartView.frame.height))
+		lineChat.delegate = self
+		
+		self.chartView.addSubview(lineChat)
+	}
 	fileprivate func bindViewModel() {
 		
 		viewModel.splittedWeights.bind {
@@ -320,12 +323,6 @@ extension WeightsViewController {
 		
 		self.values = weights
 		self.timeLinePeriod = weightsDates
-	}
-	fileprivate func addChartView() {
-		let lineChat = ChartView(frame: CGRect(x: 0, y: 0, width: self.chartView.frame.width, height: self.chartView.frame.height))
-		lineChat.delegate = self
-		
-		self.chartView.addSubview(lineChat)
 	}
 	fileprivate func updateTableView() {
 		DispatchQueue.main.async {

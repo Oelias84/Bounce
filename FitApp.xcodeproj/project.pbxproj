@@ -133,7 +133,6 @@
 		7CFE0C0E276936330077D16F /* BounceNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE086312767BCA100BF3CF3 /* BounceNavigationBarView.swift */; };
 		7CFE0C0F276936470077D16F /* BounceNavigationBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE086302767BCA100BF3CF3 /* BounceNavigationBarView.xib */; };
 		7CFFAD9C261DEF1000C05C66 /* DishesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFFAD9B261DEF1000C05C66 /* DishesTableViewController.swift */; };
-		B30069D325926F090025FA0E /* WeightProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30069D225926F090025FA0E /* WeightProgressViewController.swift */; };
 		B302982025793BBA00CF41F0 /* UserProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = B302981F25793BBA00CF41F0 /* UserProgress.swift */; };
 		B330B87625757C1000BDB206 /* Workout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B330B87525757C1000BDB206 /* Workout.storyboard */; };
 		B330B87F25757F1300BDB206 /* ExerciseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B330B87E25757F1300BDB206 /* ExerciseTableViewCell.xib */; };
@@ -158,7 +157,6 @@
 		B367F18825B1EEC200DF21D7 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B367F18725B1EEC200DF21D7 /* LocalNotificationManager.swift */; };
 		B368DF4F25A5F24E00BD1937 /* GoogleApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */; };
 		B368DFE025A6247600BD1937 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368DFDF25A6247600BD1937 /* SpinnerView.swift */; };
-		B368DFFB25A76A2C00BD1937 /* WeightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */; };
 		B368E04925A790D200BD1937 /* ServerDishs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368E04825A790D200BD1937 /* ServerDishs.swift */; };
 		B368E05C25A79BB700BD1937 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368E05B25A79BB700BD1937 /* Data+Extensions.swift */; };
 		B368E07F25A8819100BD1937 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368E07E25A8819100BD1937 /* Key.swift */; };
@@ -350,7 +348,6 @@
 		7CFFAD9B261DEF1000C05C66 /* DishesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishesTableViewController.swift; sourceTree = "<group>"; };
 		ACEF8473DFF1F8DE43E4AFF4 /* Pods-FitApp-FitAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp-FitAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-FitApp-FitAppUITests/Pods-FitApp-FitAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B0AE3B48B417514ACEE1ACAB /* Pods-FitAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitAppTests.release.xcconfig"; path = "Target Support Files/Pods-FitAppTests/Pods-FitAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		B30069D225926F090025FA0E /* WeightProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightProgressViewController.swift; sourceTree = "<group>"; };
 		B302981F25793BBA00CF41F0 /* UserProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProgress.swift; sourceTree = "<group>"; };
 		B330B87525757C1000BDB206 /* Workout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Workout.storyboard; sourceTree = "<group>"; };
 		B330B87E25757F1300BDB206 /* ExerciseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseTableViewCell.xib; sourceTree = "<group>"; };
@@ -375,7 +372,6 @@
 		B367F18725B1EEC200DF21D7 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		B368DF4E25A5F24D00BD1937 /* GoogleApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApiManager.swift; sourceTree = "<group>"; };
 		B368DFDF25A6247600BD1937 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
-		B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightViewModel.swift; sourceTree = "<group>"; };
 		B368E04825A790D200BD1937 /* ServerDishs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDishs.swift; sourceTree = "<group>"; };
 		B368E05B25A79BB700BD1937 /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		B368E07E25A8819100BD1937 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
@@ -556,9 +552,9 @@
 			children = (
 				7C2BD80F267212C7006A1736 /* MealManager.swift */,
 				7C54164A269D923800C22859 /* ErrorManager.swift */,
-				7CFA85CE26ED1A8A00296B53 /* WeightsManager.swift */,
 				7CFA85D026EE055700296B53 /* DailyMealManager.swift */,
 				7C7DF4B126FB87DE0043A132 /* MessagesManager.swift */,
+				7CFA85CE26ED1A8A00296B53 /* WeightsManager.swift */,
 				7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */,
 				B3DB751A259F8773002CF48B /* ConsumptionManager.swift */,
 				7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */,
@@ -1041,7 +1037,6 @@
 		B3833F472593783B006776D5 /* Weight */ = {
 			isa = PBXGroup;
 			children = (
-				B30069D225926F090025FA0E /* WeightProgressViewController.swift */,
 				7C1284392881CD6500E735D8 /* WeightsViewController.swift */,
 			);
 			name = Weight;
@@ -1097,7 +1092,6 @@
 				7C54164C269D951C00C22859 /* LoginViewModel.swift */,
 				7C54164E26AACC9900C22859 /* RegisterViewModel.swift */,
 				B3DB7512259F8270002CF48B /* MealViewModel.swift */,
-				B368DFFA25A76A2C00BD1937 /* WeightViewModel.swift */,
 				7C1284352881CAE500E735D8 /* WeightsViewModel.swift */,
 				B358227E25ACA40D00C91295 /* ArticleViewModel.swift */,
 				B38397F525B4A1BE00154697 /* WorkoutViewModel.swift */,
@@ -1441,7 +1435,6 @@
 				B341E230257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift in Sources */,
 				7C74AF9E264336EA001D0F5D /* PushNotificationSender.swift in Sources */,
 				B38397F625B4A1BE00154697 /* WorkoutViewModel.swift in Sources */,
-				B30069D325926F090025FA0E /* WeightProgressViewController.swift in Sources */,
 				7CB0E179278775B400D6EDA5 /* ChatContainerViewController.swift in Sources */,
 				B367F18825B1EEC200DF21D7 /* LocalNotificationManager.swift in Sources */,
 				7C74350D25CDBBE900D33A9A /* Sender.swift in Sources */,
@@ -1451,7 +1444,6 @@
 				B368DF4F25A5F24E00BD1937 /* GoogleApiManager.swift in Sources */,
 				7CFA85CF26ED1A8A00296B53 /* WeightsManager.swift in Sources */,
 				7C7434F525CD9DD700D33A9A /* ChatViewController.swift in Sources */,
-				B368DFFB25A76A2C00BD1937 /* WeightViewModel.swift in Sources */,
 				7C1284382881CB2200E735D8 /* ObservableObject.swift in Sources */,
 				7CE0862527613FE000BF3CF3 /* UiColor+Extensions.swift in Sources */,
 				7C33B661266A587D00E16A1C /* CommentsViewModel.swift in Sources */,
