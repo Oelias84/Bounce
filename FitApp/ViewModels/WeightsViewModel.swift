@@ -54,34 +54,34 @@ extension WeightsViewModel {
 
 	// Get Weights Count
 	var getDailyWeightsCount: Int {
-		return getDailyFilteredWights(for: selectedDate)?.count ?? 0
+		return getDailyFilteredWights()?.count ?? 0
 	}
 	var getMonthlyWeightsCount: Int {
-		return getMonthlyFilteredWights(for: selectedDate)?.count ?? 0
+		return getMonthlyFilteredWights()?.count ?? 0
 	}
 	var getYearlyWeightsCount: Int {
-		return getYearlyFilteredWights(for: selectedDate)?.count ?? 0
+		return getYearlyFilteredWights()?.count ?? 0
 	}
 
 	// Get Weights
 	func getWeights(for period: TimePeriod) -> [Weight]? {
 		switch period {
 		case .week:
-			return getDailyFilteredWights(for: selectedDate)
+			return getDailyFilteredWights()
 		case .month:
-			return getMonthlyFilteredWights(for: selectedDate)
+			return getMonthlyFilteredWights()
 		case .year:
-			return getYearlyFilteredWights(for: selectedDate)
+			return getYearlyFilteredWights()
 		}
 	}
 	func getWeight(for period: TimePeriod, at row: Int) -> Weight? {
 		switch period {
 		case .week:
-			return getDayWeight(for: selectedDate, at: row)
+			return getDayWeight(at: row)
 		case .month:
-			return getMonthlyWeight(for: selectedDate, at: row)
+			return getMonthlyWeight(at: row)
 		case .year:
-			return getYearlyWeight(for: selectedDate, at: row)
+			return getYearlyWeight(at: row)
 		}
 	}
 	
@@ -156,13 +156,13 @@ extension WeightsViewModel {
 	}
 	
 	// Private
-	fileprivate func getDailyFilteredWights(for selectedDate: Date) -> [Weight]? {
+	fileprivate func getDailyFilteredWights() -> [Weight]? {
 		let weightPeriod = splittedWeights.value?.first(where: { weightPeriod in
 			weightPeriod.canContain(selectedDate.onlyDate)
 		})
 		return weightPeriod?.weightsArray
 	}
-	fileprivate func getMonthlyFilteredWights(for selectedDate: Date) -> [Weight]? {
+	fileprivate func getMonthlyFilteredWights() -> [Weight]? {
 		guard var splitToWeeksArray = splittedWeights.value else { return nil }
 		splitToWeeksArray = splitToWeeksArray.filter { $0.startDate >= selectedDate.onlyDate.start(of: .year) }
 		var weekWeightsArray = [Weight]()
@@ -180,7 +180,7 @@ extension WeightsViewModel {
 		}
 		return weekWeightsArray
 	}
-	fileprivate func getYearlyFilteredWights(for selectedDate: Date) -> [Weight]? {
+	fileprivate func getYearlyFilteredWights() -> [Weight]? {
 		guard var yearSplittedWeights = splittedWeights.value else { return nil }
 		yearSplittedWeights = yearSplittedWeights.filter { $0.startDate.year == selectedDate.year }
 		var monthWeightsArray = [Weight]()
@@ -195,14 +195,13 @@ extension WeightsViewModel {
 		return monthWeightsArray
 	}
 	
-	fileprivate func getDayWeight(for date: Date, at row: Int) -> Weight? {
-		return getDailyFilteredWights(for: date)?[row]
+	fileprivate func getDayWeight(at row: Int) -> Weight? {
+		return getDailyFilteredWights()?[row]
 	}
-	fileprivate func getMonthlyWeight(for date: Date, at row: Int) -> Weight? {
-		return getMonthlyFilteredWights(for: date)?[row]
+	fileprivate func getMonthlyWeight(at row: Int) -> Weight? {
+		return getMonthlyFilteredWights()?[row]
 	}
-	fileprivate func getYearlyWeight(for date: Date, at row: Int) -> Weight? {
-		return getYearlyFilteredWights(for: date)?[row]
+	fileprivate func getYearlyWeight(at row: Int) -> Weight? {
+		return getYearlyFilteredWights()?[row]
 	}
-	
 }
