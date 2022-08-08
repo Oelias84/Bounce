@@ -11,7 +11,7 @@ import FirebaseAuth
 
 protocol weightTableViewCellDelegate {
 	
-	func presentImage(url: URL)
+	func presentImage(image: UIImage)
 }
 
 class weightTableViewCell: UITableViewCell {
@@ -108,8 +108,8 @@ extension weightTableViewCell {
 		})
 	}
 	@objc fileprivate func imageTapped() {
-		if let imagePath = weight.imagePath, let url = URL(string: imagePath) {
-			self.delegate?.presentImage(url: url)
+		if let image = weightImageView.image {
+			self.delegate?.presentImage(image: image)
 		}
 	}
 }

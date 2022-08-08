@@ -174,8 +174,8 @@ extension WeightsViewController: AddWeightAlertViewDelegate {
 }
 extension WeightsViewController: weightTableViewCellDelegate {
 	
-	func presentImage(url: URL) {
-		let photoViewer = PhotoViewerViewController(with: url)
+	func presentImage(image: UIImage) {
+		let photoViewer = PhotoViewerViewController(image: image)
 		present(photoViewer, animated: true)
 	}
 }
