@@ -18,7 +18,7 @@ enum CaloriesAlertsState: String {
 
 class WeightAlertsManager {
 	
-	private var userWeights: [Weight]!
+	private var userWeightsPeriod: [WeightPeriod]!
 	private var userDailyMeals: [DailyMeal]!
 	
 	private var userConsumedCalories: Double!
@@ -46,6 +46,8 @@ class WeightAlertsManager {
 	
 	private var firstWeekAverageWeight: Double!
 	private var secondWeekAverageWeight: Double!
+	
+	private var weightsManager = WeightsManager.shared
 	
 	required init() {
 #if DEBUG
@@ -91,7 +93,7 @@ extension WeightAlertsManager {
 	}
 	private func configureData(completion: @escaping (() -> ())) {
 		let today = Date().onlyDate
-		guard let firstUserWeightDate = userWeights.first?.date.onlyDate else { return }
+		guard let firstUserWeightDate = weightsManager.getFirstWeight?.date.onlyDate else { return }
 		
 		//If user didn't change shouldShowAlertToUser to false
 		if lastCaloriesCheckDateString?.onlyDate != nil ,shouldShowAlertToUser == true {
@@ -140,13 +142,15 @@ extension WeightAlertsManager {
 	//MARK: - Server Handeling
 	private func getWeights(completion: @escaping () -> ()) {
 		
-//		WeightsManager.shared.fetchWeight() {
-//			[weak self] weights in
-//			guard let self = self else { return }
-//
-//			self.userWeights = weights.sorted()
-//			completion()
-//		}
+		weightsManager.splittedWeeksWeightsPeriod.bind {
+			[weak self] weightsPeriod in
+			guard let self = self else { return }
+			
+			if weightsPeriod != nil {
+				self.userWeightsPeriod = weightsPeriod
+				completion()
+			}
+		}
 	}
 	private func getAllMeals(completion: @escaping () -> ()) {
 		
@@ -181,29 +185,30 @@ extension WeightAlertsManager {
 	
 	//MARK: - Calculation
 	private func calculateWeights() {
-		
-		if Date().onlyDate.isEarlier(than: userWeights.first!.date.onlyDate.add(3.weeks)) {
-			guard let firstWeekDate = userWeights.first?.date.onlyDate else { return }
-			
-			firstWeekWeightsArray = userWeights.filter {
-				$0.date.onlyDate.isLaterThanOrEqual(to: firstWeekDate) &&
-				$0.date.onlyDate.isEarlierThanOrEqual(to: firstWeekDate.add(1.weeks))
-			}
-			secondWeekWeightsArray = userWeights.filter {
-				$0.date.onlyDate.isLaterThanOrEqual(to: firstWeekDate.add(1.weeks)) &&
-				$0.date.onlyDate.isEarlierThanOrEqual(to: firstWeekDate.add(2.weeks))
-			}
+		guard let firstWeekDate = weightsManager.getFirstWeight?.date.onlyDate.add(3.weeks) else { return }
+
+		// If first time
+		if Date().onlyDate.isEarlier(than: firstWeekDate) {
+			firstWeekWeightsArray = userWeightsPeriod[0].weightsArray
+			secondWeekWeightsArray = userWeightsPeriod[1].weightsArray
 		} else {
-			guard let firstWeekDate = lastCaloriesCheckDateString else { return }
+			guard let lastCaloriesCheckDateString = lastCaloriesCheckDateString else { return }
+
+			let first = userWeightsPeriod.first(where: {
+				let firstWeekDate = lastCaloriesCheckDateString.subtract(1.days).onlyDate
+				let weightPeriod = $0.canContain(firstWeekDate)
+				return weightPeriod
+			})
 			
-			firstWeekWeightsArray = userWeights.filter {
-				$0.date.onlyDate.isLaterThanOrEqual(to: firstWeekDate.subtract(1.weeks)) &&
-				$0.date.onlyDate.isEarlierThanOrEqual(to: firstWeekDate)
-			}
-			secondWeekWeightsArray = userWeights.filter {
-				$0.date.onlyDate.isLaterThanOrEqual(to: firstWeekDate) &&
-				$0.date.onlyDate.isEarlierThanOrEqual(to: firstWeekDate.add(1.weeks))
-			}
+			firstWeekWeightsArray = first?.weightsArray
+			
+			let second = userWeightsPeriod.first(where: {
+				let secondWeekDate = first?.endDate.onlyDate.add(1.days)
+				let weightPeriod = $0.canContain(secondWeekDate!)
+				return weightPeriod
+			})
+			
+			secondWeekWeightsArray = second?.weightsArray
 		}
 	}
 	private func calculateConsumedCaloriesFormPastWeek() {

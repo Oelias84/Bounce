@@ -19,12 +19,14 @@ class WeightsManager {
 	
 	init() {
 		fetchWeights()
-//		getSplittedPeriodArray(for: .week)
 	}
 }
 
 extension WeightsManager {
 	
+	var getFirstWeight: Weight? {
+		weights.value?.first
+	}
 	var lastWeightingDate: Date {
 		weights.value!.last!.date
 	}
