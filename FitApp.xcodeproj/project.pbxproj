@@ -694,6 +694,7 @@
 				7C89AA6E256D7132009AD87C /* Storyboards */,
 				7C89AA8C256D817B009AD87C /* Controllers */,
 				B3B2A245256EDDCA0052E6C8 /* Views */,
+				7C481C7026FA17B1002FB8BF /* DataManagers */,
 				7C89AA6D256D70FE009AD87C /* Helpers */,
 				7C89AA6C256D70E5009AD87C /* Extention */,
 				7C74353925D07DBD00D33A9A /* Networking */,
@@ -744,7 +745,6 @@
 		7C89AA6D256D70FE009AD87C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				7C481C7026FA17B1002FB8BF /* DataManagers */,
 				B368E07D25A8816000BD1937 /* UserData  */,
 				7C89AA58256D6FDB009AD87C /* Constants.swift */,
 				7C74AF9D264336EA001D0F5D /* PushNotificationSender.swift */,
