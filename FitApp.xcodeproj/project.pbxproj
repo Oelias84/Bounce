@@ -561,8 +561,6 @@
 				7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */,
 				B367F18725B1EEC200DF21D7 /* LocalNotificationManager.swift */,
 				7C481C7126FA1883002FB8BF /* MealsManager.swift */,
-				7C4554F727A0A8A10077791B /* ImageCache.swift */,
-				7C4554F927A0A8D30077791B /* ImageLoader.swift */,
 			);
 			path = DataManagers;
 			sourceTree = "<group>";
@@ -747,6 +745,8 @@
 			children = (
 				B368E07D25A8816000BD1937 /* UserData  */,
 				7C89AA58256D6FDB009AD87C /* Constants.swift */,
+				7C4554F727A0A8A10077791B /* ImageCache.swift */,
+				7C4554F927A0A8D30077791B /* ImageLoader.swift */,
 				7C74AF9D264336EA001D0F5D /* PushNotificationSender.swift */,
 				7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */,
 				7CE086262761482A00BF3CF3 /* ProjectColors.swift */,
