@@ -12,13 +12,16 @@ extension UIAlertController {
 	
 	func showAlert() {
 		let keyWindow = UIApplication.shared.connectedScenes
-				.filter({$0.activationState == .foregroundActive})
-				.compactMap({$0 as? UIWindowScene})
-				.first?.windows
-				.filter({$0.isKeyWindow}).first
+											.filter({$0.activationState == .foregroundActive})
+											.compactMap({$0 as? UIWindowScene})
+											.first?.windows
+											.filter({$0.isKeyWindow}).first
 		
 		DispatchQueue.main.async {
-			keyWindow!.rootViewController?.present(self, animated: true, completion: nil)
+			#warning("Change back to last commit")
+			keyWindow?.rootViewController?.dismiss(animated: false) {
+				keyWindow?.rootViewController?.present(self, animated: true)
+			}
 		}
 	}
 }
