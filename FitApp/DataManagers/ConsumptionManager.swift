@@ -173,7 +173,7 @@ extension ConsumptionManager {
 		
 		dailyCalories = calculatedCalories
 		dailyFatPortion = portionFat(tdee: dailyCalories!)
-		dailyProteinPortion = proteinPortion(proteinGrams: proteinGrams(weight: weight, fatPercentage: fatPercentage))
+		dailyProteinPortion = proteinPortion(proteinGrams: proteinGrams(weight: currentAverageWeight ?? weight, fatPercentage: fatPercentage))
 		dailyCarbsPortion = portionCarbs(fatPortion: self.dailyFatPortion!, proteinPortion: self.dailyProteinPortion!, calories: dailyCalories!)
 	}
 
