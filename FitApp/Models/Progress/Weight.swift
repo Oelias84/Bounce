@@ -57,7 +57,13 @@ class WeightPeriod {
 		self.endDate = endDate
 		self.weightsArray = weightsArray
 	}
+	
 	func canContain(_ date: Date) -> Bool {
 		startDate.onlyDate <= date.onlyDate && date.onlyDate <= endDate.onlyDate
+	}
+	var getWeightsAverage: Double {
+		guard let weightsArray = weightsArray else { return 0.0 }
+		let average = (weightsArray.reduce(0) { $0 + $1.weight } / Double(weightsArray.count))
+		return average
 	}
 }

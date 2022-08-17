@@ -108,6 +108,7 @@
 		7CADF750278CAEBC0020CD83 /* StaticStringsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */; };
 		7CB0E179278775B400D6EDA5 /* ChatContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */; };
 		7CB0E17B2787764B00D6EDA5 /* LoginRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */; };
+		7CB6629B28A15BDD00241CCC /* UserProgressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB6629A28A15BDD00241CCC /* UserProgressManager.swift */; };
 		7CB9ADE5268B12290009B42A /* ChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE4268B12290009B42A /* ChartFormatter.swift */; };
 		7CB9ADE7268CB7140009B42A /* ChartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE6268CB7140009B42A /* ChartView.xib */; };
 		7CB9ADE9268CB72B0009B42A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE8268CB72B0009B42A /* ChartView.swift */; };
@@ -321,6 +322,7 @@
 		7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticStringsManager.swift; sourceTree = "<group>"; };
 		7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatContainerViewController.swift; sourceTree = "<group>"; };
 		7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginRegister.storyboard; sourceTree = "<group>"; };
+		7CB6629A28A15BDD00241CCC /* UserProgressManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProgressManager.swift; sourceTree = "<group>"; };
 		7CB9ADE4268B12290009B42A /* ChartFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFormatter.swift; sourceTree = "<group>"; };
 		7CB9ADE6268CB7140009B42A /* ChartView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartView.xib; sourceTree = "<group>"; };
 		7CB9ADE8268CB72B0009B42A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 				7C7DF4B126FB87DE0043A132 /* MessagesManager.swift */,
 				7CFA85CE26ED1A8A00296B53 /* WeightsManager.swift */,
 				7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */,
+				7CB6629A28A15BDD00241CCC /* UserProgressManager.swift */,
 				B3DB751A259F8773002CF48B /* ConsumptionManager.swift */,
 				7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */,
 				7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */,
@@ -1484,6 +1487,7 @@
 				B36B718C2577BDF3001CD393 /* ExerciseViewController.swift in Sources */,
 				7C9B345E2583C5B400D30480 /* QuestionnaireSumUpViewController.swift in Sources */,
 				7CFA5FFF262A10E600A3F401 /* MoveDishView.swift in Sources */,
+				7CB6629B28A15BDD00241CCC /* UserProgressManager.swift in Sources */,
 				7C8F51382671FAE0001FF0EE /* AddMealAlertDishView.swift in Sources */,
 				7CB9ADE9268CB72B0009B42A /* ChartView.swift in Sources */,
 				7C7435CF25D1EF8300D33A9A /* ChatUser.swift in Sources */,
