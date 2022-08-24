@@ -94,7 +94,7 @@ struct K {
         static let exercisesTableViewController = "ExercisesTableViewController"
         static let exerciseDetailViewController = "ExerciseDetailViewController"
         //Weight
-        static let weightViewController = "WeightViewController"
+        static let weightsViewController = "WeightsViewController"
         //Articles
         static let articlesViewController = "ArticlesViewController"
         static let articleViewController = "ArticleViewController"

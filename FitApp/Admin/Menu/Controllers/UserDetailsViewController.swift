@@ -99,10 +99,10 @@ extension UserDetailsViewController {
 	}
 	private func moveToWeightProgressVC() {
 		let storyboard = UIStoryboard(name: K.StoryboardName.weightProgress, bundle: nil)
-		let weightProgressVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.weightViewController) as WeightProgressViewController
+		let weightProgressVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.weightsViewController) as WeightsViewController
 		
+		weightProgressVC.userID = viewModel.getUserId
 		weightProgressVC.isFromAdmin = true
-		weightProgressVC.weightViewModel = WeightViewModel(userUID: viewModel.getUserId)
 		weightProgressVC.modalPresentationStyle = .fullScreen
 		present(weightProgressVC, animated: true)
 	}

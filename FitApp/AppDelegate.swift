@@ -123,7 +123,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 				case NotificationTypes.mealNotification.rawValue:
 					moveTo(storyboardId: K.StoryboardName.mealPlan, vcId: K.ViewControllerId.mealViewController)
 				case NotificationTypes.weightNotification.rawValue:
-					moveTo(storyboardId: K.StoryboardName.weightProgress, vcId: K.ViewControllerId.weightViewController)
+					moveTo(storyboardId: K.StoryboardName.weightProgress, vcId: K.ViewControllerId.weightsViewController)
 				default:
 					return
 				}
@@ -207,7 +207,7 @@ extension AppDelegate {
 		   let navController = tabBarController.selectedViewController as? UINavigationController {
 			
 			switch vcId {
-			case K.ViewControllerId.weightViewController:
+			case K.ViewControllerId.weightsViewController:
 				tabBarController.selectedIndex = 3
 			case K.ViewControllerId.mealViewController:
 				tabBarController.selectedIndex = 1

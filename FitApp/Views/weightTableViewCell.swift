@@ -6,22 +6,21 @@
 //
 
 import UIKit
+import Combine
 import FirebaseAuth
 
 protocol weightTableViewCellDelegate {
 	
-	func presentImage(url: URL)
+	func presentImage(image: UIImage)
 }
 
 class weightTableViewCell: UITableViewCell {
 	
-	var weight: Weight! {
-		didSet {
-			setupTextFields()
-		}
-	}
+	private var cancellable: AnyCancellable?
+	private var animator: UIViewPropertyAnimator?
 	
-	var timePeriod: TimePeriod! {
+	private var weight: Weight!
+	private var timePeriod: TimePeriod! {
 		didSet{
 			switch timePeriod {
 			case .week:
@@ -36,21 +35,18 @@ class weightTableViewCell: UITableViewCell {
 				changeTextLabel.isHidden = false
 				disclosureIndicatorImage.isHidden = false
 				dateImageStackView.isUserInteractionEnabled = false
-				dateTextLabel.text = "\(weight.date.startOfWeek!.displayDay)-\(weight.date.endOfWeek!.displayDayInMonth)"
+				dateTextLabel.text = "\(weight.date.displayDayInMonth)-\(weight.date.add(6.days).displayDayInMonth)"
 			case .year:
 				weightImageView.isHidden = true
 				changeTextLabel.isHidden = false
-				disclosureIndicatorImage.isHidden = false
+				disclosureIndicatorImage.isHidden = true
 				dateImageStackView.isUserInteractionEnabled = false
-				dateTextLabel.text = "\(weight.date.displayMonth)"
+				dateTextLabel.text = "\(weight.date.displayMonthAndYear)"
 			default:
 				break
 			}
 		}
 	}
-	
-	var imageUrl: URL?
-	var delegate: weightTableViewCellDelegate?
 	
 	@IBOutlet weak var dateImageStackView: UIStackView!
 	@IBOutlet weak var dateTextLabel: UILabel!
@@ -59,63 +55,61 @@ class weightTableViewCell: UITableViewCell {
 	@IBOutlet weak var weightTextLabel: UILabel!
 	@IBOutlet weak var disclosureIndicatorImage: UIImageView!
 	@IBOutlet weak var weightImageView: UIImageView!
+	
+	var delegate: weightTableViewCellDelegate?
 
 	override func setSelected(_ selected: Bool, animated: Bool) {
 		super.setSelected(selected, animated: animated)
 	}
 	
-	private func setupTextFields(){
-		imageUrl = nil
-		weightTextLabel.text = weight.printWeight
-		setWeightImage()
+	override func awakeFromNib() {
+		super.awakeFromNib()
 	}
+	override public func prepareForReuse() {
+		super.prepareForReuse()
+		
+		dateImageStackView.spacing = 0
+		weightImageView.image = nil
+		weightImageView.alpha = 0
+		animator?.stopAnimation(true)
+		cancellable?.cancel()
+	}
+}
+
+extension weightTableViewCell {
 	
-	private func setWeightImage() {
-		guard let userID = Auth.auth().currentUser?.uid else {
-			DispatchQueue.main.async {
-				[weak self] in
-				guard let self = self else { return }
-				
-				self.weightImageView.image = UIImage().imageWith(name: "N A")
-				self.dateImageStackView.spacing = 6
-			}
-			return
+	func setupCell(weight: Weight, timePeriod: TimePeriod) {
+		self.weight = weight
+		self.timePeriod = timePeriod
+		
+		weightTextLabel.text = weight.weight.isNaN ? String(format: "%.1f", 0) + " ק״ג" : weight.printWeight
+		
+		cancellable = self.loadImage(url: URL(string: weight.imagePath ?? "")).sink {
+			[unowned self] image in
+			self.showImage(image: image)
 		}
-		let path = "\(userID)/weight_images/\(weight.date.dateStringForDB).jpeg"
-
-		DispatchQueue.global(qos: .background).async {
-			GoogleStorageManager.shared.downloadURL(path: path) {
-				[weak self] result in
-				guard let self = self else { return }
-
-				switch result {
-				case .success(let url):
-					DispatchQueue.main.async {
-						[weak self] in
-						guard let self = self else { return }
-						
-						self.imageUrl = url
-						self.weightImageView.contentMode = .scaleToFill
-						self.weightImageView.sd_setImage(with: url)
-						self.dateImageStackView.spacing = 4
-					}
-				case .failure(let error):
-					DispatchQueue.main.async {
-						[weak self] in
-						guard let self = self else { return }
-						
-						self.weightImageView.image = UIImage().imageWith(name: "N A")
-						self.dateImageStackView.spacing = 6
-					}
-					print("fail to get image url", error)
-				}
-			}
-		}
-
 	}
-	@objc private func imageTapped() {
-		if let url = imageUrl {
-			self.delegate?.presentImage(url: url)
+	fileprivate func loadImage(url: URL?) -> AnyPublisher<UIImage?, Never> {
+		return Just(url)
+		.flatMap({ poster -> AnyPublisher<UIImage?, Never> in
+			guard let url = url else { return Just( UIImage().imageWith(name: "N A")!).eraseToAnyPublisher() }
+			return ImageLoader.shared.loadImage(from: url)
+		})
+		.eraseToAnyPublisher()
+	}
+	fileprivate func showImage(image: UIImage?) {
+		dateImageStackView.spacing = 6
+		animator?.stopAnimation(false)
+		weightImageView.alpha = 0.0
+		weightImageView.image = image
+		weightImageView.contentMode = .scaleToFill
+		animator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
+			self.weightImageView.alpha = 1.0
+		})
+	}
+	@objc fileprivate func imageTapped() {
+		if let image = weightImageView.image {
+			self.delegate?.presentImage(image: image)
 		}
 	}
 }

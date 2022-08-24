@@ -11,7 +11,7 @@ protocol AddWeightAlertViewDelegate {
 	
 	func cancelButtonAction()
 	func cameraButtonTapped()
-	func confirmButtonAction(weight: String, date: Date?)
+	func confirmButtonAction(weight: String, date: Date?, imagePath: String?)
 }
 
 class AddWeightAlertView: UIView {
@@ -46,15 +46,12 @@ class AddWeightAlertView: UIView {
 		removeKeyboardListener()
 	}
 	
-	@objc func cameraButtonAction() {
-		delegate?.cameraButtonTapped()
-	}
 	@IBAction func confirmButtonAction(_ sender: Any) {
 		if let perentVC = parentViewController {
 			Spinner.shared.show(perentVC.view)
 		}
 		if let weight = weightTextField.text, !weight.isEmpty {
-			delegate?.confirmButtonAction(weight: weight, date: editWeight?.date)
+			delegate?.confirmButtonAction(weight: weight, date: editWeight?.date, imagePath: editWeight?.imagePath)
 		} else {
 			weightTextField.becomeFirstResponder()
 			weightTextField.layer.borderColor = UIColor.red.cgColor
@@ -88,10 +85,13 @@ class AddWeightAlertView: UIView {
 		weightTextField.layer.borderColor = UIColor.systemBlue.cgColor
 		weightImageButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cameraButtonAction)))
 	}
-	func chageCheckMarkState() {
+	func changeCheckMarkState() {
 		DispatchQueue.main.async { [weak self] in
 			guard let self = self else { return }
 			self.checkMarkImageView.isHidden = false
 		}
+	}
+	@objc func cameraButtonAction() {
+		delegate?.cameraButtonTapped()
 	}
 }

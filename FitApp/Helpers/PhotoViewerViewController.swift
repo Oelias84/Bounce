@@ -10,10 +10,12 @@ import SDWebImage
 
 class PhotoViewerViewController: UIViewController {
 
-	private let url: URL
+	fileprivate let url: URL?
+	fileprivate let image: UIImage?
 	
-	init(with url: URL) {
+	init(with url: URL? = nil, image: UIImage? = nil) {
 		self.url = url
+		self.image = image
 		super.init(nibName: nil, bundle: nil)
 	}
 	
@@ -31,8 +33,13 @@ class PhotoViewerViewController: UIViewController {
 		super.viewDidLoad()
 		title = "תמונה"
 		view.backgroundColor = .black
-		view.addSubview(imageView)
-		self.imageView.sd_setImage(with: self.url)
+		if let image = image {
+			view.addSubview(imageView)
+			self.imageView.image = image
+		} else {
+			view.addSubview(imageView)
+			self.imageView.sd_setImage(with: self.url)
+		}
 	}
 	
 	override func viewDidLayoutSubviews() {

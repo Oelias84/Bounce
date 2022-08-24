@@ -68,7 +68,7 @@ class ChartView: UIView {
 		
 		chartData.addDataSet(chartDataSet)
 		
-		chartDataSet.colors = [.black]
+		chartDataSet.colors = [.projectTail]
 		chartDataSet.setCircleColor(.projectTail)
 		chartDataSet.mode = .horizontalBezier
 

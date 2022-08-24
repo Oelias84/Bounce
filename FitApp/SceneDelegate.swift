@@ -51,7 +51,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 											case NotificationTypes.mealNotification.rawValue:
 												self.moveToFromNotification(storyboardId: K.StoryboardName.mealPlan, vcId: K.ViewControllerId.mealViewController)
 											case NotificationTypes.weightNotification.rawValue:
-												self.moveToFromNotification(storyboardId: K.StoryboardName.weightProgress, vcId: K.ViewControllerId.weightViewController)
+												self.moveToFromNotification(storyboardId: K.StoryboardName.weightProgress, vcId: K.ViewControllerId.weightsViewController)
 											default:
 												if UserProfile.defaults.getIsManager {
 													guard let userChatId = notificationResponse.notification.request.content.userInfo["id"] as? String else { return }
@@ -191,7 +191,7 @@ extension SceneDelegate {
 		   let navController = tabBarController.selectedViewController as? UINavigationController {
 			
 			switch vcId {
-			case K.ViewControllerId.weightViewController:
+			case K.ViewControllerId.weightsViewController:
 				tabBarController.selectedIndex = 3
 			case K.ViewControllerId.mealViewController:
 				tabBarController.selectedIndex = 1

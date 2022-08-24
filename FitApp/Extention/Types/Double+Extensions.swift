@@ -38,4 +38,20 @@ extension Double {
 			return whole
 		}
 	}
+	func shortDecimal(maxDecimals max: Int? = 2) -> Double {
+		let stringArr = String(self).split(separator: ".")
+		let decimals = Array(stringArr[1])
+		var string = "\(stringArr[0])."
+		
+		var count = 0;
+		for n in decimals {
+			if count == max { break }
+			string += "\(n)"
+			count += 1
+		}
+		
+		
+		let double = Double(string)!
+		return double
+	}
 }

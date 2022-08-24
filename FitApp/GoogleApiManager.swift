@@ -214,6 +214,16 @@ struct GoogleApiManager {
 	}
 	
 	//MARK: - Weights
+	func updateWeights(weights: [Weight]?, completion: @escaping (Error?) -> ()) {
+		guard let weights = weights else { return }
+		let weightsModel = Weights(weights: weights)
+		
+		do {
+			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-weights").document("weights").setData(from: weightsModel.self, merge: true, completion: completion)
+		} catch {
+			print(error)
+		}
+	}
 	func updateWeights(weights: Weights) {
 		do {
 			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-weights").document("weights").setData(from: weights.self)

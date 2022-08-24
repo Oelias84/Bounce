@@ -18,7 +18,7 @@ enum CaloriesAlertsState: String {
 
 class WeightAlertsManager {
 	
-	private var userWeights: [Weight]!
+	private var userWeightsPeriod: [WeightPeriod]!
 	private var userDailyMeals: [DailyMeal]!
 	
 	private var userConsumedCalories: Double!
@@ -29,12 +29,7 @@ class WeightAlertsManager {
 	private var shouldShowNotEnoughDataAlert = false
 	
 	private var todayDate: Date!
-	private var lastCaloriesCheckDateString: Date? {
-		didSet {
-			UserProfile.defaults.lastCaloriesCheckDateString = lastCaloriesCheckDateString?.dateStringForDB
-			UserProfile.updateServer()
-		}
-	}
+	private var lastCaloriesCheckDateString: Date?
 	
 	private var firstWeekWeightsArray: [Weight]! {
 		didSet {
@@ -52,7 +47,12 @@ class WeightAlertsManager {
 	private var firstWeekAverageWeight: Double!
 	private var secondWeekAverageWeight: Double!
 	
+	private var weightsManager = WeightsManager.shared
+	
 	required init() {
+#if DEBUG
+		return
+#endif
 		if !UserProfile.defaults.getIsManager {
 			setUserData() {
 				self.configureData() {
@@ -70,8 +70,8 @@ extension WeightAlertsManager {
 	private func setUserData(completion: @escaping (() -> ())) {
 		let group = DispatchGroup()
 		todayDate = Date().onlyDate
+		
 		ConsumptionManager.shared.calculateUserData()
-
 		lastCaloriesCheckDateString = UserProfile.defaults.lastCaloriesCheckDateString?.dateFromString
 		shouldShowAlertToUser = UserProfile.defaults.shouldShowCaloriesCheckAlert
 		
@@ -93,7 +93,7 @@ extension WeightAlertsManager {
 	}
 	private func configureData(completion: @escaping (() -> ())) {
 		let today = Date().onlyDate
-		guard let firstUserWeightDate = userWeights.first?.date.onlyDate else { return }
+		guard let firstUserWeightDate = weightsManager.getFirstWeight?.date.onlyDate else { return }
 		
 		//If user didn't change shouldShowAlertToUser to false
 		if lastCaloriesCheckDateString?.onlyDate != nil ,shouldShowAlertToUser == true {
@@ -105,7 +105,7 @@ extension WeightAlertsManager {
 			calculateConsumedCaloriesFormPastWeek()
 			
 			completion()
-		//First time check
+			//First time check
 		} else if lastCaloriesCheckDateString == nil, today.isLaterThanOrEqual(to: firstUserWeightDate.add(2.weeks)) {
 			
 			//Set true on show alert
@@ -117,12 +117,12 @@ extension WeightAlertsManager {
 			
 			//Update last check date
 			lastCaloriesCheckDateString = firstUserWeightDate.add(2.weeks)
+			UserProfile.defaults.lastCaloriesCheckDateString = lastCaloriesCheckDateString?.dateStringForDB
 			
 			//Calculate calories consumed over the last week
 			calculateConsumedCaloriesFormPastWeek()
 			
 			completion()
-			
 		} else if let lastCheck = lastCaloriesCheckDateString?.onlyDate, today.isLaterThanOrEqual(to: lastCheck.add(1.weeks)) {
 			
 			//Set true on show alert
@@ -131,9 +131,6 @@ extension WeightAlertsManager {
 			
 			//Fill the arrays with weight data
 			calculateWeights()
-			
-			//Update last check date
-			lastCaloriesCheckDateString = today
 			
 			//Calculate calories consumed over the last week
 			calculateConsumedCaloriesFormPastWeek()
@@ -145,12 +142,14 @@ extension WeightAlertsManager {
 	//MARK: - Server Handeling
 	private func getWeights(completion: @escaping () -> ()) {
 		
-		WeightsManager.shared.fetchWeight() {
-			[weak self] weights in
+		weightsManager.splittedWeeksWeightsPeriod.bind {
+			[weak self] weightsPeriod in
 			guard let self = self else { return }
 			
-			self.userWeights = weights.sorted()
-			completion()
+			if weightsPeriod != nil {
+				self.userWeightsPeriod = weightsPeriod
+				completion()
+			}
 		}
 	}
 	private func getAllMeals(completion: @escaping () -> ()) {
@@ -171,7 +170,10 @@ extension WeightAlertsManager {
 		}
 	}
 	private func updateUserCaloriesProgress() {
-		let data = CaloriesProgressState(date: lastCaloriesCheckDateString!, userCaloriesBetweenConsumedAndGiven: userCaloriesBetweenConsumedAndGiven, userWeekConsumedCalories: userConsumedCalories, userWeekExpectedCalories: userExpectedDailyCalories, firstWeekAverageWeight: firstWeekAverageWeight, secondWeekAverageWeight: secondWeekAverageWeight)
+		guard let lastCaloriesCheckDateString = UserProfile.defaults.lastCaloriesCheckDateString?.dateFromString else { return }
+		
+		//Update the update calories progress state
+		let data = CaloriesProgressState(date: lastCaloriesCheckDateString, userCaloriesBetweenConsumedAndGiven: userCaloriesBetweenConsumedAndGiven, userWeekConsumedCalories: userConsumedCalories, userWeekExpectedCalories: userExpectedDailyCalories, firstWeekAverageWeight: firstWeekAverageWeight, secondWeekAverageWeight: secondWeekAverageWeight)
 		
 		GoogleApiManager.shared.updateCaloriesProgressState(data: data)
 	}
@@ -183,30 +185,30 @@ extension WeightAlertsManager {
 	
 	//MARK: - Calculation
 	private func calculateWeights() {
-		
-		if Date().onlyDate.isEarlier(than: userWeights.first!.date.onlyDate.add(3.weeks)) {
-			guard let firstWeekDate = userWeights.first?.date.onlyDate else { return }
-			
-			firstWeekWeightsArray = userWeights.filter {
-				$0.date.onlyDate.isLaterThanOrEqual(to: firstWeekDate) &&
-				$0.date.onlyDate.isEarlierThanOrEqual(to: firstWeekDate.add(1.weeks))
-			}
-			secondWeekWeightsArray = userWeights.filter {
-				$0.date.onlyDate.isLaterThanOrEqual(to: firstWeekDate.add(1.weeks)) &&
-				$0.date.onlyDate.isEarlierThanOrEqual(to: firstWeekDate.add(2.weeks))
-			}
-			
+		guard let firstWeekDate = weightsManager.getFirstWeight?.date.onlyDate.add(3.weeks) else { return }
+
+		// If first time
+		if Date().onlyDate.isEarlier(than: firstWeekDate) {
+			firstWeekWeightsArray = userWeightsPeriod[0].weightsArray
+			secondWeekWeightsArray = userWeightsPeriod[1].weightsArray
 		} else {
-			guard let firstWeekDate = lastCaloriesCheckDateString else { return }
+			guard let lastCaloriesCheckDateString = lastCaloriesCheckDateString else { return }
+
+			let first = userWeightsPeriod.first(where: {
+				let firstWeekDate = lastCaloriesCheckDateString.subtract(1.days).onlyDate
+				let weightPeriod = $0.canContain(firstWeekDate)
+				return weightPeriod
+			})
 			
-			firstWeekWeightsArray = userWeights.filter {
-				$0.date.onlyDate.isLaterThanOrEqual(to: firstWeekDate.subtract(1.weeks)) &&
-				$0.date.onlyDate.isEarlierThanOrEqual(to: firstWeekDate)
-			}
-			secondWeekWeightsArray = userWeights.filter {
-				$0.date.onlyDate.isLaterThanOrEqual(to: firstWeekDate) &&
-				$0.date.onlyDate.isEarlierThanOrEqual(to: firstWeekDate.add(1.weeks))
-			}
+			firstWeekWeightsArray = first?.weightsArray
+			
+			let second = userWeightsPeriod.first(where: {
+				let secondWeekDate = first?.endDate.onlyDate.add(1.days)
+				let weightPeriod = $0.canContain(secondWeekDate!)
+				return weightPeriod
+			})
+			
+			secondWeekWeightsArray = second?.weightsArray
 		}
 	}
 	private func calculateConsumedCaloriesFormPastWeek() {
@@ -221,7 +223,6 @@ extension WeightAlertsManager {
 		}
 		
 		let consumedCalories = DailyMealManager.calculateMealAverageCalories(meals: mealsConsumedInPeriod)
-		
 		userExpectedDailyCalories = DailyMealManager.calculateMealExpectedCalories(meals: mealsConsumedInPeriod)
 		userCaloriesBetweenConsumedAndGiven = consumedCalories - userExpectedDailyCalories
 		userConsumedCalories = consumedCalories
@@ -236,22 +237,20 @@ extension WeightAlertsManager {
 		let differenceBetweenWeight = Double(String(format: "%.2f", firstWeekAverageWeight))! - Double(String(format: "%.2f", secondWeekAverageWeight))!
 		let differenceBetweenWeightPercentage = (differenceBetweenWeight / firstWeekAverageWeight) * 100
 		
-		updateUserCaloriesProgress()
-		
 		if (shouldShowNotEnoughDataAlert || differenceBetweenWeight.isNaN) {
-			//present an alert that the user dose not have enough data to calculate calories
+			//Present an alert that the user dose not have enough data to calculate calories
 			let message = MessagesTextManager().notEnoughDataAlert()
-			self.presentAlert(title: "", message: message)
+			self.presentAlert(title: nil, message: message)
 		} else if shouldShowAlertToUser ?? false {
-			
 			updateAverageWeight()
 			
 			let newMeals = MealViewModel.shared.createMealsForNewUserData()
 			let newCalories = DailyMealManager.getCurrentMealsCalories(meals: newMeals)
 			
-			//present an alert depending on the calories calculation
+			//Present an alert depending on the calories calculation
+			//Check smaller calories consumed from the last week
 			if differenceBetweenWeightPercentage < expectedWeightRange.lowerBound {
-				//Check average calories consumed from the last week
+				
 				if userConsumedCalories < userExpectedDailyCalories {
 					//Send Message 1
 					let message = MessagesTextManager(weightState: .gainWeight, calorieState: .smallerThenAverage, newCalories: Double(newCalories) ?? 0).composeMessage()
@@ -265,9 +264,10 @@ extension WeightAlertsManager {
 					let message = MessagesTextManager(weightState: .gainWeight, calorieState: .average, newCalories: Double(newCalories) ?? 0).composeMessage()
 					self.presentAlert(title: message.0, message: message.1)
 				}
+				
+				//Check bigger calories consumed from the last week
 			} else if differenceBetweenWeightPercentage > expectedWeightRange.upperBound {
-
-				//Check average calories consumed from the last week
+				
 				if userConsumedCalories < userExpectedDailyCalories {
 					//Send Message 1
 					let message = MessagesTextManager(weightState: .lowerThenExpected, calorieState: .smallerThenAverage, newCalories: Double(newCalories) ?? 0).composeMessage()
@@ -281,9 +281,10 @@ extension WeightAlertsManager {
 					let message = MessagesTextManager(weightState: .lowerThenExpected, calorieState: .average, newCalories: Double(newCalories) ?? 0).composeMessage()
 					self.presentAlert(title: message.0, message: message.1)
 				}
-			} else if expectedWeightRange.contains(differenceBetweenWeightPercentage) {
-
+				
 				//Check average calories consumed from the last week
+			} else if expectedWeightRange.contains(differenceBetweenWeightPercentage) {
+				
 				if userConsumedCalories < userExpectedDailyCalories {
 					//Send Message 1
 					let message = MessagesTextManager(weightState: .asExpected, calorieState: .smallerThenAverage, newCalories: Double(newCalories) ?? 0).composeMessage()
@@ -300,27 +301,32 @@ extension WeightAlertsManager {
 			}
 		}
 	}
-	private func presentAlert(title: String, message: String) {
+	private func presentAlert(title: String?, message: String) {
 		let weightAlert = UIAlertController(title: title ,message: message, preferredStyle: .alert)
 		
 		weightAlert.addAction(UIAlertAction(title: "הבנתי, תודה", style: .default) { _ in
+			//Update User Data
 			self.shouldShowAlertToUser = false
+			
 			UserProfile.defaults.shouldShowCaloriesCheckAlert = self.shouldShowAlertToUser
-
+			UserProfile.defaults.lastCaloriesCheckDateString = self.todayDate.dateStringForDB
+			
+			self.updateUserCaloriesProgress()
+			UserProfile.updateServer()
+			
 			if let text = weightAlert.message {
 				self.sendMessageToManager(title: title, text: text)
 			}
 		})
-		DispatchQueue.main.async {
-			weightAlert.showAlert()
-		}
+		weightAlert.showAlert()
 	}
 	
 	//MARK: - Notification
-	private func sendMessageToManager(title: String, text: String) {
+	private func sendMessageToManager(title: String?, text: String) {
+		
 		DispatchQueue.global(qos: .background).async {
 			MessagesManager.shared.bindMessageManager = {
-				MessagesManager.shared.sendMassageToSupport(messageText: title + "\n\n" + text)
+				MessagesManager.shared.sendMassageToSupport(messageText: (title ?? "") + "\n\n" + text)
 			}
 		}
 	}

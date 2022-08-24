@@ -62,9 +62,16 @@ extension Date {
 		formatter.timeZone = .current
 		return formatter.string(from: self)
 	}
-	var displayYear: String {
+	var displayMonthAndYear: String {
 		let formatter = DateFormatter()
 		formatter.dateFormat = "MM/yy"
+		formatter.locale = Locale(identifier: "en_Us")
+		formatter.timeZone = .current
+		return formatter.string(from: self)
+	}
+	var displayOnlyMonth: String {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "MM"
 		formatter.locale = Locale(identifier: "en_Us")
 		formatter.timeZone = .current
 		return formatter.string(from: self)
@@ -87,7 +94,7 @@ extension Date {
 
 		let birthday: Date = self
 		let timeInterval = birthday.timeIntervalSinceNow
-		let age = abs(Int(timeInterval / 31556926.0)).years.years
+//		let age = abs(Int(timeInterval / 31556926.0)).years.years
 		let calendar: NSCalendar! = NSCalendar(calendarIdentifier: .gregorian)
 
 		if #available(iOS 15, *) {
