@@ -33,9 +33,11 @@ struct Weight: Codable, Comparable {
         return date.displayDayInMonth
     }
     var printWeight: String {
-        return String(format: "%.1f", weight) + " ק״ג"
+		return decimalWeight.shortFraction() + " ק״ג"
     }
-	
+	var decimalWeight: Decimal {
+		return Decimal(weight)
+	}
 	static func < (lhs: Weight, rhs: Weight) -> Bool {
 		lhs.date < rhs.date
 	}
@@ -51,6 +53,19 @@ class WeightPeriod {
 	let startDate: Date
 	let endDate: Date
 	var weightsArray: [Weight]?
+	
+	var decimalWeight: [Decimal] {
+		guard weightsArray != nil else { return [] }
+		var weights = [Decimal]()
+		
+		weightsArray?.forEach {
+			weights.append(Decimal($0.weight))
+		}
+		return weights
+	}
+	var weightsSum: Decimal {
+		decimalWeight.reduce(0, +)
+	}
 	
 	init(startDate: Date, endDate: Date, weightsArray: [Weight]? = nil) {
 		self.startDate = startDate

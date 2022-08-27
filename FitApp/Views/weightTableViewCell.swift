@@ -83,7 +83,6 @@ extension weightTableViewCell {
 		self.timePeriod = timePeriod
 		
 		weightTextLabel.text = weight.weight.isNaN ? String(format: "%.1f", 0) + " ק״ג" : weight.printWeight
-		
 		cancellable = self.loadImage(url: URL(string: weight.imagePath ?? "")).sink {
 			[unowned self] image in
 			self.showImage(image: image)

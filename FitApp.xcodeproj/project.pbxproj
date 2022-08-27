@@ -133,6 +133,7 @@
 		7CB9ADE9268CB72B0009B42A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE8268CB72B0009B42A /* ChartView.swift */; };
 		7CBBF1ED28197A8600EE55F1 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBF1EC28197A8600EE55F1 /* IAPManager.swift */; };
 		7CBBF1EF281992AA00EE55F1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CBBF1EE281992AA00EE55F1 /* StoreKit.framework */; };
+		7CCBB92A28BA5EEF00D7EB87 /* Decimal+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBB92928BA5EEF00D7EB87 /* Decimal+Extensions.swift */; };
 		7CCC0E67262B2E79006E2E35 /* TableViewEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC0E66262B2E79006E2E35 /* TableViewEmptyView.swift */; };
 		7CD1817B2647E80F0054DB9C /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */; };
 		7CD1817C2647E80F0054DB9C /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */; };
@@ -370,6 +371,7 @@
 		7CBBF1EC28197A8600EE55F1 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		7CBBF1EE281992AA00EE55F1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		7CBBF1F0281C54F000EE55F1 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		7CCBB92928BA5EEF00D7EB87 /* Decimal+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Extensions.swift"; sourceTree = "<group>"; };
 		7CCC0E66262B2E79006E2E35 /* TableViewEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEmptyView.swift; sourceTree = "<group>"; };
 		7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
@@ -1178,6 +1180,7 @@
 				B367F14725B036CC00DF21D7 /* UserDefaults+Extensions.swift */,
 				7C62180F26F4F2F20019FD25 /* UIAlertController+Extensions.swift */,
 				7C10BA6F276BCB9C00B5860C /* UINavigationController+Extensions.swift */,
+				7CCBB92928BA5EEF00D7EB87 /* Decimal+Extensions.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -1744,6 +1747,7 @@
 				7C10BA70276BCB9C00B5860C /* UINavigationController+Extensions.swift in Sources */,
 				7C28129E284B8386004385DD /* UserMealsViewController.swift in Sources */,
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
+				7CCBB92A28BA5EEF00D7EB87 /* Decimal+Extensions.swift in Sources */,
 				7C54164D269D951C00C22859 /* LoginViewModel.swift in Sources */,
 				7CE9BB732871F79300FB3328 /* UserCommentsTableViewCell.swift in Sources */,
 				7CB3701E28358D180010E8EC /* AdminUserMenuTableViewCell.swift in Sources */,

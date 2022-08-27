@@ -235,23 +235,21 @@ extension WeightsViewController: UITableViewDelegate, UITableViewDataSource {
 			cell.differenceTextLabel.text = "-"
 			cell.changeTextLabel.text = "-"
 		} else {
-			let difference: Double = {
-				let weight = weightData!.weight
-				let lastWeight = viewModel.getWeight(for: timePeriod, at: indexPath.row-1)?.weight
+			let difference: Decimal = {
+				let weight = weightData!.decimalWeight
+				let lastWeight = viewModel.getWeight(for: timePeriod, at: indexPath.row-1)?.decimalWeight ?? weight
 				
 				switch timePeriod {
 				case .week:
-					return weight - (lastWeight ?? weight)
-				case .month:
-					return weight - (lastWeight ?? weight)
-				case .year:
-					return weight - (lastWeight ?? weight)
+					return Decimal(string: weight.shortFraction())! - Decimal(string: lastWeight.shortFraction())!
+				case .month, .year:
+					return weight - lastWeight
 				}
 			}()
-			let differenceInPrecent = (difference.shortDecimal() / weightData!.weight) * 100.0
+			let differenceInPrecent = (difference / weightData!.decimalWeight) * 100.0
 			
-			cell.changeTextLabel.text = differenceInPrecent.isNaN ? "-" : String(differenceInPrecent.shortDecimal(maxDecimals: 1))+"%"
-			cell.differenceTextLabel.text = difference.isNaN ? "-" : String(difference.shortDecimal(maxDecimals: 1))
+			cell.changeTextLabel.text = differenceInPrecent.isNaN ? "-" : differenceInPrecent.shortFraction() + "%"
+			cell.differenceTextLabel.text = difference.isNaN ? "-" : difference.shortFraction()
 		}
 		
 		cell.delegate = self
@@ -312,10 +310,12 @@ extension WeightsViewController {
 			addWeightButton.setImage(UIImage(systemName: "xmark"), for: .normal)
 			addWeightButton.setTitle("", for: .normal)
 		}
+		dateLeftButton.isHidden = true
 	}
 	fileprivate func updateView() {
 		updateDateLabels()
 		updateTableView()
+		updateButtons()
 	}
 	fileprivate func addChartView() {
 		let lineChat = ChartView(frame: CGRect(x: 0, y: 0, width: self.chartView.frame.width, height: self.chartView.frame.height))
@@ -365,17 +365,17 @@ extension WeightsViewController {
 			switch self.timePeriod {
 			case .week:
 				self.dateTextLabel.text = "\(startDate.displayDayInMonth) - \(endDate.displayDayInMonth)"
-				self.dateRightButton.isHidden = endDate.onlyDate.isLaterThanOrEqual(to: Date().onlyDate)
-				self.dateLeftButton.isHidden = false
 			case .month:
 				self.dateTextLabel.text = "\((self.viewModel.selectedDate!.displayMonthAndYear))"
-				self.dateRightButton.isHidden = endDate.onlyDate.isLaterThanOrEqual(to: Date().onlyDate)
-				self.dateLeftButton.isHidden = false
 			case .year:
 				self.dateTextLabel.text = "\((self.viewModel.selectedDate!.year))"
-				self.dateLeftButton.isHidden = self.viewModel.backButtonIsHidden
-				self.dateRightButton.isHidden = endDate.onlyDate.year == Date().year
 			}
+		}
+	}
+	fileprivate func updateButtons() {
+		DispatchQueue.main.async {
+			self.dateRightButton.isHidden = self.viewModel.forwardButtonIsHidden(period: self.timePeriod)
+			self.dateLeftButton.isHidden = self.viewModel.backButtonIsHidden(period: self.timePeriod)
 		}
 	}
 	

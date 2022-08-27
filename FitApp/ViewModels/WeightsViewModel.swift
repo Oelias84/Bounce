@@ -50,19 +50,39 @@ extension WeightsViewModel {
 		}
 		return (Date(), Date())
 	}
-	var backButtonIsHidden: Bool {
-		guard let yearSplittedWeights = splittedWeights.value else { return false }
-		
-		if let firsWeightDate = yearSplittedWeights.first?.weightsArray?.first?.date {
-			return (firsWeightDate.year >= selectedDate.onlyDate.year)
+	
+	func backButtonIsHidden(period: TimePeriod) -> Bool {
+		guard let splittedWeights = splittedWeights.value else { return false }
+		if let firsWeightDate = splittedWeights.first?.weightsArray?.first?.date {
+			
+			switch period {
+			case .week:
+				return selectedDate.onlyDate <= firsWeightDate.onlyDate
+			case .month:
+				return selectedDate.year <= firsWeightDate.year && selectedDate.month <= firsWeightDate.month
+			case .year:
+				return selectedDate.year <= firsWeightDate.year
+			}
 		} else {
 			return true
 		}
 	}
+	func forwardButtonIsHidden(period: TimePeriod) -> Bool {
+
+		switch period {
+		case .week:
+			return selectedDate.onlyDate >= Date().onlyDate
+		case .month:
+			return selectedDate.year >= Date().year && selectedDate.month >= Date().month
+		case .year:
+			return selectedDate.year >= Date().year
+		}
+	}
+	
 	var didWeightForCurrentDate: Bool {
 		weightsManager.lastWeightingDate == Date().onlyDate
 	}
-
+	
 	// Get Weights Count
 	var getDailyWeightsCount: Int {
 		return getDailyFilteredWights()?.count ?? 0
@@ -73,7 +93,7 @@ extension WeightsViewModel {
 	var getYearlyWeightsCount: Int {
 		return getYearlyFilteredWights()?.count ?? 0
 	}
-
+	
 	// Get Weights
 	func getWeights(for period: TimePeriod) -> [Weight]? {
 		switch period {
@@ -130,7 +150,7 @@ extension WeightsViewModel {
 					}
 					group.leave()
 				}
-
+				
 				group.wait()
 				group.enter()
 				let weight = Weight(dateString: weightDate.dateStringForDB, weight: weight, imagePath: path?.absoluteString)
@@ -182,11 +202,9 @@ extension WeightsViewModel {
 			if week.weightsArray!.contains(where: { weight in
 				weight.date.month == selectedDate.month
 			}) {
-				let weeklyWeightSum = week.weightsArray!.reduce(0) { accumulator, element in
-					return accumulator + element.weight.shortDecimal()
-				}
-				let calculatedWeight = (weeklyWeightSum / Double(week.weightsArray?.count ?? 0)).shortDecimal()
-				let weight = Weight(dateString: week.startDate.dateStringForDB, weight: calculatedWeight)
+				let calculatedWeight = (week.weightsSum / Decimal(week.weightsArray?.count ?? 0))
+				let weight = Weight(dateString: week.startDate.dateStringForDB, weight: Double(calculatedWeight.shortFraction())!)
+				
 				weekWeightsArray.append(weight)
 			}
 		}
@@ -198,11 +216,9 @@ extension WeightsViewModel {
 		var monthWeightsArray = [Weight]()
 		
 		for month in yearSplittedWeights {
-			let monthlyWeightSum = month.weightsArray!.reduce(0) { accumulator, element in
-				return accumulator + element.weight
-			}
-			let calculatedWeight = (monthlyWeightSum / Double(month.weightsArray?.count ?? 0)).shortDecimal()
-			let weight = Weight(dateString: month.startDate.dateStringForDB, weight: calculatedWeight)
+			let calculatedWeight = (month.weightsSum / Decimal(month.weightsArray?.count ?? 0))
+			let weight = Weight(dateString: month.startDate.dateStringForDB, weight: Double(calculatedWeight.shortFraction())!)
+			
 			monthWeightsArray.append(weight)
 		}
 		return monthWeightsArray
