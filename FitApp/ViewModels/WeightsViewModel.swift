@@ -39,15 +39,35 @@ extension WeightsViewModel {
 		}
 		return (Date(), Date())
 	}
-	var backButtonIsHidden: Bool {
-		guard let yearSplittedWeights = splittedWeights.value else { return false }
-		
-		if let firsWeightDate = yearSplittedWeights.first?.weightsArray?.first?.date {
-			return (firsWeightDate.year >= selectedDate.onlyDate.year)
+	
+	func backButtonIsHidden(period: TimePeriod) -> Bool {
+		guard let splittedWeights = splittedWeights.value else { return false }
+		if let firsWeightDate = splittedWeights.first?.weightsArray?.first?.date {
+			
+			switch period {
+			case .week:
+				return selectedDate.onlyDate <= firsWeightDate.onlyDate
+			case .month:
+				return selectedDate.year <= firsWeightDate.year && selectedDate.month <= firsWeightDate.month
+			case .year:
+				return selectedDate.year <= firsWeightDate.year
+			}
 		} else {
 			return true
 		}
 	}
+	func forwardButtonIsHidden(period: TimePeriod) -> Bool {
+
+		switch period {
+		case .week:
+			return selectedDate.onlyDate >= Date().onlyDate
+		case .month:
+			return selectedDate.year >= Date().year && selectedDate.month >= Date().month
+		case .year:
+			return selectedDate.year >= Date().year
+		}
+	}
+	
 	var didWeightForCurrentDate: Bool {
 		weightsManager.lastWeightingDate == Date().onlyDate
 	}
@@ -171,10 +191,9 @@ extension WeightsViewModel {
 			if week.weightsArray!.contains(where: { weight in
 				weight.date.month == selectedDate.month
 			}) {
-				let weeklyWeightSum = week.weightsArray!.reduce(0) { accumulator, element in
-					return accumulator + element.weight
-				}
-				let weight = Weight(dateString: week.startDate.dateStringForDB, weight: weeklyWeightSum / Double(week.weightsArray?.count ?? 0))
+				let calculatedWeight = (week.weightsSum / Decimal(week.weightsArray?.count ?? 0))
+				let weight = Weight(dateString: week.startDate.dateStringForDB, weight: Double(calculatedWeight.shortFraction())!)
+				
 				weekWeightsArray.append(weight)
 			}
 		}
@@ -186,10 +205,9 @@ extension WeightsViewModel {
 		var monthWeightsArray = [Weight]()
 		
 		for month in yearSplittedWeights {
-			let monthlyWeightSum = month.weightsArray!.reduce(0) { accumulator, element in
-				return accumulator + element.weight
-			}
-			let weight = Weight(dateString: month.startDate.dateStringForDB, weight: monthlyWeightSum / Double(month.weightsArray?.count ?? 0))
+			let calculatedWeight = (month.weightsSum / Decimal(month.weightsArray?.count ?? 0))
+			let weight = Weight(dateString: month.startDate.dateStringForDB, weight: Double(calculatedWeight.shortFraction())!)
+			
 			monthWeightsArray.append(weight)
 		}
 		return monthWeightsArray
