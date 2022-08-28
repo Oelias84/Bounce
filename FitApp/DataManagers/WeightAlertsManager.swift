@@ -195,7 +195,7 @@ extension WeightAlertsManager {
 			guard let lastCaloriesCheckDateString = lastCaloriesCheckDateString else { return }
 
 			let first = userWeightsPeriod.first(where: {
-				let firstWeekDate = lastCaloriesCheckDateString.subtract(1.days).onlyDate
+				let firstWeekDate = lastCaloriesCheckDateString.subtract(4.days).onlyDate
 				let weightPeriod = $0.canContain(firstWeekDate)
 				return weightPeriod
 			})
