@@ -40,7 +40,6 @@ class ChartView: UIView {
 	}
 	func cubicLineChartSetup() {
 		
-		self.backgroundColor = .white
 		self.addSubview(lineChartView)
 		
 		lineChartView.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +48,7 @@ class ChartView: UIView {
 		lineChartView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
 		lineChartView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 		
-		lineChartView.animate(xAxisDuration: 2.0, yAxisDuration: 2.0, easingOption: .easeInSine)
+		lineChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0, easingOption: .easeInSine)
 		
 		cubicLineChart(dataPoints: timeLinePeriod, values: weights)
 	}
@@ -74,11 +73,11 @@ class ChartView: UIView {
 
 		chartDataSet.lineWidth = 0
 		chartDataSet.circleHoleRadius = 5
-		chartDataSet.circleRadius = 5
+		chartDataSet.circleRadius = 3
 		chartDataSet.cubicIntensity = 1
 		chartDataSet.drawCirclesEnabled = true
 		chartDataSet.valueFormatter = ChartValuesFormatter()
-		chartDataSet.valueFont = UIFont(name: "Helvetica", size: 10.0)!
+		chartDataSet.valueFont = UIFont(name: "Helvetica", size: 9.0)!
 		
 		//Adding gradient
 		let gradientColors = [UIColor.projectGreen.cgColor, UIColor.clear.cgColor] as CFArray
