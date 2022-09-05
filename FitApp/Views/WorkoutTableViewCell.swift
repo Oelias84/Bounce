@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol WorkoutTableViewCellDelegate {
+	func workoutCheckboxAction(state: WorkoutState)
+}
+
 class WorkoutTableViewCell: UITableViewCell {
     
     var workout: Workout! {
@@ -16,10 +20,16 @@ class WorkoutTableViewCell: UITableViewCell {
     }
     var workoutNumber: Int!
 	var workoutType: workoutType!
+	var workoutState: WorkoutState!
+	var indexPathForCell: IndexPath!
+
+	var delegate: WorkoutTableViewCellDelegate?
+	
     @IBOutlet weak var workoutTitleLabel: UILabel!
     @IBOutlet weak var workoutDescriptionLabel: UILabel!
     @IBOutlet weak var workoutBackgroundCell: UIView!
-    
+	@IBOutlet weak var workoutCheckbox: UIButton!
+	
 	@IBOutlet weak var exerciseLabel: UILabel!
 	@IBOutlet weak var setsLabel: UILabel!
 	@IBOutlet weak var timeLabel: UILabel!
@@ -29,13 +39,18 @@ class WorkoutTableViewCell: UITableViewCell {
         
         workoutBackgroundCell.cellView()
     }
+	
+	@IBAction func workoutCheckboxAction(_ sender: UIButton) {
+		sender.isSelected = !sender.isSelected
+		workoutState.index = indexPathForCell?.row
+		workoutState.isChecked = sender.isSelected
+		delegate?.workoutCheckboxAction(state: self.workoutState)
+	}
+}
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
+extension WorkoutTableViewCell {
+	
     func setupData() {
-        
 		let numberOfExercise = workout.exercises.count
 		var numberOfSets = 0
 
@@ -46,6 +61,7 @@ class WorkoutTableViewCell: UITableViewCell {
 			}
 		}
 		
+		workoutCheckbox.isSelected = workoutState?.isChecked ?? false
 		exerciseLabel.text = "\(numberOfExercise) תרגילים"
 		setsLabel.text = "\(numberOfSets) סטים"
 		timeLabel.text = workout.time

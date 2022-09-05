@@ -36,3 +36,38 @@ class WorkoutExercise: Codable {
 		self.exerciseToPresent = exerciseToPresent
 	}
 }
+
+class WorkoutStates: Codable {
+	
+	private var stateDate: String?
+	var workoutType: workoutType?
+	var workoutStates = [WorkoutState]()
+	
+	init(workoutType: workoutType?) {
+		self.workoutType = workoutType
+		self.resetIsChecked()
+	}
+	
+	private func resetIsChecked() {
+		if let date = stateDate?.dateFromString?.onlyDate {
+			if let endOfTheWeek = date.endOfWeek {
+				if Date().isLater(than: endOfTheWeek) {
+					workoutStates.forEach { $0.isChecked = false }
+				}
+			}
+		} else {
+			stateDate = Date().onlyDate.dateStringForDB
+		}
+	}
+}
+
+class WorkoutState: Codable {
+	
+	var index: Int?
+	var isChecked: Bool = false
+}
+
+struct WorkoutStatesData: Codable {
+	
+	let WorkoutStatesData: [WorkoutStates]
+}

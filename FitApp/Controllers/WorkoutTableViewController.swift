@@ -31,6 +31,7 @@ class WorkoutTableViewController: UIViewController {
 		
 		topBarView.setImage()
 		workoutViewModel.refreshDate()
+		
 		workoutViewModel.bindWorkoutViewModelToController = {
 			Spinner.shared.stop()
 			DispatchQueue.main.async {
@@ -66,6 +67,9 @@ extension WorkoutTableViewController: UITableViewDelegate, UITableViewDataSource
 		let cellData = workoutViewModel.getWorkout(for: indexPath.row)
 		let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.workoutCell, for: indexPath) as! WorkoutTableViewCell
 		
+		cell.delegate = self
+		cell.indexPathForCell = indexPath
+		cell.workoutState = workoutViewModel.getWorkoutState(for: indexPath.row)
 		cell.workoutType = workoutViewModel.type
 		cell.workoutNumber = indexPath.row + 1
 		cell.workout = cellData
@@ -83,6 +87,12 @@ extension WorkoutTableViewController: UITableViewDelegate, UITableViewDataSource
 extension WorkoutTableViewController: BounceNavigationBarDelegate {
 	
 	func backButtonTapped() {}
+}
+extension WorkoutTableViewController: WorkoutTableViewCellDelegate {
+
+	func workoutCheckboxAction(state: WorkoutState) {
+		workoutViewModel.updateWorkoutStates(workoutState: state)
+	}
 }
 
 //MARK: Functions

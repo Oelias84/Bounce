@@ -475,6 +475,34 @@ struct GoogleApiManager {
 			})
 		}
 	}
+	func updateWorkoutState(_ workoutsState: [WorkoutStates]) {
+		let data = WorkoutStatesData(WorkoutStatesData: workoutsState)
+		
+		do {
+			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workoutState").document("workoutState").setData(from: data, merge: true)
+		} catch {
+			print(error)
+		}
+	}
+	func getWorkoutsState(completion: @escaping (Result<[WorkoutStates]?, Error>) -> Void) {
+		do {
+			db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workoutState").document("workoutState").getDocument(completion: { (documentSnapshot, error) in
+				if let error = error {
+					print(error)
+				} else if let data = documentSnapshot {
+					do {
+						var workoutStates: [WorkoutStates]? = nil
+						let weightStatesData = try data.data(as: WorkoutStatesData.self)
+						workoutStates = weightStatesData?.WorkoutStatesData
+						completion(.success(workoutStates))
+					} catch {
+						print(error)
+						completion(.failure(error))
+					}
+				}
+			})
+		}
+	}
 	func getExerciseBy(completion: @escaping (Result<[Exercise], Error>) -> Void) {
 		do {
 			db.collection("workouts-data").document("exercises").getDocument(source: .default, completion: { (data, error) in
