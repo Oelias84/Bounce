@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum workoutType {
+enum workoutType: Codable {
 	case home
 	case gym
 }
@@ -22,8 +22,9 @@ class WorkoutViewModel: NSObject {
 	private var gymExercises: [Exercise]!
 	private var gymWorkout: [Workout] = []
 	
+	private var workoutsStates: [WorkoutStates]!
 	private let googleManager = GoogleApiManager()
-
+	
 	var bindWorkoutViewModelToController : (() -> ()) = {}
 	
 	override init() {
@@ -46,11 +47,23 @@ class WorkoutViewModel: NSObject {
 			return gymWorkout[index]
 		}
 	}
+	func getWorkoutState(for index: Int) -> WorkoutState {
+		guard let workoutsState = workoutsStates.first(where: {$0.workoutType == type}) else { return WorkoutState() }
+		
+		if !workoutsState.workoutStates.isEmpty && workoutsState.workoutStates.count-1 >= index {
+			return workoutsState.workoutStates[index]
+		} else {
+			return WorkoutState()
+		}
+	}
 	
 	func refreshDate() {
-
 		let group = DispatchGroup()
 		
+		group.enter()
+		fetchWorkoutsState {
+			group.leave()
+		}
 		group.enter()
 		fetchExercise {
 			self.fetchWorkout {
@@ -65,6 +78,9 @@ class WorkoutViewModel: NSObject {
 				group.leave()
 			}
 		}
+		group.notify(queue: .main) {
+			self.bindWorkoutViewModelToController()
+		}
 	}
 	func addWarmup(_ type: workoutType) -> WorkoutExercise {
 		switch type {
@@ -74,6 +90,18 @@ class WorkoutViewModel: NSObject {
 			return WorkoutExercise(exercise: "17", repeats: "10", sets: "3", exerciseToPresent: nil)
 		}
 	}
+	
+	func updateWorkoutStates(workoutState: WorkoutState) {
+		guard let workoutsState = workoutsStates.first(where: {$0.workoutType == type}) else { return }
+
+		if let containWorkoutState = workoutsState.workoutStates.first(where: {$0.index == workoutState.index}) {
+			containWorkoutState.isChecked = workoutState.isChecked
+		} else {
+			workoutsState.workoutStates.append(workoutState)
+		}
+		googleManager.updateWorkoutState(workoutsStates)
+	}
+	
 	private func addExerciseDataToWorkout() {
 		homeWorkout.forEach {
 			$0.exercises.forEach {
@@ -93,14 +121,14 @@ class WorkoutViewModel: NSObject {
 	
 	private func fetchWorkout(completion: @escaping () -> Void) {
 		homeWorkout.removeAll()
-        if let level = UserProfile.defaults.fitnessLevel,
-           let weeklyWorkout = UserProfile.defaults.weaklyWorkouts {
-            self.googleManager.getWorkouts(forFitnessLevel: level) {
+		if let level = UserProfile.defaults.fitnessLevel,
+		   let weeklyWorkout = UserProfile.defaults.weaklyWorkouts {
+			self.googleManager.getWorkouts(forFitnessLevel: level) {
 				[weak self] result in
 				guard let self = self else { return }
 				
-                switch result {
-                case .success(let workouts):
+				switch result {
+				case .success(let workouts):
 					workouts.forEach {
 						$0.exercises.insert(self.addWarmup(.home), at: 0)
 					}
@@ -129,7 +157,6 @@ class WorkoutViewModel: NSObject {
 			}
 		}
 	}
-	
 	private func fetchGymWorkout(completion: @escaping () -> Void) {
 		gymWorkout.removeAll()
 		if let level = UserProfile.defaults.fitnessLevel,
@@ -169,6 +196,27 @@ class WorkoutViewModel: NSObject {
 			case .failure(let error):
 				print("Error fetching Exercises: ", error )
 			}
+		}
+	}
+	private func fetchWorkoutsState(completion: @escaping () -> Void) {
+		homeWorkout.removeAll()
+		self.googleManager.getWorkoutsState() {
+			[weak self] result in
+			guard let self = self else { return }
+			
+			switch result {
+			case .success(let workoutsState):
+				if let workoutsState = workoutsState {
+					self.workoutsStates = workoutsState
+				} else {
+					let homeStateWorkout = WorkoutStates(workoutType: .home)
+					let gymStateWorkout = WorkoutStates(workoutType: .gym)
+					self.workoutsStates = [homeStateWorkout, gymStateWorkout]
+				}
+			case .failure(let error):
+				print("There was an issue getting workouts: ", error )
+			}
+			completion()
 		}
 	}
 }
