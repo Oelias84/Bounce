@@ -15,6 +15,9 @@ class AdminUserMenuTableViewCell: UITableViewCell {
 	private var animator: UIViewPropertyAnimator?
 	
 	@IBOutlet weak var userImageView: UIImageView!
+	@IBOutlet weak var lastSeenImageView: UIImageView!
+	@IBOutlet weak var isExpiredImageView: UIImageView!
+	
 	@IBOutlet weak var userNameLabel: UILabel!
 	@IBOutlet weak var messageButton: UIButton!
 	
@@ -24,7 +27,14 @@ class AdminUserMenuTableViewCell: UITableViewCell {
 	override public func prepareForReuse() {
 		super.prepareForReuse()
 		
+		lastSeenImageView.isHidden = true
+		isExpiredImageView.isHidden = true
+
 		userImageView.image = nil
+		lastSeenImageView.image = nil
+		isExpiredImageView.image = nil
+		isExpiredImageView.tintColor = nil
+		
 		userImageView.alpha = 0.0
 		animator?.stopAnimation(true)
 		cancellable?.cancel()
@@ -39,7 +49,7 @@ extension AdminUserMenuTableViewCell {
 	
 	public func configure(with chat: Chat) {
 		self.chat = chat
-		
+
 		if let userName = chat.displayName {
 			userNameLabel.text =  userName
 			userNameLabel.textColor = .black
@@ -51,10 +61,37 @@ extension AdminUserMenuTableViewCell {
 			[unowned self] image in
 			self.showImage(image: image)
 		}
-		isLastMessageReadFor(chat: chat) ? messageButton.setImage(UIImage(systemName: "message"), for: .normal)
-		: messageButton.setImage(UIImage(systemName: "message.fill"), for: .normal)
+		
+		switch chat.programState {
+		case .active:
+			break
+		case .expire:
+			let image = UIImage(systemName: "clock.badge.exclamationmark")?.withRenderingMode(.alwaysTemplate)
+			isExpiredImageView.isHidden = false
+			isExpiredImageView.image = image
+			isExpiredImageView.tintColor = .red
+		case .expireSoon:
+			let image = UIImage(systemName: "clock.badge.exclamationmark")
+			isExpiredImageView.isHidden = false
+			isExpiredImageView.image = image
+		default:
+			break
+		}
+		
+		if chat.wasSeenLately {
+			lastSeenImageView.isHidden = true
+		} else {
+			lastSeenImageView.isHidden = false
+			lastSeenImageView.image = UIImage(systemName: "person.fill.questionmark")
+		}
+		
+		if chat.isLastMessageReadFor {
+			messageButton.setImage(UIImage(systemName: "message"), for: .normal)
+		} else {
+			messageButton.setImage(UIImage(systemName: "message.fill"), for: .normal)
+		}
 	}
-	
+
 	fileprivate func showImage(image: UIImage?) {
 		userImageView.alpha = 0.0
 		animator?.stopAnimation(false)
@@ -64,16 +101,10 @@ extension AdminUserMenuTableViewCell {
 		})
 	}
 	fileprivate func loadImage(for chat: Chat) -> AnyPublisher<UIImage?, Never> {
-		return Just(chat.imagePath)
-		.flatMap({ poster -> AnyPublisher<UIImage?, Never> in
+		return Just(chat.imagePath).flatMap { poster -> AnyPublisher<UIImage?, Never> in
 			guard let url = chat.imagePath else { return Just(UIImage(systemName:"person.circle")).eraseToAnyPublisher() }
 			return ImageLoader.shared.loadImage(from: url)
-		})
-		.eraseToAnyPublisher()
-	}
-	fileprivate func isLastMessageReadFor(chat: Chat) -> Bool {
-		guard let lastSeen = chat.lastSeenMessageDate, let lastMessage = chat.latestMessage?.sentDate else { return false }
-		return lastSeen > lastMessage
+		}.eraseToAnyPublisher()
 	}
 	fileprivate func moveToChatContainerVC() {
 		let chatVC = ChatViewController(viewModel: ChatViewModel(chat: chat))

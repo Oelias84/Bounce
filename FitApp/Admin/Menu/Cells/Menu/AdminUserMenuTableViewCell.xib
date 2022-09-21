@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -39,43 +40,78 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SqO-Un-LVo">
-                                <rect key="frame" x="62" y="41.5" width="234" height="28.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SqO-Un-LVo">
+                                <rect key="frame" x="62" y="29.5" width="102" height="52"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="700" verticalCompressionResistancePriority="1000" text="Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ga3-Yu-Npz">
-                                        <rect key="frame" x="0.0" y="2" width="45.5" height="24"/>
-                                        <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="18"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="QBo-62-43N">
-                                        <rect key="frame" x="129" y="0.0" width="105" height="28.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UsG-3d-cnE">
+                                        <rect key="frame" x="0.0" y="0.0" width="45.5" height="24"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6z-qF-fPd">
-                                                <rect key="frame" x="0.0" y="0.0" width="28.5" height="28.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="1000" verticalHuggingPriority="700" verticalCompressionResistancePriority="1000" text="Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ga3-Yu-Npz">
+                                                <rect key="frame" x="0.0" y="0.0" width="45.5" height="24"/>
+                                                <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="firstBaseline" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ivd-85-pMZ">
+                                        <rect key="frame" x="0.0" y="32" width="62" height="20"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5EM-Jv-LSp">
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="I6z-qF-fPd" secondAttribute="height" multiplier="1:1" id="EmA-aT-o0u"/>
-                                                    <constraint firstAttribute="width" constant="40" id="JHS-2f-6Hu"/>
+                                                    <constraint firstAttribute="height" constant="25" id="1T4-M5-741"/>
+                                                    <constraint firstAttribute="width" secondItem="5EM-Jv-LSp" secondAttribute="height" multiplier="1:1" id="CAu-9F-xcv"/>
                                                 </constraints>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" image="message.fill" catalog="system">
-                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="messageButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lvq-9k-jtU"/>
-                                                </connections>
-                                            </button>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ejk-KH-loI">
-                                                <rect key="frame" x="92.5" y="0.5" width="12.5" height="26.5"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GFL-7p-lxx" userLabel="Program Indication Image View">
+                                                <rect key="frame" x="37" y="0.0" width="25" height="25"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="JUS-Qm-0z3"/>
+                                                    <constraint firstAttribute="width" secondItem="GFL-7p-lxx" secondAttribute="height" multiplier="1:1" id="D6u-6a-jCW"/>
+                                                    <constraint firstAttribute="height" constant="25" id="bZa-v0-ZTk"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="5EM-Jv-LSp" firstAttribute="top" secondItem="ivd-85-pMZ" secondAttribute="topMargin" id="9JB-nb-5bA"/>
+                                            <constraint firstAttribute="height" constant="20" id="LZR-LV-zXF"/>
+                                        </constraints>
                                     </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="UsG-3d-cnE" firstAttribute="leading" secondItem="SqO-Un-LVo" secondAttribute="leading" id="Yuu-0k-I7R"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="300" distribution="fillEqually" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="QBo-62-43N">
+                                <rect key="frame" x="172" y="14.5" width="124" height="82"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6z-qF-fPd">
+                                        <rect key="frame" x="0.0" y="0.0" width="82" height="82"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="I6z-qF-fPd" secondAttribute="height" multiplier="1:1" id="EmA-aT-o0u"/>
+                                            <constraint firstAttribute="width" constant="40" id="JHS-2f-6Hu"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="message.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="messageButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lvq-9k-jtU"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ejk-KH-loI">
+                                        <rect key="frame" x="94" y="28" width="30" height="26.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="JUS-Qm-0z3"/>
+                                            <constraint firstAttribute="width" constant="30" id="eqc-uT-gqI"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                             </stackView>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="QBo-62-43N" secondAttribute="trailing" id="4pm-xm-uMT"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
@@ -87,17 +123,19 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="isExpiredImageView" destination="GFL-7p-lxx" id="2TF-7v-k2U"/>
+                <outlet property="lastSeenImageView" destination="5EM-Jv-LSp" id="XcG-jG-oXS"/>
                 <outlet property="messageButton" destination="I6z-qF-fPd" id="s6b-DB-Hhr"/>
                 <outlet property="userImageView" destination="aNu-Xf-2Mf" id="L1V-gh-HOv"/>
                 <outlet property="userNameLabel" destination="Ga3-Yu-Npz" id="BmC-hW-F56"/>
             </connections>
-            <point key="canvasLocation" x="138" y="142"/>
+            <point key="canvasLocation" x="137.68115942028987" y="141.62946428571428"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="chevron.forward" catalog="system" width="96" height="128"/>
-        <image name="message.fill" catalog="system" width="128" height="113"/>
-        <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="chevron.forward" catalog="system" width="97" height="128"/>
+        <image name="message.fill" catalog="system" width="128" height="114"/>
+        <image name="person.circle" catalog="system" width="128" height="123"/>
         <namedColor name="ProjectLightGreen">
             <color red="0.28600001335144043" green="0.57599997520446777" blue="0.56099998950958252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

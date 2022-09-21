@@ -14,7 +14,6 @@ final class ChatsViewController: UIViewController {
 
 	@IBOutlet weak var topBarView: BounceNavigationBarView!
 	@IBOutlet weak var tableView: UITableView!
-	@IBOutlet weak var broadcastMessageButton: UIButton!
 	@IBOutlet weak var searchControllerView: UISearchBar!
 	
 	override func viewDidLoad() {
@@ -37,10 +36,6 @@ final class ChatsViewController: UIViewController {
 		super.viewWillAppear(animated)
 		
 		topBarView.setImage()
-	}
-	
-	@IBAction func broadcastMessageButtonAction(_ sender: UIButton) {
-		presentTextFieldAlert(withTitle: "מה תרצו לכתוב?", withMessage: "", options: "שלח", "ביטול")
 	}
 }
 
@@ -70,22 +65,6 @@ extension ChatsViewController: BounceNavigationBarDelegate {
 		navigationController?.popViewController(animated: true)
 	}
 }
-extension ChatsViewController: PopupAlertViewDelegate {
-	
-	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
-		if let textFieldValue = textFieldValue {
-			chatsViewModel.sendBroadcastMessage(text: textFieldValue)
-		}
-	}
-	func cancelButtonTapped(alertNumber: Int) {
-		return
-	}
-	func thirdButtonTapped(alertNumber: Int) {
-		UserProfile.defaults.showQaAlert = false
-	}
-}
-
-//MARK: - Delegates
 extension ChatsViewController: UISearchBarDelegate {
 	
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -137,29 +116,5 @@ extension ChatsViewController {
 		
 		chatContainerVC.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: chatData))
 		navigationController?.pushViewController(chatContainerVC, animated: true)
-	}
-	private func presentTextFieldAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
-		guard let window = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window else {
-			return
-		}
-		let storyboard = UIStoryboard(name: K.NibName.popupAlertView, bundle: nil)
-		let customAlert = storyboard.instantiateViewController(identifier: K.NibName.popupAlertView) as! PopupAlertView
-		
-		customAlert.providesPresentationContextTransitionStyle = true
-		customAlert.definesPresentationContext = true
-		customAlert.modalPresentationStyle = .overCurrentContext
-		customAlert.modalTransitionStyle = .crossDissolve
-
-		customAlert.delegate = self
-		customAlert.titleText = title
-		customAlert.popupType = .textBox
-		customAlert.messageText = message
-		customAlert.okButtonText = options[0]
-		customAlert.cancelButtonText = options[1]
-		
-		if options.count == 3 {
-			customAlert.doNotShowText = options.last
-		}
-		window.rootViewController?.present(customAlert, animated: true, completion: nil)
 	}
 }

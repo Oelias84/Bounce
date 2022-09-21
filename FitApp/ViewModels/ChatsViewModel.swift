@@ -59,8 +59,4 @@ class ChatsViewModel {
 		flitteredChats = results
 		completion()
 	}
-	
-	public func sendBroadcastMessage(text: String) {
-		messagesManager.postBroadcast(text: text)
-	}
 }

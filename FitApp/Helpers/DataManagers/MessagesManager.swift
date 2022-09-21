@@ -279,7 +279,7 @@ extension MessagesManager {
 		}
 	}
 	
-	public func postBroadcast(text: String) {
+	public func postBroadcast(text: String, for chats: [Chat]) {
 		for chat in chats {
 			self.sendTextMessageToChat(chat: chat, text: text) { _ in }
 		}

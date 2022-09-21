@@ -9,15 +9,19 @@ import Foundation
 
 class Chat: Comparable {
 	
-	
 	var isAdmin: Bool
 	var userId: String
 	var imagePath: URL?
 	var displayName: String?
 	var pushTokens: [String]?
-	
 	var latestMessage: Message?
 	var lastSeenMessageDate: Date?
+	var isLastMessageReadFor: Bool {
+		guard let lastSeen = self.lastSeenMessageDate, let lastMessage = self.latestMessage?.sentDate else { return false }
+		return lastSeen > lastMessage
+	}
+	var wasSeenLately: Bool = false
+	var programState: UserProgramSatet?
 	
 	init(userId: String, isAdmin: Bool = false, displayName: String? = nil, otherUserUID: String? = nil, latestMessage: Message? = nil, pushTokens: [String]? = nil, lastSeenMessageDate: Date? = nil) {
 		

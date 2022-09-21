@@ -9,10 +9,16 @@ import UIKit
 
 class UsersListViewController: UIViewController {
 	
-	private let viewModel = UsersListViewModel()
+	private var viewModel: UsersListViewModel!
 	
 	@IBOutlet weak var tableView: UITableView!
-	@IBOutlet weak var searchControllerView: UISearchBar!
+	@IBOutlet weak var upButtonView: UIButton!
+	@IBOutlet weak var filerButtonView: UIButton!
+	
+	private var isSearchBarEmpty: Bool {
+		return searchController.searchBar.text?.isEmpty ?? true
+	}
+	private let searchController = UISearchController(searchResultsController: nil)
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == "moveToUserDetails" {
@@ -31,11 +37,20 @@ class UsersListViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		viewModel = UsersListViewModel(parentVC: self)
 		Spinner.shared.show(view)
 		setupView()
 		bindViewModel()
+		setupSearchBar()
+	}
+	@objc func yourMethodName() {
+		print("Cancel button tap")
 	}
 	
+	@IBAction func upButtonAction(_ sender: Any) {
+		let indexPath = IndexPath(row: 0, column: 0)
+		tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+	}
 	@IBAction func closeButtonAction(_ sender: Any) {
 		dismiss(animated: true)
 	}
@@ -45,19 +60,21 @@ class UsersListViewController: UIViewController {
 }
 
 //MARK: - Delegates
-extension UsersListViewController: UISearchBarDelegate {
+extension UsersListViewController: UISearchResultsUpdating, UISearchBarDelegate {
+
 	
-	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+	func updateSearchResults(for searchController: UISearchController) {
+		let searchBar = searchController.searchBar
+		
 		guard let text = searchBar.text, !text.replacingOccurrences(of: " ", with: "").isEmpty, text.count > 1 else {
-			self.viewModel.filterUsers(with: nil) {}
+			self.viewModel.filterUsers(with: .allUsers)
 			self.tableView.reloadData()
 			return
 		}
-		viewModel.filterUsers(with: text) {
-			self.tableView.reloadData()
-		}
+		viewModel.filterUsers(with: .searchBy(name: text))
 	}
 }
+
 extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -67,6 +84,7 @@ extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
 		let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.adminUserMenuCell) as! AdminUserMenuTableViewCell
 		let cellData = viewModel.getChatFor(row: indexPath.row)
 		
+		upButtonAnimat(indexPath: indexPath)
 		cell.configure(with: cellData)
 		return cell
 	}
@@ -94,16 +112,21 @@ extension UsersListViewController: PopupAlertViewDelegate {
 //MARK: - Functions
 extension UsersListViewController {
 	
-	private func setupView() {
-		searchControllerView.placeholder = "חפשו משתמשים..."
+	fileprivate func setupView() {
+		if #available(iOS 14.0, *) {
+			filerButtonView.menu = viewModel.filterMenu
+			filerButtonView.showsMenuAsPrimaryAction = true
+		} else {
+			//Sheet
+		}
 		tableView.register(UINib(nibName: K.NibName.adminUserMenuTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.adminUserMenuCell)
 	}
-	private func bindViewModel() {
-
+	fileprivate func bindViewModel() {
 		viewModel.filteredUsers.bind {
 			users in
 			if users != nil {
 				DispatchQueue.main.async {
+					self.title = "\(self.viewModel.getChatsCount ?? 0) משתמשים"
 					self.tableView.reloadData()
 					Spinner.shared.stop()
 				}
@@ -111,11 +134,33 @@ extension UsersListViewController {
 			Spinner.shared.stop()
 		}
 	}
-	private func moveToUserDetails(userData: Chat) {
+	fileprivate func setupSearchBar() {
+		searchController.searchBar.placeholder = "חיפוש משתמשים"
+		searchController.searchResultsUpdater = self
+		searchController.obscuresBackgroundDuringPresentation = false
+		navigationItem.searchController = searchController
+		definesPresentationContext = true
+	}
+	fileprivate func moveToUserDetails(userData: Chat) {
 		let sender: [String: Chat?] = ["userChat": userData]
 		performSegue(withIdentifier: K.SegueId.moveToUserDetails, sender: sender)
 	}
-	private func presentTextFieldAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
+	fileprivate func upButtonAnimat(indexPath: IndexPath) {
+		if indexPath.row > 20 {
+			upButtonView.isHidden = false
+			UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut) {
+				self.upButtonView.alpha = 1
+			}
+		} else {
+			UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut) {
+				self.upButtonView.alpha = 0
+			} completion: { didfinish in
+				self.upButtonView.isHidden = didfinish
+			}
+		}
+	}
+	
+	fileprivate func presentTextFieldAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
 		let storyboard = UIStoryboard(name: K.NibName.popupAlertView, bundle: nil)
 		let customAlert = storyboard.instantiateViewController(identifier: K.NibName.popupAlertView) as! PopupAlertView
 		

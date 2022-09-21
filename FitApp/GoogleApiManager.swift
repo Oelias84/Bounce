@@ -11,6 +11,13 @@ import FirebaseStorage
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+enum UserProgramSatet {
+	
+	case active
+	case expire
+	case expireSoon
+}
+
 struct GoogleApiManager {
 	
 	let db = Firestore.firestore()
@@ -65,14 +72,6 @@ struct GoogleApiManager {
 				}
 				completion(nil)
 			}
-			//			db.collection("users").document(Auth.auth().currentUser!.uid).delete {
-			//				error in
-			//				if error != nil {
-			//					completion(error)
-			//				} else {
-			//
-			//				}
-			//			}
 		}
 	}
 	func updateUserData(userData: ServerUserData) {
@@ -132,6 +131,54 @@ struct GoogleApiManager {
 			}
 		}
 	}
+	func getUserLastSeenData(days: Int, userID: String, completion: @escaping (Result<Bool?, Error>) -> Void) {
+		db.collection("users").document(userID).collection("user-daily-meals").getDocuments(source: .default) {
+			(data, error) in
+			if let error = error {
+				print(error)
+				completion(.failure(error))
+			}
+			if let data = data?.documents.last {
+				if let lastDate = data.documentID.dateFromString, lastDate.isEarlier(than: Date().subtract(days.days))  {
+					completion(.success(false))
+				} else {
+					completion(.success(true))
+				}
+			} else {
+				completion(.success(false))
+			}
+		}
+	}
+	func getUserOrderExpirationData(userID: String, completion: @escaping (Result<UserProgramSatet?, Error>) -> Void) {
+
+		db.collection("users").document(userID).collection("profile-data").document("order-data").getDocument(source: .default) {
+			(data, error) in
+			if let error = error {
+				print(error)
+			}
+			if let data = data?.data() {
+				guard let transactionDate = data["dateOfTransaction"] as? String,
+					  let period = data["period"] as? Int else {
+					completion(.failure(ErrorManager.DatabaseError.dataIsEmpty))
+					return
+				}
+				if let expirationDate = transactionDate.fullDateFromStringWithDash?.add(period.months) {
+					if Date().subtract(period.months).isLater(than: expirationDate) {
+						completion(.success(.expire))
+					} else if expirationDate.subtract(7.days).isLaterThanOrEqual(to: Date()) {
+						completion(.success(.expireSoon))
+					} else {
+						completion(.success(.active))
+					}
+				} else {
+					completion(.success(nil))
+				}
+			} else {
+				completion(.success(nil))
+			}
+		}
+	}
+	
 	func getUserCaloriesProgressData(userID: String? = nil, completion: @escaping (Result<[CaloriesProgressState]?, Error>) -> Void) {
 		db.collection("users").document(userID ?? Auth.auth().currentUser!.uid).collection("user-calories-progress").getDocuments {
 			data, error in

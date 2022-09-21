@@ -110,28 +110,12 @@
                                     <constraint firstAttribute="height" constant="214" id="i21-gk-7UK"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jNX-IN-22o">
-                                <rect key="frame" x="360" y="138" width="26" height="26"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="26" id="J4H-Pj-eZv"/>
-                                    <constraint firstAttribute="width" secondItem="jNX-IN-22o" secondAttribute="height" multiplier="1:1" id="gKX-Cr-591"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="BroadcastMessageIcon">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
-                                </state>
-                                <connections>
-                                    <action selector="broadcastMessageButtonAction:" destination="3WV-NT-5lt" eventType="touchUpInside" id="gNM-i4-Fhn"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="56i-w5-PJG"/>
                         <color key="backgroundColor" name="ProjectBackground"/>
                         <constraints>
                             <constraint firstItem="1Su-bJ-hxW" firstAttribute="top" secondItem="F6I-dd-rQg" secondAttribute="bottom" constant="12" id="2te-ak-cuj"/>
-                            <constraint firstItem="1Su-bJ-hxW" firstAttribute="top" secondItem="jNX-IN-22o" secondAttribute="bottom" constant="62" id="8NA-qg-Rpy"/>
                             <constraint firstAttribute="bottom" secondItem="1Su-bJ-hxW" secondAttribute="bottom" id="Gsk-fa-y64"/>
-                            <constraint firstItem="56i-w5-PJG" firstAttribute="trailing" secondItem="jNX-IN-22o" secondAttribute="trailing" constant="28" id="HUB-vl-D84"/>
                             <constraint firstItem="1Su-bJ-hxW" firstAttribute="trailing" secondItem="56i-w5-PJG" secondAttribute="trailing" id="Yje-bE-sN9"/>
                             <constraint firstItem="F6I-dd-rQg" firstAttribute="leading" secondItem="56i-w5-PJG" secondAttribute="leading" id="bP8-Qq-Xcm"/>
                             <constraint firstItem="F6I-dd-rQg" firstAttribute="top" secondItem="k8C-70-xjZ" secondAttribute="top" id="czQ-3b-BY7"/>
@@ -141,7 +125,6 @@
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="6PT-1W-are"/>
                     <connections>
-                        <outlet property="broadcastMessageButton" destination="jNX-IN-22o" id="203-uE-Ahy"/>
                         <outlet property="searchControllerView" destination="0ga-4E-DJu" id="fEp-by-Jdt"/>
                         <outlet property="tableView" destination="zhA-De-oAp" id="8Pe-1K-LBq"/>
                         <outlet property="topBarView" destination="F6I-dd-rQg" id="rdJ-zB-arK"/>
@@ -153,7 +136,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BroadcastMessageIcon" width="155.21000671386719" height="155.24000549316406"/>
         <namedColor name="ProjectBackground">
             <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
