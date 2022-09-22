@@ -130,8 +130,9 @@ extension UsersListViewController {
 					self.tableView.reloadData()
 					Spinner.shared.stop()
 				}
+			} else {
+				Spinner.shared.stop()
 			}
-			Spinner.shared.stop()
 		}
 	}
 	fileprivate func setupSearchBar() {

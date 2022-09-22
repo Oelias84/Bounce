@@ -39,30 +39,32 @@ class UsersListViewModel {
 	init(parentVC: UIViewController) {
 		self.parentVC = parentVC
 		
-		let group = DispatchGroup()
-		self.fetchChats() {
-			if let users = self.users {
-				DispatchQueue.global().async(group: group) {
-
-				for user in users {
-					group.enter()
-						self.getUserLastSeen(days: 3, userID: user.userId) {
-							result in
-							switch result {
-							case .success(let wasSeenLately):
-								if let wasSeenLately {
-									user.wasSeenLately = wasSeenLately
+		DispatchQueue.global(qos: .userInitiated).async {
+			self.fetchChats() {
+				let group = DispatchGroup()
+				if let users = self.users {
+					DispatchQueue.global(qos: .userInitiated).async(group: group) {
+						
+						for user in users {
+							group.enter()
+							self.getUserLastSeen(days: 3, userID: user.userId) {
+								result in
+								switch result {
+								case .success(let wasSeenLately):
+									if let wasSeenLately {
+										user.wasSeenLately = wasSeenLately
+									}
+								case .failure(let error):
+									print(error)
 								}
-							case .failure(let error):
-								print(error)
+								group.leave()
 							}
-							group.leave()
 						}
 					}
 				}
-			}
-			group.notify(queue: .main) {
-				self.filterUsers(with: self.currentFilter)
+				group.notify(queue: .main) {
+					self.filterUsers(with: self.currentFilter)
+				}
 			}
 		}
 	}

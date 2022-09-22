@@ -150,20 +150,25 @@ struct GoogleApiManager {
 		}
 	}
 	func getUserOrderExpirationData(userID: String, completion: @escaping (Result<UserProgramSatet?, Error>) -> Void) {
-
+		
 		db.collection("users").document(userID).collection("profile-data").document("order-data").getDocument(source: .default) {
 			(data, error) in
 			if let error = error {
 				print(error)
 			}
+			
 			if let data = data?.data() {
+				
+				if let m = data["currentOrderId"] as? String, m == "order-2982" {
+					print()
+				}
 				guard let transactionDate = data["dateOfTransaction"] as? String,
 					  let period = data["period"] as? Int else {
 					completion(.failure(ErrorManager.DatabaseError.dataIsEmpty))
 					return
 				}
 				if let expirationDate = transactionDate.fullDateFromStringWithDash?.add(period.months) {
-					if Date().subtract(period.months).isLater(than: expirationDate) {
+					if Date().isLater(than: expirationDate) {
 						completion(.success(.expire))
 					} else if expirationDate.subtract(7.days).isLaterThanOrEqual(to: Date()) {
 						completion(.success(.expireSoon))
