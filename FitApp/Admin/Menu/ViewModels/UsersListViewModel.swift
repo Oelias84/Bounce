@@ -32,7 +32,7 @@ class UsersListViewModel {
 	
 	fileprivate var didFetchIsExpired = false
 	fileprivate var didFetchWasSeenLately = false
-
+	
 	fileprivate var users: [Chat]?
 	var filteredUsers: ObservableObject<[Chat]?> = ObservableObject(nil)
 	
@@ -43,8 +43,6 @@ class UsersListViewModel {
 			self.fetchChats() {
 				let group = DispatchGroup()
 				if let users = self.users {
-					DispatchQueue.global(qos: .userInitiated).async(group: group) {
-						
 						for user in users {
 							group.enter()
 							self.getUserLastSeen(days: 3, userID: user.userId) {
@@ -60,7 +58,6 @@ class UsersListViewModel {
 								group.leave()
 							}
 						}
-					}
 				}
 				group.notify(queue: .main) {
 					self.filterUsers(with: self.currentFilter)
@@ -172,7 +169,19 @@ class UsersListViewModel {
 		googleDatabase.getAllChats(userId: self.adminId) {
 			[weak self] chats in
 			guard let self = self else { return }
-			self.users = chats
+			
+			if var users = self.users {
+				chats.forEach { chat in
+					if let oldChat = users.first(where: { $0.userId == chat.userId }) {
+						oldChat.latestMessage = chat.latestMessage
+						oldChat.lastSeenMessageDate = chat.lastSeenMessageDate
+					} else {
+						users.append(chat)
+					}
+				}
+			} else {
+				self.users = chats
+			}
 			completion()
 		}
 	}

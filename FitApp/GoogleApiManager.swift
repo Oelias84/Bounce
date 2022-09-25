@@ -159,9 +159,13 @@ struct GoogleApiManager {
 			
 			if let data = data?.data() {
 				
-				if let m = data["currentOrderId"] as? String, m == "order-2982" {
+				#if DEBUG
+				//Test by order number
+				if let orderId = data["currentOrderId"] as? String, orderId == "order-3334" {
 					print()
 				}
+				#endif
+
 				guard let transactionDate = data["dateOfTransaction"] as? String,
 					  let period = data["period"] as? Int else {
 					completion(.failure(ErrorManager.DatabaseError.dataIsEmpty))
@@ -170,7 +174,7 @@ struct GoogleApiManager {
 				if let expirationDate = transactionDate.fullDateFromStringWithDash?.add(period.months) {
 					if Date().isLater(than: expirationDate) {
 						completion(.success(.expire))
-					} else if expirationDate.subtract(7.days).isLaterThanOrEqual(to: Date()) {
+					} else if Date().isLaterThanOrEqual(to: expirationDate.subtract(7.days)) {
 						completion(.success(.expireSoon))
 					} else {
 						completion(.success(.active))
