@@ -325,8 +325,12 @@ extension WeightAlertsManager {
 	private func sendMessageToManager(title: String?, text: String) {
 		
 		DispatchQueue.global(qos: .background).async {
-			MessagesManager.shared.bindMessageManager = {
-				MessagesManager.shared.sendMassageToSupport(messageText: (title ?? "") + "\n\n" + text)
+			MessagesManager.shared.chats.bind() {
+				chats in
+				
+				if !chats.isEmpty {
+					MessagesManager.shared.sendMassageToSupport(messageText: (title ?? "") + "\n\n" + text)
+				}
 			}
 		}
 	}

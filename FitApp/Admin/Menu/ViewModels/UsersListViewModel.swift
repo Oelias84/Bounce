@@ -21,13 +21,11 @@ enum UserFilterType {
 	case notLoggedFor(days: Int? = 3)
 }
 
-
 class UsersListViewModel {
 	
 	fileprivate let parentVC: UIViewController!
-	fileprivate let adminId = Auth.auth().currentUser!.uid
-	fileprivate let googleDatabase =  GoogleDatabaseManager.shared
-	fileprivate let googleFirestore = GoogleApiManager.shared
+	fileprivate let messagesManager = MessagesManager.shared
+
 	fileprivate var currentFilter: UserFilterType = .allUsers
 	
 	fileprivate var didFetchIsExpired = false
@@ -40,33 +38,13 @@ class UsersListViewModel {
 		self.parentVC = parentVC
 		
 		DispatchQueue.global(qos: .userInitiated).async {
-			self.fetchChats() {
-				let group = DispatchGroup()
-				if let users = self.users {
-						for user in users {
-							group.enter()
-							self.getUserLastSeen(days: 3, userID: user.userId) {
-								result in
-								switch result {
-								case .success(let wasSeenLately):
-									if let wasSeenLately {
-										user.wasSeenLately = wasSeenLately
-									}
-								case .failure(let error):
-									print(error)
-								}
-								group.leave()
-							}
-						}
-				}
-				group.notify(queue: .main) {
-					self.filterUsers(with: self.currentFilter)
-				}
+			self.getChats() {
+				self.filterUsers(with: self.currentFilter)
 			}
 		}
 	}
 	
-	//Getters
+	// Getters
 	var getChatsCount: Int? {
 		filteredUsers.value?.count
 	}
@@ -102,7 +80,11 @@ class UsersListViewModel {
 		filteredUsers.value = results.sorted()
 	}
 	
-	var filterItems: [UIAction] {
+	// Filter menu
+	var filterMenu: UIMenu {
+		UIMenu(title: "מיין לפי:", image: nil, identifier: nil, options: [], children: filterItems)
+	}
+	private var filterItems: [UIAction] {
 		[
 			UIAction(title: "כל היוזרים", image: nil, handler: { (_) in
 				self.filterUsers(with: .allUsers)
@@ -119,10 +101,12 @@ class UsersListViewModel {
 				} else {
 					Spinner.shared.show(self.parentVC.view)
 					
-					self.addIsExpired {
-						self.filterUsers(with: .programActive)
-						self.didFetchIsExpired = true
-						Spinner.shared.stop()
+					DispatchQueue.global(qos: .userInteractive).async {
+						self.messagesManager.addIsExpired {
+							self.filterUsers(with: .programActive)
+							self.didFetchIsExpired = true
+							Spinner.shared.stop()
+						}
 					}
 				}
 			}),
@@ -132,10 +116,12 @@ class UsersListViewModel {
 				} else {
 					Spinner.shared.show(self.parentVC.view)
 					
-					self.addIsExpired {
-						self.filterUsers(with: .programExpiredSoon)
-						self.didFetchIsExpired = true
-						Spinner.shared.stop()
+					DispatchQueue.global(qos: .userInteractive).async {
+						self.messagesManager.addIsExpired {
+							self.filterUsers(with: .programExpiredSoon)
+							self.didFetchIsExpired = true
+							Spinner.shared.stop()
+						}
 					}
 				}
 			}),
@@ -145,76 +131,47 @@ class UsersListViewModel {
 				} else {
 					Spinner.shared.show(self.parentVC.view)
 					
-					self.addIsExpired {
-						self.filterUsers(with: .programExpired)
-						self.didFetchIsExpired = true
-						Spinner.shared.stop()
+					DispatchQueue.global(qos: .userInteractive).async {
+						self.messagesManager.addIsExpired {
+							self.filterUsers(with: .programExpired)
+							self.didFetchIsExpired = true
+							Spinner.shared.stop()
+						}
 					}
 				}
 			})
 		]
 	}
-	var filterMenu: UIMenu {
-		UIMenu(title: "מיין לפי:", image: nil, identifier: nil, options: [], children: filterItems)
-	}
-	
-	//Broadcast message
+
+	// Broadcast message
 	public func sendBroadcastMessage(text: String) {
 		guard let usersChats = filteredUsers.value else { return }
 		
 		MessagesManager.shared.postBroadcast(text: text, for: usersChats)
 	}
 	
-	fileprivate func fetchChats(completion: @escaping ()->()) {
-		googleDatabase.getAllChats(userId: self.adminId) {
+	// Fetch data
+	fileprivate func getChats(completion: @escaping ()->()) {
+		
+		messagesManager.chats.bind() {
 			[weak self] chats in
 			guard let self = self else { return }
 			
-			if var users = self.users {
-				chats.forEach { chat in
-					if let oldChat = users.first(where: { $0.userId == chat.userId }) {
-						oldChat.latestMessage = chat.latestMessage
-						oldChat.lastSeenMessageDate = chat.lastSeenMessageDate
-					} else {
-						users.append(chat)
-					}
-				}
-			} else {
-				self.users = chats
-			}
-			completion()
-		}
-	}
-	
-	fileprivate func getUserLastSeen(days: Int, userID: String, completion: @escaping (Result<Bool?, Error>)->()) {
-		googleFirestore.getUserLastSeenData(days: days, userID: userID, completion: completion)
-	}
-	fileprivate func getUserOrderExpirationData(userID: String, completion: @escaping (Result<UserProgramSatet?, Error>)->()) {
-		googleFirestore.getUserOrderExpirationData(userID: userID, completion: completion)
-	}
-	fileprivate func addIsExpired(completion: @escaping ()->()) {
-		let group = DispatchGroup()
-		
-		DispatchQueue.global(qos: .userInteractive).async {
-			if let users = self.users {
-				for user in users {
-					group.enter()
-					self.getUserOrderExpirationData(userID: user.userId) {
-						result in
-						
-						switch result {
-						case .success(let programState):
-							user.programState = programState
-						case .failure(let error):
-							print(error)
+			if !chats.isEmpty {
+				if var users = self.users {
+					chats.forEach { chat in
+						if let oldChat = users.first(where: { $0.userId == chat.userId }) {
+							oldChat.latestMessage = chat.latestMessage
+							oldChat.lastSeenMessageDate = chat.lastSeenMessageDate
+							
+						} else {
+							users.append(chat)
 						}
-						group.leave()
 					}
+				} else {
+					self.users = chats
 				}
-				group.wait()
-				DispatchQueue.main.async {
-					completion()
-				}
+				completion()
 			}
 		}
 	}

@@ -10,32 +10,33 @@ import Foundation
 class ChatsViewModel {
 	
 	private var chats: [Chat]?
-	private var flitteredChats: [Chat]?
+	public var flitteredChats: ObservableObject<[Chat]?> = ObservableObject(nil)
 	
 	private let imageLoader = ImageLoader()
 	private let messagesManager = MessagesManager.shared
 
-	var chatsViewModelBinder: (() -> ()) = {}
-
 	init() {
-		messagesManager.bindMessageManager = {
-			self.chats = self.messagesManager.getSupportChats()?.sorted()
-			self.flitteredChats = self.chats
-			self.chatsViewModelBinder()
+		messagesManager.chats.bind() {
+			chats in
+			
+			if !chats.isEmpty {
+				self.chats = chats.sorted()
+				self.flitteredChats.value = self.chats
+			}
 		}
 	}
 	
 	//Getters
 	var getChatsCount: Int? {
-		flitteredChats?.count
+		flitteredChats.value?.count
 	}
 	func getChatFor(row: Int) -> Chat {
-		flitteredChats![row]
+		flitteredChats.value![row]
 	}
 	func getChats(completion: @escaping ()->()) {
 		if let chats = messagesManager.getSupportChats() {
 			self.chats = chats.sorted()
-			self.flitteredChats = self.chats
+			self.flitteredChats.value = self.chats
 			completion()
 		} else {
 			messagesManager.fetchSupportChats()
@@ -45,7 +46,7 @@ class ChatsViewModel {
 	public func filterUsers(with term: String?, completion: ()->()) {
 		Spinner.shared.stop()
 		guard let term = term else {
-			flitteredChats = chats
+			flitteredChats.value = chats
 			return
 		}
 		
@@ -56,7 +57,7 @@ class ChatsViewModel {
 			return name.hasPrefix(term.lowercased())
 		})
 		
-		flitteredChats = results
+		flitteredChats.value = results
 		completion()
 	}
 }

@@ -19,10 +19,12 @@ final class ChatViewController: MessagesViewController {
 	
 	var viewModel: ChatViewModel!
 	
-	private let hud = JGProgressHUD()
-	private let isAdmin: Bool = UserProfile.defaults.getIsManager
-	private let imagePickerController = UIImagePickerController()
-	
+	fileprivate let hud = JGProgressHUD()
+	fileprivate let isAdmin: Bool = UserProfile.defaults.getIsManager
+	fileprivate let refreshControl = UIRefreshControl()
+	fileprivate let imagePickerController = UIImagePickerController()
+	fileprivate var ifFirstLoad = true
+
 	init(viewModel: ChatViewModel) {
 		self.viewModel = viewModel
 		super.init(nibName: nil, bundle: nil)
@@ -33,7 +35,7 @@ final class ChatViewController: MessagesViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-			
+
 		bindViewModel()
 		setupController()
 		setupInputButton()
@@ -44,7 +46,6 @@ final class ChatViewController: MessagesViewController {
 }
 
 //MARK: - Delegats
-//Text Message
 extension ChatViewController: InputBarAccessoryViewDelegate {
 	
 	func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
@@ -69,7 +70,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 	}
 }
 
-//Media Messages
+//Messages
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate {
 	
 	func currentSender() -> SenderType {
@@ -107,24 +108,15 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		
 		//Name Config
 		let presentingName: String = {
-			if isAdmin {
-				if message.sender.senderId != viewModel.getChatUserId {
-					return "B"
-				} else {
-					let senderName = viewModel.getDisplayName?.splitFullName
-					let presentingInitials = "\(senderName?.0.first ?? " ")\(senderName?.1.first ?? " ")"
-					return presentingInitials
-				}
-			}
-			if message.sender.senderId != currentSender().senderId {
+			if message.sender.senderId != viewModel.getChatUserId {
 				return "B"
 			} else {
-				let senderName = UserProfile.defaults.name?.splitFullName
+				let senderName = isAdmin ? viewModel.getDisplayName?.splitFullName : UserProfile.defaults.name?.splitFullName
 				let presentingInitials = "\(senderName?.0.first ?? " ")\(senderName?.1.first ?? " ")"
 				return presentingInitials
 			}
 		}()
-		
+
 		//Avatar Config
 		if isAdmin {
 			avatarView.backgroundColor = message.sender.senderId == viewModel.getChatUserId  ? .projectIncomingMessageBubble : .projectOutgoingMessageBubble
@@ -135,6 +127,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		avatarView.placeholderTextColor = .black
 		avatarView.initials = presentingName
 	}
+
 	//Custom cell view
 	func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
 		.black
@@ -151,8 +144,8 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 			return .bubble
 		}
 	}
-	//Cell delegate
 
+	//Cell delegate
 	func didTapMessage(in cell: MessageCollectionViewCell) {
 		guard let indexPath = messagesCollectionView.indexPath(for: cell) else { return }
 		let message = viewModel.getMessageAt(indexPath)
@@ -180,6 +173,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		}
 	}
 }
+
 extension ChatViewController: CropViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 	
 	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -210,6 +204,7 @@ extension ChatViewController: CropViewControllerDelegate, UINavigationController
 			}
 		}
 	}
+	
 	//Image Crop
 	func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
 		
@@ -238,24 +233,32 @@ extension ChatViewController: CropViewControllerDelegate, UINavigationController
 //MARK: - Functions
 extension ChatViewController {
 	
-	private func bindViewModel() {
-		self.viewModel.messages.bind {
+	fileprivate func bindViewModel() {
+		messageInputBar.alpha = 0
+		messagesCollectionView.alpha = 0
+		viewModel.messages.bind {
 			messages in
 			
 			if messages == nil {
 				self.disableInteraction()
 			} else {
-				DispatchQueue.main.async {
-					self.messagesCollectionView.reloadData()
-				}
 				DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
 					self.ableInteraction()
-					self.messagesCollectionView.scrollToLastItem(animated: false)
+					self.messagesCollectionView.reloadDataAndKeepOffset()
+					if self.ifFirstLoad {
+						UIView.animate(withDuration: 0.5) {
+							self.messageInputBar.alpha = 1
+							self.messagesCollectionView.alpha = 1
+						}
+						self.messagesCollectionView.scrollToLastItem(animated: false)
+					} else {
+						self.refreshControl.endRefreshing()
+					}
 				}
 			}
 		}
 	}
-	private func setupController() {
+	fileprivate func setupController() {
 		
 		showMessageTimestampOnSwipeLeft = true
 		title = self.viewModel.getDisplayName
@@ -267,12 +270,16 @@ extension ChatViewController {
 		messageInputBar.shouldAutoUpdateMaxTextViewHeight = false
 		
 		imagePickerController.delegate = self
+		messagesCollectionView.scrollsToTop = false
 		messagesCollectionView.messagesDataSource = self
 		messagesCollectionView.messageCellDelegate = self
 		messagesCollectionView.messagesLayoutDelegate = self
 		messagesCollectionView.messagesDisplayDelegate = self
+		
+		messagesCollectionView.addSubview(refreshControl)
+		refreshControl.addTarget(self, action: #selector(loadMoreMessages), for: .valueChanged)
 	}
-	private func setupInputButton() {
+	fileprivate func setupInputButton() {
 		let button = InputBarButtonItem()
 		
 		button.setSize(CGSize(width: 35, height: 35), animated: false)
@@ -287,7 +294,7 @@ extension ChatViewController {
 		messageInputBar.setStackViewItems([button], forStack: .left, animated: true)
 	}
 	
-	private func presentInputActionSheet() {
+	fileprivate func presentInputActionSheet() {
 		let actionSheet = UIAlertController(title: "ייבוא מדיה",
 											message: "בחר סוג מדיה",
 											preferredStyle: .actionSheet)
@@ -301,7 +308,7 @@ extension ChatViewController {
 		
 		present(actionSheet, animated: true)
 	}
-	private func presentVideoInputActionSheet() {
+	fileprivate func presentVideoInputActionSheet() {
 		let actionSheet = UIAlertController(title: "יבוא וידאו",
 											message: "מהיכן תרצה לייבא?",
 											preferredStyle: .actionSheet)
@@ -332,61 +339,64 @@ extension ChatViewController {
 		present(actionSheet, animated: true)
 	}
 	
-	private func presentImageFor(_ urlString: String) {
-		
-		viewModel.getMediaUrlFor(urlString) {
-			[weak self] url in
-			guard let self = self else {
-				self?.disableInteraction()
-				return
-			}
-			self.ableInteraction()
-			if let url = url {
-				let photoViewer = PhotoViewerViewController(with: url)
-				self.parent?.present(photoViewer, animated: true)
-			} else {
-				self.presentOkAlert(withTitle: "אופס!", withMessage: "נראה שאין אפשרות להציג תמונה זאת", buttonText: "סגירה")
-			}
-		}
-	}
-	private func presentVideoFor(_ urlString: String) {
-		
-		viewModel.getMediaUrlFor(urlString) {
-			[weak self] url in
-			guard let self = self else {
-				self?.disableInteraction()
-				return
-			}
-			self.ableInteraction()
-			if let url = url {
-				let videoVC = AVPlayerViewController()
+	fileprivate func presentImageFor(_ urlString: String) {
+		DispatchQueue.global(qos: .userInteractive).async {
+			self.viewModel.getMediaUrlFor(urlString) {
+				[weak self] url in
+				guard let self = self else {
+					self?.disableInteraction()
+					return
+				}
+				self.ableInteraction()
 				
-				videoVC.player = AVPlayer(url: url)
-				self.parent?.present(videoVC, animated: true)
-				videoVC.player?.play()
-			} else {
-				self.presentOkAlert(withTitle: "אופס!", withMessage: "נראה שהסירטון אינו זמין לצפייה", buttonText: "סגירה")
+				DispatchQueue.main.async {
+					if let url = url {
+						let photoViewer = PhotoViewerViewController(with: url)
+						self.parent?.present(photoViewer, animated: true)
+					} else {
+						self.presentOkAlert(withTitle: "אופס!", withMessage: "נראה שאין אפשרות להציג תמונה זאת", buttonText: "סגירה")
+					}
+				}
 			}
 		}
 	}
-	private func disableInteraction() {
+	fileprivate func presentVideoFor(_ urlString: String) {
+		DispatchQueue.global(qos: .userInteractive).async {
+			self.viewModel.getMediaUrlFor(urlString) {
+				[weak self] url in
+				guard let self = self else {
+					self?.disableInteraction()
+					return
+				}
+				
+				self.ableInteraction()
+				DispatchQueue.main.async {
+					if let url = url {
+						let videoVC = AVPlayerViewController()
+						
+						videoVC.player = AVPlayer(url: url)
+						self.parent?.present(videoVC, animated: true)
+						videoVC.player?.play()
+					} else {
+						self.presentOkAlert(withTitle: "אופס!", withMessage: "נראה שהסירטון אינו זמין לצפייה", buttonText: "סגירה")
+					}
+				}
+			}
+		}
+	}
+	fileprivate func disableInteraction() {
 		if let view = navigationController?.view {
 			Spinner.shared.show(view)
 		}
 	}
-	private func ableInteraction() {
+	fileprivate func ableInteraction() {
 		Spinner.shared.stop()
 	}
-}
-
-extension String {
-	var isValidURL: Bool {
-		let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-		if let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count)) {
-			// it is a link, if the match covers the whole string
-			return match.range.length == self.utf16.count
-		} else {
-			return false
+	
+	@objc fileprivate func loadMoreMessages() {
+		DispatchQueue.global(qos: .userInteractive).async {
+			self.viewModel.listenToMessages()
 		}
+		ifFirstLoad = false
 	}
 }

@@ -21,10 +21,12 @@ final class ChatsViewController: UIViewController {
 		if let navView = navigationController?.view { Spinner.shared.show(navView) }
 
 		chatsViewModel = ChatsViewModel()
-		chatsViewModel.chatsViewModelBinder = {
-			[weak self] in
-			guard let self = self else { return }
-			self.updateUI()
+		chatsViewModel.flitteredChats.bind() {
+			chats in
+			
+			if chats != nil {
+				self.updateUI()
+			}
 		}
 		
 		setupTopBar()

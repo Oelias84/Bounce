@@ -18,18 +18,26 @@ class ChatViewModel {
 		
 	required init(chat: Chat?) {
 		
-		if let chat = chat {
-			self.chat = chat
-			self.listenToMessages()
-			self.updateLastSeenDate()
-		} else {
-			if let chat = self.messagesManager.getUserChat() {
+		DispatchQueue.global(qos: .userInitiated).async {
+			if let chat = chat {
 				self.chat = chat
+				self.messagesManager.numberOfMessages = 10
+				
 				self.listenToMessages()
+				self.updateLastSeenDate()
 			} else {
-				messagesManager.bindMessageManager = {
-					self.chat = self.messagesManager.getUserChat()
+				if let chat = self.messagesManager.getUserChat() {
+					self.chat = chat
 					self.listenToMessages()
+				} else {
+					self.messagesManager.chats.bind() {
+						chats in
+
+						if !chats.isEmpty {
+							self.chat = self.messagesManager.getUserChat()
+							self.listenToMessages()
+						}
+					}
 				}
 			}
 		}
