@@ -59,14 +59,14 @@ class UsersListViewModel {
 		let results = users.filter {
 			switch term {
 			case .readMassages:
-				return $0.isLastMessageReadFor == true
+				return $0.isLastMessageReadFor == true && $0.programState != .expire
 			case .didNotUpdateWorkout:
 				return true
 			case .searchBy(let filteredName):
 				let name = $0.displayName?.lowercased() ?? ""
 				return name.contains(filteredName.lowercased())
 			case .notLoggedFor(_):
-				return $0.wasSeenLately == false
+				return $0.wasSeenLately == false && $0.programState != .expire && $0.programState != nil
 			case .programActive:
 				return $0.programState == .active || $0.programState == .expireSoon
 			case .programExpired:
@@ -77,7 +77,8 @@ class UsersListViewModel {
 				return true
 			}
 		}
-		filteredUsers.value = results.sorted()
+		let sortedUsers = results.sorted()
+		filteredUsers.value = sortedUsers.sorted(by: { $0.latestMessage!.sentDate > $1.latestMessage!.sentDate })
 	}
 	
 	// Filter menu
@@ -85,61 +86,26 @@ class UsersListViewModel {
 		UIMenu(title: "מיין לפי:", image: nil, identifier: nil, options: [], children: filterItems)
 	}
 	private var filterItems: [UIAction] {
-		[
-			UIAction(title: "כל היוזרים", image: nil, handler: { (_) in
+
+		return [
+			UIAction(title: "כל היוזרים") { _ in
 				self.filterUsers(with: .allUsers)
-			}),
-			UIAction(title: "הודעות שנקראו", image: nil, handler: { (_) in
+			},
+			UIAction(title: "הודעות שנקראו") { _ in
 				self.filterUsers(with: .readMassages)
-			}),
-			UIAction(title: "לא נראו 3 ימים", image: nil, handler: { (_) in
-				self.filterUsers(with: .notLoggedFor())
-			}),
-			UIAction(title: "מנויים פעילים", image: nil, handler: { (_) in
-				if self.didFetchIsExpired {
-					self.filterUsers(with: .programActive)
-				} else {
-					Spinner.shared.show(self.parentVC.view)
-					
-					DispatchQueue.global(qos: .userInteractive).async {
-						self.messagesManager.addIsExpired {
-							self.filterUsers(with: .programActive)
-							self.didFetchIsExpired = true
-							Spinner.shared.stop()
-						}
-					}
-				}
-			}),
-			UIAction(title: "לפני סיום מנוי", image: nil, handler: { (_) in
-				if self.didFetchIsExpired {
-					self.filterUsers(with: .programExpiredSoon)
-				} else {
-					Spinner.shared.show(self.parentVC.view)
-					
-					DispatchQueue.global(qos: .userInteractive).async {
-						self.messagesManager.addIsExpired {
-							self.filterUsers(with: .programExpiredSoon)
-							self.didFetchIsExpired = true
-							Spinner.shared.stop()
-						}
-					}
-				}
-			}),
-			UIAction(title: "מנויים לא פעילים", image: nil, handler: { (_) in
-				if self.didFetchIsExpired {
-					self.filterUsers(with: .programExpired)
-				} else {
-					Spinner.shared.show(self.parentVC.view)
-					
-					DispatchQueue.global(qos: .userInteractive).async {
-						self.messagesManager.addIsExpired {
-							self.filterUsers(with: .programExpired)
-							self.didFetchIsExpired = true
-							Spinner.shared.stop()
-						}
-					}
-				}
-			})
+			},
+			UIAction(title: "לא נראו 3 ימים", image:  UIImage(systemName: "person.fill.questionmark")) { _ in
+				self.filterOrFetch(filter: .notLoggedFor())
+			},
+			UIAction(title: "מנויים פעילים") { _ in
+				self.filterOrFetch(filter: .programActive)
+			},
+			UIAction(title: "לפני סיום מנוי", image: UIImage(systemName: "clock.badge.exclamationmark")) { _ in
+				self.filterOrFetch(filter: .programExpiredSoon)
+			},
+			UIAction(title: "מנויים לא פעילים") { _ in
+				self.filterOrFetch(filter: .programExpired)
+			}
 		]
 	}
 
@@ -172,6 +138,21 @@ class UsersListViewModel {
 					self.users = chats
 				}
 				completion()
+			}
+		}
+	}
+	fileprivate func filterOrFetch(filter: UserFilterType) {
+		if self.didFetchIsExpired {
+			self.filterUsers(with: filter)
+		} else {
+			Spinner.shared.show(self.parentVC.view)
+			
+			DispatchQueue.global(qos: .userInteractive).async {
+				self.messagesManager.addIsExpired {
+					self.filterUsers(with: filter)
+					self.didFetchIsExpired = true
+					Spinner.shared.stop()
+				}
 			}
 		}
 	}

@@ -38,16 +38,8 @@ class Chat: Comparable {
 	}
 	static func < (lhs: Chat, rhs: Chat) -> Bool {
 		
-		if let lastSeen = lhs.lastSeenMessageDate, let lastMessage = lhs.latestMessage?.sentDate {
-			if lastSeen < lastMessage {
-				return true
-			} else {
-				if let lhsDate = lhs.latestMessage?.sentDate, let rhsDate = rhs.latestMessage?.sentDate {
-					return lhsDate > rhsDate
-				} else {
-					return false
-				}
-			}
+		if let lhsLastSeen = lhs.lastSeenMessageDate, let rhsLastSeen = rhs.lastSeenMessageDate {
+			return lhsLastSeen > rhsLastSeen
 		} else {
 			return false
 		}
@@ -60,3 +52,4 @@ struct LatestMessage {
 	let text: String
 	let isRead: Bool
 }
+
