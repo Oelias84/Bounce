@@ -35,6 +35,15 @@ struct UserProfile {
 			self.getTermsAndDecode(name: "healthApproval")
 		}
 	}
+
+	@UserDefault(key: .expirationDate)
+	var expirationDate: String?
+	
+	@UserDefault(key: .currentAppVersion)
+	var currentAppVersion: String?
+	
+	@UserDefault(key: .currentWeight)
+	var currentWeight: Double?
 	
 	@UserDefault(key: .permissionLevel)
 	var permissionLevel: Int?
@@ -196,7 +205,6 @@ extension UserProfile {
 		let googleManager = GoogleApiManager()
 		
 		let data = ServerUserData (
-			permissionLevel: defaults.permissionLevel,
 			termsApproval: defaults.termsApproval,
 			healthApproval: defaults.termsApproval,
 			gender: defaults.gender,
@@ -223,6 +231,9 @@ extension UserProfile {
 	func updateUserProfileData(_ data: ServerUserData, id: String) {
 		var userProfile = self
 		
+		userProfile.expirationDate = data.expirationDate
+		userProfile.currentAppVersion = data.currentAppVersion
+		userProfile.currentWeight = data.currentWeight
 		userProfile.permissionLevel = data.permissionLevel
 		userProfile.termsApproval = data.termsApproval
 		userProfile.healthApproval = data.healthApproval
@@ -247,7 +258,10 @@ extension UserProfile {
 	}
 	func resetUserProfileData() {
 		var userProfile = UserProfile.defaults
-
+		
+		userProfile.expirationDate = nil
+		userProfile.currentAppVersion = nil
+		userProfile.currentWeight = nil
 		userProfile.userProfileImage = nil
 		userProfile.permissionLevel = nil
 		userProfile.healthApproval = nil
@@ -282,31 +296,33 @@ extension UserProfile {
 
 struct ServerUserData: Codable {
 	
-	var permissionLevel: Int? = nil
-	var termsApproval: TermsAgreeDataModel? = nil
-	var healthApproval: TermsAgreeDataModel? = nil
-	var gender: String? = nil
-	var lastCaloriesCheckDateString: String? = nil
-	var birthDate: String? = nil
-	var email: String? = nil
-	var name: String? = nil
-	var weight: Double? = nil
-	var currentAverageWeight: Double? = nil
-	var height: Int? = nil
-	var fatPercentage: Double? = nil
-	var steps: Int? = nil
-	var kilometer: Double? = nil
-	var lifeStyle: Double? = nil
-	var mealsPerDay: Int? = nil
-	var mostHungry: Int? = nil
-	var fitnessLevel: Int? = nil
-	var weaklyWorkouts: Int? = nil
-	var externalWorkout: Int? = nil
-	var finishOnboarding: Bool? = nil
+	var expirationDate: String?
+	var currentAppVersion: String?
+	var currentWeight: Double?
+	var permissionLevel: Int?
+	var termsApproval: TermsAgreeDataModel?
+	var healthApproval: TermsAgreeDataModel?
+	var gender: String?
+	var lastCaloriesCheckDateString: String?
+	var birthDate: String?
+	var email: String?
+	var name: String?
+	var weight: Double?
+	var currentAverageWeight: Double?
+	var height: Int?
+	var fatPercentage: Double?
+	var steps: Int?
+	var kilometer: Double?
+	var lifeStyle: Double?
+	var mealsPerDay: Int?
+	var mostHungry: Int?
+	var fitnessLevel: Int?
+	var weaklyWorkouts: Int?
+	var externalWorkout: Int?
+	var finishOnboarding: Bool?
 	
 	func encode(to encoder: Encoder) throws {
 		var container = encoder.container(keyedBy: CodingKeys.self)
-		try container.encode(permissionLevel, forKey: .permissionLevel)
 		try container.encode(termsApproval, forKey: .termsApproval)
 		try container.encode(healthApproval, forKey: .healthApproval)
 		try container.encode(gender, forKey: .gender)
@@ -356,6 +372,9 @@ extension Key {
 	static let lastCaloriesCheckDateString: Key = "lastCaloriesCheckDateString"
 	
 	//user data
+	static let expirationDate: Key = "expirationDate"
+	static let currentAppVersion: Key = "currentAppVersion"
+	static let currentWeight: Key = "currentWeight"
 	static let lastWeightAlertPresentedDate: Key = "lastWeightAlertPresentedDate"
 	static let permissionLevel: Key = "permissionLevel"
 	static let termsApproval: Key = "termsApproval"
