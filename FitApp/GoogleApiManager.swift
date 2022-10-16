@@ -65,14 +65,6 @@ struct GoogleApiManager {
 				}
 				completion(nil)
 			}
-			//			db.collection("users").document(Auth.auth().currentUser!.uid).delete {
-			//				error in
-			//				if error != nil {
-			//					completion(error)
-			//				} else {
-			//
-			//				}
-			//			}
 		}
 	}
 	func updateUserData(userData: ServerUserData) {
@@ -132,7 +124,34 @@ struct GoogleApiManager {
 			}
 		}
 	}
-	
+	func updateAppVersion() {
+		guard let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else { return }
+		
+		db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("data").setData(["currentAppVersion":appVersion], merge: true)
+	}
+	func getProgramExpirationData(completion: @escaping (Result<String?, Error>) -> Void) {
+		db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("order-data").getDocument(source: .default) {
+			(data, error) in
+			if let error = error {
+				print(error)
+			}
+			
+			if let data = data?.data() {
+				guard let transactionDate = data["dateOfTransaction"] as? String,
+					  let period = data["period"] as? Int else {
+					completion(.failure(ErrorManager.DatabaseError.dataIsEmpty))
+					return
+				}
+				if let expirationDate = transactionDate.fullDateFromStringWithDash?.add(period.months) {
+					completion(.success(expirationDate.fullDateStringForDB))
+				} else {
+					completion(.success(nil))
+				}
+			} else {
+				completion(.success(nil))
+			}
+		}
+	}
 	//MARK: - Meals
 	func createDailyMeal(meals: [Meal], date: Date) {
 		guard !meals.isEmpty else { return }

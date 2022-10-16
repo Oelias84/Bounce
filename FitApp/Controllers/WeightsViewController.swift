@@ -218,32 +218,31 @@ extension WeightsViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.weightCell) as! weightTableViewCell
-		let weight = viewModel.getWeight(for: timePeriod, at: indexPath.row)
-
+		let weightData = viewModel.getWeight(for: timePeriod, at: indexPath.row)
+		
 		if indexPath.row == 0 {
 			cell.differenceTextLabel.text = "-"
 			cell.changeTextLabel.text = "-"
 		} else {
-			let difference: Double = {
-				let lastWeight = viewModel.getWeight(for: timePeriod, at: indexPath.row-1)?.weight
-
+			let difference: Decimal = {
+				let weight = weightData!.decimalWeight
+				let lastWeight = viewModel.getWeight(for: timePeriod, at: indexPath.row-1)?.decimalWeight ?? weight
+				
 				switch timePeriod {
 				case .week:
-					return weight!.weight - (lastWeight ?? weight!.weight)
-				case .month:
-					return weight!.weight - (lastWeight ?? weight!.weight)
-				case .year:
-					return weight!.weight - (lastWeight ?? weight!.weight)
+					return Decimal(string: weight.shortFraction())! - Decimal(string: lastWeight.shortFraction())!
+				case .month, .year:
+					return weight - lastWeight
 				}
 			}()
-			let differenceInPrecent = (difference / weight!.weight) * 100.0
+			let differenceInPrecent = (difference / weightData!.decimalWeight) * 100.0
 			
-			cell.changeTextLabel.text = differenceInPrecent.isNaN ? "-" : String(format: "%.1f", differenceInPrecent)+"%"
-			cell.differenceTextLabel.text = difference.isNaN ? "-" : String(format: "%.1f", difference)
+			cell.changeTextLabel.text = differenceInPrecent.isNaN ? "-" : differenceInPrecent.shortFraction() + "%"
+			cell.differenceTextLabel.text = difference.isNaN ? "-" : difference.shortFraction()
 		}
 		
 		cell.delegate = self
-		cell.setupCell(weight: weight!, timePeriod: timePeriod)
+		cell.setupCell(weight: weightData!, timePeriod: timePeriod)
 		return cell
 	}
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -294,10 +293,12 @@ extension WeightsViewController {
 		topBarView.isBackButtonHidden = true
 		topBarView.isDayWelcomeHidden = true
 		topBarView.isProfileButtonHidden = false
+		dateLeftButton.isHidden = true
 	}
 	fileprivate func updateView() {
 		updateDateLabels()
 		updateTableView()
+		updateButtons()
 	}
 	fileprivate func addChartView() {
 		let lineChat = ChartView(frame: CGRect(x: 0, y: 0, width: self.chartView.frame.width, height: self.chartView.frame.height))
@@ -347,17 +348,17 @@ extension WeightsViewController {
 			switch self.timePeriod {
 			case .week:
 				self.dateTextLabel.text = "\(startDate.displayDayInMonth) - \(endDate.displayDayInMonth)"
-				self.dateRightButton.isHidden = endDate.onlyDate.isLaterThanOrEqual(to: Date().onlyDate)
-				self.dateLeftButton.isHidden = false
 			case .month:
 				self.dateTextLabel.text = "\((self.viewModel.selectedDate!.displayMonthAndYear))"
-				self.dateRightButton.isHidden = endDate.onlyDate.isLaterThanOrEqual(to: Date().onlyDate)
-				self.dateLeftButton.isHidden = false
 			case .year:
 				self.dateTextLabel.text = "\((self.viewModel.selectedDate!.year))"
-				self.dateLeftButton.isHidden = self.viewModel.backButtonIsHidden
-				self.dateRightButton.isHidden = endDate.onlyDate.year == Date().year
 			}
+		}
+	}
+	fileprivate func updateButtons() {
+		DispatchQueue.main.async {
+			self.dateRightButton.isHidden = self.viewModel.forwardButtonIsHidden(period: self.timePeriod)
+			self.dateLeftButton.isHidden = self.viewModel.backButtonIsHidden(period: self.timePeriod)
 		}
 	}
 	

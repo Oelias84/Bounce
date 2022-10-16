@@ -260,10 +260,10 @@ extension MessagesTextManager {
 		(
    """
    \(defaultTitle)
-   \(title!)\n
+   \(title!)
    """,
    """
-   \(text!)\n
+   \( text != "" ? "\n\(text!)\n" : "")
    \(newCalorieText)
    """
 		)

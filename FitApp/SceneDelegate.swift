@@ -12,7 +12,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 	var window: UIWindow?
 	
-	@available(iOS 13.0, *)
 	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 		// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
 		// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -97,6 +96,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// Called when the scene has moved from an inactive state to an active state.
 		// Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
 		
+		DispatchQueue.global(qos: .background).async {
+			#warning("Move to user sign in the next update (1.1.50)")
+			GoogleApiManager.shared.getProgramExpirationData { result in
+				switch result {
+				case .success(let expirationDate):
+					guard let expirationDate else { return }
+					GoogleDatabaseManager.shared.updateUserProgramExpirationDate(expirationDate)
+				case .failure(let error):
+					print("Error:", error.localizedDescription)
+				}
+			}
+			
+			GoogleDatabaseManager.shared.updateUserLastSeenDate()
+			GoogleApiManager.shared.updateAppVersion()
+		}
 	}
 	func sceneWillResignActive(_ scene: UIScene) {
 		// Called when the scene will move from an active state to an inactive state.

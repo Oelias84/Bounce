@@ -18,6 +18,8 @@ final class GoogleDatabaseManager {
 	static let shared = GoogleDatabaseManager()
 	private let database = Database.database().reference()
 	
+	//MARK: - Public
+	// Create
 	func createChat(userId: String, isAdmin: Bool, completion: @escaping (Result<Chat, ErrorManager.DatabaseError>) -> Void) {
 		let newChatData = createChatData()
 		
@@ -55,6 +57,8 @@ final class GoogleDatabaseManager {
 			}
 		}
 	}
+	
+	// Update
 	func updatePushToken(userId: String, isAdmin: Bool) {
 		guard let token = UserProfile.defaults.fcmToken else { return }
 		let timestamp = Date().millisecondsSince2020
@@ -67,7 +71,14 @@ final class GoogleDatabaseManager {
 	func updateLastSeenMessageDate(chat: Chat) {
 		chatRef(userId: chat.userId).child(chat.isAdmin == true ? "support_last_seen_message_timestamp" : "last_seen_message_timestamp").setValue(Date().millisecondsSince2020)
 	}
+	func updateUserLastSeenDate() {
+		chatRef(userId: Auth.auth().currentUser!.uid).child("user_last_seen").setValue(Date().fullDateStringForDB)
+	}
+	func updateUserProgramExpirationDate(_ date: String) {
+		chatRef(userId: Auth.auth().currentUser!.uid).child("expirationDate").setValue(date)
+	}
 	
+	// Send
 	func sendMessageToChat(chat: Chat, content: String, kind: MessageKind, completion: @escaping (Result<Void, Error>) -> ()) {
 		sendMessageToChat(chat: chat, content: content, link: nil, previewData: nil, kind: kind, completion: completion)
 	}
@@ -94,6 +105,7 @@ final class GoogleDatabaseManager {
 		}
 	}
 	
+	// Getters
 	func getAllChats(userId: String, completion: @escaping ([Chat]) -> Void) {
 		chatsRef().observe(.value) {
 			snapshot in
@@ -146,8 +158,16 @@ final class GoogleDatabaseManager {
 		}
 	}
 	
-	///Create
-	private func createChatData() -> [String: Any] {
+	// Delete
+	func removeUserPushTokenFromChat() {
+		guard let userID = Auth.auth().currentUser?.uid else { return }
+		let userChat = chatRef(userId: userID)
+		userChat.child("push_tokens").removeValue()
+	}
+	
+	//MARK: - Private
+	// Create
+	fileprivate func createChatData() -> [String: Any] {
 		let messageData = createMessageData(senderId: "", kind: MessageKind.text("").rawValue, timestamp: 0, content: "", mediaPath: nil, mediaPreview: nil)
 		
 		return [
@@ -157,7 +177,7 @@ final class GoogleDatabaseManager {
 			"support_last_seen_message_timestamp": 0
 		]
 	}
-	private func createMessageData(senderId: String, kind: String, timestamp: Int64, content: String, mediaPath: String?, mediaPreview: String?) -> [String:Any] {
+	fileprivate func createMessageData(senderId: String, kind: String, timestamp: Int64, content: String, mediaPath: String?, mediaPreview: String?) -> [String:Any] {
 		return [
 			"type": kind,
 			"content": content,
@@ -168,8 +188,8 @@ final class GoogleDatabaseManager {
 		]
 	}
 	
-	///Update
-	private func updateOtherUserPushToken(chat: Chat, completion: @escaping () ->()) {
+	// Update
+	fileprivate func updateOtherUserPushToken(chat: Chat, completion: @escaping () ->()) {
 		database.child("support").child("admin_push_tokens").observeSingleEvent(of: .value) {
 			snapshot in
 			
@@ -185,19 +205,12 @@ final class GoogleDatabaseManager {
 			completion()
 		}
 	}
-	private func updateLatestMessage(chat: Chat, latestMessageData: [String: Any]) {
+	fileprivate func updateLatestMessage(chat: Chat, latestMessageData: [String: Any]) {
 		chatRef(userId: chat.userId).child("latest_message").setValue(latestMessageData)
 	}
 	
-	///Delete
-	public func removeUserPushTokenFromChat() {
-		guard let userID = Auth.auth().currentUser?.uid else { return }
-		let userChat = chatRef(userId: userID)
-		userChat.child("push_tokens").removeValue()
-	}
-	
-	///Parse
-	private func parseChatsData(userId: String, snapshot: DataSnapshot) -> [Chat] {
+	// Parse
+	fileprivate func parseChatsData(userId: String, snapshot: DataSnapshot) -> [Chat] {
 		var chats: [Chat] = []
 		
 		snapshot.children.forEach {
@@ -228,7 +241,7 @@ final class GoogleDatabaseManager {
 		}
 		return chats
 	}
-	private func parseChatData(userId: String, isAdmin: Bool, snapshot: DataSnapshot) -> Chat? {
+	fileprivate func parseChatData(userId: String, isAdmin: Bool, snapshot: DataSnapshot) -> Chat? {
 		guard let chatData = snapshot.value as? [String: Any] else  { return nil }
 		
 		var displayName: String? {
@@ -250,10 +263,10 @@ final class GoogleDatabaseManager {
 			let data = chatData["push_tokens"] as? [String: Int64]
 			return data?.keys.compactMap { $0 } ?? []
 		}
-
+		
 		return Chat(userId: userId, isAdmin: isAdmin, displayName: displayName, pushTokens: pushTokens, lastSeenMessageDate: lastSeenMessageTimestamp?.dateFromMillisecondsSince2020)
 	}
-	private func parseMessagesData(userId: String, snapshot: DataSnapshot) -> [Message]? {
+	fileprivate func parseMessagesData(userId: String, snapshot: DataSnapshot) -> [Message]? {
 		guard let value = snapshot.value as? [String: Any] else {
 			return nil
 		}
@@ -314,7 +327,7 @@ final class GoogleDatabaseManager {
 		}
 		return messages
 	}
-	private func parseLatestMessageData(userId: String, snapshot: DataSnapshot) -> Message? {
+	fileprivate func parseLatestMessageData(userId: String, snapshot: DataSnapshot) -> Message? {
 		guard let value = snapshot.value as? [String: Any] else {
 			return nil
 		}
@@ -340,7 +353,7 @@ final class GoogleDatabaseManager {
 		}
 		return Message(sender: Sender(photoURL: "", senderId: senderId, displayName: ""), messageId: "", sentDate: date, kind: kind ?? .text(""), isIncoming: senderId != userId, content: content)
 	}
-	private func downloadUserChatImagePath(chats: [Chat], completion: @escaping () ->()) {
+	fileprivate func downloadUserChatImagePath(chats: [Chat], completion: @escaping () ->()) {
 		
 		let queue = DispatchQueue.global()
 		let dispatchGroup = DispatchGroup()
@@ -369,41 +382,45 @@ final class GoogleDatabaseManager {
 		}
 	}
 	
-	///Reference
-	private func chatsRef() -> DatabaseReference {
+	// Reference
+	fileprivate func chatsRef() -> DatabaseReference {
 		return database.child("support").child("chats")
 	}
-	private func chatRef(userId: String) -> DatabaseReference {
+	fileprivate func chatRef(userId: String) -> DatabaseReference {
 		return database.child("support").child("chats").child(userId)
 	}
-	private func chatMessagesRef(userId: String) -> DatabaseReference {
+	fileprivate func chatMessagesRef(userId: String) -> DatabaseReference {
 		return database.child("support").child("messages").child(userId)
 	}
+}
+
+extension GoogleDatabaseManager {
 	
-	func convertBase64StringToImage (imageBase64String: String) -> UIImage? {
+	// Helpers
+	fileprivate func convertBase64StringToImage (imageBase64String: String) -> UIImage? {
 		if let imageData = Data(base64Encoded: imageBase64String, options: .init(rawValue: 0)) {
 			let image = UIImage(data: imageData)
 			return image
 		}
 		return nil
 	}
-	func getThumbnailImage(forUrl url: URL) -> UIImage? {
+	fileprivate func getThumbnailImage(forUrl url: URL) -> UIImage? {
 		let asset: AVAsset = AVAsset(url: url)
 		let imageGenerator = AVAssetImageGenerator(asset: asset)
-
+		
 		do {
 			let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60), actualTime: nil)
 			return UIImage(cgImage: thumbnailImage)
 		} catch let error {
 			print(error)
 		}
-
+		
 		return nil
 	}
-	func findIfURLExistIn(_ input: String) -> URL? {
+	fileprivate func findIfURLExistIn(_ input: String) -> URL? {
 		let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
 		let matches = detector.matches(in: input, options: [], range: NSRange(location: 0, length: input.utf16.count))
-
+		
 		for match in matches {
 			guard let range = Range(match.range, in: input) else { continue }
 			let url = input[range]
@@ -430,21 +447,19 @@ extension Data {
 
 extension Date {
 	
-	private var timestampSince2020: Int64 { 1577833200000 }
-	
+	static var timestampSince2020: Int64 = 1577833200000
 	var millisecondsSince2020: Int64 {
-		return Int64(timeIntervalSince1970 * 1000) - timestampSince2020
+		return Int64(timeIntervalSince1970 * 1000) - Date.timestampSince2020
 	}
 }
 
 extension Int64 {
 	
-	private var timestampSince2020: Int64 { 1577833200000 }
-	
 	var dateFromMillisecondsSince2020: Date {
-		return Date(timeIntervalSince1970: Double(self + timestampSince2020) / 1000.0)
+		return Date(timeIntervalSince1970: Double(self + Date.timestampSince2020) / 1000.0)
 	}
 }
+
 extension MessageKind {
 	
 	var rawValue: String {

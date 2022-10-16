@@ -84,10 +84,6 @@ extension Date {
 	}
 	
 	var age: String? {
-
-		let birthday: Date = self
-		let timeInterval = birthday.timeIntervalSinceNow
-		let age = abs(Int(timeInterval / 31556926.0)).years.years
 		let calendar: NSCalendar! = NSCalendar(calendarIdentifier: .gregorian)
 
 		if #available(iOS 15, *) {

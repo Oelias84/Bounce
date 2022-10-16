@@ -98,6 +98,7 @@
 		7C89AA78256D715F009AD87C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89AA75256D715F009AD87C /* UIViewController+Extensions.swift */; };
 		7C89AA81256D7342009AD87C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C89AA80256D7342009AD87C /* RegisterViewController.swift */; };
 		7C89AA91256D8286009AD87C /* Questionnaire.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA90256D8286009AD87C /* Questionnaire.storyboard */; };
+		7C8AFCC028BBF970007CD926 /* Decimal+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8AFCBF28BBF970007CD926 /* Decimal+Extensions.swift */; };
 		7C8F51362671F9E3001FF0EE /* AddMealAlertDishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8F51352671F9E3001FF0EE /* AddMealAlertDishView.xib */; };
 		7C8F51382671FAE0001FF0EE /* AddMealAlertDishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8F51372671FAE0001FF0EE /* AddMealAlertDishView.swift */; };
 		7C98731E26F4A7C8000E5299 /* CaloriesProgressState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C98731D26F4A7C8000E5299 /* CaloriesProgressState.swift */; };
@@ -312,6 +313,7 @@
 		7C89AA75256D715F009AD87C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		7C89AA80256D7342009AD87C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		7C89AA90256D8286009AD87C /* Questionnaire.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Questionnaire.storyboard; sourceTree = "<group>"; };
+		7C8AFCBF28BBF970007CD926 /* Decimal+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Extensions.swift"; sourceTree = "<group>"; };
 		7C8F51352671F9E3001FF0EE /* AddMealAlertDishView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMealAlertDishView.xib; sourceTree = "<group>"; };
 		7C8F51372671FAE0001FF0EE /* AddMealAlertDishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealAlertDishView.swift; sourceTree = "<group>"; };
 		7C98731D26F4A7C8000E5299 /* CaloriesProgressState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesProgressState.swift; sourceTree = "<group>"; };
@@ -984,6 +986,7 @@
 				B367F14725B036CC00DF21D7 /* UserDefaults+Extensions.swift */,
 				7C62180F26F4F2F20019FD25 /* UIAlertController+Extensions.swift */,
 				7C10BA6F276BCB9C00B5860C /* UINavigationController+Extensions.swift */,
+				7C8AFCBF28BBF970007CD926 /* Decimal+Extensions.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -1453,6 +1456,7 @@
 				7C1ACCF5266FCBC6008079C9 /* ChangeDateView.swift in Sources */,
 				7C98731E26F4A7C8000E5299 /* CaloriesProgressState.swift in Sources */,
 				7C4554FA27A0A8D30077791B /* ImageLoader.swift in Sources */,
+				7C8AFCC028BBF970007CD926 /* Decimal+Extensions.swift in Sources */,
 				B358222825AC9A2F00C91295 /* ArticlesViewController.swift in Sources */,
 				B341E23B257FB3F400EE05A7 /* UITextField+Extensions.swift in Sources */,
 				7C32C588278E370500B97642 /* PopupAlertView.swift in Sources */,
@@ -1726,7 +1730,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.36;
+				MARKETING_VERSION = 1.1.39;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
@@ -1749,7 +1753,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.36;
+				MARKETING_VERSION = 1.1.39;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
