@@ -75,7 +75,7 @@ final class GoogleDatabaseManager {
 		chatRef(userId: Auth.auth().currentUser!.uid).child("user_last_seen").setValue(Date().fullDateStringForDB)
 	}
 	func updateUserProgramExpirationDate(_ date: String) {
-		chatRef(userId: Auth.auth().currentUser!.uid).child("expirationDate").setValue(date)
+		chatRef(userId: Auth.auth().currentUser!.uid).child("program_expiration_date").setValue(date)
 	}
 	
 	// Send
