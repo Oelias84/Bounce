@@ -207,6 +207,7 @@ class WorkoutViewModel: NSObject {
 			switch result {
 			case .success(let workoutsState):
 				if let workoutsState = workoutsState {
+					workoutsState.forEach { $0.resetIsChecked() }
 					self.workoutsStates = workoutsState
 				} else {
 					let homeStateWorkout = WorkoutStates(workoutType: .home)

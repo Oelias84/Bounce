@@ -40,6 +40,7 @@ class WorkoutExercise: Codable {
 class WorkoutStates: Codable {
 	
 	private var stateDate: String?
+
 	var workoutType: workoutType?
 	var workoutStates = [WorkoutState]()
 	
@@ -48,10 +49,11 @@ class WorkoutStates: Codable {
 		self.resetIsChecked()
 	}
 	
-	private func resetIsChecked() {
+	func resetIsChecked() {
 		if let date = stateDate?.dateFromString?.onlyDate {
 			if let endOfTheWeek = date.endOfWeek {
 				if Date().isLater(than: endOfTheWeek) {
+					stateDate = Date().dateStringForDB
 					workoutStates.forEach { $0.isChecked = false }
 				}
 			}
@@ -69,5 +71,5 @@ class WorkoutState: Codable {
 
 struct WorkoutStatesData: Codable {
 	
-	let WorkoutStatesData: [WorkoutStates]
+	let workoutStatesData: [WorkoutStates]
 }
