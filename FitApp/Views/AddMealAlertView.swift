@@ -85,7 +85,7 @@ class AddMealAlertView: UIView {
 			newDish.isHidden = false
 			self.dishStackView.addArrangedSubview(newDish)
 		} completion: { _ in
-			self.dishes.append(newDish.dish)
+			self.dishes.append(newDish.viewModel.dish)
 			DispatchQueue.main.async {
 				self.shouldHideButtons()
 			}
