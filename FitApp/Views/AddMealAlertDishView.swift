@@ -9,23 +9,25 @@ import UIKit
 
 class AddMealAlertDishView: UIView {
 	
-	var dish = Dish(name: "", type: .protein, amount: 0.0)
-	
+	let viewModel = AddMealAlertDishViewModel()
+
 	@IBOutlet weak var dishTypeTextField: UITextField!
 	@IBOutlet weak var dishNameTextField: UITextField!
-	@IBOutlet weak var dishAmountTextField: UITextField! {
-		didSet {
-			dishAmountTextField.addTarget(self, action: #selector(amountChanged(textField:)), for: .editingChanged)
-		}
-	}
+	@IBOutlet weak var dishAmountTextField: UITextField!
 	
 	private var dishTypePicker: UIPickerView = {
 		let picker = UIPickerView()
-		
+		picker.tag = 0
 		picker.backgroundColor = .white
 		return picker
 	}()
-	
+	private var halfNumberPicker: UIPickerView = {
+		let picker = UIPickerView()
+		picker.tag = 1
+		picker.backgroundColor = .white
+		return picker
+	}()
+
 	@IBOutlet var contentView: UIView!
 	
 	override init(frame: CGRect) {
@@ -40,6 +42,107 @@ class AddMealAlertDishView: UIView {
 		setupView()
 	}
 }
+
+//MARK: - Delegates
+extension AddMealAlertDishView: UITextFieldDelegate {
+
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		
+		switch textField {
+		case dishNameTextField:
+			getDishName()
+		case dishAmountTextField:
+			dishAmountTextField.text = ""
+		default:
+			break
+		}
+	}
+	func textFieldDidEndEditing(_ textField: UITextField) {
+		
+		switch textField {
+		case dishAmountTextField:
+			if let amountText = dishAmountTextField.text, !amountText.isEmpty {
+				let amount = amountText.toDecimalDouble
+				viewModel.dish.amount = amount
+				dishAmountTextField.text = String(amount)
+			} else {
+				self.presentAlert(withMessage: "נראה שכמות המנה שגויה אנא נסה שנית", options: "הבנתי", "ביטול")
+			}
+		default:
+			break
+		}
+	}
+}
+
+extension AddMealAlertDishView: PopupAlertViewDelegate {
+	
+	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
+		self.dishAmountTextField.becomeFirstResponder()
+	}
+	func cancelButtonTapped(alertNumber: Int) {
+		return
+	}
+	func thirdButtonTapped(alertNumber: Int) {
+		return
+	}
+}
+extension AddMealAlertDishView: UIPickerViewDelegate, UIPickerViewDataSource {
+	
+	func numberOfComponents(in pickerView: UIPickerView) -> Int {
+		1
+	}
+	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+		
+		viewModel.getPickerCount(for: pickerView.tag)
+	}
+	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+		
+		viewModel.getTitle(for: pickerView.tag, in: row)
+	}
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		
+		switch pickerView {
+		case halfNumberPicker:
+			let selectedNumber = viewModel.getHalfNumber(for: row)
+			viewModel.dish.amount = selectedNumber
+			dishAmountTextField.text = String(selectedNumber)
+			
+		case dishTypePicker:
+			let selectedName = viewModel.getDishName(for: row)
+			viewModel.dish.type = DishType.init(rawValue: selectedName)!
+			dishTypeTextField.text = selectedName
+			
+			dishNameTextField.text = ""
+			dishAmountTextField.text = ""
+			viewModel.dish.setName(name: "")
+			viewModel.dish.amount = 0
+		default:
+			return
+		}
+	}
+}
+extension AddMealAlertDishView: DishesTableViewControllerDelegate {
+	
+	func didDissmisView() {
+		dishNameTextField.inputView = UIView()
+		dishNameTextField.endEditing(true)
+	}
+	func cancelButtonTapped() {
+		dishNameTextField.inputView = UIView()
+		dishNameTextField.endEditing(true)
+	}
+	func didPickDish(name: String?) {
+		
+		if let name = name {
+			viewModel.dish.setName(name: name)
+			dishNameTextField.text = name
+		}
+		dishNameTextField.inputView = UIView()
+		dishNameTextField.endEditing(true)
+	}
+}
+
+//MARK: - Functions
 extension AddMealAlertDishView {
 	
 	private func setupView() {
@@ -49,13 +152,15 @@ extension AddMealAlertDishView {
 		
 		dishTypePicker.dataSource = self
 		dishTypePicker.delegate = self
+		halfNumberPicker.dataSource = self
+		halfNumberPicker.delegate = self
 		
 		dishAmountTextField.setupToolBar(cancelButtonName: "אישור")
 		dishTypeTextField.setupToolBar(cancelButtonName: "אישור")
 		
-		dishNameTextField.inputView = UIView()
+		dishAmountTextField.inputView = halfNumberPicker
 		dishTypeTextField.inputView = dishTypePicker
-		dishTypeTextField.text = dish.type.rawValue
+		dishTypeTextField.text = viewModel.dish.type.rawValue
 	}
 	private func commonInit() {
 		
@@ -69,10 +174,10 @@ extension AddMealAlertDishView {
 		let dishesListVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.dishesListViewController) as DishesTableViewController
 		
 		dishesListVC.delegate = self
-		dishesListVC.type = dish.type
+		dishesListVC.type = viewModel.dish.type
 		dishesListVC.state = .exceptional
-		dishesListVC.originalDishName = dish.getDishName
-
+		dishesListVC.originalDishName = viewModel.dish.getDishName
+		
 		self.parentViewController?.present(dishesListVC, animated: true, completion: nil)
 	}
 	private func presentAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
@@ -97,105 +202,5 @@ extension AddMealAlertDishView {
 			customAlert.doNotShowText = options.last
 		}
 		window.rootViewController?.present(customAlert, animated: true, completion: nil)
-	}
-}
-
-extension AddMealAlertDishView: UITextFieldDelegate {
-	
-	func textFieldDidBeginEditing(_ textField: UITextField) {
-		
-		switch textField {
-		case dishNameTextField:
-			getDishName()
-		case dishAmountTextField:
-			dishAmountTextField.text = ""
-			
-		default:
-			break
-		}
-	}
-	func textFieldDidEndEditing(_ textField: UITextField) {
-		
-		switch textField {
-		case dishAmountTextField:
-			if let amountText = dishAmountTextField.text, !amountText.isEmpty {
-				let amount = amountText.toDecimalDouble
-				dish.amount = amount
-				dishAmountTextField.text = String(amount)
-			} else {
-				self.presentAlert(withMessage: "נראה שכמות המנה שגויה אנא נסה שנית", options: "הבנתי", "ביטול")
-			}
-		default:
-			break
-		}
-	}
-	@objc final private func amountChanged(textField: UITextField) {
-		if let amountText = textField.text, !amountText.isEmpty {
-			let amount = amountText.toDecimalDouble
-			dish.amount = amount
-			dishAmountTextField.text = String(amount)
-		}
-	}
-}
-
-extension AddMealAlertDishView: PopupAlertViewDelegate {
-	
-	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
-		self.dishAmountTextField.becomeFirstResponder()
-	}
-	func cancelButtonTapped(alertNumber: Int) {
-		return
-	}
-	func thirdButtonTapped(alertNumber: Int) {
-		return
-	}
-}
-extension AddMealAlertDishView: UIPickerViewDelegate, UIPickerViewDataSource {
-	
-	private var typeNames: [String] {
-		return DishType.allCases.map {
-			$0.rawValue
-		}
-	}
-	
-	func numberOfComponents(in pickerView: UIPickerView) -> Int {
-		1
-	}
-	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-		typeNames.count
-	}
-	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-		typeNames[row]
-	}
-	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		let selectedName = typeNames[row]
-		dish.type = DishType.init(rawValue: selectedName)!
-		dishTypeTextField.text = selectedName
-		
-		dishNameTextField.text = ""
-		dishAmountTextField.text = ""
-		dish.setName(name: "")
-		dish.amount = 0
-	}
-}
-
-extension AddMealAlertDishView: DishesTableViewControllerDelegate {
-	
-	func didDissmisView() {
-		dishNameTextField.inputView = UIView()
-		dishNameTextField.endEditing(true)
-	}
-	func cancelButtonTapped() {
-		dishNameTextField.inputView = UIView()
-		dishNameTextField.endEditing(true)
-	}
-	func didPickDish(name: String?) {
-		
-		if let name = name {
-			dish.setName(name: name)
-			dishNameTextField.text = name
-		}
-		dishNameTextField.inputView = UIView()
-		dishNameTextField.endEditing(true)
 	}
 }
