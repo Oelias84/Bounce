@@ -18,8 +18,8 @@ final class ChatsViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		if let navView = navigationController?.view { Spinner.shared.show(navView) }
-
+		
+		Spinner.shared.show()
 		chatsViewModel = ChatsViewModel()
 		chatsViewModel.flitteredChats.bind() {
 			chats in

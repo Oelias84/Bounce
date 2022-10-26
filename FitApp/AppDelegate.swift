@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				}
 				UserProfile.defaults.hasRunBefore = true
 			} else {
-				Spinner.shared.show(window)
+				Spinner.shared.show()
 				// Run code here for every other launch but the first
 				if Auth.auth().currentUser != nil {
 					//Check if the user is approved in data base

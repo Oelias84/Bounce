@@ -71,6 +71,7 @@ class MoveDishView: UIView {
 	}
 	
 	@IBAction func confirmButtonAction(_ sender: Any) {
+		Spinner.shared.show()
 		
 		if let dish = dishToMove, let portion = dishAmount, let toMeal = moveToMealIndex {
 			mealViewModel.move(portion: portion, of: dish, from: meal, to: toMeal)

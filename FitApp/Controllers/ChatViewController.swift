@@ -46,6 +46,7 @@ final class ChatViewController: MessagesViewController {
 }
 
 //MARK: - Delegats
+//Text Message
 extension ChatViewController: InputBarAccessoryViewDelegate {
 	
 	func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
@@ -70,7 +71,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 	}
 }
 
-//Messages
+//Media Messages
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate {
 	
 	func currentSender() -> SenderType {

@@ -54,7 +54,7 @@ class RegisterViewController: UIViewController {
 		presentImagePickerActionSheet(imagePicker: imagePickerController) { _ in }
 	}
 	@IBAction func singUpButtonAction(_ sender: Any) {
-		Spinner.shared.show(self.view)
+		Spinner.shared.show(self)
 		view.endEditing(true)
 		
 		do {

@@ -158,7 +158,7 @@ extension WeightsViewController: AddWeightAlertViewDelegate {
 	}
 	func confirmButtonAction(weight: String, date: Date?, imagePath: String?) {
 		guard let weightDouble = Double(weight) else { return }
-		Spinner.shared.show(self.view)
+		Spinner.shared.show(self)
 		
 		if weightDouble>150 || weightDouble<30 {
 			weightAlert = nil
@@ -389,9 +389,7 @@ extension WeightsViewController {
 												height: UIScreen.main.bounds.size.height)
 		if let alert = weightAlert {
 			window?.addSubview(alert)
-			if let navView = self.navigationController?.view {
-				Spinner.shared.show(navView)
-			}
+			Spinner.shared.show()
 		}
 	}
 }
