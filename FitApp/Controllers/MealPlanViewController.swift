@@ -41,7 +41,7 @@ class MealPlanViewController: UIViewController {
 	
 	@IBAction private func todayButtonTapped(_ sender: UIButton) {
 		date = Date()
-		Spinner.shared.show(self.view)
+		Spinner.shared.show(self)
 		changeDateView.changeToCurrentDate()
 		mealViewModel.fetchMealsBy(date: date) {
 			[weak self] hasMeal in
@@ -78,7 +78,7 @@ extension MealPlanViewController: UITableViewDelegate, UITableViewDataSource {
 extension MealPlanViewController: ChangeDateViewDelegate {
 	
 	func dateDidChange(_ date: Date) {
-		Spinner.shared.show(self.view)
+		Spinner.shared.show(self)
 		self.date = date
 		mealViewModel.fetchMealsBy(date: date) {
 			[weak self] hasMeal in

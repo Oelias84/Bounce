@@ -19,7 +19,7 @@ class ChatContainerViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		Spinner.shared.show((navigationController?.view)!)
+		Spinner.shared.show()
 		setupChat()
 		setupTopBarView()
 	}

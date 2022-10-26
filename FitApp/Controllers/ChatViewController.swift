@@ -371,9 +371,7 @@ extension ChatViewController {
 		}
 	}
 	private func disableInteraction() {
-		if let view = navigationController?.view {
-			Spinner.shared.show(view)
-		}
+		Spinner.shared.show()
 	}
 	private func ableInteraction() {
 		Spinner.shared.stop()
