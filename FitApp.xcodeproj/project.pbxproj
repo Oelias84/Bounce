@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -60,6 +60,11 @@
 		7C658AA825D9873C00CA75B2 /* Motivations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658AA725D9873C00CA75B2 /* Motivations.swift */; };
 		7C658AB525D990EB00CA75B2 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658AB425D990EB00CA75B2 /* CommentViewController.swift */; };
 		7C658ABE25D992D200CA75B2 /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658ABD25D992D200CA75B2 /* Comments.swift */; };
+		7C6E059128FDA8C5001013B9 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7C6E059028FDA8C5001013B9 /* Lottie */; };
+		7C6E059828FED1DC001013B9 /* CongratsConfettiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E059728FED1DC001013B9 /* CongratsConfettiViewController.swift */; };
+		7C6E059B28FEDB66001013B9 /* CongratsConfettiViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6E059A28FEDB66001013B9 /* CongratsConfettiViewController.storyboard */; };
+		7C6E059D28FEE1CA001013B9 /* Confetti.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C6E059C28FEE1CA001013B9 /* Confetti.json */; };
+		7C6E05A52906EAC2001013B9 /* AddMealAlertDishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E05A42906EAC2001013B9 /* AddMealAlertDishViewModel.swift */; };
 		7C71BB4725D869AC00FBEB96 /* AddWeightAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71BB4625D869AC00FBEB96 /* AddWeightAlertView.swift */; };
 		7C7434EB25CD906500D33A9A /* MailComposerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7434EA25CD906500D33A9A /* MailComposerViewController.swift */; };
 		7C7434F025CD9D9D00D33A9A /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7434EF25CD9D9D00D33A9A /* ChatsViewController.swift */; };
@@ -264,6 +269,10 @@
 		7C658AA725D9873C00CA75B2 /* Motivations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motivations.swift; sourceTree = "<group>"; };
 		7C658AB425D990EB00CA75B2 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		7C658ABD25D992D200CA75B2 /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
+		7C6E059728FED1DC001013B9 /* CongratsConfettiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratsConfettiViewController.swift; sourceTree = "<group>"; };
+		7C6E059A28FEDB66001013B9 /* CongratsConfettiViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CongratsConfettiViewController.storyboard; sourceTree = "<group>"; };
+		7C6E059C28FEE1CA001013B9 /* Confetti.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Confetti.json; sourceTree = "<group>"; };
+		7C6E05A42906EAC2001013B9 /* AddMealAlertDishViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMealAlertDishViewModel.swift; sourceTree = "<group>"; };
 		7C71BB4625D869AC00FBEB96 /* AddWeightAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWeightAlertView.swift; sourceTree = "<group>"; };
 		7C7434EA25CD906500D33A9A /* MailComposerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailComposerViewController.swift; sourceTree = "<group>"; };
 		7C7434EF25CD9D9D00D33A9A /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
@@ -419,6 +428,7 @@
 			files = (
 				FFBD0878BB9E28260C344D5A /* Pods_FitApp.framework in Frameworks */,
 				7CBBF1EF281992AA00EE55F1 /* StoreKit.framework in Frameworks */,
+				7C6E059128FDA8C5001013B9 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,6 +596,23 @@
 				7C658AB425D990EB00CA75B2 /* CommentViewController.swift */,
 			);
 			name = Meals;
+			sourceTree = "<group>";
+		};
+		7C6E059428FECF98001013B9 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				7C6E059C28FEE1CA001013B9 /* Confetti.json */,
+			);
+			name = Lottie;
+			sourceTree = "<group>";
+		};
+		7C6E059928FED1E4001013B9 /* LottieViews */ = {
+			isa = PBXGroup;
+			children = (
+				7C6E059728FED1DC001013B9 /* CongratsConfettiViewController.swift */,
+				7C6E059A28FEDB66001013B9 /* CongratsConfettiViewController.storyboard */,
+			);
+			name = LottieViews;
 			sourceTree = "<group>";
 		};
 		7C71BB4E25D869B400FBEB96 /* WeightViews */ = {
@@ -778,6 +805,7 @@
 		7C89AA7C256D717F009AD87C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7C6E059428FECF98001013B9 /* Lottie */,
 				7C7C38312790F99F0075B64A /* TSV Files */,
 				7CADF74B278CADDE0020CD83 /* StaticText.json */,
 				7C10BA78276BCFAF00B5860C /* Assistant-Bold.ttf */,
@@ -816,6 +844,7 @@
 			children = (
 				7C8F51352671F9E3001FF0EE /* AddMealAlertDishView.xib */,
 				7C8F51372671FAE0001FF0EE /* AddMealAlertDishView.swift */,
+				7C6E05A42906EAC2001013B9 /* AddMealAlertDishViewModel.swift */,
 			);
 			name = DishView;
 			sourceTree = "<group>";
@@ -1074,6 +1103,7 @@
 				7C71BB4E25D869B400FBEB96 /* WeightViews */,
 				7C1ACD0D2670D175008079C9 /* AddMealAlertView */,
 				7C7C381E2790B5FE0075B64A /* SpreadsheetView */,
+				7C6E059928FED1E4001013B9 /* LottieViews */,
 				B3CA0CE2258111FD00923902 /* CircularProgressView.swift */,
 				B368DFDF25A6247600BD1937 /* SpinnerView.swift */,
 			);
@@ -1145,6 +1175,7 @@
 			);
 			name = FitApp;
 			packageProductDependencies = (
+				7C6E059028FDA8C5001013B9 /* Lottie */,
 			);
 			productName = FitApp;
 			productReference = 7C89A9F7256D69CA009AD87C /* FitApp.app */;
@@ -1222,6 +1253,7 @@
 			);
 			mainGroup = 7C89A9EE256D69CA009AD87C;
 			packageReferences = (
+				7C6E058F28FDA8C5001013B9 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 7C89A9F8256D69CA009AD87C /* Products */;
 			projectDirPath = "";
@@ -1249,8 +1281,10 @@
 				7C10BA80276BCFBE00B5860C /* Assistant-ExtraLight.ttf in Resources */,
 				7C857BA5262C4D68006AB0BD /* TableViewEmptyView.xib in Resources */,
 				B358222325AC930B00C91295 /* Articles.storyboard in Resources */,
+				7C6E059D28FEE1CA001013B9 /* Confetti.json in Resources */,
 				7C5262B725BC756700694007 /* Settings.storyboard in Resources */,
 				7C89AA91256D8286009AD87C /* Questionnaire.storyboard in Resources */,
+				7C6E059B28FEDB66001013B9 /* CongratsConfettiViewController.storyboard in Resources */,
 				B3E6E9A02571446E00958C48 /* MealPlanTableViewCell.xib in Resources */,
 				7C10BA7B276BCFBE00B5860C /* Assistant-ExtraBold.ttf in Resources */,
 				7C32C58E278E3E2400B97642 /* PopupAlertView.storyboard in Resources */,
@@ -1425,6 +1459,7 @@
 				B3DB7513259F8270002CF48B /* MealViewModel.swift in Sources */,
 				7C2BD810267212C7006A1736 /* MealManager.swift in Sources */,
 				B367F17825B1BDF600DF21D7 /* DishesGenerator.swift in Sources */,
+				7C6E059828FED1DC001013B9 /* CongratsConfettiViewController.swift in Sources */,
 				B368E05C25A79BB700BD1937 /* Data+Extensions.swift in Sources */,
 				7C89AA81256D7342009AD87C /* RegisterViewController.swift in Sources */,
 				7C89AA77256D715F009AD87C /* UIView+Extensions.swift in Sources */,
@@ -1535,6 +1570,7 @@
 				7C54164D269D951C00C22859 /* LoginViewModel.swift in Sources */,
 				7CFE0C0E276936330077D16F /* BounceNavigationBarView.swift in Sources */,
 				7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */,
+				7C6E05A52906EAC2001013B9 /* AddMealAlertDishViewModel.swift in Sources */,
 				7CD1817B2647E80F0054DB9C /* NotificationTableViewCell.swift in Sources */,
 				B358223025AC9DA800C91295 /* Article.swift in Sources */,
 				7C7434F025CD9D9D00D33A9A /* ChatsViewController.swift in Sources */,
@@ -1887,6 +1923,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7C6E058F28FDA8C5001013B9 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7C6E059028FDA8C5001013B9 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C6E058F28FDA8C5001013B9 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7C89A9EF256D69CA009AD87C /* Project object */;
 }

@@ -47,9 +47,8 @@ class AddWeightAlertView: UIView {
 	}
 	
 	@IBAction func confirmButtonAction(_ sender: Any) {
-		if let perentVC = parentViewController {
-			Spinner.shared.show(perentVC.view)
-		}
+		Spinner.shared.show()
+		
 		if let weight = weightTextField.text, !weight.isEmpty {
 			delegate?.confirmButtonAction(weight: weight, date: editWeight?.date, imagePath: editWeight?.imagePath)
 		} else {
