@@ -45,7 +45,7 @@ class LoginViewController: UIViewController {
 	}
 	@IBAction func signInButtonAction(_ sender: Any) {
 		view.endEditing(true)
-		Spinner.shared.show(view)
+		Spinner.shared.show(self)
 
 		do {
 			try viewModel.login(email: emailTextfield.text, password: passwordTextfield.text) {

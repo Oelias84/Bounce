@@ -20,7 +20,7 @@ class CommentsViewController: UIViewController {
 		registerCells()
 		setupTopBarView()
 		
-		Spinner.shared.show(self.view)
+		Spinner.shared.show(self)
 		viewModel = CommentsViewModel()
 		viewModel.bindNotificationViewModelToController = { [weak self] in
 			guard let self = self else { return }
