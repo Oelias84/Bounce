@@ -204,39 +204,52 @@ class MealViewModel: NSObject {
 		}
 		return meals?.count ?? 0
 	}
-	func updateMeals(for date: Date) {
+	func updateMeals(for date: Date, completion: @escaping (Error?) -> Void) {
 		guard let meals = self.meals else { return }
 		let dailyMeal = DailyMeal(meals: meals)
 		getProgress()
-		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal)
+		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal, completion: completion)
 	}
-	func removeExceptionalMeal(for date: Date) {
+	func removeExceptionalMeal(for date: Date, completion: @escaping (Error?) -> Void) {
 		guard var meals = self.meals else { return }
 		meals.removeAll(where: { $0.name == "ארוחת חריגה" })
 		let dailyMeal = DailyMeal(meals: meals)
 		getProgress()
-		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal)
-		fetchMealsBy(date: date) {_ in}
+		
+		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: dailyMeal) { error in
+			if let error {
+				completion(error)
+			} else {
+				self.fetchMealsBy(date: date) { result in
+					switch result {
+					case .success(_):
+						completion(nil)
+					case .failure(let error):
+						completion(error)
+					}
+				}
+			}
+		}
 	}
 	
-	func fetchMealsBy(date: Date, completion: @escaping (Bool) -> ()) {
+	func fetchMealsBy(date: Date, completion: @escaping (Result<Bool, Error>) -> ()) {
 		GoogleApiManager.shared.getMealFor(date) { result in
 			switch result {
 			case .success(let dailyMeal):
 				if let dailyMeal = dailyMeal {
 					self.meals = dailyMeal.meals
 					self.currentMealDate = date
-					completion(true)
+					completion(.success(true))
 				} else {
 					self.meals = []
-					completion(false)
+					completion(.success(false))
 				}
 			case .failure(let error):
-				print(error)
+				completion(.failure(error))
 			}
 		}
 	}
-	func move(portion: Double, of dish: Dish, from meal: Meal, to destinationMeal: Meal) {
+	func move(portion: Double, of dish: Dish, from meal: Meal, to destinationMeal: Meal, completion: @escaping (Error?) -> ()) {
 		if let dishToSubtract = meal.dishes.first(where: { $0 == dish }) {
 			if dishToSubtract.amount == portion {
 				//Remove original dish if from its meal if portion equals to dish amount
@@ -249,8 +262,21 @@ class MealViewModel: NSObject {
 		//Append the dish with the desire portion to the destinationMeal
 		destinationMeal.dishes.append(Dish(name: dish.getDishName, type: dish.type, amount: portion, isDishDone: dish.isDishDone))
 		
-		updateMeals(for: meal.date)
-		fetchMealsBy(date: meal.date) {_ in}
+		updateMeals(for: meal.date) { error in
+			if let error {
+				completion(error)
+			} else {
+				self.fetchMealsBy(date: meal.date) { result in
+					
+					switch result {
+					case .success(_):
+						completion(nil)
+					case .failure(let error):
+						completion(error)
+					}
+				}
+			}
+		}
 	}
 	
 	private func fetchMealsForOrCreate(date: Date, prefer: MealType?, numberOfMeals: Int, protein: Double, carbs: Double, fat: Double) {

@@ -74,8 +74,14 @@ class MoveDishView: UIView {
 		Spinner.shared.show()
 		
 		if let dish = dishToMove, let portion = dishAmount, let toMeal = moveToMealIndex {
-			mealViewModel.move(portion: portion, of: dish, from: meal, to: toMeal)
-			removeFromSuperview()
+			mealViewModel.move(portion: portion, of: dish, from: meal, to: toMeal) { error in
+				Spinner.shared.stop()
+				if error != nil {
+					self.presentOkAlertWithDelegate(withTitle: "שגיאה בהעברה", withMessage: "אנא נסו שנית מאור יותר")
+				} else {
+					self.removeFromSuperview()
+				}
+			}
 		} else {
 			self.presentOkAlertWithDelegate(withTitle: "שגיאה בהעברה", withMessage: "יש לקבוע לאיזו ארוחה להעביר את המנה")
 		}

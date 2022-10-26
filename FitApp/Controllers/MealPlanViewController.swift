@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class MealPlanViewController: UIViewController {
 	
 	private var date = Date()
@@ -44,10 +43,17 @@ class MealPlanViewController: UIViewController {
 		Spinner.shared.show(self)
 		changeDateView.changeToCurrentDate()
 		mealViewModel.fetchMealsBy(date: date) {
-			[weak self] hasMeal in
+			[weak self] result in
 			guard let self = self else { return }
 			Spinner.shared.stop()
-			self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
+			
+			switch result {
+			case .success(let hasMeal):
+				self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
+			case .failure(let error):
+				print("An Error has accrue:", error.localizedDescription)
+				self.presentAlert(withTitle: "שגיאה", withMessage: "אנא נסו שנית מאור יותר", alertNumber: 0)
+			}
 		}
 	}
 }
@@ -80,13 +86,20 @@ extension MealPlanViewController: ChangeDateViewDelegate {
 	func dateDidChange(_ date: Date) {
 		Spinner.shared.show(self)
 		self.date = date
+		
 		mealViewModel.fetchMealsBy(date: date) {
-			[weak self] hasMeal in
+			[weak self] result in
 			guard let self = self else { return }
-			
-			DispatchQueue.main.async {
-				Spinner.shared.stop()
-				self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
+			Spinner.shared.stop()
+
+			switch result {
+			case .success(let hasMeal):
+				DispatchQueue.main.async {
+					self.tableView.backgroundView = hasMeal ? nil : self.presentEmptyTableViewBackground(self.date)
+				}
+			case .failure(let error):
+				print("An Error has accrue:", error)
+				self.presentAlert(withTitle: "שגיאה", withMessage: "אנא נסו שנית מאור יותר", alertNumber: 1)
 			}
 		}
 	}
@@ -94,7 +107,7 @@ extension MealPlanViewController: ChangeDateViewDelegate {
 extension MealPlanViewController: TableViewEmptyViewDelegate {
 	
 	func createNewMealButtonTapped() {
-		Spinner.shared.show(view)
+		Spinner.shared.show(self)
 		tableView.backgroundView = nil
 		mealViewModel.fetchData(date: date)
 	}
@@ -123,9 +136,24 @@ extension MealPlanViewController: PopupAlertViewDelegate {
 }
 extension MealPlanViewController: AddMealAlertViewDelegate {
 	
-	func didFinish(with: Meal) {
-		mealViewModel.meals?.append(with)
-		mealViewModel.updateMeals(for: date)
+	
+	func didFinishAdding(_ meal: Meal) {
+		Spinner.shared.show()
+
+		mealViewModel.meals?.append(meal)
+		mealViewModel.updateMeals(for: date) { error in
+
+			Spinner.shared.stop() {
+				if let error {
+					print("An Error has accrue:", error)
+					self.presentAlert(withTitle: "נכשל בהוספת המנה", withMessage: "אנא נסו שנית מאור יותר", alertNumber: 1)
+					self.mealViewModel.meals?.removeAll { $0 == meal }
+				} else {
+					#warning("Add Lottie confirmation Animation")
+					self.presentOkAlert(withMessage: "המנה נוספה בהצלחה")
+				}
+			}
+		}
 	}
 }
 extension MealPlanViewController: BounceNavigationBarDelegate {
@@ -144,9 +172,8 @@ extension MealPlanViewController {
 		}
 	}
 	private func callToViewModelForUIUpdate() {
-		if let navView = navigationController?.view {
-			Spinner.shared.show(navView)
-		}
+		Spinner.shared.show()
+		
 		if mealViewModel.meals == nil {
 			mealViewModel.fetchData()
 		} else {

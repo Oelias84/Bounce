@@ -145,9 +145,9 @@ struct GoogleApiManager {
 			print(error)
 		}
 	}
-	func updateMealBy(date: Date, dailyMeal: DailyMeal) {
+	func updateMealBy(date: Date, dailyMeal: DailyMeal, completion: @escaping (Error?) -> Void) {
 		do {
-			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-daily-meals").document("\(date.dateStringForDB)").setData(from: dailyMeal.self)
+			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-daily-meals").document("\(date.dateStringForDB)").setData(from: dailyMeal.self, completion: completion)
 		} catch {
 			print(error)
 		}
