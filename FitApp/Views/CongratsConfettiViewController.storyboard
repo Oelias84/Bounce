@@ -32,35 +32,31 @@
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="at4-a6-fQ0" customClass="LottieAnimationView" customModule="Lottie">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="668"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Of-nU-E5n">
-                                                    <rect key="frame" x="318" y="62" width="36" height="36"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal">
-                                                        <imageReference key="image" image="xmark.circle.fill" catalog="system" symbolScale="large"/>
-                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="closeButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="fIy-YZ-W4b"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstItem="9Of-nU-E5n" firstAttribute="top" secondItem="at4-a6-fQ0" secondAttribute="top" constant="62" id="aLP-0R-t6Z"/>
-                                                <constraint firstAttribute="trailing" secondItem="9Of-nU-E5n" secondAttribute="trailing" constant="36" id="fWv-If-WNm"/>
-                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="Confetti"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shahar&amp;yael" translatesAutoresizingMaskIntoConstraints="NO" id="8od-lZ-ipR">
+                                            <rect key="frame" x="36" y="114" width="318" height="601.66666666666663"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                    <real key="value" value="15"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XBJ-BU-WkI" customClass="LottieAnimationView" customModule="Lottie">
+                                            <rect key="frame" x="0.0" y="94" width="390" height="662"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="Confetti"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft9-wX-y8t">
-                                            <rect key="frame" x="36" y="609.66666666666663" width="318" height="58.333333333333371"/>
+                                            <rect key="frame" x="36" y="739.66666666666663" width="318" height="58.333333333333371"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" איזה כיף, סיימתי אימון 😁  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLQ-nV-535">
-                                                    <rect key="frame" x="56" y="15.999999999999998" width="206" height="26.333333333333329"/>
+                                                    <rect key="frame" x="56" y="15.999999999999998" width="206" height="26.333333333333321"/>
                                                     <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="20"/>
                                                     <color key="textColor" name="ProjectLightGreen"/>
                                                     <nil key="highlightedColor"/>
@@ -69,6 +65,7 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="dLQ-nV-535" firstAttribute="centerX" secondItem="ft9-wX-y8t" secondAttribute="centerX" id="4s3-eW-mnF"/>
+                                                <constraint firstAttribute="height" constant="58.329999999999998" id="CdJ-TN-P56"/>
                                                 <constraint firstItem="dLQ-nV-535" firstAttribute="top" secondItem="ft9-wX-y8t" secondAttribute="top" constant="16" id="hTk-Zb-YNh"/>
                                                 <constraint firstAttribute="bottom" secondItem="dLQ-nV-535" secondAttribute="bottom" constant="16" id="p0Q-UN-ZCt"/>
                                             </constraints>
@@ -78,15 +75,41 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Of-nU-E5n">
+                                            <rect key="frame" x="318" y="46" width="36" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="9Of-nU-E5n" secondAttribute="height" multiplier="1:1" id="V6g-VK-vch"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal">
+                                                <imageReference key="image" image="xmark.circle.fill" catalog="system" symbolScale="large"/>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="closeButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="fIy-YZ-W4b"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="at4-a6-fQ0" secondAttribute="bottom" constant="176" id="0U2-Vh-YeW"/>
+                                        <constraint firstAttribute="bottom" secondItem="ft9-wX-y8t" secondAttribute="bottom" constant="46" id="3rq-0v-TBP"/>
+                                        <constraint firstAttribute="trailing" secondItem="8od-lZ-ipR" secondAttribute="trailing" constant="36" id="8Zg-nm-5Ww"/>
+                                        <constraint firstItem="XBJ-BU-WkI" firstAttribute="leading" secondItem="hxl-nj-SZf" secondAttribute="leading" id="I4z-eV-xHT"/>
                                         <constraint firstItem="ft9-wX-y8t" firstAttribute="leading" secondItem="hxl-nj-SZf" secondAttribute="leading" constant="36" id="JoT-kM-A71"/>
                                         <constraint firstItem="at4-a6-fQ0" firstAttribute="leading" secondItem="hxl-nj-SZf" secondAttribute="leading" id="KR7-kM-rwG"/>
+                                        <constraint firstItem="8od-lZ-ipR" firstAttribute="top" secondItem="9Of-nU-E5n" secondAttribute="bottom" constant="32" id="LAQ-OJ-s9Y"/>
                                         <constraint firstAttribute="trailing" secondItem="at4-a6-fQ0" secondAttribute="trailing" id="Pa6-Sj-pPb"/>
+                                        <constraint firstItem="9Of-nU-E5n" firstAttribute="top" secondItem="hxl-nj-SZf" secondAttribute="top" constant="46" id="Q7W-uM-Cyz"/>
+                                        <constraint firstItem="8od-lZ-ipR" firstAttribute="leading" secondItem="hxl-nj-SZf" secondAttribute="leading" constant="36" id="TpT-h1-TqL"/>
+                                        <constraint firstItem="XBJ-BU-WkI" firstAttribute="top" secondItem="9Of-nU-E5n" secondAttribute="bottom" constant="12" id="b9n-ly-cFE"/>
                                         <constraint firstAttribute="trailing" secondItem="ft9-wX-y8t" secondAttribute="trailing" constant="36" id="dpi-xM-BUh"/>
+                                        <constraint firstAttribute="trailing" secondItem="9Of-nU-E5n" secondAttribute="trailing" constant="36" id="jg6-is-mTa"/>
+                                        <constraint firstItem="ft9-wX-y8t" firstAttribute="top" secondItem="8od-lZ-ipR" secondAttribute="bottom" constant="24" id="obm-Ux-78E"/>
                                         <constraint firstItem="at4-a6-fQ0" firstAttribute="top" secondItem="hxl-nj-SZf" secondAttribute="top" id="qvw-Ct-6Gj"/>
-                                        <constraint firstAttribute="bottom" secondItem="ft9-wX-y8t" secondAttribute="bottom" constant="176" id="srU-fD-7c7"/>
+                                        <constraint firstAttribute="bottom" secondItem="XBJ-BU-WkI" secondAttribute="bottom" constant="88" id="tgX-M6-uwA"/>
+                                        <constraint firstAttribute="trailing" secondItem="XBJ-BU-WkI" secondAttribute="trailing" id="xnO-rh-Lzg"/>
                                     </constraints>
                                 </view>
                                 <blurEffect style="systemUltraThinMaterial"/>
@@ -103,6 +126,7 @@
                     </view>
                     <connections>
                         <outlet property="animation" destination="at4-a6-fQ0" id="tfr-EB-Glb"/>
+                        <outlet property="animationTop" destination="XBJ-BU-WkI" id="ScK-Z5-6YY"/>
                         <outlet property="titleLabel" destination="dLQ-nV-535" id="46T-n3-XsR"/>
                     </connections>
                 </viewController>
@@ -112,6 +136,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="shahar&amp;yael" width="4480" height="6720"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
         <namedColor name="ProjectLightGreen">
             <color red="0.28600001335144043" green="0.57599997520446777" blue="0.56099998950958252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
