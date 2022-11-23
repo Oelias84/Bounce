@@ -78,7 +78,10 @@ class UsersListViewModel {
 			}
 		}
 		let sortedUsers = results.sorted()
-		filteredUsers.value = sortedUsers.sorted(by: { $0.latestMessage!.sentDate > $1.latestMessage!.sentDate })
+		filteredUsers.value = sortedUsers.sorted(by: {
+			guard let latestMessage = $0.latestMessage, let latestMessageOther = $1.latestMessage else { return false }
+			return latestMessage.sentDate > latestMessageOther.sentDate
+		})
 	}
 	
 	// Filter menu
