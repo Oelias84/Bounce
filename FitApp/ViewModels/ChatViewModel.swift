@@ -14,7 +14,7 @@ class ChatViewModel {
 	private var chat: Chat?
 	private let messagesManager = MessagesManager.shared
 	
-	var messages: ObservableObject<[Message]?> = ObservableObject(nil)
+	var messages: ProjectObservableObject<[Message]?> = ProjectObservableObject(nil)
 		
 	required init(chat: Chat?) {
 		

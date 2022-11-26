@@ -25,7 +25,7 @@ class WorkoutViewModel {
 	private var workoutsStates: [WorkoutStates]!
 	private let googleManager = GoogleApiManager()
 	
-	var finishHomeWorkoutConfiguringData: ObservableObject<Bool?> = ObservableObject(nil)
+	var finishHomeWorkoutConfiguringData: ProjectObservableObject<Bool?> = ProjectObservableObject(nil)
 	
 	init() {
 		let group = DispatchGroup()

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ExercisesTableViewController: UIViewController {
     
@@ -16,6 +17,8 @@ class ExercisesTableViewController: UIViewController {
 	
 	@IBOutlet weak var topBarView: BounceNavigationBarView!
 	@IBOutlet weak var tableView: UITableView!
+	
+	@IBOutlet weak var swiftUIContainer: UIView!
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == K.SegueId.moveToExerciseDetailViewController {
@@ -28,7 +31,8 @@ class ExercisesTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		
+		addSwiftUIView(content: ExerciseListView(workout: workout))
+
 		for exercise in workout.exercises {
 			numberOfExerciseSection.updateValue(+1, forKey: exercise.exerciseToPresent!.type)
 		}
@@ -52,6 +56,18 @@ extension ExercisesTableViewController {
 		topBarView.isBackButtonHidden = false
 		topBarView.isDayWelcomeHidden = true
 		topBarView.isMotivationHidden = true
+	}
+	private func addSwiftUIView(content: some View) {
+		var child = UIHostingController(rootView: content)
+		
+		addChild(child)
+		swiftUIContainer.addSubview(child.view)
+		
+		child.view.translatesAutoresizingMaskIntoConstraints = false
+		child.view.topAnchor.constraint(equalTo: swiftUIContainer.topAnchor).isActive = true
+		child.view.bottomAnchor.constraint(equalTo: swiftUIContainer.bottomAnchor).isActive = true
+		child.view.leftAnchor.constraint(equalTo: swiftUIContainer.leftAnchor).isActive = true
+		child.view.rightAnchor.constraint(equalTo: swiftUIContainer.rightAnchor).isActive = true
 	}
 }
 

@@ -13,9 +13,9 @@ class WeightsManager {
 	static let shared = WeightsManager()
 	fileprivate var googleService = GoogleApiManager()
 	
-	var weights: ObservableObject<[Weight]?> = ObservableObject(nil)
-	var splittedWeeksWeightsPeriod: ObservableObject<[WeightPeriod]?> = ObservableObject(nil)
-	var splittedMonthsWeightsPeriod: ObservableObject<[WeightPeriod]?> = ObservableObject(nil)
+	var weights: ProjectObservableObject<[Weight]?> = ProjectObservableObject(nil)
+	var splittedWeeksWeightsPeriod: ProjectObservableObject<[WeightPeriod]?> = ProjectObservableObject(nil)
+	var splittedMonthsWeightsPeriod: ProjectObservableObject<[WeightPeriod]?> = ProjectObservableObject(nil)
 	
 	init() {
 		fetchWeights()
