@@ -17,10 +17,29 @@ struct StaticStringsManager {
 	
 	func parsedGenderString() -> Dictionary<Int, String>? {
 		var genderString = Dictionary<Int, String>()
-		guard let stringsDictionary = loadStaticStrings(), let userGender = UserProfile.defaults.getGender else { return nil }
+		guard let stringsDictionary = loadStaticStrings() else { return nil }
 		
-		switch userGender {
-		case .male:
+		if let userGender = UserProfile.defaults.getGender {
+
+			switch userGender {
+			case .male:
+				for string in stringsDictionary {
+					if let strKey = string.key {
+						if let keyNumber = Int(strKey) {
+							genderString[keyNumber] = string.male
+						}
+					}
+				}
+			case .female:
+				for string in stringsDictionary {
+					if let strKey = string.key {
+						if let keyNumber = Int(strKey) {
+							genderString[keyNumber] = string.female
+						}
+					}
+				}
+			}
+		} else {
 			for string in stringsDictionary {
 				if let strKey = string.key {
 					if let keyNumber = Int(strKey) {
@@ -28,19 +47,10 @@ struct StaticStringsManager {
 					}
 				}
 			}
-		case .female:
-			for string in stringsDictionary {
-				if let strKey = string.key {
-					if let keyNumber = Int(strKey) {
-						genderString[keyNumber] = string.female
-					}
-				}
-			}
 		}
 		return genderString
 	}
 	private func loadStaticStrings() -> [StringItem]? {
-		
 		if let url = Bundle.main.url(forResource: nil, withExtension: "json") {
 			do {
 				let data = try Data(contentsOf: url)
@@ -48,23 +58,22 @@ struct StaticStringsManager {
 				let jsonData = try decoder.decode(StaticString.self, from: data)
 				return jsonData.dictionary
 			} catch {
-				print("error:\(error)")
+				print("Could't fetch static data from server: \n\(error)")
 			}
 		}
-		return nil
-		
+		return readLocalFile()
 	}
-	private func readLocalFile() -> Data? {
+	private func readLocalFile() -> [StringItem]? {
 		do {
-			if let bundlePath = Bundle.main.path(forResource: "StaticText.json",
-												 ofType: "json"),
+			if let bundlePath = Bundle.main.path(forResource: "StaticText", ofType: "json"),
 				let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
-				return jsonData
+				let decoder = JSONDecoder()
+				let jsonDecoderData = try decoder.decode(StaticString.self, from: jsonData)
+				return jsonDecoderData.dictionary
 			}
 		} catch {
-			print(error)
+			print("Could't fetch static data from local file: \n\(error)")
 		}
-		
 		return nil
 	}
 }
