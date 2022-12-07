@@ -135,6 +135,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		avatarView.placeholderTextColor = .black
 		avatarView.initials = presentingName
 	}
+	
 	//Custom cell view
 	func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
 		.black
@@ -151,7 +152,18 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 			return .bubble
 		}
 	}
+	
 	//Cell delegate
+	func didTapMessage(in cell: MessageCollectionViewCell) {
+		guard let indexPath = messagesCollectionView.indexPath(for: cell) else { return }
+		let message = viewModel.getMessageAt(indexPath)
+		switch message.kind {
+		case .linkPreview(let linkItem):
+			UIApplication.shared.open(linkItem.url)
+		default:
+			break
+		}
+	}
 	func didTapImage(in cell: MessageCollectionViewCell) {
 		messagesCollectionView.endEditing(true)
 		guard let indexPath = messagesCollectionView.indexPath(for: cell) else { return }

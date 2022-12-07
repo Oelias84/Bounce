@@ -10,6 +10,8 @@ import Foundation
 struct CaloriesProgressState: Codable {
 	
 	let date: Date
+	let oldTdee: Double
+	let newTdee: Double
 	let differenceBetweenAverageWeight: Double
 	let differenceBetweenAverageWeightPercentage: Double
 	let userCaloriesBetweenConsumedAndGiven: Double
@@ -20,12 +22,14 @@ struct CaloriesProgressState: Codable {
 	
 	init(date: Date, userCaloriesBetweenConsumedAndGiven: Double,
 		 userWeekConsumedCalories: Double, userWeekExpectedCalories: Double,
-		 firstWeekAverageWeight: Double, secondWeekAverageWeight: Double) {
+		 firstWeekAverageWeight: Double, secondWeekAverageWeight: Double, oldTdee: Double, newTdee: Double) {
 		
 		let averageWeightDifference = firstWeekAverageWeight - secondWeekAverageWeight
 		let averageWeightDifferencePrecent = ( averageWeightDifference / firstWeekAverageWeight) * 100
 		
 		self.date = date
+		self.oldTdee = oldTdee
+		self.newTdee = newTdee
 		self.differenceBetweenAverageWeight = averageWeightDifference
 		self.differenceBetweenAverageWeightPercentage = averageWeightDifferencePrecent
 		self.userWeekConsumedCalories = userWeekConsumedCalories

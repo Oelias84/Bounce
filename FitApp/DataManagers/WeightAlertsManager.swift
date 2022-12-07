@@ -24,6 +24,7 @@ class WeightAlertsManager {
 	private var userConsumedCalories: Double!
 	private var userCaloriesBetweenConsumedAndGiven: Double!
 	private var userExpectedDailyCalories: Double!
+	private var userNewExpectedDailyCalories: Double!
 	
 	private var shouldShowAlertToUser: Bool!
 	private var shouldShowNotEnoughDataAlert = false
@@ -173,7 +174,7 @@ extension WeightAlertsManager {
 		guard let lastCaloriesCheckDateString = UserProfile.defaults.lastCaloriesCheckDateString?.dateFromString else { return }
 		
 		//Update the update calories progress state
-		let data = CaloriesProgressState(date: lastCaloriesCheckDateString, userCaloriesBetweenConsumedAndGiven: userCaloriesBetweenConsumedAndGiven, userWeekConsumedCalories: userConsumedCalories, userWeekExpectedCalories: userExpectedDailyCalories, firstWeekAverageWeight: firstWeekAverageWeight, secondWeekAverageWeight: secondWeekAverageWeight)
+		let data = CaloriesProgressState(date: lastCaloriesCheckDateString, userCaloriesBetweenConsumedAndGiven: userCaloriesBetweenConsumedAndGiven, userWeekConsumedCalories: userConsumedCalories, userWeekExpectedCalories: userExpectedDailyCalories, firstWeekAverageWeight: firstWeekAverageWeight, secondWeekAverageWeight: secondWeekAverageWeight, oldTdee: userExpectedDailyCalories, newTdee: userNewExpectedDailyCalories)
 		
 		GoogleApiManager.shared.updateCaloriesProgressState(data: data)
 	}
@@ -247,6 +248,8 @@ extension WeightAlertsManager {
 			let newMeals = MealViewModel.shared.createMealsForNewUserData()
 			let newCalories = DailyMealManager.getCurrentMealsCalories(meals: newMeals)
 			
+			userNewExpectedDailyCalories = Double(newCalories)
+
 			//Present an alert depending on the calories calculation
 			//Check smaller calories consumed from the last week
 			if differenceBetweenWeightPercentage < expectedWeightRange.lowerBound {
