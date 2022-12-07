@@ -12,12 +12,9 @@ class ExercisesTableViewController: UIViewController {
     
     var workout: Workout!
     var selectedExercise: Exercise?
-	var numberOfExerciseSection: [String:Int] = ["legs":0, "chest":0, "stomach":0, "shoulders":0, "back":0]
-	var sectionCount: Int!
+	var exercisesState: [ExerciseState]!
 	
 	@IBOutlet weak var topBarView: BounceNavigationBarView!
-	@IBOutlet weak var tableView: UITableView!
-	
 	@IBOutlet weak var swiftUIContainer: UIView!
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -31,14 +28,13 @@ class ExercisesTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		addSwiftUIView(content: ExerciseListView(workout: workout))
-
-		for exercise in workout.exercises {
-			numberOfExerciseSection.updateValue(+1, forKey: exercise.exerciseToPresent!.type)
-		}
-		sectionCount = numberOfExerciseSection.filter { $0.value != 0 }.count-1
-		tableView.register(UINib(nibName: K.NibName.exerciseTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.exerciseCell)
+		
 		setupTopBar()
+		addSwiftUIView(content: ExerciseListView(viewModel: ExerciseListViewModel(workout: self.workout, exercisesState: self.exercisesState)) { index in
+			self.detailButtonTapped(index: index)
+		} endEditing: {
+			// Update Server
+		})
     }
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -47,6 +43,17 @@ class ExercisesTableViewController: UIViewController {
 	}
 }
 
+
+
+//MARK: - Delegates
+extension ExercisesTableViewController: BounceNavigationBarDelegate {
+
+	func backButtonTapped() {
+		navigationController?.popViewController(animated: true)
+	}
+}
+
+//MARK: - Functions
 extension ExercisesTableViewController {
 	
 	private func setupTopBar() {
@@ -58,7 +65,7 @@ extension ExercisesTableViewController {
 		topBarView.isMotivationHidden = true
 	}
 	private func addSwiftUIView(content: some View) {
-		var child = UIHostingController(rootView: content)
+		let child = UIHostingController(rootView: content)
 		
 		addChild(child)
 		swiftUIContainer.addSubview(child.view)
@@ -69,41 +76,8 @@ extension ExercisesTableViewController {
 		child.view.leftAnchor.constraint(equalTo: swiftUIContainer.leftAnchor).isActive = true
 		child.view.rightAnchor.constraint(equalTo: swiftUIContainer.rightAnchor).isActive = true
 	}
-}
-
-//MARK: - Delegates
-extension ExercisesTableViewController: BounceNavigationBarDelegate {
-	
-	func backButtonTapped() {
-		navigationController?.popViewController(animated: true)
+	private func detailButtonTapped(index: Int) {
+		selectedExercise = workout.exercises[index].exerciseToPresent
+		performSegue(withIdentifier: K.SegueId.moveToExerciseDetailViewController , sender: self)
 	}
-}
-extension ExercisesTableViewController: UITableViewDelegate, UITableViewDataSource {
-
-    // MARK: - Table view data source
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        workout.exercises.count
-    }
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let exercise = workout.exercises[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.exerciseCell, for: indexPath) as! ExerciseTableViewCell
-        
-        cell.exerciseNumber = indexPath.row
-        cell.exerciseData = exercise
-        cell.indexPath = indexPath
-        cell.delegate = self
-        return cell
-    }
-	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        146
-    }
-}
-
-//MARK: - Functions
-extension ExercisesTableViewController: ExerciseTableViewCellDelegate {
-    
-    func detailButtonTapped(indexPath: IndexPath) {
-        selectedExercise = workout.exercises[indexPath.row].exerciseToPresent
-        performSegue(withIdentifier: K.SegueId.moveToExerciseDetailViewController , sender: self)
-    }
 }

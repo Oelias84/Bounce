@@ -8,12 +8,19 @@
 import UIKit
 import Lottie
 
+enum WorkoutCongratsPopupType {
+	case finishedAll
+	case finishedOne
+}
+
 class CongratsConfettiViewController: UIViewController {
+	
+	var popupType: WorkoutCongratsPopupType!
 
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var animation: LottieAnimationView!
 	@IBOutlet weak var animationTop: LottieAnimationView!
-
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -23,7 +30,15 @@ class CongratsConfettiViewController: UIViewController {
 		animation.contentMode = .scaleToFill
 		animation.loopMode = .loop
 		animation.play()
-		titleLabel.text = StaticStringsManager.shared.getGenderString?[0] ?? "איזה כיף, סיימתי אימון :)"
+		
+		switch popupType {
+		case .finishedAll:
+			titleLabel.text = StaticStringsManager.shared.getGenderString?[45] ??  ""
+		case .finishedOne:
+			titleLabel.text = StaticStringsManager.shared.getGenderString?[44] ??  ""
+		case .none:
+			break
+		}
 	}
 	
 	@IBAction func closeButtonAction(_ sender: Any) {

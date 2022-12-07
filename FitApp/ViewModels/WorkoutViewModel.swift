@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum workoutType: Codable {
+enum WorkoutType: Codable {
 	case home
 	case gym
 }
 
 class WorkoutViewModel {
 	
-	var type: workoutType = .home
+	var type: WorkoutType = .home
 	
 	private var homeExercises: [Exercise]!
 	private var homeWorkout: [Workout] = []
@@ -22,7 +22,7 @@ class WorkoutViewModel {
 	private var gymExercises: [Exercise]!
 	private var gymWorkout: [Workout] = []
 	
-	private var workoutsStates: [WorkoutStates]!
+	private var workoutsStates: [WorkoutStates]? = [WorkoutStates]()
 	private let googleManager = GoogleApiManager()
 	
 	var finishHomeWorkoutConfiguringData: ProjectObservableObject<Bool?> = ProjectObservableObject(nil)
@@ -56,7 +56,16 @@ class WorkoutViewModel {
 			self.addExerciseDataToWorkout()
 		}
 	}
-	
+
+	func addWarmup(_ type: WorkoutType) -> WorkoutExercise {
+		switch type {
+		case .home:
+			return WorkoutExercise(exercise: "13", repeats: "10", sets: "3", exerciseToPresent: nil)
+		case .gym:
+			return WorkoutExercise(exercise: "17", repeats: "10", sets: "3", exerciseToPresent: nil)
+		}
+	}
+
 	func getWorkoutsCount() -> Int {
 		switch type {
 		case .home:
@@ -74,46 +83,55 @@ class WorkoutViewModel {
 		}
 	}
 	func getWorkoutState(for index: Int) -> WorkoutState {
-		guard let workoutsState = workoutsStates.first(where: {$0.workoutType == type}) else { return WorkoutState() }
+		guard let workoutsState = workoutsStates?.first(where: {$0.workoutType == type}) else {
+			let firstWorkoutsState = WorkoutStates(workoutType: type)
+			let firstWorkoutState = WorkoutState(index: 0)
+
+			firstWorkoutsState.workoutStates.append(firstWorkoutState)
+			workoutsStates?.append(firstWorkoutsState)
+
+			let workoutState = workoutsStates?.first?.workoutStates.first
+			return workoutState ?? WorkoutState(index: 0)
+		}
 		
-		if !workoutsState.workoutStates.isEmpty && workoutsState.workoutStates.count-1 >= index {
+		if let workoutState = workoutsState.workoutStates.first(where: {$0.index == index }) {
+			return workoutState
+		} else {
+			let newWorkoutState = WorkoutState(index: index)
+			workoutsState.workoutStates.append(newWorkoutState)
 			return workoutsState.workoutStates[index]
-		} else {
-			return WorkoutState()
 		}
 	}
-	func addWarmup(_ type: workoutType) -> WorkoutExercise {
-		switch type {
-		case .home:
-			return WorkoutExercise(exercise: "13", repeats: "10", sets: "3", exerciseToPresent: nil)
-		case .gym:
-			return WorkoutExercise(exercise: "17", repeats: "10", sets: "3", exerciseToPresent: nil)
-		}
-	}
-	
-	func updateWorkoutStates(workoutState: WorkoutState, completion: () -> ()) {
-		guard let workoutsState = workoutsStates.first(where: {$0.workoutType == type}) else { return }
+	func getExercisesState(index: Int) -> [ExerciseState] {
+		guard let workoutState = workoutsStates?.first(where: {$0.workoutType == type}) else { return [] }
 		
-		if let containWorkoutState = workoutsState.workoutStates.first(where: {$0.index == workoutState.index}) {
-			containWorkoutState.isChecked = workoutState.isChecked
-		} else {
-			workoutsState.workoutStates.append(workoutState)
+		if workoutState.workoutStates[index].exercisesStates.isEmpty {
+			for i in 0...(getWorkout(for: index)?.exercises.count ?? 0) {
+				workoutState.workoutStates[index].exercisesStates.append(ExerciseState(index: i))
+			}
+			return workoutState.workoutStates[index].exercisesStates
 		}
+		return workoutState.workoutStates[index].exercisesStates
+	}
+	func updateWorkoutStates(isChecked: Bool, completion: (WorkoutCongratsPopupType)->()) {
+		guard let workoutsStates = workoutsStates,
+			  let userWorkoutNumber = UserProfile.defaults.weaklyWorkouts,
+			  let workoutState = workoutsStates.first(where: { $0.workoutType == type }) else { return }
+		
 		googleManager.updateWorkoutState(workoutsStates)
 		
-		// Check if all states are checked
-		let states = workoutsState.workoutStates
+		if !isChecked { return }
+		let checkedWorkoutsCount = workoutState.workoutStates.filter({ $0.isChecked }).count
 		
-		for workoutStates in states {
-			guard let userWorkoutNumber = UserProfile.defaults.weaklyWorkouts, workoutStates.isChecked == true else { break }
-			if workoutStates.index == userWorkoutNumber-1 {
-				completion()
-			}
+		if checkedWorkoutsCount == userWorkoutNumber {
+			completion(.finishedAll)
+		} else {
+			completion(.finishedOne)
 		}
 	}
 	
 	private func addExerciseDataToWorkout() {
-		homeWorkout.forEach {
+		homeWorkout.forEach {		
 			$0.exercises.forEach {
 				$0.exerciseToPresent = self.homeExercises[Int($0.exercise)!]
 			}

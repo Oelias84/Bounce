@@ -8,7 +8,7 @@
 import UIKit
 
 protocol WorkoutTableViewCellDelegate {
-	func workoutCheckboxAction(state: WorkoutState)
+	func workoutCheckboxAction(didCheck: Bool)
 }
 
 class WorkoutTableViewCell: UITableViewCell {
@@ -19,7 +19,7 @@ class WorkoutTableViewCell: UITableViewCell {
         }
     }
     var workoutNumber: Int!
-	var workoutType: workoutType!
+	var workoutType: WorkoutType!
 	var workoutState: WorkoutState!
 	var indexPathForCell: IndexPath!
 
@@ -42,9 +42,9 @@ class WorkoutTableViewCell: UITableViewCell {
 	
 	@IBAction func workoutCheckboxAction(_ sender: UIButton) {
 		sender.isSelected = !sender.isSelected
-		workoutState.index = indexPathForCell?.row
+		workoutState.index = indexPathForCell.row
 		workoutState.isChecked = sender.isSelected
-		delegate?.workoutCheckboxAction(state: self.workoutState)
+		delegate?.workoutCheckboxAction(didCheck: sender.isSelected)
 	}
 }
 

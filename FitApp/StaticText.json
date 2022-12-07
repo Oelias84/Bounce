@@ -257,6 +257,18 @@
 			"key": "43",
 			"male": "מחיקה ניכשלה אנה נסה במועד מאוחר יותר",
 			"female": "מחיקה ניכשלה אנה נסי במועד מאוחר יותר",
+		},
+		{
+			"name": "finish_workout",
+			"key": "44",
+			"male": "איזה כיף, סיימת אימון 😁",
+			"female": "איזה כיף, סיימת אימון 😁",
+		},
+		{
+			"name": "finish_all_workouts",
+			"key": "45",
+			"male": "איזה כיף, סיימת את כל האימוני לשבוע 😁",
+			"female": "איזה כיף, סיימת את כל האימוני לשבוע 😁",
 		}
 	]
 }

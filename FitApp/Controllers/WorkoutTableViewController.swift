@@ -19,7 +19,7 @@ class WorkoutTableViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		Spinner.shared.show()		
+		Spinner.shared.show()
 		viewModel.finishHomeWorkoutConfiguringData.bind { didFinish in
 			
 			if didFinish == true {
@@ -36,6 +36,7 @@ class WorkoutTableViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
+		viewModel.updateWorkoutStates(isChecked: false) { _ in }
 		topBarView.setImage()
 	}
 	
@@ -48,7 +49,6 @@ class WorkoutTableViewController: UIViewController {
 		default:
 			break
 		}
-		
 		DispatchQueue.main.async {
 			self.tableView.reloadData()
 		}
@@ -75,9 +75,7 @@ extension WorkoutTableViewController: UITableViewDelegate, UITableViewDataSource
 		return cell
 	}
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		guard let workout = viewModel.getWorkout(for: indexPath.row) else { return }
-		
-		moveToExercisesView(for: workout)
+		moveToExercisesView(for: indexPath.row)
 	}
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		146
@@ -88,20 +86,29 @@ extension WorkoutTableViewController: BounceNavigationBarDelegate {
 	func backButtonTapped() {}
 }
 extension WorkoutTableViewController: WorkoutTableViewCellDelegate {
-
-	func workoutCheckboxAction(state: WorkoutState) {
+	
+	func workoutCheckboxAction(didCheck: Bool) {
 		
-		viewModel.updateWorkoutStates(workoutState: state) {
-			let storyboard = UIStoryboard(name: K.ViewControllerId.congratsConfettiViewController, bundle: nil)
-			let vc = storyboard.instantiateViewController(withIdentifier: K.ViewControllerId.congratsConfettiViewController) as! CongratsConfettiViewController
-			vc.modalPresentationStyle = .overFullScreen
-			self.present(vc, animated: true)
+		viewModel.updateWorkoutStates(isChecked: didCheck) {
+			[weak self] workoutCongratsType in
+			guard let self = self else { return }
+			
+			self.presetCongratsPopup(popupType: workoutCongratsType)
 		}
 	}
 }
 
 //MARK: Functions
 extension WorkoutTableViewController {
+	
+	private func presetCongratsPopup(popupType: WorkoutCongratsPopupType) {
+		let storyboard = UIStoryboard(name: K.ViewControllerId.congratsConfettiViewController, bundle: nil)
+		let vc = storyboard.instantiateViewController(withIdentifier: K.ViewControllerId.congratsConfettiViewController) as! CongratsConfettiViewController
+		
+		vc.popupType = popupType
+		vc.modalPresentationStyle = .overFullScreen
+		present(vc, animated: true)
+	}
 	
 	private func setupView() {
 		segmentedControl.backgroundColor = .projectBackgroundColor
@@ -131,11 +138,13 @@ extension WorkoutTableViewController {
 		tableView.dataSource = self
 		tableView.register(UINib(nibName: K.NibName.workoutTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.workoutCell)
 	}
-	private func moveToExercisesView(for workout: Workout) {
+	private func moveToExercisesView(for index: Int) {
+		guard let workout = viewModel.getWorkout(for: index) else { return }
 		let storyboard = UIStoryboard(name: K.StoryboardName.workout, bundle: nil)
-		let workoutVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.exercisesTableViewController) as ExercisesTableViewController
+		let exercisesVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.exercisesTableViewController) as ExercisesTableViewController
 		
-		workoutVC.workout = workout
-		navigationController?.pushViewController(workoutVC, animated: true)
+		exercisesVC.workout = workout
+		exercisesVC.exercisesState = viewModel.getExercisesState(index: index)
+		navigationController?.pushViewController(exercisesVC, animated: true)
 	}
 }

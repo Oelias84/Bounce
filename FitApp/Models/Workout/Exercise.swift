@@ -16,6 +16,15 @@ class Exercise: Codable {
 	let maleText: String?
 	let type: String
 	
+	init(name: String, videos: [String], title: String, text: String, maleText: String?, type: String) {
+		self.name = name
+		self.videos = videos
+		self.title = title
+		self.text = text
+		self.maleText = maleText
+		self.type = type
+	}
+	
 	var getExerciseText: String {
 		let userGender = UserProfile.defaults.getGender
 		switch userGender {

@@ -215,4 +215,11 @@ struct K {
 		static let alertWeightTitle = "קביעת תזכורת שקילה"
 		static let alertWeightMessage = "באיזה שעה תרצי לקבוע תזכורת לשקילה?"
 	}
+	
+	struct Fonts {
+
+		static let boldText = "Assistant-Bold"
+		static let lightText = "Assistant-Light"
+		static let regularText = "Assistant-Regular"
+	}
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pv1-qA-DXa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pv1-qA-DXa">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -23,14 +23,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DVS-bx-UAm">
-                                <rect key="frame" x="0.0" y="214" width="414" height="682"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="jTV-rI-T0V" id="bZt-Th-6aQ"/>
-                                    <outlet property="delegate" destination="jTV-rI-T0V" id="Mbq-Ge-YbU"/>
-                                </connections>
-                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJ8-gt-CiY">
+                                <rect key="frame" x="0.0" y="214" width="414" height="648"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dT-qn-pGP" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="214"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -42,18 +38,18 @@
                         <viewLayoutGuide key="safeArea" id="Kdj-rf-K5U"/>
                         <color key="backgroundColor" name="ProjectBackground"/>
                         <constraints>
-                            <constraint firstItem="DVS-bx-UAm" firstAttribute="top" secondItem="5dT-qn-pGP" secondAttribute="bottom" id="5Pg-bl-yXr"/>
+                            <constraint firstItem="aJ8-gt-CiY" firstAttribute="leading" secondItem="Kdj-rf-K5U" secondAttribute="leading" id="6VP-xC-CtA"/>
                             <constraint firstItem="5dT-qn-pGP" firstAttribute="top" secondItem="pGf-YY-agy" secondAttribute="top" id="8fc-f9-gyU"/>
                             <constraint firstItem="5dT-qn-pGP" firstAttribute="leading" secondItem="Kdj-rf-K5U" secondAttribute="leading" id="FM4-dn-RcY"/>
+                            <constraint firstItem="Kdj-rf-K5U" firstAttribute="trailing" secondItem="aJ8-gt-CiY" secondAttribute="trailing" id="PPH-Yr-k2y"/>
+                            <constraint firstItem="Kdj-rf-K5U" firstAttribute="bottom" secondItem="aJ8-gt-CiY" secondAttribute="bottom" id="Uh8-Ff-5CB"/>
                             <constraint firstItem="5dT-qn-pGP" firstAttribute="trailing" secondItem="Kdj-rf-K5U" secondAttribute="trailing" id="Y6j-In-vpX"/>
-                            <constraint firstItem="DVS-bx-UAm" firstAttribute="bottom" secondItem="pGf-YY-agy" secondAttribute="bottom" id="d3f-KS-N96"/>
-                            <constraint firstItem="DVS-bx-UAm" firstAttribute="trailing" secondItem="Kdj-rf-K5U" secondAttribute="trailing" id="iVZ-1U-B6s"/>
-                            <constraint firstItem="DVS-bx-UAm" firstAttribute="leading" secondItem="Kdj-rf-K5U" secondAttribute="leading" id="j9B-2i-hTg"/>
+                            <constraint firstItem="aJ8-gt-CiY" firstAttribute="top" secondItem="5dT-qn-pGP" secondAttribute="bottom" id="h12-xe-dNb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="Wny-WH-c3Z"/>
                     <connections>
-                        <outlet property="tableView" destination="DVS-bx-UAm" id="Ave-Hj-LOn"/>
+                        <outlet property="swiftUIContainer" destination="aJ8-gt-CiY" id="yMo-oe-jUp"/>
                         <outlet property="topBarView" destination="5dT-qn-pGP" id="JYC-cV-3F4"/>
                         <segue destination="OF6-fl-RTm" kind="show" identifier="moveToExerciseDetailViewController" id="Ie6-H3-7sG"/>
                     </connections>
@@ -107,7 +103,7 @@
                                         </connections>
                                     </button>
                                     <pageControl opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="9Se-H6-EaU">
-                                        <rect key="frame" x="149.5" y="234" width="115.5" height="26"/>
+                                        <rect key="frame" x="149" y="234" width="116.5" height="26"/>
                                     </pageControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QjN-iz-FHK">
                                         <rect key="frame" x="0.0" y="222" width="50" height="50"/>
@@ -358,14 +354,14 @@
     </scenes>
     <resources>
         <image name="arrow.up.backward.and.arrow.down.forward" catalog="system" width="128" height="115"/>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
-        <image name="chevron.forward" catalog="system" width="96" height="128"/>
-        <image name="play.fill" catalog="system" width="116" height="128"/>
+        <image name="chevron.backward" catalog="system" width="97" height="128"/>
+        <image name="chevron.forward" catalog="system" width="97" height="128"/>
+        <image name="play.fill" catalog="system" width="117" height="128"/>
         <namedColor name="ProjectBackground">
             <color red="0.9570000171661377" green="0.9570000171661377" blue="0.9570000171661377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

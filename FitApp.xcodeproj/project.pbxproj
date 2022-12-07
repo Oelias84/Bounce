@@ -60,6 +60,8 @@
 		7C658AA825D9873C00CA75B2 /* Motivations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658AA725D9873C00CA75B2 /* Motivations.swift */; };
 		7C658AB525D990EB00CA75B2 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658AB425D990EB00CA75B2 /* CommentViewController.swift */; };
 		7C658ABE25D992D200CA75B2 /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658ABD25D992D200CA75B2 /* Comments.swift */; };
+		7C676CCD293232D30034B311 /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C676CCC293232D30034B311 /* ExerciseViewModel.swift */; };
+		7C6B61B12930EFC20051DD65 /* ExerciseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B61B02930EFC20051DD65 /* ExerciseListView.swift */; };
 		7C6E059128FDA8C5001013B9 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7C6E059028FDA8C5001013B9 /* Lottie */; };
 		7C6E059828FED1DC001013B9 /* CongratsConfettiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E059728FED1DC001013B9 /* CongratsConfettiViewController.swift */; };
 		7C6E059B28FEDB66001013B9 /* CongratsConfettiViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6E059A28FEDB66001013B9 /* CongratsConfettiViewController.storyboard */; };
@@ -130,6 +132,7 @@
 		7CE1ED132773633500337304 /* CollapsibleTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE1ED122773633500337304 /* CollapsibleTableViewHeader.xib */; };
 		7CE1ED1527737A5C00337304 /* CollapsibleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CE1ED1427737A5C00337304 /* CollapsibleTableViewCell.xib */; };
 		7CE1ED1627738D3700337304 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C89AA03256D69CB009AD87C /* Assets.xcassets */; };
+		7CE8C2142936550C009F3FAE /* ExerciseListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE8C2132936550C009F3FAE /* ExerciseListViewModel.swift */; };
 		7CFA5FF7262A0F5800A3F401 /* MoveDishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */; };
 		7CFA5FFF262A10E600A3F401 /* MoveDishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */; };
 		7CFA85CB26ECDEA000296B53 /* WeightAlertsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */; };
@@ -269,6 +272,8 @@
 		7C658AA725D9873C00CA75B2 /* Motivations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Motivations.swift; sourceTree = "<group>"; };
 		7C658AB425D990EB00CA75B2 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		7C658ABD25D992D200CA75B2 /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
+		7C676CCC293232D30034B311 /* ExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
+		7C6B61B02930EFC20051DD65 /* ExerciseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListView.swift; sourceTree = "<group>"; };
 		7C6E059728FED1DC001013B9 /* CongratsConfettiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratsConfettiViewController.swift; sourceTree = "<group>"; };
 		7C6E059A28FEDB66001013B9 /* CongratsConfettiViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CongratsConfettiViewController.storyboard; sourceTree = "<group>"; };
 		7C6E059C28FEE1CA001013B9 /* Confetti.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Confetti.json; sourceTree = "<group>"; };
@@ -350,6 +355,7 @@
 		7CE1ED0E277126B800337304 /* ExpandableSectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableSectionData.swift; sourceTree = "<group>"; };
 		7CE1ED122773633500337304 /* CollapsibleTableViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollapsibleTableViewHeader.xib; sourceTree = "<group>"; };
 		7CE1ED1427737A5C00337304 /* CollapsibleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollapsibleTableViewCell.xib; sourceTree = "<group>"; };
+		7CE8C2132936550C009F3FAE /* ExerciseListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListViewModel.swift; sourceTree = "<group>"; };
 		7CFA5FF6262A0F5800A3F401 /* MoveDishView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoveDishView.xib; sourceTree = "<group>"; };
 		7CFA5FFE262A10E600A3F401 /* MoveDishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveDishView.swift; sourceTree = "<group>"; };
 		7CFA85CA26ECDEA000296B53 /* WeightAlertsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightAlertsManager.swift; sourceTree = "<group>"; };
@@ -596,6 +602,23 @@
 				7C658AB425D990EB00CA75B2 /* CommentViewController.swift */,
 			);
 			name = Meals;
+			sourceTree = "<group>";
+		};
+		7C676CCB293232A30034B311 /* Exercise */ = {
+			isa = PBXGroup;
+			children = (
+				7CE8C21529365534009F3FAE /* ExerciseList */,
+				7C676CCC293232D30034B311 /* ExerciseViewModel.swift */,
+			);
+			name = Exercise;
+			sourceTree = "<group>";
+		};
+		7C6B61AF2930EF980051DD65 /* SwiftUIView */ = {
+			isa = PBXGroup;
+			children = (
+				7C676CCB293232A30034B311 /* Exercise */,
+			);
+			name = SwiftUIView;
 			sourceTree = "<group>";
 		};
 		7C6E059428FECF98001013B9 /* Lottie */ = {
@@ -943,6 +966,15 @@
 			path = CollapsibleTableViewCell;
 			sourceTree = "<group>";
 		};
+		7CE8C21529365534009F3FAE /* ExerciseList */ = {
+			isa = PBXGroup;
+			children = (
+				7C6B61B02930EFC20051DD65 /* ExerciseListView.swift */,
+				7CE8C2132936550C009F3FAE /* ExerciseListViewModel.swift */,
+			);
+			name = ExerciseList;
+			sourceTree = "<group>";
+		};
 		7CFA5FF5262A0F1C00A3F401 /* MoveDishView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1092,6 +1124,7 @@
 		B3B2A245256EDDCA0052E6C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7C6B61AF2930EF980051DD65 /* SwiftUIView */,
 				7C1ACD082670C9D2008079C9 /* CellViews */,
 				7C32C586278E368C00B97642 /* PopupAlertView */,
 				7C4EB828276E57FE00DA1407 /* TextFieldView */,
@@ -1452,6 +1485,7 @@
 				7C0E4531275E8FA500ECA20E /* MessagesTextManager.swift in Sources */,
 				7C74352D25D056A900D33A9A /* GoogleStorageManager.swift in Sources */,
 				B3B2A238256ED4F20052E6C8 /* QuestionnaireFatPresentViewController.swift in Sources */,
+				7C676CCD293232D30034B311 /* ExerciseViewModel.swift in Sources */,
 				7C149C7925D817DD00B0864F /* PhotoViewerViewController.swift in Sources */,
 				B330B88A257581AA00BDB206 /* ExerciseTableViewCell.swift in Sources */,
 				7C7434EB25CD906500D33A9A /* MailComposerViewController.swift in Sources */,
@@ -1462,6 +1496,7 @@
 				7C6E059828FED1DC001013B9 /* CongratsConfettiViewController.swift in Sources */,
 				B368E05C25A79BB700BD1937 /* Data+Extensions.swift in Sources */,
 				7C89AA81256D7342009AD87C /* RegisterViewController.swift in Sources */,
+				7CE8C2142936550C009F3FAE /* ExerciseListViewModel.swift in Sources */,
 				7C89AA77256D715F009AD87C /* UIView+Extensions.swift in Sources */,
 				B348421525890E5D00E0EF31 /* DIsh.swift in Sources */,
 				B348420D25890CF800E0EF31 /* Meal.swift in Sources */,
@@ -1569,6 +1604,7 @@
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
 				7C54164D269D951C00C22859 /* LoginViewModel.swift in Sources */,
 				7CFE0C0E276936330077D16F /* BounceNavigationBarView.swift in Sources */,
+				7C6B61B12930EFC20051DD65 /* ExerciseListView.swift in Sources */,
 				7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */,
 				7C6E05A52906EAC2001013B9 /* AddMealAlertDishViewModel.swift in Sources */,
 				7CD1817B2647E80F0054DB9C /* NotificationTableViewCell.swift in Sources */,
@@ -1758,6 +1794,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KMHWK7748S;
 				INFOPLIST_FILE = FitApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1781,6 +1818,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KMHWK7748S;
 				INFOPLIST_FILE = FitApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
