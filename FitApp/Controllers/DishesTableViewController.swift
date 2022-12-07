@@ -138,22 +138,29 @@ extension DishesTableViewController: PopupAlertViewDelegate {
 	}
 	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
 		
-		if let text = textFieldValue, text != "" {
-			if UserProfile.defaults.otherDishes == nil {
-				UserProfile.defaults.otherDishes = [text]
-			} else {
-				UserProfile.defaults.otherDishes?.append(text)
+		switch alertNumber {
+		case 0:
+			if let indexPath = indexPath {
+				self.tableView.deselectRow(at: indexPath, animated: true)
+				dismiss(animated: true) {
+					self.delegate?.didPickDish(name: self.selectedDish)
+					self.dismiss(animated: true)
+				}
 			}
-			dismiss(animated: true) {
-				self.delegate?.didPickDish(name: text)
-				self.dismiss(animated: true)
+		case 1:
+			if let text = textFieldValue, text != "" {
+				if UserProfile.defaults.otherDishes == nil {
+					UserProfile.defaults.otherDishes = [text]
+				} else {
+					UserProfile.defaults.otherDishes?.append(text)
+				}
+				dismiss(animated: true) {
+					self.delegate?.didPickDish(name: text)
+					self.dismiss(animated: true)
+				}
 			}
-		} else if let indexPath = indexPath {
-			self.tableView.deselectRow(at: indexPath, animated: true)
-			dismiss(animated: true) {
-				self.delegate?.didPickDish(name: self.selectedDish)
-				self.dismiss(animated: true)
-			}
+		default:
+			return
 		}
 	}
 }
@@ -179,6 +186,7 @@ extension DishesTableViewController {
 		case .normal:
 			presentAlert(withTitle: "החלפת מנה" , withMessage: "האם ברצונך להחליף \nאת- \(originalDishName)\n ב- \(selectedDish)", options: "אישור", "ביטול", alertNumber: 0)
 		case .exceptional:
+			self.delegate?.didPickDish(name: selectedDish)
 			dismiss(animated: true)
 		default:
 			break

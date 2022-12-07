@@ -155,9 +155,15 @@ extension AddMealAlertDishView {
 		halfNumberPicker.dataSource = self
 		halfNumberPicker.delegate = self
 		
+		dishNameTextField.tintColor = .clear
+		dishAmountTextField.tintColor = .clear
+		dishTypeTextField.tintColor = .clear
+		
 		dishAmountTextField.setupToolBar(cancelButtonName: "אישור")
 		dishTypeTextField.setupToolBar(cancelButtonName: "אישור")
-		
+
+		dishNameTextField.inputView = UIView()
+		dishNameTextField.inputAccessoryView = UIView()
 		dishAmountTextField.inputView = halfNumberPicker
 		dishTypeTextField.inputView = dishTypePicker
 		dishTypeTextField.text = viewModel.dish.type.rawValue
