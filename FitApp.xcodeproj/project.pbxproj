@@ -46,6 +46,8 @@
 		7C32C58E278E3E2400B97642 /* PopupAlertView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C32C58D278E3E2400B97642 /* PopupAlertView.storyboard */; };
 		7C33B65F26690A3800E16A1C /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C33B65E26690A3800E16A1C /* Notification.swift */; };
 		7C33B661266A587D00E16A1C /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C33B660266A587D00E16A1C /* CommentsViewModel.swift */; };
+		7C3B9A4B29634EB600DB9C62 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		7C3B9A4D29634EFB00DB9C62 /* AddMealAlertDishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B9A4C29634EFB00DB9C62 /* AddMealAlertDishViewModel.swift */; };
 		7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F4F3125C2D31300EE3758 /* SettingsOptionsTableViewController.swift */; };
 		7C3F4F8C25C9E2AF00EE3758 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3F4F8B25C9E2AF00EE3758 /* ResetPasswordViewController.swift */; };
 		7C4554F827A0A8A10077791B /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4554F727A0A8A10077791B /* ImageCache.swift */; };
@@ -273,6 +275,7 @@
 		7C32C58D278E3E2400B97642 /* PopupAlertView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopupAlertView.storyboard; sourceTree = "<group>"; };
 		7C33B65E26690A3800E16A1C /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		7C33B660266A587D00E16A1C /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
+		7C3B9A4C29634EFB00DB9C62 /* AddMealAlertDishViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMealAlertDishViewModel.swift; sourceTree = "<group>"; };
 		7C3F4F3125C2D31300EE3758 /* SettingsOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOptionsTableViewController.swift; sourceTree = "<group>"; };
 		7C3F4F8B25C9E2AF00EE3758 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		7C4554F727A0A8A10077791B /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -898,6 +901,7 @@
 			children = (
 				7C8F51352671F9E3001FF0EE /* AddMealAlertDishView.xib */,
 				7C8F51372671FAE0001FF0EE /* AddMealAlertDishView.swift */,
+				7C3B9A4C29634EFB00DB9C62 /* AddMealAlertDishViewModel.swift */,
 			);
 			name = DishView;
 			sourceTree = "<group>";
@@ -1648,6 +1652,7 @@
 				B367F18825B1EEC200DF21D7 /* LocalNotificationManager.swift in Sources */,
 				7C74350D25CDBBE900D33A9A /* Sender.swift in Sources */,
 				B302982025793BBA00CF41F0 /* UserProgress.swift in Sources */,
+				7C3B9A4D29634EFB00DB9C62 /* AddMealAlertDishViewModel.swift in Sources */,
 				B3BB8F4125826FEB00D70628 /* QuestionnaireNutritionViewController.swift in Sources */,
 				B36B71922577BF0C001CD393 /* Exercise.swift in Sources */,
 				7CAE9B35284E1C3A00B409E9 /* UserCalorieProgressViewController.swift in Sources */,
@@ -1758,6 +1763,7 @@
 				7CB6059C28AED3E9002A7C74 /* WeightsViewController.swift in Sources */,
 				B358223025AC9DA800C91295 /* Article.swift in Sources */,
 				7C7434F025CD9D9D00D33A9A /* ChatsViewController.swift in Sources */,
+				7C3B9A4B29634EB600DB9C62 /* (null) in Sources */,
 				B3E6E9B825714D5800958C48 /* MealPlanViewController.swift in Sources */,
 				B3BB8F35258223E400D70628 /* QuestionnaireActivityViewController.swift in Sources */,
 				B3DB751B259F8773002CF48B /* ConsumptionManager.swift in Sources */,
