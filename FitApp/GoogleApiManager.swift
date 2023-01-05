@@ -107,7 +107,9 @@ struct GoogleApiManager {
 		}
 	}
 	func getUserData(completion: @escaping (Result<ServerUserData?, Error>) -> Void) {
-		db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("data").getDocument(source: .default) {
+		guard let user = Auth.auth().currentUser?.uid else { return }
+		
+		db.collection("users").document(user).collection("profile-data").document("data").getDocument(source: .default) {
 			(data, error) in
 			if let error = error {
 				print(error)
@@ -126,11 +128,14 @@ struct GoogleApiManager {
 	}
 	func updateAppVersion() {
 		guard let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else { return }
-		
-		db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("data").setData(["currentAppVersion":appVersion], merge: true)
+		guard let user = Auth.auth().currentUser?.uid else { return }
+
+		db.collection("users").document(user).collection("profile-data").document("data").setData(["currentAppVersion":appVersion], merge: true)
 	}
 	func getProgramExpirationData(completion: @escaping (Result<String?, Error>) -> Void) {
-		db.collection("users").document(Auth.auth().currentUser!.uid).collection("profile-data").document("order-data").getDocument(source: .default) {
+		guard let user = Auth.auth().currentUser?.uid else { return }
+
+		db.collection("users").document(user).collection("profile-data").document("order-data").getDocument(source: .default) {
 			(data, error) in
 			if let error = error {
 				print(error)
