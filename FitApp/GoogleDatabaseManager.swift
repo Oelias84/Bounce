@@ -72,10 +72,12 @@ final class GoogleDatabaseManager {
 		chatRef(userId: chat.userId).child(chat.isAdmin == true ? "support_last_seen_message_timestamp" : "last_seen_message_timestamp").setValue(Date().millisecondsSince2020)
 	}
 	func updateUserLastSeenDate() {
-		chatRef(userId: Auth.auth().currentUser!.uid).child("user_last_seen").setValue(Date().fullDateStringForDB)
+		guard let user = Auth.auth().currentUser?.uid else { return }
+		chatRef(userId: user).child("user_last_seen").setValue(Date().fullDateStringForDB)
 	}
 	func updateUserProgramExpirationDate(_ date: String) {
-		chatRef(userId: Auth.auth().currentUser!.uid).child("program_expiration_date").setValue(date)
+		guard let user = Auth.auth().currentUser?.uid else { return }
+		chatRef(userId: user).child("program_expiration_date").setValue(date)
 	}
 	
 	// Send
