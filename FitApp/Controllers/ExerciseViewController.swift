@@ -187,6 +187,7 @@ extension ExerciseViewController {
 
 		if exercise.videos.count == 1 {
 			forwardButton.isHidden = true
+			backwardsButton.isHidden = true
 		}
 		forwardButton.imageView?.contentMode = .scaleAspectFit
 		backwardsButton.imageView?.contentMode = .scaleAspectFit
@@ -221,11 +222,12 @@ extension ExerciseViewController {
 		}
 	}
 	private func shouldHideButtons(_ isHidden: Bool) {
-		
-		if isHidden {
-			[self.forwardButton, self.fullScreenButton, self.videoPageIndicator].forEach { $0?.fadeOut() }
-		} else {
-			[self.forwardButton, self.fullScreenButton, self.videoPageIndicator].forEach { $0?.fadeIn() }
+		DispatchQueue.main.async {
+			if isHidden {
+				[self.fullScreenButton, self.videoPageIndicator].forEach { $0?.fadeOut() }
+			} else {
+				[self.fullScreenButton, self.videoPageIndicator].forEach { $0?.fadeIn() }
+			}
 		}
 	}
 	@objc func playFull() {
