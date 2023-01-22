@@ -15,7 +15,7 @@ class HomeViewModel {
 	private var fatColor = UIColor.projectTurquoise
 	private var carbsColor = UIColor.projectGreen
 	private var proteinColor = UIColor.projectTail
-
+	
 	// Getters
 	var getMealDate: String {
 		return MealViewModel.shared.getMealStringDate()
@@ -61,7 +61,7 @@ class HomeViewModel {
 	var getUserMealProgress: UserProgress {
 		let currentProgress = MealViewModel.shared.getProgress()
 		userConsumption.calculateUserData()
-
+		
 		return UserProgress(carbsTarget: currentProgress.1.carbs,
 							proteinTarget: currentProgress.1.protein,
 							fatTarget: currentProgress.1.fats,
@@ -108,24 +108,39 @@ class HomeViewModel {
 			}
 		}
 	}
-	func getMotivationText(completion: @escaping (String) -> ()) {
-		var motivationText = "..."
-		
-		GoogleApiManager.shared.getMotivations { result in
-			
-			switch result {
-			case .success(let motivations):
-				if let motivations = motivations {
-					if let lastMotivation = UserProfile.defaults.motivationText {
-						motivationText = motivations.text.filter{ $0 != lastMotivation }[Int.random(in: 0...motivations.text.count-2)]
-						completion(motivationText)
-					} else {
-						motivationText = motivations.text[Int.random(in: 0...motivations.text.count)]
-						completion(motivationText)
+	func getMotivationText(completion: @escaping (String?) -> ()) {
+		if let motivationText = UserProfile.defaults.motivationText {
+			completion(motivationText)
+			if let lastMotivationDate = UserProfile.defaults.lastMotivationDate?.onlyDate, lastMotivationDate.isLater(than: Date().onlyDate) {
+				DispatchQueue.global(qos: .background).async {
+					GoogleApiManager.shared.getMotivations { result in
+						switch result {
+						case .success(let motivations):
+							if let motivations = motivations {
+								completion(motivations.text.filter{ $0 != motivationText }[Int.random(in: 0...motivations.text.count-2)])
+								UserProfile.defaults.lastMotivationDate = Date().onlyDate
+							}
+						case .failure(let error):
+							completion(motivationText)
+							print(error)
+						}
 					}
 				}
-			case .failure(let error):
-				print(error)
+			}
+		} else {
+			completion(nil)
+			DispatchQueue.global(qos: .background).async {
+				GoogleApiManager.shared.getMotivations { result in
+					switch result {
+					case .success(let motivations):
+						if let motivations = motivations {
+							completion(motivations.text[Int.random(in: 0...motivations.text.count)])
+						}
+					case .failure(let error):
+						
+						print(error)
+					}
+				}
 			}
 		}
 	}
