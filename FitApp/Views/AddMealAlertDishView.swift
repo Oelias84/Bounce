@@ -11,9 +11,9 @@ class AddMealAlertDishView: UIView {
 	
 	let viewModel = AddMealAlertDishViewModel()
 
-	@IBOutlet weak var dishTypeTextField: UITextField!
-	@IBOutlet weak var dishNameTextField: UITextField!
-	@IBOutlet weak var dishAmountTextField: UITextField!
+	@IBOutlet weak var dishTypeTextField: AddMealTextFieldView!
+	@IBOutlet weak var dishNameTextField: AddMealTextFieldView!
+	@IBOutlet weak var dishAmountTextField: AddMealTextFieldView!
 	
 	private var dishTypePicker: UIPickerView = {
 		let picker = UIPickerView()
@@ -154,6 +154,14 @@ extension AddMealAlertDishView {
 		dishTypePicker.delegate = self
 		halfNumberPicker.dataSource = self
 		halfNumberPicker.delegate = self
+		
+		dishAmountTextField.shouldPerformAction = false
+		dishTypeTextField.shouldPerformAction = false
+		dishTypeTextField.shouldPerformAction = false
+		
+		dishAmountTextField.tintColor = .clear
+		dishTypeTextField.tintColor = .clear
+		dishTypeTextField.tintColor = .clear
 		
 		dishAmountTextField.setupToolBar(cancelButtonName: "אישור")
 		dishTypeTextField.setupToolBar(cancelButtonName: "אישור")

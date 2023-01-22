@@ -9,6 +9,8 @@ import Foundation
 
 class AddMealTextFieldView: UITextField {
 	
+	public var shouldPerformAction: Bool = true
+
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
@@ -16,5 +18,9 @@ class AddMealTextFieldView: UITextField {
 		layer.cornerRadius = 5
 		layer.borderWidth = 1
 		layer.borderColor = UIColor.projectTail.cgColor
+	}
+	
+	override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+		shouldPerformAction
 	}
 }
