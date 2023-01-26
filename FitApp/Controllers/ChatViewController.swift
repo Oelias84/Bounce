@@ -236,15 +236,18 @@ extension ChatViewController {
 	fileprivate func bindViewModel() {
 		messageInputBar.alpha = 0
 		messagesCollectionView.alpha = 0
+		disableInteraction()
+
 		viewModel.messages.bind {
 			messages in
-			
+
 			if messages == nil {
-				self.disableInteraction()
+				self.ableInteraction()
 			} else {
 				DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
 					self.ableInteraction()
 					self.messagesCollectionView.reloadDataAndKeepOffset()
+					
 					if self.ifFirstLoad {
 						UIView.animate(withDuration: 0.5) {
 							self.messageInputBar.alpha = 1
@@ -390,7 +393,13 @@ extension ChatViewController {
 		}
 	}
 	fileprivate func ableInteraction() {
-		Spinner.shared.stop()
+		DispatchQueue.main.async {
+			UIView.animate(withDuration: 0.5) {
+				Spinner.shared.stop()
+				self.messageInputBar.alpha = 1
+				self.messagesCollectionView.alpha = 1
+			}
+		}
 	}
 	
 	@objc fileprivate func loadMoreMessages() {
