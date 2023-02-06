@@ -254,8 +254,15 @@ struct ExerciseListView_Previews: PreviewProvider {
 		let exercise = Exercise(name: "Upper", videos: ["gs://my-fit-app-a8595.appspot.com/42"], title: "רגליים", text: "", maleText: "", type: "legs")
 		let workExercise = WorkoutExercise(exercise: "1", repeats: "15-20", sets: "4", exerciseToPresent: exercise)
 		let workout = Workout(exercises: [workExercise], name: "", time: "", type: 1)
-//		var exercisesState: Binding<[ExerciseState]> = [ExerciseState]()
-//		ExerciseListView(viewModel: ExerciseListViewModel(workout: workout, exercisesState: $exercisesState)) { _ in } exerciseStateDate: { _ in }
+		let exerciseState = ExerciseState(index: 0)
+		let exercisesState: [ExerciseState] = [exerciseState]
+		
+		ExerciseListView(viewModel: ExerciseListViewModel(workout: workout, exercisesState: exercisesState)) { index in
+			return
+		} endEditing: {
+			// Update Server
+			return
+		}
 	}
 }
 extension UIApplication {
