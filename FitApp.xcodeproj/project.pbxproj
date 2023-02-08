@@ -1730,7 +1730,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.47;
+				MARKETING_VERSION = 1.1.48;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
@@ -1753,7 +1753,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.47;
+				MARKETING_VERSION = 1.1.48;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
