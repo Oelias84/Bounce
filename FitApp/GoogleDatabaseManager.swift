@@ -149,8 +149,8 @@ final class GoogleDatabaseManager {
 			}
 		}
 	}
-	func getAllMessagesForChat(chat: Chat, completion: @escaping (Result<[Message], ErrorManager.DatabaseError>) -> Void) {
-		chatMessagesRef(userId: chat.userId).observe(.value) {
+	func getAllMessagesForChat(toLast: UInt, chat: Chat, completion: @escaping (Result<[Message], ErrorManager.DatabaseError>) -> Void) {
+		chatMessagesRef(userId: chat.userId).queryLimited(toLast: toLast).observe(.value) {
 			snapshot in
 			guard let messages = self.parseMessagesData(userId: chat.userId, snapshot: snapshot) else {
 				completion(.failure(.noFetch))
@@ -159,6 +159,16 @@ final class GoogleDatabaseManager {
 			completion(.success(messages))
 		}
 	}
+//	func getAllMessagesForChat(chat: Chat, completion: @escaping (Result<[Message], ErrorManager.DatabaseError>) -> Void) {
+//		chatMessagesRef(userId: chat.userId).observe(.value) {
+//			snapshot in
+//			guard let messages = self.parseMessagesData(userId: chat.userId, snapshot: snapshot) else {
+//				completion(.failure(.noFetch))
+//				return
+//			}
+//			completion(.success(messages))
+//		}
+//	}
 	
 	// Delete
 	func removeUserPushTokenFromChat() {

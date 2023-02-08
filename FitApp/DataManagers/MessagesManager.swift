@@ -21,7 +21,9 @@ class MessagesManager {
 	
 	let googleManager = GoogleDatabaseManager.shared
 	let googleStorageManager = GoogleStorageManager.shared
-	
+
+	var numberOfMessages: UInt = 10
+
 	private var chats: [Chat] = [Chat]() {
 		didSet {
 			self.bindMessageManager()
@@ -219,20 +221,20 @@ extension MessagesManager {
 		}
 	}
 	public func fetchMessagesFor(_ chat: Chat, completion: @escaping ([Message]?) -> ()) {
-		
-		googleManager.getAllMessagesForChat(chat: chat) {
+		self.googleManager.getAllMessagesForChat(toLast: self.numberOfMessages, chat: chat) {
 			result in
-			
-			switch result {
-			case .success(let messages):
-				completion(messages)
-			case .failure(let error):
-				completion(nil)
-				print("Error:", error.localizedDescription)
+			DispatchQueue.main.async {
+				switch result {
+				case .success(let messages):
+					completion(messages)
+				case .failure(let error):
+					completion(nil)
+					print("Error:", error.localizedDescription)
+				}
 			}
 		}
+		self.numberOfMessages += 10
 	}
-	
 	public func downloadMediaURL(urlString: String, completion: @escaping (URL?) ->()) {
 		
 		googleStorageManager.downloadURL(path: urlString) {

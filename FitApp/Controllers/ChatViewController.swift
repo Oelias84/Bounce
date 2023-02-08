@@ -23,6 +23,9 @@ final class ChatViewController: MessagesViewController {
 	private let isAdmin: Bool = UserProfile.defaults.getIsManager
 	private let imagePickerController = UIImagePickerController()
 	
+	fileprivate let refreshControl = UIRefreshControl()
+	fileprivate var ifFirstLoad = true
+
 	init(viewModel: ChatViewModel) {
 		self.viewModel = viewModel
 		super.init(nibName: nil, bundle: nil)
@@ -239,24 +242,49 @@ extension ChatViewController: CropViewControllerDelegate, UINavigationController
 //MARK: - Functions
 extension ChatViewController {
 	
-	private func bindViewModel() {
-		self.viewModel.messages.bind {
+//	private func bindViewModel() {
+//		self.viewModel.messages.bind {
+//			messages in
+//
+//			if messages == nil {
+//				self.disableInteraction()
+//			} else {
+//				DispatchQueue.main.async {
+//					self.messagesCollectionView.reloadData()
+//				}
+//				DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
+//					self.ableInteraction()
+//					self.messagesCollectionView.scrollToLastItem(animated: false)
+//				}
+//			}
+//		}
+//	}
+	fileprivate func bindViewModel() {
+		messageInputBar.alpha = 0
+		messagesCollectionView.alpha = 0
+		viewModel.messages.bind {
 			messages in
 			
 			if messages == nil {
 				self.disableInteraction()
 			} else {
-				DispatchQueue.main.async {
-					self.messagesCollectionView.reloadData()
-				}
 				DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
 					self.ableInteraction()
-					self.messagesCollectionView.scrollToLastItem(animated: false)
+					self.messagesCollectionView.reloadDataAndKeepOffset()
+					if self.ifFirstLoad {
+						UIView.animate(withDuration: 0.5) {
+							self.messageInputBar.alpha = 1
+							self.messagesCollectionView.alpha = 1
+						}
+						self.messagesCollectionView.scrollToLastItem(animated: false)
+					} else {
+						self.refreshControl.endRefreshing()
+					}
 				}
 			}
 		}
 	}
-	private func setupController() {
+	fileprivate func setupController() {
 		
 		showMessageTimestampOnSwipeLeft = true
 		title = self.viewModel.getDisplayName
@@ -268,11 +296,32 @@ extension ChatViewController {
 		messageInputBar.shouldAutoUpdateMaxTextViewHeight = false
 		
 		imagePickerController.delegate = self
+		messagesCollectionView.scrollsToTop = false
 		messagesCollectionView.messagesDataSource = self
 		messagesCollectionView.messageCellDelegate = self
 		messagesCollectionView.messagesLayoutDelegate = self
 		messagesCollectionView.messagesDisplayDelegate = self
+		
+		messagesCollectionView.addSubview(refreshControl)
+		refreshControl.addTarget(self, action: #selector(loadMoreMessages), for: .valueChanged)
 	}
+//	private func setupController() {
+//
+//		showMessageTimestampOnSwipeLeft = true
+//		title = self.viewModel.getDisplayName
+//		navigationItem.largeTitleDisplayMode = .never
+//
+//		messageInputBar.delegate = self
+//		messageInputBar.inputTextView.font = UIFont(name: "Assistant-Regular", size: 18)!
+//		messageInputBar.maxTextViewHeight = 96
+//		messageInputBar.shouldAutoUpdateMaxTextViewHeight = false
+//
+//		imagePickerController.delegate = self
+//		messagesCollectionView.messagesDataSource = self
+//		messagesCollectionView.messageCellDelegate = self
+//		messagesCollectionView.messagesLayoutDelegate = self
+//		messagesCollectionView.messagesDisplayDelegate = self
+//	}
 	private func setupInputButton() {
 		let button = InputBarButtonItem()
 		
@@ -375,6 +424,12 @@ extension ChatViewController {
 	}
 	private func ableInteraction() {
 		Spinner.shared.stop()
+	}
+	@objc fileprivate func loadMoreMessages() {
+		DispatchQueue.global(qos: .userInteractive).async {
+			self.viewModel.listenToMessages()
+		}
+		ifFirstLoad = false
 	}
 }
 
