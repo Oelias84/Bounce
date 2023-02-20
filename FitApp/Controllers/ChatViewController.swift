@@ -25,7 +25,7 @@ final class ChatViewController: MessagesViewController {
 	
 	fileprivate let refreshControl = UIRefreshControl()
 	fileprivate var ifFirstLoad = true
-
+	
 	init(viewModel: ChatViewModel) {
 		self.viewModel = viewModel
 		super.init(nibName: nil, bundle: nil)
@@ -33,10 +33,10 @@ final class ChatViewController: MessagesViewController {
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
 	}
-
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-			
+		
 		bindViewModel()
 		setupController()
 		setupInputButton()
@@ -242,32 +242,13 @@ extension ChatViewController: CropViewControllerDelegate, UINavigationController
 //MARK: - Functions
 extension ChatViewController {
 	
-//	private func bindViewModel() {
-//		self.viewModel.messages.bind {
-//			messages in
-//
-//			if messages == nil {
-//				self.disableInteraction()
-//			} else {
-//				DispatchQueue.main.async {
-//					self.messagesCollectionView.reloadData()
-//				}
-//				DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
-//					self.ableInteraction()
-//					self.messagesCollectionView.scrollToLastItem(animated: false)
-//				}
-//			}
-//		}
-//	}
 	fileprivate func bindViewModel() {
 		messageInputBar.alpha = 0
 		messagesCollectionView.alpha = 0
 		viewModel.messages.bind {
 			messages in
 			
-			if messages == nil {
-				self.disableInteraction()
-			} else {
+			if messages != nil {
 				DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
 					self.ableInteraction()
 					self.messagesCollectionView.reloadDataAndKeepOffset()
@@ -281,6 +262,8 @@ extension ChatViewController {
 						self.refreshControl.endRefreshing()
 					}
 				}
+			} else {
+				self.ableInteraction()
 			}
 		}
 	}
@@ -305,23 +288,6 @@ extension ChatViewController {
 		messagesCollectionView.addSubview(refreshControl)
 		refreshControl.addTarget(self, action: #selector(loadMoreMessages), for: .valueChanged)
 	}
-//	private func setupController() {
-//
-//		showMessageTimestampOnSwipeLeft = true
-//		title = self.viewModel.getDisplayName
-//		navigationItem.largeTitleDisplayMode = .never
-//
-//		messageInputBar.delegate = self
-//		messageInputBar.inputTextView.font = UIFont(name: "Assistant-Regular", size: 18)!
-//		messageInputBar.maxTextViewHeight = 96
-//		messageInputBar.shouldAutoUpdateMaxTextViewHeight = false
-//
-//		imagePickerController.delegate = self
-//		messagesCollectionView.messagesDataSource = self
-//		messagesCollectionView.messageCellDelegate = self
-//		messagesCollectionView.messagesLayoutDelegate = self
-//		messagesCollectionView.messagesDisplayDelegate = self
-//	}
 	private func setupInputButton() {
 		let button = InputBarButtonItem()
 		
