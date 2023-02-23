@@ -126,6 +126,9 @@
 		7CD1817B2647E80F0054DB9C /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */; };
 		7CD1817C2647E80F0054DB9C /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */; };
 		7CD1817E26481E5D0054DB9C /* SettingTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */; };
+		7CD2C21629A3C96700C2CF7B /* ExerciseDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD2C21529A3C96700C2CF7B /* ExerciseDropView.swift */; };
+		7CD2C21829A3C9E400C2CF7B /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD2C21729A3C9E400C2CF7B /* UIApplication+Extensions.swift */; };
+		7CD2C21A29A3DCC900C2CF7B /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD2C21929A3DCC900C2CF7B /* WorkoutManager.swift */; };
 		7CE0862527613FE000BF3CF3 /* UiColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0862427613FE000BF3CF3 /* UiColor+Extensions.swift */; };
 		7CE086272761482A00BF3CF3 /* ProjectColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE086262761482A00BF3CF3 /* ProjectColors.swift */; };
 		7CE1ED0D2771100A00337304 /* CollapsibleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE1ED0C2771100A00337304 /* CollapsibleTableViewCell.swift */; };
@@ -349,6 +352,9 @@
 		7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewModel.swift; sourceTree = "<group>"; };
+		7CD2C21529A3C96700C2CF7B /* ExerciseDropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDropView.swift; sourceTree = "<group>"; };
+		7CD2C21729A3C9E400C2CF7B /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		7CD2C21929A3DCC900C2CF7B /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
 		7CE0862427613FE000BF3CF3 /* UiColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiColor+Extensions.swift"; sourceTree = "<group>"; };
 		7CE086262761482A00BF3CF3 /* ProjectColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectColors.swift; sourceTree = "<group>"; };
 		7CE086302767BCA100BF3CF3 /* BounceNavigationBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BounceNavigationBarView.xib; sourceTree = "<group>"; };
@@ -581,6 +587,7 @@
 				7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */,
 				B367F18725B1EEC200DF21D7 /* LocalNotificationManager.swift */,
 				7C481C7126FA1883002FB8BF /* MealsManager.swift */,
+				7CD2C21929A3DCC900C2CF7B /* WorkoutManager.swift */,
 			);
 			path = DataManagers;
 			sourceTree = "<group>";
@@ -951,6 +958,14 @@
 			name = NotificationViewCell;
 			sourceTree = "<group>";
 		};
+		7CD2C21329A3C94100C2CF7B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7CD2C21529A3C96700C2CF7B /* ExerciseDropView.swift */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
 		7CE0862F2767A64000BF3CF3 /* BounceNavigationBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -972,6 +987,7 @@
 		7CE8C21529365534009F3FAE /* ExerciseList */ = {
 			isa = PBXGroup;
 			children = (
+				7CD2C21329A3C94100C2CF7B /* Components */,
 				7C6B61B02930EFC20051DD65 /* ExerciseListView.swift */,
 				7CE8C2132936550C009F3FAE /* ExerciseListViewModel.swift */,
 			);
@@ -1032,6 +1048,7 @@
 				B3B2A231256ED2A60052E6C8 /* UIImage+Extensions.swift */,
 				B341E23A257FB3F400EE05A7 /* UITextField+Extensions.swift */,
 				7CE0862427613FE000BF3CF3 /* UiColor+Extensions.swift */,
+				7CD2C21729A3C9E400C2CF7B /* UIApplication+Extensions.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1518,6 +1535,7 @@
 				B302982025793BBA00CF41F0 /* UserProgress.swift in Sources */,
 				B3BB8F4125826FEB00D70628 /* QuestionnaireNutritionViewController.swift in Sources */,
 				B36B71922577BF0C001CD393 /* Exercise.swift in Sources */,
+				7CD2C21629A3C96700C2CF7B /* ExerciseDropView.swift in Sources */,
 				B368DF4F25A5F24E00BD1937 /* GoogleApiManager.swift in Sources */,
 				7CFA85CF26ED1A8A00296B53 /* WeightsManager.swift in Sources */,
 				7C7434F525CD9DD700D33A9A /* ChatViewController.swift in Sources */,
@@ -1555,6 +1573,7 @@
 				B3B2A232256ED2A60052E6C8 /* UIImage+Extensions.swift in Sources */,
 				7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */,
 				B368E07F25A8819100BD1937 /* Key.swift in Sources */,
+				7CD2C21A29A3DCC900C2CF7B /* WorkoutManager.swift in Sources */,
 				7CB9ADE5268B12290009B42A /* ChartFormatter.swift in Sources */,
 				7C74350825CDBB4C00D33A9A /* Message.swift in Sources */,
 				B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */,
@@ -1605,6 +1624,7 @@
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
 				7C83152525E053B100335601 /* ExerciseCategoryView.swift in Sources */,
 				7C10BA70276BCB9C00B5860C /* UINavigationController+Extensions.swift in Sources */,
+				7CD2C21829A3C9E400C2CF7B /* UIApplication+Extensions.swift in Sources */,
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
 				7C54164D269D951C00C22859 /* LoginViewModel.swift in Sources */,
 				7CFE0C0E276936330077D16F /* BounceNavigationBarView.swift in Sources */,
