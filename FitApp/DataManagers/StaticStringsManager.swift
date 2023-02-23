@@ -58,7 +58,7 @@ struct StaticStringsManager {
 				let jsonData = try decoder.decode(StaticString.self, from: data)
 				return jsonData.dictionary
 			} catch {
-				print("Could't fetch static data from server: \n\(error)")
+				print("Could't fetch static Text from server: \n\(error)")
 			}
 		}
 		return readLocalFile()
@@ -72,7 +72,7 @@ struct StaticStringsManager {
 				return jsonDecoderData.dictionary
 			}
 		} catch {
-			print("Could't fetch static data from local file: \n\(error)")
+			print("Could't fetch static data Text local file: \n\(error)")
 		}
 		return nil
 	}

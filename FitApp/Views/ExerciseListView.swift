@@ -21,11 +21,13 @@ struct ExerciseListView: View {
 				let exercise = $viewModel.workout.exercises[index]
 				let exerciseState = $viewModel.exercisesState[index]
 				
-				ExerciseDropView(viewModel: ExerciseViewModel(index: index, exercise: exercise), exerciseState: exerciseState, focusedField: _focusedField) { exerciseIndex in
-					// Call back for moving into the exercise detail
-					selectedExercise(exerciseIndex)
-				}
-					.padding(.horizontal)
+				HStack {
+					
+					ExerciseDropView(viewModel: ExerciseViewModel(index: index, exercise: exercise), exerciseState: exerciseState, focusedField: _focusedField) { exerciseIndex in
+						// Call back for moving into the exercise detail
+						selectedExercise(exerciseIndex)
+					}
+					.padding(.horizontal)}
 			}
 		}
 		.background(Color(UIColor.projectBackgroundColor))
@@ -155,8 +157,6 @@ struct ExerciseDropView: View {
 		.shadow(color: Color(UIColor.lightGray.withAlphaComponent(0.2)), radius: 6, y: 4)
 	}
 	
-	
-	
 	// Tag View
 	var exerciseTag: some View {
 		VStack {
@@ -170,88 +170,10 @@ struct ExerciseDropView: View {
 	}
 }
 
-struct SetView: View {
-	
-	enum Field: Hashable {
-		case repeatsField
-		case weightField
-	}
-		
-	var isDeleteEnabled: Bool
-	@Binding var set: SetModel
-
-	@State var isEnabled: Bool = true
-	@FocusState var focusedField: SetView.Field?
-	
-	var repeatsPlaceholder: String {
-		return String(set.repeats ?? 0)
-	}
-	var weightsPlaceholder: String {
-		return String(set.weight ?? 0)
-	}
-	
-	let action: (UUID?)->()
-	
-	var body: some View {
-		
-		HStack {
-			// Set Number
-			Text("סט #\(set.setIndex+1)")
-				.padding(.trailing, 10)
-				.padding(.trailing, 0)
-				.frame(width: 56)
-				.font(Font.custom(K.Fonts.boldText, size: 16))
-			
-			// Number of repeats textfield
-			Text("חזרות:")
-				.font(Font.custom(K.Fonts.regularText, size: 16))
-			
-			TextField(repeatsPlaceholder, value: $set.repeats, format: .number)
-				.focused($focusedField, equals: .repeatsField)
-				.keyboardType(.numberPad)
-				.multilineTextAlignment(.center)
-				.frame(width: 46)
-				.textFieldStyle(.roundedBorder)
-				.multilineTextAlignment(.center)
-			
-			// Weight amount textfield
-			Text("משקל:")
-				.font(Font.custom(K.Fonts.regularText, size: 16))
-			TextField(weightsPlaceholder, value: $set.weight, format: .number)
-				.focused($focusedField, equals: .weightField)
-				.keyboardType(.decimalPad)
-				.frame(width: 64)
-				.textFieldStyle(.roundedBorder)
-				.multilineTextAlignment(.center)
-			
-			// Remove Button
-			Spacer()
-			if isDeleteEnabled {
-				Button {
-					focusedField = nil
-					isEnabled = false
-					
-					withAnimation {
-						DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
-							action(set.id)
-							isEnabled = true
-						}
-					}
-				} label: {
-					Image(systemName: "xmark")
-						.frame(width: 16, height: 16)
-						.foregroundColor(Color(UIColor.red))
-				}
-				.allowsHitTesting(isEnabled)
-			}
-		}
-	}
-}
-
 struct ExerciseListView_Previews: PreviewProvider {
 	
 	static var previews: some View {
-		let exercise = Exercise(name: "Upper", videos: ["gs://my-fit-app-a8595.appspot.com/42"], title: "רגליים", text: "", maleText: "", type: "legs")
+		let exercise = Exercise(name: "Upper", videos: ["gs://my-fit-app-a8595.appspot.com/42"], title: "רגליים", text: "", maleText: "", type: "legs", exerciseNumber: nil)
 		let workExercise = WorkoutExercise(exercise: "1", repeats: "15-20", sets: "4", exerciseToPresent: exercise)
 		let workout = Workout(exercises: [workExercise], name: "", time: "", type: 1)
 		let exerciseState = ExerciseState(index: 0)
@@ -263,10 +185,5 @@ struct ExerciseListView_Previews: PreviewProvider {
 			// Update Server
 			return
 		}
-	}
-}
-extension UIApplication {
-	func endEditing() {
-		sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
 	}
 }

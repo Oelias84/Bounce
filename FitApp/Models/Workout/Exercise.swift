@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Exercise: Codable {
+struct Exercise: Codable {
 	
 	let name: String
 	let videos: [String]
@@ -15,15 +15,7 @@ class Exercise: Codable {
 	let text: String
 	let maleText: String?
 	let type: String
-	
-	init(name: String, videos: [String], title: String, text: String, maleText: String?, type: String) {
-		self.name = name
-		self.videos = videos
-		self.title = title
-		self.text = text
-		self.maleText = maleText
-		self.type = type
-	}
+	let exerciseNumber: Int?
 	
 	var getExerciseText: String {
 		let userGender = UserProfile.defaults.getGender

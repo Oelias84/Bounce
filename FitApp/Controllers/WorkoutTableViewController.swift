@@ -10,7 +10,7 @@ import BetterSegmentedControl
 
 class WorkoutTableViewController: UIViewController {
 	
-	private var viewModel: WorkoutViewModel = WorkoutViewModel()
+	private var viewModel: WorkoutViewModel!
 	
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var topBarView: BounceNavigationBarView!
@@ -18,10 +18,11 @@ class WorkoutTableViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
 		Spinner.shared.show()
+
+		viewModel = WorkoutViewModel()
+		
 		viewModel.finishHomeWorkoutConfiguringData.bind { didFinish in
-			
 			if didFinish == true {
 				Spinner.shared.stop()
 				DispatchQueue.main.async {
@@ -36,7 +37,7 @@ class WorkoutTableViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		viewModel.updateWorkoutStates(isChecked: false) { _ in }
+		viewModel.updateWorkoutStates(isChecked: false)
 		topBarView.setImage()
 	}
 	
@@ -144,7 +145,7 @@ extension WorkoutTableViewController {
 		let exercisesVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.exercisesTableViewController) as ExercisesTableViewController
 		
 		exercisesVC.workout = workout
-		exercisesVC.exercisesState = viewModel.getExercisesState(index: index)
+		exercisesVC.exercisesState = viewModel.getExercisesState(for: index)
 		navigationController?.pushViewController(exercisesVC, animated: true)
 	}
 }
