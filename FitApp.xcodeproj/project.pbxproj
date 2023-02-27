@@ -116,6 +116,9 @@
 		7CADF750278CAEBC0020CD83 /* StaticStringsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */; };
 		7CB0E179278775B400D6EDA5 /* ChatContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */; };
 		7CB0E17B2787764B00D6EDA5 /* LoginRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */; };
+		7CB11A9A29ACED35003462F7 /* SetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB11A9929ACED35003462F7 /* SetView.swift */; };
+		7CB11A9C29ACF287003462F7 /* ExercisePotionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB11A9B29ACF287003462F7 /* ExercisePotionsView.swift */; };
+		7CB11A9E29ACF2C3003462F7 /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB11A9D29ACF2C3003462F7 /* ExerciseView.swift */; };
 		7CB9ADE5268B12290009B42A /* ChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE4268B12290009B42A /* ChartFormatter.swift */; };
 		7CB9ADE7268CB7140009B42A /* ChartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE6268CB7140009B42A /* ChartView.xib */; };
 		7CB9ADE9268CB72B0009B42A /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB9ADE8268CB72B0009B42A /* ChartView.swift */; };
@@ -128,6 +131,7 @@
 		7CD2C21629A3C96700C2CF7B /* ExerciseDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD2C21529A3C96700C2CF7B /* ExerciseDropView.swift */; };
 		7CD2C21829A3C9E400C2CF7B /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD2C21729A3C9E400C2CF7B /* UIApplication+Extensions.swift */; };
 		7CD2C21A29A3DCC900C2CF7B /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD2C21929A3DCC900C2CF7B /* WorkoutManager.swift */; };
+		7CD2C21C29A8033200C2CF7B /* UIScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD2C21B29A8033200C2CF7B /* UIScreen+Extensions.swift */; };
 		7CE0862527613FE000BF3CF3 /* UiColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0862427613FE000BF3CF3 /* UiColor+Extensions.swift */; };
 		7CE086272761482A00BF3CF3 /* ProjectColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE086262761482A00BF3CF3 /* ProjectColors.swift */; };
 		7CE1ED0D2771100A00337304 /* CollapsibleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE1ED0C2771100A00337304 /* CollapsibleTableViewCell.swift */; };
@@ -340,6 +344,9 @@
 		7CADF74F278CAEBC0020CD83 /* StaticStringsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticStringsManager.swift; sourceTree = "<group>"; };
 		7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatContainerViewController.swift; sourceTree = "<group>"; };
 		7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginRegister.storyboard; sourceTree = "<group>"; };
+		7CB11A9929ACED35003462F7 /* SetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetView.swift; sourceTree = "<group>"; };
+		7CB11A9B29ACF287003462F7 /* ExercisePotionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePotionsView.swift; sourceTree = "<group>"; };
+		7CB11A9D29ACF2C3003462F7 /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
 		7CB9ADE4268B12290009B42A /* ChartFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFormatter.swift; sourceTree = "<group>"; };
 		7CB9ADE6268CB7140009B42A /* ChartView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartView.xib; sourceTree = "<group>"; };
 		7CB9ADE8268CB72B0009B42A /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
@@ -353,6 +360,7 @@
 		7CD2C21529A3C96700C2CF7B /* ExerciseDropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDropView.swift; sourceTree = "<group>"; };
 		7CD2C21729A3C9E400C2CF7B /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		7CD2C21929A3DCC900C2CF7B /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
+		7CD2C21B29A8033200C2CF7B /* UIScreen+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extensions.swift"; sourceTree = "<group>"; };
 		7CE0862427613FE000BF3CF3 /* UiColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiColor+Extensions.swift"; sourceTree = "<group>"; };
 		7CE086262761482A00BF3CF3 /* ProjectColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectColors.swift; sourceTree = "<group>"; };
 		7CE086302767BCA100BF3CF3 /* BounceNavigationBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BounceNavigationBarView.xib; sourceTree = "<group>"; };
@@ -958,7 +966,10 @@
 		7CD2C21329A3C94100C2CF7B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				7CB11A9929ACED35003462F7 /* SetView.swift */,
+				7CB11A9D29ACF2C3003462F7 /* ExerciseView.swift */,
 				7CD2C21529A3C96700C2CF7B /* ExerciseDropView.swift */,
+				7CB11A9B29ACF287003462F7 /* ExercisePotionsView.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -1046,6 +1057,7 @@
 				B341E23A257FB3F400EE05A7 /* UITextField+Extensions.swift */,
 				7CE0862427613FE000BF3CF3 /* UiColor+Extensions.swift */,
 				7CD2C21729A3C9E400C2CF7B /* UIApplication+Extensions.swift */,
+				7CD2C21B29A8033200C2CF7B /* UIScreen+Extensions.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1521,6 +1533,7 @@
 				B3E6E9AD25714C1400958C48 /* MealPlanTableViewCell.swift in Sources */,
 				B38068C625B7197E005C4A24 /* WorkoutTableViewCell.swift in Sources */,
 				B358227825ACA2F800C91295 /* CollapsibleTableViewHeader.swift in Sources */,
+				7CB11A9A29ACED35003462F7 /* SetView.swift in Sources */,
 				7C4554F827A0A8A10077791B /* ImageCache.swift in Sources */,
 				B341E230257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift in Sources */,
 				7C74AF9E264336EA001D0F5D /* PushNotificationSender.swift in Sources */,
@@ -1622,6 +1635,7 @@
 				7C10BA70276BCB9C00B5860C /* UINavigationController+Extensions.swift in Sources */,
 				7CD2C21829A3C9E400C2CF7B /* UIApplication+Extensions.swift in Sources */,
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
+				7CD2C21C29A8033200C2CF7B /* UIScreen+Extensions.swift in Sources */,
 				7C54164D269D951C00C22859 /* LoginViewModel.swift in Sources */,
 				7CFE0C0E276936330077D16F /* BounceNavigationBarView.swift in Sources */,
 				7C6B61B12930EFC20051DD65 /* ExerciseListView.swift in Sources */,
@@ -1630,6 +1644,8 @@
 				7CD1817B2647E80F0054DB9C /* NotificationTableViewCell.swift in Sources */,
 				B358223025AC9DA800C91295 /* Article.swift in Sources */,
 				7C7434F025CD9D9D00D33A9A /* ChatsViewController.swift in Sources */,
+				7CB11A9E29ACF2C3003462F7 /* ExerciseView.swift in Sources */,
+				7CB11A9C29ACF287003462F7 /* ExercisePotionsView.swift in Sources */,
 				B3E6E9B825714D5800958C48 /* MealPlanViewController.swift in Sources */,
 				B3BB8F35258223E400D70628 /* QuestionnaireActivityViewController.swift in Sources */,
 				B3DB751B259F8773002CF48B /* ConsumptionManager.swift in Sources */,

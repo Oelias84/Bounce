@@ -7,89 +7,81 @@
 
 import SwiftUI
 
-struct SetView: View {
-	
-	enum Field: Hashable {
-		case repeatsField
-		case weightField
-	}
-		
-	var isDeleteEnabled: Bool
-	@Binding var set: SetModel
 
-	@State var isEnabled: Bool = true
+struct ExerciseDropView: View {
+	
+	@ObservedObject var viewModel: ExerciseViewModel
+	
+	@State var showDetails: Bool = false
+	@Binding var exerciseState: ExerciseState
 	@FocusState var focusedField: SetView.Field?
 	
-	var repeatsPlaceholder: String {
-		return String(set.repeats ?? 0)
-	}
-	var weightsPlaceholder: String {
-		return String(set.weight ?? 0)
-	}
-	
-	let action: (UUID?)->()
+	let action: (Int)->()
 	
 	var body: some View {
-		
-		HStack {
-			// Set Number
-			Text("סט #\(set.setIndex+1)")
-				.padding(.trailing, 10)
-				.padding(.trailing, 0)
-				.frame(width: 56)
-				.font(Font.custom(K.Fonts.boldText, size: 16))
+		VStack(alignment: .leading) {
 			
-			// Number of repeats textfield
-			Text("חזרות:")
-				.font(Font.custom(K.Fonts.regularText, size: 16))
-			
-			TextField(repeatsPlaceholder, value: $set.repeats, format: .number)
-				.focused($focusedField, equals: .repeatsField)
-				.keyboardType(.numberPad)
-				.multilineTextAlignment(.center)
-				.frame(width: 46)
-				.textFieldStyle(.roundedBorder)
-				.multilineTextAlignment(.center)
-			
-			// Weight amount textfield
-			Text("משקל:")
-				.font(Font.custom(K.Fonts.regularText, size: 16))
-			TextField(weightsPlaceholder, value: $set.weight, format: .number)
-				.focused($focusedField, equals: .weightField)
-				.keyboardType(.decimalPad)
-				.frame(width: 64)
-				.textFieldStyle(.roundedBorder)
-				.multilineTextAlignment(.center)
-			
-			// Remove Button
-			Spacer()
-			if isDeleteEnabled {
-				Button {
-					focusedField = nil
-					isEnabled = false
-					
-					withAnimation {
-						DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
-							action(set.id)
-							isEnabled = true
+			ExerciseView(viewModel: viewModel, showDetails: $showDetails, action: action) {
+				showDetails.toggle()
+				// Adding first set
+				if $exerciseState.setsState.count == 0 && showDetails {
+					exerciseState.setsState.append(SetModel(setIndex: 0))
+				}
+			}
+			// Sets list Dropdown View
+			if showDetails {
+				Divider()
+				LazyVStack(alignment: .leading, spacing: 8) {
+					ForEach(0..<$exerciseState.setsState.count, id: \.self) { index in
+						let setsState = $exerciseState.setsState[index]
+						let deleteEnable = setsState.setIndex.wrappedValue == $exerciseState.setsState.count-1
+						
+						SetView(isDeleteEnabled: deleteEnable, set: setsState, focusedField: _focusedField) { id in
+							withAnimation {
+								// Toggle show details button if last set deleted
+								if exerciseState.setsState.count == 1 { showDetails.toggle() }
+								// Remove if find
+								$exerciseState.setsState.wrappedValue.removeAll(where: {$0.id == id})
+							}
 						}
 					}
-				} label: {
-					Image(systemName: "xmark")
-						.frame(width: 16, height: 16)
-						.foregroundColor(Color(UIColor.red))
 				}
-				.allowsHitTesting(isEnabled)
+				.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: showDetails ? .infinity : .none)
+				.clipped()
+				
+				// Add Set Button
+				HStack {
+					Button {
+						withAnimation {
+							$exerciseState.setsState.wrappedValue.append(SetModel(setIndex: exerciseState.setsState.count))
+							focusedField = .repeatsField
+						}
+					} label: {
+						Image(systemName: "plus.circle")
+							.frame(width: 16, height: 16)
+							.foregroundColor(Color(UIColor.projectTail))
+					}
+					.padding(2)
+					Spacer()
+				}
 			}
 		}
+		.padding()
+		.background(Color.white)
+		.cornerRadius(12)
+		.padding(4)
+		.shadow(color: Color(UIColor.lightGray.withAlphaComponent(0.2)), radius: 6, y: 4)
 	}
 }
 
-//struct ExerciseDropView_Previews: PreviewProvider {
-//    static var previews: some View {
-//		
-//		ExerciseDropView(viewModel: ExerciseViewModel(index: 1, exercise: Binding<WorkoutExercise>), exerciseState: Binding<ExerciseState>) { _ in
-//			
-//		}
-//    }
-//}
+struct ExerciseDropView_Previews: PreviewProvider {
+
+	@State static var exerciseState: ExerciseState = ExerciseState(index: 0)
+	@State static var exercise: WorkoutExercise = WorkoutExercise(exercise: "1", repeats: "12", sets: "12", exerciseToPresent: nil)
+
+	static var previews: some View {
+		ExerciseDropView(viewModel: ExerciseViewModel(index: 1, exercise: $exercise), exerciseState: $exerciseState) { _ in
+
+		}
+	}
+}
