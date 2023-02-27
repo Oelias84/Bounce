@@ -48,7 +48,7 @@ class ExerciseViewModel: ObservableObject {
 		case "stomach":
 			return ("בטן", #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1))
 		case "warmup":
-			return ("חימום", #colorLiteral(red: 0.7058823529, green: 0.8549019608, blue: 0.7529411765, alpha: 1))
+			return ("חימום", .lightGray)
 		default:
 			return ("", UIColor.white)
 		}
