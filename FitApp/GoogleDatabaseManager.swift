@@ -73,7 +73,7 @@ final class GoogleDatabaseManager {
 	}
 	func sendMessageToChat(chat: Chat, content: String, link: String?, previewData: Data?, kind: MessageKind, completion: @escaping(Result<Void, Error>) -> ()) {
 		let date = Date().millisecondsSince2020
-		let messageId = "\(chat.userId)_\(date)"
+		let messageId = "\(chat.userId)a\(date)"
 		guard let senderId = Auth.auth().currentUser?.uid else {
 			completion(.failure(ErrorManager.DatabaseError.noUID))
 			return
