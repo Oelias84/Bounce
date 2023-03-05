@@ -15,7 +15,7 @@ class HomeViewController: UIViewController {
 	
 	private var viewModel = HomeViewModel()
 	private var weightAlertsManager: WeightAlertsManager!
-
+	
 	private var carbsRingLayer: RingProgressView!
 	private var fatRingLayer: RingProgressView!
 	private var proteinRingLayer: RingProgressView!
@@ -171,7 +171,7 @@ extension HomeViewController {
 		}
 	}
 	private func setupProgressLabels() {
-		DispatchQueue.main.async {			
+		DispatchQueue.main.async {
 			self.setUpProgressTextFields()
 			
 			self.fatCountLabel.text = self.viewModel.getFatCurrentValue
@@ -181,26 +181,20 @@ extension HomeViewController {
 		}
 	}
 	private func setupMotivationText() {
-		DispatchQueue.main.async {
-			self.topBarView.motivationText = UserProfile.defaults.motivationText
-		}
-		DispatchQueue.global(qos: .background).async {
-			self.viewModel.getMotivationText() {
-				[weak self] motivation in
-				guard let self = self else { return }
-				
-				let lastMotivationDate = UserProfile.defaults.lastMotivationDate
-				
-				if lastMotivationDate == nil || lastMotivationDate!.onlyDate > Date().onlyDate {
-					UserProfile.defaults.lastMotivationDate = Date()
-					UserProfile.defaults.motivationText = motivation
-				}
+		viewModel.getMotivationText { motivationText in
+			if let motivationText {
 				DispatchQueue.main.async {
-					self.topBarView.motivationText = UserProfile.defaults.motivationText
+					self.topBarView.motivationText = motivationText
+					UserProfile.defaults.motivationText = motivationText
+				}
+			} else {
+				DispatchQueue.main.async {
+					self.topBarView.motivationText = "..."
 				}
 			}
 		}
 	}
+	
 	private func setupNavigationBarView() {
 		topBarView.delegate = self
 		topBarView.isProfileButtonHidden = false
@@ -226,7 +220,7 @@ extension HomeViewController {
 	}
 	private func checkWeightAlert() {
 		let lastDate = UserProfile.defaults.lastWeightAlertPresentedDate
-			
+		
 		if lastDate == nil {
 			UserProfile.defaults.lastWeightAlertPresentedDate = Date()
 			presentWeightAlert()

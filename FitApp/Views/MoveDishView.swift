@@ -43,8 +43,8 @@ class MoveDishView: UIView {
 	@IBOutlet weak var mealToMoveTextLabel: UILabel!
 	
 	@IBOutlet weak var mealTitleLabel: UILabel!
-	@IBOutlet weak var dishToMoveTextfield: UITextField!
-	@IBOutlet weak var destinationMealTextfield: UITextField!
+	@IBOutlet weak var dishToMoveTextfield: DishCellTextFieldView!
+	@IBOutlet weak var destinationMealTextfield: DishCellTextFieldView!
 	@IBOutlet weak var dishAmountStepper: GMStepper!
 	@IBOutlet weak var dishAmountLabel: UILabel!
 	@IBOutlet weak var bottomViewConstrain: NSLayoutConstraint!
@@ -187,11 +187,16 @@ extension MoveDishView {
 		dishPickerView.dataSource = self
 		destinationPickerView.delegate = self
 		destinationPickerView.dataSource = self
+		
 		dishToMoveTextfield.delegate = self
 		destinationMealTextfield.delegate = self
+		dishToMoveTextfield.shouldPerformAction = false
+		destinationMealTextfield.shouldPerformAction = false
+		
 		dishToMoveTextfield.inputView = dishPickerView
 		destinationMealTextfield.inputView = destinationPickerView
 		dishToMoveTextLabel.text = StaticStringsManager.shared.getGenderString?[23] ?? ""
+		
 		dishAmountStepper.minimumValue = 0.5
 		dishAmountStepper.stepValue = 0.5
 		dishToMoveTextfield.becomeFirstResponder()

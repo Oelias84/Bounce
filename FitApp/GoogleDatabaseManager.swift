@@ -86,7 +86,8 @@ final class GoogleDatabaseManager {
 	}
 	func sendMessageToChat(chat: Chat, content: String, link: String?, previewData: Data?, kind: MessageKind, completion: @escaping(Result<Void, Error>) -> ()) {
 		let date = Date().millisecondsSince2020
-		let messageId = "\(chat.userId)_\(date)"
+		let messageId = "\(chat.userId)a\(date)"
+		
 		guard let senderId = Auth.auth().currentUser?.uid else {
 			completion(.failure(ErrorManager.DatabaseError.noUID))
 			return
@@ -149,8 +150,8 @@ final class GoogleDatabaseManager {
 			}
 		}
 	}
-	func getAllMessagesForChat(chat: Chat, completion: @escaping (Result<[Message], ErrorManager.DatabaseError>) -> Void) {
-		chatMessagesRef(userId: chat.userId).observe(.value) {
+	func getAllMessagesForChat(toLast: UInt, chat: Chat, completion: @escaping (Result<[Message], ErrorManager.DatabaseError>) -> Void) {
+		chatMessagesRef(userId: chat.userId).queryLimited(toLast: toLast).observe(.value) {
 			snapshot in
 			guard let messages = self.parseMessagesData(userId: chat.userId, snapshot: snapshot) else {
 				completion(.failure(.noFetch))

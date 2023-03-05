@@ -107,7 +107,7 @@ extension MealPlanViewController: ChangeDateViewDelegate {
 extension MealPlanViewController: TableViewEmptyViewDelegate {
 	
 	func createNewMealButtonTapped() {
-		Spinner.shared.show(self)
+		Spinner.shared.show()
 		tableView.backgroundView = nil
 		mealViewModel.fetchData(date: date)
 	}
@@ -174,6 +174,7 @@ extension MealPlanViewController {
 	private func callToViewModelForUIUpdate() {
 		Spinner.shared.show()
 		
+		Spinner.shared.show()
 		if mealViewModel.meals == nil {
 			mealViewModel.fetchData()
 		} else {
