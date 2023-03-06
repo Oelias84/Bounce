@@ -8,9 +8,9 @@
 import SwiftUI
 
 
-struct ExerciseDropView: View {
+struct ExerciseDropViewContainer: View {
 	
-	@ObservedObject var viewModel: ExerciseViewModel
+	@ObservedObject var viewModel: ExerciseDropViewModel
 	
 	@State var showDetails: Bool = false
 	@Binding var exerciseState: ExerciseState
@@ -20,15 +20,19 @@ struct ExerciseDropView: View {
 	
 	var body: some View {
 		VStack(alignment: .leading) {
-			
-			ExerciseView(viewModel: viewModel, showDetails: $showDetails, action: action) {
+			//MARK: - Exercise view
+			ExerciseView(index: viewModel.getIndex(), name: viewModel.getName(), type: viewModel.getType(), numberOfSetes: viewModel.getNumberOfSets(),
+						 numberOfRepeats: viewModel.getNumberOfRepeats(), presentedNumber: viewModel.getNumberOfRepeats(), showDetails: $showDetails, action: action) {
+				
 				showDetails.toggle()
+				
 				// Adding first set
 				if $exerciseState.setsState.count == 0 && showDetails {
 					exerciseState.setsState.append(SetModel(setIndex: 0))
 				}
 			}
-			// Sets list Dropdown View
+			
+			//MARK: - Dropdown View
 			if showDetails {
 				Divider()
 				LazyVStack(alignment: .leading, spacing: 8) {
@@ -49,7 +53,7 @@ struct ExerciseDropView: View {
 				.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: showDetails ? .infinity : .none)
 				.clipped()
 				
-				// Add Set Button
+				//MARK: - Add Set Button
 				HStack {
 					Button {
 						withAnimation {
@@ -78,9 +82,10 @@ struct ExerciseDropView_Previews: PreviewProvider {
 
 	@State static var exerciseState: ExerciseState = ExerciseState(index: 0)
 	@State static var exercise: WorkoutExercise = WorkoutExercise(exercise: "1", repeats: "12", sets: "12", exerciseToPresent: nil)
-
+	@State static var exerciseViewModel = ExerciseListViewModel(workout: Workout(exercises: [], name: "", time: "", type: 0), exercisesState: [])
+	
 	static var previews: some View {
-		ExerciseDropView(viewModel: ExerciseViewModel(index: 1, exercise: $exercise), exerciseState: $exerciseState) { _ in
+		ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: 1, exerciseViewModel: exerciseViewModel), exerciseState: $exerciseState) { _ in
 
 		}
 	}

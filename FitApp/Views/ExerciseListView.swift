@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ExerciseListView: View {
 	
-	@StateObject var viewModel: ExerciseListViewModel
+	@StateObject var exerciseListViewModel: ExerciseListViewModel
 	@FocusState var focusedField: SetView.Field?
 	
 	let selectedExercise: (Int)->()
@@ -17,12 +17,12 @@ struct ExerciseListView: View {
 	
 	var body: some View {
 		ScrollView {
-			ForEach(0..<viewModel.getExercisesCount, id: \.self) { index in
-				let exercise = $viewModel.workout.exercises[index]
-				let exerciseState = $viewModel.exercisesState[index]
+			ForEach(0..<exerciseListViewModel.getExercisesCount, id: \.self) { index in
+				let exercise = exerciseListViewModel.workout.exercises[index]
+				let exerciseState = $exerciseListViewModel.exercisesState[index]
 				
 				HStack {
-					ExerciseDropView(viewModel: ExerciseViewModel(index: index, exercise: exercise), exerciseState: exerciseState, focusedField: _focusedField) { exerciseIndex in
+					ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: index, exerciseViewModel: exerciseListViewModel), exerciseState: exerciseState, focusedField: _focusedField) { exerciseIndex in
 						// Call back for moving into the exercise detail
 						selectedExercise(exerciseIndex)
 					}
@@ -56,7 +56,7 @@ struct ExerciseListView_Previews: PreviewProvider {
 		let exerciseState = ExerciseState(index: 0)
 		let exercisesState: [ExerciseState] = [exerciseState]
 		
-		ExerciseListView(viewModel: ExerciseListViewModel(workout: workout, exercisesState: exercisesState)) { index in
+		ExerciseListView(exerciseListViewModel: ExerciseListViewModel(workout: workout, exercisesState: exercisesState)) { index in
 			return
 		} endEditing: {
 			return

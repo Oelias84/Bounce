@@ -16,7 +16,6 @@ class ExerciseListViewModel: ObservableObject {
 	init(workout: Workout, exercisesState: [ExerciseState]) {
 		self.workout = workout
 		self.exercisesState = exercisesState
-		print(exercisesState)
 	}
 	
 	var getExercisesCount: Int {

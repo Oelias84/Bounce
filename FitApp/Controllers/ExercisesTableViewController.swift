@@ -30,7 +30,7 @@ class ExercisesTableViewController: UIViewController {
         super.viewDidLoad()
 		
 		setupTopBar()
-		addSwiftUIView(content: ExerciseListView(viewModel: ExerciseListViewModel(workout: self.workout, exercisesState: self.exercisesState)) { index in
+		addSwiftUIView(content: ExerciseListView(exerciseListViewModel: ExerciseListViewModel(workout: self.workout, exercisesState: self.exercisesState)) { index in
 			self.detailButtonTapped(index: index)
 		} endEditing: {
 			// Update Server

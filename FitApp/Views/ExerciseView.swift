@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct ExerciseView: View {
-	
-	@ObservedObject var viewModel: ExerciseViewModel
-	
+		
+	@State var index: Int
+	@State var name: String
+	@State var type: String
+	@State var numberOfSetes: String
+	@State var numberOfRepeats: String
+	@State var presentedNumber: String
+		
 	@Binding var showDetails: Bool
 	
 	let action: (Int)->Void
@@ -20,9 +25,9 @@ struct ExerciseView: View {
 		VStack(alignment: .leading) {
 			HStack(alignment: .top) {
 				VStack(alignment: .leading) {
-					Text("תרגיל \(viewModel.getExercisePresentNumber)#")
+					Text("תרגיל \(presentedNumber)#")
 						.font(Font.custom(K.Fonts.regularText, size: 14))
-					Text(viewModel.getName)
+					Text(name)
 						.font(Font.custom(K.Fonts.boldText, size: 22))
 				}
 				.padding(.bottom, 8)
@@ -48,16 +53,16 @@ struct ExerciseView: View {
 				.padding(.trailing, 10)
 				
 				// Exercise details
-				Text("סטים: X\(viewModel.getNumberOfSets)")
+				Text("סטים: X\(numberOfSetes)")
 					.font(Font.custom(K.Fonts.regularText, size: 16))
 					.padding(.trailing, 16)
-				Text("חזרות: X\(viewModel.getNumberOfRepeats)")
+				Text("חזרות: X\(numberOfRepeats)")
 					.font(Font.custom(K.Fonts.regularText, size: 16))
 				
 				// Explain Button (continue to exercise screen)
 				Spacer()
 				Button {
-					action(viewModel.getIndex)
+					action(index)
 				} label: {
 					Text("הסבר")
 						.font(Font.custom(K.Fonts.regularText, size: 14))
@@ -75,13 +80,31 @@ struct ExerciseView: View {
 	// Tag View
 	var exerciseTag: some View {
 		VStack {
-			Text(viewModel.getTag.0)
+			Text(getTag.0)
 				.foregroundColor(.white)
 				.font(Font.custom(K.Fonts.boldText, size: 12))
 		}
 		.frame(width: 54, height: 24)
-		.background(Color(viewModel.getTag.1))
+		.background(Color(getTag.1))
 		.cornerRadius(12)
+	}
+	var getTag: (String, UIColor) {
+		switch type {
+		case "legs":
+			return ("רגליים", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
+		case "chest":
+			return ("חזה", #colorLiteral(red: 0.1863320172, green: 0.6013119817, blue: 0.9211298823, alpha: 1))
+		case "back":
+			return ("גב", #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1))
+		case "shoulders":
+			return ("כתפיים", #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))
+		case "stomach":
+			return ("בטן", #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1))
+		case "warmup":
+			return ("חימום", .lightGray)
+		default:
+			return ("", UIColor.white)
+		}
 	}
 }
 
@@ -91,7 +114,7 @@ struct ExerciseView_Previews: PreviewProvider {
 
 	static var previews: some View {
 		
-		ExerciseView(viewModel: ExerciseViewModel(index: 0, exercise: $exercisesState), showDetails: $showDetails) { _ in
+		ExerciseView(index: 0, name: "PushUps", type: "legs", numberOfSetes: "4", numberOfRepeats: "12", presentedNumber: "0", showDetails: $showDetails) { _ in
 			
 		} dropDownAction: {
 			
