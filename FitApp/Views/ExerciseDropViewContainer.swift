@@ -82,10 +82,9 @@ struct ExerciseDropView_Previews: PreviewProvider {
 
 	@State static var exerciseState: ExerciseState = ExerciseState(index: 0)
 	@State static var exercise: WorkoutExercise = WorkoutExercise(exercise: "1", repeats: "12", sets: "12", exerciseToPresent: nil)
-	@State static var exerciseViewModel = ExerciseListViewModel(workout: Workout(exercises: [], name: "", time: "", type: 0), exercisesState: [])
 	
 	static var previews: some View {
-		ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: 1, exerciseViewModel: exerciseViewModel), exerciseState: $exerciseState) { _ in
+		ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: 1, workoutExercise: exercise), exerciseState: $exerciseState) { _ in
 
 		}
 	}

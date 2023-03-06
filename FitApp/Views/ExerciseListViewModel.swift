@@ -10,7 +10,7 @@ import Foundation
 
 class ExerciseListViewModel: ObservableObject {
 	
-	@Published var workout: Workout!
+	@Published private var workout: Workout!
 	@Published var exercisesState: [ExerciseState]
 	
 	init(workout: Workout, exercisesState: [ExerciseState]) {
@@ -20,5 +20,8 @@ class ExerciseListViewModel: ObservableObject {
 	
 	var getExercisesCount: Int {
 		workout.exercises.count
+	}
+	func getWorkoutExercise(at index: Int) -> WorkoutExercise {
+		workout.exercises[index]
 	}
 }

@@ -12,11 +12,12 @@ import Foundation
 class ExerciseDropViewModel: ObservableObject {
 	
 	private let index: Int
-	var exerciseViewModel: ExerciseListViewModel!
+	private let workoutExercise: WorkoutExercise
+//	var exerciseViewModel: ExerciseListViewModel!
 
-	init(index: Int, exerciseViewModel: ExerciseListViewModel) {
+	init(index: Int, workoutExercise: WorkoutExercise) {
 		self.index = index
-		self.exerciseViewModel = exerciseViewModel
+		self.workoutExercise = workoutExercise
 	}
 	
 	func getIndex() -> Int {
@@ -27,19 +28,15 @@ class ExerciseDropViewModel: ObservableObject {
 	}
 	
 	func getType() -> String {
-		currentExercise().exerciseToPresent?.type ?? ""
+		workoutExercise.exerciseToPresent?.type ?? ""
 	}
 	func getName() -> String {
-		currentExercise().exerciseToPresent?.name ?? ""
+		workoutExercise.exerciseToPresent?.name ?? ""
 	}
 	func getNumberOfSets() -> String {
-		currentExercise().sets
+		workoutExercise.sets
 	}
 	func getNumberOfRepeats() -> String {
-		currentExercise().repeats
-	}
-	
-	private func currentExercise() -> WorkoutExercise {
-		exerciseViewModel.workout.exercises[index]
+		workoutExercise.repeats
 	}
 }

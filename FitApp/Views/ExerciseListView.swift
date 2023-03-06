@@ -18,11 +18,11 @@ struct ExerciseListView: View {
 	var body: some View {
 		ScrollView {
 			ForEach(0..<exerciseListViewModel.getExercisesCount, id: \.self) { index in
-				let exercise = exerciseListViewModel.workout.exercises[index]
+				let workoutExercise = exerciseListViewModel.getWorkoutExercise(at: index)
 				let exerciseState = $exerciseListViewModel.exercisesState[index]
 				
 				HStack {
-					ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: index, exerciseViewModel: exerciseListViewModel), exerciseState: exerciseState, focusedField: _focusedField) { exerciseIndex in
+					ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: index, workoutExercise: workoutExercise), exerciseState: exerciseState, focusedField: _focusedField) { exerciseIndex in
 						// Call back for moving into the exercise detail
 						selectedExercise(exerciseIndex)
 					}
