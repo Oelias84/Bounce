@@ -20,8 +20,8 @@ struct ExerciseView: View {
 	@Binding var showDetails: Bool
 	
 	let action: (Int)->Void
-	let dropDownAction: ()->Void
 	let replacerButtonAction: (_ exerciseToReplace: Int)->Void
+	let dropDownAction: ()->Void
 	
 	var body: some View {
 		VStack(alignment: .leading) {
@@ -132,9 +132,9 @@ struct ExerciseView_Previews: PreviewProvider {
 		
 		ExerciseView(index: 0, name: "PushUps", type: "legs", numberOfSetes: "4", numberOfRepeats: "12", presentedNumber: "0", showDetails: $showDetails) { _ in
 			
-		} dropDownAction: {
-			
 		} replacerButtonAction: { _ in
+			
+		} dropDownAction: {
 			
 		}
 	}

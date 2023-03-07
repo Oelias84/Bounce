@@ -40,6 +40,8 @@
 		7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */; };
 		7C2B901729B5E85500CC58CA /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2B901629B5E85500CC58CA /* WorkoutManager.swift */; };
 		7C2B901929B5E9BD00CC58CA /* ExerciseOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2B901829B5E9BD00CC58CA /* ExerciseOptionsView.swift */; };
+		7C2B901D29B7869700CC58CA /* ExerciseOptionsListSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2B901C29B7869700CC58CA /* ExerciseOptionsListSheetView.swift */; };
+		7C2B901F29B7873900CC58CA /* ExerciseOptionsListSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2B901E29B7873900CC58CA /* ExerciseOptionsListSheetViewModel.swift */; };
 		7C2BD810267212C7006A1736 /* MealManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2BD80F267212C7006A1736 /* MealManager.swift */; };
 		7C32C588278E370500B97642 /* PopupAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C32C587278E370500B97642 /* PopupAlertView.swift */; };
 		7C32C58E278E3E2400B97642 /* PopupAlertView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C32C58D278E3E2400B97642 /* PopupAlertView.storyboard */; };
@@ -259,6 +261,8 @@
 		7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireSecondActivityViewController.swift; sourceTree = "<group>"; };
 		7C2B901629B5E85500CC58CA /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
 		7C2B901829B5E9BD00CC58CA /* ExerciseOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseOptionsView.swift; sourceTree = "<group>"; };
+		7C2B901C29B7869700CC58CA /* ExerciseOptionsListSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseOptionsListSheetView.swift; sourceTree = "<group>"; };
+		7C2B901E29B7873900CC58CA /* ExerciseOptionsListSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseOptionsListSheetViewModel.swift; sourceTree = "<group>"; };
 		7C2BD80F267212C7006A1736 /* MealManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealManager.swift; sourceTree = "<group>"; };
 		7C32C587278E370500B97642 /* PopupAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAlertView.swift; sourceTree = "<group>"; };
 		7C32C58D278E3E2400B97642 /* PopupAlertView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopupAlertView.storyboard; sourceTree = "<group>"; };
@@ -568,6 +572,24 @@
 				7CD2C21529A3C96700C2CF7B /* ExerciseDropViewContainer.swift */,
 			);
 			name = ExerciseView;
+			sourceTree = "<group>";
+		};
+		7C2B901B29B785B800CC58CA /* ExerciseOptions */ = {
+			isa = PBXGroup;
+			children = (
+				7C2B902029B7879500CC58CA /* Components */,
+				7C2B901C29B7869700CC58CA /* ExerciseOptionsListSheetView.swift */,
+				7C2B901E29B7873900CC58CA /* ExerciseOptionsListSheetViewModel.swift */,
+			);
+			name = ExerciseOptions;
+			sourceTree = "<group>";
+		};
+		7C2B902029B7879500CC58CA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7C2B901829B5E9BD00CC58CA /* ExerciseOptionsView.swift */,
+			);
+			name = Components;
 			sourceTree = "<group>";
 		};
 		7C32C586278E368C00B97642 /* PopupAlertView */ = {
@@ -976,9 +998,9 @@
 		7CD2C21329A3C94100C2CF7B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				7CB11A9929ACED35003462F7 /* SetView.swift */,
+				7C2B901B29B785B800CC58CA /* ExerciseOptions */,
 				7C2B901A29B5EF2900CC58CA /* ExerciseView */,
-				7C2B901829B5E9BD00CC58CA /* ExerciseOptionsView.swift */,
+				7CB11A9929ACED35003462F7 /* SetView.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -1557,6 +1579,7 @@
 				B368DF4F25A5F24E00BD1937 /* GoogleApiManager.swift in Sources */,
 				7CFA85CF26ED1A8A00296B53 /* WeightsManager.swift in Sources */,
 				7C7434F525CD9DD700D33A9A /* ChatViewController.swift in Sources */,
+				7C2B901F29B7873900CC58CA /* ExerciseOptionsListSheetViewModel.swift in Sources */,
 				7C1284382881CB2200E735D8 /* ObservableObject.swift in Sources */,
 				7CE0862527613FE000BF3CF3 /* UiColor+Extensions.swift in Sources */,
 				7C33B661266A587D00E16A1C /* CommentsViewModel.swift in Sources */,
@@ -1596,6 +1619,7 @@
 				B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */,
 				B368E08725A8820E00BD1937 /* PropertyListValue.swift in Sources */,
 				B36B718C2577BDF3001CD393 /* ExerciseViewController.swift in Sources */,
+				7C2B901D29B7869700CC58CA /* ExerciseOptionsListSheetView.swift in Sources */,
 				7C9B345E2583C5B400D30480 /* QuestionnaireSumUpViewController.swift in Sources */,
 				7CFA5FFF262A10E600A3F401 /* MoveDishView.swift in Sources */,
 				7C8F51382671FAE0001FF0EE /* AddMealAlertDishView.swift in Sources */,

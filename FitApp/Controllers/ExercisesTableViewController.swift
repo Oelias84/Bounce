@@ -11,6 +11,7 @@ import SwiftUI
 class ExercisesTableViewController: UIViewController {
     
     var workout: Workout!
+	var workoutIndex: Int!
     var selectedExercise: Exercise?
 	var exercisesState: [ExerciseState]!
 	
@@ -30,7 +31,7 @@ class ExercisesTableViewController: UIViewController {
         super.viewDidLoad()
 		
 		setupTopBar()
-		addSwiftUIView(content: ExerciseListView(exerciseListViewModel: ExerciseListViewModel(workout: self.workout, exercisesState: self.exercisesState)) { index in
+		addSwiftUIView(content: ExerciseListView(exerciseListViewModel: ExerciseListViewModel(workoutIndex: self.workoutIndex, workout: self.workout, exercisesState: self.exercisesState)) { index in
 			// User tapped details button
 			self.detailButtonTapped(index: index)
 		} endEditing: {

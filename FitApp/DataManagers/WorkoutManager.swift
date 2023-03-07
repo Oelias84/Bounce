@@ -153,37 +153,45 @@ class WorkoutManager {
 		currentWorkoutType = type
 	}
 	
-//	func getExerciseOptions(workoutIndex: Int, workoutType: WorkoutType, exerciseType: ExerciseType) -> [Exercise] {
-//		// Get the current workout by workout type and index
-//		var currentWorkout: Workout {
-//			switch workoutType {
-//			case .home:
-//				return homeWorkouts[workoutIndex]
-//			case .gym:
-//				return gymWorkouts[workoutIndex]
-//			}
+	func getExerciseOptions(workoutIndex: Int, exerciseType: ExerciseType) -> [Exercise] {
+		// Get the current workout by workout type and index
+		var currentWorkout: Workout {
+			switch self.currentWorkoutType {
+			case .home:
+				return homeWorkouts[workoutIndex]
+			case .gym:
+				return gymWorkouts[workoutIndex]
+			}
+		}
+		// Get all exercises by type
+		var exercisesOptions: [Exercise] {
+			switch self.currentWorkoutType {
+			case .home:
+				return homeExercisesByType.first(where: {$0.type == exerciseType})?.exercises ?? []
+			case .gym:
+				return gymExercisesByType.first(where: {$0.type == exerciseType})?.exercises ?? []
+			}
+		}
+		// Map used exercise to exerciseNumbers
+		let exercisesToRemove = currentWorkout.exercises.compactMap{ $0.exerciseToPresent?.exerciseNumber }
+
+		
+		// Filter used exercises from exercises options list
+		let flitteredOptions = exercisesOptions.filter {
+			guard let exercise = $0.exerciseNumber else { return false }
+			return !exercisesToRemove.contains(exercise)
+		}
+		
+		
+//		exercisesOptions.filter {
+//			guard let exerciseNumber = $0.exerciseToPresent?.exerciseNumber else { return false }
+//			return !exercisesToRemove.contains(exerciseNumber)
 //		}
-//		// Get all exercises by type
-//		var exercisesOptions: [Exercise] {
-//			switch workoutType {
-//			case .home:
-//				return homeExercisesByType.first(where: {$0.type == exerciseType})?.exercises ?? []
-//			case .gym:
-//				return gymExercisesByType.first(where: {$0.type == exerciseType})?.exercises ?? []
-//			}
-//		}
-//		// Map used exercise to exerciseNumbers
-//		let exercisesToRemove = currentWorkout.exercises.compactMap{ $0.exerciseToPresent?.exerciseNumber }
-//
-//		// Filter used exercises from exercises options list
-//		let flitteredOptions = exercisesOptions.filter {
-//			return !exercisesToRemove.contains($0.exerciseNumber)
-//		}
-//
-//		// Return filtered exercises
-//		return flitteredOptions
-//	}
-	func replaceExercise(_ exerciseNumber: Int, with: Int, workoutIndex: Int, workoutType: WorkoutType, exerciseType: ExerciseType) {
+
+		// Return filtered exercises
+		return flitteredOptions
+	}
+	func replaceExercise(_ exerciseNumber: Int, with: Int, workoutIndex: Int) {
 		
 //		if let userPreferredWorkout = userPreferredWorkout {
 //

@@ -15,6 +15,8 @@ struct ExerciseListView: View {
 	let selectedExercise: (Int)->()
 	let endEditing: ()->()
 	
+	@State private var isShowingExerciseOptions = false
+
 	var body: some View {
 		ScrollView {
 			ForEach(0..<exerciseListViewModel.getExercisesCount, id: \.self) { index in
@@ -22,9 +24,13 @@ struct ExerciseListView: View {
 				let exerciseState = $exerciseListViewModel.exercisesState[index]
 				
 				HStack {
-					ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: index, workoutExercise: workoutExercise), exerciseState: exerciseState, focusedField: _focusedField) { exerciseIndex in
+					ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: index, workoutExercise: workoutExercise),
+											  exerciseState: exerciseState, focusedField: _focusedField) { exerciseIndex in
 						// Call back for moving into the exercise detail
 						selectedExercise(exerciseIndex)
+					} replacerButtonAction: { exerciseNumberToRepldce in
+						exerciseListViewModel.exerciseNumberToReplace = exerciseNumberToRepldce
+						isShowingExerciseOptions.toggle()
 					}
 					.padding(.horizontal)}
 			}
@@ -44,6 +50,9 @@ struct ExerciseListView: View {
 				}
 			}
 		}
+		.sheet(isPresented: $isShowingExerciseOptions) {
+			ExerciseOptionsListSheetView(viewModel: ExerciseOptionsListSheetViewModel(exerciseType: exerciseListViewModel.getSelectedExerciseType, workoutIndex: exerciseListViewModel.getWorkoutIndex))
+		}
 	}
 }
 
@@ -56,7 +65,7 @@ struct ExerciseListView_Previews: PreviewProvider {
 		let exerciseState = ExerciseState(index: 0)
 		let exercisesState: [ExerciseState] = [exerciseState]
 		
-		ExerciseListView(exerciseListViewModel: ExerciseListViewModel(workout: workout, exercisesState: exercisesState)) { index in
+		ExerciseListView(exerciseListViewModel: ExerciseListViewModel(workoutIndex: 0, workout: workout, exercisesState: exercisesState)) { index in
 			return
 		} endEditing: {
 			return

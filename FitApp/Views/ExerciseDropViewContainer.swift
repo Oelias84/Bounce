@@ -17,20 +17,19 @@ struct ExerciseDropViewContainer: View {
 	@FocusState var focusedField: SetView.Field?
 	
 	let action: (Int)->()
+	let replacerButtonAction: (Int)->Void
 	
 	var body: some View {
 		VStack(alignment: .leading) {
 			//MARK: - Exercise view
 			ExerciseView(index: viewModel.getIndex, name: viewModel.getName, type: viewModel.getType, exerciseNumber: viewModel.exerciseNumber, numberOfSetes: viewModel.getNumberOfSets,
-						 numberOfRepeats: viewModel.getNumberOfRepeats, presentedNumber: viewModel.getNumberOfRepeats, showDetails: $showDetails, action: action) {
+						 numberOfRepeats: viewModel.getNumberOfRepeats, presentedNumber: viewModel.getNumberOfRepeats, showDetails: $showDetails, action: action, replacerButtonAction: replacerButtonAction) {
 				
 				showDetails.toggle()
 				// Adding first set
 				if $exerciseState.setsState.count == 0 && showDetails {
 					exerciseState.setsState.append(SetModel(setIndex: 0))
 				}
-			} replacerButtonAction: { exerciseToReplace in
-				
 			}
 			
 			//MARK: - Dropdown View
@@ -89,6 +88,9 @@ struct ExerciseDropView_Previews: PreviewProvider {
 	static var previews: some View {
 		ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: 1, workoutExercise: exercise), exerciseState: $exerciseState) { _ in
 			
+		} replacerButtonAction: { _ in
+			
 		}
 	}
 }
+	
