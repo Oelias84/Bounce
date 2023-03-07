@@ -13,7 +13,6 @@ class ExerciseDropViewModel: ObservableObject {
 	
 	private let index: Int
 	private let workoutExercise: WorkoutExercise
-//	var exerciseViewModel: ExerciseListViewModel!
 
 	init(index: Int, workoutExercise: WorkoutExercise) {
 		self.index = index
