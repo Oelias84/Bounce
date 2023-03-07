@@ -19,23 +19,25 @@ class ExerciseDropViewModel: ObservableObject {
 		self.workoutExercise = workoutExercise
 	}
 	
-	func getIndex() -> Int {
+	var getIndex: Int {
 		index
 	}
-	func getExercisePresentNumber() -> Int {
+	var getExercisePresentNumber: Int {
 		index + 1
 	}
-	
-	func getType() -> String {
+	var exerciseNumber: Int? {
+		workoutExercise.exerciseToPresent?.exerciseNumber
+	}
+	var getType: String {
 		workoutExercise.exerciseToPresent?.type ?? ""
 	}
-	func getName() -> String {
+	var getName: String {
 		workoutExercise.exerciseToPresent?.name ?? ""
 	}
-	func getNumberOfSets() -> String {
+	var getNumberOfSets: String {
 		workoutExercise.sets
 	}
-	func getNumberOfRepeats() -> String {
+	var getNumberOfRepeats: String {
 		workoutExercise.repeats
 	}
 }

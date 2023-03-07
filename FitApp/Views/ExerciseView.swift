@@ -12,6 +12,7 @@ struct ExerciseView: View {
 	@State var index: Int
 	@State var name: String
 	@State var type: String
+	@State var exerciseNumber: Int?
 	@State var numberOfSetes: String
 	@State var numberOfRepeats: String
 	@State var presentedNumber: String
@@ -20,10 +21,13 @@ struct ExerciseView: View {
 	
 	let action: (Int)->Void
 	let dropDownAction: ()->Void
+	let replacerButtonAction: (_ exerciseToReplace: Int)->Void
 	
 	var body: some View {
 		VStack(alignment: .leading) {
 			HStack(alignment: .top) {
+				
+				//MARK: - Title Text
 				VStack(alignment: .leading) {
 					Text("תרגיל \(presentedNumber)#")
 						.font(Font.custom(K.Fonts.regularText, size: 14))
@@ -32,8 +36,20 @@ struct ExerciseView: View {
 				}
 				.padding(.bottom, 8)
 				
-				// Tag View
 				Spacer()
+				
+				//MARK: - Replacer Button
+				Button {
+					guard let exerciseNumber else { return }
+					replacerButtonAction(exerciseNumber)
+				} label: {
+					Image(systemName: "arrow.2.squarepath")
+						.resizable()
+						.scaledToFit()
+						.frame(width: 24, height: 24)
+						.foregroundColor(Color(UIColor.projectGreen))
+				}
+				//MARK: - Tag View
 				exerciseTag
 			}
 			
@@ -117,6 +133,8 @@ struct ExerciseView_Previews: PreviewProvider {
 		ExerciseView(index: 0, name: "PushUps", type: "legs", numberOfSetes: "4", numberOfRepeats: "12", presentedNumber: "0", showDetails: $showDetails) { _ in
 			
 		} dropDownAction: {
+			
+		} replacerButtonAction: { _ in
 			
 		}
 	}
