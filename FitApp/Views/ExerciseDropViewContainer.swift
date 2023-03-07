@@ -46,6 +46,8 @@ struct ExerciseDropViewContainer: View {
 								if exerciseState.setsState.count == 1 { showDetails.toggle() }
 								// Remove if find
 								$exerciseState.setsState.wrappedValue.removeAll(where: {$0.id == id})
+								// Update Server
+								WorkoutManager.shared.updateWorkoutStates()
 							}
 						}
 					}

@@ -31,9 +31,11 @@ class ExercisesTableViewController: UIViewController {
 		
 		setupTopBar()
 		addSwiftUIView(content: ExerciseListView(exerciseListViewModel: ExerciseListViewModel(workout: self.workout, exercisesState: self.exercisesState)) { index in
+			// User tapped details button
 			self.detailButtonTapped(index: index)
 		} endEditing: {
-			// Update Server
+			// Update server
+			WorkoutManager.shared.updateWorkoutStates()
 		})
     }
 	override func viewWillAppear(_ animated: Bool) {

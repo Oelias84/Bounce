@@ -385,4 +385,8 @@ class WorkoutManager {
 			completion(.finishedOne)
 		}
 	}
+	func updateWorkoutStates() {
+		guard let workoutsStates = workoutsStates else { return }
+		googleManager.updateWorkoutState(workoutsStates)
+	}
 }
