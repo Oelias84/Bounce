@@ -38,6 +38,8 @@ class WorkoutManager {
 	
 //	private var userPreferredWorkout: UserPreferredWorkout?
 		
+	private var currentWorkoutType: WorkoutType = .home
+
 	private var gymExercises: [Exercise]!
 	private var homeExercises: [Exercise]!
 
@@ -92,6 +94,9 @@ class WorkoutManager {
 	}
 	
 	// Getters
+	var getCurrentWorkoutType: WorkoutType {
+		currentWorkoutType
+	}
 	var getHomeWorkout: [Workout] {
 		homeWorkouts
 	}
@@ -142,6 +147,10 @@ class WorkoutManager {
 			return workoutState.workoutStates[index].exercisesStates
 		}
 		return workoutState.workoutStates[index].exercisesStates
+	}
+	
+	func setCurrentWorkoutType(_ type: WorkoutType) {
+		currentWorkoutType = type
 	}
 	
 //	func getExerciseOptions(workoutIndex: Int, workoutType: WorkoutType, exerciseType: ExerciseType) -> [Exercise] {

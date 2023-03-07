@@ -9,7 +9,6 @@ import Foundation
 
 class WorkoutViewModel {
 	
-	var type: WorkoutType = .home
 	var finishHomeWorkoutConfiguringData: ProjectObservableObject<Bool?> = ProjectObservableObject(nil)
 	
 	private let workoutManager = WorkoutManager.shared
@@ -19,7 +18,9 @@ class WorkoutViewModel {
 			self.finishHomeWorkoutConfiguringData.value = hasData
 		}
 	}
-
+	var type: WorkoutType {
+		workoutManager.getCurrentWorkoutType
+	}
 	func addWarmup(_ type: WorkoutType) -> WorkoutExercise {
 		switch type {
 		case .home:
@@ -27,6 +28,9 @@ class WorkoutViewModel {
 		case .gym:
 			return WorkoutExercise(exercise: "17", repeats: "10", sets: "3", exerciseToPresent: nil)
 		}
+	}
+	func setWorkoutType(_ type: WorkoutType) {
+		workoutManager.setCurrentWorkoutType(type)
 	}
 	
 	func getWorkoutsCount() -> Int {

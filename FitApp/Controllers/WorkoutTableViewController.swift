@@ -44,9 +44,9 @@ class WorkoutTableViewController: UIViewController {
 	@IBAction func segmentedControlAction(_ sender: BetterSegmentedControl) {
 		switch sender.index {
 		case 0:
-			viewModel.type = .home
+			viewModel.setWorkoutType(.home)
 		case 1:
-			viewModel.type = .gym
+			viewModel.setWorkoutType(.gym)
 		default:
 			break
 		}
