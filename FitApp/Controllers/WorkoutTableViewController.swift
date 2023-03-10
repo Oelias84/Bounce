@@ -146,7 +146,6 @@ extension WorkoutTableViewController {
 		
 		exercisesVC.workout = workout
 		exercisesVC.workoutIndex = index
-		exercisesVC.exercisesState = viewModel.getExercisesState(for: index)
 		navigationController?.pushViewController(exercisesVC, animated: true)
 	}
 }

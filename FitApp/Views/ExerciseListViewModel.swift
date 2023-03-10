@@ -16,10 +16,10 @@ class ExerciseListViewModel: ObservableObject {
 	
 	var exerciseNumberToReplace: Int?
 	
-	init(workoutIndex: Int,workout: Workout, exercisesState: [ExerciseState]) {
-		self.workout = workout
+	init(workoutIndex: Int, workout: Workout) {
 		self.workoutIndex = workoutIndex
-		self.exercisesState = exercisesState
+		self.workout = WorkoutManager.shared.getCurrentWorkout(for: workoutIndex)
+		self.exercisesState = WorkoutManager.shared.getExercisesState(index: workoutIndex)
 	}
 	
 	var getExercisesCount: Int {
@@ -38,15 +38,13 @@ class ExerciseListViewModel: ObservableObject {
 		
 		return ExerciseType(rawValue: type) ?? .none
 	}
-//	var getSelectedExerciseToReplace: Exercise? {
-//		guard let selectedExerciseNumber = exerciseToReplaceNumber,
-//			  let selectedExercise = workout.exercises.first(where: {Int($0.exercise) == selectedExerciseNumber})  else { return nil }
-//		return selectedExercise.exerciseToPresent
-//	}
-//	var getExerciseType: ExerciseType {
-//		guard let selectedExerciseNumber = exerciseToReplaceNumber,
-//			  let selectedExercise = workout.exercises.first(where: {Int($0.exercise) == selectedExerciseNumber})  else { return .chest }
-//
-//		return ExerciseType(rawValue: selectedExercise.exerciseToPresent?.type ?? "") ?? .chest
-//	}
+	
+	func replaceExercise(with execiseOption: Exercise) {
+		guard let exerciseNumberToReplace else { return }
+		
+		WorkoutManager.shared.replaceExercise(exercise: exerciseNumberToReplace, with: execiseOption, workoutIndex: workoutIndex) {
+			self.exercisesState = WorkoutManager.shared.getExercisesState(index: workoutIndex)
+			objectWillChange.send()
+		}
+	}
 }

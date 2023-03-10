@@ -15,7 +15,7 @@ struct SetView: View {
 	}
 	
 	var isDeleteEnabled: Bool
-	@Binding var set: SetModel
+	@State var set: SetModel
 	@State var isEnabled: Bool = true
 	@FocusState var focusedField: SetView.Field?
 	
@@ -87,6 +87,6 @@ struct SetView_Previews: PreviewProvider {
 	@State static var setModel: SetModel = SetModel(setIndex: 10)
 
     static var previews: some View {
-		SetView(isDeleteEnabled: true, set: $setModel) {_ in }
+		SetView(isDeleteEnabled: true, set: setModel) {_ in }
     }
 }

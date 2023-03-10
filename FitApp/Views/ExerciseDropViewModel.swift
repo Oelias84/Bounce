@@ -22,8 +22,8 @@ class ExerciseDropViewModel: ObservableObject {
 	var getIndex: Int {
 		index
 	}
-	var getExercisePresentNumber: Int {
-		index + 1
+	var getExercisePresentNumber: String {
+		String(index + 1)
 	}
 	var exerciseNumber: Int? {
 		workoutExercise.exerciseToPresent?.exerciseNumber

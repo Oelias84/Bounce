@@ -31,7 +31,7 @@ struct Workouts: Codable {
 
 class WorkoutExercise: Codable {
 	
-	let exercise: String
+	var exercise: String
 	let repeats: String
 	let sets: String
 	var exerciseToPresent: Exercise?
@@ -75,11 +75,11 @@ class WorkoutStates: Codable {
 
 class ExerciseState: Codable {
 	
-	var index: Int
+	var exerciseNumber: Int
 	var setsState: [SetModel]
 	
-	init(index: Int, setsState: [SetModel] = [SetModel]()) {
-		self.index = index
+	init(exerciseNumber: Int, setsState: [SetModel] = [SetModel]()) {
+		self.exerciseNumber = exerciseNumber
 		self.setsState = setsState
 	}
 }

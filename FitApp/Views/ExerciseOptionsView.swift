@@ -11,12 +11,12 @@ struct ExerciseOptionsView: View {
 	
 	@State var exercise: Exercise
 	
-	let changeExerciseAction: (Int?)->Void
+	let changeExerciseAction: (Exercise)->Void
 	
 	var body: some View {
 		HStack {
 			Button {
-				changeExerciseAction(exercise.exerciseNumber)
+				changeExerciseAction(exercise)
 			} label: {
 				VStack() {
 					Text(exercise.name)

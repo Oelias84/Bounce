@@ -10,6 +10,8 @@ import SwiftUI
 struct ExerciseOptionsListSheetView: View {
 	
 	@ObservedObject var viewModel: ExerciseOptionsListSheetViewModel
+
+	let selectedExerciseOption: (Exercise)->Void
 	
 	var body: some View {
 		VStack{
@@ -17,8 +19,8 @@ struct ExerciseOptionsListSheetView: View {
 				ForEach(0..<viewModel.getExerciseOptionCount, id: \.self) { index in
 					let exercise = viewModel.getExerciseOptions(at: index)
 					
-					ExerciseOptionsView(exercise: exercise) { exerciseNumber in
-						
+					ExerciseOptionsView(exercise: exercise) { selectedExercise in
+						selectedExerciseOption(selectedExercise)
 					}
 					.padding(.horizontal)
 				}
@@ -32,6 +34,6 @@ struct ExerciseOptionsListSheetView: View {
 
 struct ExercisePotionsView_Previews: PreviewProvider {
 	static var previews: some View {
-		ExerciseOptionsListSheetView(viewModel: ExerciseOptionsListSheetViewModel(exerciseType: .chest, workoutIndex: 0))
+		ExerciseOptionsListSheetView(viewModel: ExerciseOptionsListSheetViewModel(exerciseType: .chest, workoutIndex: 0)) {_ in}
 	}
 }

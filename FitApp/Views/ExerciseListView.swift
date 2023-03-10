@@ -21,18 +21,19 @@ struct ExerciseListView: View {
 		ScrollView {
 			ForEach(0..<exerciseListViewModel.getExercisesCount, id: \.self) { index in
 				let workoutExercise = exerciseListViewModel.getWorkoutExercise(at: index)
-				let exerciseState = $exerciseListViewModel.exercisesState[index]
+				let exerciseState = exerciseListViewModel.exercisesState.first(where: {$0.exerciseNumber == Int(workoutExercise.exercise)}) ?? ExerciseState(exerciseNumber: Int(workoutExercise.exercise)!)
 				
-				HStack {
+				VStack {
 					ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: index, workoutExercise: workoutExercise),
 											  exerciseState: exerciseState, focusedField: _focusedField) { exerciseIndex in
 						// Call back for moving into the exercise detail
 						selectedExercise(exerciseIndex)
-					} replacerButtonAction: { exerciseNumberToRepldce in
-						exerciseListViewModel.exerciseNumberToReplace = exerciseNumberToRepldce
+					} replacerButtonAction: { exerciseNumberToReplace in
+						exerciseListViewModel.exerciseNumberToReplace = exerciseNumberToReplace
 						isShowingExerciseOptions.toggle()
 					}
-					.padding(.horizontal)}
+					.padding(.horizontal)
+				}
 			}
 		}
 		.background(Color(UIColor.projectBackgroundColor))
@@ -51,7 +52,10 @@ struct ExerciseListView: View {
 			}
 		}
 		.sheet(isPresented: $isShowingExerciseOptions) {
-			ExerciseOptionsListSheetView(viewModel: ExerciseOptionsListSheetViewModel(exerciseType: exerciseListViewModel.getSelectedExerciseType, workoutIndex: exerciseListViewModel.getWorkoutIndex))
+			ExerciseOptionsListSheetView(viewModel: ExerciseOptionsListSheetViewModel(exerciseType: exerciseListViewModel.getSelectedExerciseType, workoutIndex: exerciseListViewModel.getWorkoutIndex)) { selectedExerciseOption in
+				exerciseListViewModel.replaceExercise(with: selectedExerciseOption)
+				isShowingExerciseOptions.toggle()
+			}
 		}
 	}
 }
@@ -62,10 +66,8 @@ struct ExerciseListView_Previews: PreviewProvider {
 		let exercise = Exercise(name: "Upper", videos: ["gs://my-fit-app-a8595.appspot.com/42"], title: "רגליים", text: "", maleText: "", type: "legs", exerciseNumber: 0)
 		let workExercise = WorkoutExercise(exercise: "1", repeats: "15-20", sets: "4", exerciseToPresent: exercise)
 		let workout = Workout(exercises: [workExercise], name: "", time: "", type: 1)
-		let exerciseState = ExerciseState(index: 0)
-		let exercisesState: [ExerciseState] = [exerciseState]
 		
-		ExerciseListView(exerciseListViewModel: ExerciseListViewModel(workoutIndex: 0, workout: workout, exercisesState: exercisesState)) { index in
+		ExerciseListView(exerciseListViewModel: ExerciseListViewModel(workoutIndex: 0, workout: workout)) { index in
 			return
 		} endEditing: {
 			return

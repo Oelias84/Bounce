@@ -9,13 +9,13 @@ import SwiftUI
 
 struct ExerciseView: View {
 		
-	@State var index: Int
-	@State var name: String
-	@State var type: String
-	@State var exerciseNumber: Int?
-	@State var numberOfSetes: String
-	@State var numberOfRepeats: String
-	@State var presentedNumber: String
+	var index: Int
+	var name: String
+	var type: String
+	var exerciseNumber: Int?
+	var numberOfSetes: String
+	var numberOfRepeats: String
+	var presentedNumber: String
 		
 	@Binding var showDetails: Bool
 	

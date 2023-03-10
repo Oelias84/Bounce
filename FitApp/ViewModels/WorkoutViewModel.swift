@@ -42,7 +42,7 @@ class WorkoutViewModel {
 		}
 	}
 	func getWorkout(for index: Int) -> Workout? {
-		workoutManager.getCurrentWorkout(by: type, for: index)
+		workoutManager.getCurrentWorkout(for: index)
 	}
 	func getWorkoutState(for index: Int) -> WorkoutState {
 		workoutManager.getWorkoutState(by: type, for: index)
@@ -53,6 +53,6 @@ class WorkoutViewModel {
 		}
 	}
 	func getExercisesState(for index: Int) -> [ExerciseState] {
-		workoutManager.getExercisesState(by: type, index: index)
+		workoutManager.getExercisesState(index: index)
 	}
 }
