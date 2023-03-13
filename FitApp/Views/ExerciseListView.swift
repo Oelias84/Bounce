@@ -18,7 +18,7 @@ struct ExerciseListView: View {
 	@State private var isShowingExerciseOptions = false
 
 	var body: some View {
-		ScrollView {
+        ScrollView(showsIndicators: false) {
 			ForEach(0..<viewModel.getExercisesCount, id: \.self) { index in
 				let workoutExercise = viewModel.getWorkoutExercise(at: index)
                 let exerciseState = $viewModel.exercisesState.first(where: {$0.exerciseNumber.wrappedValue == workoutExercise.exerciseToPresent!.exerciseNumber ?? 0})!
