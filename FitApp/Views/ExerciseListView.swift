@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ExerciseListView: View {
 	
-	@StateObject var exerciseListViewModel: ExerciseListViewModel
+	@StateObject var viewModel: ExerciseListViewModel
 	@FocusState var focusedField: SetView.Field?
 	
 	let selectedExercise: (Int)->()
@@ -19,21 +19,22 @@ struct ExerciseListView: View {
 
 	var body: some View {
 		ScrollView {
-			ForEach(0..<exerciseListViewModel.getExercisesCount, id: \.self) { index in
-				let workoutExercise = exerciseListViewModel.getWorkoutExercise(at: index)
-				let exerciseState = exerciseListViewModel.exercisesState.first(where: {$0.exerciseNumber == Int(workoutExercise.exercise)}) ?? ExerciseState(exerciseNumber: Int(workoutExercise.exercise)!)
-				
-				VStack {
-					ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: index, workoutExercise: workoutExercise),
-											  exerciseState: exerciseState, focusedField: _focusedField) { exerciseIndex in
-						// Call back for moving into the exercise detail
-						selectedExercise(exerciseIndex)
-					} replacerButtonAction: { exerciseNumberToReplace in
-						exerciseListViewModel.exerciseNumberToReplace = exerciseNumberToReplace
-						isShowingExerciseOptions.toggle()
-					}
-					.padding(.horizontal)
-				}
+			ForEach(0..<viewModel.getExercisesCount, id: \.self) { index in
+				let workoutExercise = viewModel.getWorkoutExercise(at: index)
+                let exerciseState = $viewModel.exercisesState.first(where: {$0.exerciseNumber.wrappedValue == workoutExercise.exerciseToPresent!.exerciseNumber ?? 0})!
+                    
+                
+                    VStack {
+                        ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: index, workoutExercise: workoutExercise),
+                                                  exerciseState: exerciseState, focusedField: _focusedField) { exerciseIndex in
+                            // Call back for moving into the exercise detail
+                            selectedExercise(exerciseIndex)
+                        } replacerButtonAction: { exerciseNumberToReplace in
+                            viewModel.exerciseNumberToReplace = exerciseNumberToReplace
+                            isShowingExerciseOptions.toggle()
+                        }
+                        .padding(.horizontal)
+                    }
 			}
 		}
 		.background(Color(UIColor.projectBackgroundColor))
@@ -52,8 +53,8 @@ struct ExerciseListView: View {
 			}
 		}
 		.sheet(isPresented: $isShowingExerciseOptions) {
-			ExerciseOptionsListSheetView(viewModel: ExerciseOptionsListSheetViewModel(exerciseType: exerciseListViewModel.getSelectedExerciseType, workoutIndex: exerciseListViewModel.getWorkoutIndex)) { selectedExerciseOption in
-				exerciseListViewModel.replaceExercise(with: selectedExerciseOption)
+			ExerciseOptionsListSheetView(viewModel: ExerciseOptionsListSheetViewModel(exerciseType: viewModel.getSelectedExerciseType, workoutIndex: viewModel.getWorkoutIndex)) { selectedExerciseOption in
+				viewModel.replaceExercise(with: selectedExerciseOption)
 				isShowingExerciseOptions.toggle()
 			}
 		}
@@ -67,7 +68,7 @@ struct ExerciseListView_Previews: PreviewProvider {
 		let workExercise = WorkoutExercise(exercise: "1", repeats: "15-20", sets: "4", exerciseToPresent: exercise)
 		let workout = Workout(exercises: [workExercise], name: "", time: "", type: 1)
 		
-		ExerciseListView(exerciseListViewModel: ExerciseListViewModel(workoutIndex: 0, workout: workout)) { index in
+		ExerciseListView(viewModel: ExerciseListViewModel(workoutIndex: 0)) { index in
 			return
 		} endEditing: {
 			return

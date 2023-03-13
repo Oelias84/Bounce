@@ -13,7 +13,7 @@ class Workout: Codable {
     var name: String
 	var time: String
     var type: Int
-	
+    
 	init(exercises: [WorkoutExercise], name: String, time: String, type: Int) {
 		self.exercises = exercises
 		self.name = name
@@ -103,8 +103,8 @@ struct SetModel: Codable, Identifiable {
 	
 	var id = UUID()
 	var setIndex: Int!
-	var repeats: Int? = nil
-	var weight: Double? = nil
+	var repeats: Int?
+	var weight: Double?
 	
 	init(setIndex: Int) {
 		self.setIndex = setIndex

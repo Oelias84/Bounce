@@ -10,13 +10,14 @@ import Foundation
 
 class ExerciseListViewModel: ObservableObject {
 	
-	private let workoutIndex: Int
+    let workoutIndex: Int
 	@Published var workout: Workout!
 	@Published var exercisesState: [ExerciseState]
-	
+    @Published var workoutManager: WorkoutManager = WorkoutManager.shared
+    
 	var exerciseNumberToReplace: Int?
 	
-	init(workoutIndex: Int, workout: Workout) {
+	init(workoutIndex: Int) {
 		self.workoutIndex = workoutIndex
 		self.workout = WorkoutManager.shared.getCurrentWorkout(for: workoutIndex)
 		self.exercisesState = WorkoutManager.shared.getExercisesState(index: workoutIndex)
