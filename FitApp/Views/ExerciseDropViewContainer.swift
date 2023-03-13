@@ -24,15 +24,19 @@ struct ExerciseDropViewContainer: View {
         VStack(alignment: .leading) {
             //MARK: - Exercise view
             ExerciseView(index: viewModel.getIndex, name: viewModel.getName, type: viewModel.getType, exerciseNumber: viewModel.exerciseNumber, numberOfSetes: viewModel.getNumberOfSets,
-                         numberOfRepeats: viewModel.getNumberOfRepeats, presentedNumber: viewModel.getExercisePresentNumber, showDetails: $showDetails, action: action, replacerButtonAction: replacerButtonAction) {
-                
+                         numberOfRepeats: viewModel.getNumberOfRepeats, presentedNumber: viewModel.getExercisePresentNumber, showDetails: $showDetails, action: action) { exerciseToReplace in
+                // Replce exercise clicked
+                showDetails.toggle()
+                replacerButtonAction(exerciseToReplace)
+            } dropDownAction: {
+                // Open sets infomatio clicked
                 showDetails.toggle()
                 // Adding first set
                 if exerciseState.setsState.count == 0 && showDetails {
                     exerciseState.setsState.append(SetModel(setIndex: 0))
                 }
             }
-            
+                         
             //MARK: - Dropdown View
             if showDetails {
                 Divider()
