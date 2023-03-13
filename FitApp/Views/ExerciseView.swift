@@ -29,15 +29,20 @@ struct ExerciseView: View {
 				
 				//MARK: - Title Text
 				VStack(alignment: .leading) {
-					Text("תרגיל \(presentedNumber)#")
-						.font(Font.custom(K.Fonts.regularText, size: 14))
+                    HStack {
+                        Text("תרגיל \(presentedNumber)#")
+                            .font(Font.custom(K.Fonts.regularText, size: 14))
+                        
+                        //MARK: - Tag View
+                        exerciseTag
+                    }
 					Text(name)
 						.font(Font.custom(K.Fonts.boldText, size: 22))
 				}
 				.padding(.bottom, 8)
-				
-				Spacer()
-				
+
+                Spacer()
+
 				//MARK: - Replacer Button
 				Button {
 					guard let exerciseNumber else { return }
@@ -49,8 +54,6 @@ struct ExerciseView: View {
 						.frame(width: 24, height: 24)
 						.foregroundColor(Color(UIColor.projectGreen))
 				}
-				//MARK: - Tag View
-				exerciseTag
 			}
 			
 			HStack(alignment: .center) {
