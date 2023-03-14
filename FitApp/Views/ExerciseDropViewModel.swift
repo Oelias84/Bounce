@@ -13,9 +13,12 @@ class ExerciseDropViewModel: ObservableObject {
 	
 	private let index: Int
 	private let workoutExercise: WorkoutExercise
-
-	init(index: Int, workoutExercise: WorkoutExercise) {
+    
+    @Published var exerciseState: ExerciseState
+    
+    init(index: Int, workoutExercise: WorkoutExercise, exerciseState: ExerciseState) {
 		self.index = index
+        self.exerciseState = exerciseState
 		self.workoutExercise = workoutExercise
 	}
 	

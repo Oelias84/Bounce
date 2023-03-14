@@ -13,13 +13,12 @@ struct ExerciseDropViewContainer: View {
     @ObservedObject var viewModel: ExerciseDropViewModel
     
     @State var showDetails: Bool = false
-    @Binding var exerciseState: ExerciseState
+    @State var isSetViewLock: Bool = false
     
     @FocusState var focusedField: SetView.Field?
     
     let action: (Int)->()
     let replacerButtonAction: (Int)->Void
-    
     var body: some View {
         VStack(alignment: .leading) {
             //MARK: - Exercise view
@@ -32,8 +31,12 @@ struct ExerciseDropViewContainer: View {
                 // Open sets infomatio clicked
                 showDetails.toggle()
                 // Adding first set
-                if exerciseState.setsState.count == 0 && showDetails {
-                    exerciseState.setsState.append(SetModel(setIndex: 0))
+                if viewModel.exerciseState.setsState.count == 0 && showDetails {
+                    // Add First Set if dose not exist
+                    let newSet = SetModel(setIndex: 0)
+                    $viewModel.exerciseState.setsState.wrappedValue.append(newSet)
+                    // Update Server
+                    WorkoutManager.shared.updateWorkoutStates()
                 }
             }
                          
@@ -41,20 +44,27 @@ struct ExerciseDropViewContainer: View {
             if showDetails {
                 Divider()
                 LazyVStack(alignment: .leading, spacing: 8) {
-                    ForEach(0..<$exerciseState.setsState.count, id: \.self) { index in
-                        let setsState = $exerciseState.setsState[index]
-                        let deleteEnable = setsState.setIndex.wrappedValue == $exerciseState.setsState.count-1
+                    ForEach(0..<$viewModel.exerciseState.setsState.count, id: \.self) { index in
+                        let setsState = $viewModel.exerciseState.setsState[index]
+                        let deleteEnable = setsState.setIndex.wrappedValue == $viewModel.exerciseState.setsState.count-1
                         
                         SetView(isDeleteEnabled: deleteEnable, set: setsState, focusedField: _focusedField) { id in
                             withAnimation {
+                                // Disable the view from interaction
+                                isSetViewLock = true
                                 // Toggle show details button if last set deleted
-                                if exerciseState.setsState.count == 1 { showDetails.toggle() }
+                                if viewModel.exerciseState.setsState.count == 1 { showDetails.toggle() }
                                 // Remove if find
-                                exerciseState.setsState.removeAll(where: {$0.id == id})
+                                $viewModel.exerciseState.setsState.wrappedValue.removeAll(where: {$0.id == id})
                                 // Update Server
                                 WorkoutManager.shared.updateWorkoutStates()
+                                // Realse the view from interaction
+                                DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                                    isSetViewLock = false
+                                }
                             }
                         }
+                        .allowsHitTesting(!isSetViewLock)
                     }
                 }
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: showDetails ? .infinity : .none)
@@ -64,7 +74,10 @@ struct ExerciseDropViewContainer: View {
                 HStack {
                     Button {
                         withAnimation {
-                            exerciseState.setsState.append(SetModel(setIndex: exerciseState.setsState.count))
+                            // Add Set
+                            let newSet = SetModel(setIndex: viewModel.exerciseState.setsState.count)
+                            $viewModel.exerciseState.setsState.wrappedValue.append(newSet)
+                            // Change Focuse
                             focusedField = .repeatsField
                         }
                     } label: {
@@ -73,6 +86,7 @@ struct ExerciseDropViewContainer: View {
                             .foregroundColor(Color(UIColor.projectTail))
                     }
                     .padding(2)
+                    
                     Spacer()
                 }
             }
@@ -91,7 +105,7 @@ struct ExerciseDropView_Previews: PreviewProvider {
     @State static var exercise: WorkoutExercise = WorkoutExercise(exercise: "1", repeats: "12", sets: "12", exerciseToPresent: nil)
     
     static var previews: some View {
-        ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: 1, workoutExercise: exercise), exerciseState: $exerciseState) { _ in
+        ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: 1, workoutExercise: exercise, exerciseState: exerciseState)) { _ in
             
         } replacerButtonAction: { _ in
             
