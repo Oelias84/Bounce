@@ -63,22 +63,21 @@ struct SetView: View {
 			// Remove Button
 			Spacer()
 			if isDeleteEnabled {
-				Button {
-					focusedField = nil
-					isEnabled = false
-					
-					withAnimation {
-						DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
-							action(set.id)
-							isEnabled = true
-						}
-					}
-				} label: {
-					Image(systemName: "xmark")
-						.frame(width: 16, height: 16)
-						.foregroundColor(Color(UIColor.red))
-				}
-				.allowsHitTesting(isEnabled)
+                withAnimation {
+                    Button {
+                        focusedField = nil
+                        isEnabled = false
+                        
+                        withAnimation {
+                            action(set.id)
+                        }
+                    } label: {
+                        Image(systemName: "xmark")
+                            .frame(width: 16, height: 16)
+                            .foregroundColor(Color(UIColor.red))
+                    }
+                    .allowsHitTesting(isEnabled)
+                }
 			}
 		}
 	}
