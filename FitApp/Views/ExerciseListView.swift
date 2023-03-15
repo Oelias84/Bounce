@@ -53,7 +53,7 @@ struct ExerciseListView: View {
         .sheet(isPresented: $isShowingExerciseOptions) {
             ExerciseOptionsListSheetView(viewModel: ExerciseOptionsListSheetViewModel(exerciseType: viewModel.getSelectedExerciseType, workoutIndex: viewModel.getWorkoutIndex)) { selectedExerciseOption in
                 viewModel.replaceExercise(with: selectedExerciseOption)
-                isShowingExerciseOptions = false
+                isShowingExerciseOptions.toggle()
             }
         }
     }
@@ -63,6 +63,7 @@ struct ExerciseListView_Previews: PreviewProvider {
     
     static var previews: some View {
         let exercise = Exercise(name: "Upper", videos: ["gs://my-fit-app-a8595.appspot.com/42"], title: "רגליים", text: "", maleText: "", type: "legs", exerciseNumber: 0)
+        let workExercise = WorkoutExercise(exercise: "1", repeats: "15-20", sets: "4", exerciseToPresent: exercise)
         
         ExerciseListView(viewModel: ExerciseListViewModel(workoutIndex: 0)) { index in
             return

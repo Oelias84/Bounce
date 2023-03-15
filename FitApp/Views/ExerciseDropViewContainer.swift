@@ -25,7 +25,7 @@ struct ExerciseDropViewContainer: View {
             ExerciseView(index: viewModel.getIndex, name: viewModel.getName, type: viewModel.getType, exerciseNumber: viewModel.exerciseNumber, numberOfSetes: viewModel.getNumberOfSets,
                          numberOfRepeats: viewModel.getNumberOfRepeats, presentedNumber: viewModel.getExercisePresentNumber, showDetails: $showDetails, action: action) { exerciseToReplace in
                 // Replce exercise clicked
-                showDetails.toggle()
+                showDetails = false
                 replacerButtonAction(exerciseToReplace)
             } dropDownAction: {
                 // Open sets infomatio clicked
@@ -66,28 +66,6 @@ struct ExerciseDropViewContainer: View {
                         }
                         
                     }
-                    
-//                    ForEach(viewModel.exerciseState.setsState.indices, id: \.self) { index in
-//                        let setsState = $viewModel.exerciseState.setsState[index]
-//                        let deleteEnable = setsState.setIndex.wrappedValue == $viewModel.exerciseState.setsState.count-1
-//
-//                        SetView(isDeleteEnabled: deleteEnable, set: setsState, focusedField: _focusedField) { id in
-//
-//                            // Toggle show details button if last set deleted
-//                            if viewModel.exerciseState.setsState.count == 1 {
-//                                withAnimation {
-//                                    showDetails.toggle()
-//                                }
-//                            }
-//
-//                            // Remove if find
-//                            if let index = $viewModel.exerciseState.setsState.wrappedValue.firstIndex(where: {$0.id == id}) {
-//                                $viewModel.exerciseState.setsState.wrappedValue.remove(at: index)
-//                            }
-//                            // Update Server
-//                            WorkoutManager.shared.updateWorkoutStates()
-//                        }
-//                    }
                 }
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: showDetails ? .infinity : .none)
                 .clipped()
