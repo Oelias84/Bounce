@@ -10,7 +10,7 @@ import SwiftUI
 import Foundation
 
 class ExerciseDropViewModel: ObservableObject {
-	
+    
 	private let index: Int
 	private let workoutExercise: WorkoutExercise
     

@@ -39,54 +39,75 @@ struct ExerciseDropViewContainer: View {
                     WorkoutManager.shared.updateWorkoutStates()
                 }
             }
-                         
+            
             //MARK: - Dropdown View
             if showDetails {
                 Divider()
-                LazyVStack(alignment: .leading, spacing: 8) {
-                    ForEach(0..<$viewModel.exerciseState.setsState.count, id: \.self) { index in
-                        let setsState = $viewModel.exerciseState.setsState[index]
-                        let deleteEnable = setsState.setIndex.wrappedValue == $viewModel.exerciseState.setsState.count-1
-                        
-                        SetView(isDeleteEnabled: deleteEnable, set: setsState, focusedField: _focusedField) { id in
-                            withAnimation {
-                                // Disable the view from interaction
-                                isSetViewLock = true
-                                // Toggle show details button if last set deleted
-                                if viewModel.exerciseState.setsState.count == 1 { showDetails.toggle() }
-                                // Remove if find
-                                $viewModel.exerciseState.setsState.wrappedValue.removeAll(where: {$0.id == id})
-                                // Update Server
-                                WorkoutManager.shared.updateWorkoutStates()
-                                // Realse the view from interaction
-                                DispatchQueue.main.asyncAfter(deadline: .now()+1) {
-                                    isSetViewLock = false
+                VStack(alignment: .leading, spacing: 8) {
+                    
+                    ForEach($viewModel.exerciseState.setsState) { setsState in
+                        let deleteEnable = setsState.setIndex.wrappedValue == viewModel.exerciseState.setsState.count-1
+
+                        SetView(isDeleteEnabled: deleteEnable, set: setsState, id: setsState.id, focusedField: _focusedField) { id in
+                            
+                            // Toggle show details button if last set deleted
+                            if viewModel.exerciseState.setsState.count == 1 {
+                                withAnimation {
+                                    showDetails.toggle()
                                 }
                             }
+                            
+                            // Remove if find
+                            if let index = $viewModel.exerciseState.setsState.wrappedValue.firstIndex(where: {$0.id == id}) {
+                                $viewModel.exerciseState.setsState.wrappedValue.remove(at: index)
+                            }
+                            // Update Server
+                            WorkoutManager.shared.updateWorkoutStates()
                         }
-                        .allowsHitTesting(!isSetViewLock)
+                        
                     }
+                    
+//                    ForEach(viewModel.exerciseState.setsState.indices, id: \.self) { index in
+//                        let setsState = $viewModel.exerciseState.setsState[index]
+//                        let deleteEnable = setsState.setIndex.wrappedValue == $viewModel.exerciseState.setsState.count-1
+//
+//                        SetView(isDeleteEnabled: deleteEnable, set: setsState, focusedField: _focusedField) { id in
+//
+//                            // Toggle show details button if last set deleted
+//                            if viewModel.exerciseState.setsState.count == 1 {
+//                                withAnimation {
+//                                    showDetails.toggle()
+//                                }
+//                            }
+//
+//                            // Remove if find
+//                            if let index = $viewModel.exerciseState.setsState.wrappedValue.firstIndex(where: {$0.id == id}) {
+//                                $viewModel.exerciseState.setsState.wrappedValue.remove(at: index)
+//                            }
+//                            // Update Server
+//                            WorkoutManager.shared.updateWorkoutStates()
+//                        }
+//                    }
                 }
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: showDetails ? .infinity : .none)
                 .clipped()
                 
                 //MARK: - Add Set Button
                 HStack {
-                    Button {
-                        withAnimation {
+                    withAnimation {
+                        Button {
                             // Add Set
                             let newSet = SetModel(setIndex: viewModel.exerciseState.setsState.count)
-                            $viewModel.exerciseState.setsState.wrappedValue.append(newSet)
-                            // Change Focuse
-                            focusedField = .repeatsField
+                            withAnimation {
+                                $viewModel.exerciseState.setsState.wrappedValue.append(newSet)
+                            }
+                        } label: {
+                            Image(systemName: "plus.circle")
+                                .frame(width: 16, height: 16)
+                                .foregroundColor(Color(UIColor.projectTail))
                         }
-                    } label: {
-                        Image(systemName: "plus.circle")
-                            .frame(width: 16, height: 16)
-                            .foregroundColor(Color(UIColor.projectTail))
+                        .padding(2)
                     }
-                    .padding(2)
-                    
                     Spacer()
                 }
             }

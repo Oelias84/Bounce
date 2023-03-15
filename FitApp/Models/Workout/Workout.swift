@@ -99,7 +99,7 @@ struct WorkoutStatesData: Codable {
 	
 	let workoutStatesData: [WorkoutStates]
 }
-struct SetModel: Codable, Identifiable {
+struct SetModel: Codable, Identifiable, Equatable {
 	
 	var id = UUID()
 	var setIndex: Int!

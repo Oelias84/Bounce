@@ -9,13 +9,13 @@ import SwiftUI
 import Foundation
 
 class ExerciseListViewModel: ObservableObject {
-	
-    let workoutIndex: Int
+    
 	@Published var workout: Workout!
 	@Published var exercisesState: [ExerciseState]
     @Published var workoutManager: WorkoutManager = WorkoutManager.shared
     
-	var exerciseNumberToReplace: Int?
+    private let workoutIndex: Int
+    var exerciseNumberToReplace: Int?
 	
 	init(workoutIndex: Int) {
 		self.workoutIndex = workoutIndex
