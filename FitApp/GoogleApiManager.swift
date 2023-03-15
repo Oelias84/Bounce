@@ -357,68 +357,106 @@ struct GoogleApiManager {
 			}
 		}
 	}
-	
-	//MARK: - Workouts
-	func getWorkouts(forFitnessLevel: Int, completion: @escaping (Result<[Workout], Error>) -> Void) {
-		do {
-			db.collection("workouts-data").document("workouts").getDocument(source: .default, completion: { (data, error) in
-				if let error = error {
-					print(error)
-				} else if let data = data {
-					do {
-						var workouts: [Workout] = []
-						if let workoutsData = try data.data(as: Workouts.self) {
-							
-							switch forFitnessLevel {
-							case 1:
-								workouts = workoutsData.beginner
-								completion(.success(workouts))
-							case 2:
-								workouts = workoutsData.intermediate
-								completion(.success(workouts))
-							case 3:
-								workouts = workoutsData.advance
-								completion(.success(workouts))
-							default:
-								break
-							}
-						}
-					} catch {
-						print(error)
-						completion(.failure(error))
-					}
-				}
-			})
-		}
-	}
-	func updateWorkoutState(_ workoutsState: [WorkoutStates]) {
-		let data = WorkoutStatesData(workoutStatesData: workoutsState)
-		
-		do {
-			try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-state").document("workout-state").setData(from: data, merge: true)
-		} catch {
-			print(error)
-		}
-	}
-	func getWorkoutsState(completion: @escaping (Result<[WorkoutStates]?, Error>) -> Void) {
-		do {
-			db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-state").document("workout-state").getDocument(completion: { (documentSnapshot, error) in
-				if let error = error {
-					print(error)
-				} else if let data = documentSnapshot {
-					do {
-						var workoutStates: [WorkoutStates]? = nil
-						let weightStatesData = try data.data(as: WorkoutStatesData.self)
-						workoutStates = weightStatesData?.workoutStatesData
-						completion(.success(workoutStates))
-					} catch {
-						print(error)
-						completion(.failure(error))
-					}
-				}
-			})
-		}
-	}
+    
+    //MARK: - Preferred Workout
+    func removePreferredWorkout() {
+        db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("preferred-workout").delete()
+    }
+    func getPreferredWorkouts(completion: @escaping (UserPreferredWorkouts?) -> Void) {
+        do {
+            db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("preferred-workout").getDocument(completion: { (data, error) in
+                if let error = error {
+                    print("Error in getPreferredWorkouts: ", error)
+                } else if let data = data {
+                    do {
+                        if let decodedData = try data.data(as: UserPreferredWorkouts.self) {
+                            completion(decodedData)
+                        } else {
+                            completion(nil)
+                        }
+                    } catch {
+                        print("Error in getPreferredWorkouts: ", error)
+                    }
+                }
+            })
+        }
+    }
+    func updatePreferredWorkouts(_ data: UserPreferredWorkouts, completion: @escaping () -> Void) {
+        do {
+            try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("preferred-workout").setData(from: data.self, merge: true) { error in
+                if let error = error {
+                    print("Error in updatePreferredWorkouts: ", error)
+                } else {
+                    completion()
+                }
+            }
+        } catch {
+            print("Error in updatePreferredWorkouts: ", error)
+        }
+    }
+    
+    //MARK: - Workouts
+    //Home Workout
+    func getWorkouts(forFitnessLevel: Int, completion: @escaping (Result<[Workout], Error>) -> Void) {
+        do {
+            db.collection("workouts-data").document("workouts").getDocument(source: .default, completion: { (data, error) in
+                if let error = error {
+                    print(error)
+                } else if let data = data {
+                    do {
+                        var workouts: [Workout] = []
+                        if let workoutsData = try data.data(as: Workouts.self) {
+                            
+                            switch forFitnessLevel {
+                            case 1:
+                                workouts = workoutsData.beginner
+                                completion(.success(workouts))
+                            case 2:
+                                workouts = workoutsData.intermediate
+                                completion(.success(workouts))
+                            case 3:
+                                workouts = workoutsData.advance
+                                completion(.success(workouts))
+                            default:
+                                break
+                            }
+                        }
+                    } catch {
+                        print(error)
+                        completion(.failure(error))
+                    }
+                }
+            })
+        }
+    }
+    func updateWorkoutState(_ workoutsState: [WorkoutStates]) {
+        let data = WorkoutStatesData(workoutStatesData: workoutsState)
+        
+        do {
+            try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("workout-state").setData(from: data, merge: true)
+        } catch {
+            print(error)
+        }
+    }
+    func getWorkoutsState(completion: @escaping (Result<[WorkoutStates]?, Error>) -> Void) {
+        do {
+            db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("workout-state").getDocument(completion: { (documentSnapshot, error) in
+                if let error = error {
+                    print(error)
+                } else if let data = documentSnapshot {
+                    do {
+                        var workoutStates: [WorkoutStates]? = nil
+                        let weightStatesData = try data.data(as: WorkoutStatesData.self)
+                        workoutStates = weightStatesData?.workoutStatesData
+                        completion(.success(workoutStates))
+                    } catch {
+                        print(error)
+                        completion(.failure(error))
+                    }
+                }
+            })
+        }
+    }
 	func getExerciseBy(completion: @escaping (Result<[Exercise], Error>) -> Void) {
 		do {
 			db.collection("workouts-data").document("exercises").getDocument(source: .default, completion: { (data, error) in
@@ -437,7 +475,7 @@ struct GoogleApiManager {
 			})
 		}
 	}
-	
+	//Gym Workout
 	func getGymWorkouts(forFitnessLevel: Int, completion: @escaping (Result<[Workout], Error>) -> Void) {
 		do {
 			db.collection("workouts-data").document("gym-workouts").getDocument(source: .default, completion: { (data, error) in
