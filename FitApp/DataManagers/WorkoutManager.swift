@@ -36,7 +36,6 @@ class WorkoutManager {
     
     static let shared = WorkoutManager()
     
-    //	private var userPreferredWorkout: UserPreferredWorkout?
     
     private var currentWorkoutType: WorkoutType = .home
     
@@ -49,6 +48,8 @@ class WorkoutManager {
     private var homeExercisesByType: [HomeExercisesByType] = []
     private var gymExercisesByType: [HomeExercisesByType] = []
     
+    private var userPreferredWorkout: UserPreferredWorkouts?
+    
     private var workoutsStates: [WorkoutStates]? = [WorkoutStates]()
     
     private let googleManager = GoogleApiManager()
@@ -58,6 +59,10 @@ class WorkoutManager {
     private init() {
         let group = DispatchGroup()
         
+        group.enter()
+        fetchPreferredWorkout {
+            group.leave()
+        }
         group.enter()
         fetchWorkoutsState {
             group.leave()
@@ -93,7 +98,7 @@ class WorkoutManager {
         }
     }
     
-    // Getters
+    //MARK: - Getters
     var getCurrentWorkoutType: WorkoutType {
         currentWorkoutType
     }
@@ -178,19 +183,13 @@ class WorkoutManager {
         
         // Filter used exercises from exercises options list
         let flitteredOptions = exercisesOptions.filter {
-            guard let exercise = $0.exerciseNumber else { return false }
-            return !exercisesToRemove.contains(exercise)
+            return !exercisesToRemove.contains($0.exerciseNumber)
         }
         
         // Return filtered exercises
         return flitteredOptions
     }
     func replaceExercise(exercise exerciseNumber: Int, with exerciseOption: Exercise, workoutIndex: Int, completion: ()->()) {
-        
-        //		if let userPreferredWorkout = userPreferredWorkout {
-        //
-        //
-        //		} else {
         // Get the current workout by workout type and index
         var currentWorkout: Workout {
             switch self.currentWorkoutType {
@@ -200,23 +199,64 @@ class WorkoutManager {
                 return gymWorkouts[workoutIndex]
             }
         }
-        
         guard let exerciseIndex = currentWorkout.exercises.firstIndex(where: {$0.exerciseToPresent?.exerciseNumber == exerciseNumber}) else { return }
-        
+
         let exercise = currentWorkout.exercises[Int(exerciseIndex)]
-        exercise.exercise = String(exerciseOption.exerciseNumber!)
+        exercise.exercise = String(exerciseOption.exerciseNumber)
         exercise.exerciseToPresent = exerciseOption
         
+        // If user has Preferred workout
+        if var userPreferredWorkout = userPreferredWorkout {
+            switch currentWorkoutType {
+            case .home:
+                userPreferredWorkout.homeWorkouts[workoutIndex] = currentWorkout
+            case .gym:
+                userPreferredWorkout.gymWorkouts[workoutIndex] = currentWorkout
+            }
+            
+            
+            
+            
+            self.updatePreferredWorkouts {
+                self.userPreferredWorkout = userPreferredWorkout
+            }
+        } else {
+            
+            let preferredWorkoutData = UserPreferredWorkouts(homeWorkouts: homeWorkouts, gymWorkouts: gymWorkouts)
+            self.userPreferredWorkout = preferredWorkoutData
+            self.updatePreferredWorkouts {}
+        }
+        
+        // Update WorkoutState if contained
         guard let workoutState = workoutsStates?.first(where: {$0.workoutType == currentWorkoutType}) else {
             completion()
             return
         }
-        workoutState.workoutStates[workoutIndex].exercisesStates.append(ExerciseState(exerciseNumber: exerciseOption.exerciseNumber!))
         
+        workoutState.workoutStates[workoutIndex].exercisesStates.append(ExerciseState(exerciseNumber: exerciseOption.exerciseNumber))
         completion()
     }
-    // Fetch
-    /// Workouts
+
+    private func filterExerciseByType(exercisesData: [Exercise]) -> [HomeExercisesByType] {
+        var exercisesByType: [HomeExercisesByType] = []
+        
+        for i in 0..<exercisesData.count {
+            let exercise = exercisesData[i]
+            guard let exerciseType = ExerciseType(rawValue: exercise.type) else { return exercisesByType }
+            
+            if exercisesByType.contains(where: {$0.type == exerciseType}) {
+                let containedExerciseType = exercisesByType.first(where: {$0.type == exerciseType})
+                containedExerciseType?.exercises.append(exercise)
+            } else {
+                let exerciseByType = HomeExercisesByType(type: exerciseType, exercises: [exercise])
+                exercisesByType.append(exerciseByType)
+            }
+        }
+        return exercisesByType
+    }
+
+    //MARK: - Fetch
+    // Workouts
     private func fetchWorkout(completion: @escaping () -> Void) {
         homeWorkouts.removeAll()
         if let level = UserProfile.defaults.fitnessLevel,
@@ -240,7 +280,7 @@ class WorkoutManager {
         } else {
             print("Missing fitness user level")
         }
-        
+
     }
     private func fetchGymWorkout(completion: @escaping () -> Void) {
         gymWorkouts.removeAll()
@@ -264,9 +304,14 @@ class WorkoutManager {
         } else {
             print("Missing fitness user level")
         }
-        
     }
-    /// Exercise
+    private func fetchPreferredWorkout(completion: @escaping () -> Void) {
+        googleManager.getPreferredWorkouts { data in
+            self.userPreferredWorkout = data
+            completion()
+        }
+    }
+    // Exercise
     private func fetchExercise(completion: @escaping () -> Void) {
         googleManager.getExerciseBy {
             [weak self] result in
@@ -299,7 +344,7 @@ class WorkoutManager {
             }
         }
     }
-    /// Workout state
+    // Workout state
     private func fetchWorkoutsState(completion: @escaping () -> Void) {
         homeWorkouts.removeAll()
         self.googleManager.getWorkoutsState() {
@@ -322,73 +367,63 @@ class WorkoutManager {
             completion()
         }
     }
-    
+    // Adding exercise to workout
     private func addExerciseDataToWorkout() {
-        for index in 0..<homeWorkouts.count {
-            let workout = homeWorkouts[index]
-            //			workout.workoutNumber = index
-            //
-            //			// If user has
-            //			if let userWorkoutPlan = userPreferredWorkout {
-            //				if let savedWorkout = userWorkoutPlan.homeWorkout.first(where: {$0.workoutNumber == workout.workoutNumber}) {
-            //					workout.exercises = savedWorkout.exercises
-            //					workout.exercises.forEach {
-            //						let exercise = $0
-            //
-            //						exercise.exerciseToPresent = self.homeExercises.first(where: { homeExercise in
-            //							return homeExercise.exerciseNumber == Int(exercise.exercise)
-            //						})
-            //					}
-            //				} else {
-            //					workout.exercises.forEach {
-            //						let exercise = $0
-            //
-            //						exercise.exerciseToPresent = self.homeExercises.first(where: { homeExercise in
-            //							return homeExercise.exerciseNumber == Int(exercise.exercise)
-            //						})
-            //					}
-            //				}
-            //			} else {
+        if let userPreferredWorkout {
+            homeWorkouts = userPreferredWorkout.homeWorkouts
+            userPreferredWorkout.homeWorkouts.forEach {
+                $0.exercises.forEach {
+                    print($0.exercise)
+                }
+            }
+        }
+        homeWorkouts.forEach { workout in
             workout.exercises.forEach {
                 let exercise = $0
-                
                 exercise.exerciseToPresent = self.homeExercises.first(where: { homeExercise in
                     return homeExercise.exerciseNumber == Int(exercise.exercise)
                 })
             }
-            //			}
         }
         finishFetching.value = true
     }
     private func addGymExerciseDataToWorkout() {
+        if let userPreferredWorkout {
+            gymWorkouts = userPreferredWorkout.gymWorkouts
+        }
         gymWorkouts.forEach {
             $0.exercises.forEach {
                 $0.exerciseToPresent = self.gymExercises[Int($0.exercise)!]
             }
         }
     }
-    
-    private func filterExerciseByType(exercisesData: [Exercise]) -> [HomeExercisesByType] {
-        var exercisesByType: [HomeExercisesByType] = []
         
-        for i in 0..<exercisesData.count {
-            let exercise = exercisesData[i]
-            guard let exerciseType = ExerciseType(rawValue: exercise.type) else { return exercisesByType }
-            
-            if exercisesByType.contains(where: {$0.type == exerciseType}) {
-                let containedExerciseType = exercisesByType.first(where: {$0.type == exerciseType})
-                containedExerciseType?.exercises.append(exercise)
-            } else {
-                let exerciseByType = HomeExercisesByType(type: exerciseType, exercises: [exercise])
-                exercisesByType.append(exerciseByType)
-            }
-        }
-        return exercisesByType
-    }
-    
     //MARK: - Update
-    func saveUserPreferredWorkout() {
-        
+    func updatePreferredWorkouts(completion: @escaping () -> Void) {
+        var preferredHomeWorkout: [Workout] {
+            var workouts: [Workout] = []
+            homeWorkouts.forEach { workout in
+                let exercises = workout.exercises.map{ WorkoutExercise(exercise: $0.exercise, repeats: $0.repeats, sets: $0.sets, exerciseToPresent: nil)}
+                
+                let workout = Workout(exercises: exercises, name: workout.name, time: workout.time, type: workout.type)
+                workouts.append(workout)
+            }
+            return workouts
+        }
+        var preferredGymWorkout: [Workout] {
+            var workouts: [Workout] = []
+            gymWorkouts.forEach { workout in
+                let exercises = workout.exercises.map{ WorkoutExercise (exercise: $0.exercise, repeats: $0.repeats, sets: $0.sets, exerciseToPresent: nil)}
+                
+                let workout = Workout(exercises: exercises, name: workout.name, time: workout.time, type: workout.type)
+                workouts.append(workout)
+            }
+            return workouts
+        }
+
+        // Update server with preferred data
+        let data = UserPreferredWorkouts(homeWorkouts: preferredHomeWorkout, gymWorkouts: preferredGymWorkout)
+        googleManager.updatePreferredWorkouts(data, completion: completion)
     }
     func updateWorkoutStates(isChecked: Bool, for type: WorkoutType, completion: (WorkoutCongratsPopupType)->()) {
         guard let workoutsStates = workoutsStates,
