@@ -209,13 +209,10 @@ class WorkoutManager {
         if var userPreferredWorkout = userPreferredWorkout {
             switch currentWorkoutType {
             case .home:
-                userPreferredWorkout.homeWorkouts[workoutIndex] = currentWorkout
+                userPreferredWorkout.homeWorkouts = homeWorkouts
             case .gym:
-                userPreferredWorkout.gymWorkouts[workoutIndex] = currentWorkout
+                userPreferredWorkout.gymWorkouts = gymWorkouts
             }
-            
-            
-            
             
             self.updatePreferredWorkouts {
                 self.userPreferredWorkout = userPreferredWorkout

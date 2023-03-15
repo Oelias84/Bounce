@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		13CF235DA08F341CFEB28805 /* Pods_FitApp_FitAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9F92787D51B022DC3D3BE25 /* Pods_FitApp_FitAppUITests.framework */; };
 		1A1C4513AE7EF2FAD0F25C05 /* Pods_FitAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */; };
+		4095DD7729C1ECB700F67D56 /* UserPreferredWorkouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4095DD7629C1ECB700F67D56 /* UserPreferredWorkouts.swift */; };
 		7C0E4531275E8FA500ECA20E /* MessagesTextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */; };
 		7C0F703A276CEA5900964004 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0F7039276CEA5900964004 /* SettingsTableViewCell.xib */; };
 		7C0F703C276CEA8600964004 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F703B276CEA8600964004 /* SettingsTableViewCell.swift */; };
@@ -229,6 +230,7 @@
 
 /* Begin PBXFileReference section */
 		05D96098412DCEF72F6C4753 /* Pods-FitApp-FitAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp-FitAppUITests.release.xcconfig"; path = "Target Support Files/Pods-FitApp-FitAppUITests/Pods-FitApp-FitAppUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4095DD7629C1ECB700F67D56 /* UserPreferredWorkouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferredWorkouts.swift; sourceTree = "<group>"; };
 		4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTextManager.swift; sourceTree = "<group>"; };
 		7C0F7039276CEA5900964004 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
@@ -943,6 +945,7 @@
 			children = (
 				B38397FA25B4A21F00154697 /* Workout.swift */,
 				B36B71912577BF0C001CD393 /* Exercise.swift */,
+				4095DD7629C1ECB700F67D56 /* UserPreferredWorkouts.swift */,
 			);
 			path = Workout;
 			sourceTree = "<group>";
@@ -1601,6 +1604,7 @@
 				7CE1ED0F277126B800337304 /* ExpandableSectionData.swift in Sources */,
 				7CE1ED0D2771100A00337304 /* CollapsibleTableViewCell.swift in Sources */,
 				7C89AA66256D704D009AD87C /* LoginViewController.swift in Sources */,
+				4095DD7729C1ECB700F67D56 /* UserPreferredWorkouts.swift in Sources */,
 				B368DFE025A6247600BD1937 /* SpinnerView.swift in Sources */,
 				7C62181026F4F2F20019FD25 /* UIAlertController+Extensions.swift in Sources */,
 				B341E236257FA6F500EE05A7 /* Date+Extensions.swift in Sources */,

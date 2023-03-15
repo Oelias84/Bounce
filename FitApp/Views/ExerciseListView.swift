@@ -21,7 +21,7 @@ struct ExerciseListView: View {
         ScrollView(showsIndicators: false) {
             ForEach(0..<viewModel.getExercisesCount, id: \.self) { index in
                 let workoutExercise = viewModel.getWorkoutExercise(at: index)
-                let exerciseState = viewModel.exercisesState.first(where: {$0.exerciseNumber == workoutExercise.exerciseToPresent!.exerciseNumber ?? 0})!
+                let exerciseState = viewModel.exercisesState.first(where: {$0.exerciseNumber == workoutExercise.exerciseToPresent!.exerciseNumber })!
                 
                 VStack {
                     ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: index, workoutExercise: workoutExercise, exerciseState: exerciseState), focusedField: _focusedField) { exerciseIndex in
@@ -53,7 +53,7 @@ struct ExerciseListView: View {
         .sheet(isPresented: $isShowingExerciseOptions) {
             ExerciseOptionsListSheetView(viewModel: ExerciseOptionsListSheetViewModel(exerciseType: viewModel.getSelectedExerciseType, workoutIndex: viewModel.getWorkoutIndex)) { selectedExerciseOption in
                 viewModel.replaceExercise(with: selectedExerciseOption)
-                isShowingExerciseOptions.toggle()
+                isShowingExerciseOptions = false
             }
         }
     }
@@ -63,7 +63,6 @@ struct ExerciseListView_Previews: PreviewProvider {
     
     static var previews: some View {
         let exercise = Exercise(name: "Upper", videos: ["gs://my-fit-app-a8595.appspot.com/42"], title: "רגליים", text: "", maleText: "", type: "legs", exerciseNumber: 0)
-        let workExercise = WorkoutExercise(exercise: "1", repeats: "15-20", sets: "4", exerciseToPresent: exercise)
         
         ExerciseListView(viewModel: ExerciseListViewModel(workoutIndex: 0)) { index in
             return

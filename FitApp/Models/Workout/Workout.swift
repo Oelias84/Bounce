@@ -20,6 +20,12 @@ class Workout: Codable {
 		self.time = time
 		self.type = type
 	}
+    
+    func removeExerciseData() {
+        exercises.forEach {
+            $0.exerciseToPresent = nil
+        }
+    }
 }
 
 struct Workouts: Codable {
