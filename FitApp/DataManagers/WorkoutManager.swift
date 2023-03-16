@@ -398,40 +398,36 @@ class WorkoutManager {
     //MARK: - Update
     func updatePreferredWorkouts(completion: @escaping () -> Void) {
         var preferredHomeWorkout: [Workout] {
-            var workouts: [Workout] = []
-            homeWorkouts.forEach { workout in
-                let exercises = workout.exercises.map{ WorkoutExercise(exercise: $0.exercise, repeats: $0.repeats, sets: $0.sets, exerciseToPresent: nil)}
-                
-                let workout = Workout(exercises: exercises, name: workout.name, time: workout.time, type: workout.type)
-                workouts.append(workout)
-            }
-            return workouts
+            return homeWorkouts.map { mapWorkout($0) }
         }
         var preferredGymWorkout: [Workout] {
-            var workouts: [Workout] = []
-            gymWorkouts.forEach { workout in
-                let exercises = workout.exercises.map{ WorkoutExercise (exercise: $0.exercise, repeats: $0.repeats, sets: $0.sets, exerciseToPresent: nil)}
-                
-                let workout = Workout(exercises: exercises, name: workout.name, time: workout.time, type: workout.type)
-                workouts.append(workout)
-            }
-            return workouts
+            return gymWorkouts.map { mapWorkout($0) }
         }
-
         // Update server with preferred data
         let data = UserPreferredWorkouts(homeWorkouts: preferredHomeWorkout, gymWorkouts: preferredGymWorkout)
         googleManager.updatePreferredWorkouts(data, completion: completion)
+        
+        
+        func mapWorkout(_ workout: Workout) -> Workout {
+            let exercises = workout.exercises.compactMap { exercise in
+                return WorkoutExercise(exercise: exercise.exercise, repeats: exercise.repeats, sets: exercise.sets, exerciseToPresent: nil)
+            }
+            return Workout(exercises: exercises, name: workout.name, time: workout.time, type: workout.type)
+        }
     }
     func updateWorkoutStates(isChecked: Bool, for type: WorkoutType, completion: (WorkoutCongratsPopupType)->()) {
         guard let workoutsStates = workoutsStates,
               let userWorkoutNumber = UserProfile.defaults.weaklyWorkouts,
-              let workoutState = workoutsStates.first(where: { $0.workoutType == type }) else { return }
+              let workoutState = workoutsStates.first(where: { $0.workoutType == type }) else {
+            return
+        }
         
         googleManager.updateWorkoutState(workoutsStates)
         
-        if !isChecked { return }
-        let checkedWorkoutsCount = workoutState.workoutStates.filter({ $0.isChecked }).count
+        guard isChecked else { return }
         
+        let checkedWorkoutsCount = workoutState.workoutStates.lazy.filter({ $0.isChecked }).count
+
         if checkedWorkoutsCount == userWorkoutNumber {
             completion(.finishedAll)
         } else {
