@@ -10,7 +10,7 @@ import BetterSegmentedControl
 
 class WorkoutTableViewController: UIViewController {
 	
-	private var viewModel: WorkoutViewModel!
+	private var viewModel: WorkoutViewModel = WorkoutViewModel()
 	
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var topBarView: BounceNavigationBarView!
@@ -19,24 +19,22 @@ class WorkoutTableViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		Spinner.shared.show()
-
-		viewModel = WorkoutViewModel()
-		
-		viewModel.finishHomeWorkoutConfiguringData.bind { didFinish in
-			if didFinish == true {
-				Spinner.shared.stop()
-				DispatchQueue.main.async {
-					self.tableView.reloadData()
-				}
-			}
-		}
-		
-		setupView()
+        
+        setupView()
 		setUpTableView()
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		
+        
+        viewModel.finishHomeWorkoutConfiguringData.bind { didFinish in
+            if didFinish == true {
+                Spinner.shared.stop()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        
 		viewModel.updateWorkoutStates(isChecked: false)
 		topBarView.setImage()
 	}

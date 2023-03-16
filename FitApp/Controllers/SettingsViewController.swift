@@ -247,7 +247,7 @@ extension SettingsViewController: BounceNavigationBarDelegate {
 
 //MARK: - Functions
 extension SettingsViewController {
-	
+	//setuo
 	fileprivate func setupTopBar() {
 		
 		topBarView.delegate = self
@@ -285,7 +285,6 @@ extension SettingsViewController {
 		]
 		tableView.reloadData()
 	}
-	
 	fileprivate func setupActivityTitle() -> String {
 		if let steps = userData.steps {
 			return "\(steps) צעדים"
@@ -326,7 +325,6 @@ extension SettingsViewController {
 		}
 		return fitnessTitle
 	}
-	
 	fileprivate func setupNumberOfMealsStepper() -> (Int,Int,Double) {
 		if let meals = userData.mealsPerDay {
 			return (3, 5, Double(meals))
@@ -370,8 +368,18 @@ extension SettingsViewController {
 		UserProfile.updateServer()
 	}
 	fileprivate func workoutStepperAction(_ value: Double) {
+        Spinner.shared.show()
+        // Update local data
 		UserProfile.defaults.weaklyWorkouts = Int(value)
-		UserProfile.updateServer()
+        // Removing saved data
+        WorkoutManager.shared.removePreferredWorkoutData {
+            // Reloading manager data
+            WorkoutManager.shared.loadData()
+            // Update server
+            UserProfile.updateServer()
+            // Remove Spinner
+            Spinner.shared.stop()
+        }
 	}
 	fileprivate func externalWorkoutAction(_ value: Double) {
 		UserProfile.defaults.externalWorkout = Int(value)

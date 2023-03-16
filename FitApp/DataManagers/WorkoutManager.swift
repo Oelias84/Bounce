@@ -57,6 +57,10 @@ class WorkoutManager {
     public var finishFetching: ProjectObservableObject<Bool?> = ProjectObservableObject(nil)
     
     private init() {
+        loadData()
+    }
+    
+    func loadData() {
         let group = DispatchGroup()
         
         group.enter()
@@ -437,5 +441,9 @@ class WorkoutManager {
     func updateWorkoutStates() {
         guard let workoutsStates = workoutsStates else { return }
         googleManager.updateWorkoutState(workoutsStates)
+    }
+    //MARK: - Remove
+    func removePreferredWorkoutData(completion: @escaping () -> Void) {
+        googleManager.removeUserWorkoutData(completion: completion)
     }
 }

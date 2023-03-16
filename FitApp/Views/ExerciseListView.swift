@@ -21,7 +21,10 @@ struct ExerciseListView: View {
         ScrollView(showsIndicators: false) {
             ForEach(0..<viewModel.getExercisesCount, id: \.self) { index in
                 let workoutExercise = viewModel.getWorkoutExercise(at: index)
-                let exerciseState = viewModel.exercisesState.first(where: {$0.exerciseNumber == workoutExercise.exerciseToPresent!.exerciseNumber })!
+                
+                let exerciseState = viewModel.exercisesState.first(where: {
+                    return $0.exerciseNumber == workoutExercise.exerciseToPresent!.exerciseNumber
+                })!
                 
                 VStack {
                     ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: index, workoutExercise: workoutExercise, exerciseState: exerciseState), focusedField: _focusedField) { exerciseIndex in
@@ -37,7 +40,7 @@ struct ExerciseListView: View {
         }
         .background(Color(UIColor.projectBackgroundColor))
         .toolbar {
-            // Keyboard confirm Button
+            // Keyboard confirm Buttonma
             ToolbarItemGroup(placement: .keyboard) {
                 Spacer()
                 Button("אישור") {

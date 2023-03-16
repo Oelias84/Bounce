@@ -359,8 +359,21 @@ struct GoogleApiManager {
 	}
     
     //MARK: - Preferred Workout
-    func removePreferredWorkout() {
-        db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("preferred-workout").delete()
+    func removeUserWorkoutData(completion: @escaping () -> Void) {
+        let group = DispatchGroup()
+        DispatchQueue.global(qos: .userInteractive).async {
+            group.enter()
+            db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("preferred-workout").delete() { error in
+                group.leave()
+            }
+            group.enter()
+            db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("workout-state").delete() { error in
+                group.leave()
+            }
+        }
+        group.notify(queue: .main) {
+            completion()
+        }
     }
     func getPreferredWorkouts(completion: @escaping (UserPreferredWorkouts?) -> Void) {
         do {
