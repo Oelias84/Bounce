@@ -71,7 +71,10 @@ struct UserProfile {
 	
 	@UserDefault(key: .lastMotivationDate)
 	var lastMotivationDate: Date?
-	
+    
+    @UserDefault(key: .naturalMenu)
+    var naturalMenu: Bool?
+
 	@UserDefault(key: .finishOnboarding)
 	var finishOnboarding: Bool?
 	
@@ -224,6 +227,7 @@ extension UserProfile {
 			fitnessLevel: defaults.fitnessLevel,
 			weaklyWorkouts: defaults.weaklyWorkouts,
 			externalWorkout: defaults.externalWorkout,
+            naturalMenu: defaults.naturalMenu,
 			finishOnboarding: defaults.finishOnboarding
 		)
 		googleManager.updateUserData(userData: data)
@@ -242,6 +246,7 @@ extension UserProfile {
 		userProfile.id = id
 		userProfile.name = data.name
 		userProfile.email = data.email
+        userProfile.naturalMenu = data.naturalMenu
 		userProfile.finishOnboarding = data.finishOnboarding
 		userProfile.birthDate = data.birthDate?.dateFromString
 		userProfile.weight = data.weight
@@ -319,6 +324,7 @@ struct ServerUserData: Codable {
 	var fitnessLevel: Int?
 	var weaklyWorkouts: Int?
 	var externalWorkout: Int?
+    var naturalMenu: Bool?
 	var finishOnboarding: Bool?
 	
 	func encode(to encoder: Encoder) throws {
@@ -342,6 +348,7 @@ struct ServerUserData: Codable {
 		try container.encode(fitnessLevel, forKey: .fitnessLevel)
 		try container.encode(weaklyWorkouts, forKey: .weaklyWorkouts)
 		try container.encode(externalWorkout, forKey: .externalWorkout)
+        try container.encode(externalWorkout, forKey: .naturalMenu)
 		try container.encode(finishOnboarding, forKey: .finishOnboarding)
 
 	}
@@ -399,6 +406,7 @@ extension Key {
 	static let fitnessLevel: Key = "fitnessLevel"
 	static let weaklyWorkouts: Key = "weaklyWorkouts"
 	static let externalWorkout: Key = "externalWorkout"
+    static let naturalMenu: Key = "naturalMenu"
 	static let finishOnboarding: Key = "finishOnboarding"
 	static let otherDishes: Key = "otherDishes"
 }
