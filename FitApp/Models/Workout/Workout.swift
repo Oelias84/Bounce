@@ -94,8 +94,7 @@ class WorkoutState: Codable {
 	
 	var index: Int
 	var isChecked: Bool = false
-	var exercisesStates = [ExerciseState]()
-	
+    
 	init(index: Int) {
 		self.index = index
 	}
@@ -104,6 +103,10 @@ class WorkoutState: Codable {
 struct WorkoutStatesData: Codable {
 	
 	let workoutStatesData: [WorkoutStates]
+}
+struct ExercisesStatesData: Codable {
+    
+    let exercisesStatesData: [ExerciseState]
 }
 struct SetModel: Codable, Identifiable, Equatable {
 	

@@ -22,12 +22,8 @@ struct ExerciseListView: View {
             ForEach(0..<viewModel.getExercisesCount, id: \.self) { index in
                 let workoutExercise = viewModel.getWorkoutExercise(at: index)
                 
-                let exerciseState = viewModel.exercisesState.first(where: {
-                    return $0.exerciseNumber == workoutExercise.exerciseToPresent!.exerciseNumber
-                })!
-                
                 VStack {
-                    ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: index, workoutExercise: workoutExercise, exerciseState: exerciseState), focusedField: _focusedField) { exerciseIndex in
+                    ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: index, workoutExercise: workoutExercise), focusedField: _focusedField) { exerciseIndex in
                         // Call back for moving into the exercise detail
                         selectedExercise(exerciseIndex)
                     } replacerButtonAction: { exerciseNumberToReplace in
@@ -49,6 +45,8 @@ struct ExerciseListView: View {
                     } else {
                         focusedField = nil
                         endEditing()
+                        WorkoutManager.shared.updateExercisesStates()
+
                     }
                 }
             }
@@ -65,9 +63,6 @@ struct ExerciseListView: View {
 struct ExerciseListView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let exercise = Exercise(name: "Upper", videos: ["gs://my-fit-app-a8595.appspot.com/42"], title: "רגליים", text: "", maleText: "", type: "legs", exerciseNumber: 0)
-        let workExercise = WorkoutExercise(exercise: "1", repeats: "15-20", sets: "4", exerciseToPresent: exercise)
-        
         ExerciseListView(viewModel: ExerciseListViewModel(workoutIndex: 0)) { index in
             return
         } endEditing: {

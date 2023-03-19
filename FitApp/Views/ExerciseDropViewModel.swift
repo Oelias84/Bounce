@@ -16,10 +16,10 @@ class ExerciseDropViewModel: ObservableObject {
     
     @Published var exerciseState: ExerciseState
     
-    init(index: Int, workoutExercise: WorkoutExercise, exerciseState: ExerciseState) {
+    init(index: Int, workoutExercise: WorkoutExercise) {
 		self.index = index
-        self.exerciseState = exerciseState
-		self.workoutExercise = workoutExercise
+        self.workoutExercise = workoutExercise
+        self.exerciseState = WorkoutManager.shared.getExercisesState(exerciseNumber: Int(workoutExercise.exercise)!)
 	}
 	
 	var getIndex: Int {
