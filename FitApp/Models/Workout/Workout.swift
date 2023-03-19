@@ -105,6 +105,10 @@ struct WorkoutStatesData: Codable {
 	
 	let workoutStatesData: [WorkoutStates]
 }
+struct ExercisesStatesData: Codable {
+    
+    let exercisesStatesData: [ExerciseState]
+}
 struct SetModel: Codable, Identifiable, Equatable {
 	
 	var id = UUID()

@@ -442,34 +442,6 @@ struct GoogleApiManager {
             })
         }
     }
-    func updateWorkoutState(_ workoutsState: [WorkoutStates]) {
-        let data = WorkoutStatesData(workoutStatesData: workoutsState)
-        
-        do {
-            try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("workout-state").setData(from: data, merge: true)
-        } catch {
-            print(error)
-        }
-    }
-    func getWorkoutsState(completion: @escaping (Result<[WorkoutStates]?, Error>) -> Void) {
-        do {
-            db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("workout-state").getDocument(completion: { (documentSnapshot, error) in
-                if let error = error {
-                    print(error)
-                } else if let data = documentSnapshot {
-                    do {
-                        var workoutStates: [WorkoutStates]? = nil
-                        let weightStatesData = try data.data(as: WorkoutStatesData.self)
-                        workoutStates = weightStatesData?.workoutStatesData
-                        completion(.success(workoutStates))
-                    } catch {
-                        print(error)
-                        completion(.failure(error))
-                    }
-                }
-            })
-        }
-    }
 	func getExerciseBy(completion: @escaping (Result<[Exercise], Error>) -> Void) {
 		do {
 			db.collection("workouts-data").document("exercises").getDocument(source: .default, completion: { (data, error) in
@@ -673,6 +645,64 @@ struct GoogleApiManager {
 			print(error)
 		}
 	}
+    //Workout State
+    func updateWorkoutState(_ workoutsState: [WorkoutStates]) {
+        let data = WorkoutStatesData(workoutStatesData: workoutsState)
+        
+        do {
+            try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("workout-state").setData(from: data, merge: true)
+        } catch {
+            print(error)
+        }
+    }
+    func getWorkoutsState(completion: @escaping (Result<[WorkoutStates]?, Error>) -> Void) {
+        do {
+            db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("workout-state").getDocument(completion: { (documentSnapshot, error) in
+                if let error = error {
+                    print(error)
+                } else if let data = documentSnapshot {
+                    do {
+                        var workoutStates: [WorkoutStates]? = nil
+                        let data = try data.data(as: WorkoutStatesData.self)
+                        workoutStates = data?.workoutStatesData
+                        completion(.success(workoutStates))
+                    } catch {
+                        print(error)
+                        completion(.failure(error))
+                    }
+                }
+            })
+        }
+    }
+    //Exercise State
+    func updateExercisesState(_ exercisesStates: [ExerciseState]) {
+        let data = ExercisesStatesData(exercisesStatesData: exercisesStates)
+        
+        do {
+            try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("exercises-state").setData(from: data, merge: true)
+        } catch {
+            print(error)
+        }
+    }
+    func getWorkoutsState(completion: @escaping (Result<[ExerciseState]?, Error>) -> Void) {
+        do {
+            db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("exercises-state").getDocument(completion: { (documentSnapshot, error) in
+                if let error = error {
+                    print(error)
+                } else if let data = documentSnapshot {
+                    do {
+                        var workoutStates: [ExerciseState]? = nil
+                        let data = try data.data(as: ExercisesStatesData.self)
+                        workoutStates = data?.exercisesStatesData
+                        completion(.success(workoutStates))
+                    } catch {
+                        print(error)
+                        completion(.failure(error))
+                    }
+                }
+            })
+        }
+    }
 }
 
 struct DishArray:Codable {
