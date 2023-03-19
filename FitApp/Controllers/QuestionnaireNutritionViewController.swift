@@ -25,7 +25,9 @@ class QuestionnaireNutritionViewController: UIViewController {
 	@IBOutlet weak var mostHungerCheckThird: UIButton!
 	@IBOutlet weak var mostHungerCheckForth: UIButton!
 	
-	@IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var neutralMenuCheckMark: UIButton!
+    
+    @IBOutlet weak var nextButton: UIButton!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -125,6 +127,11 @@ class QuestionnaireNutritionViewController: UIViewController {
 			return
 		}
 	}
+    
+    @IBAction func neutralMenuCheckMark(sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        UserProfile.defaults.naturalMenu = sender.isSelected
+    }
 }
 
 extension QuestionnaireNutritionViewController {
@@ -170,7 +177,10 @@ extension QuestionnaireNutritionViewController {
 				break
 			}
 		}
-		if let meals = userData.mealsPerDay, let hunger = userData.mostHungry{
+        if let neutralMenuCheckMark = userData.naturalMenu {
+            self.neutralMenuCheckMark.isSelected = neutralMenuCheckMark
+        }
+		if let meals = userData.mealsPerDay, let hunger = userData.mostHungry {
 			self.mostHunger = hunger
 			self.numberOfMeals = meals
 		}
