@@ -94,8 +94,7 @@ class WorkoutState: Codable {
 	
 	var index: Int
 	var isChecked: Bool = false
-	var exercisesStates = [ExerciseState]()
-	
+    
 	init(index: Int) {
 		self.index = index
 	}

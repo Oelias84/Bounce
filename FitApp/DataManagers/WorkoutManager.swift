@@ -51,7 +51,8 @@ class WorkoutManager {
     private var userPreferredWorkout: UserPreferredWorkouts?
     
     private var workoutsStates: [WorkoutStates]? = [WorkoutStates]()
-    
+    private var exercisesStates: [ExerciseState]? = [ExerciseState]()
+
     private let googleManager = GoogleApiManager()
     
     public var finishFetching: ProjectObservableObject<Bool?> = ProjectObservableObject(nil)
@@ -69,6 +70,10 @@ class WorkoutManager {
         }
         group.enter()
         fetchWorkoutsState {
+            group.leave()
+        }
+        group.enter()
+        fetchExercisesState {
             group.leave()
         }
         group.enter()
@@ -144,18 +149,14 @@ class WorkoutManager {
             return workoutsState.workoutStates[index]
         }
     }
-    func getExercisesState(index: Int) -> [ExerciseState] {
-        guard let workoutState = workoutsStates?.first(where: {$0.workoutType == currentWorkoutType}) else { return [] }
-        
-        if workoutState.workoutStates[index].exercisesStates.isEmpty {
-            getCurrentWorkout(for: index)?.exercises.forEach {
-                if let exerciseNumber = $0.exerciseToPresent?.exerciseNumber  {
-                    workoutState.workoutStates[index].exercisesStates.append(ExerciseState(exerciseNumber: exerciseNumber))
-                }
-            }
-            return workoutState.workoutStates[index].exercisesStates
+    func getExercisesState(exerciseNumber: Int) -> ExerciseState {
+        if let exerciseState = exercisesStates?.first(where: {$0.exerciseNumber == exerciseNumber}) {
+            return exerciseState
+        } else {
+            let exerciseState = ExerciseState(exerciseNumber: exerciseNumber)
+            exercisesStates?.append(exerciseState)
+            return exerciseState
         }
-        return workoutState.workoutStates[index].exercisesStates
     }
     
     func setCurrentWorkoutType(_ type: WorkoutType) {
@@ -234,7 +235,7 @@ class WorkoutManager {
             return
         }
         
-        workoutState.workoutStates[workoutIndex].exercisesStates.append(ExerciseState(exerciseNumber: exerciseOption.exerciseNumber))
+//        workoutState.workoutStates[workoutIndex].exercisesStates.append(ExerciseState(exerciseNumber: exerciseOption.exerciseNumber))
         completion()
     }
 
@@ -368,6 +369,21 @@ class WorkoutManager {
             completion()
         }
     }
+    // Exercises state
+    private func fetchExercisesState(completion: @escaping () -> Void) {
+        self.googleManager.getExercisesState() {
+            [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let data):
+                self.exercisesStates = data
+            case .failure(let error):
+                print("There was an issue getting workouts: ", error )
+            }
+            completion()
+        }
+    }
     // Adding exercise to workout
     private func addExerciseDataToWorkout() {
         if let userPreferredWorkout {
@@ -441,6 +457,10 @@ class WorkoutManager {
     func updateWorkoutStates() {
         guard let workoutsStates = workoutsStates else { return }
         googleManager.updateWorkoutState(workoutsStates)
+    }
+    func updateExercisesStates() {
+        guard let exercisesStates = exercisesStates else { return }
+        googleManager.updateExercisesState(exercisesStates)
     }
     //MARK: - Remove
     func removePreferredWorkoutData(completion: @escaping () -> Void) {

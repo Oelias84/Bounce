@@ -684,7 +684,7 @@ struct GoogleApiManager {
             print(error)
         }
     }
-    func getWorkoutsState(completion: @escaping (Result<[ExerciseState]?, Error>) -> Void) {
+    func getExercisesState(completion: @escaping (Result<[ExerciseState]?, Error>) -> Void) {
         do {
             db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("exercises-state").getDocument(completion: { (documentSnapshot, error) in
                 if let error = error {

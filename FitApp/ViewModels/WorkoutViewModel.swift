@@ -52,7 +52,4 @@ class WorkoutViewModel {
 			completion?(workoutCongratsPopupType)
 		}
 	}
-	func getExercisesState(for index: Int) -> [ExerciseState] {
-		workoutManager.getExercisesState(index: index)
-	}
 }

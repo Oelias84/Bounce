@@ -11,7 +11,6 @@ import Foundation
 class ExerciseListViewModel: ObservableObject {
     
 	@Published var workout: Workout!
-	@Published var exercisesState: [ExerciseState]
     @Published var workoutManager: WorkoutManager = WorkoutManager.shared
     
     private let workoutIndex: Int
@@ -20,7 +19,6 @@ class ExerciseListViewModel: ObservableObject {
 	init(workoutIndex: Int) {
 		self.workoutIndex = workoutIndex
 		self.workout = WorkoutManager.shared.getCurrentWorkout(for: workoutIndex)
-		self.exercisesState = WorkoutManager.shared.getExercisesState(index: workoutIndex)
 	}
 	
 	var getExercisesCount: Int {
@@ -44,7 +42,6 @@ class ExerciseListViewModel: ObservableObject {
 		guard let exerciseNumberToReplace else { return }
 		
 		WorkoutManager.shared.replaceExercise(exercise: exerciseNumberToReplace, with: execiseOption, workoutIndex: workoutIndex) {
-			self.exercisesState = WorkoutManager.shared.getExercisesState(index: workoutIndex)
 			objectWillChange.send()
 		}
 	}

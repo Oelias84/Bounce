@@ -36,7 +36,7 @@ struct ExerciseDropViewContainer: View {
                     let newSet = SetModel(setIndex: 0)
                     $viewModel.exerciseState.setsState.wrappedValue.append(newSet)
                     // Update Server
-                    WorkoutManager.shared.updateWorkoutStates()
+                    WorkoutManager.shared.updateExercisesStates()
                 }
             }
             
@@ -62,7 +62,7 @@ struct ExerciseDropViewContainer: View {
                                 $viewModel.exerciseState.setsState.wrappedValue.remove(at: index)
                             }
                             // Update Server
-                            WorkoutManager.shared.updateWorkoutStates()
+                            WorkoutManager.shared.updateExercisesStates()
                         }
                         
                     }
@@ -104,7 +104,7 @@ struct ExerciseDropView_Previews: PreviewProvider {
     @State static var exercise: WorkoutExercise = WorkoutExercise(exercise: "1", repeats: "12", sets: "12", exerciseToPresent: nil)
     
     static var previews: some View {
-        ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: 1, workoutExercise: exercise, exerciseState: exerciseState)) { _ in
+        ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: 1, workoutExercise: exercise)) { _ in
             
         } replacerButtonAction: { _ in
             
