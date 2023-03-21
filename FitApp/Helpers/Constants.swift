@@ -154,6 +154,7 @@ struct K {
 		static let addingCell = "addingCell"
 		
 		static let settingCell = "settingCell"
+        static let checkboxCell = "checkboxCell"
 		
 		static let activityCell = "activityCell"
 		static let numberOfMealsCell = "numberOfMealsCell"
@@ -168,7 +169,8 @@ struct K {
     struct NibName {
 		
         //Cells
-		static let SettingsTableViewCell = "SettingsTableViewCell"
+		static let settingsTableViewCell = "SettingsTableViewCell"
+        static let settingsCheckboxTableViewCell = "SettingsCheckboxTableViewCell"
 		
 		static let chatTableViewCell = "ChatTableViewCell"
 		static let addingTableViewCell = "AddingTableViewCell"

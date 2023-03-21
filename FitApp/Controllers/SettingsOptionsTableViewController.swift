@@ -56,6 +56,7 @@ extension SettingsOptionsTableViewController: BounceNavigationBarDelegate {
 	}
 }
 extension SettingsOptionsTableViewController: UITableViewDelegate, UITableViewDataSource {
+    
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return viewModel.getNumberOfSections()
 	}

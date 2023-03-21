@@ -36,7 +36,6 @@ class WorkoutManager {
     
     static let shared = WorkoutManager()
     
-    
     private var currentWorkoutType: WorkoutType = .home
     
     private var gymExercises: [Exercise]!
@@ -229,13 +228,6 @@ class WorkoutManager {
             self.updatePreferredWorkouts {}
         }
         
-        // Update WorkoutState if contained
-        guard let workoutState = workoutsStates?.first(where: {$0.workoutType == currentWorkoutType}) else {
-            completion()
-            return
-        }
-        
-//        workoutState.workoutStates[workoutIndex].exercisesStates.append(ExerciseState(exerciseNumber: exerciseOption.exerciseNumber))
         completion()
     }
 

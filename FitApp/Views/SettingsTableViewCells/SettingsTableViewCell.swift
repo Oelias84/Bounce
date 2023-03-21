@@ -37,6 +37,7 @@ class SettingsTableViewCell: UITableViewCell {
 	override func prepareForReuse() {
 		super.prepareForReuse()
 		infoButton.isHidden = true
+        titleLabel.textColor = .black
 	}
 	override func setSelected(_ selected: Bool, animated: Bool) {
 		super.setSelected(selected, animated: animated)
