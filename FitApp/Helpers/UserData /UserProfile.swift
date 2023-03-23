@@ -351,7 +351,7 @@ struct ServerUserData: Codable {
 		try container.encode(fitnessLevel, forKey: .fitnessLevel)
 		try container.encode(weaklyWorkouts, forKey: .weaklyWorkouts)
 		try container.encode(externalWorkout, forKey: .externalWorkout)
-        try container.encode(externalWorkout, forKey: .naturalMenu)
+        try container.encode(naturalMenu, forKey: .naturalMenu)
 		try container.encode(finishOnboarding, forKey: .finishOnboarding)
 
 	}
