@@ -15,8 +15,7 @@ enum SettingsContentType {
 }
 
 class SettingsOptionsTableViewController: UIViewController {
-	
-	
+
 	var contentType: SettingsContentType!
 	private var viewModel: SettingTableViewModel!
 	
@@ -29,8 +28,9 @@ class SettingsOptionsTableViewController: UIViewController {
 		setupTopBar()
 		viewModel = SettingTableViewModel(contentType: contentType, for: self)
 		if contentType == .notifications {
-			let notificationNib = UINib(nibName: K.NibName.notificationTableViewCell, bundle: nil)
-			tableView.register(notificationNib, forCellReuseIdentifier: K.CellId.notificationCell)
+			tableView.register(UINib(nibName: K.NibName.notificationTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.notificationCell)
+            tableView.register(UINib(nibName: K.NibName.notificationSwitchTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.notificationSwitchCell)
+            
 			viewModel.bindNotificationViewModelToController = {
 				DispatchQueue.main.async {
 					self.tableView.reloadData()
@@ -49,6 +49,16 @@ class SettingsOptionsTableViewController: UIViewController {
 }
 
 //MARK: - Delegate
+extension SettingsOptionsTableViewController: NotificationSwitchTableViewCellDelegate {
+    
+    func notificationSwitchAction(_ sender: UISwitch) {
+        if UserProfile.defaults.showWeightAlertNotification != nil {
+            UserProfile.defaults.showWeightAlertNotification?.toggle()
+        } else {
+            UserProfile.defaults.showWeightAlertNotification = false
+        }
+    }
+}
 extension SettingsOptionsTableViewController: BounceNavigationBarDelegate {
 	
 	func backButtonTapped() {
@@ -62,10 +72,17 @@ extension SettingsOptionsTableViewController: UITableViewDelegate, UITableViewDa
 	}
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
-		if section == 1 {
-			return viewModel.getNumberOfNotificationsRows()
-		}
-		return viewModel.getNumberOfRows()
+        switch contentType {
+        case .notifications:
+            if section == 1 {
+                return viewModel.getNumberOfNotificationsRows()
+            } else {
+                return viewModel.getNumberOfRows()
+            }
+        default:
+            return viewModel.getNumberOfRows()
+        }
+
 	}
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		
@@ -92,11 +109,21 @@ extension SettingsOptionsTableViewController: UITableViewDelegate, UITableViewDa
 			cell.notification = cellData
 			return cell
 		default:
-			let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.settingsOptionCell)!
-			cell.separatorInset = .zero
-			cell.selectionStyle = .none
-			cell.textLabel?.text = viewModel.getCellTitle(at: indexPath.row)
-			return cell
+            if indexPath.row == 2 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.notificationSwitchCell, for: indexPath) as! NotificationSwitchTableViewCell
+                cell.notificationTextLabel.text = viewModel.getCellTitle(at: indexPath.row)
+                cell.delegate = self
+                print(UserProfile.defaults.showWeightAlertNotification)
+                cell.notificationSwitch.isOn = UserProfile.defaults.showWeightAlertNotification ?? true
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.settingsOptionCell)!
+                cell.separatorInset = .zero
+                cell.selectionStyle = .none
+                cell.accessoryView = viewModel.getNotificationTitleCellAccessoryView(at: indexPath.row)
+                cell.textLabel?.text = viewModel.getCellTitle(at: indexPath.row)
+                return cell
+            }
 		}
 	}
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -88,7 +88,7 @@ extension SettingTableViewModel {
 		case .mostHungry:
 			tableViewItemArray = ["בוקר", "צהריים", "ערב", "לא ידוע"]
 		case .notifications:
-			tableViewItemArray = ["התראות שקילה", "התראות שתייה"]
+			tableViewItemArray = ["התראות שקילה", "התראות שתייה", "הצג התראות ניתוח נתונים"]
 		case .none:
 			break
 		}
@@ -120,14 +120,16 @@ extension SettingTableViewModel {
 			if let scaleNotification = notificationsArray?.filter({ $0.id == "weightNotification" }) {
 				if scaleNotification.count > 0 {
 					return UIImageView(image: UIImage(systemName: "square.and.pencil"))
-				}
+                }
 			} else {
 				return UIImageView(image: UIImage(systemName: "plus"))
 			}
+        case 2:
+            return UIImageView(image: UIImage(systemName: "plus"))
 		default:
-			break
+            break
 		}
-		return UIImageView(image: UIImage(systemName: "plus"))
+        return UIImageView(image: UIImage(systemName: "plus"))
 	}
 	func didSelect(at indexPath: IndexPath) {
 		
@@ -209,6 +211,7 @@ extension SettingTableViewModel {
 	func updateNotification() {
 		self.notificationsArray = notificationManager.getNotifications()
 	}
+
 	private func updateAndPopViewController(_ level: Int) {
 		UserProfile.defaults.fitnessLevel = level
 		UserProfile.updateServer()

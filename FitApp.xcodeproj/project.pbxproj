@@ -12,6 +12,8 @@
 		403EF8E929C8DE94007694AB /* SettingsCheckboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403EF8E729C8DE94007694AB /* SettingsCheckboxTableViewCell.swift */; };
 		403EF8EA29C8DE94007694AB /* SettingsCheckboxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 403EF8E829C8DE94007694AB /* SettingsCheckboxTableViewCell.xib */; };
 		4095DD7729C1ECB700F67D56 /* UserPreferredWorkouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4095DD7629C1ECB700F67D56 /* UserPreferredWorkouts.swift */; };
+		40F5782029CB42B10093ED71 /* NotificationSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F5781E29CB42B10093ED71 /* NotificationSwitchTableViewCell.swift */; };
+		40F5782129CB42B10093ED71 /* NotificationSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40F5781F29CB42B10093ED71 /* NotificationSwitchTableViewCell.xib */; };
 		7C0E4531275E8FA500ECA20E /* MessagesTextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */; };
 		7C0F703A276CEA5900964004 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0F7039276CEA5900964004 /* SettingsTableViewCell.xib */; };
 		7C0F703C276CEA8600964004 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F703B276CEA8600964004 /* SettingsTableViewCell.swift */; };
@@ -235,6 +237,8 @@
 		403EF8E729C8DE94007694AB /* SettingsCheckboxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCheckboxTableViewCell.swift; sourceTree = "<group>"; };
 		403EF8E829C8DE94007694AB /* SettingsCheckboxTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCheckboxTableViewCell.xib; sourceTree = "<group>"; };
 		4095DD7629C1ECB700F67D56 /* UserPreferredWorkouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferredWorkouts.swift; sourceTree = "<group>"; };
+		40F5781E29CB42B10093ED71 /* NotificationSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSwitchTableViewCell.swift; sourceTree = "<group>"; };
+		40F5781F29CB42B10093ED71 /* NotificationSwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationSwitchTableViewCell.xib; sourceTree = "<group>"; };
 		4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTextManager.swift; sourceTree = "<group>"; };
 		7C0F7039276CEA5900964004 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
@@ -513,6 +517,15 @@
 				403EF8E829C8DE94007694AB /* SettingsCheckboxTableViewCell.xib */,
 			);
 			path = CheboxCell;
+			sourceTree = "<group>";
+		};
+		40F5781D29CB42720093ED71 /* NotificationSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				40F5781E29CB42B10093ED71 /* NotificationSwitchTableViewCell.swift */,
+				40F5781F29CB42B10093ED71 /* NotificationSwitchTableViewCell.xib */,
+			);
+			name = NotificationSwitch;
 			sourceTree = "<group>";
 		};
 		7C0F7034276CE99600964004 /* SettingsTableViewCells */ = {
@@ -1006,6 +1019,7 @@
 		7CD181782647E7B30054DB9C /* NotificationViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				40F5781D29CB42720093ED71 /* NotificationSwitch */,
 				7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */,
 				7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */,
 			);
@@ -1396,6 +1410,7 @@
 				7C6E059B28FEDB66001013B9 /* CongratsConfettiViewController.storyboard in Resources */,
 				B3E6E9A02571446E00958C48 /* MealPlanTableViewCell.xib in Resources */,
 				7C10BA7B276BCFBE00B5860C /* Assistant-ExtraBold.ttf in Resources */,
+				40F5782129CB42B10093ED71 /* NotificationSwitchTableViewCell.xib in Resources */,
 				7C32C58E278E3E2400B97642 /* PopupAlertView.storyboard in Resources */,
 				B3B7FCEF2590EFBC004BC2CD /* WeightProgress.storyboard in Resources */,
 				7CFA5FF7262A0F5800A3F401 /* MoveDishView.xib in Resources */,
@@ -1568,6 +1583,7 @@
 				7C7434EB25CD906500D33A9A /* MailComposerViewController.swift in Sources */,
 				7CADF74E278CADFF0020CD83 /* Static.swift in Sources */,
 				B3DB7513259F8270002CF48B /* MealViewModel.swift in Sources */,
+				40F5782029CB42B10093ED71 /* NotificationSwitchTableViewCell.swift in Sources */,
 				7C2BD810267212C7006A1736 /* MealManager.swift in Sources */,
 				B367F17825B1BDF600DF21D7 /* DishesGenerator.swift in Sources */,
 				7C6E059828FED1DC001013B9 /* CongratsConfettiViewController.swift in Sources */,

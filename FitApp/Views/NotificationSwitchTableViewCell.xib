@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="notificationSwitchCell" id="KGk-i7-Jjw" customClass="NotificationSwitchTableViewCell" customModule="FitApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="y9a-bS-QYv">
+                        <rect key="frame" x="16" y="0.0" width="288" height="44"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeD-WQ-ZOC">
+                                <rect key="frame" x="0.0" y="11.999999999999998" width="239" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NZY-Vu-UOq">
+                                <rect key="frame" x="239" y="6.6666666666666679" width="51" height="31.000000000000004"/>
+                                <color key="onTintColor" name="ProjectTail"/>
+                                <connections>
+                                    <action selector="notificationSwitchAction:" destination="KGk-i7-Jjw" eventType="valueChanged" id="7Yh-JI-fYt"/>
+                                </connections>
+                            </switch>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="NZY-Vu-UOq" firstAttribute="top" secondItem="y9a-bS-QYv" secondAttribute="top" constant="6.6699999999999999" id="elh-jr-5Zi"/>
+                            <constraint firstAttribute="bottom" secondItem="NZY-Vu-UOq" secondAttribute="bottom" constant="6.3300000000000001" id="sjl-vI-n1X"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="y9a-bS-QYv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="FAG-88-uyh"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="y9a-bS-QYv" secondAttribute="trailing" id="caw-Vh-Tny"/>
+                    <constraint firstItem="y9a-bS-QYv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="f28-9c-FQL"/>
+                    <constraint firstAttribute="bottom" secondItem="y9a-bS-QYv" secondAttribute="bottom" id="r33-wo-Y0Y"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="notificationSwitch" destination="NZY-Vu-UOq" id="XfS-6d-rB1"/>
+                <outlet property="notificationTextLabel" destination="EeD-WQ-ZOC" id="Tqv-Pp-N9S"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="21"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="ProjectTail">
+            <color red="0.067000001668930054" green="0.47499999403953552" blue="0.45100000500679016" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>

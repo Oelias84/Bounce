@@ -149,6 +149,7 @@ struct K {
         static let workoutCell = "workoutCell"
 		static let settingsOptionCell = "settingsOptionCell"
 		static let notificationCell = "notificationCell"
+        static let notificationSwitchCell = "notificationSwitchCell"
 		static let chatCell = "chatCell"
 		static let dishesCell = "dishesCell"
 		static let addingCell = "addingCell"
@@ -184,6 +185,7 @@ struct K {
 		static let exerciseTableViewCell = "ExerciseTableViewCell"
 		static let mealPlanTableViewCell = "MealPlanTableViewCell"
 		static let notificationTableViewCell = "NotificationTableViewCell"
+        static let notificationSwitchTableViewCell = "NotificationSwitchTableViewCell"
 		static let questionnaireFatCollectionViewCell = "QuestionnaireFatCollectionViewCell"
 		static let collapsibleTableViewHeader = "CollapsibleTableViewHeader"
 

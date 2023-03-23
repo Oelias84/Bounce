@@ -56,8 +56,11 @@ struct UserProfile {
 	
 	@UserDefault(key: .showQaAlert)
 	var showQaAlert: Bool?
-	
-	@UserDefault(key: .showMealNotFinishedAlert)
+    
+    @UserDefault(key: .showWeightAlertNotification)
+    var showWeightAlertNotification: Bool?
+    
+    @UserDefault(key: .showMealNotFinishedAlert)
 	var showMealNotFinishedAlert: Bool?
 	
 	@UserDefault(key: .shouldShowCaloriesCheckAlert)
@@ -369,6 +372,7 @@ extension Key {
 	//show alerts
 	static let showQaAlert: Key = "showQaAlert"
 	static let showMealNotFinishedAlert: Key = "showMealNotFinishedAlert"
+    static let showWeightAlertNotification: Key = "showWeightAlertNotification"
 	static let shouldShowCaloriesCheckAlert: Key = "shouldShowCaloriesCheckAlert"
 	
 	//motivations
