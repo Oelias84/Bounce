@@ -269,7 +269,33 @@
 			"key": "45",
 			"male": "איזה כיף, סיימת את כל האימונימ לשבוע 😁",
 			"female": "איזה כיף, סיימת את כל האימונימ לשבוע 😁",
-		}
+		},
+        {
+            "name": "natural_menu_title",
+            "key": "46",
+            "male": "שמירה על המשקל",
+            "female": "שמירה על המשקל",
+        },
+        {
+            "name": "natural_menu_text",
+            "key": "47",
+            "male": "מאזן נטרלי שבו לאורך זמן ובמקביל לאימוני כח אתה  ממשיך לרדת באחוזי שומן ולעלות מסת שריר בצורה מינורית ושומר על המשקל הנוכחי שלך.",
+            "female": "מאזן נטרלי שבו לאורך זמן ובמקביל לאימוני כח את ממשיכה לרדת באחוזי שומן ולעלות מסת שריר בצורה מינורית ושומרת על המשקל הנוכחי שלך.",
+        },
+        {
+            "name": "negative_menu_title",
+            "key": "48",
+            "male": "חיטוב",
+            "female": "חיטוב",
+        },
+        {
+            "name": "negative_menu_text",
+            "key": "49",
+            "male": "מאזן קלורי שלילי שבו לאורך זמן ובמקביל  לאימוני כח אתה מוריד אחוזי שומן תוך כדי שמירת מסת שריר.",
+            "female": "מאזן קלורי שלילי שבו לאורך זמן ובמקביל  לאימוני כח את מורידה אחוזי שומן תוך כדי שמירת מסת שריר.",
+        }
+        
+        
 	]
 }
 
