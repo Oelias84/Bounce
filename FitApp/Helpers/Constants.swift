@@ -85,7 +85,7 @@ struct K {
         static let questionnaireSecond = "QuestionnaireSecond"
         static let questionnaireThird = "QuestionnaireThird"
         static let questionnaireForth = "QuestionnaireForth"
-		static let questionnaireForthSecondPart = "QuestionnaireForthSecondPart"
+		static let questionnaireFifthSecondPart = "QuestionnaireFifthSecondPart"
         static let questionnaireFifth = "QuestionnaireFifth"
         static let questionnaireSixth = "QuestionnaireSixth"
         static let questionnaireSeventh = "QuestionnaireSeventh"
@@ -130,6 +130,7 @@ struct K {
         static let moveToActivity = "moveToActivity"
 		static let moveToSecondActivity = "moveToSecondActivity"
         static let moveToNutrition = "moveToNutrition"
+        static let moveToNutritionGoal = "moveToNutritionGoal"
         static let moveToFitnessLevel = "moveToFitnessLevel"
         static let moveToSumup = "moveToSumup"
 		//Settings

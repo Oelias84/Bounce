@@ -12,6 +12,7 @@
 		403EF8E929C8DE94007694AB /* SettingsCheckboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403EF8E729C8DE94007694AB /* SettingsCheckboxTableViewCell.swift */; };
 		403EF8EA29C8DE94007694AB /* SettingsCheckboxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 403EF8E829C8DE94007694AB /* SettingsCheckboxTableViewCell.xib */; };
 		4095DD7729C1ECB700F67D56 /* UserPreferredWorkouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4095DD7629C1ECB700F67D56 /* UserPreferredWorkouts.swift */; };
+		40AA5BDE29D1EF720018E094 /* QuestionnaireNutritionGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AA5BDD29D1EF720018E094 /* QuestionnaireNutritionGoalViewController.swift */; };
 		40F5782029CB42B10093ED71 /* NotificationSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F5781E29CB42B10093ED71 /* NotificationSwitchTableViewCell.swift */; };
 		40F5782129CB42B10093ED71 /* NotificationSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40F5781F29CB42B10093ED71 /* NotificationSwitchTableViewCell.xib */; };
 		7C0E4531275E8FA500ECA20E /* MessagesTextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */; };
@@ -237,6 +238,7 @@
 		403EF8E729C8DE94007694AB /* SettingsCheckboxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCheckboxTableViewCell.swift; sourceTree = "<group>"; };
 		403EF8E829C8DE94007694AB /* SettingsCheckboxTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCheckboxTableViewCell.xib; sourceTree = "<group>"; };
 		4095DD7629C1ECB700F67D56 /* UserPreferredWorkouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferredWorkouts.swift; sourceTree = "<group>"; };
+		40AA5BDD29D1EF720018E094 /* QuestionnaireNutritionGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireNutritionGoalViewController.swift; sourceTree = "<group>"; };
 		40F5781E29CB42B10093ED71 /* NotificationSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		40F5781F29CB42B10093ED71 /* NotificationSwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationSwitchTableViewCell.xib; sourceTree = "<group>"; };
 		4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1205,6 +1207,7 @@
 				B3BB8F34258223E400D70628 /* QuestionnaireActivityViewController.swift */,
 				7C22214725DF11090075F524 /* QuestionnaireSecondActivityViewController.swift */,
 				B3BB8F4025826FEB00D70628 /* QuestionnaireNutritionViewController.swift */,
+				40AA5BDD29D1EF720018E094 /* QuestionnaireNutritionGoalViewController.swift */,
 				B3BB8F3A2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift */,
 				7C9B345D2583C5B400D30480 /* QuestionnaireSumUpViewController.swift */,
 			);
@@ -1699,6 +1702,7 @@
 				7C658ABE25D992D200CA75B2 /* Comments.swift in Sources */,
 				7CFCAF4726BD58DA008A24F8 /* HomeViewModel.swift in Sources */,
 				7C0F703C276CEA8600964004 /* SettingsTableViewCell.swift in Sources */,
+				40AA5BDE29D1EF720018E094 /* QuestionnaireNutritionGoalViewController.swift in Sources */,
 				7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */,
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
 				7C83152525E053B100335601 /* ExerciseCategoryView.swift in Sources */,

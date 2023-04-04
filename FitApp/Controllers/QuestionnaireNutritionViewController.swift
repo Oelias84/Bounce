@@ -24,18 +24,17 @@ class QuestionnaireNutritionViewController: UIViewController {
 	@IBOutlet weak var mostHungerCheckSecond: UIButton!
 	@IBOutlet weak var mostHungerCheckThird: UIButton!
 	@IBOutlet weak var mostHungerCheckForth: UIButton!
-	
-    @IBOutlet weak var neutralMenuCheckMark: UIButton!
-    
+	    
     @IBOutlet weak var nextButton: UIButton!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationItem.setHidesBackButton(true, animated: false)
 		
-		setupTextFields()
+		setupView()
 		setupCheckCheckMark()
 	}
+    
 	@IBAction func backButtonAction(_ sender: Any) {
 		navigationController?.popViewController(animated: true)
 	}
@@ -132,14 +131,18 @@ class QuestionnaireNutritionViewController: UIViewController {
         sender.isSelected = !sender.isSelected
         UserProfile.defaults.naturalMenu = sender.isSelected
     }
+    @IBAction func negativMenuCheckMark(sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        UserProfile.defaults.naturalMenu = !sender.isSelected
+    }
 }
 
 extension QuestionnaireNutritionViewController {
 	
-	private func setupTextFields() {
-		titleTextLabel.text = StaticStringsManager.shared.getGenderString?[12]
-		whatTimeTextLabel.text = StaticStringsManager.shared.getGenderString?[13]
-	}
+    private func setupView() {
+        titleTextLabel.text = StaticStringsManager.shared.getGenderString?[12]
+        whatTimeTextLabel.text = StaticStringsManager.shared.getGenderString?[13]
+    }
 	private func setupCheckCheckMark() {
 		let userData = UserProfile.defaults
 		
@@ -177,9 +180,6 @@ extension QuestionnaireNutritionViewController {
 				break
 			}
 		}
-        if let neutralMenuCheckMark = userData.naturalMenu {
-            self.neutralMenuCheckMark.isSelected = neutralMenuCheckMark
-        }
 		if let meals = userData.mealsPerDay, let hunger = userData.mostHungry {
 			self.mostHunger = hunger
 			self.numberOfMeals = meals
