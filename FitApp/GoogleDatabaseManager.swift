@@ -72,10 +72,12 @@ final class GoogleDatabaseManager {
 		chatRef(userId: chat.userId).child(chat.isAdmin == true ? "support_last_seen_message_timestamp" : "last_seen_message_timestamp").setValue(Date().millisecondsSince2020)
 	}
 	func updateUserLastSeenDate() {
-		chatRef(userId: Auth.auth().currentUser!.uid).child("user_last_seen").setValue(Date().fullDateStringForDB)
+		guard let user = Auth.auth().currentUser?.uid else { return }
+		chatRef(userId: user).child("user_last_seen").setValue(Date().fullDateStringForDB)
 	}
 	func updateUserProgramExpirationDate(_ date: String) {
-		chatRef(userId: Auth.auth().currentUser!.uid).child("program_expiration_date").setValue(date)
+		guard let user = Auth.auth().currentUser?.uid else { return }
+		chatRef(userId: user).child("program_expiration_date").setValue(date)
 	}
 	
 	// Send
@@ -84,7 +86,8 @@ final class GoogleDatabaseManager {
 	}
 	func sendMessageToChat(chat: Chat, content: String, link: String?, previewData: Data?, kind: MessageKind, completion: @escaping(Result<Void, Error>) -> ()) {
 		let date = Date().millisecondsSince2020
-		let messageId = "\(chat.userId)_\(date)"
+		let messageId = "\(chat.userId)a\(date)"
+		
 		guard let senderId = Auth.auth().currentUser?.uid else {
 			completion(.failure(ErrorManager.DatabaseError.noUID))
 			return
@@ -147,8 +150,8 @@ final class GoogleDatabaseManager {
 			}
 		}
 	}
-	func getAllMessagesForChat(chat: Chat, completion: @escaping (Result<[Message], ErrorManager.DatabaseError>) -> Void) {
-		chatMessagesRef(userId: chat.userId).observe(.value) {
+	func getAllMessagesForChat(toLast: UInt, chat: Chat, completion: @escaping (Result<[Message], ErrorManager.DatabaseError>) -> Void) {
+		chatMessagesRef(userId: chat.userId).queryLimited(toLast: toLast).observe(.value) {
 			snapshot in
 			guard let messages = self.parseMessagesData(userId: chat.userId, snapshot: snapshot) else {
 				completion(.failure(.noFetch))

@@ -15,7 +15,7 @@ import CropViewController
 import BetterSegmentedControl
 
 enum TimePeriod {
-
+	
 	case week
 	case month
 	case year
@@ -24,10 +24,18 @@ enum TimePeriod {
 class WeightsViewController: UIViewController {
 	
 	var viewModel: WeightsViewModel!
+	var userID: String?
 	
 	var values = [Double]()
 	var timeLinePeriod = [Date]()
-	var timePeriod: TimePeriod = .week
+	var isFromAdmin: Bool = false
+	var timePeriod: TimePeriod = .week {
+		didSet {
+			if !isFromAdmin {
+				addWeightButton.isHidden = timePeriod != .week
+			}
+		}
+	}
 	
 	private var weightImage: UIImage?
 	private var weightAlert: AddWeightAlertView?
@@ -49,7 +57,7 @@ class WeightsViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		viewModel = WeightsViewModel()
+		viewModel = WeightsViewModel(userUID: userID)
 		setupView()
 		bindViewModel()
 	}
@@ -64,7 +72,10 @@ class WeightsViewController: UIViewController {
 		updateView()
 	}
 	@IBAction func addWeightButtonAction(_ sender: Any) {
-		
+		if isFromAdmin {
+			dismiss(animated: true)
+			return
+		}
 		addWeightButton.isEnabled = false
 		if viewModel.didWeightForCurrentDate {
 			presentOkAlert(withMessage: "כבר נשקלת היום")
@@ -147,7 +158,7 @@ extension WeightsViewController: AddWeightAlertViewDelegate {
 	}
 	func confirmButtonAction(weight: String, date: Date?, imagePath: String?) {
 		guard let weightDouble = Double(weight) else { return }
-		Spinner.shared.show(self)
+		Spinner.shared.show(self.view)
 		
 		if weightDouble>150 || weightDouble<30 {
 			weightAlert = nil
@@ -250,9 +261,10 @@ extension WeightsViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let weight = viewModel.getWeight(for: timePeriod, at: indexPath.row)
-
+		
 		switch timePeriod {
 		case .week:
+			if isFromAdmin { return }
 			presentAddWeightAlert(weight: weight)
 		case .month:
 			viewModel.selectedDate = weight?.date
@@ -270,7 +282,7 @@ extension WeightsViewController {
 	
 	fileprivate func setupView() {
 		chartViewContainer.cellView()
-
+		
 		segmentedControl.backgroundColor = .projectBackgroundColor
 		segmentedControl.borderColorV = .projectGray.withAlphaComponent(0.2)
 		segmentedControl.borderWidthV = 1
@@ -280,7 +292,7 @@ extension WeightsViewController {
 			.indicatorViewBackgroundColor(.projectTail),
 		]
 		
-		segmentedControl.segments =  [
+		segmentedControl.segments = [
 			LabelSegment(text: "שבוע", normalFont: UIFont(name: "Assistant-SemiBold", size: 18), normalTextColor: .black, selectedTextColor: .white),
 			LabelSegment(text: "חודש", normalFont: UIFont(name: "Assistant-SemiBold", size: 18), normalTextColor: .black, selectedTextColor: .white),
 			LabelSegment(text: "שנה", normalFont: UIFont(name: "Assistant-SemiBold", size: 18), normalTextColor: .black, selectedTextColor: .white),
@@ -293,6 +305,11 @@ extension WeightsViewController {
 		topBarView.isBackButtonHidden = true
 		topBarView.isDayWelcomeHidden = true
 		topBarView.isProfileButtonHidden = false
+		
+		if isFromAdmin {
+			addWeightButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+			addWeightButton.setTitle("", for: .normal)
+		}
 		dateLeftButton.isHidden = true
 	}
 	fileprivate func updateView() {
@@ -369,10 +386,12 @@ extension WeightsViewController {
 		weightAlert = AddWeightAlertView(weight: weight)
 		weightAlert?.delegate = self
 		weightAlert?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width,
-									height: UIScreen.main.bounds.size.height)
+												height: UIScreen.main.bounds.size.height)
 		if let alert = weightAlert {
 			window?.addSubview(alert)
-			Spinner.shared.show()
+			if let navView = self.navigationController?.view {
+				Spinner.shared.show(navView)
+			}
 		}
 	}
 }

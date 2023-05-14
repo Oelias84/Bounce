@@ -161,9 +161,7 @@ extension ArticlesViewController {
 	}
 	private func callToViewModelForUIUpdate() {
 		
-		if let navView = navigationController?.view {
-			Spinner.shared.show(navView)
-		}
+		Spinner.shared.show()
 		articleViewModel = ArticleViewModel()
 		articleViewModel.bindArticleViewModelToController = {
 			self.updateDataSource()

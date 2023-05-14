@@ -178,7 +178,7 @@ extension SettingsViewController: CropViewControllerDelegate, UINavigationContro
 	func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
 		cropViewController.dismiss(animated: true) {
 			self.inCameraMode = false
-			Spinner.shared.show(self.view)
+			Spinner.shared.show(self)
 			self.saveImage(image)
 		}
 	}
@@ -466,7 +466,7 @@ extension SettingsViewController {
 		}
 	}
 	fileprivate func presentDeleteAccountAlert() {
-		Spinner.shared.show(view)
+		Spinner.shared.show(self)
 		let deleteAlert = UIAlertController(title: StaticStringsManager.shared.getGenderString?[41] ?? "",
 											 message: StaticStringsManager.shared.getGenderString?[42] ?? "", preferredStyle: .alert)
 		deleteAlert.addTextField { emailTextField in

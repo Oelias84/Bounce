@@ -19,9 +19,7 @@ class WorkoutTableViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if let navView = navigationController?.view {
-			Spinner.shared.show(navView)
-		}
+		Spinner.shared.show()
 		setupView()
 		setUpTableView()
 		workoutViewModel = WorkoutViewModel()

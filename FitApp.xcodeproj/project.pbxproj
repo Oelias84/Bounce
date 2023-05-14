@@ -115,6 +115,7 @@
 		7CBBF1ED28197A8600EE55F1 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBF1EC28197A8600EE55F1 /* IAPManager.swift */; };
 		7CBBF1EF281992AA00EE55F1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CBBF1EE281992AA00EE55F1 /* StoreKit.framework */; };
 		7CCC0E67262B2E79006E2E35 /* TableViewEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCC0E66262B2E79006E2E35 /* TableViewEmptyView.swift */; };
+		7CD07C842972D33400F0F385 /* AddMealAlertDishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD07C832972D33400F0F385 /* AddMealAlertDishViewModel.swift */; };
 		7CD1817B2647E80F0054DB9C /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */; };
 		7CD1817C2647E80F0054DB9C /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */; };
 		7CD1817E26481E5D0054DB9C /* SettingTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */; };
@@ -330,6 +331,7 @@
 		7CBBF1EE281992AA00EE55F1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		7CBBF1F0281C54F000EE55F1 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		7CCC0E66262B2E79006E2E35 /* TableViewEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewEmptyView.swift; sourceTree = "<group>"; };
+		7CD07C832972D33400F0F385 /* AddMealAlertDishViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMealAlertDishViewModel.swift; sourceTree = "<group>"; };
 		7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewModel.swift; sourceTree = "<group>"; };
@@ -814,6 +816,7 @@
 		7C8F51392671FAE5001FF0EE /* DishView */ = {
 			isa = PBXGroup;
 			children = (
+				7CD07C832972D33400F0F385 /* AddMealAlertDishViewModel.swift */,
 				7C8F51352671F9E3001FF0EE /* AddMealAlertDishView.xib */,
 				7C8F51372671FAE0001FF0EE /* AddMealAlertDishView.swift */,
 			);
@@ -1429,6 +1432,7 @@
 				7C89AA81256D7342009AD87C /* RegisterViewController.swift in Sources */,
 				7C89AA77256D715F009AD87C /* UIView+Extensions.swift in Sources */,
 				B348421525890E5D00E0EF31 /* DIsh.swift in Sources */,
+				7CD07C842972D33400F0F385 /* AddMealAlertDishViewModel.swift in Sources */,
 				B348420D25890CF800E0EF31 /* Meal.swift in Sources */,
 				B3833F39259364ED006776D5 /* Weight.swift in Sources */,
 				B3E6E9AD25714C1400958C48 /* MealPlanTableViewCell.swift in Sources */,
@@ -1726,7 +1730,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.39;
+				MARKETING_VERSION = 1.1.51;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
@@ -1749,7 +1753,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.39;
+				MARKETING_VERSION = 1.1.51;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;

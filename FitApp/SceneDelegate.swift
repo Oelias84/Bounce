@@ -44,7 +44,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 									self.goToHome(window) {
 										if let notificationResponse = connectionOptions.notificationResponse {
 											let id = notificationResponse.notification.request.identifier
-											Spinner.shared.show(window)
+											Spinner.shared.show()
 
 											switch id {
 											case NotificationTypes.mealNotification.rawValue:
@@ -211,7 +211,7 @@ extension SceneDelegate {
 				tabBarController.selectedIndex = 1
 			case K.ViewControllerId.ChatContainerViewController:
 				// Manager
-				Spinner.shared.show(window!)
+				Spinner.shared.show()
 				
 				 if let chatViewContainer = destinationViewController as? ChatContainerViewController {
 					
