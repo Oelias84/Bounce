@@ -30,7 +30,7 @@ class LoginViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+        
 		raiseScreenWhenKeyboardAppears()
 		addScreenTappGesture()
 		passwordTextfield.isSecureTextEntry = true
