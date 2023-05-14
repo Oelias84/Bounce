@@ -113,7 +113,6 @@ extension SettingsOptionsTableViewController: UITableViewDelegate, UITableViewDa
                 let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.notificationSwitchCell, for: indexPath) as! NotificationSwitchTableViewCell
                 cell.notificationTextLabel.text = viewModel.getCellTitle(at: indexPath.row)
                 cell.delegate = self
-                print(UserProfile.defaults.showWeightAlertNotification)
                 cell.notificationSwitch.isOn = UserProfile.defaults.showWeightAlertNotification ?? true
                 return cell
             } else {

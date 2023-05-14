@@ -440,7 +440,7 @@ extension SettingsViewController {
     }
     fileprivate func nutritionDetailsTappedAt(_ row: Int) {
         switch row {
-        case 1:
+        case 2:
             let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
             let vc = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsOptionsTableViewController) as! SettingsOptionsTableViewController
             vc.contentType = .mostHungry
