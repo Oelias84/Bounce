@@ -21,7 +21,7 @@ enum ExerciseType: String {
     case none
 }
 
-class HomeExercisesByType {
+class ExercisesByType {
     
     let type: ExerciseType
     var exercises: [Exercise]
@@ -44,8 +44,8 @@ class WorkoutManager {
     private var gymWorkouts: [Workout] = []
     private var homeWorkouts: [Workout] = []
     
-    private var homeExercisesByType: [HomeExercisesByType] = []
-    private var gymExercisesByType: [HomeExercisesByType] = []
+    private var homeExercisesByType: [ExercisesByType] = []
+    private var gymExercisesByType: [ExercisesByType] = []
     
     private var userPreferredWorkout: UserPreferredWorkouts?
     
@@ -93,7 +93,7 @@ class WorkoutManager {
         }
         group.notify(queue: .main) {
             self.addGymExerciseDataToWorkout()
-            self.addExerciseDataToWorkout()
+            self.addHomeExerciseDataToWorkout()
         }
     }
     
@@ -181,9 +181,9 @@ class WorkoutManager {
                 return gymExercisesByType.first(where: {$0.type == exerciseType})?.exercises ?? []
             }
         }
-        // Map used exercise to exerciseNumbers
-        let exercisesToRemove = currentWorkout.exercises.compactMap{ $0.exerciseToPresent?.exerciseNumber }
         
+        // Map used exercise to exerciseNumbers
+        let exercisesToRemove = currentWorkout.exercises.compactMap { $0.exerciseToPresent?.exerciseNumber }
         
         // Filter used exercises from exercises options list
         let flitteredOptions = exercisesOptions.filter {
@@ -217,7 +217,6 @@ class WorkoutManager {
             case .gym:
                 userPreferredWorkout.gymWorkouts = gymWorkouts
             }
-            
             self.updatePreferredWorkouts {
                 self.userPreferredWorkout = userPreferredWorkout
             }
@@ -225,24 +224,24 @@ class WorkoutManager {
             
             let preferredWorkoutData = UserPreferredWorkouts(homeWorkouts: homeWorkouts, gymWorkouts: gymWorkouts)
             self.userPreferredWorkout = preferredWorkoutData
-            self.updatePreferredWorkouts {}
+            self.updatePreferredWorkouts {
+                
+            }
         }
-        
         completion()
     }
 
-    private func filterExerciseByType(exercisesData: [Exercise]) -> [HomeExercisesByType] {
-        var exercisesByType: [HomeExercisesByType] = []
+    private func filterExerciseByType(exercisesData: [Exercise]) -> [ExercisesByType] {
+        var exercisesByType: [ExercisesByType] = []
         
         for i in 0..<exercisesData.count {
             let exercise = exercisesData[i]
             guard let exerciseType = ExerciseType(rawValue: exercise.type) else { return exercisesByType }
             
-            if exercisesByType.contains(where: {$0.type == exerciseType}) {
-                let containedExerciseType = exercisesByType.first(where: {$0.type == exerciseType})
-                containedExerciseType?.exercises.append(exercise)
+            if let containedExerciseType = exercisesByType.first(where: {$0.type == exerciseType}) {
+                containedExerciseType.exercises.append(exercise)
             } else {
-                let exerciseByType = HomeExercisesByType(type: exerciseType, exercises: [exercise])
+                let exerciseByType = ExercisesByType(type: exerciseType, exercises: [exercise])
                 exercisesByType.append(exerciseByType)
             }
         }
@@ -377,14 +376,9 @@ class WorkoutManager {
         }
     }
     // Adding exercise to workout
-    private func addExerciseDataToWorkout() {
+    private func addHomeExerciseDataToWorkout() {
         if let userPreferredWorkout {
             homeWorkouts = userPreferredWorkout.homeWorkouts
-            userPreferredWorkout.homeWorkouts.forEach {
-                $0.exercises.forEach {
-                    print($0.exercise)
-                }
-            }
         }
         homeWorkouts.forEach { workout in
             workout.exercises.forEach {
