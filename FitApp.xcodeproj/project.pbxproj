@@ -146,7 +146,7 @@
 		7CD07C842972D33400F0F385 /* AddMealAlertDishViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD07C832972D33400F0F385 /* AddMealAlertDishViewModel.swift */; };
 		7CD1817B2647E80F0054DB9C /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */; };
 		7CD1817C2647E80F0054DB9C /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */; };
-		7CD1817E26481E5D0054DB9C /* SettingTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */; };
+		7CD1817E26481E5D0054DB9C /* SettingsOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD1817D26481E5D0054DB9C /* SettingsOptionsViewModel.swift */; };
 		7CD2C21629A3C96700C2CF7B /* ExerciseDropViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD2C21529A3C96700C2CF7B /* ExerciseDropViewContainer.swift */; };
 		7CD2C21829A3C9E400C2CF7B /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD2C21729A3C9E400C2CF7B /* UIApplication+Extensions.swift */; };
 		7CE0862527613FE000BF3CF3 /* UiColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE0862427613FE000BF3CF3 /* UiColor+Extensions.swift */; };
@@ -384,7 +384,7 @@
 		7CD07C832972D33400F0F385 /* AddMealAlertDishViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMealAlertDishViewModel.swift; sourceTree = "<group>"; };
 		7CD181792647E80F0054DB9C /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		7CD1817A2647E80F0054DB9C /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
-		7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewModel.swift; sourceTree = "<group>"; };
+		7CD1817D26481E5D0054DB9C /* SettingsOptionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOptionsViewModel.swift; sourceTree = "<group>"; };
 		7CD2C21529A3C96700C2CF7B /* ExerciseDropViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDropViewContainer.swift; sourceTree = "<group>"; };
 		7CD2C21729A3C9E400C2CF7B /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		7CE0862427613FE000BF3CF3 /* UiColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UiColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -1273,7 +1273,7 @@
 				B358227E25ACA40D00C91295 /* ArticleViewModel.swift */,
 				B38397F525B4A1BE00154697 /* WorkoutViewModel.swift */,
 				7C74350225CDBAE900D33A9A /* ChatsViewModel.swift */,
-				7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */,
+				7CD1817D26481E5D0054DB9C /* SettingsOptionsViewModel.swift */,
 				7C33B660266A587D00E16A1C /* CommentsViewModel.swift */,
 				7CFCAF4626BD58DA008A24F8 /* HomeViewModel.swift */,
 				7C182FE3279DF26A00796693 /* ChatViewModel.swift */,
@@ -1703,7 +1703,7 @@
 				7C1ACCEB266F8F8F008079C9 /* CommentTableViewCell.swift in Sources */,
 				7C7C38352793630A0075B64A /* DishCellTextFieldView.swift in Sources */,
 				7CFA85D126EE055700296B53 /* DailyMealManager.swift in Sources */,
-				7CD1817E26481E5D0054DB9C /* SettingTableViewModel.swift in Sources */,
+				7CD1817E26481E5D0054DB9C /* SettingsOptionsViewModel.swift in Sources */,
 				7C7435EB25D31F9A00D33A9A /* Chat.swift in Sources */,
 				7C54164F26AACC9900C22859 /* RegisterViewModel.swift in Sources */,
 				7C33B65F26690A3800E16A1C /* Notification.swift in Sources */,

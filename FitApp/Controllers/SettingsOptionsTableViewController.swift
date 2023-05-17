@@ -18,7 +18,7 @@ enum SettingsContentType {
 class SettingsOptionsTableViewController: UIViewController {
     
     var contentType: SettingsContentType!
-    private var viewModel: SettingTableViewModel!
+    private var viewModel: SettingsOptionsViewModel!
     
     @IBOutlet weak var topBarView: BounceNavigationBarView!
     @IBOutlet weak var tableView: UITableView!
@@ -28,7 +28,7 @@ class SettingsOptionsTableViewController: UIViewController {
         
         setupTopBar()
         registerCells()
-        viewModel = SettingTableViewModel(contentType: contentType, for: self)
+        viewModel = SettingsOptionsViewModel(contentType: contentType, for: self)
         
         if contentType == .notifications {
             viewModel.bindNotificationViewModelToController = {

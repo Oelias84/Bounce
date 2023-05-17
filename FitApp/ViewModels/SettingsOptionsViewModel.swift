@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingTableViewModel {
+class SettingsOptionsViewModel {
 	
 	var vc: UIViewController!
 	var contentType: SettingsContentType!
@@ -38,7 +38,7 @@ class SettingTableViewModel {
 }
 
 //MARK: - Delegates
-extension SettingTableViewModel: PopupAlertViewDelegate {
+extension SettingsOptionsViewModel: PopupAlertViewDelegate {
 	
 	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
 		guard let level = level else { return }
@@ -64,7 +64,7 @@ extension SettingTableViewModel: PopupAlertViewDelegate {
 }
 
 //MARK: - Functions
-extension SettingTableViewModel {
+extension SettingsOptionsViewModel {
 	
 	//MARK: - Setters
 	private func setTitle() {
