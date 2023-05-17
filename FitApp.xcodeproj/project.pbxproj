@@ -19,6 +19,7 @@
 		401BF79029EEC2C9001F4F38 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 401BF78F29EEC2C9001F4F38 /* MessageKit */; };
 		403EF8E929C8DE94007694AB /* SettingsCheckboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403EF8E729C8DE94007694AB /* SettingsCheckboxTableViewCell.swift */; };
 		403EF8EA29C8DE94007694AB /* SettingsCheckboxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 403EF8E829C8DE94007694AB /* SettingsCheckboxTableViewCell.xib */; };
+		407A6FED2A127117003ED30F /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407A6FEC2A127117003ED30F /* SettingsViewModel.swift */; };
 		4095DD7729C1ECB700F67D56 /* UserPreferredWorkouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4095DD7629C1ECB700F67D56 /* UserPreferredWorkouts.swift */; };
 		40AA5BDE29D1EF720018E094 /* QuestionnaireNutritionGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AA5BDD29D1EF720018E094 /* QuestionnaireNutritionGoalViewController.swift */; };
 		40F5782029CB42B10093ED71 /* NotificationSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F5781E29CB42B10093ED71 /* NotificationSwitchTableViewCell.swift */; };
@@ -245,6 +246,7 @@
 		05D96098412DCEF72F6C4753 /* Pods-FitApp-FitAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp-FitAppUITests.release.xcconfig"; path = "Target Support Files/Pods-FitApp-FitAppUITests/Pods-FitApp-FitAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		403EF8E729C8DE94007694AB /* SettingsCheckboxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCheckboxTableViewCell.swift; sourceTree = "<group>"; };
 		403EF8E829C8DE94007694AB /* SettingsCheckboxTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCheckboxTableViewCell.xib; sourceTree = "<group>"; };
+		407A6FEC2A127117003ED30F /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4095DD7629C1ECB700F67D56 /* UserPreferredWorkouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferredWorkouts.swift; sourceTree = "<group>"; };
 		40AA5BDD29D1EF720018E094 /* QuestionnaireNutritionGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireNutritionGoalViewController.swift; sourceTree = "<group>"; };
 		40F5781E29CB42B10093ED71 /* NotificationSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSwitchTableViewCell.swift; sourceTree = "<group>"; };
@@ -1275,6 +1277,7 @@
 				7C33B660266A587D00E16A1C /* CommentsViewModel.swift */,
 				7CFCAF4626BD58DA008A24F8 /* HomeViewModel.swift */,
 				7C182FE3279DF26A00796693 /* ChatViewModel.swift */,
+				407A6FEC2A127117003ED30F /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1687,6 +1690,7 @@
 				7C2B901D29B7869700CC58CA /* ExerciseOptionsListSheetView.swift in Sources */,
 				7C9B345E2583C5B400D30480 /* QuestionnaireSumUpViewController.swift in Sources */,
 				7CFA5FFF262A10E600A3F401 /* MoveDishView.swift in Sources */,
+				407A6FED2A127117003ED30F /* SettingsViewModel.swift in Sources */,
 				7C8F51382671FAE0001FF0EE /* AddMealAlertDishView.swift in Sources */,
 				7CB9ADE9268CB72B0009B42A /* ChartView.swift in Sources */,
 				7C7435CF25D1EF8300D33A9A /* ChatUser.swift in Sources */,

@@ -9,23 +9,12 @@ import UIKit
 import FirebaseAuth
 import CropViewController
 
-enum SettingsMenu {
-    
-    case activity
-    case nutrition
-    case fitness
-    case system
-}
+
 
 class SettingsViewController: UIViewController {
     
-    private var optionContentType: SettingsContentType!
-    
-    private let userGender = UserProfile.defaults.getGender
-    private var tableViewData: [SettingsMenu: [SettingsCell]]!
-    private var userData: UserProfile! = UserProfile.defaults
-    
-    private var inCameraMode: Bool = false
+    let viewModel = SettingsViewModel()
+
     private let imagePickerController = UIImagePickerController()
     
     @IBOutlet weak var tableView: UITableView!
@@ -35,7 +24,7 @@ class SettingsViewController: UIViewController {
         if segue.identifier == K.SegueId.moveToSettingsOptions {
             
             let settingsOptionsVC = segue.destination as! SettingsOptionsTableViewController
-            settingsOptionsVC.contentType = optionContentType
+            settingsOptionsVC.contentType = viewModel.getContentType
         }
     }
     
@@ -49,12 +38,15 @@ class SettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        userData = UserProfile.defaults
-        setupTableViewData()
-        
-        if !inCameraMode {
-            //			navigationController?.popViewController(animated: false)
+        viewModel.setupTableViewData() {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
+        
+//        if !inCameraMode {
+//            //			navigationController?.popViewController(animated: false)
+//        }
     }
     
     @objc private func resourcesButtonAction() {
@@ -69,37 +61,13 @@ class SettingsViewController: UIViewController {
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        4
+        viewModel.getNumberOfSections
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        switch section {
-        case 0:
-            return "פרטים אישיים"
-        case 1:
-            return "תזונה"
-        case 2:
-            return "כושר"
-        case 3:
-            return "מערכת"
-        default:
-            return nil
-        }
+        viewModel.getTitleFor(section)
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        switch section {
-        case 0:
-            return tableViewData[.activity]!.count
-        case 1:
-            return tableViewData[.nutrition]!.count
-        case 2:
-            return tableViewData[.fitness]!.count
-        case 3:
-            return tableViewData[.system]!.count
-        default:
-            return 0
-        }
+        viewModel.getNumberOfRows(in: section)
     }
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
@@ -110,9 +78,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         header.textLabel?.font = UIFont(name: "Assistant-Bold", size: 18)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         switch indexPath.section {
-            
         case 0:
             personalDetailsTappedAt()
         case 1:
@@ -126,49 +92,47 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let stepperCell = tableView.dequeueReusableCell(withIdentifier: K.CellId.settingCell, for: indexPath) as! SettingsTableViewCell
-        
         stepperCell.delegate = self
+        stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
         
         switch indexPath.section {
         case 0:
             //Personal details
             //activity level
-            stepperCell.settingsCellData = tableViewData[.activity]![indexPath.row]
+            stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
             stepperCell.tag = 0
         case 1:
             //Nutrition
             switch indexPath.row {
             case 0:
-                //neutral menu
-                let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.checkboxCell, for: indexPath) as! SettingsCheckboxTableViewCell
-                cell.delegate = self
-                cell.checkboxButton.isSelected = userData.naturalMenu ?? false
-                cell.cellTextLabel.text = tableViewData[.nutrition]![indexPath.row].title
-                return cell
+                stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
             case 1:
                 //number of meals
-                stepperCell.settingsCellData = tableViewData[.nutrition]![indexPath.row]
+                stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
                 stepperCell.tag = 1
             case 2:
+                //number of meals
+                stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
+                stepperCell.tag = 1
+            case 3:
                 //most hungry
-                stepperCell.settingsCellData = tableViewData[.nutrition]![indexPath.row]
+                stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
                 stepperCell.tag = 2
             default:
                 return UITableViewCell()
             }
         case 2:
             //Fitness Level
-            stepperCell.settingsCellData = tableViewData[.fitness]![indexPath.row]
+            stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
             stepperCell.infoButton.isHidden = !(indexPath.row == 2)
         case 3:
             //System
             switch indexPath.row {
             case 0:
-                stepperCell.settingsCellData = tableViewData[.system]![indexPath.row]
+                stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
             default:
-                stepperCell.settingsCellData = tableViewData[.system]![indexPath.row]
+                stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
                 stepperCell.titleLabel.textColor = .red
                 stepperCell.labelStackView.isHidden = true
                 stepperCell.titleLabel.font = UIFont(name: "Assistant-SemiBold", size: 14.0)
@@ -184,7 +148,7 @@ extension SettingsViewController: CropViewControllerDelegate, UINavigationContro
     
     func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
         cropViewController.dismiss(animated: true) {
-            self.inCameraMode = false
+//            self.inCameraMode = false
             Spinner.shared.show(self)
             self.saveImage(image)
         }
@@ -206,12 +170,12 @@ extension SettingsViewController: SettingsCheckboxTableViewCellDelegate {
         presentOkAlert(withTitle: StaticStringsManager.shared.getGenderString?[32] ?? "" ,withMessage: "Enter a massage here")
     }
     func checkboxButtonAction(_ sender: UIButton) {
-        if userData.naturalMenu == nil {
-            UserProfile.defaults.naturalMenu = true
-        } else {
-            userData.naturalMenu?.toggle()
-        }
-        UserProfile.updateServer()
+//        if userData.naturalMenu == nil {
+//            UserProfile.defaults.naturalMenu = true
+//        } else {
+//            userData.naturalMenu?.toggle()
+//        }
+//        UserProfile.updateServer()
     }
 }
 extension SettingsViewController: SettingsStepperViewCellDelegate {
@@ -258,7 +222,7 @@ extension SettingsViewController: BounceNavigationBarDelegate {
         presentImagePickerActionSheet(imagePicker: imagePickerController) {
             didSelect in
             if didSelect {
-                self.inCameraMode = true
+//                self.inCameraMode = true
             }
         }
     }
@@ -270,7 +234,7 @@ extension SettingsViewController: BounceNavigationBarDelegate {
 //MARK: - Functions
 extension SettingsViewController {
     //setup
-    fileprivate func setupTopBar() {
+    private func setupTopBar() {
         
         topBarView.delegate = self
         topBarView.nameTitle = "הגדרות"
@@ -280,123 +244,18 @@ extension SettingsViewController {
         topBarView.isDayWelcomeHidden = true
         topBarView.isProfileButtonHidden = false
     }
-    fileprivate func registerCells() {
+    private func registerCells() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: K.NibName.settingsTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.settingCell)
         tableView.register(UINib(nibName: K.NibName.settingsCheckboxTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.checkboxCell)
     }
-    fileprivate func setupTableViewData() {
-        
-        let setupNumberOfMealsStepper = setupNumberOfMealsStepper()
-        let setupNumberOfTrainingsStepper = setupNumberOfTrainingsStepper()
-        let setupNumberOfExternalTrainingsStepper = setupNumberOfExternalTrainingsStepper()
-        
-        tableViewData = [
-            .activity: [
-                SettingsCell(title: "רמת פעילות", secondaryTitle: setupActivityTitle())
-            ],
-            .nutrition: [
-                SettingsCell(title: "תפריט נטרלי"),
-                SettingsCell(title: "מספר ארוחות", stepperValue: setupNumberOfMealsStepper.2, stepperMin: setupNumberOfMealsStepper.0, stepperMax: setupNumberOfMealsStepper.1),
-                SettingsCell(title: StaticStringsManager.shared.getGenderString?[21] ?? "", secondaryTitle: setupMostHungryTitle())
-            ],
-            .fitness: [
-                SettingsCell(title: "רמת קושי", secondaryTitle: setupFitnessLevelTitle()),
-                SettingsCell(title: "מספר אימונים שבועי", stepperValue: setupNumberOfTrainingsStepper.2, stepperMin: setupNumberOfTrainingsStepper.0, stepperMax: setupNumberOfTrainingsStepper.1),
-                SettingsCell(title: "מספר אימונים שבועי חיצוני", stepperValue: setupNumberOfExternalTrainingsStepper.2, stepperMin: setupNumberOfExternalTrainingsStepper.0, stepperMax: setupNumberOfExternalTrainingsStepper.1)
-            ],
-            .system: [
-                SettingsCell(title: "התראות", secondaryTitle: ""),
-                SettingsCell(title:  StaticStringsManager.shared.getGenderString?[22] ?? "", secondaryTitle: ""),
-                SettingsCell(title:  StaticStringsManager.shared.getGenderString?[40] ?? "", secondaryTitle: "")
-            ]
-        ]
-        tableView.reloadData()
-    }
-    fileprivate func setupActivityTitle() -> String {
-        if let steps = userData.steps {
-            return "\(steps) צעדים"
-        } else if let kilometers = userData.kilometer {
-            return String(format: "%.1f", kilometers) + "ק״מ"
-        } else {
-            return UserProfile.getLifeStyleText()
-        }
-    }
-    fileprivate func setupMostHungryTitle() -> String {
-        var hungerTitle: String {
-            switch userData.mostHungry  {
-            case 1:
-                return "בוקר"
-            case 2:
-                return "צהריים"
-            case 3:
-                return "ערב"
-            default:
-                return "לא ידוע"
-            }
-        }
-        return hungerTitle
-    }
-    fileprivate func setupFitnessLevelTitle() -> String {
-        
-        var fitnessTitle: String {
-            switch userData.fitnessLevel  {
-            case 1:
-                return StaticStringsManager.shared.getGenderString?[14] ?? ""
-            case 2:
-                return "ביניים"
-            case 3:
-                return StaticStringsManager.shared.getGenderString?[17] ?? ""
-            default:
-                return "שגיאה"
-            }
-        }
-        return fitnessTitle
-    }
-    fileprivate func setupNumberOfMealsStepper() -> (Int,Int,Double) {
-        if let meals = userData.mealsPerDay {
-            return (3, 5, Double(meals))
-        }
-        return (0, 0, 0)
-    }
-    fileprivate func setupNumberOfTrainingsStepper() -> (Int,Int,Double) {
-        var min = 0
-        var max = 0
-        
-        switch userData.fitnessLevel {
-        case 1:
-            min = 2
-            max = 2
-        case 2:
-            min = 2
-            max = 3
-        case 3:
-            min = 3
-            max = 4
-        default:
-            break
-        }
-        if let workouts = userData.weaklyWorkouts {
-            return (min, max, Double(workouts))
-        }
-        return (min, max, 0)
-    }
-    fileprivate func setupNumberOfExternalTrainingsStepper() -> (Int,Int,Double) {
-        let min = 0
-        let max = 3
-        
-        if let workouts = userData.externalWorkout {
-            return (min, max, Double(workouts))
-        }
-        return (min, max, 0)
-    }
     
-    fileprivate func mealStepperAction(_ value: Double) {
+    private func mealStepperAction(_ value: Double) {
         UserProfile.defaults.mealsPerDay = Int(value)
         UserProfile.updateServer()
     }
-    fileprivate func workoutStepperAction(_ value: Double) {
+    private func workoutStepperAction(_ value: Double) {
         Spinner.shared.show()
         // Update local data
         UserProfile.defaults.weaklyWorkouts = Int(value)
@@ -410,18 +269,19 @@ extension SettingsViewController {
             Spinner.shared.stop()
         }
     }
-    fileprivate func externalWorkoutAction(_ value: Double) {
+    private func externalWorkoutAction(_ value: Double) {
         UserProfile.defaults.externalWorkout = Int(value)
         UserProfile.updateServer()
     }
     
-    fileprivate func systemTappedAt(_ row: Int) {
+    private func systemTappedAt(_ row: Int) {
         switch row {
         case 0:
-            let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
-            let vc = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsOptionsTableViewController) as! SettingsOptionsTableViewController
-            vc.contentType = .notifications
-            self.navigationController?.pushViewController(vc, animated: true)
+            LocalNotificationManager.shared.checkUserPermissions { hasPermission in
+                if hasPermission {
+                    self.moveToOptoinsVC(for: .notifications)
+                }
+            }
         case 1:
             presentLogoutAlert()
         case 2:
@@ -430,38 +290,33 @@ extension SettingsViewController {
             break
         }
     }
-    fileprivate func personalDetailsTappedAt() {
+    private func personalDetailsTappedAt() {
         let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
-        let activityLevelVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireForth)
-        as! QuestionnaireActivityViewController
+        let activityLevelVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireForth) as! QuestionnaireActivityViewController
         
         activityLevelVC.isFromSettings = true
         navigationController?.pushViewController(activityLevelVC, animated: true)
     }
-    fileprivate func nutritionDetailsTappedAt(_ row: Int) {
+    private func nutritionDetailsTappedAt(_ row: Int) {
         switch row {
+        case 0:
+            moveToOptoinsVC(for: .nutritios)
         case 2:
-            let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
-            let vc = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsOptionsTableViewController) as! SettingsOptionsTableViewController
-            vc.contentType = .mostHungry
-            self.navigationController?.pushViewController(vc, animated: true)
+            moveToOptoinsVC(for: .mostHungry)
         default:
             break
         }
     }
-    fileprivate func fitnessLevelDetailsTappedAt(_ row: Int) {
+    private func fitnessLevelDetailsTappedAt(_ row: Int) {
         switch row {
         case 0:
-            let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
-            let vc = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsOptionsTableViewController) as! SettingsOptionsTableViewController
-            vc.contentType = .fitnessLevel
-            self.navigationController?.pushViewController(vc, animated: true)
+            moveToOptoinsVC(for: .fitnessLevel)
         default:
             break
         }
     }
     
-    fileprivate func sendSupportEmail() {
+    private func sendSupportEmail() {
         let subject = ""
         let messageBody = "<h1>יש לכתוב כאן את ההודעה</h1>"
         let mailVC = MailComposerViewController(recipients: ["Fitappsupport@gmail.com"], subject: subject, messageBody: messageBody, messageBodyIsHtml: true)
@@ -469,7 +324,7 @@ extension SettingsViewController {
         present(mailVC, animated: true)
     }
     
-    fileprivate func saveImage(_ image: UIImage) {
+    private func saveImage(_ image: UIImage) {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         topBarView.userProfileButton.isEnabled = false
         let profileImagePath = "\(userId)/profile_image.jpeg"
@@ -493,7 +348,7 @@ extension SettingsViewController {
             }
         }
     }
-    fileprivate func saveUserImage(image: UIImage, for url: String, completion: @escaping (Result<URL, Error>) -> Void) {
+    private func saveUserImage(image: UIImage, for url: String, completion: @escaping (Result<URL, Error>) -> Void) {
         let storageManager = GoogleStorageManager.shared
         
         DispatchQueue.global(qos: .userInteractive).async {
@@ -502,7 +357,7 @@ extension SettingsViewController {
             }
         }
     }
-    fileprivate func presentDeleteAccountAlert() {
+    private func presentDeleteAccountAlert() {
         Spinner.shared.show(self)
         let deleteAlert = UIAlertController(title: StaticStringsManager.shared.getGenderString?[41] ?? "",
                                             message: StaticStringsManager.shared.getGenderString?[42] ?? "", preferredStyle: .alert)
@@ -535,5 +390,14 @@ extension SettingsViewController {
         })
         deleteAlert.addAction(UIAlertAction(title: "ביטול", style: .cancel))
         present(deleteAlert, animated: true)
+    }
+    
+    private func moveToOptoinsVC(for contentType: SettingsContentType) {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: K.StoryboardName.settings, bundle: nil)
+            let vc = storyboard.instantiateViewController(identifier: K.ViewControllerId.SettingsOptionsTableViewController) as! SettingsOptionsTableViewController
+            vc.contentType = contentType
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }

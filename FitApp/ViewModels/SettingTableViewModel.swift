@@ -70,6 +70,8 @@ extension SettingTableViewModel {
 	private func setTitle() {
 		
 		switch contentType {
+        case .nutritios:
+            tableViewTitle = ""
 		case .fitnessLevel:
 			tableViewTitle = "רמת כושר"
 		case .mostHungry:
@@ -83,6 +85,8 @@ extension SettingTableViewModel {
 	private func setTableView() {
 		
 		switch contentType {
+        case .nutritios:
+            tableViewItemArray = ["נטרלי" ,"חיטוב"]
 		case .fitnessLevel:
 			tableViewItemArray = [StaticStringsManager.shared.getGenderString?[14] ?? "מתחיל", "ביניים", StaticStringsManager.shared.getGenderString?[17] ?? "מתקדם"]
 		case .mostHungry:
@@ -91,7 +95,8 @@ extension SettingTableViewModel {
 			tableViewItemArray = ["התראות שקילה", "התראות שתייה", "הצג התראות ניתוח נתונים"]
 		case .none:
 			break
-		}
+            
+        }
 	}
 	
 	//MARK: - Getters
@@ -102,7 +107,7 @@ extension SettingTableViewModel {
 		return (contentType == .notifications) ? 2 : 1
 	}
 	func getCellTitle(at index: Int) -> String {
-		return tableViewItemArray[index]
+        return tableViewItemArray[index]
 	}
 	func getNotificationCell(at index: Int) -> Notification {
 		return notificationsArray![index]
@@ -113,28 +118,25 @@ extension SettingTableViewModel {
 	func getNumberOfNotificationsRows() -> Int {
 		return notificationsArray?.count ?? 0
 	}
-	func getNotificationTitleCellAccessoryView(at index: Int) -> UIView {
-		
-		switch index {
-		case 0:
-			if let scaleNotification = notificationsArray?.filter({ $0.id == "weightNotification" }) {
-				if scaleNotification.count > 0 {
-					return UIImageView(image: UIImage(systemName: "square.and.pencil"))
+	func getNotificationTitleCellAccessoryView(at indexPath: IndexPath) -> UIView {
+        print(indexPath.section)
+        if contentType == .notifications {
+            if indexPath.section == 0 {
+                return UIImageView(image: UIImage(systemName: "plus"))
+            } else {
+                if notificationsArray?[indexPath.row].id == "weightNotification" {
+                    return UIImageView(image: UIImage(systemName: "square.and.pencil"))
                 }
-			} else {
-				return UIImageView(image: UIImage(systemName: "plus"))
-			}
-        case 2:
-            return UIImageView(image: UIImage(systemName: "plus"))
-		default:
-            break
-		}
-        return UIImageView(image: UIImage(systemName: "plus"))
+            }
+        }
+        return UIImageView(image: nil)
 	}
 	func didSelect(at indexPath: IndexPath) {
 		
 		switch contentType {
-		case .mostHungry:
+        case .nutritios:
+            menuChange()
+        case .mostHungry:
 			mealChange(at: indexPath.row)
 		case .fitnessLevel:
 			fitnessLevelChange(at: indexPath.row+1)
@@ -147,6 +149,11 @@ extension SettingTableViewModel {
 		}
 	}
 	
+    func menuChange() {
+        UserProfile.defaults.naturalMenu?.toggle()
+        UserProfile.updateServer()
+        vc.navigationController?.popViewController(animated: true)
+    }
 	func mealChange(at hunger: Int) {
 		
 		if hunger == 3 {
