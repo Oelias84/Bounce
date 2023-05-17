@@ -21,7 +21,18 @@ class QuestionnaireNutritionGoalViewController: UIViewController {
         super.viewDidLoad()
 
         setupView()
-        setupUpMenu()
+        setupCheckMarks()
+    }
+    
+    @IBAction func neutralMenuCheckMarkAction(_ sender: UIButton) {
+        sender.isSelected = true
+        negativeMenuCheckMark.isSelected = false
+        UserProfile.defaults.naturalMenu = true
+    }
+    @IBAction func negativeMenuCheckMarkAction(_ sender: UIButton) {
+        sender.isSelected = true
+        neutralMenuCheckMark.isSelected = false
+        UserProfile.defaults.naturalMenu = false
     }
     @IBAction func backButtonAction(_ sender: Any) {
         navigationController?.popViewController(animated: true)
@@ -35,15 +46,15 @@ class QuestionnaireNutritionGoalViewController: UIViewController {
         negativeMenuTitle.text = StaticStringsManager.shared.getGenderString?[48]
         negativeMenuText.text = StaticStringsManager.shared.getGenderString?[49]
     }
-    private func setupUpMenu() {
+    private func setupCheckMarks() {
         let userData = UserProfile.defaults
         
         if userData.naturalMenu == true {
-            self.neutralMenuCheckMark.isSelected = true
-            self.negativeMenuCheckMark.isSelected = false
+            neutralMenuCheckMark.isSelected = true
+            negativeMenuCheckMark.isSelected = false
         } else {
-            self.neutralMenuCheckMark.isSelected = false
-            self.negativeMenuCheckMark.isSelected = true
+            neutralMenuCheckMark.isSelected = false
+            negativeMenuCheckMark.isSelected = true
         }
     }
 }

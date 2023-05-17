@@ -19,6 +19,7 @@ class QuestionnaireSumUpViewController: UIViewController {
 	@IBOutlet weak var heightLabel: UITextField!
 	@IBOutlet weak var activityLevelLabel: UITextField!
 	@IBOutlet weak var numberOfMealsLabel: UITextField!
+    @IBOutlet weak var menuGoalLabel: UITextField!
 	@IBOutlet weak var numberOfWorkoutsLabel: UITextField!
 	@IBOutlet weak var numberOfExternalWorkoutsLabel: UITextField!
 	@IBOutlet weak var numberOfExternalWorkoutsStack: UIStackView!
@@ -140,15 +141,19 @@ extension QuestionnaireSumUpViewController {
 	
 	private func configureLabels() {
 		
-		if let weight = userData.weight, let birthDate = userData.birthDate,
-		   let height = userData.height, let mealsPerDay = userData.mealsPerDay,
-		   let weaklyWorkouts = userData.weaklyWorkouts {
+		if let weight = userData.weight,
+           let birthDate = userData.birthDate,
+		   let height = userData.height,
+           let mealsPerDay = userData.mealsPerDay,
+		   let weaklyWorkouts = userData.weaklyWorkouts,
+           let menuGoal = userData.naturalMenu {
 			
 			ageLabel.text = birthDate.age
 			weightLabel.text = "\(weight) " + K.Units.Kilograms
 			heightLabel.text = "\(height) " + K.Units.centimeter
 			numberOfMealsLabel.text = "\(mealsPerDay)"
 			numberOfWorkoutsLabel.text = "\(weaklyWorkouts)"
+            menuGoalLabel.text = menuGoal ? "שמירה על משקל" : "חיטוב"
 		}
 		
 		if let externalWorkout = userData.externalWorkout, externalWorkout != 0 {
