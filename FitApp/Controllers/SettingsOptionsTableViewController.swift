@@ -73,10 +73,10 @@ extension SettingsOptionsTableViewController: UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch contentType {
         case .notifications:
-            if section == 1 {
-                return viewModel.getNumberOfNotificationsRows()
-            } else {
+            if section == 0 {
                 return viewModel.getNumberOfRows()
+            } else {
+                return viewModel.getNumberOfNotificationsRows()
             }
         default:
             return viewModel.getNumberOfRows()
@@ -99,12 +99,16 @@ extension SettingsOptionsTableViewController: UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch contentType {
         case .notifications:
-            if indexPath.row == 2 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.notificationSwitchCell, for: indexPath) as! NotificationSwitchTableViewCell
-                cell.notificationTextLabel.text = viewModel.getCellTitle(at: indexPath.row)
-                cell.delegate = self
-                cell.notificationSwitch.isOn = UserProfile.defaults.showWeightAlertNotification ?? true
-                return cell
+            if indexPath.section == 0 {
+                if indexPath.row == 2 {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.notificationSwitchCell, for: indexPath) as! NotificationSwitchTableViewCell
+                    cell.notificationTextLabel.text = viewModel.getCellTitle(at: indexPath.row)
+                    cell.delegate = self
+                    cell.notificationSwitch.isOn = UserProfile.defaults.showWeightAlertNotification ?? true
+                    return cell
+                } else {
+                    return getSettingOptionCell(for: indexPath)
+                }
             } else {
                 return getSettingOptionCell(for: indexPath)
             }
@@ -114,7 +118,7 @@ extension SettingsOptionsTableViewController: UITableViewDelegate, UITableViewDa
                 let cellData = viewModel.getNotificationCell(at: indexPath.row)
                 let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.notificationCell, for: indexPath) as! NotificationTableViewCell
                 cell.separatorInset = UIEdgeInsets(top: 0.0, left: cell.bounds.size.width - 10, bottom: 0.0, right: 0.0)
-                cell.accessoryView = viewModel.getNotificationTitleCellAccessoryView(at: indexPath)
+                cell.accessoryView = viewModel.getNotificationCellAccessoryView(at: indexPath)
                 cell.notification = cellData
                 return cell
             default:
@@ -171,8 +175,13 @@ extension SettingsOptionsTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.settingsOptionCell)!
         cell.separatorInset = .zero
         cell.selectionStyle = .none
-        cell.accessoryView = viewModel.getNotificationTitleCellAccessoryView(at: indexPath)
-        cell.textLabel?.text = viewModel.getCellTitle(at: indexPath.row)
+        cell.accessoryView = viewModel.getNotificationCellAccessoryView(at: indexPath)
+        
+        if contentType == .notifications, indexPath.section == 1 {
+            cell.textLabel?.text = viewModel.getNotificationCellTitle(at: indexPath.row)
+        } else {
+            cell.textLabel?.text = viewModel.getCellTitle(at: indexPath.row)
+        }
         return cell
     }
 }

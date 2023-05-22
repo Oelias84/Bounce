@@ -44,9 +44,7 @@ extension SettingsOptionsViewModel: PopupAlertViewDelegate {
 		guard let level = level else { return }
 		
 		switch self.level {
-		case 1:
-			UserProfile.defaults.weaklyWorkouts = 2
-		case 2:
+        case 1, 2:
 			UserProfile.defaults.weaklyWorkouts = 2
 		case 3:
 			UserProfile.defaults.weaklyWorkouts = 3
@@ -95,44 +93,70 @@ extension SettingsOptionsViewModel {
 			tableViewItemArray = ["התראות שקילה", "התראות שתייה", "הצג התראות ניתוח נתונים"]
 		case .none:
 			break
-            
         }
 	}
 	
 	//MARK: - Getters
 	func getVCTitle() -> String {
-		return tableViewTitle
+		tableViewTitle
 	}
 	func getNumberOfSections() -> Int {
-		return (contentType == .notifications) ? 2 : 1
+		(contentType == .notifications) ? 2 : 1
 	}
 	func getCellTitle(at index: Int) -> String {
-        return tableViewItemArray[index]
+        tableViewItemArray[index]
 	}
-	func getNotificationCell(at index: Int) -> Notification {
-		return notificationsArray![index]
-	}
-	func getNumberOfRows() -> Int {
-		return tableViewItemArray.count
-	}
-	func getNumberOfNotificationsRows() -> Int {
-		return notificationsArray?.count ?? 0
-	}
-	func getNotificationTitleCellAccessoryView(at indexPath: IndexPath) -> UIView {
-        print(indexPath.section)
+    
+    func getNotificationCellTitle(at index: Int) -> String {
+        notificationsArray?[index].title ?? ""
+    }
+    func getNotificationCell(at index: Int) -> Notification {
+        notificationsArray![index]
+    }
+    func getNotificationCellAccessoryView(at indexPath: IndexPath) -> UIView {
         if contentType == .notifications {
             if indexPath.section == 0 {
-                return UIImageView(image: UIImage(systemName: "plus"))
+                guard let notificationsArray else { return UIImageView(image: UIImage(systemName: "plus")) }
+                
+                if indexPath.row == 0 {
+                    if notificationsArray.contains(where: {$0.id == NotificationTypes.weightNotification.rawValue }) {
+                        return UIImageView(image: UIImage(systemName: "square.and.pencil"))
+                    } else {
+                        return UIImageView(image: UIImage(systemName: "plus"))
+                    }
+                } else {
+                    if notificationsArray.contains(where: {$0.id == NotificationTypes.waterNotification.rawValue }) {
+                        return UIImageView(image: UIImage(systemName: "square.and.pencil"))
+                    } else {
+                        return UIImageView(image: UIImage(systemName: "plus"))
+                    }
+                }
             } else {
-                if notificationsArray?[indexPath.row].id == "weightNotification" {
-                    return UIImageView(image: UIImage(systemName: "square.and.pencil"))
+                let calendar = Calendar.current
+                if let notificationComponents = notificationsArray?[indexPath.row].dateTime,
+                   let date = calendar.date(from: notificationComponents) {
+                    
+                    // Use the transformed date here
+                    let timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 24))
+                    timeLabel.text = "שעת התראה - " + date.onlyTime.timeString
+                    timeLabel.textAlignment = .left
+                    return timeLabel
+                } else {
+                    return UIImageView(image: nil)
                 }
             }
+        } else {
+            return UIImageView(image: nil)
         }
-        return UIImageView(image: nil)
+    }
+    
+	func getNumberOfRows() -> Int {
+		tableViewItemArray.count
+	}
+	func getNumberOfNotificationsRows() -> Int {
+		notificationsArray?.count ?? 0
 	}
 	func didSelect(at indexPath: IndexPath) {
-		
 		switch contentType {
         case .nutritios:
             menuChange()
