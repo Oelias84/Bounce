@@ -74,6 +74,10 @@ class SettingsViewModel {
         complition()
     }
     
+    func refresh() {
+        userData = UserProfile.defaults
+    }
+    
     //MARK: - Private Funcs
     private var getNutritiosTitle: String {
         userData.naturalMenu == true ? "נטרלי" : "חיטוב"

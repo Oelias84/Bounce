@@ -1407,7 +1407,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="85y-dg-LYi">
-                                                <rect key="frame" x="0.0" y="127.33333333333336" width="299" height="53.666666666666671"/>
+                                                <rect key="frame" x="0.0" y="127.33333333333336" width="299" height="53.666666666666643"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="גובה" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xzD-MB-W37">
                                                         <rect key="frame" x="0.0" y="0.0" width="299" height="23.666666666666668"/>
@@ -2741,7 +2741,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3yk-Xy-vQY"/>
+        <segue reference="qiK-vY-Riw"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="20 men" width="3159" height="6209"/>

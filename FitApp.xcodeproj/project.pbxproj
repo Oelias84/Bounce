@@ -17,11 +17,19 @@
 		401BF78B29EEC195001F4F38 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 401BF78A29EEC195001F4F38 /* FirebaseMessaging */; };
 		401BF78D29EEC195001F4F38 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 401BF78C29EEC195001F4F38 /* FirebaseStorage */; };
 		401BF79029EEC2C9001F4F38 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 401BF78F29EEC2C9001F4F38 /* MessageKit */; };
+		401DFF5A2A1B6E7C00EB0516 /* View+Extesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401DFF592A1B6E7C00EB0516 /* View+Extesions.swift */; };
+		401DFF5C2A1B828F00EB0516 /* Animation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401DFF5B2A1B828F00EB0516 /* Animation+Extensions.swift */; };
 		403EF8E929C8DE94007694AB /* SettingsCheckboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403EF8E729C8DE94007694AB /* SettingsCheckboxTableViewCell.swift */; };
 		403EF8EA29C8DE94007694AB /* SettingsCheckboxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 403EF8E829C8DE94007694AB /* SettingsCheckboxTableViewCell.xib */; };
+		404551F12A1B585A004BCB2F /* ActivityLevelAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404551F02A1B585A004BCB2F /* ActivityLevelAlertView.swift */; };
 		407A6FED2A127117003ED30F /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407A6FEC2A127117003ED30F /* SettingsViewModel.swift */; };
 		4095DD7729C1ECB700F67D56 /* UserPreferredWorkouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4095DD7629C1ECB700F67D56 /* UserPreferredWorkouts.swift */; };
+		409B63242A23E07C003EF792 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409B63232A23E07C003EF792 /* RoundedButton.swift */; };
 		40AA5BDE29D1EF720018E094 /* QuestionnaireNutritionGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AA5BDD29D1EF720018E094 /* QuestionnaireNutritionGoalViewController.swift */; };
+		40CC33962A23EA37004BE8A0 /* CheckBoxWithSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CC33952A23EA37004BE8A0 /* CheckBoxWithSliderView.swift */; };
+		40CC33982A24B18C004BE8A0 /* CheckboxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CC33972A24B18C004BE8A0 /* CheckboxStyle.swift */; };
+		40CC339B2A24FAB9004BE8A0 /* ActivityLevelAlertView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CC339A2A24FAB9004BE8A0 /* ActivityLevelAlertView+ViewModel.swift */; };
+		40CC339E2A251CF5004BE8A0 /* GeneralAlertPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CC339D2A251CF5004BE8A0 /* GeneralAlertPopupView.swift */; };
 		40F5782029CB42B10093ED71 /* NotificationSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F5781E29CB42B10093ED71 /* NotificationSwitchTableViewCell.swift */; };
 		40F5782129CB42B10093ED71 /* NotificationSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40F5781F29CB42B10093ED71 /* NotificationSwitchTableViewCell.xib */; };
 		7C0E4531275E8FA500ECA20E /* MessagesTextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */; };
@@ -244,11 +252,19 @@
 
 /* Begin PBXFileReference section */
 		05D96098412DCEF72F6C4753 /* Pods-FitApp-FitAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp-FitAppUITests.release.xcconfig"; path = "Target Support Files/Pods-FitApp-FitAppUITests/Pods-FitApp-FitAppUITests.release.xcconfig"; sourceTree = "<group>"; };
+		401DFF592A1B6E7C00EB0516 /* View+Extesions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extesions.swift"; sourceTree = "<group>"; };
+		401DFF5B2A1B828F00EB0516 /* Animation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Animation+Extensions.swift"; sourceTree = "<group>"; };
 		403EF8E729C8DE94007694AB /* SettingsCheckboxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCheckboxTableViewCell.swift; sourceTree = "<group>"; };
 		403EF8E829C8DE94007694AB /* SettingsCheckboxTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCheckboxTableViewCell.xib; sourceTree = "<group>"; };
+		404551F02A1B585A004BCB2F /* ActivityLevelAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLevelAlertView.swift; sourceTree = "<group>"; };
 		407A6FEC2A127117003ED30F /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4095DD7629C1ECB700F67D56 /* UserPreferredWorkouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferredWorkouts.swift; sourceTree = "<group>"; };
+		409B63232A23E07C003EF792 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		40AA5BDD29D1EF720018E094 /* QuestionnaireNutritionGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireNutritionGoalViewController.swift; sourceTree = "<group>"; };
+		40CC33952A23EA37004BE8A0 /* CheckBoxWithSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxWithSliderView.swift; sourceTree = "<group>"; };
+		40CC33972A24B18C004BE8A0 /* CheckboxStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxStyle.swift; sourceTree = "<group>"; };
+		40CC339A2A24FAB9004BE8A0 /* ActivityLevelAlertView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityLevelAlertView+ViewModel.swift"; sourceTree = "<group>"; };
+		40CC339D2A251CF5004BE8A0 /* GeneralAlertPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralAlertPopupView.swift; sourceTree = "<group>"; };
 		40F5781E29CB42B10093ED71 /* NotificationSwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		40F5781F29CB42B10093ED71 /* NotificationSwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationSwitchTableViewCell.xib; sourceTree = "<group>"; };
 		4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -539,6 +555,49 @@
 			path = CheboxCell;
 			sourceTree = "<group>";
 		};
+		404551EF2A1B581D004BCB2F /* ActivityLevel */ = {
+			isa = PBXGroup;
+			children = (
+				404551F02A1B585A004BCB2F /* ActivityLevelAlertView.swift */,
+				40CC339A2A24FAB9004BE8A0 /* ActivityLevelAlertView+ViewModel.swift */,
+			);
+			name = ActivityLevel;
+			sourceTree = "<group>";
+		};
+		409B63212A23E02A003EF792 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				40CC339C2A251C62004BE8A0 /* Alerts */,
+				409B63222A23E049003EF792 /* Buttons */,
+			);
+			name = CustomViews;
+			sourceTree = "<group>";
+		};
+		409B63222A23E049003EF792 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				409B63232A23E07C003EF792 /* RoundedButton.swift */,
+				40CC33952A23EA37004BE8A0 /* CheckBoxWithSliderView.swift */,
+			);
+			name = Buttons;
+			sourceTree = "<group>";
+		};
+		40CC33992A24B1C7004BE8A0 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				40CC33972A24B18C004BE8A0 /* CheckboxStyle.swift */,
+			);
+			name = Styles;
+			sourceTree = "<group>";
+		};
+		40CC339C2A251C62004BE8A0 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				40CC339D2A251CF5004BE8A0 /* GeneralAlertPopupView.swift */,
+			);
+			name = Alerts;
+			sourceTree = "<group>";
+		};
 		40F5781D29CB42720093ED71 /* NotificationSwitch */ = {
 			isa = PBXGroup;
 			children = (
@@ -711,6 +770,9 @@
 		7C6B61AF2930EF980051DD65 /* SwiftUIView */ = {
 			isa = PBXGroup;
 			children = (
+				40CC33992A24B1C7004BE8A0 /* Styles */,
+				409B63212A23E02A003EF792 /* CustomViews */,
+				404551EF2A1B581D004BCB2F /* ActivityLevel */,
 				7C676CCB293232A30034B311 /* Exercise */,
 			);
 			name = SwiftUIView;
@@ -1139,6 +1201,7 @@
 				B341E23A257FB3F400EE05A7 /* UITextField+Extensions.swift */,
 				7CE0862427613FE000BF3CF3 /* UiColor+Extensions.swift */,
 				7CD2C21729A3C9E400C2CF7B /* UIApplication+Extensions.swift */,
+				401DFF592A1B6E7C00EB0516 /* View+Extesions.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1155,6 +1218,7 @@
 				7C62180F26F4F2F20019FD25 /* UIAlertController+Extensions.swift */,
 				7C10BA6F276BCB9C00B5860C /* UINavigationController+Extensions.swift */,
 				7C8AFCBF28BBF970007CD926 /* Decimal+Extensions.swift */,
+				401DFF5B2A1B828F00EB0516 /* Animation+Extensions.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -1626,9 +1690,11 @@
 				B348421525890E5D00E0EF31 /* DIsh.swift in Sources */,
 				7CD07C842972D33400F0F385 /* AddMealAlertDishViewModel.swift in Sources */,
 				B348420D25890CF800E0EF31 /* Meal.swift in Sources */,
+				404551F12A1B585A004BCB2F /* ActivityLevelAlertView.swift in Sources */,
 				B3833F39259364ED006776D5 /* Weight.swift in Sources */,
 				B3E6E9AD25714C1400958C48 /* MealPlanTableViewCell.swift in Sources */,
 				B38068C625B7197E005C4A24 /* WorkoutTableViewCell.swift in Sources */,
+				401DFF5A2A1B6E7C00EB0516 /* View+Extesions.swift in Sources */,
 				B358227825ACA2F800C91295 /* CollapsibleTableViewHeader.swift in Sources */,
 				7CB11A9A29ACED35003462F7 /* SetView.swift in Sources */,
 				7C4554F827A0A8A10077791B /* ImageCache.swift in Sources */,
@@ -1647,9 +1713,11 @@
 				7C7434F525CD9DD700D33A9A /* ChatViewController.swift in Sources */,
 				7C2B901F29B7873900CC58CA /* ExerciseOptionsListSheetViewModel.swift in Sources */,
 				7C1284382881CB2200E735D8 /* ObservableObject.swift in Sources */,
+				40CC33962A23EA37004BE8A0 /* CheckBoxWithSliderView.swift in Sources */,
 				7CE0862527613FE000BF3CF3 /* UiColor+Extensions.swift in Sources */,
 				7C33B661266A587D00E16A1C /* CommentsViewModel.swift in Sources */,
 				7C1ACCF5266FCBC6008079C9 /* ChangeDateView.swift in Sources */,
+				40CC33982A24B18C004BE8A0 /* CheckboxStyle.swift in Sources */,
 				7C98731E26F4A7C8000E5299 /* CaloriesProgressState.swift in Sources */,
 				7C4554FA27A0A8D30077791B /* ImageLoader.swift in Sources */,
 				7C8AFCC028BBF970007CD926 /* Decimal+Extensions.swift in Sources */,
@@ -1660,6 +1728,7 @@
 				B3DB753525A09133002CF48B /* Double+Extensions.swift in Sources */,
 				7CE086272761482A00BF3CF3 /* ProjectColors.swift in Sources */,
 				7C74357D25D0824D00D33A9A /* User.swift in Sources */,
+				40CC339E2A251CF5004BE8A0 /* GeneralAlertPopupView.swift in Sources */,
 				7CADF750278CAEBC0020CD83 /* StaticStringsManager.swift in Sources */,
 				7C481C7226FA1883002FB8BF /* MealsManager.swift in Sources */,
 				7C5262BF25BC79B200694007 /* SettingsViewController.swift in Sources */,
@@ -1693,12 +1762,14 @@
 				407A6FED2A127117003ED30F /* SettingsViewModel.swift in Sources */,
 				7C8F51382671FAE0001FF0EE /* AddMealAlertDishView.swift in Sources */,
 				7CB9ADE9268CB72B0009B42A /* ChartView.swift in Sources */,
+				40CC339B2A24FAB9004BE8A0 /* ActivityLevelAlertView+ViewModel.swift in Sources */,
 				7C7435CF25D1EF8300D33A9A /* ChatUser.swift in Sources */,
 				7C2B901729B5E85500CC58CA /* WorkoutManager.swift in Sources */,
 				7C3F4F8C25C9E2AF00EE3758 /* ResetPasswordViewController.swift in Sources */,
 				B368E04925A790D200BD1937 /* ServerDishs.swift in Sources */,
 				B3BB8F3B2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift in Sources */,
 				7C12843A2881CD6500E735D8 /* WeightsViewController.swift in Sources */,
+				401DFF5C2A1B828F00EB0516 /* Animation+Extensions.swift in Sources */,
 				7CFFAD9C261DEF1000C05C66 /* DishesTableViewController.swift in Sources */,
 				7C1ACCEB266F8F8F008079C9 /* CommentTableViewCell.swift in Sources */,
 				7C7C38352793630A0075B64A /* DishCellTextFieldView.swift in Sources */,
@@ -1732,6 +1803,7 @@
 				7C658ABE25D992D200CA75B2 /* Comments.swift in Sources */,
 				7CFCAF4726BD58DA008A24F8 /* HomeViewModel.swift in Sources */,
 				7C0F703C276CEA8600964004 /* SettingsTableViewCell.swift in Sources */,
+				409B63242A23E07C003EF792 /* RoundedButton.swift in Sources */,
 				40AA5BDE29D1EF720018E094 /* QuestionnaireNutritionGoalViewController.swift in Sources */,
 				7C3F4F3225C2D31300EE3758 /* SettingsOptionsTableViewController.swift in Sources */,
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,

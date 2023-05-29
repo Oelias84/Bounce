@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 import FirebaseAuth
 import CropViewController
 
@@ -13,7 +14,7 @@ import CropViewController
 
 class SettingsViewController: UIViewController {
     
-    let viewModel = SettingsViewModel()
+    var viewModel = SettingsViewModel()
 
     private let imagePickerController = UIImagePickerController()
     
@@ -97,33 +98,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
         
         switch indexPath.section {
-        case 0:
-            //Personal details
-            //activity level
-            stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
-            stepperCell.tag = 0
-        case 1:
+        case 0, 1:
+            //Activity and LifeStyle
             //Nutrition
-            switch indexPath.row {
-            case 0:
-                stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
-            case 1:
-                //number of meals
-                stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
-                stepperCell.tag = 1
-            case 2:
-                //number of meals
-                stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
-                stepperCell.tag = 1
-            case 3:
-                //most hungry
-                stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
-                stepperCell.tag = 2
-            default:
-                return UITableViewCell()
-            }
+            stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
         case 2:
-            //Fitness Level
+            //Fitness
             stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
             stepperCell.infoButton.isHidden = !(indexPath.row == 2)
         case 3:
@@ -291,11 +271,14 @@ extension SettingsViewController {
         }
     }
     private func personalDetailsTappedAt() {
-        let storyboard = UIStoryboard(name: K.StoryboardName.questionnaire, bundle: nil)
-        let activityLevelVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.questionnaireForth) as! QuestionnaireActivityViewController
-        
-        activityLevelVC.isFromSettings = true
-        navigationController?.pushViewController(activityLevelVC, animated: true)
+        let contentView = ActivityLevelAlertView() {
+            self.viewModel.setupTableViewData() {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        contentView.showPopup()
     }
     private func nutritionDetailsTappedAt(_ row: Int) {
         switch row {

@@ -225,6 +225,7 @@ struct K {
 
 		static let boldText = "Assistant-Bold"
 		static let lightText = "Assistant-Light"
+        static let semiBold = "Assistant-SemiBold"
 		static let regularText = "Assistant-Regular"
 	}
 }
