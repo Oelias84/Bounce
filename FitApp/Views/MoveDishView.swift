@@ -197,7 +197,7 @@ extension MoveDishView {
 		contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 	}
 	private func setupStepper() {
-		dishAmountStepper.roundButtons = true
+//		dishAmountStepper.roundButtons = true
 		dishAmountStepper.labelTextColor = .black
 		dishAmountStepper.backgroundColor = .clear
 		dishAmountStepper.buttonsTextColor = .white

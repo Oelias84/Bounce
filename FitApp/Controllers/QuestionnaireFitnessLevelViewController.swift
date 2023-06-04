@@ -157,7 +157,7 @@ extension QuestionnaireFitnessLevelViewController {
 	private func setupView() {
 		externalTrainingStepper.minimumValue = 0
 		externalTrainingStepper.maximumValue = 3
-		externalTrainingStepper.roundButtons = true
+//		externalTrainingStepper.roundButtons = true
 		externalTrainingStepper.labelTextColor = .white
 		externalTrainingStepper.backgroundColor = .clear
 		externalTrainingStepper.buttonsTextColor = .white

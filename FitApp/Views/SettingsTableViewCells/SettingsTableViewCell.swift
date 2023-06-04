@@ -56,7 +56,7 @@ extension SettingsTableViewCell {
 	
 	private func setupView() {
 		selectionStyle = .none
-		stepperView.roundButtons = true
+//		stepperView.roundButtons = true
 		stepperView.labelTextColor = .black
 		stepperView.backgroundColor = .clear
 		stepperView.buttonsTextColor = .white
