@@ -18,7 +18,7 @@ target 'FitApp' do
 #    pod 'FirebaseFirestoreSwift'
     
 		pod 'SpreadsheetView'
-    pod 'BulletinBoard'
+#    pod 'BulletinBoard'
     pod 'DateToolsSwift'
 		pod 'CropViewController'
 		pod 'JGProgressHUD'
@@ -26,7 +26,7 @@ target 'FitApp' do
 		pod 'MKRingProgressView'
 		pod 'Charts'
 		pod 'GMStepper'
-		pod 'BetterSegmentedControl', '~> 1.3'
+#		pod 'BetterSegmentedControl', '~> 1.3'
 		
   target 'FitAppTests' do
     inherit! :search_paths

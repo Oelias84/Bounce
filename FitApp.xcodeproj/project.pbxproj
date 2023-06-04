@@ -17,6 +17,8 @@
 		401BF78B29EEC195001F4F38 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 401BF78A29EEC195001F4F38 /* FirebaseMessaging */; };
 		401BF78D29EEC195001F4F38 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 401BF78C29EEC195001F4F38 /* FirebaseStorage */; };
 		401BF79029EEC2C9001F4F38 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 401BF78F29EEC2C9001F4F38 /* MessageKit */; };
+		402F2E1A2A2CA8A4002F9DF6 /* BetterSegmentedControl in Frameworks */ = {isa = PBXBuildFile; productRef = 402F2E192A2CA8A4002F9DF6 /* BetterSegmentedControl */; settings = {ATTRIBUTES = (Required, ); }; };
+		402F2E202A2CB0D3002F9DF6 /* BLTNBoard in Frameworks */ = {isa = PBXBuildFile; productRef = 402F2E1F2A2CB0D3002F9DF6 /* BLTNBoard */; };
 		40F3BEA12A2C8E2D00E3F41F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7C6E059028FDA8C5001013B9 /* Lottie */; };
 		7C0E4531275E8FA500ECA20E /* MessagesTextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */; };
 		7C0F703A276CEA5900964004 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0F7039276CEA5900964004 /* SettingsTableViewCell.xib */; };
@@ -477,6 +479,8 @@
 				401BF78529EEC195001F4F38 /* FirebaseDatabase in Frameworks */,
 				FFBD0878BB9E28260C344D5A /* Pods_FitApp.framework in Frameworks */,
 				401BF79029EEC2C9001F4F38 /* MessageKit in Frameworks */,
+				402F2E1A2A2CA8A4002F9DF6 /* BetterSegmentedControl in Frameworks */,
+				402F2E202A2CB0D3002F9DF6 /* BLTNBoard in Frameworks */,
 				401BF78D29EEC195001F4F38 /* FirebaseStorage in Frameworks */,
 				401BF78329EEC195001F4F38 /* FirebaseAuth in Frameworks */,
 				7CBBF1EF281992AA00EE55F1 /* StoreKit.framework in Frameworks */,
@@ -1369,6 +1373,8 @@
 				401BF78A29EEC195001F4F38 /* FirebaseMessaging */,
 				401BF78C29EEC195001F4F38 /* FirebaseStorage */,
 				401BF78F29EEC2C9001F4F38 /* MessageKit */,
+				402F2E192A2CA8A4002F9DF6 /* BetterSegmentedControl */,
+				402F2E1F2A2CB0D3002F9DF6 /* BLTNBoard */,
 			);
 			productName = FitApp;
 			productReference = 7C89A9F7256D69CA009AD87C /* FitApp.app */;
@@ -1449,6 +1455,8 @@
 				7C6E058F28FDA8C5001013B9 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				401BF77F29EEC195001F4F38 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				401BF78E29EEC2C9001F4F38 /* XCRemoteSwiftPackageReference "MessageKit" */,
+				402F2E182A2CA8A4002F9DF6 /* XCRemoteSwiftPackageReference "BetterSegmentedControl" */,
+				402F2E1E2A2CB0D3002F9DF6 /* XCRemoteSwiftPackageReference "BulletinBoard" */,
 			);
 			productRefGroup = 7C89A9F8256D69CA009AD87C /* Products */;
 			projectDirPath = "";
@@ -2155,6 +2163,22 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		402F2E182A2CA8A4002F9DF6 /* XCRemoteSwiftPackageReference "BetterSegmentedControl" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gmarm/BetterSegmentedControl";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
+		402F2E1E2A2CB0D3002F9DF6 /* XCRemoteSwiftPackageReference "BulletinBoard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alexaubry/BulletinBoard.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		7C6E058F28FDA8C5001013B9 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -2205,6 +2229,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 401BF78E29EEC2C9001F4F38 /* XCRemoteSwiftPackageReference "MessageKit" */;
 			productName = MessageKit;
+		};
+		402F2E192A2CA8A4002F9DF6 /* BetterSegmentedControl */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 402F2E182A2CA8A4002F9DF6 /* XCRemoteSwiftPackageReference "BetterSegmentedControl" */;
+			productName = BetterSegmentedControl;
+		};
+		402F2E1F2A2CB0D3002F9DF6 /* BLTNBoard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 402F2E1E2A2CB0D3002F9DF6 /* XCRemoteSwiftPackageReference "BulletinBoard" */;
+			productName = BLTNBoard;
 		};
 		7C6E059028FDA8C5001013B9 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

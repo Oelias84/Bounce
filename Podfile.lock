@@ -1,6 +1,4 @@
 PODS:
-  - BetterSegmentedControl (1.3.0)
-  - BulletinBoard (5.0.0)
   - Charts (4.1.0):
     - Charts/Core (= 4.1.0)
   - Charts/Core (4.1.0):
@@ -17,8 +15,6 @@ PODS:
   - SwiftAlgorithms (1.0.0)
 
 DEPENDENCIES:
-  - BetterSegmentedControl (~> 1.3)
-  - BulletinBoard
   - Charts
   - CropViewController
   - DateToolsSwift
@@ -30,8 +26,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - BetterSegmentedControl
-    - BulletinBoard
     - Charts
     - CropViewController
     - DateToolsSwift
@@ -43,8 +37,6 @@ SPEC REPOS:
     - SwiftAlgorithms
 
 SPEC CHECKSUMS:
-  BetterSegmentedControl: 85d1b0343a09603b098884d527f550dfc8e6cdd9
-  BulletinBoard: dba77053c2a7b64953f63073f7534165af2edd21
   Charts: 354f86803d11d9c35de280587fef50d1af063978
   CropViewController: 58fb440f30dac788b129d2a1f24cffdcb102669c
   DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
@@ -55,6 +47,6 @@ SPEC CHECKSUMS:
   SpreadsheetView: 688dbd19f2b355df0eb09e486266fd913a013449
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
 
-PODFILE CHECKSUM: 48e4da69db8ce2f430f8119626a47ba6d64ee3a9
+PODFILE CHECKSUM: fa7212f2daaf42d6c5954035b61842b8e089eab8
 
 COCOAPODS: 1.12.0
