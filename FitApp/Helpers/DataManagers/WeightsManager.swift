@@ -5,6 +5,7 @@
 //  Created by Ofir Elias on 11/09/2021.
 //
 
+import UIKit
 import Foundation
 import FirebaseAuth
 

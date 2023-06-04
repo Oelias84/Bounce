@@ -38,11 +38,11 @@ extension UserCalorieProgressViewModel {
 		GoogleApiManager.shared.getUserCaloriesProgressData(userID: userID) {
 			[weak self] result in
 			guard let self = self else { return }
-			
+
 			switch result {
 			case .success(let data):
 				guard let data = data?.sorted() else { return }
-				
+
 				self.userProgress.value = data
 			case .failure(let error):
 				print("Error:", error.localizedDescription)

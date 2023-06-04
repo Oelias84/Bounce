@@ -72,18 +72,18 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
 //Messages
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate {
-	
-	func currentSender() -> SenderType {
-		if let sender = viewModel.getSelfSender {
-			return sender
-		}
-		fatalError("Self Sender in nil, email should cached")
-	}
+    
+    var currentSender: SenderType {
+       if let sender = viewModel.getSelfSender {
+           return sender
+       }
+       fatalError("Self Sender in nil, email should cached")
+    }
 	func isFromCurrentSender(message: MessageType) -> Bool {
 		if isAdmin {
 			return message.sender.senderId != viewModel.getChatUserId
 		}
-		return message.sender.senderId == currentSender().senderId
+        return message.sender.senderId == currentSender.senderId
 	}
 	
 	//Collection view dataSource
@@ -121,7 +121,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		if isAdmin {
 			avatarView.backgroundColor = message.sender.senderId == viewModel.getChatUserId  ? .projectIncomingMessageBubble : .projectOutgoingMessageBubble
 		} else {
-			avatarView.backgroundColor = message.sender.senderId != currentSender().senderId ? .projectIncomingMessageBubble : .projectOutgoingMessageBubble
+			avatarView.backgroundColor = message.sender.senderId != currentSender.senderId ? .projectIncomingMessageBubble : .projectOutgoingMessageBubble
 		}
 		avatarView.placeholderFont = UIFont(name: "Assistant-Regular", size: 12)!
 		avatarView.placeholderTextColor = .black

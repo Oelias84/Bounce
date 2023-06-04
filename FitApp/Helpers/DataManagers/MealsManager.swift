@@ -111,7 +111,7 @@ extension MealsManager {
 		let data = DailyMeal(meals: dailyMeal)
 		
 		getTodaysProgress()
-		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: data)
+        GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: data) { _ in }
 	}
 	func removeExceptionalMeal(for date: Date) {
 		guard var dailyMeals = self.dailyMeals else { return }
@@ -119,8 +119,9 @@ extension MealsManager {
 		let data = DailyMeal(meals: dailyMeals)
 		
 		getTodaysProgress()
-		GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: data)
-		fetchMealsBy(date: date) {_ in}
+        GoogleApiManager.shared.updateMealBy(date: date, dailyMeal: data) { error in
+            self.fetchMealsBy(date: date) {_ in}
+        }
 	}
 	func fetchMealsBy(date: Date, completion: @escaping (Bool) -> ()) {
 		GoogleApiManager.shared.getMealFor(date) { result in

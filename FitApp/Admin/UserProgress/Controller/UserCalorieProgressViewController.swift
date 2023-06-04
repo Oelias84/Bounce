@@ -33,7 +33,6 @@ class UserCalorieProgressViewController: UIViewController {
 	}
 }
 
-
 //MARK: - Delegates
 extension UserCalorieProgressViewController: UITableViewDelegate, UITableViewDataSource  {
 	

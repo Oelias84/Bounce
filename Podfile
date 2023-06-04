@@ -7,15 +7,15 @@ target 'FitApp' do
 
   # Pods for FitApp
 	
-		pod 'MessageKit'
-    pod 'Firebase/Auth'
-    pod 'Firebase/Core'
-		pod 'Firebase/Storage'
-		pod 'Firebase/Database'
-    pod 'Firebase/Firestore'
-		pod 'Firebase/Analytics'
-		pod 'Firebase/Messaging'
-    pod 'FirebaseFirestoreSwift'
+#		pod 'MessageKit'
+#    pod 'Firebase/Auth'
+#    pod 'Firebase/Core'
+#		pod 'Firebase/Storage'
+#		pod 'Firebase/Database'
+#    pod 'Firebase/Firestore'
+#		pod 'Firebase/Analytics'
+#		pod 'Firebase/Messaging'
+#    pod 'FirebaseFirestoreSwift'
     
 		pod 'SpreadsheetView'
     pod 'BulletinBoard'
@@ -35,6 +35,14 @@ target 'FitApp' do
 
   target 'FitAppUITests' do
     # Pods for testing
+  end
+  
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+      end
+    end
   end
 
 end
