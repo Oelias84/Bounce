@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,12 +17,7 @@
 		401BF78B29EEC195001F4F38 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 401BF78A29EEC195001F4F38 /* FirebaseMessaging */; };
 		401BF78D29EEC195001F4F38 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 401BF78C29EEC195001F4F38 /* FirebaseStorage */; };
 		401BF79029EEC2C9001F4F38 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 401BF78F29EEC2C9001F4F38 /* MessageKit */; };
-		403EF8E929C8DE94007694AB /* SettingsCheckboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403EF8E729C8DE94007694AB /* SettingsCheckboxTableViewCell.swift */; };
-		403EF8EA29C8DE94007694AB /* SettingsCheckboxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 403EF8E829C8DE94007694AB /* SettingsCheckboxTableViewCell.xib */; };
-		4095DD7729C1ECB700F67D56 /* UserPreferredWorkouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4095DD7629C1ECB700F67D56 /* UserPreferredWorkouts.swift */; };
-		40AA5BDE29D1EF720018E094 /* QuestionnaireNutritionGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AA5BDD29D1EF720018E094 /* QuestionnaireNutritionGoalViewController.swift */; };
-		40F5782029CB42B10093ED71 /* NotificationSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F5781E29CB42B10093ED71 /* NotificationSwitchTableViewCell.swift */; };
-		40F5782129CB42B10093ED71 /* NotificationSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40F5781F29CB42B10093ED71 /* NotificationSwitchTableViewCell.xib */; };
+		40F3BEA12A2C8E2D00E3F41F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7C6E059028FDA8C5001013B9 /* Lottie */; };
 		7C0E4531275E8FA500ECA20E /* MessagesTextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */; };
 		7C0F703A276CEA5900964004 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0F7039276CEA5900964004 /* SettingsTableViewCell.xib */; };
 		7C0F703C276CEA8600964004 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F703B276CEA8600964004 /* SettingsTableViewCell.swift */; };
@@ -477,6 +472,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40F3BEA12A2C8E2D00E3F41F /* Lottie in Frameworks */,
 				401BF78B29EEC195001F4F38 /* FirebaseMessaging in Frameworks */,
 				401BF78529EEC195001F4F38 /* FirebaseDatabase in Frameworks */,
 				FFBD0878BB9E28260C344D5A /* Pods_FitApp.framework in Frameworks */,
@@ -485,7 +481,6 @@
 				401BF78329EEC195001F4F38 /* FirebaseAuth in Frameworks */,
 				7CBBF1EF281992AA00EE55F1 /* StoreKit.framework in Frameworks */,
 				401BF78129EEC195001F4F38 /* FirebaseAnalytics in Frameworks */,
-				7C6E059128FDA8C5001013B9 /* Lottie in Frameworks */,
 				401BF78729EEC195001F4F38 /* FirebaseFirestore in Frameworks */,
 				401BF78929EEC195001F4F38 /* FirebaseFirestoreSwift in Frameworks */,
 			);
@@ -1981,7 +1976,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.50;
+				MARKETING_VERSION = 1.1.52;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
@@ -2004,7 +1999,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.50;
+				MARKETING_VERSION = 1.1.52;
 				PRODUCT_BUNDLE_IDENTIFIER = swift.ShaharYael.MyFItApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
