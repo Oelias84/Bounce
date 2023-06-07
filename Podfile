@@ -24,7 +24,7 @@ target 'FitApp' do
 		pod 'JGProgressHUD'
 		pod 'SDWebImage', '~> 5.0'
 		pod 'MKRingProgressView'
-		pod 'Charts'
+		pod 'Charts', '~> 4.1.0'
 		pod 'GMStepper'
 		pod 'BetterSegmentedControl', '~> 1.3'
 		
