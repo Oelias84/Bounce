@@ -46,12 +46,16 @@ struct ExerciseListView: View {
                         focusedField = nil
                         endEditing()
                         WorkoutManager.shared.updateExercisesStates()
-
                     }
                 }
             }
         }
         .sheet(isPresented: $isShowingExerciseOptions) {
+            Capsule(style: .continuous)
+                .fill(Color(uiColor: .projectTail))
+                .frame(width: 60, height: 3)
+                .padding()
+            
             ExerciseOptionsListSheetView(viewModel: ExerciseOptionsListSheetViewModel(exerciseType: viewModel.getSelectedExerciseType, workoutIndex: viewModel.getWorkoutIndex)) { selectedExerciseOption in
                 viewModel.replaceExercise(with: selectedExerciseOption)
                 isShowingExerciseOptions.toggle()

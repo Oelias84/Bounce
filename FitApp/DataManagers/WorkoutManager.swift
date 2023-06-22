@@ -13,11 +13,15 @@ enum WorkoutType: Codable {
 }
 enum ExerciseType: String {
     case warmup
+    #warning("remove")
     case legs
     case chest
     case back
     case shoulders
     case stomach
+    case hamstring
+    case quad
+    case glutes
     case none
 }
 

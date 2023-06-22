@@ -22,7 +22,7 @@ struct ExerciseOptionsListSheetView: View {
 					ExerciseOptionsView(exercise: exercise) { selectedExercise in
 						selectedExerciseOption(selectedExercise)
 					}
-					.padding(.horizontal)
+					.padding(.bottom, 10)
 				}
 			}
 			.frame(maxWidth: .infinity, maxHeight: .infinity)

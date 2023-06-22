@@ -37,7 +37,7 @@ struct ExerciseView: View {
                         exerciseTag
                     }
 					Text(name)
-						.font(Font.custom(K.Fonts.boldText, size: 22))
+						.font(Font.custom(K.Fonts.boldText, size: 18))
 				}
 				.padding(.bottom, 8)
 
