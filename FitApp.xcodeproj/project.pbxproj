@@ -22,6 +22,7 @@
 		403EF8E929C8DE94007694AB /* SettingsCheckboxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403EF8E729C8DE94007694AB /* SettingsCheckboxTableViewCell.swift */; };
 		403EF8EA29C8DE94007694AB /* SettingsCheckboxTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 403EF8E829C8DE94007694AB /* SettingsCheckboxTableViewCell.xib */; };
 		404551F12A1B585A004BCB2F /* ActivityLevelAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404551F02A1B585A004BCB2F /* ActivityLevelAlertView.swift */; };
+		4078834F2A44423500CC8853 /* StepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4078834E2A44423500CC8853 /* StepperView.swift */; };
 		407A6FED2A127117003ED30F /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407A6FEC2A127117003ED30F /* SettingsViewModel.swift */; };
 		4095DD7729C1ECB700F67D56 /* UserPreferredWorkouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4095DD7629C1ECB700F67D56 /* UserPreferredWorkouts.swift */; };
 		409B63242A23E07C003EF792 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409B63232A23E07C003EF792 /* RoundedButton.swift */; };
@@ -257,6 +258,7 @@
 		403EF8E729C8DE94007694AB /* SettingsCheckboxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCheckboxTableViewCell.swift; sourceTree = "<group>"; };
 		403EF8E829C8DE94007694AB /* SettingsCheckboxTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCheckboxTableViewCell.xib; sourceTree = "<group>"; };
 		404551F02A1B585A004BCB2F /* ActivityLevelAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLevelAlertView.swift; sourceTree = "<group>"; };
+		4078834E2A44423500CC8853 /* StepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperView.swift; sourceTree = "<group>"; };
 		407A6FEC2A127117003ED30F /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4095DD7629C1ECB700F67D56 /* UserPreferredWorkouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferredWorkouts.swift; sourceTree = "<group>"; };
 		409B63232A23E07C003EF792 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
@@ -562,6 +564,16 @@
 				40CC339A2A24FAB9004BE8A0 /* ActivityLevelAlertView+ViewModel.swift */,
 			);
 			name = ActivityLevel;
+			sourceTree = "<group>";
+		};
+		4078834D2A44421100CC8853 /* CustomUIKitViews */ = {
+			isa = PBXGroup;
+			children = (
+				B368DFDF25A6247600BD1937 /* SpinnerView.swift */,
+				B3CA0CE2258111FD00923902 /* CircularProgressView.swift */,
+				4078834E2A44423500CC8853 /* StepperView.swift */,
+			);
+			name = CustomUIKitViews;
 			sourceTree = "<group>";
 		};
 		409B63212A23E02A003EF792 /* CustomViews */ = {
@@ -1299,6 +1311,7 @@
 		B3B2A245256EDDCA0052E6C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4078834D2A44421100CC8853 /* CustomUIKitViews */,
 				7C6B61AF2930EF980051DD65 /* SwiftUIView */,
 				7C1ACD082670C9D2008079C9 /* CellViews */,
 				7C32C586278E368C00B97642 /* PopupAlertView */,
@@ -1312,8 +1325,6 @@
 				7C1ACD0D2670D175008079C9 /* AddMealAlertView */,
 				7C7C381E2790B5FE0075B64A /* SpreadsheetView */,
 				7C6E059928FED1E4001013B9 /* LottieViews */,
-				B3CA0CE2258111FD00923902 /* CircularProgressView.swift */,
-				B368DFDF25A6247600BD1937 /* SpinnerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1813,6 +1824,7 @@
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
 				7C54164D269D951C00C22859 /* LoginViewModel.swift in Sources */,
 				7CFE0C0E276936330077D16F /* BounceNavigationBarView.swift in Sources */,
+				4078834F2A44423500CC8853 /* StepperView.swift in Sources */,
 				7C6B61B12930EFC20051DD65 /* ExerciseListView.swift in Sources */,
 				7C22214825DF11090075F524 /* QuestionnaireSecondActivityViewController.swift in Sources */,
 				7C6E05A52906EAC2001013B9 /* AddMealAlertDishViewModel.swift in Sources */,

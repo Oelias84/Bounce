@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import GMStepper
 
 class MoveDishView: UIView {
 	
@@ -45,7 +44,7 @@ class MoveDishView: UIView {
 	@IBOutlet weak var mealTitleLabel: UILabel!
 	@IBOutlet weak var dishToMoveTextfield: DishCellTextFieldView!
 	@IBOutlet weak var destinationMealTextfield: DishCellTextFieldView!
-	@IBOutlet weak var dishAmountStepper: GMStepper!
+	@IBOutlet weak var dishAmountStepper: StepperView!
 	@IBOutlet weak var dishAmountLabel: UILabel!
 	@IBOutlet weak var bottomViewConstrain: NSLayoutConstraint!
 	
@@ -242,7 +241,7 @@ extension MoveDishView {
 
 		window.rootViewController?.present(customAlert, animated: true, completion: nil)
 	}
-	@objc func stepperValueChanged(stepper: GMStepper) {
+	@objc func stepperValueChanged(stepper: StepperView) {
 		dishAmount = stepper.value
 		updateAmountLabel()
 	}

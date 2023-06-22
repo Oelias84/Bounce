@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import GMStepper
 
 class QuestionnaireFitnessLevelViewController: UIViewController {
 	
@@ -30,7 +29,7 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 	@IBOutlet weak var threeWeeklyWorkoutsButton: UIButton!
 	@IBOutlet weak var fourWeeklyWorkoutsButton: UIButton!
 	
-	@IBOutlet weak var externalTrainingStepper: GMStepper!
+	@IBOutlet weak var externalTrainingStepper: StepperView!
 	
 	@IBOutlet weak var nextButton: UIButton!
 	
@@ -155,11 +154,11 @@ class QuestionnaireFitnessLevelViewController: UIViewController {
 extension QuestionnaireFitnessLevelViewController {
     
 	private func setupView() {
+        externalTrainingStepper.labelCornerRadius = 6
+        
 		externalTrainingStepper.minimumValue = 0
 		externalTrainingStepper.maximumValue = 3
-		externalTrainingStepper.roundButtons = true
 		externalTrainingStepper.labelTextColor = .white
-		externalTrainingStepper.backgroundColor = .clear
 		externalTrainingStepper.buttonsTextColor = .white
 		externalTrainingStepper.labelBackgroundColor = .clear
 		externalTrainingStepper.buttonsBackgroundColor = .projectTail
@@ -244,7 +243,7 @@ extension QuestionnaireFitnessLevelViewController {
 			break
         }
     }
-	@objc private func stepperValueChanged(_ sender: GMStepper) {
+	@objc private func stepperValueChanged(_ sender: StepperView) {
 		externalWorkouts = Int(sender.value)
 	}
 }

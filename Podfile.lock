@@ -7,7 +7,6 @@ PODS:
     - SwiftAlgorithms (~> 1.0)
   - CropViewController (2.6.0)
   - DateToolsSwift (5.0.0)
-  - GMStepper (2.2)
   - JGProgressHUD (2.2)
   - MKRingProgressView (2.2.3)
   - SDWebImage (5.10.4):
@@ -22,7 +21,6 @@ DEPENDENCIES:
   - Charts (~> 4.1.0)
   - CropViewController
   - DateToolsSwift
-  - GMStepper
   - JGProgressHUD
   - MKRingProgressView
   - SDWebImage (~> 5.0)
@@ -35,7 +33,6 @@ SPEC REPOS:
     - Charts
     - CropViewController
     - DateToolsSwift
-    - GMStepper
     - JGProgressHUD
     - MKRingProgressView
     - SDWebImage
@@ -48,13 +45,12 @@ SPEC CHECKSUMS:
   Charts: 354f86803d11d9c35de280587fef50d1af063978
   CropViewController: 7093b39ec3cb508531b22d35773e06cecd7378d8
   DateToolsSwift: 4207ada6ad615d8dc076323d27037c94916dbfa6
-  GMStepper: 89fb106944dfcc3aa3add7164e3ebd463ea2104b
   JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
   MKRingProgressView: 404b3157e7a533ab8668d29ec20042c35d12ca1d
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
   SpreadsheetView: 688dbd19f2b355df0eb09e486266fd913a013449
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
 
-PODFILE CHECKSUM: 5192a37b80145dc740ed4562e3cd4fb8c4109fac
+PODFILE CHECKSUM: 8f31afb2672b7e55f9147e4c367ec0f07ac0becf
 
 COCOAPODS: 1.12.0
