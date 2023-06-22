@@ -18,7 +18,7 @@ enum SettingsMenu: String, CaseIterable {
 
 class SettingsViewModel {
     
-    private var inCameraMode: Bool = false
+    var inCameraMode: Bool = false
     private var optionContentType: SettingsContentType!
     private let userGender = UserProfile.defaults.getGender
     private var userData: UserProfile! = UserProfile.defaults
@@ -86,7 +86,7 @@ class SettingsViewModel {
         if let steps = userData.steps {
             return "\(steps) צעדים"
         } else if let kilometers = userData.kilometer {
-            return String(format: "%.1f", kilometers) + "ק״מ"
+            return String(format: "%.1f", kilometers) + " ק״מ"
         } else {
             return UserProfile.getLifeStyleText()
         }

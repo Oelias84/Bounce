@@ -45,9 +45,9 @@ class SettingsViewController: UIViewController {
             }
         }
         
-//        if !inCameraMode {
-//            //			navigationController?.popViewController(animated: false)
-//        }
+        if !viewModel.inCameraMode {
+            navigationController?.popViewController(animated: false)
+        }
     }
     
     @objc private func resourcesButtonAction() {
@@ -128,7 +128,7 @@ extension SettingsViewController: CropViewControllerDelegate, UINavigationContro
     
     func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
         cropViewController.dismiss(animated: true) {
-//            self.inCameraMode = false
+            self.viewModel.inCameraMode = false
             Spinner.shared.show(self)
             self.saveImage(image)
         }
@@ -202,7 +202,7 @@ extension SettingsViewController: BounceNavigationBarDelegate {
         presentImagePickerActionSheet(imagePicker: imagePickerController) {
             didSelect in
             if didSelect {
-//                self.inCameraMode = true
+                self.viewModel.inCameraMode = true
             }
         }
     }
