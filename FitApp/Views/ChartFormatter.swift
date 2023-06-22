@@ -8,7 +8,7 @@
 import Charts
 
 @objc(ChartFormatter)
-class ChartFormatter: NSObject, IAxisValueFormatter {
+class ChartFormatter: NSObject, AxisValueFormatter {
 	
 	let dates: [Date]
 	let type: TimePeriod
@@ -43,7 +43,7 @@ class ChartFormatter: NSObject, IAxisValueFormatter {
 	}
 }
 
-class ChartValuesFormatter: IValueFormatter {
+class ChartValuesFormatter: ValueFormatter {
 	
 	func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
 		return String(format: "%.1f", value)
