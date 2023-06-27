@@ -2016,6 +2016,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KMHWK7748S;
 				INFOPLIST_FILE = FitApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Bounce;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2040,6 +2041,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KMHWK7748S;
 				INFOPLIST_FILE = FitApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Bounce;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -44,10 +44,6 @@ class SettingsViewController: UIViewController {
                 self.tableView.reloadData()
             }
         }
-        
-        if !viewModel.inCameraMode {
-            navigationController?.popViewController(animated: false)
-        }
     }
     
     @objc private func resourcesButtonAction() {
