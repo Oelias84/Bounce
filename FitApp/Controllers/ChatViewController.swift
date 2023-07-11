@@ -48,9 +48,14 @@ final class ChatViewController: MessagesViewController {
 //MARK: - Delegats
 extension ChatViewController: InputBarAccessoryViewDelegate {
 	
+    func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {
+        
+        print(text)
+    }
+    
 	func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
 		disableInteraction()
-		
+
 		guard !text.replacingOccurrences(of: " ", with: "").isEmpty else {
 			self.disableInteraction()
 			return
@@ -262,7 +267,7 @@ extension ChatViewController {
 		}
 	}
 	fileprivate func setupController() {
-		
+        maintainPositionOnInputBarHeightChanged = true
 		showMessageTimestampOnSwipeLeft = true
 		title = self.viewModel.getDisplayName
 		navigationItem.largeTitleDisplayMode = .never

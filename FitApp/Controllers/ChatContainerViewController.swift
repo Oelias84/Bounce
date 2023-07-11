@@ -32,15 +32,6 @@ class ChatContainerViewController: UIViewController {
 		super.viewDidLayoutSubviews()
 		chatViewController.view.frame = CGRect(x: 0, y: topBarViewHeightConstraint.constant, width: view.bounds.width, height: view.bounds.height - topBarViewHeightConstraint.constant)
 	}
-	
-	/// Required for the `MessageInputBar` to be visible
-	override var canBecomeFirstResponder: Bool {
-		return chatViewController.canBecomeFirstResponder
-	}
-	/// Required for the `MessageInputBar` to be visible
-	override var inputAccessoryView: UIView? {
-		return chatViewController.inputAccessoryView
-	}
 }
 
 extension ChatContainerViewController: BounceNavigationBarDelegate {
