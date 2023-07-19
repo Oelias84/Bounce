@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -18,14 +18,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" restorationIdentifier="adminUserMenuCell" selectionStyle="none" indentationWidth="10" rowHeight="111" id="KGk-i7-Jjw" customClass="AdminUserMenuTableViewCell" customModule="FitApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
+            <rect key="frame" x="0.0" y="0.0" width="344" height="111"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
+                <rect key="frame" x="0.0" y="0.0" width="344" height="111"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Dr9-db-OgR">
-                        <rect key="frame" x="12" y="0.0" width="296" height="111"/>
+                        <rect key="frame" x="12" y="0.0" width="320" height="111"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="aNu-Xf-2Mf">
                                 <rect key="frame" x="0.0" y="29" width="54" height="53"/>
@@ -40,8 +40,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SqO-Un-LVo">
-                                <rect key="frame" x="62" y="29.5" width="102" height="52"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SqO-Un-LVo">
+                                <rect key="frame" x="62" y="29.5" width="186" height="52"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UsG-3d-cnE">
                                         <rect key="frame" x="0.0" y="0.0" width="45.5" height="24"/>
@@ -54,7 +54,7 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="firstBaseline" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ivd-85-pMZ">
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="firstBaseline" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ivd-85-pMZ">
                                         <rect key="frame" x="0.0" y="32" width="62" height="20"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5EM-Jv-LSp">
@@ -64,13 +64,24 @@
                                                     <constraint firstAttribute="width" secondItem="5EM-Jv-LSp" secondAttribute="height" multiplier="1:1" id="CAu-9F-xcv"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GFL-7p-lxx" userLabel="Program Indication Image View">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="ZXf-9a-ZTU">
                                                 <rect key="frame" x="37" y="0.0" width="25" height="25"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="GFL-7p-lxx" secondAttribute="height" multiplier="1:1" id="D6u-6a-jCW"/>
-                                                    <constraint firstAttribute="height" constant="25" id="bZa-v0-ZTk"/>
-                                                </constraints>
-                                            </imageView>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GFL-7p-lxx" userLabel="Program Indication Image View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="GFL-7p-lxx" secondAttribute="height" multiplier="1:1" id="D6u-6a-jCW"/>
+                                                            <constraint firstAttribute="height" constant="25" id="bZa-v0-ZTk"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCi-a7-SCz">
+                                                        <rect key="frame" x="25" y="0.0" width="0.0" height="25"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="5EM-Jv-LSp" firstAttribute="top" secondItem="ivd-85-pMZ" secondAttribute="topMargin" id="9JB-nb-5bA"/>
@@ -83,10 +94,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="300" distribution="fillEqually" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="QBo-62-43N">
-                                <rect key="frame" x="172" y="14.5" width="124" height="82"/>
+                                <rect key="frame" x="256" y="40.5" width="64" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6z-qF-fPd">
-                                        <rect key="frame" x="0.0" y="0.0" width="82" height="82"/>
+                                        <rect key="frame" x="0.0" y="1" width="28.5" height="28.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="I6z-qF-fPd" secondAttribute="height" multiplier="1:1" id="EmA-aT-o0u"/>
                                             <constraint firstAttribute="width" constant="40" id="JHS-2f-6Hu"/>
@@ -100,13 +111,16 @@
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ejk-KH-loI">
-                                        <rect key="frame" x="94" y="28" width="30" height="26.5"/>
+                                        <rect key="frame" x="34" y="2" width="30" height="26.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="JUS-Qm-0z3"/>
                                             <constraint firstAttribute="width" constant="30" id="eqc-uT-gqI"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="qJ2-Gc-1UK"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <constraints>
@@ -123,13 +137,14 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="experationDateLabel" destination="CCi-a7-SCz" id="POM-gR-zlu"/>
                 <outlet property="isExpiredImageView" destination="GFL-7p-lxx" id="2TF-7v-k2U"/>
                 <outlet property="lastSeenImageView" destination="5EM-Jv-LSp" id="XcG-jG-oXS"/>
                 <outlet property="messageButton" destination="I6z-qF-fPd" id="s6b-DB-Hhr"/>
                 <outlet property="userImageView" destination="aNu-Xf-2Mf" id="L1V-gh-HOv"/>
                 <outlet property="userNameLabel" destination="Ga3-Yu-Npz" id="BmC-hW-F56"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="141.62946428571428"/>
+            <point key="canvasLocation" x="155.07246376811597" y="141.62946428571428"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -86,7 +86,7 @@ class ChatViewModel {
 	}
 	public func updateLastSeenDate() {
 		guard let chat = chat else { return }
-		messagesManager.googleManager.updateLastSeenMessageDate(chat: chat)
+        messagesManager.googleManager.updateLastSeenMessageDate(userID: chat.userId, isAdmin: chat.isAdmin)
 	}
 	public func getMediaUrlFor(_ urlString: String, completion: @escaping (URL?) -> ()) {
 		messagesManager.downloadMediaURL(urlString: urlString, completion: completion)
@@ -96,7 +96,7 @@ class ChatViewModel {
 		
 		switch messageKind {
 		case .text(let string):
-			messagesManager.sendTextMessageToChat(chat: chat, text: string, completion: completion)
+            messagesManager.sendTextMessageToChat(userID: chat.userId, isAdmin: chat.isAdmin, userPushToke: chat.pushTokens ?? [], text: string, completion: completion)
 		case .photo(_), .video(_):
 			messagesManager.sendMediaMessageFor(chat: chat, messageKind: messageKind, completion: completion)
 		default:

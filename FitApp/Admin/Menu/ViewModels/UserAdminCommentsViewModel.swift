@@ -12,10 +12,6 @@ class UserAdminCommentsViewModel {
 	var comments: ObservableObject<[UserAdminComment]?> = ObservableObject(nil)
 	private let userUID: String!
 	
-	deinit {
-		print("deinit")
-	}
-	
  	init(userUID: String) {
 		self.userUID = userUID
 		getComments(userUID: userUID)

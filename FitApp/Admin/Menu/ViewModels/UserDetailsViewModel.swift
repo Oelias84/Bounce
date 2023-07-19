@@ -14,7 +14,6 @@ final class UserDetailsViewModel {
 	var userDetails: ObservableObject<ServerUserData?> = ObservableObject(nil)
 	
 	init(userData: Chat) {
-		
 		self.userData = userData
 		fetchUserDetails()
 	}
@@ -24,6 +23,9 @@ final class UserDetailsViewModel {
 extension UserDetailsViewModel {
 	
 	//Getters
+    var userName: String? {
+        userData.displayName
+    }
 	var getUserId: String {
 		return userData.userId
 	}
