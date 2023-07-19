@@ -22,6 +22,7 @@ class AdminUserMenuTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var messageButton: UIButton!
+    @IBOutlet weak var broadcastButton: UIButton!
     
     @IBOutlet weak var experationDateLabel: UILabel!
     
@@ -32,6 +33,10 @@ class AdminUserMenuTableViewCell: UITableViewCell {
     
     @IBAction private func messageButtonAction(_ sender: Any) {
         moveToChatContainerVC()
+    }
+    @IBAction func broadcastButtonAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        
     }
 }
 
