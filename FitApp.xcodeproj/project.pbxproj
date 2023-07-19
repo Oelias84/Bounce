@@ -19,6 +19,7 @@
 		401BF79029EEC2C9001F4F38 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 401BF78F29EEC2C9001F4F38 /* MessageKit */; };
 		402F2E1A2A2CA8A4002F9DF6 /* BetterSegmentedControl in Frameworks */ = {isa = PBXBuildFile; productRef = 402F2E192A2CA8A4002F9DF6 /* BetterSegmentedControl */; settings = {ATTRIBUTES = (Required, ); }; };
 		402F2E202A2CB0D3002F9DF6 /* BLTNBoard in Frameworks */ = {isa = PBXBuildFile; productRef = 402F2E1F2A2CB0D3002F9DF6 /* BLTNBoard */; };
+		403C098C2A68541F00946DE4 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C098B2A68541F00946DE4 /* UserViewModel.swift */; };
 		40F3BEA12A2C8E2D00E3F41F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7C6E059028FDA8C5001013B9 /* Lottie */; };
 		7C0E4531275E8FA500ECA20E /* MessagesTextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */; };
 		7C0F703A276CEA5900964004 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0F7039276CEA5900964004 /* SettingsTableViewCell.xib */; };
@@ -76,10 +77,8 @@
 		7C658ABE25D992D200CA75B2 /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C658ABD25D992D200CA75B2 /* Comments.swift */; };
 		7C71BB4725D869AC00FBEB96 /* AddWeightAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C71BB4625D869AC00FBEB96 /* AddWeightAlertView.swift */; };
 		7C7434EB25CD906500D33A9A /* MailComposerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7434EA25CD906500D33A9A /* MailComposerViewController.swift */; };
-		7C7434F025CD9D9D00D33A9A /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7434EF25CD9D9D00D33A9A /* ChatsViewController.swift */; };
 		7C7434F525CD9DD700D33A9A /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C7434F425CD9DD700D33A9A /* ChatViewController.swift */; };
 		7C7434FB25CD9F0000D33A9A /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C7434FA25CD9F0000D33A9A /* Chat.storyboard */; };
-		7C74350325CDBAE900D33A9A /* ChatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74350225CDBAE900D33A9A /* ChatsViewModel.swift */; };
 		7C74350825CDBB4C00D33A9A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74350725CDBB4C00D33A9A /* Message.swift */; };
 		7C74350D25CDBBE900D33A9A /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74350C25CDBBE900D33A9A /* Sender.swift */; };
 		7C74352D25D056A900D33A9A /* GoogleStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C74352C25D056A900D33A9A /* GoogleStorageManager.swift */; };
@@ -246,6 +245,7 @@
 
 /* Begin PBXFileReference section */
 		05D96098412DCEF72F6C4753 /* Pods-FitApp-FitAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp-FitAppUITests.release.xcconfig"; path = "Target Support Files/Pods-FitApp-FitAppUITests/Pods-FitApp-FitAppUITests.release.xcconfig"; sourceTree = "<group>"; };
+		403C098B2A68541F00946DE4 /* UserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTextManager.swift; sourceTree = "<group>"; };
 		7C0F7039276CEA5900964004 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
@@ -303,10 +303,8 @@
 		7C658ABD25D992D200CA75B2 /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
 		7C71BB4625D869AC00FBEB96 /* AddWeightAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWeightAlertView.swift; sourceTree = "<group>"; };
 		7C7434EA25CD906500D33A9A /* MailComposerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailComposerViewController.swift; sourceTree = "<group>"; };
-		7C7434EF25CD9D9D00D33A9A /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
 		7C7434F425CD9DD700D33A9A /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		7C7434FA25CD9F0000D33A9A /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
-		7C74350225CDBAE900D33A9A /* ChatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewModel.swift; sourceTree = "<group>"; };
 		7C74350725CDBB4C00D33A9A /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7C74350C25CDBBE900D33A9A /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
 		7C74352C25D056A900D33A9A /* GoogleStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleStorageManager.swift; sourceTree = "<group>"; };
@@ -707,7 +705,6 @@
 			isa = PBXGroup;
 			children = (
 				7C7434F425CD9DD700D33A9A /* ChatViewController.swift */,
-				7C7434EF25CD9D9D00D33A9A /* ChatsViewController.swift */,
 				7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */,
 			);
 			name = Chat;
@@ -1042,6 +1039,7 @@
 		7CB3701928357D8F0010E8EC /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				403C098B2A68541F00946DE4 /* UserViewModel.swift */,
 				7CB37017283576FA0010E8EC /* UsersListViewModel.swift */,
 				7C9F7BF3283EA32B006868F4 /* UserDetailsViewModel.swift */,
 				7CE9BB742871F89000FB3328 /* UserAdminCommentsViewModel.swift */,
@@ -1316,7 +1314,6 @@
 				B3DB7512259F8270002CF48B /* MealViewModel.swift */,
 				B358227E25ACA40D00C91295 /* ArticleViewModel.swift */,
 				B38397F525B4A1BE00154697 /* WorkoutViewModel.swift */,
-				7C74350225CDBAE900D33A9A /* ChatsViewModel.swift */,
 				7CD1817D26481E5D0054DB9C /* SettingTableViewModel.swift */,
 				7C33B660266A587D00E16A1C /* CommentsViewModel.swift */,
 				7CFCAF4626BD58DA008A24F8 /* HomeViewModel.swift */,
@@ -1744,6 +1741,7 @@
 				B368E04925A790D200BD1937 /* ServerDishs.swift in Sources */,
 				B3BB8F3B2582553600D70628 /* QuestionnaireFitnessLevelViewController.swift in Sources */,
 				7CFFAD9C261DEF1000C05C66 /* DishesTableViewController.swift in Sources */,
+				403C098C2A68541F00946DE4 /* UserViewModel.swift in Sources */,
 				7C1ACCEB266F8F8F008079C9 /* CommentTableViewCell.swift in Sources */,
 				7C7C38352793630A0075B64A /* DishCellTextFieldView.swift in Sources */,
 				7CFA85D126EE055700296B53 /* DailyMealManager.swift in Sources */,
@@ -1754,7 +1752,6 @@
 				7C1ACD0C2670D170008079C9 /* AddMealAlertView.swift in Sources */,
 				B35111CA25962D41001B2B9B /* weightTableViewCell.swift in Sources */,
 				7CE9BB752871F89000FB3328 /* UserAdminCommentsViewModel.swift in Sources */,
-				7C74350325CDBAE900D33A9A /* ChatsViewModel.swift in Sources */,
 				7CCC0E67262B2E79006E2E35 /* TableViewEmptyView.swift in Sources */,
 				B330B88F257583D200BDB206 /* ExercisesTableViewController.swift in Sources */,
 				7C89AA61256D700F009AD87C /* UserProfile.swift in Sources */,
@@ -1795,7 +1792,6 @@
 				7CD1817B2647E80F0054DB9C /* NotificationTableViewCell.swift in Sources */,
 				7CB6059C28AED3E9002A7C74 /* WeightsViewController.swift in Sources */,
 				B358223025AC9DA800C91295 /* Article.swift in Sources */,
-				7C7434F025CD9D9D00D33A9A /* ChatsViewController.swift in Sources */,
 				B3E6E9B825714D5800958C48 /* MealPlanViewController.swift in Sources */,
 				B3BB8F35258223E400D70628 /* QuestionnaireActivityViewController.swift in Sources */,
 				B3DB751B259F8773002CF48B /* ConsumptionManager.swift in Sources */,
