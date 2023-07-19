@@ -7,49 +7,62 @@
 
 import Foundation
 
+enum UserProgramSatet {
+    
+    case active
+    case expire
+    case expireSoon
+}
+
 class Chat: Comparable {
-	
-	var isAdmin: Bool
-	var userId: String
-	var imagePath: URL?
-	var displayName: String?
-	var pushTokens: [String]?
-	var latestMessage: Message?
-	var lastSeenMessageDate: Date?
-	var isLastMessageReadFor: Bool {
-		guard let lastSeen = self.lastSeenMessageDate, let lastMessage = self.latestMessage?.sentDate else { return false }
-		return lastSeen > lastMessage
-	}
-	var wasSeenLately: Bool = false
-	var programState: UserProgramSatet?
-	
-	init(userId: String, isAdmin: Bool = false, displayName: String? = nil, otherUserUID: String? = nil, latestMessage: Message? = nil, pushTokens: [String]? = nil, lastSeenMessageDate: Date? = nil) {
-		
-		self.userId = userId
-		self.isAdmin = isAdmin
-		self.pushTokens = pushTokens
-		self.displayName = displayName
-		self.latestMessage = latestMessage
-		self.lastSeenMessageDate = lastSeenMessageDate
-	}
-	
-	static func == (lhs: Chat, rhs: Chat) -> Bool {
-		false
-	}
-	static func < (lhs: Chat, rhs: Chat) -> Bool {
-		
-		if let lhsLastSeen = lhs.lastSeenMessageDate, let rhsLastSeen = rhs.lastSeenMessageDate {
-			return lhsLastSeen > rhsLastSeen
-		} else {
-			return false
-		}
-	}
+    
+    var isAdmin: Bool
+    var userId: String
+    var imagePath: URL?
+    var displayName: String?
+    var pushTokens: [String]?
+    var latestMessage: Message?
+    var lastSeenMessageDate: Date?
+    var userLastSeen: String?
+    var programExpirationDate: String?
+    
+    init(userId: String,
+         isAdmin: Bool = false,
+         displayName: String? = nil,
+         otherUserUID: String? = nil,
+         latestMessage: Message? = nil,
+         pushTokens: [String]? = nil,
+         lastSeenMessageDate: Date? = nil,
+         userLastSeen: String? = nil,
+         programExpirationDate: String? = nil) {
+        
+        self.userId = userId
+        self.isAdmin = isAdmin
+        self.pushTokens = pushTokens
+        self.displayName = displayName
+        self.latestMessage = latestMessage
+        self.lastSeenMessageDate = lastSeenMessageDate
+        self.userLastSeen = userLastSeen
+        self.programExpirationDate = programExpirationDate
+    }
+    
+    
+    
+    static func == (lhs: Chat, rhs: Chat) -> Bool {
+        false
+    }
+    static func < (lhs: Chat, rhs: Chat) -> Bool {
+        guard let latestMessage = lhs.latestMessage,
+              let latestMessageOther = rhs.latestMessage else { return false }
+        
+        return latestMessage.sentDate > latestMessageOther.sentDate
+    }
 }
 
 struct LatestMessage {
-	
-	let date: String
-	let text: String
-	let isRead: Bool
+    
+    let date: String
+    let text: String
+    let isRead: Bool
 }
 
