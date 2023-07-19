@@ -64,31 +64,31 @@ final class GoogleDatabaseManager {
 			chatRef(userId: userId).child("push_tokens").child(token).setValue(timestamp)
 		}
 	}
-	func updateLastSeenMessageDate(chat: Chat) {
-		chatRef(userId: chat.userId).child(chat.isAdmin == true ? "support_last_seen_message_timestamp" : "last_seen_message_timestamp").setValue(Date().millisecondsSince2020)
+    func updateLastSeenMessageDate(userID: String, isAdmin: Bool) {
+		chatRef(userId: userID).child(isAdmin == true ? "support_last_seen_message_timestamp" : "last_seen_message_timestamp").setValue(Date().millisecondsSince2020)
 	}
 	
-	func sendMessageToChat(chat: Chat, content: String, kind: MessageKind, completion: @escaping (Result<Void, Error>) -> ()) {
-		sendMessageToChat(chat: chat, content: content, link: nil, previewData: nil, kind: kind, completion: completion)
+	func sendMessageToChat(userID: String, isAdmin: Bool, content: String, kind: MessageKind, completion: @escaping (Result<Void, Error>) -> ()) {
+        sendMessageToChat(userID: userID, isAdmin: isAdmin, content: content, link: nil, previewData: nil, kind: kind, completion: completion)
 	}
-	func sendMessageToChat(chat: Chat, content: String, link: String?, previewData: Data?, kind: MessageKind, completion: @escaping(Result<Void, Error>) -> ()) {
-		let date = Date().millisecondsSince2020
-		let messageId = "\(chat.userId)a\(date)"
+    func sendMessageToChat(userID: String, isAdmin: Bool, content: String, link: String?, previewData: Data?, kind: MessageKind, completion: @escaping(Result<Void, Error>) -> ()) {
 		guard let senderId = Auth.auth().currentUser?.uid else {
 			completion(.failure(ErrorManager.DatabaseError.noUID))
 			return
 		}
-		
+        
+        let date = Date().millisecondsSince2020
+        let messageId = "\(userID)a\(date)"
 		let newMessagesData = createMessageData(senderId: senderId, kind: kind.rawValue, timestamp: date, content: content, mediaPath: link, mediaPreview: previewData?.base64EncodedString())
 		
-		chatMessagesRef(userId: chat.userId).child(messageId).setValue(newMessagesData) {
+		chatMessagesRef(userId: userID).child(messageId).setValue(newMessagesData) {
 			error, data in
 			
 			if let error = error {
 				completion(.failure(error))
 			} else {
-				self.updateLastSeenMessageDate(chat: chat)
-				self.updateLatestMessage(chat: chat, latestMessageData: newMessagesData)
+                self.updateLastSeenMessageDate(userID: userID, isAdmin: isAdmin)
+				self.updateLatestMessage(userID: userID, latestMessageData: newMessagesData)
 				completion(.success(()))
 			}
 		}
@@ -185,8 +185,8 @@ final class GoogleDatabaseManager {
 			completion()
 		}
 	}
-	private func updateLatestMessage(chat: Chat, latestMessageData: [String: Any]) {
-		chatRef(userId: chat.userId).child("latest_message").setValue(latestMessageData)
+	private func updateLatestMessage(userID: String, latestMessageData: [String: Any]) {
+		chatRef(userId: userID).child("latest_message").setValue(latestMessageData)
 	}
 	
 	///Delete
@@ -205,13 +205,12 @@ final class GoogleDatabaseManager {
 	private func parseChatsData(userId: String, snapshot: DataSnapshot) -> [Chat] {
 		var chats: [Chat] = []
 		
-		snapshot.children.forEach {
-			data in
-			
+		snapshot.children.forEach { data in
 			guard let data = data as? DataSnapshot,
-				  let chatData = data.value as? [String: Any] else  { return }
-			var displayName: String? {
-				return chatData["display_name"] as? String
+				  let chatData = data.value as? [String: Any] else { return }
+            
+			var displayName: String {
+                chatData["display_name"] as? String ?? "Missing User Name"
 			}
 			var latestMessage: Message? {
 				let messageSnapshot = data.childSnapshot(forPath: "latest_message")
@@ -229,7 +228,23 @@ final class GoogleDatabaseManager {
 				let data = chatData["push_tokens"] as? [String: Int64]
 				return data?.keys.compactMap { $0 } ?? []
 			}
-			chats.append(Chat(userId: data.key, isAdmin: true, displayName: displayName, latestMessage: latestMessage, pushTokens: pushTokens, lastSeenMessageDate: lastSeenMessageTimestamp?.dateFromMillisecondsSince2020))
+            var  programExpirationDate : String? {
+                chatData["program_expiration_date"] as? String
+            }
+            var userLastSeen: String? {
+                chatData["user_last_seen"] as? String
+            }
+            
+            let chat = Chat(userId: data.key,
+                            isAdmin: true,
+                            displayName: displayName,
+                            latestMessage: latestMessage,
+                            pushTokens: pushTokens,
+                            lastSeenMessageDate: lastSeenMessageTimestamp?.dateFromMillisecondsSince2020,
+                            userLastSeen: userLastSeen,
+                            programExpirationDate: programExpirationDate)
+            
+			chats.append(chat)
 		}
 		return chats
 	}

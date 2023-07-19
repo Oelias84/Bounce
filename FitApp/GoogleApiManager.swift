@@ -11,13 +11,6 @@ import FirebaseStorage
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-enum UserProgramSatet {
-	
-	case active
-	case expire
-	case expireSoon
-}
-
 struct GoogleApiManager {
 	
 	let db = Firestore.firestore()
@@ -43,54 +36,37 @@ struct GoogleApiManager {
 			}
 		}
 	}
-	func getUserLastSeenData(days: Int, userID: String, completion: @escaping (Result<Bool?, Error>) -> Void) {
+	func getUserLastSeenData(days: Int, userID: String, completion: @escaping (Result<String?, Error>) -> Void) {
 		db.collection("users").document(userID).collection("user-daily-meals").getDocuments(source: .default) {
 			(data, error) in
-			if let error = error {
+			
+            if let error = error {
 				print(error)
 				completion(.failure(error))
 			}
 			if let data = data?.documents.last {
-				if let lastDate = data.documentID.dateFromString, lastDate.isEarlier(than: Date().subtract(days.days))  {
-					completion(.success(false))
-				} else {
-					completion(.success(true))
-				}
+                completion(.success(data.documentID))
 			} else {
-				completion(.success(false))
+				completion(.success(nil))
 			}
 		}
 	}
-	func getUserOrderExpirationData(userID: String, completion: @escaping (Result<UserProgramSatet?, Error>) -> Void) {
-		
+	func getUserOrderExpirationData(userID: String, completion: @escaping (Result<String?, Error>) -> Void) {
 		db.collection("users").document(userID).collection("profile-data").document("order-data").getDocument(source: .default) {
 			(data, error) in
-			if let error = error {
+			
+            if let error = error {
 				print(error)
 			}
-			
 			if let data = data?.data() {
-				
-				#if DEBUG
-				//Test by order number
-				if let orderId = data["currentOrderId"] as? String, orderId == "order-3334" {
-					print()
-				}
-				#endif
-
 				guard let transactionDate = data["dateOfTransaction"] as? String,
 					  let period = data["period"] as? Int else {
 					completion(.failure(ErrorManager.DatabaseError.dataIsEmpty))
 					return
 				}
+                
 				if let expirationDate = transactionDate.fullDateFromStringWithDash?.add(period.months) {
-					if Date().isLater(than: expirationDate) {
-						completion(.success(.expire))
-					} else if Date().isLaterThanOrEqual(to: expirationDate.subtract(7.days)) {
-						completion(.success(.expireSoon))
-					} else {
-						completion(.success(.active))
-					}
+                    completion(.success(expirationDate.fullDateStringForDB))
 				} else {
 					completion(.success(nil))
 				}
@@ -104,6 +80,7 @@ struct GoogleApiManager {
     func getMealFor(userID: String? = nil, _ date: Date, completion: @escaping (Result<DailyMeal?, Error>) -> Void) {
         db.collection("users").document(userID ?? Auth.auth().currentUser!.uid).collection("user-daily-meals").document("\(date.dateStringForDB)")
             .getDocument(source: .default, completion: { (data, error) in
+                
                 if let error = error {
                     print("getMealFor Error: ", error)
                 } else if let data = data {
@@ -123,7 +100,8 @@ struct GoogleApiManager {
 	func getWeights(userUID: String? = nil, completion: @escaping (Result<[Weight]?, Error>) -> Void) {
 		do {
 			db.collection("users").document(userUID ?? Auth.auth().currentUser!.uid).collection("user-weights").document("weights").getDocument(source: .default, completion: { (data, error) in
-				if let error = error {
+				
+                if let error = error {
 					print(error)
 				} else if let data = data {
                     
