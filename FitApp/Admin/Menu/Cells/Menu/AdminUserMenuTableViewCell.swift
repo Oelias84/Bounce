@@ -8,6 +8,10 @@
 import UIKit
 import Combine
 
+protocol AdminUserMenuTableViewCellDelegate: AnyObject {
+    func broadcastButtonTapped(userViewModel: UserViewModel)
+}
+
 class AdminUserMenuTableViewCell: UITableViewCell {
     
     //    private var chat: Chat!
@@ -26,6 +30,8 @@ class AdminUserMenuTableViewCell: UITableViewCell {
     
     @IBOutlet weak var experationDateLabel: UILabel!
     
+    weak var delegate: AdminUserMenuTableViewCellDelegate?
+    
     override public func prepareForReuse() {
         super.prepareForReuse()
         resetCell()
@@ -36,7 +42,7 @@ class AdminUserMenuTableViewCell: UITableViewCell {
     }
     @IBAction func broadcastButtonAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        
+        delegate?.broadcastButtonTapped(userViewModel: viewModel)
     }
 }
 
