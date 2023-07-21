@@ -14,7 +14,6 @@ protocol AdminUserMenuTableViewCellDelegate: AnyObject {
 
 class AdminUserMenuTableViewCell: UITableViewCell {
     
-    //    private var chat: Chat!
     private var viewModel: UserViewModel!
     
     private var cancellable: AnyCancellable?
@@ -42,6 +41,7 @@ class AdminUserMenuTableViewCell: UITableViewCell {
     }
     @IBAction func broadcastButtonAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        viewModel.shouldBroadcast.toggle()
         delegate?.broadcastButtonTapped(userViewModel: viewModel)
     }
 }
@@ -58,13 +58,15 @@ extension AdminUserMenuTableViewCell {
         isExpiredImageView.image = nil
         isExpiredImageView.tintColor = nil
         
+        broadcastButton.isSelected = false
+
         userImageView.alpha = 0.0
         animator?.stopAnimation(true)
         cancellable?.cancel()
     }
     public func configure(with vm: UserViewModel) {
         self.viewModel = vm
-        
+                
         //User name
         if let userName = viewModel.userName {
             userNameLabel.text = userName
@@ -75,9 +77,14 @@ extension AdminUserMenuTableViewCell {
         }
         
         //Profile Image
-        cancellable = loadImage(for: viewModel.imagePath).sink {
-            [weak self] image in
-            self?.showImage(image: image)
+        if viewModel.imagePath != nil {
+            cancellable = loadImage(for: viewModel.imagePath).sink {
+                [weak self] image in
+                self?.showImage(image: image)
+            }
+        } else {
+            userImageView.alpha = 1.0
+            userImageView.image = UIImage(systemName:"person.circle")
         }
         
         switch viewModel.programState {
@@ -111,6 +118,9 @@ extension AdminUserMenuTableViewCell {
         } else {
             messageButton.setImage(UIImage(systemName: "message.fill"), for: .normal)
         }
+        
+        //Broadcast
+        broadcastButton.isSelected = vm.shouldBroadcast
     }
     
     fileprivate func showImage(image: UIImage?) {

@@ -20,19 +20,26 @@ enum UserFilterType {
     case notLoggedFor(days: Int? = 3)
 }
 
+enum BroadcastType {
+    
+    case selective
+    case allFilterd
+}
+
 class UsersListViewModel {
     
     private var currentFilter: UserFilterType = .allUsers
     
     private var originalUsers: [UserViewModel]?
-    private var selectedUsers: [UserViewModel] = []
-    public var filteredUsers: ObservableObject<[UserViewModel]?> = ObservableObject(nil)
+    private var selectedBroadcastUser: [UserViewModel] = []
     
     private let parentVC: UIViewController!
     private let messagesManager = MessagesManager.shared
     private var didFetchIsExpired = false
     
-    
+    public var isBroadcastSelection: BroadcastType?
+    public var filteredUsers: ObservableObject<[UserViewModel]?> = ObservableObject(nil)
+
     init(parentVC: UIViewController) {
         self.parentVC = parentVC
         
@@ -43,12 +50,17 @@ class UsersListViewModel {
         }
     }
     
-    func addSelectedUser(user: UserViewModel) {
-        selectedUsers.append(user)
+    func addOrRemoveSelectedUser(_ userViewModel: UserViewModel) {
+        if let containdUserIndex = selectedBroadcastUser.firstIndex(where: { $0.userId == userViewModel.userId }) {
+            selectedBroadcastUser.remove(at: containdUserIndex)
+        } else {
+            selectedBroadcastUser.append(userViewModel)
+        }
     }
-    func removeSelectedUser(user: UserViewModel) {
-        selectedUsers.removeAll(where: { $0.userId == user.userId })
+    func removeAllbroadcastUsers() {
+        selectedBroadcastUser.removeAll()
     }
+    
     //MARK: - Getters
     var chatsCount: Int? {
         filteredUsers.value?.count
@@ -148,9 +160,17 @@ class UsersListViewModel {
     }
     
     //MARK: - Broadcast message
+    public func brodcartAllUsers() {
+        guard let filteredUsers = filteredUsers.value else { return }
+        selectedBroadcastUser = filteredUsers
+    }
+    public func removeBrodcastSelection() {
+        selectedBroadcastUser = []
+        originalUsers?.forEach { $0.shouldBroadcast = false }
+    }
     public func sendBroadcastMessage(text: String) {
-        guard let usersChats = filteredUsers.value else { return }
-        MessagesManager.shared.postBroadcast(text: text, for: usersChats)
+        guard !selectedBroadcastUser.isEmpty else { return }
+        MessagesManager.shared.postBroadcast(text: text, for: selectedBroadcastUser)
     }
     
     //MARK: - Fetch data
@@ -166,7 +186,7 @@ class UsersListViewModel {
                         //Happens on data base live changes
                         //If user exist in the list will update its latest message and latest seen
                         //Else add the user
-                        if var oldChat = users.first(where: { $0.userId == chat.userId }) {
+                        if let oldChat = users.first(where: { $0.userId == chat.userId }) {
                             oldChat.latestMessage = chat.latestMessage
                             oldChat.lastSeenMessageDate = chat.lastSeenMessageDate
                         } else {

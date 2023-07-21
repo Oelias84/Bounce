@@ -107,10 +107,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="300" distribution="fillEqually" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="QBo-62-43N">
-                                <rect key="frame" x="256" y="35.5" width="64" height="40"/>
+                                <rect key="frame" x="256" y="40.5" width="64" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6z-qF-fPd">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="0.0" y="1" width="28.5" height="28.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="I6z-qF-fPd" secondAttribute="height" multiplier="1:1" id="EmA-aT-o0u"/>
                                             <constraint firstAttribute="width" constant="40" id="JHS-2f-6Hu"/>
@@ -124,7 +124,7 @@
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.forward" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ejk-KH-loI">
-                                        <rect key="frame" x="51.5" y="7" width="12.5" height="26.5"/>
+                                        <rect key="frame" x="34" y="2" width="30" height="26.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="JUS-Qm-0z3"/>
                                             <constraint firstAttribute="width" constant="30" id="eqc-uT-gqI"/>
@@ -138,6 +138,7 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="QBo-62-43N" secondAttribute="trailing" id="4pm-xm-uMT"/>
+                            <constraint firstItem="ZHe-DE-5XH" firstAttribute="leading" secondItem="Dr9-db-OgR" secondAttribute="leading" id="WNP-SS-aDY"/>
                         </constraints>
                     </stackView>
                 </subviews>

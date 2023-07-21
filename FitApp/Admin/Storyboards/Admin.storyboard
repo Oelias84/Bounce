@@ -71,14 +71,25 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem image="bubble.left.and.bubble.right.fill" catalog="system" id="pYN-LX-C2H">
-                                <connections>
-                                    <action selector="broadcastButtonAction:" destination="Qg4-fl-pb9" id="2Kp-6B-iRj"/>
-                                </connections>
+                            <barButtonItem title="Item" width="7" style="plain" id="dyG-nk-gMm" userLabel="Broadcast Bar Button Item">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="502-gS-WaV">
+                                    <rect key="frame" x="356" y="5" width="54" height="34"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal">
+                                        <color key="titleColor" name="incomingAudioMessageTint"/>
+                                        <imageReference key="image" image="bubble.left.and.bubble.right.fill" catalog="system" symbolScale="large"/>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="semibold"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="broadcastButtonAction:" destination="Qg4-fl-pb9" eventType="touchUpInside" id="cv2-gE-8lV"/>
+                                    </connections>
+                                </button>
+                                <color key="tintColor" systemColor="systemIndigoColor"/>
                             </barButtonItem>
-                            <barButtonItem style="plain" id="dyG-nk-gMm">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="502-gS-WaV">
-                                    <rect key="frame" x="313" y="11" width="27" height="22"/>
+                            <barButtonItem style="plain" id="x3y-Ad-YfV" userLabel="Filtter Bar Button Item">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lxR-Us-qDL">
+                                    <rect key="frame" x="321" y="11" width="27" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal">
@@ -86,14 +97,14 @@
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="semibold"/>
                                     </state>
                                 </button>
+                                <color key="tintColor" systemColor="systemIndigoColor"/>
                             </barButtonItem>
-                            <barButtonItem style="plain" id="9AJ-oe-4YS">
+                            <barButtonItem style="plain" id="9AJ-oe-4YS" userLabel="Active Bar Button Item">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RHT-hW-rRq">
-                                    <rect key="frame" x="207.5" y="9" width="97.5" height="26.5"/>
+                                    <rect key="frame" x="215.5" y="9" width="97.5" height="26.5"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" title="רק פעילים">
-                                        <color key="titleColor" name="AccentColor"/>
                                         <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="semibold"/>
                                     </state>
@@ -104,11 +115,13 @@
                                         <action selector="filterExpiredButtonAction:" destination="Qg4-fl-pb9" eventType="touchUpInside" id="xOx-bL-uwi"/>
                                     </connections>
                                 </button>
+                                <color key="tintColor" systemColor="systemIndigoColor"/>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="filerButtonView" destination="502-gS-WaV" id="ReX-kL-iZ8"/>
+                        <outlet property="broadcastButtonView" destination="502-gS-WaV" id="zTg-77-QXr"/>
+                        <outlet property="filerButtonView" destination="lxR-Us-qDL" id="tWf-cW-A7u"/>
                         <outlet property="filterExpiredButtonView" destination="RHT-hW-rRq" id="cup-lj-Ipr"/>
                         <outlet property="tableView" destination="vDv-sv-UoL" id="9CW-Ch-gRj"/>
                         <outlet property="upButtonView" destination="wCX-t5-brR" id="NkE-ap-kdg"/>
@@ -521,11 +534,14 @@
         <image name="line.3.horizontal.decrease" catalog="system" width="128" height="73"/>
         <image name="message" catalog="system" width="128" height="116"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
-        <namedColor name="AccentColor">
-            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="incomingAudioMessageTint">
+            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

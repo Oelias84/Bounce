@@ -7,9 +7,10 @@
 
 import Foundation
 
-struct UserViewModel: Comparable {
+class UserViewModel: Comparable {
     
     private let chat: Chat
+    var shouldBroadcast = false
     
     init(_ chat: Chat) {
         self.chat = chat
@@ -82,6 +83,7 @@ struct UserViewModel: Comparable {
     var pushToken: [String] {
         chat.pushTokens ?? []
     }
+    
     static func == (lhs: UserViewModel, rhs: UserViewModel) -> Bool {
         false
     }

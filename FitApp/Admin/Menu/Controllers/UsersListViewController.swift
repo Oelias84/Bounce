@@ -15,6 +15,7 @@ class UsersListViewController: UIViewController {
     @IBOutlet weak var upButtonView: UIButton!
     @IBOutlet weak var filerButtonView: UIButton!
     @IBOutlet weak var filterExpiredButtonView: UIButton!
+    @IBOutlet weak var broadcastButtonView: UIButton!
     
     private var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
@@ -44,9 +45,6 @@ class UsersListViewController: UIViewController {
         bindViewModel()
         setupSearchBar()
     }
-    @objc func yourMethodName() {
-        print("Cancel button tap")
-    }
     
     @IBAction func upButtonAction(_ sender: Any) {
         let indexPath = IndexPath(row: 0, column: 0)
@@ -56,7 +54,11 @@ class UsersListViewController: UIViewController {
         dismiss(animated: true)
     }
     @IBAction func broadcastButtonAction(_ sender: Any) {
-        presentTextFieldAlert(withTitle: "מה תרצו לכתוב?", withMessage: "", options: "שלח", "ביטול")
+        if viewModel.isBroadcastSelection == nil {
+            presentBroadcastSheet()
+        } else {
+            presentTextFieldAlert(withTitle: "מה תרצו לכתוב?", withMessage: "", options: "שלח", "ביטול")
+        }
     }
     @IBAction func filterExpiredButtonAction(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -101,13 +103,34 @@ extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.adminUserMenuCell) as! AdminUserMenuTableViewCell
         let cellViewModel = viewModel.userViewModel(row: indexPath.row)
         
+        cell.delegate = self
         upButtonAnimat(indexPath: indexPath)
         cell.configure(with: cellViewModel)
+        animateCellBroadcastButton(for: cell)
+        
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let userData = viewModel.userViewModel(row: indexPath.row).userDetailsViewModel
         moveToUserDetails(userData: userData)
+    }
+    
+    func animateCellBroadcastButton(for cell: AdminUserMenuTableViewCell) {
+        if self.viewModel.isBroadcastSelection == .selective {
+            UIView.animate(withDuration: 0.2) {
+                cell.broadcastButton.isHidden = false
+            }
+            UIView.animate(withDuration: 0.1, delay: 0.1) {
+                cell.broadcastButton.alpha = 1
+            }
+        } else {
+            UIView.animate(withDuration: 0.1) {
+                cell.broadcastButton.alpha = 0
+            }
+            UIView.animate(withDuration: 0.3) {
+                cell.broadcastButton.isHidden = true
+            }
+        }
     }
 }
 
@@ -117,8 +140,14 @@ extension UsersListViewController: PopupAlertViewDelegate {
         if let text = textFieldValue {
             viewModel.sendBroadcastMessage(text: text)
         }
+        viewModel.removeBrodcastSelection()
+        viewModel.isBroadcastSelection = nil
+        changeBrodcastButtonState()
     }
     func cancelButtonTapped(alertNumber: Int) {
+        viewModel.removeBrodcastSelection()
+        viewModel.isBroadcastSelection = nil
+        changeBrodcastButtonState()
         return
     }
     func thirdButtonTapped(alertNumber: Int) {
@@ -129,7 +158,8 @@ extension UsersListViewController: PopupAlertViewDelegate {
 //MARK: - Functions
 extension UsersListViewController {
     
-    fileprivate func setupView() {
+    private func setupView() {
+        filterExpiredButtonView.setTitleColor(.blue, for: .normal)
         filterExpiredButtonView.isSelected = viewModel.showOnlyActive
         
         if #available(iOS 14.0, *) {
@@ -140,7 +170,7 @@ extension UsersListViewController {
         }
         tableView.register(UINib(nibName: K.NibName.adminUserMenuTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.adminUserMenuCell)
     }
-    fileprivate func bindViewModel() {
+    private func bindViewModel() {
         viewModel.filteredUsers.bind {
             users in
             if users != nil {
@@ -154,18 +184,18 @@ extension UsersListViewController {
             }
         }
     }
-    fileprivate func setupSearchBar() {
+    private func setupSearchBar() {
         searchController.searchBar.placeholder = "חיפוש משתמשים"
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
-    fileprivate func moveToUserDetails(userData: UserDetailsViewModel) {
+    private func moveToUserDetails(userData: UserDetailsViewModel) {
         let sender: [String: UserDetailsViewModel?] = ["userDetailsViewModel": userData]
         performSegue(withIdentifier: K.SegueId.moveToUserDetails, sender: sender)
     }
-    fileprivate func upButtonAnimat(indexPath: IndexPath) {
+    private func upButtonAnimat(indexPath: IndexPath) {
         if indexPath.row > 20 {
             upButtonView.isHidden = false
             UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut) {
@@ -179,8 +209,42 @@ extension UsersListViewController {
             }
         }
     }
+    private func changeBrodcastButtonState() {
+        DispatchQueue.main.async {
+            if self.viewModel.isBroadcastSelection != nil {
+                self.broadcastButtonView.setImage(nil, for: .normal)
+                self.broadcastButtonView.setTitle("להודעה", for: .normal)
+                self.broadcastButtonView.setTitleColor(.blue, for: .normal)
+            } else {
+                self.broadcastButtonView.setImage(UIImage(systemName: "bubble.left.and.bubble.right.fill"), for: .normal)
+                self.broadcastButtonView.setTitle(nil, for: .normal)
+            }
+            self.tableView.reloadData()
+        }
+    }
     
-    fileprivate func presentTextFieldAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
+    private func presentBroadcastSheet() {
+        let sheetAlert = UIAlertController(title: "Broad Cast", message: nil, preferredStyle: .actionSheet)
+        
+        let allFillterdOption = UIAlertAction(title: "כל המשתמשים", style: .default) { _ in
+            self.viewModel.isBroadcastSelection = .allFilterd
+            self.viewModel.brodcartAllUsers()
+            self.changeBrodcastButtonState()
+        }
+        let selectionOption = UIAlertAction(title: "בחירת משתמשים", style: .default) { _ in
+            self.viewModel.isBroadcastSelection = .selective
+            self.changeBrodcastButtonState()
+        }
+        
+        let cancellButton = UIAlertAction(title: "ביטול", style: .cancel)
+        
+        sheetAlert.addAction(allFillterdOption)
+        sheetAlert.addAction(selectionOption)
+        sheetAlert.addAction(cancellButton)
+        
+        present(sheetAlert, animated: true)
+    }
+    private func presentTextFieldAlert(withTitle title: String? = nil, withMessage message: String, options: (String)...) {
         let storyboard = UIStoryboard(name: K.NibName.popupAlertView, bundle: nil)
         let customAlert = storyboard.instantiateViewController(identifier: K.NibName.popupAlertView) as! PopupAlertView
         
@@ -199,7 +263,14 @@ extension UsersListViewController {
         if options.count == 3 {
             customAlert.doNotShowText = options.last
         }
+        
         present(customAlert, animated: true, completion: nil)
     }
 }
 
+extension UsersListViewController: AdminUserMenuTableViewCellDelegate {
+    
+    func broadcastButtonTapped(userViewModel: UserViewModel) {
+        viewModel.addOrRemoveSelectedUser(userViewModel)
+    }
+}
