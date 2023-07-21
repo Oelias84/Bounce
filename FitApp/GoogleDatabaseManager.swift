@@ -295,13 +295,14 @@ final class GoogleDatabaseManager {
 				
 			case "TEXT":
 				if let url = findIfURLExistIn(content) {
-					let attributedString = NSMutableAttributedString(string: content)
-					attributedString.addAttribute(.link, value: content,
-												  range: NSRange(location: 0, length: Array(url.absoluteString).count))
-					print(attributedString)
-					let linkedItem = LinkedItem(text: "!ליחצו על הלינק", attributedText: attributedString, url: url,
-												title: url.absoluteString, teaser: "ליחצו על הלינק",
-												thumbnailImage: UIImage(systemName: "safari")!)
+                    let thumbnail = UIImage(systemName: "safari")!
+                    let textWithoutURL = content.deletingPrefix(url.absoluteString)
+                    
+                    let linkedItem = LinkedItem(text: textWithoutURL,
+                                                attributedText: nil, url: url,
+												title: "ליחצו כדי לעבור ללינק", teaser: "",
+												thumbnailImage: thumbnail)
+                    
 					kind = .linkPreview(linkedItem)
 				} else {
 					kind = .text(content)
@@ -491,4 +492,10 @@ extension MessageKind {
 			return "CUSTOM"
 		}
 	}
+}
+extension String {
+    func deletingPrefix(_ prefix: String) -> String {
+        guard self.hasPrefix(prefix) else { return self }
+        return String(self.dropFirst(prefix.count))
+    }
 }
