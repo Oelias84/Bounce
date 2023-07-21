@@ -141,14 +141,21 @@ extension UsersListViewController: PopupAlertViewDelegate {
             viewModel.sendBroadcastMessage(text: text)
         }
         viewModel.removeBrodcastSelection()
-        viewModel.isBroadcastSelection = nil
         changeBrodcastButtonState()
+        viewModel.isBroadcastSelection = nil
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     func cancelButtonTapped(alertNumber: Int) {
         viewModel.removeBrodcastSelection()
-        viewModel.isBroadcastSelection = nil
         changeBrodcastButtonState()
-        return
+        viewModel.isBroadcastSelection = nil
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     func thirdButtonTapped(alertNumber: Int) {
         UserProfile.defaults.showQaAlert = false
@@ -191,10 +198,6 @@ extension UsersListViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
-    private func moveToUserDetails(userData: UserDetailsViewModel) {
-        let sender: [String: UserDetailsViewModel?] = ["userDetailsViewModel": userData]
-        performSegue(withIdentifier: K.SegueId.moveToUserDetails, sender: sender)
-    }
     private func upButtonAnimat(indexPath: IndexPath) {
         if indexPath.row > 20 {
             upButtonView.isHidden = false
@@ -219,8 +222,12 @@ extension UsersListViewController {
                 self.broadcastButtonView.setImage(UIImage(systemName: "bubble.left.and.bubble.right.fill"), for: .normal)
                 self.broadcastButtonView.setTitle(nil, for: .normal)
             }
-            self.tableView.reloadData()
         }
+    }
+    
+    private func moveToUserDetails(userData: UserDetailsViewModel) {
+        let sender: [String: UserDetailsViewModel?] = ["userDetailsViewModel": userData]
+        performSegue(withIdentifier: K.SegueId.moveToUserDetails, sender: sender)
     }
     
     private func presentBroadcastSheet() {
@@ -230,10 +237,16 @@ extension UsersListViewController {
             self.viewModel.isBroadcastSelection = .allFilterd
             self.viewModel.brodcartAllUsers()
             self.changeBrodcastButtonState()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
         let selectionOption = UIAlertAction(title: "בחירת משתמשים", style: .default) { _ in
             self.viewModel.isBroadcastSelection = .selective
             self.changeBrodcastButtonState()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
         
         let cancellButton = UIAlertAction(title: "ביטול", style: .cancel)

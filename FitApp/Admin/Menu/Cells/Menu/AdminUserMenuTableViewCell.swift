@@ -58,8 +58,6 @@ extension AdminUserMenuTableViewCell {
         isExpiredImageView.image = nil
         isExpiredImageView.tintColor = nil
         
-        broadcastButton.isSelected = false
-
         userImageView.alpha = 0.0
         animator?.stopAnimation(true)
         cancellable?.cancel()
