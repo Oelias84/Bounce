@@ -98,7 +98,7 @@ extension ConsumptionManager {
     private func TDEE(gender: Gender, naturalMenu: Bool, weight: Double, fatPercentage: Double, Kilometer: Double?, lifeStyle: Double?, numberOfTrainings: Int) -> Double? {
 		
 		let LBM = weight * ((100 - fatPercentage) / 100)
-        let BMR = (LBM * 22.0) + (naturalMenu ? 0 : 500.0)
+        let BMR = (LBM * 22.0) + (naturalMenu ? 500.0 : 0)
 		
 		var EAT: Double {
 			switch gender {

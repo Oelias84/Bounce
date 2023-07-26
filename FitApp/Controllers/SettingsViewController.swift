@@ -146,12 +146,12 @@ extension SettingsViewController: SettingsCheckboxTableViewCellDelegate {
         presentOkAlert(withTitle: StaticStringsManager.shared.getGenderString?[32] ?? "" ,withMessage: "Enter a massage here")
     }
     func checkboxButtonAction(_ sender: UIButton) {
-//        if userData.naturalMenu == nil {
-//            UserProfile.defaults.naturalMenu = true
-//        } else {
-//            userData.naturalMenu?.toggle()
-//        }
-//        UserProfile.updateServer()
+        if UserProfile.defaults.naturalMenu == nil {
+            UserProfile.defaults.naturalMenu = true
+        } else {
+            UserProfile.defaults.naturalMenu!.toggle()
+        }
+        UserProfile.updateServer()
     }
 }
 extension SettingsViewController: SettingsStepperViewCellDelegate {
