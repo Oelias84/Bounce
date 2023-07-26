@@ -6,19 +6,8 @@ target 'FitApp' do
   use_frameworks!
 
   # Pods for FitApp
-	
-#		pod 'MessageKit'
-#    pod 'Firebase/Auth'
-#    pod 'Firebase/Core'
-#		pod 'Firebase/Storage'
-#		pod 'Firebase/Database'
-#    pod 'Firebase/Firestore'
-#		pod 'Firebase/Analytics'
-#		pod 'Firebase/Messaging'
-#    pod 'FirebaseFirestoreSwift'
-    
+  
 		pod 'SpreadsheetView'
-#    pod 'BulletinBoard'
     pod 'DateToolsSwift'
 		pod 'CropViewController'
 		pod 'JGProgressHUD'
@@ -26,7 +15,6 @@ target 'FitApp' do
 		pod 'MKRingProgressView'
 		pod 'Charts'
 		pod 'GMStepper'
-#		pod 'BetterSegmentedControl', '~> 1.3'
 		
   target 'FitAppTests' do
     inherit! :search_paths
