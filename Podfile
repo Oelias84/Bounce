@@ -13,7 +13,7 @@ target 'FitApp' do
 		pod 'JGProgressHUD'
 		pod 'SDWebImage', '~> 5.0'
 		pod 'MKRingProgressView'
-		pod 'Charts', '~> 4.1.0'
+		pod 'Charts'
 		pod 'BetterSegmentedControl', '~> 1.3'
 		
   target 'FitAppTests' do

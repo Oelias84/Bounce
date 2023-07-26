@@ -6,6 +6,7 @@
 //
 
 import Charts
+import Foundation
 
 @objc(ChartFormatter)
 class ChartFormatter: NSObject, AxisValueFormatter {
