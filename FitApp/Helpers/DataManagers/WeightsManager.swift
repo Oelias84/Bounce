@@ -14,9 +14,9 @@ class WeightsManager {
 	static let shared = WeightsManager()
 	fileprivate var googleService = GoogleApiManager()
 	
-	var weights: ObservableObject<[Weight]?> = ObservableObject(nil)
-	var splittedWeeksWeightsPeriod: ObservableObject<[WeightPeriod]?> = ObservableObject(nil)
-	var splittedMonthsWeightsPeriod: ObservableObject<[WeightPeriod]?> = ObservableObject(nil)
+	var weights: UiKitObservableObject<[Weight]?> = UiKitObservableObject(nil)
+	var splittedWeeksWeightsPeriod: UiKitObservableObject<[WeightPeriod]?> = UiKitObservableObject(nil)
+	var splittedMonthsWeightsPeriod: UiKitObservableObject<[WeightPeriod]?> = UiKitObservableObject(nil)
 	
 	init(userID: String? = nil) {
 		if let userID = userID {

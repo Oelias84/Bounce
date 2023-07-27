@@ -10,7 +10,7 @@ import Foundation
 final class UserCalorieProgressViewModel {
 	
 	var userID: String!
-	var userProgress: ObservableObject<[CaloriesProgressState]?> = ObservableObject(nil)
+	var userProgress: UiKitObservableObject<[CaloriesProgressState]?> = UiKitObservableObject(nil)
 	
 	init(userID: String) {
 		self.userID = userID

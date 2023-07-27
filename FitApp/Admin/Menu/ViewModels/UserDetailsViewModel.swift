@@ -11,7 +11,7 @@ final class UserDetailsViewModel {
 	
 	let userData: Chat
 	let googleManager = GoogleApiManager.shared
-	var userDetails: ObservableObject<ServerUserData?> = ObservableObject(nil)
+	var userDetails: UiKitObservableObject<ServerUserData?> = UiKitObservableObject(nil)
 	
 	init(userData: Chat) {
 		self.userData = userData

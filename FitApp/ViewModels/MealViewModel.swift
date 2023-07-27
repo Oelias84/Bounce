@@ -18,7 +18,7 @@ class MealViewModel: NSObject {
 	
 	static let shared = MealViewModel()
 	private let consumptionManager = ConsumptionManager.shared
-	var meals: ObservableObject<[Meal]?> = ObservableObject(nil)
+	var meals: UiKitObservableObject<[Meal]?> = UiKitObservableObject(nil)
 	
 	private var currentMealDate: Date?
 	let mealManager = MealManager.shared

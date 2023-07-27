@@ -12,7 +12,7 @@ import DateToolsSwift
 class WeightsViewModel {
 	
 	var selectedDate: Date!
-	var splittedWeights: ObservableObject<[WeightPeriod]?> = ObservableObject(nil)
+	var splittedWeights: UiKitObservableObject<[WeightPeriod]?> = UiKitObservableObject(nil)
 	
 	fileprivate var weightsManager: WeightsManager!
 	
@@ -20,7 +20,7 @@ class WeightsViewModel {
 		selectedDate = Date().onlyDate
 		
 		if userUID != nil {
-			splittedWeights = ObservableObject(nil)
+			splittedWeights = UiKitObservableObject(nil)
 			weightsManager = WeightsManager(userID: userUID)
 			weightsManager.splittedWeeksWeightsPeriod.bind { data in
 				if data != nil {

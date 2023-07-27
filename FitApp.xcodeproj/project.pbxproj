@@ -130,7 +130,7 @@
 		7CAE9B40284E333D00B409E9 /* UserProgressDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAE9B3F284E333D00B409E9 /* UserProgressDetailsViewModel.swift */; };
 		7CB0E179278775B400D6EDA5 /* ChatContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */; };
 		7CB0E17B2787764B00D6EDA5 /* LoginRegister.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */; };
-		7CB37011283570ED0010E8EC /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB37010283570ED0010E8EC /* ObservableObject.swift */; };
+		7CB37011283570ED0010E8EC /* UiKitObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB37010283570ED0010E8EC /* UiKitObservableObject.swift */; };
 		7CB37013283573430010E8EC /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CB37012283573430010E8EC /* Admin.storyboard */; };
 		7CB370162835767A0010E8EC /* UsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB370152835767A0010E8EC /* UsersListViewController.swift */; };
 		7CB37018283576FA0010E8EC /* UsersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB37017283576FA0010E8EC /* UsersListViewModel.swift */; };
@@ -366,7 +366,7 @@
 		7CAE9B3F284E333D00B409E9 /* UserProgressDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProgressDetailsViewModel.swift; sourceTree = "<group>"; };
 		7CB0E178278775B400D6EDA5 /* ChatContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatContainerViewController.swift; sourceTree = "<group>"; };
 		7CB0E17A2787764B00D6EDA5 /* LoginRegister.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginRegister.storyboard; sourceTree = "<group>"; };
-		7CB37010283570ED0010E8EC /* ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
+		7CB37010283570ED0010E8EC /* UiKitObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiKitObservableObject.swift; sourceTree = "<group>"; };
 		7CB37012283573430010E8EC /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
 		7CB370152835767A0010E8EC /* UsersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewController.swift; sourceTree = "<group>"; };
 		7CB37017283576FA0010E8EC /* UsersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListViewModel.swift; sourceTree = "<group>"; };
@@ -854,7 +854,7 @@
 				7C149C7825D817DD00B0864F /* PhotoViewerViewController.swift */,
 				7CE086262761482A00BF3CF3 /* ProjectColors.swift */,
 				7CBBF1EC28197A8600EE55F1 /* IAPManager.swift */,
-				7CB37010283570ED0010E8EC /* ObservableObject.swift */,
+				7CB37010283570ED0010E8EC /* UiKitObservableObject.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1727,7 +1727,7 @@
 				7C89A9FB256D69CA009AD87C /* AppDelegate.swift in Sources */,
 				B368E07F25A8819100BD1937 /* Key.swift in Sources */,
 				7CB9ADE5268B12290009B42A /* ChartFormatter.swift in Sources */,
-				7CB37011283570ED0010E8EC /* ObservableObject.swift in Sources */,
+				7CB37011283570ED0010E8EC /* UiKitObservableObject.swift in Sources */,
 				7C74350825CDBB4C00D33A9A /* Message.swift in Sources */,
 				B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */,
 				B368E08725A8820E00BD1937 /* PropertyListValue.swift in Sources */,

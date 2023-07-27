@@ -10,7 +10,7 @@ import Foundation
 final class UserMealsViewModel {
 	
 	var userID: String!
-	var meals: ObservableObject<[Meal]?> = ObservableObject(nil)
+	var meals: UiKitObservableObject<[Meal]?> = UiKitObservableObject(nil)
 	
 	init(userID: String) {
 		self.userID = userID

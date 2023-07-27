@@ -24,7 +24,7 @@ class MessagesManager {
     fileprivate let googleFirestore = GoogleApiManager.shared
     fileprivate let googleStorageManager = GoogleStorageManager.shared
     
-    var chats: ObservableObject<[Chat]> = ObservableObject([Chat]())
+    var chats: UiKitObservableObject<[Chat]> = UiKitObservableObject([Chat]())
     
     private let userId = Auth.auth().currentUser?.uid
     private let userEmail = UserProfile.defaults.email

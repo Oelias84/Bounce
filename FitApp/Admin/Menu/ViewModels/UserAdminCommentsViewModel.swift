@@ -9,7 +9,7 @@ import Foundation
 
 class UserAdminCommentsViewModel {
 	
-	var comments: ObservableObject<[UserAdminComment]?> = ObservableObject(nil)
+	var comments: UiKitObservableObject<[UserAdminComment]?> = UiKitObservableObject(nil)
 	private let userUID: String!
 	
  	init(userUID: String) {

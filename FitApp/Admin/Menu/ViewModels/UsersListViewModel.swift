@@ -38,7 +38,7 @@ class UsersListViewModel {
     private var didFetchIsExpired = false
     
     public var isBroadcastSelection: BroadcastType?
-    public var filteredUsers: ObservableObject<[UserViewModel]?> = ObservableObject(nil)
+    public var filteredUsers: UiKitObservableObject<[UserViewModel]?> = UiKitObservableObject(nil)
 
     init(parentVC: UIViewController) {
         self.parentVC = parentVC
