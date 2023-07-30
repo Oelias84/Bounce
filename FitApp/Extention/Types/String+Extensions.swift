@@ -173,8 +173,14 @@ extension String {
 	}
 }
 
+extension String {
+    
+    static let noInformation = "אין מידע"
+}
+
 extension StringProtocol {
 	var words: [SubSequence] {
 		return split { !$0.isLetter }
 	}
 }
+

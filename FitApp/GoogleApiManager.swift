@@ -118,7 +118,47 @@ struct GoogleApiManager {
 			})
 		}
 	}
-	
+    
+    //MARK: - Program Orders
+    func getCurrentOrder(userUID: String? = nil, completion: @escaping (Result<CurentOrderModel, Error>) -> Void) {
+        do {
+            db.collection("users").document(userUID ?? Auth.auth().currentUser!.uid).collection("profile-data").document("order-data").getDocument(source: .default, completion: { (data, error) in
+                
+                if let error = error {
+                    print(error)
+                } else if let data = data {
+                    
+                    do {
+                        let cureentOrder = try data.data(as: CurentOrderModel.self)
+                        completion(.success(cureentOrder))
+                    } catch {
+                        print("getWeights Error: ", error)
+                        completion(.failure(error))
+                    }
+                }
+            })
+        }
+    }
+    func getOrder(orderID: String, completion: @escaping (Result<OrderModel, Error>) -> Void) {
+        do {
+            db.collection("orders-data").document(orderID).getDocument(source: .default, completion: { (data, error) in
+                
+                if let error = error {
+                    print(error)
+                } else if let data = data {
+                    
+                    do {
+                        let order = try data.data(as: OrderModel.self)
+                        completion(.success(order))
+                    } catch {
+                        print("getWeights Error: ", error)
+                        completion(.failure(error))
+                    }
+                }
+            })
+        }
+    }
+
 	//MARK: - Comments
 	func updateUserAdminComment(userUID: String, comments: UserAdminCommentsData, completion: ((Error?) -> Void)? = nil) {
 		do {

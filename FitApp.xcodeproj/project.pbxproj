@@ -20,6 +20,13 @@
 		402F2E1A2A2CA8A4002F9DF6 /* BetterSegmentedControl in Frameworks */ = {isa = PBXBuildFile; productRef = 402F2E192A2CA8A4002F9DF6 /* BetterSegmentedControl */; settings = {ATTRIBUTES = (Required, ); }; };
 		402F2E202A2CB0D3002F9DF6 /* BLTNBoard in Frameworks */ = {isa = PBXBuildFile; productRef = 402F2E1F2A2CB0D3002F9DF6 /* BLTNBoard */; };
 		403C098C2A68541F00946DE4 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403C098B2A68541F00946DE4 /* UserViewModel.swift */; };
+		4051EF5A2A729270005627A2 /* OrederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4051EF592A729270005627A2 /* OrederView.swift */; };
+		4051EF5D2A7292A9005627A2 /* OrederView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4051EF5C2A7292A9005627A2 /* OrederView+ViewModel.swift */; };
+		4051EF622A729498005627A2 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4051EF612A729498005627A2 /* OrderModel.swift */; };
+		4051EF652A72A074005627A2 /* CurrentOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4051EF642A72A074005627A2 /* CurrentOrderView.swift */; };
+		4051EF672A72A08F005627A2 /* CurrentOrderView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4051EF662A72A08F005627A2 /* CurrentOrderView+ViewModel.swift */; };
+		4051EF692A72A0A4005627A2 /* CurentOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4051EF682A72A0A4005627A2 /* CurentOrderModel.swift */; };
+		4051EF6C2A75955A005627A2 /* OrderLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4051EF6B2A75955A005627A2 /* OrderLineView.swift */; };
 		40F3BEA12A2C8E2D00E3F41F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7C6E059028FDA8C5001013B9 /* Lottie */; };
 		7C0E4531275E8FA500ECA20E /* MessagesTextManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */; };
 		7C0F703A276CEA5900964004 /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0F7039276CEA5900964004 /* SettingsTableViewCell.xib */; };
@@ -246,6 +253,13 @@
 /* Begin PBXFileReference section */
 		05D96098412DCEF72F6C4753 /* Pods-FitApp-FitAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FitApp-FitAppUITests.release.xcconfig"; path = "Target Support Files/Pods-FitApp-FitAppUITests/Pods-FitApp-FitAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		403C098B2A68541F00946DE4 /* UserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		4051EF592A729270005627A2 /* OrederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrederView.swift; sourceTree = "<group>"; };
+		4051EF5C2A7292A9005627A2 /* OrederView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrederView+ViewModel.swift"; sourceTree = "<group>"; };
+		4051EF612A729498005627A2 /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
+		4051EF642A72A074005627A2 /* CurrentOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentOrderView.swift; sourceTree = "<group>"; };
+		4051EF662A72A08F005627A2 /* CurrentOrderView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentOrderView+ViewModel.swift"; sourceTree = "<group>"; };
+		4051EF682A72A0A4005627A2 /* CurentOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurentOrderModel.swift; sourceTree = "<group>"; };
+		4051EF6B2A75955A005627A2 /* OrderLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderLineView.swift; sourceTree = "<group>"; };
 		4A985BBBC6856DDB3F1AC0F5 /* Pods_FitAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FitAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C0E4530275E8FA500ECA20E /* MessagesTextManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTextManager.swift; sourceTree = "<group>"; };
 		7C0F7039276CEA5900964004 /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
@@ -530,6 +544,52 @@
 				B0AE3B48B417514ACEE1ACAB /* Pods-FitAppTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		4051EF582A7291F6005627A2 /* UserOreders */ = {
+			isa = PBXGroup;
+			children = (
+				4051EF5E2A7293F1005627A2 /* Models */,
+				4051EF5B2A729296005627A2 /* ViewModels */,
+				4051EF632A72A05C005627A2 /* Views */,
+			);
+			path = UserOreders;
+			sourceTree = "<group>";
+		};
+		4051EF5B2A729296005627A2 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4051EF5C2A7292A9005627A2 /* OrederView+ViewModel.swift */,
+				4051EF662A72A08F005627A2 /* CurrentOrderView+ViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4051EF5E2A7293F1005627A2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4051EF612A729498005627A2 /* OrderModel.swift */,
+				4051EF682A72A0A4005627A2 /* CurentOrderModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4051EF632A72A05C005627A2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4051EF6A2A759540005627A2 /* Components */,
+				4051EF592A729270005627A2 /* OrederView.swift */,
+				4051EF642A72A074005627A2 /* CurrentOrderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4051EF6A2A759540005627A2 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				4051EF6B2A75955A005627A2 /* OrderLineView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		7C0F7034276CE99600964004 /* SettingsTableViewCells */ = {
@@ -1083,6 +1143,7 @@
 				7CB3700928354B460010E8EC /* Menu */,
 				7C28129A284B7F20004385DD /* UserMeals */,
 				7CAE9B33284E1C1400B409E9 /* UserProgress */,
+				4051EF582A7291F6005627A2 /* UserOreders */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -1663,6 +1724,7 @@
 				7C7434EB25CD906500D33A9A /* MailComposerViewController.swift in Sources */,
 				7CADF74E278CADFF0020CD83 /* Static.swift in Sources */,
 				B3DB7513259F8270002CF48B /* MealViewModel.swift in Sources */,
+				4051EF672A72A08F005627A2 /* CurrentOrderView+ViewModel.swift in Sources */,
 				7C2BD810267212C7006A1736 /* MealManager.swift in Sources */,
 				B367F17825B1BDF600DF21D7 /* DishesGenerator.swift in Sources */,
 				B368E05C25A79BB700BD1937 /* Data+Extensions.swift in Sources */,
@@ -1676,6 +1738,7 @@
 				B358227825ACA2F800C91295 /* CollapsibleTableViewHeader.swift in Sources */,
 				7C4554F827A0A8A10077791B /* ImageCache.swift in Sources */,
 				B341E230257F972300EE05A7 /* QuestionnairePersonalDetailsViewController.swift in Sources */,
+				4051EF6C2A75955A005627A2 /* OrderLineView.swift in Sources */,
 				7C74AF9E264336EA001D0F5D /* PushNotificationSender.swift in Sources */,
 				B38397F625B4A1BE00154697 /* WorkoutViewModel.swift in Sources */,
 				7C2812A4284B8791004385DD /* UserMealTableViewCell.swift in Sources */,
@@ -1731,7 +1794,9 @@
 				7C74350825CDBB4C00D33A9A /* Message.swift in Sources */,
 				B3B2A247256EDE190052E6C8 /* QuestionnaireFatCollectionViewCell.swift in Sources */,
 				B368E08725A8820E00BD1937 /* PropertyListValue.swift in Sources */,
+				4051EF692A72A0A4005627A2 /* CurentOrderModel.swift in Sources */,
 				B36B718C2577BDF3001CD393 /* ExerciseViewController.swift in Sources */,
+				4051EF5A2A729270005627A2 /* OrederView.swift in Sources */,
 				7C9B345E2583C5B400D30480 /* QuestionnaireSumUpViewController.swift in Sources */,
 				7CFA5FFF262A10E600A3F401 /* MoveDishView.swift in Sources */,
 				7C8F51382671FAE0001FF0EE /* AddMealAlertDishView.swift in Sources */,
@@ -1779,11 +1844,14 @@
 				7CAE9B3A284E1EC800B409E9 /* UserCalorieProgressViewModel.swift in Sources */,
 				7C89AA76256D715F009AD87C /* String+Extensions.swift in Sources */,
 				7C83152525E053B100335601 /* ExerciseCategoryView.swift in Sources */,
+				4051EF652A72A074005627A2 /* CurrentOrderView.swift in Sources */,
 				7C10BA70276BCB9C00B5860C /* UINavigationController+Extensions.swift in Sources */,
 				7C28129E284B8386004385DD /* UserMealsViewController.swift in Sources */,
+				4051EF622A729498005627A2 /* OrderModel.swift in Sources */,
 				B38397EE25B4A12200154697 /* WorkoutTableViewController.swift in Sources */,
 				7CCBB92A28BA5EEF00D7EB87 /* Decimal+Extensions.swift in Sources */,
 				7C54164D269D951C00C22859 /* LoginViewModel.swift in Sources */,
+				4051EF5D2A7292A9005627A2 /* OrederView+ViewModel.swift in Sources */,
 				7CE9BB732871F79300FB3328 /* UserCommentsTableViewCell.swift in Sources */,
 				7CB3701E28358D180010E8EC /* AdminUserMenuTableViewCell.swift in Sources */,
 				7CFE0C0E276936330077D16F /* BounceNavigationBarView.swift in Sources */,

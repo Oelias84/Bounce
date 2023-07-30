@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class UserDetailsViewController: UIViewController {
     
@@ -108,6 +109,13 @@ extension UserDetailsViewController {
         }
     }
     
+    private func moveToUsreOrderVC() {
+        let content = CurrentOrderView(viewModel: CurrentOrderView.ViewModel(userID: self.viewModel.getUserId))
+        let host = UIHostingController(rootView: content)
+        
+        host.modalPresentationStyle = .fullScreen
+        show(host, sender: self)
+    }
     private func moveToChatContainerVC() {
         let chatVC = ChatViewController(viewModel: ChatViewModel(chat: viewModel.getUserChat))
         navigationController?.pushViewController(chatVC, animated: true)
@@ -173,6 +181,8 @@ extension UserDetailsViewController: UITableViewDelegate, UITableViewDataSource 
             moveToUserMealsVC()
         case 2:
             moveToUserCalorieCalculationList()
+        case 3:
+            moveToUsreOrderVC()
         default:
             return
         }
