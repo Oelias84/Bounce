@@ -80,7 +80,11 @@ class SettingsViewModel {
     
     //MARK: - Private Funcs
     private var getNutritiosTitle: String {
-        userData.naturalMenu == true ? "נטרלי" : "חיטוב"
+        if let naturalMenu = userData.naturalMenu {
+            return naturalMenu == true ? "נטרלי" : "חיטוב"
+        } else {
+            return "נטרלי"
+        }
     }
     private var getActivityTitle: String {
         if let steps = userData.steps {
