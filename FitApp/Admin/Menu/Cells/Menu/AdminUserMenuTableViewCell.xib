@@ -138,6 +138,7 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="QBo-62-43N" secondAttribute="trailing" id="4pm-xm-uMT"/>
+                            <constraint firstItem="SqO-Un-LVo" firstAttribute="leading" secondItem="aNu-Xf-2Mf" secondAttribute="trailing" constant="8" symbolic="YES" id="Js0-3R-lGc"/>
                             <constraint firstItem="ZHe-DE-5XH" firstAttribute="leading" secondItem="Dr9-db-OgR" secondAttribute="leading" id="WNP-SS-aDY"/>
                             <constraint firstItem="aNu-Xf-2Mf" firstAttribute="leading" secondItem="ZHe-DE-5XH" secondAttribute="trailing" constant="8" symbolic="YES" id="pCn-6c-khl"/>
                         </constraints>

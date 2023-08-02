@@ -63,22 +63,16 @@ extension AdminUserMenuTableViewCell {
         cancellable?.cancel()
     }
     func animateCellBroadcastButton() {
-        if self.viewModel.shouldShowBrodcast {
-            UIView.animate(withDuration: 0.2) {
+        DispatchQueue.main.async {
+            if self.viewModel.shouldShowBrodcast {
                 self.broadcastButton.isHidden = false
-            }
-            UIView.animate(withDuration: 0.1) {
                 self.broadcastButton.alpha = 1
-            }
-        } else {
-            UIView.animate(withDuration: 0.1) {
+            } else {
                 self.broadcastButton.alpha = 0
-            }
-            UIView.animate(withDuration: 0.3) {
                 self.broadcastButton.isHidden = true
             }
+            self.setNeedsLayout()
         }
-        setNeedsLayout()
     }
     public func configure(with vm: UserViewModel) {
         self.viewModel = vm
