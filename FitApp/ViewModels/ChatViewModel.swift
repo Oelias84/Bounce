@@ -98,7 +98,7 @@ class ChatViewModel {
 		case .text(let string):
             messagesManager.sendTextMessageToChat(userID: chat.userId, isAdmin: chat.isAdmin, userPushToke: chat.pushTokens ?? [], text: string, completion: completion)
 		case .photo(_), .video(_):
-			messagesManager.sendMediaMessageFor(chat: chat, messageKind: messageKind, completion: completion)
+            messagesManager.sendMediaMessageFor(userID: chat.userId, isAdmin: chat.isAdmin, tokens: chat.pushTokens ?? [], messageKind: messageKind, completion: completion)
 		default:
 			break
 		}

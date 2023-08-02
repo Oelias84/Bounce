@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import FirebaseAuth
+import MessageKit
 
 enum UserFilterType {
     
@@ -146,9 +147,6 @@ class UsersListViewModel {
             UIAction(title: "כל היוזרים") { _ in
                 self.filterUsers(with: .allUsers)
             },
-            //			UIAction(title: "הודעות שנקראו") { _ in
-            //				self.filterUsers(with: .readMassages)
-            //			},
             UIAction(title: "לא נראו 3 ימים", image:  UIImage(systemName: "person.fill.questionmark")) { _ in
                 self.filterOrFetch(filter: .notLoggedFor())
             },
@@ -177,10 +175,16 @@ class UsersListViewModel {
         selectedBroadcastUser = []
         originalUsers?.forEach { $0.shouldBroadcast = false }
     }
-    public func sendBroadcastMessage(text: String) {
+    public func sendBroadcastMessage(type: MessageKind, completion: @escaping (Error?) -> ()) {
+        Spinner.shared.show()
         guard !selectedBroadcastUser.isEmpty else { return }
-        MessagesManager.shared.postBroadcast(text: text, for: selectedBroadcastUser)
+        
+        MessagesManager.shared.postBroadcast(messageKind: type, for: selectedBroadcastUser, completion: completion)
     }
+    public func getMediaUrlFor(_ urlString: String, completion: @escaping (URL?) -> ()) {
+        MessagesManager.shared.downloadMediaURL(urlString: urlString, completion: completion)
+    }
+
     
     //MARK: - Fetch data
     fileprivate func getChats(completion: @escaping ()->()) {

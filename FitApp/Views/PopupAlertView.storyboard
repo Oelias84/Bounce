@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sFZ-PF-moY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sFZ-PF-moY">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -138,10 +139,22 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0RD-hD-wzf">
+                                        <rect key="frame" x="267.5" y="15" width="31.5" height="24.5"/>
+                                        <color key="tintColor" name="avatarViewBackground"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="camera" catalog="system" symbolScale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cameraButtonAction:" destination="sFZ-PF-moY" eventType="touchUpInside" id="x8v-io-LQH"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="OEI-P5-R1f" firstAttribute="leading" secondItem="baN-VD-dsB" secondAttribute="leading" constant="12" id="1Kb-yY-pDu"/>
+                                    <constraint firstItem="0RD-hD-wzf" firstAttribute="centerY" secondItem="Q9A-L3-03r" secondAttribute="centerY" id="1z5-j4-zVk"/>
                                     <constraint firstAttribute="bottom" secondItem="cLy-1l-WQ1" secondAttribute="bottom" constant="16" id="341-un-CEI"/>
                                     <constraint firstAttribute="trailing" secondItem="cLy-1l-WQ1" secondAttribute="trailing" constant="45" id="8WS-wP-auS"/>
                                     <constraint firstItem="cLy-1l-WQ1" firstAttribute="top" secondItem="OEI-P5-R1f" secondAttribute="bottom" constant="24" id="FOL-hl-KFq"/>
@@ -149,6 +162,7 @@
                                     <constraint firstAttribute="trailing" secondItem="iJe-te-LIp" secondAttribute="trailing" constant="18" id="Tqb-O7-LFc"/>
                                     <constraint firstAttribute="trailing" secondItem="OEI-P5-R1f" secondAttribute="trailing" constant="12" id="X8a-n8-7ed"/>
                                     <constraint firstItem="iJe-te-LIp" firstAttribute="centerX" secondItem="baN-VD-dsB" secondAttribute="centerX" id="ZTA-sv-s9y"/>
+                                    <constraint firstAttribute="trailing" secondItem="0RD-hD-wzf" secondAttribute="trailing" constant="12" id="bRe-WG-hBu"/>
                                     <constraint firstItem="OEI-P5-R1f" firstAttribute="top" secondItem="iJe-te-LIp" secondAttribute="bottom" constant="12" id="lLV-za-OW5"/>
                                     <constraint firstItem="iJe-te-LIp" firstAttribute="leading" secondItem="baN-VD-dsB" secondAttribute="leading" constant="18" id="lld-Fp-6C7"/>
                                     <constraint firstItem="cLy-1l-WQ1" firstAttribute="leading" secondItem="baN-VD-dsB" secondAttribute="leading" constant="45" id="nw0-eF-IMS"/>
@@ -167,6 +181,7 @@
                     </view>
                     <connections>
                         <outlet property="alertView" destination="baN-VD-dsB" id="ISO-oa-aUt"/>
+                        <outlet property="cameraButton" destination="0RD-hD-wzf" id="GcU-B2-lTF"/>
                         <outlet property="cancelButton" destination="o7C-Xv-K9G" id="Jb5-FO-QML"/>
                         <outlet property="messageLabel" destination="iJe-te-LIp" id="68R-AC-imQ"/>
                         <outlet property="okButton" destination="zYg-vi-d0a" id="MQD-Rj-HDh"/>
@@ -183,14 +198,18 @@
         </scene>
     </scenes>
     <resources>
+        <image name="camera" catalog="system" width="128" height="93"/>
         <namedColor name="ProjectLightGreen">
             <color red="0.28600001335144043" green="0.57599997520446777" blue="0.56099998950958252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="avatarViewBackground">
+            <color red="0.55699998140335083" green="0.55699998140335083" blue="0.57599997520446777" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import AVFoundation
+import AVKit
+import CropViewController
 
 class UsersListViewController: UIViewController {
     
@@ -20,6 +23,7 @@ class UsersListViewController: UIViewController {
     private var isSearchBarEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
     }
+    private let imagePickerController = UIImagePickerController()
     private let searchController = UISearchController(searchResultsController: nil)
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -98,14 +102,14 @@ extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         upButtonAnimat(indexPath: indexPath)
-
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.adminUserMenuCell) as! AdminUserMenuTableViewCell
         let cellViewModel = viewModel.userViewModel(row: indexPath.row)
         
         cell.delegate = self
         cell.configure(with: cellViewModel)
         
-
+        
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -118,8 +122,101 @@ extension UsersListViewController: PopupAlertViewDelegate {
     
     func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
         if let text = textFieldValue {
-            viewModel.sendBroadcastMessage(text: text)
+            viewModel.sendBroadcastMessage(type: .text(text)) {
+                [weak self] error in
+                guard let self = self else { return }
+                
+                if let error = error {
+                    self.presentOkAlert(withTitle: "אופס",withMessage: "שליחת תמונה נכשלה")
+                    print("Error:", error)
+                    return
+                }
+                self.ableInteraction()
+            }
         }
+        dismissBroadcast()
+    }
+    func cancelButtonTapped(alertNumber: Int) {
+        dismissBroadcast()
+    }
+    func thirdButtonTapped(alertNumber: Int) {
+        UserProfile.defaults.showQaAlert = false
+    }
+}
+extension UsersListViewController: PopupAlertViewCameraDelegate {
+    
+    func cameraButtonTapped(alertNumber: Int) {
+        self.presentInputActionSheet()
+    }
+}
+extension UsersListViewController: CropViewControllerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        picker.dismiss(animated: true) {
+            
+            //Image Picker
+            if let image = info[.originalImage] as? UIImage {
+                self.presentCropViewController(image: image, type: .default)
+                
+                //Video Picker
+            } else if let videoUrl = info[.mediaURL] as? URL  {
+                guard let placeholder = MessagesManager.generateThumbnailFrom(videoURL: videoUrl) else { return }
+                let media = Media(url: videoUrl, image: nil, placeholderImage: placeholder, size: .zero)
+                
+                self.disableInteraction()
+                self.viewModel.sendBroadcastMessage(type: .video(media)) {
+                    [weak self] error in
+                    guard let self = self else { return }
+                    if let error = error {
+                        self.presentOkAlert(withTitle: "אופס",withMessage: "שליחת תמונה נכשלה")
+                        print("Error:", error)
+                        return
+                    }
+                    self.ableInteraction()
+                    self.dismissBroadcast()
+                }
+            }
+        }
+    }
+    
+    //If image crop used
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        
+        cropViewController.dismiss(animated: true) {
+            let media = Media(url: nil, image: image, placeholderImage: image, size: .zero)
+            
+            self.disableInteraction()
+            self.viewModel.sendBroadcastMessage(type: .photo(media)) {
+                [weak self] error in
+                guard let self = self else { return }
+                
+                if let error = error {
+                    self.presentOkAlert(withTitle: "אופס",withMessage: "שליחת וידאו נכשלה")
+                    print("Error:", error)
+                    return
+                }
+                self.ableInteraction()
+                self.dismissBroadcast()
+            }
+        }
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+}
+extension UsersListViewController: AdminUserMenuTableViewCellDelegate {
+    
+    func broadcastButtonTapped(userViewModel: UserViewModel) {
+        
+        viewModel.addOrRemoveSelectedUser(userViewModel)
+    }
+}
+
+//MARK: - Functions
+extension UsersListViewController {
+    
+    private func dismissBroadcast() {
         viewModel.removeBrodcastSelection()
         changeBrodcastButtonState()
         viewModel.isBroadcastSelection = nil
@@ -129,25 +226,8 @@ extension UsersListViewController: PopupAlertViewDelegate {
             self.tableView.reloadData()
         }
     }
-    func cancelButtonTapped(alertNumber: Int) {
-        viewModel.removeBrodcastSelection()
-        changeBrodcastButtonState()
-        viewModel.isBroadcastSelection = nil
-
-        DispatchQueue.main.async {
-            self.setupSearchBar()
-            self.tableView.reloadData()
-        }
-    }
-    func thirdButtonTapped(alertNumber: Int) {
-        UserProfile.defaults.showQaAlert = false
-    }
-}
-
-//MARK: - Functions
-extension UsersListViewController {
-    
     private func setupView() {
+        imagePickerController.delegate = self
         filterExpiredButtonView.setTitleColor(.blue, for: .normal)
         filterExpiredButtonView.isSelected = viewModel.showOnlyActive
         
@@ -247,11 +327,14 @@ extension UsersListViewController {
         customAlert.modalTransitionStyle = .crossDissolve
         
         customAlert.delegate = self
+        customAlert.cameraDelegate = self
+        
         customAlert.titleText = title
         customAlert.popupType = .textBox
         customAlert.messageText = message
         customAlert.okButtonText = options[0]
         customAlert.cancelButtonText = options[1]
+        customAlert.cameraButtonIsHidden = false
         
         if options.count == 3 {
             customAlert.doNotShowText = options.last
@@ -260,10 +343,101 @@ extension UsersListViewController {
         present(customAlert, animated: true, completion: nil)
     }
 }
-
-extension UsersListViewController: AdminUserMenuTableViewCellDelegate {
+extension UsersListViewController {
+    @objc private func presentInputActionSheet() {
+        let actionSheet = UIAlertController(title: "ייבוא מדיה",
+                                            message: "בחר סוג מדיה",
+                                            preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "תמונה", style: .default, handler: { [weak self] _ in
+            self?.presentImagePickerActionSheet(imagePicker: self!.imagePickerController) {_ in}
+        }))
+        actionSheet.addAction(UIAlertAction(title: "וידאו", style: .default, handler: { [weak self]  _ in
+            self?.presentVideoInputActionSheet()
+        }))
+        actionSheet.addAction(UIAlertAction(title: "ביטול", style: .cancel, handler: nil))
+        
+        present(actionSheet, animated: true)
+    }
+    private func presentVideoInputActionSheet() {
+        let actionSheet = UIAlertController(title: "יבוא וידאו",
+                                            message: "מהיכן תרצה לייבא?",
+                                            preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "מצלמה", style: .default, handler: { [weak self] _ in
+            
+            let picker = UIImagePickerController()
+            picker.sourceType = .camera
+            picker.delegate = self
+            picker.mediaTypes = ["public.movie"]
+            picker.videoQuality = .typeMedium
+            picker.allowsEditing = true
+            self?.present(picker, animated: true)
+            
+        }))
+        actionSheet.addAction(UIAlertAction(title: "גלריה", style: .default, handler: { [weak self] _ in
+            
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary
+            picker.delegate = self
+            picker.allowsEditing = true
+            picker.mediaTypes = ["public.movie"]
+            picker.videoQuality = .typeMedium
+            self?.present(picker, animated: true)
+            
+        }))
+        actionSheet.addAction(UIAlertAction(title: "ביטול", style: .cancel, handler: nil))
+        
+        present(actionSheet, animated: true)
+    }
     
-    func broadcastButtonTapped(userViewModel: UserViewModel) {
-        viewModel.addOrRemoveSelectedUser(userViewModel)
+    private func presentImageFor(_ urlString: String) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.viewModel.getMediaUrlFor(urlString) {
+                [weak self] url in
+                guard let self = self else {
+                    self?.disableInteraction()
+                    return
+                }
+                self.ableInteraction()
+                
+                DispatchQueue.main.async {
+                    if let url = url {
+                        let photoViewer = PhotoViewerViewController(with: url)
+                        self.parent?.present(photoViewer, animated: true)
+                    } else {
+                        self.presentOkAlert(withTitle: "אופס!", withMessage: "נראה שאין אפשרות להציג תמונה זאת", buttonText: "סגירה")
+                    }
+                }
+            }
+        }
+    }
+    private func presentVideoFor(_ urlString: String) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.viewModel.getMediaUrlFor(urlString) {
+                [weak self] url in
+                guard let self = self else {
+                    self?.disableInteraction()
+                    return
+                }
+                
+                self.ableInteraction()
+                DispatchQueue.main.async {
+                    if let url = url {
+                        let videoVC = AVPlayerViewController()
+                        
+                        videoVC.player = AVPlayer(url: url)
+                        self.parent?.present(videoVC, animated: true)
+                        videoVC.player?.play()
+                    } else {
+                        self.presentOkAlert(withTitle: "אופס!", withMessage: "נראה שהסירטון אינו זמין לצפייה", buttonText: "סגירה")
+                    }
+                }
+            }
+        }
+    }
+    private func disableInteraction() {
+        Spinner.shared.show()
+    }
+    private func ableInteraction() {
+        Spinner.shared.stop()
     }
 }

@@ -16,6 +16,10 @@ enum PopupType {
 	case textField
 }
 
+protocol PopupAlertViewCameraDelegate: AnyObject {
+    func cameraButtonTapped(alertNumber: Int)
+}
+
 protocol PopupAlertViewDelegate: AnyObject {
 	
 	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?)
@@ -40,13 +44,15 @@ class PopupAlertView: UIViewController {
 	@IBOutlet weak var cancelButton: UIButton!
 	@IBOutlet weak var okButton: UIButton!
 	@IBOutlet weak var thirdButton: UIButton!
-	
+    @IBOutlet weak var cameraButton: UIButton!
+    
 	@IBOutlet weak var verticallyConstraint: NSLayoutConstraint!
 	
 	deinit {
 		removeKeyboardListener()
 	}
 	
+    weak var cameraDelegate: PopupAlertViewCameraDelegate?
 	weak var delegate: PopupAlertViewDelegate?
 	
 	var selectedOption = "First"
@@ -58,8 +64,9 @@ class PopupAlertView: UIViewController {
 	var okButtonText: String?
 	var cancelButtonText: String?
 	var doNotShowText: String?
-	
-	var cancelButtonIsHidden: Bool = false
+    
+    var cameraButtonIsHidden = true
+	var cancelButtonIsHidden = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -90,10 +97,11 @@ class PopupAlertView: UIViewController {
 		if cancelButtonText != nil {
 			cancelButton.setTitle(cancelButtonText, for: .normal)
 		}
-		if cancelButtonIsHidden {
-			cancelButton.isHidden = true
-		}
-		if doNotShowText != nil {
+        
+        cancelButton.isHidden = cancelButtonIsHidden
+        cameraButton.isHidden = cameraButtonIsHidden
+		
+        if doNotShowText != nil {
 			thirdButton.isHidden = false
 			thirdButton.tintColor = .red
 			thirdButton.setTitle(doNotShowText, for: .normal)
@@ -127,9 +135,14 @@ class PopupAlertView: UIViewController {
 		self.dismiss(animated: true, completion: nil)
 	}
 	@IBAction func thirdButton(_ sender: UIButton) {
-		delegate?.thirdButtonTapped(alertNumber: alertNumber)
+        delegate?.thirdButtonTapped(alertNumber: alertNumber)
 		self.dismiss(animated: true, completion: nil)
 	}
+    @IBAction func cameraButtonAction(_ sender: UIButton) {
+        self.dismiss(animated: true) {
+            self.cameraDelegate?.cameraButtonTapped(alertNumber: self.alertNumber)
+        }
+    }
 }
 
 //MARK: - Delegates

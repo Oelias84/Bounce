@@ -82,14 +82,16 @@ extension UserAdminCommentsTableViewController {
 		
 		viewModel.comments.bind {
 			data in
-			
+            
 			if data != nil {
 				DispatchQueue.main.async {
 					self.tableView.reloadData()
 					Spinner.shared.stop()
 				}
 			}
-			Spinner.shared.stop()
+            DispatchQueue.main.async {
+                Spinner.shared.stop()
+            }
 		}
 	}
 	private func presentTextFieldAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., alertNumber: Int) {
@@ -115,11 +117,13 @@ extension UserAdminCommentsTableViewController {
 		
 		customAlert.okButtonText = options[0]
 		customAlert.cancelButtonText = options[1]
-		
+        customAlert.cameraButtonIsHidden = false
+        
 		if options.count == 3 {
 			customAlert.doNotShowText = options.last
 		}
-		present(customAlert, animated: true, completion: nil)
+        
+        customAlert.presentOnTop()
 	}
 }
 
@@ -148,4 +152,7 @@ extension UserAdminCommentsTableViewController: PopupAlertViewDelegate  {
 	func thirdButtonTapped(alertNumber: Int) {
 		return
 	}
+    func cameraButtonTapped(alertNumber: Int) {
+        print("Camera")
+    }
 }

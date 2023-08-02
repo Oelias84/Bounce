@@ -71,11 +71,26 @@ extension MessagesManager {
     }
     
     // Post
-    public func postBroadcast(text: String, for users: [UserViewModel]) {
-        for user in users {
-            if user.programState == .expire { return }
-            sendTextMessageToChat(userID: user.userId, isAdmin: user.isAdmin, userPushToke: user.pushToken, text: text) { _ in }
+    public func postBroadcast(messageKind: MessageKind, for users: [UserViewModel], completion: @escaping (Error?) -> ()) {
+        
+        switch messageKind {
+        case .text(let text):
+            for user in users {
+                DispatchQueue.global(qos: .userInteractive).async {
+                    if user.programState == .expire { return }
+                    self.sendTextMessageToChat(userID: user.userId, isAdmin: user.isAdmin, userPushToke: user.pushToken, text: text, completion: completion)
+                }
+            }
+        case .photo(_), .video(_):
+            for user in users {
+                DispatchQueue.global(qos: .userInteractive).async {
+                    self.sendMediaMessageFor(userID: user.userId, isAdmin: true, tokens: user.pushToken, messageKind: messageKind, completion: completion)
+                }
+            }
+        default:
+            break
         }
+
     }
     public func sendTextMessageToChat(userID: String, isAdmin: Bool, userPushToke: [String], text: String, completion: @escaping (Error?) -> ()) {
         
@@ -95,13 +110,12 @@ extension MessagesManager {
             }
         }
     }
-    public func sendMediaMessageFor(chat: Chat, messageKind: MessageKind, completion: @escaping (Error?) -> ()) {
-        
+    public func sendMediaMessageFor(userID: String, isAdmin: Bool, tokens: [String]?, messageKind: MessageKind, completion: @escaping (Error?) -> ()) {
         switch messageKind {
         case .photo(let media):
             guard let image = media.image,
                   let imageData = image.jpegData(compressionQuality: 0.2),
-                  let fileName = remoteFileName(chat: chat, folderName: "messages_images", suffix: ".jpeg") else { return }
+                  let fileName = remoteFileName(userId: userID, folderName: "messages_images", suffix: ".jpeg") else { return }
             
             //Send Photo message
             googleStorageManager.uploadImage(data: imageData, fileName: fileName) {
@@ -113,8 +127,8 @@ extension MessagesManager {
                     guard let placeholder = image.jpegData(compressionQuality: 0.05) else { return }
                     let media = Media(url: nil, image: nil, mediaURLString: fileName, placeholderImage: image, size: .zero)
                     
-                    self.googleManager.sendMessageToChat(userID: chat.userId,
-                                                         isAdmin: chat.isAdmin,
+                    self.googleManager.sendMessageToChat(userID: userID,
+                                                         isAdmin: isAdmin,
                                                          content: "",
                                                          link: fileName,
                                                          previewData: placeholder,
@@ -126,7 +140,7 @@ extension MessagesManager {
                             
                         case .success():
                             completion(nil)
-                            guard let userName = self.userName, let otherUserPushTokens = chat.pushTokens else { return }
+                            guard let userName = self.userName, let otherUserPushTokens = tokens else { return }
                             self.sendNotification(to: otherUserPushTokens, name: userName, text: "הודעת תמונה")
                         case .failure(let error):
                             completion(error)
@@ -140,7 +154,7 @@ extension MessagesManager {
         case .video(let media):
             guard let media = media as? Media,
                   let fileUrl = media.url,
-                  let fileName = remoteFileName(chat: chat, folderName: "messages_videos", suffix: ".mp4") else { return }
+                  let fileName = remoteFileName(userId: userID, folderName: "messages_videos", suffix: ".mp4") else { return }
             
             //Send Video message
             googleStorageManager.uploadVideo(fileUrl: fileUrl, fileName: fileName) {
@@ -152,8 +166,8 @@ extension MessagesManager {
                     guard let placeholder = MessagesManager.generateThumbnailFrom(videoURL: fileUrl) else { return }
                     let media = Media(url: nil, image: nil, mediaURLString: fileName, placeholderImage: placeholder, size: .zero)
                     
-                    self.googleManager.sendMessageToChat(userID: chat.userId,
-                                                         isAdmin: chat.isAdmin,
+                    self.googleManager.sendMessageToChat(userID: userID,
+                                                         isAdmin: isAdmin,
                                                          content: "",
                                                          link: fileName,
                                                          previewData: placeholder.jpegData(compressionQuality: 0.05),
@@ -164,7 +178,7 @@ extension MessagesManager {
                         switch result {
                         case .success():
                             completion(nil)
-                            guard let userName = self.userName, let otherUserPushTokens = chat.pushTokens else { return }
+                            guard let userName = self.userName, let otherUserPushTokens = tokens else { return }
                             self.sendNotification(to: otherUserPushTokens, name: userName, text: "הודעת וידאו")
                         case .failure(let error):
                             completion(error)
@@ -179,8 +193,8 @@ extension MessagesManager {
             return
         }
         
-        func remoteFileName(chat: Chat, folderName: String, suffix: String) -> String? {
-            return "\(chat.userId)/\(folderName)/\(Date().millisecondsSince2020)\(suffix)"
+        func remoteFileName(userId: String, folderName: String, suffix: String) -> String? {
+            return "\(userId)/\(folderName)/\(Date().millisecondsSince2020)\(suffix)"
         }
     }
     
