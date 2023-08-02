@@ -62,9 +62,27 @@ extension AdminUserMenuTableViewCell {
         animator?.stopAnimation(true)
         cancellable?.cancel()
     }
+    func animateCellBroadcastButton() {
+        if self.viewModel.shouldShowBrodcast {
+            UIView.animate(withDuration: 0.2) {
+                self.broadcastButton.isHidden = false
+            }
+            UIView.animate(withDuration: 0.1) {
+                self.broadcastButton.alpha = 1
+            }
+        } else {
+            UIView.animate(withDuration: 0.1) {
+                self.broadcastButton.alpha = 0
+            }
+            UIView.animate(withDuration: 0.3) {
+                self.broadcastButton.isHidden = true
+            }
+        }
+        setNeedsLayout()
+    }
     public func configure(with vm: UserViewModel) {
         self.viewModel = vm
-                
+        
         //User name
         if let userName = viewModel.userName {
             userNameLabel.text = userName
@@ -119,6 +137,7 @@ extension AdminUserMenuTableViewCell {
         
         //Broadcast
         broadcastButton.isSelected = vm.shouldBroadcast
+        animateCellBroadcastButton()
     }
     
     fileprivate func showImage(image: UIImage?) {

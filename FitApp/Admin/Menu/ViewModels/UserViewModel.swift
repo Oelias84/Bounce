@@ -11,6 +11,7 @@ class UserViewModel: Comparable {
     
     private let chat: Chat
     var shouldBroadcast = false
+    var shouldShowBrodcast = false
     
     init(_ chat: Chat) {
         self.chat = chat

@@ -57,6 +57,9 @@ class UsersListViewController: UIViewController {
         if viewModel.isBroadcastSelection == nil {
             presentBroadcastSheet()
         } else {
+            //hide searchbar
+            self.navigationItem.searchController = nil
+            //present text alert
             presentTextFieldAlert(withTitle: "מה תרצו לכתוב?", withMessage: "", options: "שלח", "ביטול")
         }
     }
@@ -68,13 +71,7 @@ class UsersListViewController: UIViewController {
         DispatchQueue.main.async {
             // Update TableView
             self.tableView.reloadData()
-            
-            // Update Menu
-            if #available(iOS 14.0, *) {
-                self.filerButtonView.menu = self.viewModel.filterMenu
-            } else {
-                // Fallback on earlier versions
-            }
+            self.filerButtonView.menu = self.viewModel.filterMenu
         }
     }
 }
@@ -100,37 +97,20 @@ extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
         viewModel.chatsCount ?? 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        upButtonAnimat(indexPath: indexPath)
+
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.adminUserMenuCell) as! AdminUserMenuTableViewCell
         let cellViewModel = viewModel.userViewModel(row: indexPath.row)
         
         cell.delegate = self
-        upButtonAnimat(indexPath: indexPath)
         cell.configure(with: cellViewModel)
-        animateCellBroadcastButton(for: cell)
         
+
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let userData = viewModel.userViewModel(row: indexPath.row).userDetailsViewModel
         moveToUserDetails(userData: userData)
-    }
-    
-    func animateCellBroadcastButton(for cell: AdminUserMenuTableViewCell) {
-        if self.viewModel.isBroadcastSelection == .selective {
-            UIView.animate(withDuration: 0.2) {
-                cell.broadcastButton.isHidden = false
-            }
-            UIView.animate(withDuration: 0.1, delay: 0.1) {
-                cell.broadcastButton.alpha = 1
-            }
-        } else {
-            UIView.animate(withDuration: 0.1) {
-                cell.broadcastButton.alpha = 0
-            }
-            UIView.animate(withDuration: 0.3) {
-                cell.broadcastButton.isHidden = true
-            }
-        }
     }
 }
 
@@ -145,6 +125,7 @@ extension UsersListViewController: PopupAlertViewDelegate {
         viewModel.isBroadcastSelection = nil
         
         DispatchQueue.main.async {
+            self.setupSearchBar()
             self.tableView.reloadData()
         }
     }
@@ -152,8 +133,9 @@ extension UsersListViewController: PopupAlertViewDelegate {
         viewModel.removeBrodcastSelection()
         changeBrodcastButtonState()
         viewModel.isBroadcastSelection = nil
-        
+
         DispatchQueue.main.async {
+            self.setupSearchBar()
             self.tableView.reloadData()
         }
     }
@@ -195,8 +177,9 @@ extension UsersListViewController {
         searchController.searchBar.placeholder = "חיפוש משתמשים"
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
+        searchController.definesPresentationContext = false
+        
         navigationItem.searchController = searchController
-        definesPresentationContext = true
     }
     private func upButtonAnimat(indexPath: IndexPath) {
         if indexPath.row > 20 {
@@ -223,6 +206,9 @@ extension UsersListViewController {
                 self.broadcastButtonView.setTitle(nil, for: .normal)
             }
         }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     private func moveToUserDetails(userData: UserDetailsViewModel) {
@@ -237,16 +223,10 @@ extension UsersListViewController {
             self.viewModel.isBroadcastSelection = .allFilterd
             self.viewModel.brodcartAllUsers()
             self.changeBrodcastButtonState()
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
         }
         let selectionOption = UIAlertAction(title: "בחירת משתמשים", style: .default) { _ in
             self.viewModel.isBroadcastSelection = .selective
             self.changeBrodcastButtonState()
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
         }
         
         let cancellButton = UIAlertAction(title: "ביטול", style: .cancel)

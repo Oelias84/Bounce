@@ -37,7 +37,16 @@ class UsersListViewModel {
     private let messagesManager = MessagesManager.shared
     private var didFetchIsExpired = false
     
-    public var isBroadcastSelection: BroadcastType?
+    public var isBroadcastSelection: BroadcastType? {
+        didSet {
+            if isBroadcastSelection == .selective {
+                originalUsers?.forEach { $0.shouldShowBrodcast = true }
+            } else {
+                originalUsers?.forEach { $0.shouldShowBrodcast = false }
+            }
+            self.filterUsers(with: .allUsers)
+        }
+    }
     public var filteredUsers: UiKitObservableObject<[UserViewModel]?> = UiKitObservableObject(nil)
 
     init(parentVC: UIViewController) {

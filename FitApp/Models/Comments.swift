@@ -32,8 +32,11 @@ class UserAdminComment: Codable, Comparable {
 	}
 	
 	static func < (lhs: UserAdminComment, rhs: UserAdminComment) -> Bool {
-		
-		return lhs.commentDate.fullDateFromString! > rhs.commentDate.fullDateFromString!
+        if let lhsDate = lhs.commentDate.fullDateFromString, let rhsDate = rhs.commentDate.fullDateFromString {
+            return  lhsDate > rhsDate
+        } else {
+            return false
+        }
 	}
 	static func == (lhs: UserAdminComment, rhs: UserAdminComment) -> Bool {
 		true
