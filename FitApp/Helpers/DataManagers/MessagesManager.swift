@@ -217,9 +217,6 @@ extension MessagesManager {
                         
                         switch result {
                         case .success(let programExpirationDate):
-                            if chat.displayName == "אילנה" {
-                                print()
-                            }
                             chat.programExpirationDate = programExpirationDate
                         case .failure(let error):
                             print(error)

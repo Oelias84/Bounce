@@ -178,7 +178,7 @@ struct GoogleApiManager {
 				}
 				
 				do {
-					let adminUserComment = try data.data(as: UserAdminCommentsData.self)
+					let adminUserComment = try data.data(as: UserAdminCommentsData?.self)
 					completion(.success(adminUserComment))
 				} catch {
 					print(error)
@@ -188,7 +188,6 @@ struct GoogleApiManager {
 			}
 		}
 	}
-//=======
     
     //MARK: - ApprovedUsersCheck
     func checkUserApproved(completion: @escaping (Result<Bool, Error>) -> Void) {
@@ -506,35 +505,6 @@ struct GoogleApiManager {
             completion()
         }
     }
-//    func getPreferredWorkouts(completion: @escaping (UserPreferredWorkouts?) -> Void) {
-//        do {
-//            db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("preferred-workout").getDocument(completion: { (data, error) in
-//                if let error = error {
-//                    print("Error in getPreferredWorkouts: ", error)
-//                } else if let data = data {
-//                    do {
-//                        let decodedData = try data.data(as: UserPreferredWorkouts?.self)
-//                        completion(decodedData)
-//                    } catch {
-//                        print("Error in getPreferredWorkouts: ", error)
-//                    }
-//                }
-//            })
-//        }
-//    }
-//    func updatePreferredWorkouts(_ data: UserPreferredWorkouts, completion: @escaping () -> Void) {
-//        do {
-//            try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("preferred-workout").setData(from: data.self, merge: true) { error in
-//                if let error = error {
-//                    print("Error in updatePreferredWorkouts: ", error)
-//                } else {
-//                    completion()
-//                }
-//            }
-//        } catch {
-//            print("Error in updatePreferredWorkouts: ", error)
-//        }
-//    }
     
     //MARK: - Workouts
     //Home Workout
@@ -774,64 +744,6 @@ struct GoogleApiManager {
             print(error)
         }
     }
-    //Workout State
-//    func updateWorkoutState(_ workoutsState: [WorkoutStates]) {
-//        let data = WorkoutStatesData(workoutStatesData: workoutsState)
-//
-//        do {
-//            try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("workout-state").setData(from: data, merge: true)
-//        } catch {
-//            print(error)
-//        }
-//    }
-//    func getWorkoutsState(completion: @escaping (Result<[WorkoutStates]?, Error>) -> Void) {
-//        do {
-//            db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("workout-state").getDocument(completion: { (documentSnapshot, error) in
-//                if let error = error {
-//                    print(error)
-//                } else if let data = documentSnapshot {
-//                    do {
-//                        var workoutStates: [WorkoutStates]? = nil
-//                        let data = try data.data(as: WorkoutStatesData.self)
-//                        workoutStates = data.workoutStatesData
-//                        completion(.success(workoutStates))
-//                    } catch {
-//                        print(error)
-//                        completion(.failure(error))
-//                    }
-//                }
-//            })
-//        }
-//    }
-//    //Exercise State
-//    func updateExercisesState(_ exercisesStates: [ExerciseState]) {
-//        let data = ExercisesStatesData(exercisesStatesData: exercisesStates)
-//
-//        do {
-//            try db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("exercises-state").setData(from: data, merge: true)
-//        } catch {
-//            print(error)
-//        }
-//    }
-//    func getExercisesState(completion: @escaping (Result<[ExerciseState]?, Error>) -> Void) {
-//        do {
-//            db.collection("users").document(Auth.auth().currentUser!.uid).collection("user-workout-data").document("exercises-state").getDocument(completion: { (documentSnapshot, error) in
-//                if let error = error {
-//                    print(error)
-//                } else if let data = documentSnapshot {
-//                    do {
-//                        var workoutStates: [ExerciseState]? = nil
-//                        let data = try data.data(as: ExercisesStatesData.self)
-//                        workoutStates = data.exercisesStatesData
-//                        completion(.success(workoutStates))
-//                    } catch {
-//                        print(error)
-//                        completion(.failure(error))
-//                    }
-//                }
-//            })
-//        }
-//    }
 }
 
 struct DishArray:Codable {
