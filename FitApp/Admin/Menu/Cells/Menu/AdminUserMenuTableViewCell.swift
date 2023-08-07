@@ -115,11 +115,14 @@ extension AdminUserMenuTableViewCell {
         }
         
         //Last seen Image
-        if viewModel.wasSeenLately == true || (viewModel.programState == .expire || viewModel.programState == nil) {
+        if let programState = viewModel.programState, programState == .expire {
             lastSeenImageView.isHidden = true
-        } else {
-            lastSeenImageView.isHidden = false
+        } else if let wasSeenLately = viewModel.wasSeenLately {
             lastSeenImageView.image = UIImage(systemName: "person.fill.questionmark")
+            lastSeenImageView.isHidden = wasSeenLately
+        } else {
+            lastSeenImageView.image = UIImage(systemName: "person.fill.questionmark")
+            lastSeenImageView.isHidden = false
         }
         
         //Message image

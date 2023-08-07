@@ -48,7 +48,7 @@ class UserViewModel: Comparable {
     }
     var wasSeenLately: Bool? {
         if let userLastSeen = chat.userLastSeen,
-           let userLastSeenDate = userLastSeen.fullDateFromStringWithDash {
+           let userLastSeenDate = userLastSeen.dateFromString {
             return Date().onlyDate.subtract(3.days) <= userLastSeenDate
         }
         return nil
