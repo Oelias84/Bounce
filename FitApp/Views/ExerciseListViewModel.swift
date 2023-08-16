@@ -34,8 +34,14 @@ class ExerciseListViewModel: ObservableObject {
 		guard let exerciseNumberToReplace = exerciseNumberToReplace,
 			  let selectedExercise = workout.exercises.first(where: { $0.exerciseToPresent?.exerciseNumber == exerciseNumberToReplace }),
 			  let type = selectedExercise.exerciseToPresent?.type else { return .none }
-		
-		return ExerciseType(rawValue: type) ?? .none
+        
+        #warning("Remove this condition once the users have download the new version and change the exersise type on firebase from stomach --> abs")
+        
+        if selectedExercise.exerciseToPresent?.type == "stomach" {
+            return .abs
+        } else {
+            return ExerciseType(rawValue: type) ?? .none
+        }
 	}
 	
 	func replaceExercise(with execiseOption: Exercise) {

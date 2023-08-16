@@ -500,17 +500,23 @@ struct GoogleApiManager {
             })
         }
     }
-    func getExerciseVideo(videoNumber: [String], completion: @escaping (Result<[URL], Error>) -> Void) {
-        var urls = [URL]()
-        let group = DispatchGroup()
+    func getExerciseVideosURL(exerciseType: String, videosArray: [String], completion: @escaping (Result<[URL], Error>) -> Void) {
+        var sortedList: [URL?] = [URL?](repeating: nil, count: videosArray.count)
         
-        DispatchQueue.global(qos: .userInteractive).async {
-            videoNumber.forEach { video in
-                let number = video.split(separator: "/").last
-                let pathReference = storage.reference(withPath: "exercise_videos/\(number!).m4v")
-                
-                
-                group.wait()
+        let group = DispatchGroup()
+    
+        for i in 0..<videosArray.count {
+            let video = videosArray[i]
+            
+            guard let number = video.split(separator: "/").last else {
+                completion(.failure(ErrorManager.DatabaseError.failedToFetch))
+                return
+            }
+            
+            let storage = Storage.storage(url: "gs://my-fit-app-exercise-videos")
+            let pathReference = storage.reference(forURL: "gs://my-fit-app-exercise-videos/\(exerciseType)/\(number).mp4")
+            
+            DispatchQueue.global(qos: .userInteractive).async {
                 group.enter()
                 pathReference.downloadURL { url, error in
                     if let error = error {
@@ -518,14 +524,15 @@ struct GoogleApiManager {
                         return
                     } else {
                         guard let url = url else { return }
-                        urls.append(url)
+                        sortedList[i] = url
                     }
                     group.leave()
                 }
             }
-            group.notify(queue: .main) {
-                completion(.success(urls))
-            }
+        }
+        
+        group.notify(queue: .main) {
+            completion(.success(sortedList.compactMap{$0}))
         }
     }
     func updateDishes() {

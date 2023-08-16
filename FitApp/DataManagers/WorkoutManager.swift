@@ -12,13 +12,12 @@ enum WorkoutType: Codable {
     case gym
 }
 enum ExerciseType: String {
+    case abs
     case warmup
-    #warning("remove")
     case legs
     case chest
     case back
     case shoulders
-    case stomach
     case hamstring
     case quad
     case glutes
@@ -240,7 +239,15 @@ class WorkoutManager {
         
         for i in 0..<exercisesData.count {
             let exercise = exercisesData[i]
-            guard let exerciseType = ExerciseType(rawValue: exercise.type) else { return exercisesByType }
+            
+            var exerciseType: ExerciseType {
+                #warning("Remove this condition once the users have download the new version and change the exersise type on firebase from stomach --> abs")
+                if exercise.type == "stomach" {
+                    return .abs
+                } else {
+                    return ExerciseType(rawValue: exercise.type)!
+                }
+            }
             
             if let containedExerciseType = exercisesByType.first(where: {$0.type == exerciseType}) {
                 containedExerciseType.exercises.append(exercise)
