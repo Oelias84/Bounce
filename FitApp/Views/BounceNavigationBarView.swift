@@ -43,6 +43,21 @@ final class BounceNavigationBarView: UIView {
 	}
 	
 	weak var delegate: BounceNavigationBarDelegate?
+    
+    var isLargTitle: Bool = true {
+        didSet {
+            var size: CGFloat {
+                if isLargTitle {
+                    return 32
+                } else {
+                    return 24
+                }
+            }
+            if let fontWithSize = UIFont(name: K.Fonts.boldText, size: size) {
+                nameTitleLabel.font = fontWithSize
+            }
+        }
+    }
 	
 	var nameTitle: String? = "" {
 		didSet {

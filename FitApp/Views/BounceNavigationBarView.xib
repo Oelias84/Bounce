@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,13 +40,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Vb-0t-tKu">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="232"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="198"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NavigationBackground" translatesAutoresizingMaskIntoConstraints="NO" id="c7x-sx-FM9">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="232"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="198"/>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="-2" translatesAutoresizingMaskIntoConstraints="NO" id="fkT-0R-CAW" userLabel="Left Stack View">
-                            <rect key="frame" x="24" y="56" width="145" height="90.5"/>
+                            <rect key="frame" x="24" y="56" width="320" height="90.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="dVb-AG-Db7">
                                     <rect key="frame" x="0.0" y="0.0" width="56" height="26"/>
@@ -95,13 +95,16 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="שחר אליאס" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjQ-B2-AI0">
-                                    <rect key="frame" x="0.0" y="48.5" width="145" height="42"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="שחר אליאס" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjQ-B2-AI0">
+                                    <rect key="frame" x="0.0" y="48.5" width="320" height="42"/>
                                     <fontDescription key="fontDescription" name="AssistantRoman-Bold" family="Assistant" pointSize="32"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="IjQ-B2-AI0" secondAttribute="trailing" id="HZu-tX-c1Q"/>
+                            </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleAspectFit" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="k0w-Wr-2EH" userLabel="Right Stack View">
                             <rect key="frame" x="350" y="105.5" width="40" height="40"/>
@@ -153,6 +156,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="k0w-Wr-2EH" firstAttribute="leading" secondItem="fkT-0R-CAW" secondAttribute="trailing" constant="6" id="2hf-J3-ovp"/>
                         <constraint firstAttribute="trailing" secondItem="c7x-sx-FM9" secondAttribute="trailing" id="7E9-Ac-7iy"/>
                         <constraint firstItem="fkT-0R-CAW" firstAttribute="leading" secondItem="7Vb-0t-tKu" secondAttribute="leading" constant="24" id="bg6-su-zXD"/>
                         <constraint firstItem="fkT-0R-CAW" firstAttribute="top" secondItem="7Vb-0t-tKu" secondAttribute="top" constant="56" id="lZ8-fH-lgY"/>
@@ -181,9 +185,9 @@
     </objects>
     <resources>
         <image name="NavigationBackground" width="377" height="220.13999938964844"/>
-        <image name="chevron.backward.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="info.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="message.fill" catalog="system" width="128" height="113"/>
-        <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="chevron.backward.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="info.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="message.fill" catalog="system" width="128" height="114"/>
+        <image name="person.circle" catalog="system" width="128" height="123"/>
     </resources>
 </document>

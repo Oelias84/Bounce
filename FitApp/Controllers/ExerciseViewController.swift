@@ -177,6 +177,7 @@ extension ExerciseViewController {
 		activityIndicator.startAnimating()
 	}
 	private func setupTopBarView() {
+        topBarView.isLargTitle = false
 		topBarView.nameTitle = exercise.name
 		topBarView.delegate = self
 		topBarView.isBackButtonHidden = false
