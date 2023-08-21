@@ -37,6 +37,8 @@ struct ExerciseDropViewContainer: View {
                     $viewModel.exerciseState.setsState.wrappedValue.append(newSet)
                     // Update Server
                     WorkoutManager.shared.updateExercisesStates()
+                } else if !showDetails {
+                    WorkoutManager.shared.updateExercisesStates()
                 }
             }
             
