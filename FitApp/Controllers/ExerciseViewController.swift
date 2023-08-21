@@ -170,6 +170,7 @@ extension ExerciseViewController {
 		}
 	}
 	private func playActivity() {
+        activityIndicator.removeFromSuperview()
 		playerContainerView.addSubview(activityIndicator)
 		activityIndicator.centerYAnchor.constraint(equalTo: playerContainerView.centerYAnchor).isActive = true
 		activityIndicator.centerXAnchor.constraint(equalTo: playerContainerView.centerXAnchor).isActive = true
@@ -208,7 +209,7 @@ extension ExerciseViewController {
 	private func playVideo(for exerciseNumbers: [String]) {
 		playButton.isHidden = true
 		
-		googleManager.getExerciseVideo(videoNumber: exerciseNumbers) {
+        googleManager.getExerciseVideosURL(exerciseType: exercise.type, videosArray: exerciseNumbers) {
 			result in
 			switch result {
 			case .success(let urls):
@@ -236,7 +237,7 @@ extension ExerciseViewController {
 		
 		present(fullViewPlayer, animated: true) {
 			let playerTimescale = self.player.currentItem?.asset.duration.timescale ?? 1
-			let time =  CMTime(seconds: 1, preferredTimescale: playerTimescale)
+			let time = CMTime(seconds: 1, preferredTimescale: playerTimescale)
 			
 			self.fullViewPlayer.player!.seek(to: time, toleranceBefore: .zero, toleranceAfter: .zero)
 		}

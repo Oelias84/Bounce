@@ -16,14 +16,15 @@ struct ExerciseListView: View {
     let endEditing: ()->()
     
     @State private var isShowingExerciseOptions = false
-    
+        
     var body: some View {
         ScrollView(showsIndicators: false) {
             ForEach(0..<viewModel.getExercisesCount, id: \.self) { index in
                 let workoutExercise = viewModel.getWorkoutExercise(at: index)
                 
                 VStack {
-                    ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: index, workoutExercise: workoutExercise), focusedField: _focusedField) { exerciseIndex in
+                    ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: index, workoutExercise: workoutExercise), focusedField: _focusedField) {
+                        exerciseIndex in
                         // Call back for moving into the exercise detail
                         selectedExercise(exerciseIndex)
                     } replacerButtonAction: { exerciseNumberToReplace in

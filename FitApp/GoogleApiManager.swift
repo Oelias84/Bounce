@@ -504,7 +504,7 @@ struct GoogleApiManager {
         var sortedList: [URL?] = [URL?](repeating: nil, count: videosArray.count)
         
         let group = DispatchGroup()
-    
+        
         for i in 0..<videosArray.count {
             let video = videosArray[i]
             
@@ -516,18 +516,16 @@ struct GoogleApiManager {
             let storage = Storage.storage(url: "gs://my-fit-app-exercise-videos")
             let pathReference = storage.reference(forURL: "gs://my-fit-app-exercise-videos/\(exerciseType)/\(number).mp4")
             
-            DispatchQueue.global(qos: .userInteractive).async {
-                group.enter()
-                pathReference.downloadURL { url, error in
-                    if let error = error {
-                        completion(.failure(error))
-                        return
-                    } else {
-                        guard let url = url else { return }
-                        sortedList[i] = url
-                    }
-                    group.leave()
+            group.enter()
+            pathReference.downloadURL { url, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                } else {
+                    guard let url = url else { return }
+                    sortedList[i] = url
                 }
+                group.leave()
             }
         }
         
