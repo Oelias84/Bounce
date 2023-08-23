@@ -546,6 +546,43 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4036F4C02A7A8BCF00E9324F /* UserDetails */ = {
+			isa = PBXGroup;
+			children = (
+				7C9F7BF72843B980006868F4 /* Cells */,
+				4036F4C12A7A8BEA00E9324F /* Controllers */,
+				4036F4C22A7A8C0A00E9324F /* ViewModels */,
+			);
+			path = UserDetails;
+			sourceTree = "<group>";
+		};
+		4036F4C12A7A8BEA00E9324F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7C9F7BF1283E9F7B006868F4 /* UserDetailsViewController.swift */,
+				7CE9BB6F2871F3D600FB3328 /* UserAdminCommentsTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4036F4C22A7A8C0A00E9324F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7C9F7BF3283EA32B006868F4 /* UserDetailsViewModel.swift */,
+				7CE9BB742871F89000FB3328 /* UserAdminCommentsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4036F4C32A7A958000E9324F /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				7C9F7BF82843B9AC006868F4 /* UserDetailTableViewCell.swift */,
+				7C9F7BF92843B9AC006868F4 /* UserDetailTableViewCell.xib */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
 		4051EF582A7291F6005627A2 /* UserOreders */ = {
 			isa = PBXGroup;
 			children = (
@@ -1029,13 +1066,13 @@
 			name = LoginAndRegister;
 			sourceTree = "<group>";
 		};
-		7C9F7BF72843B980006868F4 /* User Details */ = {
+		7C9F7BF72843B980006868F4 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				7C9F7BF82843B9AC006868F4 /* UserDetailTableViewCell.swift */,
-				7C9F7BF92843B9AC006868F4 /* UserDetailTableViewCell.xib */,
+				4036F4C32A7A958000E9324F /* Details */,
+				7CE9BB712871F77500FB3328 /* Comments */,
 			);
-			path = "User Details";
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		7CAE9B33284E1C1400B409E9 /* UserProgress */ = {
@@ -1090,8 +1127,6 @@
 			isa = PBXGroup;
 			children = (
 				7CB370152835767A0010E8EC /* UsersListViewController.swift */,
-				7C9F7BF1283E9F7B006868F4 /* UserDetailsViewController.swift */,
-				7CE9BB6F2871F3D600FB3328 /* UserAdminCommentsTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1101,8 +1136,6 @@
 			children = (
 				403C098B2A68541F00946DE4 /* UserViewModel.swift */,
 				7CB37017283576FA0010E8EC /* UsersListViewModel.swift */,
-				7C9F7BF3283EA32B006868F4 /* UserDetailsViewModel.swift */,
-				7CE9BB742871F89000FB3328 /* UserAdminCommentsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1110,8 +1143,6 @@
 		7CB3701A28358CD50010E8EC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				7CE9BB712871F77500FB3328 /* Comments */,
-				7C9F7BF72843B980006868F4 /* User Details */,
 				7CB3701B28358CE10010E8EC /* Menu */,
 			);
 			path = Cells;
@@ -1141,6 +1172,7 @@
 			children = (
 				7CB3700A28354B840010E8EC /* Storyboards */,
 				7CB3700928354B460010E8EC /* Menu */,
+				4036F4C02A7A8BCF00E9324F /* UserDetails */,
 				7C28129A284B7F20004385DD /* UserMeals */,
 				7CAE9B33284E1C1400B409E9 /* UserProgress */,
 				4051EF582A7291F6005627A2 /* UserOreders */,

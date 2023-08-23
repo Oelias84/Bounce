@@ -18,12 +18,12 @@ class UserAdminCommentsViewModel {
 	}
 	
 	var hasComments: Bool {
-		comments.value?.count != 0 && comments.value?.count != nil
+		comments.value?.count != 0 || comments.value?.count != nil
 	}
-	var getCommentsCount: Int? {
-		comments.value?.count
+	var getCommentsCount: Int {
+		comments.value?.count ?? 0
 	}
-	public func getCommentsFor(row: Int) -> UserAdminComment {
+	func getCommentsFor(row: Int) -> UserAdminComment {
 		comments.value![row]
 	}
 }
@@ -44,6 +44,7 @@ extension UserAdminCommentsViewModel {
 			}
 		}
 	}
+    
 	func addNewComment(with text: String, date: String? = nil, completion: ((Error?) -> Void)? = nil) {
 		let currentDate = Date().fullDateStringForDB
 		let comment = UserAdminComment(text: text, sender: UserProfile.defaults.name ?? "אין שם", commentDate: date ?? currentDate)
@@ -59,12 +60,24 @@ extension UserAdminCommentsViewModel {
 	}
 	func removeComment(row: Int, completion: ((Error?) -> Void)? = nil) {
 		guard let comments = comments.value else { return }
-		self.comments.value?.remove(at: row)
-		GoogleApiManager.shared.updateUserAdminComment(userUID: userUID, comments: UserAdminCommentsData(comments: comments), completion: completion)
+        GoogleApiManager.shared.removeUserAdminComment(userUID: userUID, comment: comments[row]) { error in
+            if let error {
+                completion?(error)
+            }
+        }
 	}
 	func updateComment(text: String, row: Int, completion: ((Error?) -> Void)? = nil) {
 		guard let comments = comments.value else { return }
 		comments[row].text = text
-		GoogleApiManager.shared.updateUserAdminComment(userUID: userUID, comments: UserAdminCommentsData(comments: comments), completion: completion)
+        GoogleApiManager.shared.updateUserAdminComment(userUID: userUID, comments: UserAdminCommentsData(comments: comments)) { error in
+            if let error {
+                completion?(error)
+            }
+            
+            GoogleDatabaseManager.shared.updateUserCommentLastSeen(state: .update, for: self.userUID)
+        }
 	}
+    func adminReadMessage() {
+        GoogleDatabaseManager.shared.updateUserCommentLastSeen(state: .read, for: self.userUID)
+    }
 }

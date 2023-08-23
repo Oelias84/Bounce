@@ -168,10 +168,22 @@ struct GoogleApiManager {
 			completion!(error)
 		}
 	}
+    func removeUserAdminComment(userUID: String, comment: UserAdminComment, completion: ((Error?) -> Void)? = nil) {
+        let commentData: [String: Any] = [
+            "text" : comment.text,
+            "sender" : comment.sender,
+            "commentDate" : comment.commentDate
+        ]
+
+        db.collection("users").document(userUID).collection("user-admin-comments").document("comments").updateData([
+            "comments": FieldValue.arrayRemove([commentData])
+        ])
+    }
 	func getUserAdminComments(userUID: String, completion: @escaping (Result<UserAdminCommentsData?, Error>) -> Void) {
 		do {
 			db.collection("users").document(userUID).collection("user-admin-comments").document("comments").addSnapshotListener{ documentSnapshot, error in
-				guard let data = documentSnapshot else {
+				
+                guard let data = documentSnapshot else {
 					print("Error fetching document: \(error!)")
 					completion(.failure(error!))
 					return
@@ -181,10 +193,13 @@ struct GoogleApiManager {
 					let adminUserComment = try data.data(as: UserAdminCommentsData?.self)
 					completion(.success(adminUserComment))
 				} catch {
-					print(error)
-					completion(.failure(error))
+                    if error.localizedDescription == "לא ניתן לקרוא את הנתונים משום שהם חסרים." {
+                        completion(.success(nil))
+                    } else {
+                        print(error)
+                        completion(.failure(error))
+                    }
 				}
-				print("Current data: \(data)")
 			}
 		}
 	}

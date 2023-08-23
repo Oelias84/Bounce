@@ -23,7 +23,9 @@ class UserAdminComment: Codable, Comparable {
 	
 	var text: String
 	var sender: String
-	var commentDate: String
+	var commentDate: String //lastCommentDate
+    
+    var viewers: [CommentViewer]?
 	
 	init(text: String, sender: String, commentDate: String) {
 		self.text = text
@@ -41,6 +43,11 @@ class UserAdminComment: Codable, Comparable {
 	static func == (lhs: UserAdminComment, rhs: UserAdminComment) -> Bool {
 		true
 	}
+}
+struct CommentViewer: Codable {
+    let updateDate: String
+    let updateName: String
+    let updateText: String?
 }
 struct UserAdminCommentsData: Codable {
 	

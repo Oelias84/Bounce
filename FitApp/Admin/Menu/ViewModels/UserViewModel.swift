@@ -9,7 +9,7 @@ import Foundation
 
 class UserViewModel: Comparable {
     
-    private let chat: Chat
+    var chat: Chat
     var shouldBroadcast = false
     var shouldShowBrodcast = false
     
@@ -84,6 +84,13 @@ class UserViewModel: Comparable {
     var pushToken: [String] {
         chat.pushTokens ?? []
     }
+    
+    #warning("Finish the conditions here!!!!!")
+//    var showUnreadComment: Bool {
+//        guard let adminID = UserProfile.defaults.id else { return false }
+//        let readCommentsByAdmin = chat.commetLastSeen?.first(where: {$0.state == .read})?.dataList.first(where: { $0.userID == adminID })
+//
+//    }
     
     static func == (lhs: UserViewModel, rhs: UserViewModel) -> Bool {
         false

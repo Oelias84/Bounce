@@ -15,7 +15,6 @@ class UserAdminCommentsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		
 		bindViewModel()
     }
 
@@ -35,12 +34,12 @@ extension UserAdminCommentsTableViewController {
 		}
 	}
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return viewModel.getCommentsCount ?? 1
+		return viewModel.getCommentsCount
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.userCommentsCell, for: indexPath) as! UserCommentsTableViewCell
 		
-		if viewModel.hasComments {
+        if viewModel.hasComments {
 			let cellData = viewModel.getCommentsFor(row: indexPath.row)
 			
 			cell.nameLabel.isHidden = false
@@ -63,13 +62,12 @@ extension UserAdminCommentsTableViewController {
 	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
 			tableView.beginUpdates()
-			self.viewModel.removeComment(row: indexPath.row) { error in
+			viewModel.removeComment(row: indexPath.row) { error in
 				if error != nil {
 					self.presentOkAlert(withMessage: "המחיקה נכשלה אנה נסו שנית")
 				}
-				tableView.deleteRows(at: [indexPath], with: .fade)
-				tableView.endUpdates()
 			}
+            tableView.endUpdates()
 		}
 	}
 }
@@ -78,20 +76,18 @@ extension UserAdminCommentsTableViewController {
 extension UserAdminCommentsTableViewController {
 	
 	fileprivate func bindViewModel() {
-		Spinner.shared.show(self.view)
-		
+		Spinner.shared.show()
+
 		viewModel.comments.bind {
 			data in
+            
+            Spinner.shared.stop()
             
 			if data != nil {
 				DispatchQueue.main.async {
 					self.tableView.reloadData()
-					Spinner.shared.stop()
 				}
 			}
-            DispatchQueue.main.async {
-                Spinner.shared.stop()
-            }
 		}
 	}
 	private func presentTextFieldAlert(withTitle title: String? = nil, withMessage message: String, options: (String)..., alertNumber: Int) {
@@ -136,18 +132,42 @@ extension UserAdminCommentsTableViewController: PopupAlertViewDelegate  {
 		switch alertNumber {
 		case 1:
 			guard let selectedCellRow = selectedEditCellIndex?.row else { return }
-			viewModel.updateComment(text: commentText, row: selectedCellRow)
+            let originalText = viewModel.getCommentsFor(row: selectedCellRow).text
+            
+            if let text = textFieldValue {
+                let trimmedText = text.replacingOccurrences(of: originalText, with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+                
+                if Array(trimmedText).isEmpty {
+                    DispatchQueue.main.async {
+                        self.presentOkAlert(withMessage: "לא הוזן טקסט")
+                    }
+                    return
+                }
+                
+                let currentDate = "בתאריך: " + Date().fullDateString
+                let author = "עודכן על ידי: " + UserProfile.defaults.name!
+                let updateText = (originalText + "\n\n\(author)\n\(currentDate)\n\n" + trimmedText)
+                
+                viewModel.updateComment(text: updateText, row: selectedCellRow)
+            } else {
+                DispatchQueue.main.async {
+                    self.presentOkAlert(withMessage: "הוספת ההערה נכשלה אנה נסו במועד מאוחר שוב")
+                }
+            }
 		default:
 			viewModel.addNewComment(with: commentText) { error in
 				if error != nil {
-					self.presentOkAlert(withMessage: "הוספת ההערה נכשלה אנה נסו במועד מאוחר יותר")
+                    DispatchQueue.main.async {
+                        self.presentOkAlert(withMessage: "הוספת ההערה נכשלה אנה נסו במועד מאוחר יותר")
+                    }
 				}
 			}
 		}
 
 	}
 	func cancelButtonTapped(alertNumber: Int) {
-		return
+        viewModel.adminReadMessage()
+        return
 	}
 	func thirdButtonTapped(alertNumber: Int) {
 		return

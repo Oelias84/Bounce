@@ -22,6 +22,7 @@ class AdminUserMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var lastSeenImageView: UIImageView!
     @IBOutlet weak var isExpiredImageView: UIImageView!
+    @IBOutlet weak var unreadCommentImageView: UIImageView!
     
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var messageButton: UIButton!
@@ -52,6 +53,7 @@ extension AdminUserMenuTableViewCell {
         lastSeenImageView.isHidden = true
         isExpiredImageView.isHidden = true
         experationDateLabel.isHidden = true
+        unreadCommentImageView.isHidden = true
         
         userImageView.image = nil
         lastSeenImageView.image = nil
@@ -97,36 +99,54 @@ extension AdminUserMenuTableViewCell {
             userImageView.image = UIImage(systemName:"person.circle")
         }
         
-        switch viewModel.programState {
+        //Last seen Image
+        if let programState = viewModel.programState, programState == .expire {
+            DispatchQueue.main.async {
+                self.lastSeenImageView.isHidden = true
+            }
+        } else if let wasSeenLately = viewModel.wasSeenLately {
+            lastSeenImageView.image = UIImage(systemName: "person.fill.questionmark")
+            DispatchQueue.main.async {
+                self.lastSeenImageView.isHidden = wasSeenLately
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.lastSeenImageView.isHidden = true
+            }
+        }
+        
+        switch vm.programState {
         case .active:
             break
         case .expire, nil:
             let image = UIImage(systemName: "clock.badge.exclamationmark")?.withRenderingMode(.alwaysTemplate)
-            isExpiredImageView.isHidden = false
             isExpiredImageView.image = image
             isExpiredImageView.tintColor = .red
+            
+            DispatchQueue.main.async {
+                self.isExpiredImageView.isHidden = false
+            }
         case .expireSoon:
             let image = UIImage(systemName: "clock.badge.exclamationmark")
-            isExpiredImageView.isHidden = false
             isExpiredImageView.image = image
-            experationDateLabel.isHidden = false
-            experationDateLabel.text = viewModel.programExperationDatedisplay
-            setNeedsLayout()
+            experationDateLabel.text = vm.programExperationDatedisplay
+            
+            DispatchQueue.main.async {
+                self.isExpiredImageView.isHidden = false
+                self.experationDateLabel.isHidden = false
+            }
         }
-        
-        //Last seen Image
-        if let programState = viewModel.programState, programState == .expire {
-            lastSeenImageView.isHidden = true
-        } else if let wasSeenLately = viewModel.wasSeenLately {
-            lastSeenImageView.image = UIImage(systemName: "person.fill.questionmark")
-            lastSeenImageView.isHidden = wasSeenLately
-        }
-        
+
         //Message image
         if viewModel.didReadLastMessage == true {
             messageButton.setImage(UIImage(systemName: "message"), for: .normal)
         } else {
             messageButton.setImage(UIImage(systemName: "message.fill"), for: .normal)
+        }
+        
+        //Uneread cpmment
+        DispatchQueue.main.async {
+            self.unreadCommentImageView.isHidden = !self.viewModel.showUnreadComment
         }
         
         //Broadcast

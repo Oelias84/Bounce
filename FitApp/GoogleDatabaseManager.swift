@@ -13,6 +13,11 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseMessaging
 
+enum UserCommentLastSeenState: String, Codable {
+    case read = "READ"
+    case update = "UPDATE"
+}
+
 final class GoogleDatabaseManager {
 	
 	static let shared = GoogleDatabaseManager()
@@ -67,6 +72,13 @@ final class GoogleDatabaseManager {
     func updateLastSeenMessageDate(userID: String, isAdmin: Bool) {
 		chatRef(userId: userID).child(isAdmin == true ? "support_last_seen_message_timestamp" : "last_seen_message_timestamp").setValue(Date().millisecondsSince2020)
 	}
+    func updateUserCommentLastSeen(state: UserCommentLastSeenState,for userID: String) {
+        guard let senderId = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let timestamp = Date().millisecondsSince2020
+        chatRef(userId: userID).child("commet-last-seen").child(state.rawValue).child(senderId).setValue("\(timestamp)")
+    }
 	
 	func sendMessageToChat(userID: String, isAdmin: Bool, content: String, kind: MessageKind, completion: @escaping (Result<Void, Error>) -> ()) {
         sendMessageToChat(userID: userID, isAdmin: isAdmin, content: content, link: nil, previewData: nil, kind: kind, completion: completion)
@@ -146,7 +158,7 @@ final class GoogleDatabaseManager {
 		}
 	}
 	
-	///Create
+	//Create
 	private func createChatData() -> [String: Any] {
 		let messageData = createMessageData(senderId: "", kind: MessageKind.text("").rawValue, timestamp: 0, content: "", mediaPath: nil, mediaPreview: nil)
 		
@@ -168,7 +180,7 @@ final class GoogleDatabaseManager {
 		]
 	}
 	
-	///Update
+	//Update
 	private func updateOtherUserPushToken(chat: Chat, completion: @escaping () ->()) {
 		database.child("support").child("admin_push_tokens").observeSingleEvent(of: .value) {
 			snapshot in
@@ -189,7 +201,7 @@ final class GoogleDatabaseManager {
 		chatRef(userId: userID).child("latest_message").setValue(latestMessageData)
 	}
 	
-	///Delete
+	//Delete
 	public func removeUserPushTokenFromChat() {
 		guard let userID = Auth.auth().currentUser?.uid else { return }
 		let userChat = chatRef(userId: userID)
@@ -201,7 +213,7 @@ final class GoogleDatabaseManager {
 		database.child("support").child("admin_push_tokens").child(userToken).removeValue()
 	}
 	
-	///Parse
+	//Parse
 	private func parseChatsData(userId: String, snapshot: DataSnapshot) -> [Chat] {
 		var chats: [Chat] = []
 		
@@ -234,7 +246,27 @@ final class GoogleDatabaseManager {
             var userLastSeen: String? {
                 chatData["user_last_seen"] as? String
             }
-            
+            var commentLastSeen: [CommentLastSeenList]? {
+                var commentLastSeenData = [CommentLastSeenList(state: .read), CommentLastSeenList(state: .update)]
+                
+                let lastSeenList = data.childSnapshot(forPath: "commet-last-seen")
+                if let value = lastSeenList.value as? [String : Any] {
+                    if let read = value[UserCommentLastSeenState.read.rawValue] as? [String : String] {
+                        read.forEach {
+                            let data = CommentLastSeen(userID: $0.key, date: Int64($0.value)!)
+                            commentLastSeenData[0].dataList.append(data)
+                        }
+                    }
+                    if let read = value[UserCommentLastSeenState.update.rawValue] as? [String : String] {
+                        read.forEach {
+                            let data = CommentLastSeen(userID: $0.key, date: Int64($0.value)!)
+                            commentLastSeenData[1].dataList.append(data)
+                        }
+                    }
+                }
+                return commentLastSeenData
+            }
+    
             let chat = Chat(userId: data.key,
                             isAdmin: true,
                             displayName: displayName,
@@ -242,7 +274,8 @@ final class GoogleDatabaseManager {
                             pushTokens: pushTokens,
                             lastSeenMessageDate: lastSeenMessageTimestamp?.dateFromMillisecondsSince2020,
                             userLastSeen: userLastSeen,
-                            programExpirationDate: programExpirationDate)
+                            programExpirationDate: programExpirationDate,
+                            commetLastSeen: commentLastSeen)
             
 			chats.append(chat)
 		}
@@ -390,7 +423,7 @@ final class GoogleDatabaseManager {
 		}
 	}
 	
-	///Reference
+	//Reference
 	private func chatsRef() -> DatabaseReference {
 		return database.child("support").child("chats")
 	}

@@ -7,6 +7,7 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -28,7 +29,7 @@
                         <rect key="frame" x="12" y="0.0" width="320" height="111"/>
                         <subviews>
                             <button hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHe-DE-5XH">
-                                <rect key="frame" x="15.5" y="35.5" width="40" height="40"/>
+                                <rect key="frame" x="0.0" y="35.5" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZHe-DE-5XH" secondAttribute="height" multiplier="1:1" id="At2-xP-xQb"/>
                                     <constraint firstAttribute="height" constant="40" id="eVo-rP-Zaw"/>
@@ -40,8 +41,16 @@
                                     <action selector="broadcastButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="eeC-lU-14J"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="g8A-gz-SLq">
+                                <rect key="frame" x="42" y="48" width="26.5" height="15"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="YSk-EW-xwd"/>
+                                    <constraint firstAttribute="width" secondItem="g8A-gz-SLq" secondAttribute="height" multiplier="33:20" id="diN-Ra-0oJ"/>
+                                </constraints>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="aNu-Xf-2Mf">
-                                <rect key="frame" x="63.5" y="29" width="54" height="53"/>
+                                <rect key="frame" x="81.5" y="29" width="54" height="53"/>
                                 <color key="tintColor" name="ProjectLightGreen"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="aNu-Xf-2Mf" secondAttribute="height" multiplier="1:1" id="7XA-cV-hvx"/>
@@ -54,7 +63,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SqO-Un-LVo">
-                                <rect key="frame" x="125.5" y="29.5" width="122.5" height="52"/>
+                                <rect key="frame" x="143.5" y="29.5" width="104.5" height="52"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="UsG-3d-cnE">
                                         <rect key="frame" x="0.0" y="0.0" width="45.5" height="24"/>
@@ -139,8 +148,9 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="QBo-62-43N" secondAttribute="trailing" id="4pm-xm-uMT"/>
                             <constraint firstItem="SqO-Un-LVo" firstAttribute="leading" secondItem="aNu-Xf-2Mf" secondAttribute="trailing" constant="8" symbolic="YES" id="Js0-3R-lGc"/>
+                            <constraint firstItem="g8A-gz-SLq" firstAttribute="leading" secondItem="ZHe-DE-5XH" secondAttribute="trailing" constant="2" id="Mzz-cS-S8q"/>
+                            <constraint firstItem="aNu-Xf-2Mf" firstAttribute="leading" secondItem="g8A-gz-SLq" secondAttribute="trailing" constant="2" id="NID-1J-bs6"/>
                             <constraint firstItem="ZHe-DE-5XH" firstAttribute="leading" secondItem="Dr9-db-OgR" secondAttribute="leading" id="WNP-SS-aDY"/>
-                            <constraint firstItem="aNu-Xf-2Mf" firstAttribute="leading" secondItem="ZHe-DE-5XH" secondAttribute="trailing" constant="8" symbolic="YES" id="pCn-6c-khl"/>
                         </constraints>
                     </stackView>
                 </subviews>
@@ -158,6 +168,7 @@
                 <outlet property="isExpiredImageView" destination="GFL-7p-lxx" id="2TF-7v-k2U"/>
                 <outlet property="lastSeenImageView" destination="5EM-Jv-LSp" id="XcG-jG-oXS"/>
                 <outlet property="messageButton" destination="I6z-qF-fPd" id="s6b-DB-Hhr"/>
+                <outlet property="unreadCommentImageView" destination="g8A-gz-SLq" id="9d6-19-C4t"/>
                 <outlet property="userImageView" destination="aNu-Xf-2Mf" id="L1V-gh-HOv"/>
                 <outlet property="userNameLabel" destination="Ga3-Yu-Npz" id="BmC-hW-F56"/>
             </connections>
@@ -168,10 +179,14 @@
         <image name="bubble.right" catalog="system" width="128" height="110"/>
         <image name="bubble.right.fill" catalog="system" width="128" height="112"/>
         <image name="chevron.forward" catalog="system" width="97" height="128"/>
+        <image name="circle.fill" catalog="system" width="128" height="123"/>
         <image name="message.fill" catalog="system" width="128" height="114"/>
         <image name="person.circle" catalog="system" width="128" height="123"/>
         <namedColor name="ProjectLightGreen">
             <color red="0.28600001335144043" green="0.57599997520446777" blue="0.56099998950958252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
