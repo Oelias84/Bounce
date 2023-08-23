@@ -166,7 +166,7 @@ extension SettingsViewController: SettingsStepperViewCellDelegate {
             case 1:
                 //Nutrition
                 switch cellIndex.row {
-                case 0:
+                case 1:
                     mealStepperAction(newValue)
                 default:
                     break

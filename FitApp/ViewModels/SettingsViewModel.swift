@@ -83,6 +83,7 @@ class SettingsViewModel {
         if let naturalMenu = userData.naturalMenu {
             return naturalMenu == true ? "נטרלי" : "חיטוב"
         } else {
+            UserProfile.defaults.naturalMenu = true
             return "נטרלי"
         }
     }
