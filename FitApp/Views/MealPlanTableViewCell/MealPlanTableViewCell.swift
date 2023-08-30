@@ -133,9 +133,11 @@ extension MealPlanTableViewCell {
 extension MealPlanTableViewCell: DishViewDelegate {
 	
 	func didCheck(dish: Dish) {
+        
 		var allChecked = false
 		
 		let isDishesChecked = meal.dishes.compactMap{ $0.isDishDone }
+        
 		for isDone in isDishesChecked {
 			if !isDone {
 				allChecked = false
@@ -144,11 +146,13 @@ extension MealPlanTableViewCell: DishViewDelegate {
 				allChecked = true
 			}
 		}
+        
 		mealViewModel.getProgress()
 		meal.isMealDone = allChecked
 		mealIsDoneCheckMark.isSelected = allChecked
-		mealViewModel.updateMeals(for: meal.date) { _ in
-			#warning("Add Lottie confirmation Animation")
+        		
+        mealViewModel.updateMeals(for: meal.date) { _ in
+//            Spinner.shared.stop()
 		}
 	}
 }

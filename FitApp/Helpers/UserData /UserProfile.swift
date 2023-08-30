@@ -147,9 +147,14 @@ struct UserProfile {
 	var externalWorkout: Int?
 	
 	//MealData
-	@UserDefault(key: .otherDishes)
-	var otherDishes: [String]?
-	
+	@UserDefault(key: .otherCatrbDishes)
+	var otherCarbDishes: [String]?
+    
+    @UserDefault(key: .otherFatDishes)
+    var otherFatDishes: [String]?
+    
+    @UserDefault(key: .otherProtainDishes)
+    var otherProtainDishes: [String]?
 	
 	func encodeTermAndSet(name: String,_ data: TermsAgreeDataModel?) {
 		let userDefaults = UserDefaults.standard
@@ -412,6 +417,8 @@ extension Key {
 	static let externalWorkout: Key = "externalWorkout"
     static let naturalMenu: Key = "naturalMenu"
 	static let finishOnboarding: Key = "finishOnboarding"
-	static let otherDishes: Key = "otherDishes"
+	static let otherCatrbDishes: Key = "otherCatrbDishes"
+    static let otherFatDishes: Key = "otherFatDishes"
+    static let otherProtainDishes: Key = "otherProtainDishes"
 }
 
