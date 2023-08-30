@@ -240,8 +240,12 @@ class WorkoutManager {
         for i in 0..<exercisesData.count {
             let exercise = exercisesData[i]
             
+            //Skip exercise when ther is no text
+            if exercise.text == "" { continue }
+            
             var exerciseType: ExerciseType {
                 #warning("Remove this condition once the users have download the new version and change the exersise type on firebase from stomach --> abs")
+                
                 if exercise.type == "stomach" {
                     return .abs
                 } else {
@@ -258,7 +262,7 @@ class WorkoutManager {
         }
         return exercisesByType
     }
-
+    
     //MARK: - Fetch
     // Workouts
     private func fetchWorkout(completion: @escaping () -> Void) {
