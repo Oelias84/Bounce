@@ -71,15 +71,17 @@ struct ExerciseView: View {
 				}
 				.padding(.trailing, 10)
 				
-				// Exercise details
-				Text("סטים: X\(numberOfSetes)")
-					.font(Font.custom(K.Fonts.regularText, size: 16))
-					.padding(.trailing, 16)
-				Text("חזרות: X\(numberOfRepeats)")
-					.font(Font.custom(K.Fonts.regularText, size: 16))
-				
-				// Explain Button (continue to exercise screen)
-				Spacer()
+                HStack(spacing: 16) {
+                    // Exercise details
+                    Text("סטים: X\(numberOfSetes)")
+                        .font(Font.custom(K.Fonts.regularText, size: 16))
+                    
+                    Text("חזרות: X\(numberOfRepeats)")
+                        .font(Font.custom(K.Fonts.regularText, size: 16))
+                    Spacer()
+                }
+                
+                // Explain Button (continue to exercise screen)
 				Button {
 					action(index)
 				} label: {
@@ -133,7 +135,7 @@ struct ExerciseView_Previews: PreviewProvider {
 
 	static var previews: some View {
 		
-		ExerciseView(index: 0, name: "PushUps", type: "legs", numberOfSetes: "4", numberOfRepeats: "12", presentedNumber: "0", showDetails: $showDetails) { _ in
+		ExerciseView(index: 0, name: "PushUps", type: "legs", numberOfSetes: "4", numberOfRepeats: "5-12", presentedNumber: "0", showDetails: $showDetails) { _ in
 			
 		} replacerButtonAction: { _ in
 			

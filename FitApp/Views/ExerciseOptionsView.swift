@@ -38,11 +38,16 @@ struct ExerciseOptionsView: View {
 }
 
 struct ExerciseOptionsView_Previews: PreviewProvider {
-	static var exercise = Exercise(name: "Hip Thrust (b-stance) Hip Thrust (b-stance)", videos: [""], title: "", text: "", maleText: "", type: "legs", exerciseNumber: 0)
+    static var exercise = Exercise(name: "Hip Thrust (b-stance)",
+                                   videos: [""],
+                                   title: "",
+                                   text: "",
+                                   maleText: "",
+                                   type: "legs",
+                                   exerciseNumber: 0,
+                                   repeats: "6-12")
 	
 	static var previews: some View {
-		ExerciseOptionsView(exercise: exercise) { _ in
-			
-		}
+		ExerciseOptionsView(exercise: exercise) { _ in }
 	}
 }

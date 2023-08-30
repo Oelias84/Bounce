@@ -16,7 +16,8 @@ struct Exercise: Codable {
 	let maleText: String?
 	let type: String
 	let exerciseNumber: Int
-	
+    let repeats: String?
+    
 	var getExerciseText: String {
 		let userGender = UserProfile.defaults.getGender
 		switch userGender {

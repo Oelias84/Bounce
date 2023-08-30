@@ -41,6 +41,6 @@ class ExerciseDropViewModel: ObservableObject {
 		workoutExercise.sets
 	}
 	var getNumberOfRepeats: String {
-		workoutExercise.repeats
+        workoutExercise.exerciseToPresent?.repeats ?? "-"
 	}
 }

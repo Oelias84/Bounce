@@ -22,8 +22,16 @@ struct ExerciseDropViewContainer: View {
     var body: some View {
         VStack(alignment: .leading) {
             //MARK: - Exercise view
-            ExerciseView(index: viewModel.getIndex, name: viewModel.getName, type: viewModel.getType, exerciseNumber: viewModel.exerciseNumber, numberOfSetes: viewModel.getNumberOfSets,
-                         numberOfRepeats: viewModel.getNumberOfRepeats, presentedNumber: viewModel.getExercisePresentNumber, showDetails: $showDetails, action: action) { exerciseToReplace in
+            ExerciseView(index: viewModel.getIndex,
+                         name: viewModel.getName,
+                         type: viewModel.getType,
+                         exerciseNumber: viewModel.exerciseNumber,
+                         numberOfSetes: viewModel.getNumberOfSets,
+                         numberOfRepeats: viewModel.getNumberOfRepeats,
+                         presentedNumber: viewModel.getExercisePresentNumber,
+                         showDetails: $showDetails,
+                         action: action) { exerciseToReplace in
+                
                 // Replce exercise clicked
                 showDetails = false
                 replacerButtonAction(exerciseToReplace)
@@ -102,15 +110,21 @@ struct ExerciseDropViewContainer: View {
 
 struct ExerciseDropView_Previews: PreviewProvider {
     
+    @State static var exerciseToPresent = Exercise(name: "Hip Thrust (b-stance)",
+                                                   videos: [""],
+                                                   title: "",
+                                                   text: "",
+                                                   maleText: "",
+                                                   type: "legs",
+                                                   exerciseNumber: 0,
+                                                   repeats: "6-12")
+    
     @State static var exerciseState: ExerciseState = ExerciseState(exerciseNumber: 0)
-    @State static var exercise: WorkoutExercise = WorkoutExercise(exercise: "1", repeats: "12", sets: "12", exerciseToPresent: nil)
+    
+    @State static var exercise: WorkoutExercise = WorkoutExercise(exercise: "1", repeats: "12", sets: "12", exerciseToPresent: exerciseToPresent)
     
     static var previews: some View {
-        ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: 1, workoutExercise: exercise)) { _ in
-            
-        } replacerButtonAction: { _ in
-            
-        }
+        ExerciseDropViewContainer(viewModel: ExerciseDropViewModel(index: 1, workoutExercise: exercise)) { _ in } replacerButtonAction: { _ in }
     }
 }
 
