@@ -8,8 +8,8 @@
 import Foundation
 
 enum WorkoutType: String, Codable {
-    case home = "Home"
-    case gym = "Gym"
+    case home = "HOME"
+    case gym = "GYM"
 }
 enum ExerciseType: String {
     case abs
