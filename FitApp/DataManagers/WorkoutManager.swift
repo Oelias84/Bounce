@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum WorkoutType: Codable {
-    case home
-    case gym
+enum WorkoutType: String, Codable {
+    case home = "Home"
+    case gym = "Gym"
 }
 enum ExerciseType: String {
     case abs
