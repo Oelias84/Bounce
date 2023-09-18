@@ -50,6 +50,7 @@ final class BounceNavigationBarView: UIView {
                 if isLargTitle {
                     return 32
                 } else {
+                    nameTitleLabel.numberOfLines = 2
                     return 24
                 }
             }
