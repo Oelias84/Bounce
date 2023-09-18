@@ -506,7 +506,6 @@ struct GoogleApiManager {
         let group = DispatchGroup()
         
         for i in 0..<videosArray.count {
-            
             let video = videosArray[i]
             #warning("Change here after version update!!!")
             
@@ -527,7 +526,7 @@ struct GoogleApiManager {
             
             var type: String {
                 switch exerciseType {
-                case "quad" , "hamstring":
+                case "quad", "hamstring":
                     return "legs"
                 default:
                     return exerciseType
