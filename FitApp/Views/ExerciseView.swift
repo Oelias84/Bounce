@@ -115,9 +115,9 @@ struct ExerciseView: View {
         case "glutes":
             return ("ישבן", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
         case "quad":
-            return ("רגל אחורית", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
+            return ("ירך אחורית", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
         case "hamstring":
-            return ("רגל קידמית", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
+            return ("ירך קידמית", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
 		case "legs":
 			return ("רגליים", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
 		case "chest":
