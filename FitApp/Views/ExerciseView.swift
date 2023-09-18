@@ -104,13 +104,20 @@ struct ExerciseView: View {
 			Text(getTag.0)
 				.foregroundColor(.white)
 				.font(Font.custom(K.Fonts.boldText, size: 12))
+                .padding(.horizontal)
 		}
-		.frame(width: 54, height: 24)
+		.frame(height: 24)
 		.background(Color(getTag.1))
 		.cornerRadius(12)
 	}
 	var getTag: (String, UIColor) {
 		switch type {
+        case "glutes":
+            return ("ישבן", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
+        case "quad":
+            return ("רגל אחורית", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
+        case "hamstring":
+            return ("רגל קידמית", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
 		case "legs":
 			return ("רגליים", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
 		case "chest":
@@ -121,6 +128,8 @@ struct ExerciseView: View {
 			return ("כתפיים", #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))
 		case "stomach":
 			return ("בטן", #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1))
+        case "abs":
+            return ("בטן", #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1))
 		case "warmup":
 			return ("חימום", .lightGray)
 		default:

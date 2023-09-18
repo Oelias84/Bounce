@@ -528,6 +528,8 @@ struct GoogleApiManager {
                 switch exerciseType {
                 case "quad", "hamstring":
                     return "legs"
+                case "stomach":
+                    return "abs"
                 default:
                     return exerciseType
                 }
