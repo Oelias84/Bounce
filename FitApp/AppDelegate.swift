@@ -172,7 +172,8 @@ extension AppDelegate {
 				}
 			}
 		}
-		return true
+        guard let permissionLevel = UserProfile.defaults.permissionLevel else { return false }
+        return  permissionLevel >= 10
 	}
 	
 	private func moveTo(storyboardId: String, vcId: String, userChatId: String? = nil) {
@@ -216,6 +217,8 @@ extension AppDelegate {
 						}
 					} else {
 						// User
+                        guard let permissionLevel = UserProfile.defaults.permissionLevel, permissionLevel >= 10 else { return }
+                        
 						chatViewContainer.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: nil))
 						navController.pushViewController(chatViewContainer, animated: true)
 					}
