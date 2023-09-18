@@ -412,8 +412,8 @@ class WorkoutManager {
         gymWorkouts.forEach { workout in
             workout.exercises.forEach {
                 let exercise = $0
-                exercise.exerciseToPresent = self.gymExercises.first(where: { homeExercise in
-                    return homeExercise.exerciseNumber == Int(exercise.exercise)
+                exercise.exerciseToPresent = self.gymExercises.first(where: { gymExercise in
+                    return gymExercise.exerciseNumber == Int(exercise.exercise)
                 })
             }
         }
