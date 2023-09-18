@@ -409,9 +409,12 @@ class WorkoutManager {
         if let userPreferredWorkout {
             gymWorkouts = userPreferredWorkout.gymWorkouts
         }
-        gymWorkouts.forEach {
-            $0.exercises.forEach {
-                $0.exerciseToPresent = self.gymExercises[Int($0.exercise)!]
+        gymWorkouts.forEach { workout in
+            workout.exercises.forEach {
+                let exercise = $0
+                exercise.exerciseToPresent = self.gymExercises.first(where: { homeExercise in
+                    return homeExercise.exerciseNumber == Int(exercise.exercise)
+                })
             }
         }
     }
