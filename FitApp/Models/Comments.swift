@@ -25,8 +25,8 @@ class UserAdminComment: Codable, Comparable {
 	var sender: String
 	var commentDate: String //lastCommentDate
     
-    var viewers: [CommentViewer]?
-	
+    var commentLastRead = CommentLastSeenList(state: .read, dataList: [])
+
 	init(text: String, sender: String, commentDate: String) {
 		self.text = text
 		self.sender = sender
@@ -44,11 +44,7 @@ class UserAdminComment: Codable, Comparable {
 		true
 	}
 }
-struct CommentViewer: Codable {
-    let updateDate: String
-    let updateName: String
-    let updateText: String?
-}
+
 struct UserAdminCommentsData: Codable {
 	
 	let comments: [UserAdminComment]

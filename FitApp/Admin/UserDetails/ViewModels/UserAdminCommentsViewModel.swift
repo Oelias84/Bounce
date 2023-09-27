@@ -26,6 +26,13 @@ class UserAdminCommentsViewModel {
 	func getCommentsFor(row: Int) -> UserAdminComment {
 		comments.value![row]
 	}
+    func showUnreadComment(for index: Int) -> Bool {
+        guard let currentAdminID = UserProfile.defaults.id else { return false }
+        guard let currentAdminCommentLastRead = comments.value?[index].commentLastRead.dataList.first(where: {$0.userID == currentAdminID}) else { return true }
+        guard let commentDate = comments.value?[index].commentDate.fullDateFromStringWithDash else { return false }
+        
+        return commentDate > currentAdminCommentLastRead.dateTime
+    }
 }
 
 //MARK: - Functions
@@ -45,7 +52,7 @@ extension UserAdminCommentsViewModel {
 		}
 	}
     
-	func addNewComment(with text: String, date: String? = nil, completion: ((Error?) -> Void)? = nil) {
+	func createComment(with text: String, date: String? = nil, completion: ((Error?) -> Void)? = nil) {
 		let currentDate = Date().fullDateStringForDB
 		let comment = UserAdminComment(text: text, sender: UserProfile.defaults.name ?? "אין שם", commentDate: date ?? currentDate)
 		
@@ -57,9 +64,11 @@ extension UserAdminCommentsViewModel {
 		
 		guard let comments = comments.value else { return }
 		GoogleApiManager.shared.updateUserAdminComment(userUID: userUID, comments: UserAdminCommentsData(comments: comments), completion: completion)
+        GoogleDatabaseManager.shared.updateUserCommentLastSeen(state: .update, for: self.userUID)
 	}
 	func removeComment(row: Int, completion: ((Error?) -> Void)? = nil) {
 		guard let comments = comments.value else { return }
+        
         GoogleApiManager.shared.removeUserAdminComment(userUID: userUID, comment: comments[row]) { error in
             if let error {
                 completion?(error)
@@ -68,16 +77,28 @@ extension UserAdminCommentsViewModel {
 	}
 	func updateComment(text: String, row: Int, completion: ((Error?) -> Void)? = nil) {
 		guard let comments = comments.value else { return }
+        let currentDate = Date().fullDateStringForDB
+
 		comments[row].text = text
+        comments[row].commentDate = currentDate
         GoogleApiManager.shared.updateUserAdminComment(userUID: userUID, comments: UserAdminCommentsData(comments: comments)) { error in
             if let error {
                 completion?(error)
             }
-            
             GoogleDatabaseManager.shared.updateUserCommentLastSeen(state: .update, for: self.userUID)
         }
 	}
-    func adminReadMessage() {
+    func adminReadMessage(for index: Int) {
+        guard let comments = comments.value else { return }
+        let selectedComment = comments[index]
+        
+        guard let currentAdminID = UserProfile.defaults.id else { return }
+        
+        let readDate = Date().millisecondsSince2020
+        let readData = CommentLastSeen(userID: currentAdminID, date: readDate)
+        selectedComment.commentLastRead.dataList.append(readData)
+        
+        GoogleApiManager.shared.updateUserAdminComment(userUID: userUID, comments: UserAdminCommentsData(comments: comments))
         GoogleDatabaseManager.shared.updateUserCommentLastSeen(state: .read, for: self.userUID)
     }
 }

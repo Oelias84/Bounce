@@ -29,6 +29,7 @@ extension UserAdminCommentsTableViewController {
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if viewModel.hasComments {
 			let cellData = viewModel.getCommentsFor(row: indexPath.row)
+            viewModel.adminReadMessage(for: indexPath.row)
 			selectedEditCellIndex = indexPath
 			presentTextFieldAlert(withTitle: "מה תרצו לכתוב?", withMessage: cellData.text, options: "עדכן", "סגור", alertNumber: 1)
 		}
@@ -44,6 +45,7 @@ extension UserAdminCommentsTableViewController {
 			
 			cell.nameLabel.isHidden = false
 			cell.dateLabel.isHidden = false
+            cell.isReadIndicatorView.isHidden = !viewModel.showUnreadComment(for: indexPath.row)
 			cell.nameLabel.text = cellData.sender
 			cell.commentTextLabel.text = cellData.text
 			cell.dateLabel.text = cellData.commentDate
@@ -155,7 +157,7 @@ extension UserAdminCommentsTableViewController: PopupAlertViewDelegate  {
                 }
             }
 		default:
-			viewModel.addNewComment(with: commentText) { error in
+			viewModel.createComment(with: commentText) { error in
 				if error != nil {
                     DispatchQueue.main.async {
                         self.presentOkAlert(withMessage: "הוספת ההערה נכשלה אנה נסו במועד מאוחר יותר")
@@ -166,7 +168,6 @@ extension UserAdminCommentsTableViewController: PopupAlertViewDelegate  {
 
 	}
 	func cancelButtonTapped(alertNumber: Int) {
-        viewModel.adminReadMessage()
         return
 	}
 	func thirdButtonTapped(alertNumber: Int) {

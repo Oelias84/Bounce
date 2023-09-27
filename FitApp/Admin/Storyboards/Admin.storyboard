@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dvY-pG-DzY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dvY-pG-DzY">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -101,8 +101,8 @@
                                 <color key="tintColor" systemColor="systemIndigoColor"/>
                             </barButtonItem>
                             <barButtonItem style="plain" id="9AJ-oe-4YS" userLabel="Active Bar Button Item">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RHT-hW-rRq">
-                                    <rect key="frame" x="199.5" y="9" width="97.5" height="26.5"/>
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" misplaced="YES" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RHT-hW-rRq">
+                                    <rect key="frame" x="194.5" y="9" width="102.5" height="26.5"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" title="רק פעילים">
@@ -518,6 +518,7 @@
                                 <connections>
                                     <outlet property="commentTextLabel" destination="QEE-Ha-oih" id="wjo-et-lfP"/>
                                     <outlet property="dateLabel" destination="ruf-nZ-gGb" id="tuw-5x-LPv"/>
+                                    <outlet property="isReadIndicatorView" destination="ty3-gd-pJ8" id="0Q7-5T-GGJ"/>
                                     <outlet property="nameLabel" destination="QBP-4A-poi" id="0ZU-rN-Tfu"/>
                                 </connections>
                             </tableViewCell>
@@ -559,7 +560,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bubble.left.and.bubble.right.fill" catalog="system" width="128" height="97"/>
+        <image name="bubble.left.and.bubble.right.fill" catalog="system" width="128" height="102"/>
         <image name="bubble.middle.bottom.fill" catalog="system" width="128" height="110"/>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
         <image name="chevron.up.circle.fill" catalog="system" width="128" height="123"/>
