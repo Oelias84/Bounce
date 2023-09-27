@@ -76,8 +76,15 @@ final class GoogleDatabaseManager {
         guard let senderId = Auth.auth().currentUser?.uid else {
             return
         }
+        
         let timestamp = Date().millisecondsSince2020
-        chatRef(userId: userID).child("commet-last-seen").child(state.rawValue).child(senderId).setValue("\(timestamp)")
+        
+        if state == .update {
+            chatRef(userId: userID).child("commet-last-seen").child(UserCommentLastSeenState.update.rawValue).child(senderId).setValue("\(timestamp)")
+            chatRef(userId: userID).child("commet-last-seen").child(UserCommentLastSeenState.read.rawValue).child(senderId).setValue("\(timestamp)")
+        } else {
+            chatRef(userId: userID).child("commet-last-seen").child(UserCommentLastSeenState.read.rawValue).child(senderId).setValue("\(timestamp)")
+        }
     }
 	
 	func sendMessageToChat(userID: String, isAdmin: Bool, content: String, kind: MessageKind, completion: @escaping (Result<Void, Error>) -> ()) {

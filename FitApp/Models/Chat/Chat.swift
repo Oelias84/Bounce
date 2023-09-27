@@ -25,7 +25,7 @@ class Chat: Comparable {
     var lastSeenMessageDate: Date?
     var userLastSeen: String?
     var programExpirationDate: String?
-    var commetLastSeen: [CommentLastSeenList]?
+    var commentLastSeen: [CommentLastSeenList]?
     
     init(userId: String,
          isAdmin: Bool = false,
@@ -46,7 +46,7 @@ class Chat: Comparable {
         self.lastSeenMessageDate = lastSeenMessageDate
         self.userLastSeen = userLastSeen
         self.programExpirationDate = programExpirationDate
-        self.commetLastSeen = commetLastSeen
+        self.commentLastSeen = commetLastSeen
     }
     
     static func == (lhs: Chat, rhs: Chat) -> Bool {
@@ -65,9 +65,17 @@ struct CommentLastSeenList: Codable {
     var dataList = [CommentLastSeen]()
 }
 
-struct CommentLastSeen: Codable {
+struct CommentLastSeen: Codable, Comparable {
+    
     let userID: String
     let date: Int64
+    
+    var dateTime: Date {
+        date.dateFromMillisecondsSince2020
+    }
+    static func < (lhs: CommentLastSeen, rhs: CommentLastSeen) -> Bool {
+        return lhs.date > rhs.date
+    }
 }
 
 struct LatestMessage {

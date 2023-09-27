@@ -85,12 +85,30 @@ class UserViewModel: Comparable {
         chat.pushTokens ?? []
     }
     
-    #warning("Finish the conditions here!!!!!")
-//    var showUnreadComment: Bool {
-//        guard let adminID = UserProfile.defaults.id else { return false }
-//        let readCommentsByAdmin = chat.commetLastSeen?.first(where: {$0.state == .read})?.dataList.first(where: { $0.userID == adminID })
-//
-//    }
+    var showUnreadComment: Bool {
+        guard let currentAdminID = UserProfile.defaults.id else { return false }
+        
+        // Check if contains comment update
+        guard let updateComments = chat.commentLastSeen?.first(where: {$0.state == .update})?.dataList.sorted(), !updateComments.isEmpty else { return false }
+        
+        // Get the last update
+        guard let latestUpdate = updateComments.first else { return false }
+        
+        // Check if latest comment belongs to current admin
+        if latestUpdate.userID != currentAdminID {
+        
+            // Check if contains comments read
+            guard let readComments = chat.commentLastSeen?.first(where: {$0.state == .read})?.dataList.sorted(), !updateComments.isEmpty else { return true }
+            
+            // Get latest read comment
+            guard let currentAdminLatestReadComment = readComments.first(where: {$0.userID == currentAdminID}) else { return true }
+            
+            // Check the date for latest update is bigger then latest read comment by current admin
+            return latestUpdate.dateTime > currentAdminLatestReadComment.dateTime
+        } else {
+            return false
+        }
+    }
     
     static func == (lhs: UserViewModel, rhs: UserViewModel) -> Bool {
         false

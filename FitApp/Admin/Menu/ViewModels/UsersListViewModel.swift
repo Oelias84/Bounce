@@ -200,7 +200,7 @@ class UsersListViewModel {
                         //If user exist in the list will update its latest message and latest seen
                         //Else add the user
                         if let oldChat = users.first(where: { $0.userId == chat.userId }) {
-                            oldChat.chat.commetLastSeen = chat.commetLastSeen
+                            oldChat.chat.commentLastSeen = chat.commentLastSeen
                         } else {
                             users.append(UserViewModel(chat))
                         }
