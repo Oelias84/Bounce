@@ -536,8 +536,8 @@ struct GoogleApiManager {
             }
             
             let storage = Storage.storage(url: "gs://my-fit-app-exercise-videos")
-            let pathReference = storage.reference(forURL: "gs://my-fit-app-exercise-videos/\(type)/\(newNumber).mp4")
-            
+            let pathReference = storage.reference(withPath: "\(type)/\(newNumber).mp4")
+
             group.enter()
             pathReference.downloadURL { url, error in
                 if let error = error {
