@@ -127,7 +127,7 @@ extension UsersListViewController: PopupAlertViewDelegate {
                 guard let self = self else { return }
                 
                 if let error = error {
-                    self.presentOkAlert(withTitle: "אופס",withMessage: "שליחת תמונה נכשלה")
+                    self.presentOkAlert(withTitle: "אופס",withMessage: "שליחת ההודעה נכשלה")
                     print("Error:", error)
                     return
                 }
@@ -297,11 +297,10 @@ extension UsersListViewController {
     }
     
     private func presentBroadcastSheet() {
-        let sheetAlert = UIAlertController(title: "Broad Cast", message: nil, preferredStyle: .actionSheet)
+        let sheetAlert = UIAlertController(title: "Broadcast", message: nil, preferredStyle: .actionSheet)
         
-        let allFillterdOption = UIAlertAction(title: "כל המשתמשים", style: .default) { _ in
+        let allFillterdOption = UIAlertAction(title: "רשימה ממוינת", style: .default) { _ in
             self.viewModel.isBroadcastSelection = .allFilterd
-            self.viewModel.brodcartAllUsers()
             self.changeBrodcastButtonState()
         }
         let selectionOption = UIAlertAction(title: "בחירת משתמשים", style: .default) { _ in

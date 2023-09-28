@@ -45,7 +45,6 @@ class UsersListViewModel {
             } else {
                 originalUsers?.forEach { $0.shouldShowBrodcast = false }
             }
-            self.filterUsers(with: .allUsers)
         }
     }
     public var filteredUsers: UiKitObservableObject<[UserViewModel]?> = UiKitObservableObject(nil)
@@ -150,9 +149,6 @@ class UsersListViewModel {
             UIAction(title: "לא נראו 3 ימים", image:  UIImage(systemName: "person.fill.questionmark")) { _ in
                 self.filterOrFetch(filter: .notLoggedFor())
             },
-            UIAction(title: "מנויים פעילים") { _ in
-                self.filterOrFetch(filter: .programActive)
-            },
             UIAction(title: "לפני סיום מנוי", image: UIImage(systemName: "clock.badge.exclamationmark")) { _ in
                 self.filterOrFetch(filter: .programExpiredSoon)
             }
@@ -162,24 +158,39 @@ class UsersListViewModel {
             actions.append( UIAction(title: "מנויים לא פעילים") { _ in
                 self.filterOrFetch(filter: .programExpired)
             })
+            actions.append( UIAction(title: "מנויים פעילים") { _ in
+                self.filterOrFetch(filter: .programActive)
+            })
         }
         return actions
     }
     
     //MARK: - Broadcast message
-    public func brodcartAllUsers() {
-        guard let filteredUsers = filteredUsers.value else { return }
-        selectedBroadcastUser = filteredUsers
-    }
     public func removeBrodcastSelection() {
         selectedBroadcastUser = []
         originalUsers?.forEach { $0.shouldBroadcast = false }
     }
     public func sendBroadcastMessage(type: MessageKind, completion: @escaping (Error?) -> ()) {
         Spinner.shared.show()
-        guard !selectedBroadcastUser.isEmpty else { return }
         
-        MessagesManager.shared.postBroadcast(messageKind: type, for: selectedBroadcastUser, completion: completion)
+        var broadcastUsers: [UserViewModel] {
+            switch isBroadcastSelection {
+            case .selective:
+                return selectedBroadcastUser
+            case .allFilterd:
+                return filteredUsers.value ?? []
+            case nil:
+                return []
+            }
+        }
+        print(broadcastUsers.count)
+        guard !broadcastUsers.isEmpty else {
+            completion(ErrorManager.DatabaseError.dataIsEmpty)
+            return
+        }
+        MessagesManager.shared.postBroadcast(messageKind: type,
+                                             for: broadcastUsers,
+                                             completion: completion)
     }
     public func getMediaUrlFor(_ urlString: String, completion: @escaping (URL?) -> ()) {
         MessagesManager.shared.downloadMediaURL(urlString: urlString, completion: completion)
