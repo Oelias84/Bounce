@@ -183,11 +183,12 @@ class UsersListViewModel {
                 return []
             }
         }
-        print(broadcastUsers.count)
+        
         guard !broadcastUsers.isEmpty else {
             completion(ErrorManager.DatabaseError.dataIsEmpty)
             return
         }
+        
         MessagesManager.shared.postBroadcast(messageKind: type,
                                              for: broadcastUsers,
                                              completion: completion)
@@ -211,7 +212,7 @@ class UsersListViewModel {
                         //If user exist in the list will update its latest message and latest seen
                         //Else add the user
                         if let oldChat = users.first(where: { $0.userId == chat.userId }) {
-                            oldChat.chat.commentLastSeen = chat.commentLastSeen
+                            oldChat.chat = chat
                         } else {
                             users.append(UserViewModel(chat))
                         }

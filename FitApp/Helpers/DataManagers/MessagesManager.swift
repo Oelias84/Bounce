@@ -24,7 +24,11 @@ class MessagesManager {
     fileprivate let googleFirestore = GoogleApiManager.shared
     fileprivate let googleStorageManager = GoogleStorageManager.shared
     
-    var chats: UiKitObservableObject<[Chat]> = UiKitObservableObject([Chat]())
+    var chats: UiKitObservableObject<[Chat]> = UiKitObservableObject([Chat]()) {
+        didSet {
+            
+        }
+    }
     
     private let userId = Auth.auth().currentUser?.uid
     private let userEmail = UserProfile.defaults.email
@@ -225,7 +229,7 @@ extension MessagesManager {
                     }
                 }
                 
-                if let userLastSeen = chat.userLastSeen {
+                if chat.userLastSeen == nil {
                     
                     group.enter()
                     self.getUserLastSeen(days: 3, userID: chat.userId) {
