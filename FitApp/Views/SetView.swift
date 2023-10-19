@@ -15,9 +15,9 @@ struct SetView: View {
     }
     
     var isDeleteEnabled: Bool
-    @Binding var set: SetModel
-    @State var id: UUID? = nil
     
+    @State var id: UUID? = nil
+    @Binding var set: SetModel
     @FocusState var focusedField: SetView.Field?
     
     var repeatsPlaceholder: String {
@@ -30,7 +30,6 @@ struct SetView: View {
     let action: (UUID?)->()
     
     var body: some View {
-        
         HStack() {
             // Set Number
             Text("סט #\(set.setIndex+1)")

@@ -11,14 +11,11 @@ import SwiftUI
 struct ExerciseDropViewContainer: View {
     
     @ObservedObject var viewModel: ExerciseDropViewModel
-    
-    @State var showDetails: Bool = false
-    @State var isSetViewLock: Bool = false
-    
     @FocusState var focusedField: SetView.Field?
     
     let action: (Int)->()
     let replacerButtonAction: (Int)->Void
+    
     var body: some View {
         VStack(alignment: .leading) {
             //MARK: - Exercise view
@@ -29,41 +26,41 @@ struct ExerciseDropViewContainer: View {
                          numberOfSetes: viewModel.getNumberOfSets,
                          numberOfRepeats: viewModel.getNumberOfRepeats,
                          presentedNumber: viewModel.getExercisePresentNumber,
-                         showDetails: $showDetails,
+                         showDetails: $viewModel.showDetails,
                          action: action) { exerciseToReplace in
                 
                 // Replce exercise clicked
-                showDetails = false
+                viewModel.showDetails = false
                 replacerButtonAction(exerciseToReplace)
             } dropDownAction: {
                 // Open sets infomatio clicked
-                showDetails.toggle()
+                viewModel.showDetails.toggle()
                 // Adding first set
-                if viewModel.exerciseState.setsState.count == 0 && showDetails {
+                if viewModel.exerciseState.setsState.count == 0 && viewModel.showDetails {
                     // Add First Set if dose not exist
                     let newSet = SetModel(setIndex: 0)
                     $viewModel.exerciseState.setsState.wrappedValue.append(newSet)
                     // Update Server
                     WorkoutManager.shared.updateExercisesStates()
-                } else if !showDetails {
+                } else if !viewModel.showDetails {
                     WorkoutManager.shared.updateExercisesStates()
                 }
             }
             
             //MARK: - Dropdown View
-            if showDetails {
+            if viewModel.showDetails {
                 Divider()
                 VStack(alignment: .leading, spacing: 8) {
                     
                     ForEach($viewModel.exerciseState.setsState) { setsState in
                         let deleteEnable = setsState.setIndex.wrappedValue == viewModel.exerciseState.setsState.count-1
 
-                        SetView(isDeleteEnabled: deleteEnable, set: setsState, id: setsState.id, focusedField: _focusedField) { id in
+                        SetView(isDeleteEnabled: deleteEnable, id: setsState.id, set: setsState, focusedField: _focusedField) { id in
                             
                             // Toggle show details button if last set deleted
                             if viewModel.exerciseState.setsState.count == 1 {
                                 withAnimation {
-                                    showDetails.toggle()
+                                    viewModel.showDetails.toggle()
                                 }
                             }
                             
@@ -77,7 +74,7 @@ struct ExerciseDropViewContainer: View {
                         
                     }
                 }
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: showDetails ? .infinity : .none)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: viewModel.showDetails ? .infinity : .none)
                 .clipped()
                 
                 //MARK: - Add Set Button

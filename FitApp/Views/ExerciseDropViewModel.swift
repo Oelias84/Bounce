@@ -14,6 +14,8 @@ class ExerciseDropViewModel: ObservableObject {
 	private let index: Int
 	private let workoutExercise: WorkoutExercise
     
+    @Published var showDetails: Bool = false
+    @Published var isSetViewLock: Bool = false
     @Published var exerciseState: ExerciseState
     
     init(index: Int, workoutExercise: WorkoutExercise) {

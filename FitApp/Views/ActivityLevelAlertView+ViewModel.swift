@@ -11,6 +11,13 @@ extension ActivityLevelAlertView {
     
     class ViewModel: ObservableObject {
         
+        var minSteps: Double = 100
+        var maxSteps: Double = 30000
+        
+        var minKilometers: Double = 0.1
+        var maxKilometers: Double = 25.01
+
+        
         enum ViewState {
             case activity
             case lifeStyle

@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ExerciseListView: View {
     
-    @StateObject var viewModel: ExerciseListViewModel
+    @ObservedObject var viewModel: ExerciseListViewModel
+    
     @FocusState var focusedField: SetView.Field?
     
     let selectedExercise: (Int)->()

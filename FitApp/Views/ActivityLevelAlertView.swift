@@ -9,13 +9,7 @@ import SwiftUI
 
 struct ActivityLevelAlertView: View {
     
-    @ObservedObject var viewModel = ViewModel()
-    
-    private var minSteps: Double = 100
-    private var maxSteps: Double = 30000
-    
-    private var minKilometers: Double = 0.1
-    private var maxKilometers: Double = 25.01
+    @StateObject var viewModel = ViewModel()
     
     let action: () -> Void
     
@@ -104,8 +98,8 @@ struct ActivityLevelAlertView: View {
     var ActivityView: some View {
         VStack(alignment: .leading) {
             CheckBoxWithSliderView(title: "קילומטרים",
-                                   minSliderValue: minKilometers,
-                                   maxSliderValue: maxKilometers,
+                                   minSliderValue: viewModel.minKilometers,
+                                   maxSliderValue: viewModel.maxKilometers,
                                    counterFormat: kilometersFormat,
                                    value: $viewModel.kilometersValue,
                                    isChecked: $viewModel.isKilometeresChecked) {
@@ -115,8 +109,8 @@ struct ActivityLevelAlertView: View {
             Divider()
             
             CheckBoxWithSliderView(title: "צעדים",
-                                   minSliderValue: minSteps,
-                                   maxSliderValue: maxSteps,
+                                   minSliderValue: viewModel.minSteps,
+                                   maxSliderValue: viewModel.maxSteps,
                                    counterFormat: stepsFormat,
                                    value: $viewModel.stepsValue,
                                    isChecked: $viewModel.isStepsChecked) {
