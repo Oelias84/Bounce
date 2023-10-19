@@ -252,11 +252,9 @@ extension ChatViewController {
 				DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
 					self.ableInteraction()
 					self.messagesCollectionView.reloadDataAndKeepOffset()
+                    
 					if self.ifFirstLoad {
-						UIView.animate(withDuration: 0.5) {
-							self.messageInputBar.alpha = 1
-							self.messagesCollectionView.alpha = 1
-						}
+                        self.showChatTextField()
 						self.messagesCollectionView.scrollToLastItem(animated: false)
 					} else {
 						self.refreshControl.endRefreshing()
@@ -264,6 +262,8 @@ extension ChatViewController {
 				}
 			} else {
 				self.ableInteraction()
+                self.showChatTextField()
+                self.messagesCollectionView.scrollToLastItem(animated: false)
 			}
 		}
 	}
@@ -391,6 +391,12 @@ extension ChatViewController {
 	private func ableInteraction() {
 		Spinner.shared.stop()
 	}
+    private func showChatTextField() {
+        UIView.animate(withDuration: 0.5) {
+            self.messageInputBar.alpha = 1
+            self.messagesCollectionView.alpha = 1
+        }
+    }
 	@objc fileprivate func loadMoreMessages() {
 		DispatchQueue.global(qos: .userInteractive).async {
 			self.viewModel.listenToMessages()
