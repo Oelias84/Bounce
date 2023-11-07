@@ -98,8 +98,8 @@ extension ConsumptionManager {
     private func TDEE(gender: Gender, naturalMenu: Bool, weight: Double, fatPercentage: Double, Kilometer: Double?, lifeStyle: Double?, numberOfTrainings: Int) -> Double? {
 		
 		let LBM = weight * ((100 - fatPercentage) / 100)
-        let BMR = (LBM * 22.0) + (naturalMenu ? 500.0 : 0)
-		
+        let BMR = (LBM * 22.0) + 500.0
+        
 		var EAT: Double {
 			switch gender {
 			case .female:
@@ -109,21 +109,18 @@ extension ConsumptionManager {
 			}
 		}
 		
-		var NIT: Double!
-		
-		if let Kilometer = Kilometer {
-			NIT = (Kilometer * weight) * 0.93
-		} else if let lifeStyle = lifeStyle {
-			NIT = BMR * lifeStyle
-		} else {
-			return nil
-		}
+        var NIT: Double {
+            if let Kilometer {
+                return (Kilometer * weight) * 0.93
+            }
+            return BMR * lifeStyle!
+        }
 		
 		var result: Double {
-			if lifeStyle != nil {
-				return (NIT + EAT) - 500
+			if let lifeStyle {
+                return (NIT + EAT) - (naturalMenu ? 0 : 500.0)
 			}
-			return ((BMR * 1.1) + NIT + EAT) - 500
+			return ((BMR * 1.1) + NIT + EAT) - (naturalMenu ? 0 : 500.0)
 		}
 		
 		if result < 1200 {
