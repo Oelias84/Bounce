@@ -18,6 +18,8 @@ struct GoogleApiManager {
     
     static let shared = GoogleApiManager()
     
+    private init() {}
+    
     //MARK: - ApprovedUsersCheck
     func checkUserApproved(completion: @escaping (Result<Bool, Error>) -> Void) {
         do {
@@ -433,7 +435,7 @@ struct GoogleApiManager {
     }
     func getExerciseBy(completion: @escaping (Result<[Exercise], Error>) -> Void) {
         do {
-            db.collection("workouts-data").document("exercises").getDocument(source: .default, completion: { (data, error) in
+            db.collection("workouts-data").document("new-exercises").getDocument(source: .default, completion: { (data, error) in
                 if let error = error {
                     print(error)
                 } else if let data = data {
@@ -484,7 +486,7 @@ struct GoogleApiManager {
     }
     func getGymExerciseBy(completion: @escaping (Result<[Exercise], Error>) -> Void) {
         do {
-            db.collection("workouts-data").document("gym-exercises").getDocument(source: .default, completion: { (data, error) in
+            db.collection("workouts-data").document("new-gym-exercises").getDocument(source: .default, completion: { (data, error) in
                 if let error = error {
                     print(error)
                 } else if let data = data {
