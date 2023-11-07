@@ -11,9 +11,12 @@ enum WorkoutType: String, Codable {
     case home = "HOME"
     case gym = "GYM"
 }
+
 enum ExerciseType: String {
     case abs
-    case warmup
+    case full_warmup
+    case lower_warmup
+    case upper_warmup
     case legs
     case chest
     case back
