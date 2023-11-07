@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O8A-Ws-eqf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O8A-Ws-eqf">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -65,7 +65,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wKv-Jp-Dby">
-                                <rect key="frame" x="79.000000000000014" y="702" width="217.33333333333337" height="68"/>
+                                <rect key="frame" x="79.000000000000014" y="702.33333333333337" width="217.33333333333337" height="67.666666666666629"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="Znh-S2-ct8">
                                         <rect key="frame" x="0.0" y="0.0" width="217.33333333333334" height="42"/>
@@ -109,7 +109,7 @@
                                         </subviews>
                                     </stackView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="2" translatesAutoresizingMaskIntoConstraints="NO" id="2lU-vA-2Wz">
-                                        <rect key="frame" x="15.333333333333329" y="42" width="186.66666666666669" height="26"/>
+                                        <rect key="frame" x="15.333333333333329" y="42" width="186.33333333333337" height="25.666666666666671"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -267,7 +267,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jvZ-Dn-3ZE">
-                                <rect key="frame" x="79.000000000000014" y="702" width="217.33333333333337" height="68"/>
+                                <rect key="frame" x="79.000000000000014" y="702.33333333333337" width="217.33333333333337" height="67.666666666666629"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="wil-t5-hOU">
                                         <rect key="frame" x="0.0" y="0.0" width="217.33333333333334" height="42"/>
@@ -311,7 +311,7 @@
                                         </subviews>
                                     </stackView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="4" translatesAutoresizingMaskIntoConstraints="NO" id="2St-up-K8c">
-                                        <rect key="frame" x="15.333333333333329" y="42" width="186.66666666666669" height="26"/>
+                                        <rect key="frame" x="15.333333333333329" y="42" width="186.33333333333337" height="25.666666666666671"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -609,7 +609,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="v98-4V-ug1">
-                                <rect key="frame" x="79.000000000000014" y="702" width="217.33333333333337" height="68"/>
+                                <rect key="frame" x="79.000000000000014" y="702.33333333333337" width="217.33333333333337" height="67.666666666666629"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="ELa-CX-NAF">
                                         <rect key="frame" x="0.0" y="0.0" width="217.33333333333334" height="42"/>
@@ -653,7 +653,7 @@
                                         </subviews>
                                     </stackView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="3" translatesAutoresizingMaskIntoConstraints="NO" id="Log-jh-iNu">
-                                        <rect key="frame" x="15.333333333333329" y="42" width="186.66666666666669" height="26"/>
+                                        <rect key="frame" x="15.333333333333329" y="42" width="186.33333333333337" height="25.666666666666671"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -871,7 +871,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7Nq-Er-Cjc">
-                                <rect key="frame" x="79.000000000000014" y="702" width="217.33333333333337" height="68"/>
+                                <rect key="frame" x="79.000000000000014" y="702.33333333333337" width="217.33333333333337" height="67.666666666666629"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="yy0-hM-jDT">
                                         <rect key="frame" x="0.0" y="0.0" width="217.33333333333334" height="42"/>
@@ -917,7 +917,7 @@
                                         </subviews>
                                     </stackView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="5" translatesAutoresizingMaskIntoConstraints="NO" id="jag-Hx-QQj">
-                                        <rect key="frame" x="15.333333333333329" y="42" width="186.66666666666669" height="26"/>
+                                        <rect key="frame" x="15.333333333333329" y="42" width="186.33333333333337" height="25.666666666666671"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1272,10 +1272,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ygw-ub-OuK">
-                                <rect key="frame" x="94.333333333333329" y="682" width="186.66666666666669" height="88"/>
+                                <rect key="frame" x="94.333333333333329" y="682.33333333333337" width="186.33333333333337" height="87.666666666666629"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="nCE-Cw-Kyc">
-                                        <rect key="frame" x="13" y="0.0" width="160.66666666666666" height="62"/>
+                                        <rect key="frame" x="12.333333333333343" y="0.0" width="161.66666666666666" height="62"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTJ-hG-67b" userLabel="backButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="62"/>
@@ -1298,7 +1298,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxd-dP-u5a">
-                                                <rect key="frame" x="89.666666666666671" y="11" width="71.000000000000014" height="40"/>
+                                                <rect key="frame" x="89.666666666666671" y="11" width="72.000000000000014" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Ene-MW-PxM"/>
                                                 </constraints>
@@ -1324,7 +1324,7 @@
                                         </subviews>
                                     </stackView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="6" translatesAutoresizingMaskIntoConstraints="NO" id="bpe-VB-k6d">
-                                        <rect key="frame" x="0.0" y="62" width="186.66666666666666" height="26"/>
+                                        <rect key="frame" x="0.0" y="61.999999999999993" width="186.33333333333334" height="25.666666666666664"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1407,7 +1407,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="85y-dg-LYi">
-                                                <rect key="frame" x="0.0" y="127.33333333333336" width="299" height="53.666666666666671"/>
+                                                <rect key="frame" x="0.0" y="127.33333333333336" width="299" height="53.666666666666643"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="גובה" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xzD-MB-W37">
                                                         <rect key="frame" x="0.0" y="0.0" width="299" height="23.666666666666668"/>
@@ -1456,14 +1456,14 @@
                                                         <rect key="frame" x="0.0" y="25.666666666666686" width="299" height="28"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Acd-GO-7bb">
-                                                                <rect key="frame" x="0.0" y="0.0" width="175" height="28"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="235" height="28"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </view>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="300" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="vfe-gx-nNc" userLabel="Activity Level Textfield">
-                                                                <rect key="frame" x="175" y="0.0" width="124" height="28"/>
+                                                                <rect key="frame" x="235" y="0.0" width="64" height="28"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="28" id="FIY-jr-iaj"/>
-                                                                    <constraint firstAttribute="width" constant="124" id="nYa-p8-ZBe"/>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="nYa-p8-ZBe"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -1493,13 +1493,13 @@
                                                         <rect key="frame" x="0.0" y="25.666666666666686" width="299" height="28"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kld-Vq-xQT">
-                                                                <rect key="frame" x="0.0" y="0.0" width="235" height="28"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="253" height="28"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </view>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="300" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="bAg-kj-hM6" userLabel="Number Of Meals Textfield">
-                                                                <rect key="frame" x="235" y="0.0" width="64" height="28"/>
+                                                                <rect key="frame" x="253" y="0.0" width="46" height="28"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="64" id="nSx-nJ-yFm"/>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="nSx-nJ-yFm"/>
                                                                     <constraint firstAttribute="height" constant="28" id="q80-Tk-fuM"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
@@ -1536,7 +1536,7 @@
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="300" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="9uY-ZR-T76" userLabel="Number Of Meals Textfield">
                                                                 <rect key="frame" x="235" y="0.0" width="64" height="28"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="64" id="PNx-jz-Ixx"/>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="PNx-jz-Ixx"/>
                                                                     <constraint firstAttribute="height" constant="28" id="cBQ-ha-5dK"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
@@ -1567,14 +1567,14 @@
                                                         <rect key="frame" x="0.0" y="25.666666666666629" width="299" height="28"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zYY-gc-Ceo">
-                                                                <rect key="frame" x="0.0" y="0.0" width="235" height="28"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="253" height="28"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </view>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="300" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="ihi-df-reP" userLabel="Number Of Workouts Textfield">
-                                                                <rect key="frame" x="235" y="0.0" width="64" height="28"/>
+                                                                <rect key="frame" x="253" y="0.0" width="46" height="28"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="28" id="CKz-lL-5Y3"/>
-                                                                    <constraint firstAttribute="width" constant="64" id="be8-l4-CLO"/>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="be8-l4-CLO"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -1696,7 +1696,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VZl-a7-8fP">
-                                <rect key="frame" x="79.000000000000014" y="702" width="217.33333333333337" height="68"/>
+                                <rect key="frame" x="79.000000000000014" y="702.33333333333337" width="217.33333333333337" height="67.666666666666629"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="btT-aK-j6L">
                                         <rect key="frame" x="0.0" y="0.0" width="217.33333333333334" height="42"/>
@@ -1740,7 +1740,7 @@
                                         </subviews>
                                     </stackView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="1" translatesAutoresizingMaskIntoConstraints="NO" id="1uD-ro-OkP">
-                                        <rect key="frame" x="15.333333333333329" y="42" width="186.66666666666669" height="26"/>
+                                        <rect key="frame" x="15.333333333333329" y="42" width="186.33333333333337" height="25.666666666666671"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1753,7 +1753,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="wov-xo-vys" userLabel="Prompt Stack View">
                                         <rect key="frame" x="37" y="37" width="253" height="258"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="TfT-om-1li">
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TfT-om-1li">
                                                 <rect key="frame" x="0.0" y="0.0" width="253" height="34"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="300" verticalHuggingPriority="251" text="שם מלא" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wes-Ql-FJY">
@@ -1762,8 +1762,14 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="8gV-cB-1TH">
-                                                        <rect key="frame" x="116.66666666666664" y="0.0" width="136.33333333333337" height="34"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uet-2d-Hwe">
+                                                        <rect key="frame" x="64.666666666666686" y="0.0" width="116.33333333333331" height="34"/>
+                                                    </view>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="8gV-cB-1TH">
+                                                        <rect key="frame" x="189" y="0.0" width="64" height="34"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="vc7-pQ-5qA"/>
+                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                         <userDefinedRuntimeAttributes>
@@ -1773,6 +1779,9 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="34" id="qwI-sX-wLJ"/>
+                                                </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="j1Y-a5-ItB">
                                                 <rect key="frame" x="0.0" y="70" width="253" height="48"/>
@@ -1806,7 +1815,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="J51-UP-RFB">
                                                         <rect key="frame" x="163.33333333333334" y="0.0" width="89.666666666666657" height="34"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kyL-fV-kv6">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kyL-fV-kv6">
                                                                 <rect key="frame" x="0.0" y="0.0" width="64" height="34"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="64" id="aPN-6V-KvN"/>
@@ -1841,7 +1850,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Bnl-L6-faY">
                                                         <rect key="frame" x="166.33333333333334" y="0.0" width="86.666666666666657" height="34"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="Ivh-Kg-Zbh">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="Ivh-Kg-Zbh">
                                                                 <rect key="frame" x="0.0" y="0.0" width="64" height="34"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="64" id="tii-hb-Zcs"/>
@@ -1887,10 +1896,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="8R4-T8-Vmf" userLabel="Terms of use Stack View">
-                                <rect key="frame" x="60" y="598" width="255" height="60"/>
+                                <rect key="frame" x="51.666666666666657" y="598" width="272" height="60"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="kcH-v1-5Ct">
-                                        <rect key="frame" x="0.0" y="0.0" width="239" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="254" height="30"/>
                                         <subviews>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYe-mE-TEK" userLabel="Terrms Checkbox">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
@@ -1909,7 +1918,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1f-9o-ze9" userLabel="Terms View Button">
-                                                <rect key="frame" x="29" y="0.0" width="210" height="30"/>
+                                                <rect key="frame" x="29" y="0.0" width="225" height="30"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="קראתי ואני מאשר תקנון תנאי שימוש">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1924,7 +1933,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="n8o-Fp-dMo">
-                                        <rect key="frame" x="0.0" y="30" width="255" height="30"/>
+                                        <rect key="frame" x="0.0" y="30" width="272" height="30"/>
                                         <subviews>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUz-Bn-YDr" userLabel="Terrms Checkbox">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
@@ -1942,7 +1951,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0nE-1c-rf5" userLabel="Terms View Button">
-                                                <rect key="frame" x="29" y="0.0" width="226" height="30"/>
+                                                <rect key="frame" x="29" y="0.0" width="243" height="30"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="קראתי ואני מאשר את הצהרת הבריאות">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2010,7 +2019,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="zBe-kq-qYG">
-                                <rect key="frame" x="94.333333333333329" y="696" width="186.66666666666669" height="74"/>
+                                <rect key="frame" x="94.333333333333329" y="696.33333333333337" width="186.33333333333337" height="73.666666666666629"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="LW1-aS-e6z">
                                         <rect key="frame" x="24.666666666666671" y="0.0" width="137.33333333333331" height="22"/>
@@ -2052,7 +2061,7 @@
                                         </subviews>
                                     </stackView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="3" translatesAutoresizingMaskIntoConstraints="NO" id="fjM-D0-xBM">
-                                        <rect key="frame" x="0.0" y="48" width="186.66666666666666" height="26"/>
+                                        <rect key="frame" x="0.0" y="48" width="186.33333333333334" height="25.666666666666671"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2311,7 +2320,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6Lj-oo-xnE">
-                                <rect key="frame" x="94.333333333333329" y="702" width="186.66666666666669" height="68"/>
+                                <rect key="frame" x="94.333333333333329" y="702.33333333333337" width="186.33333333333337" height="67.666666666666629"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ha4-S3-x9N">
                                         <rect key="frame" x="60.333333333333321" y="0.0" width="65.666666666666686" height="42"/>
@@ -2332,7 +2341,7 @@
                                         </connections>
                                     </button>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" translatesAutoresizingMaskIntoConstraints="NO" id="1Bs-9a-6ZI">
-                                        <rect key="frame" x="0.0" y="42" width="186.66666666666666" height="26"/>
+                                        <rect key="frame" x="0.0" y="42" width="186.33333333333334" height="25.666666666666671"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2546,7 +2555,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JX8-dJ-b8C">
-                                <rect key="frame" x="79.000000000000014" y="702" width="217.33333333333337" height="68"/>
+                                <rect key="frame" x="79.000000000000014" y="702.33333333333337" width="217.33333333333337" height="67.666666666666629"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="86" translatesAutoresizingMaskIntoConstraints="NO" id="B0S-w1-dwU">
                                         <rect key="frame" x="0.0" y="0.0" width="217.33333333333334" height="42"/>
@@ -2590,7 +2599,7 @@
                                         </subviews>
                                     </stackView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="7" currentPage="4" translatesAutoresizingMaskIntoConstraints="NO" id="zcB-Qq-4vM">
-                                        <rect key="frame" x="15.333333333333329" y="42" width="186.66666666666669" height="26"/>
+                                        <rect key="frame" x="15.333333333333329" y="42" width="186.33333333333337" height="25.666666666666671"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="pageIndicatorTintColor" white="1" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
