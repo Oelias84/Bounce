@@ -14,7 +14,7 @@ class ChatViewModel {
 	private var chat: Chat?
 	private let messagesManager = MessagesManager.shared
 	
-	var messages: UiKitObservableObject<[Message]?> = UiKitObservableObject(nil)
+	var messages: UiKitObservableObject<[Message]> = UiKitObservableObject([])
 		
 	required init(chat: Chat?) {
 		
@@ -54,13 +54,13 @@ class ChatViewModel {
 		chat?.displayName
 	}
 	var messagesCount: Int {
-		messages.value?.count ?? 0
+		messages.value.count
 	}
 	var getLastMessage: Message? {
-		messages.value?.last
+		messages.value.last
 	}
 	func getMessageAt(_ indexPath: IndexPath) -> Message {
-		messages.value![indexPath.section]
+        messages.value[indexPath.section]
 	}
 	
 	var getSelfSender: Sender? {
