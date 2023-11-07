@@ -58,7 +58,7 @@ class WorkoutManager {
     private var workoutsStates: [WorkoutStates]? = [WorkoutStates]()
     private var exercisesStates: [ExerciseState]? = [ExerciseState]()
 
-    private let googleManager = GoogleApiManager()
+    private let googleManager = GoogleApiManager.shared
     
     public var finishFetching: ProjectObservableObject<Bool?> = ProjectObservableObject(nil)
     

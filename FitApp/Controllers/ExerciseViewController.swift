@@ -16,7 +16,7 @@ class ExerciseViewController: UIViewController {
 	private var currentVideoUrlIndex = 0
 	private let fullViewPlayer = AVPlayerViewController()
 
-	private let googleManager = GoogleApiManager()
+    private let googleManager = GoogleApiManager.shared
 	
 	private var playerContainerView: UIView!
 	@IBOutlet weak var containerView: UIView!

@@ -12,7 +12,7 @@ import FirebaseAuth
 class WeightsManager {
 	
 	static let shared = WeightsManager()
-	fileprivate var googleService = GoogleApiManager()
+    fileprivate var googleService = GoogleApiManager.shared
 	
 	var weights: ProjectObservableObject<[Weight]?> = ProjectObservableObject(nil)
 	var splittedWeeksWeightsPeriod: ProjectObservableObject<[WeightPeriod]?> = ProjectObservableObject(nil)

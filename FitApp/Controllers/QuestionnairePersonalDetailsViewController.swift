@@ -40,7 +40,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	private var weighWholeString: String?
 	private var weightFractionString: String?
     
-    private let googleManager = GoogleApiManager()
+    private let googleManager = GoogleApiManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()

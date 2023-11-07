@@ -23,7 +23,7 @@ class ArticleViewModel: NSObject {
     override init() {
         super.init()
         
-        googleService = GoogleApiManager()
+        googleService = GoogleApiManager.shared
         fetchArticles()
     }
 	

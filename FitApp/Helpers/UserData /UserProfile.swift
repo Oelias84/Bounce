@@ -213,7 +213,7 @@ extension UserProfile {
 		}
 	}
 	static func updateServer() {
-		let googleManager = GoogleApiManager()
+        let googleManager = GoogleApiManager.shared
 		
 		let data = ServerUserData (
 			termsApproval: defaults.termsApproval,
