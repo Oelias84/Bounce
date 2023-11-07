@@ -55,6 +55,7 @@ class QuestionnaireNutritionGoalViewController: UIViewController {
         } else {
             neutralMenuCheckMark.isSelected = false
             negativeMenuCheckMark.isSelected = true
+            UserProfile.defaults.naturalMenu = false
         }
     }
 }
