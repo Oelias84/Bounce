@@ -34,7 +34,11 @@ struct ExerciseData: Codable {
 	let exercises: [Exercise]
 	
 	enum CodingKeys: String, CodingKey {
-		
 		case exercises = "exercise-data"
 	}
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(exercises, forKey: .exercises)
+    }
 }
