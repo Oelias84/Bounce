@@ -509,36 +509,16 @@ struct GoogleApiManager {
         
         for i in 0..<videosArray.count {
             let video = videosArray[i]
-            #warning("Change here after version update!!!")
-            
-            guard let number = video.split(separator: "/").last else {
-                completion(.failure(ErrorManager.DatabaseError.failedToFetch))
-                return
-            }
-            
-            let oldVideoNumbers = ["66", "67", "57", "58", "68"]
-            let newVideoNumbers = ["s9", "s10", "h7a", "h7b", "h9"]
-            
-            var newNumber: String {
-                if let index = oldVideoNumbers.firstIndex(of: String(number)) {
-                    return newVideoNumbers[index]
-                }
-                return String(number)
-            }
             
             var type: String {
-                switch exerciseType {
-                case "quad", "hamstring":
-                    return "legs"
-                case "stomach":
-                    return "abs"
-                default:
-                    return exerciseType
+                if exerciseType == "full_warmup" || exerciseType == "lower" || exerciseType == "upper" {
+                    return "warmup"
                 }
+                return exerciseType
             }
             
             let storage = Storage.storage(url: "gs://my-fit-app-exercise-videos")
-            let pathReference = storage.reference(withPath: "\(type)/\(newNumber).mp4")
+            let pathReference = storage.reference(withPath: "\(type)/\(video).mp4")
 
             group.enter()
             pathReference.downloadURL { url, error in
@@ -727,5 +707,3 @@ struct GoogleApiManager {
 struct DishArray:Codable {
     let protein: [String]
 }
-
-
