@@ -244,13 +244,7 @@ class WorkoutManager {
             if exercise.text == "" { continue }
             
             var exerciseType: ExerciseType {
-                #warning("Remove this condition once the users have download the new version and change the exersise type on firebase from stomach --> abs")
-                
-                if exercise.type == "stomach" {
-                    return .abs
-                } else {
-                    return ExerciseType(rawValue: exercise.type)!
-                }
+                ExerciseType(rawValue: exercise.type)!
             }
             
             if let containedExerciseType = exercisesByType.first(where: {$0.type == exerciseType}) {
