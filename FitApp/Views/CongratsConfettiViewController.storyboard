@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -41,7 +41,7 @@
                                             <rect key="frame" x="26" y="98" width="338" height="648"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" איזה כיף, סיימתי אימון 😁  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLQ-nV-535">
-                                                    <rect key="frame" x="66" y="575.66666666666663" width="206" height="26.333333333333371"/>
+                                                    <rect key="frame" x="46" y="575.66666666666663" width="246" height="26.333333333333371"/>
                                                     <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="20"/>
                                                     <color key="textColor" name="ProjectLightGreen"/>
                                                     <nil key="highlightedColor"/>
@@ -61,10 +61,12 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="dLQ-nV-535" firstAttribute="centerX" secondItem="ft9-wX-y8t" secondAttribute="centerX" id="1am-js-gyl"/>
+                                                <constraint firstAttribute="trailing" secondItem="dLQ-nV-535" secondAttribute="trailing" constant="46" id="3hO-jb-BcF"/>
                                                 <constraint firstItem="8od-lZ-ipR" firstAttribute="leading" secondItem="ft9-wX-y8t" secondAttribute="leading" constant="20" id="7NJ-Ej-fv1"/>
                                                 <constraint firstAttribute="trailing" secondItem="8od-lZ-ipR" secondAttribute="trailing" constant="20" id="8S8-ez-xBf"/>
                                                 <constraint firstItem="8od-lZ-ipR" firstAttribute="centerX" secondItem="ft9-wX-y8t" secondAttribute="centerX" id="Ect-m7-IG2"/>
                                                 <constraint firstItem="dLQ-nV-535" firstAttribute="top" secondItem="8od-lZ-ipR" secondAttribute="bottom" constant="26" id="Lho-MF-Otz"/>
+                                                <constraint firstItem="dLQ-nV-535" firstAttribute="leading" secondItem="ft9-wX-y8t" secondAttribute="leading" constant="46" id="QuP-U2-XhB"/>
                                                 <constraint firstAttribute="bottom" secondItem="dLQ-nV-535" secondAttribute="bottom" constant="46" id="UZD-hO-TKT"/>
                                                 <constraint firstItem="8od-lZ-ipR" firstAttribute="top" secondItem="ft9-wX-y8t" secondAttribute="top" constant="20" id="VBX-Qa-XoR"/>
                                             </constraints>
