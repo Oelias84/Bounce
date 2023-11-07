@@ -76,7 +76,7 @@ struct ExerciseView: View {
                     Text("סטים: X\(numberOfSetes)")
                         .font(Font.custom(K.Fonts.regularText, size: 16))
                     
-                    Text("חזרות: X\(numberOfRepeats)")
+                    Text("חזרות: \(numberOfRepeats)")
                         .font(Font.custom(K.Fonts.regularText, size: 16))
                     Spacer()
                 }
@@ -113,25 +113,25 @@ struct ExerciseView: View {
 	var getTag: (String, UIColor) {
 		switch type {
         case "glutes":
-            return ("ישבן", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
+            return ("Glutes", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
         case "quad":
-            return ("ירך אחורית", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
+            return ("Quad", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
         case "hamstring":
-            return ("ירך קידמית", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
+            return ("Hamstring", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
 		case "legs":
 			return ("רגליים", #colorLiteral(red: 0.3882352941, green: 0.6392156863, blue: 0.2941176471, alpha: 1))
 		case "chest":
-			return ("חזה", #colorLiteral(red: 0.1863320172, green: 0.6013119817, blue: 0.9211298823, alpha: 1))
+			return ("Chest", #colorLiteral(red: 0.1863320172, green: 0.6013119817, blue: 0.9211298823, alpha: 1))
 		case "back":
-			return ("גב", #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1))
+			return ("Back", #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1))
 		case "shoulders":
-			return ("כתפיים", #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))
+			return ("Shoulders", #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))
 		case "stomach":
 			return ("בטן", #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1))
         case "abs":
-            return ("בטן", #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1))
+            return ("Abs", #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1))
 		case "warmup":
-			return ("חימום", .lightGray)
+			return ("Warmup", .lightGray)
 		default:
 			return ("", UIColor.white)
 		}
