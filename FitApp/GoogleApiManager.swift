@@ -511,10 +511,12 @@ struct GoogleApiManager {
             let video = videosArray[i]
             
             var type: String {
-                if exerciseType == "full_warmup" || exerciseType == "lower" || exerciseType == "upper" {
+                switch ExerciseType(rawValue: exerciseType) {
+                case .full_warmup, .lower_warmup, .upper_warmup:
                     return "warmup"
+                default:
+                    return exerciseType
                 }
-                return exerciseType
             }
             
             let storage = Storage.storage(url: "gs://my-fit-app-exercise-videos")
