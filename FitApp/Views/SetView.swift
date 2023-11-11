@@ -64,7 +64,6 @@ struct SetView: View {
             // Remove Button
             if isDeleteEnabled {
                 Button {
-                    focusedField = nil
                     if let id = id {
                         action(id)
                     }

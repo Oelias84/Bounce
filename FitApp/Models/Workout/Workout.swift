@@ -84,7 +84,7 @@ class ExerciseState: Codable {
 	var exerciseNumber: Int
 	var setsState: [SetModel]
 	
-	init(exerciseNumber: Int, setsState: [SetModel] = [SetModel]()) {
+	init(exerciseNumber: Int, setsState: [SetModel] = []) {
 		self.exerciseNumber = exerciseNumber
 		self.setsState = setsState
 	}

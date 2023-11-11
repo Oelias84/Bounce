@@ -66,9 +66,9 @@ struct ExerciseDropViewContainer: View {
                             
                             // Remove if find
                             if let index = $viewModel.exerciseState.setsState.wrappedValue.firstIndex(where: {$0.id == id}) {
-                                focusedField = nil
                                 $viewModel.exerciseState.setsState.wrappedValue.remove(at: index)
                             }
+                            
                             // Update Server
                             WorkoutManager.shared.updateExercisesStates()
                         }
