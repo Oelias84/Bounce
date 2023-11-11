@@ -20,7 +20,8 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	@IBOutlet weak var termsOfUseCheckMarkButton: UIButton!
 	@IBOutlet weak var healthTermsViewButton: UIButton!
 	
-	@IBOutlet weak var termsButtonsStackView: UIStackView!
+    @IBOutlet weak var healthTermsCheckMarkButton: UIButton!
+    @IBOutlet weak var termsButtonsStackView: UIStackView!
 	
 	@IBOutlet weak var nextButton: UIButton!
 	
@@ -270,10 +271,13 @@ extension QuestionnairePersonalDetailsViewController {
 			self.userName = name
 		}
 		if userData.termsApproval != nil {
-			termsButtonsStackView.isHidden = true
 			userHasCheckedTermOfUse = true
-			userHasCheckedHealth = true
+            termsOfUseCheckMarkButton.isSelected = true
 		}
+        if userData.healthApproval != nil {
+            userHasCheckedHealth = true
+            healthTermsCheckMarkButton.isSelected = true
+        }
 	}
 	private func configureTextFields() {
 		
