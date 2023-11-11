@@ -40,7 +40,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft9-wX-y8t">
                                             <rect key="frame" x="26" y="98" width="338" height="648"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" איזה כיף, סיימתי אימון 😁  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLQ-nV-535">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" איזה כיף, סיימתי אימון 😁  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLQ-nV-535">
                                                     <rect key="frame" x="46" y="575.66666666666663" width="246" height="26.333333333333371"/>
                                                     <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="20"/>
                                                     <color key="textColor" name="ProjectLightGreen"/>
