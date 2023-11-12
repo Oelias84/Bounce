@@ -134,8 +134,12 @@ struct ExerciseView: View {
             return ("בטן", #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1))
         case "abs":
             return ("Abs", #colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1))
-        case "warmup":
-            return ("Warmup", .lightGray)
+        case "full_warmup":
+            return ("Full Warmup", .lightGray)
+        case "lower_warmup":
+            return ("Lower Warmup", .lightGray)
+        case "upper_warmup":
+            return ("Upper Warmup", .lightGray)
         default:
             return ("", UIColor.white)
         }
