@@ -108,10 +108,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
             default:
-                stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
                 stepperCell.titleLabel.textColor = .red
                 stepperCell.labelStackView.isHidden = true
-                stepperCell.titleLabel.font = UIFont(name: "Assistant-SemiBold", size: 14.0)
+                stepperCell.settingsCellData = viewModel.getCellViewModelFor(indexPath)
             }
         default:
             return UITableViewCell()
@@ -163,16 +162,23 @@ extension SettingsViewController: SettingsStepperViewCellDelegate {
             switch cellIndex.section {
             case 0:
                 break
-            case 1:
-                //Nutrition
-                switch cellIndex.row {
-                case 1:
-                    mealStepperAction(newValue)
-                default:
-                    break
+            case 1: //Nutrition
+                if IOSKeysManager.shared.isFeatureOpen(.neutralMenu) {
+                    switch cellIndex.row {
+                    case 1:
+                        mealStepperAction(newValue)
+                    default:
+                        break
+                    }
+                } else {
+                    switch cellIndex.row {
+                    case 0:
+                        mealStepperAction(newValue)
+                    default:
+                        break
+                    }
                 }
-            case 2:
-                //Fitness Level
+            case 2: //Fitness Level
                 switch cellIndex.row {
                 case 1:
                     workoutStepperAction(newValue)
@@ -277,13 +283,22 @@ extension SettingsViewController {
         contentView.showPopup()
     }
     private func nutritionDetailsTappedAt(_ row: Int) {
-        switch row {
-        case 0:
-            moveToOptoinsVC(for: .nutritios)
-        case 2:
-            moveToOptoinsVC(for: .mostHungry)
-        default:
-            break
+        if IOSKeysManager.shared.isFeatureOpen(.neutralMenu) {
+            switch row {
+            case 0:
+                moveToOptoinsVC(for: .nutritios)
+            case 2:
+                moveToOptoinsVC(for: .mostHungry)
+            default:
+                break
+            }
+        } else {
+            switch row {
+            case 1:
+                moveToOptoinsVC(for: .mostHungry)
+            default:
+                break
+            }
         }
     }
     private func fitnessLevelDetailsTappedAt(_ row: Int) {

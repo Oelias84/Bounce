@@ -21,13 +21,9 @@ class SettingsViewModel {
     var inCameraMode: Bool = false
     private var optionContentType: SettingsContentType!
     private let userGender = UserProfile.defaults.getGender
-    private var userData: UserProfile! = UserProfile.defaults
+    private var userData = UserProfile.defaults
 
     private var tableViewData: [SettingsMenu: [SettingsCell]] = [:]
-
-    init() {
-        userData = UserProfile.defaults
-    }
     
     //MARK: - Getters
     var getContentType: SettingsContentType {
@@ -56,7 +52,6 @@ class SettingsViewModel {
                 SettingsCell(title: "רמת פעילות", secondaryTitle: getActivityTitle)
             ],
             .nutrition: [
-                SettingsCell(title: "סוג תפריט", secondaryTitle: getNutritiousTitle),
                 SettingsCell(title: "מספר ארוחות", stepperValue: setupNumberOfMealsStepper.2, stepperMin: setupNumberOfMealsStepper.0, stepperMax: setupNumberOfMealsStepper.1),
                 SettingsCell(title: StaticStringsManager.shared.getGenderString?[21] ?? "", secondaryTitle: getMostHungryTitle)
             ],
@@ -71,6 +66,9 @@ class SettingsViewModel {
                 SettingsCell(title:  StaticStringsManager.shared.getGenderString?[40] ?? "", secondaryTitle: "")
             ]
         ]
+        if IOSKeysManager.shared.isFeatureOpen(.neutralMenu) {
+            tableViewData[.nutrition]?.insert(SettingsCell(title: "סוג תפריט", secondaryTitle: getNutritiousTitle), at: 0)
+        }
         completion()
     }
     
