@@ -156,6 +156,22 @@ struct GoogleApiManager {
             }
         }
     }
+    func getFeaturesKeys(completion: @escaping (Result<FeaturesKeyModel, Error>) -> Void) {
+        do {
+            db.collection("features-keys").document("IOS").getDocument() { (data, error) in
+                if let error = error {
+                    completion(.failure(error))
+                } else if let data = data {
+                    do {
+                        let decodedData = try data.data(as: FeaturesKeyModel.self)
+                        completion(.success(decodedData))
+                    } catch {
+                        completion(.failure(ErrorManager.DatabaseError.failedToDecodeData))
+                    }
+                }
+            }
+        }
+    }
     
     //MARK: - Meals
     func createDailyMeal(meals: [Meal], date: Date) {
