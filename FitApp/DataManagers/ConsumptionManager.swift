@@ -117,7 +117,7 @@ extension ConsumptionManager {
         }
 		
 		var result: Double {
-			if let lifeStyle {
+			if lifeStyle != nil {
                 return (NIT + EAT) - (naturalMenu ? 0 : 500.0)
 			}
 			return ((BMR * 1.1) + NIT + EAT) - (naturalMenu ? 0 : 500.0)
