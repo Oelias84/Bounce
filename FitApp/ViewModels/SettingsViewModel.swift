@@ -50,13 +50,13 @@ class SettingsViewModel {
         return tableViewData[type]![indexPath.row]
     }
     
-    func setupTableViewData(complition: @escaping ()->Void) {
+    func setupTableViewData(completion: ()->Void) {
         tableViewData = [
             .activity: [
                 SettingsCell(title: "רמת פעילות", secondaryTitle: getActivityTitle)
             ],
             .nutrition: [
-                SettingsCell(title: "סוג תפריט", secondaryTitle: getNutritiosTitle),
+                SettingsCell(title: "סוג תפריט", secondaryTitle: getNutritiousTitle),
                 SettingsCell(title: "מספר ארוחות", stepperValue: setupNumberOfMealsStepper.2, stepperMin: setupNumberOfMealsStepper.0, stepperMax: setupNumberOfMealsStepper.1),
                 SettingsCell(title: StaticStringsManager.shared.getGenderString?[21] ?? "", secondaryTitle: getMostHungryTitle)
             ],
@@ -71,15 +71,11 @@ class SettingsViewModel {
                 SettingsCell(title:  StaticStringsManager.shared.getGenderString?[40] ?? "", secondaryTitle: "")
             ]
         ]
-        complition()
-    }
-    
-    func refresh() {
-        userData = UserProfile.defaults
+        completion()
     }
     
     //MARK: - Private Funcs
-    private var getNutritiosTitle: String {
+    private var getNutritiousTitle: String {
         if let naturalMenu = userData.naturalMenu {
             return naturalMenu == true ? "נטרלי" : "חיטוב"
         } else {
