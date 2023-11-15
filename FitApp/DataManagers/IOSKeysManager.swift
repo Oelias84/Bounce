@@ -13,7 +13,7 @@ final class IOSKeysManager {
         case neutralMenu
     }
     
-    var keys: FeaturesKeyModel?
+    private var keys: FeaturesKeyModel?
 
     static let shared = IOSKeysManager()
     
