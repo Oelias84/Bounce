@@ -8,11 +8,14 @@
 import UIKit
 
 class QuestionnaireFatPresentViewController: UIViewController {
-	
+    
 	private var selectedPercentage: String?
 	private var isFirstLoad = true
-	private var index: Int?
-	
+	private var index: Int = 0
+    
+    @IBOutlet weak var carouselRightButton: UIButton!
+    @IBOutlet weak var carouselLeftButton: UIButton!
+        
 	var currentIndex: IndexPath {
 		let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
 		let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
@@ -33,14 +36,20 @@ class QuestionnaireFatPresentViewController: UIViewController {
 		setupTextFields()
 		setupSelectedImage()
 		setUpCollectionView()
+        updateCarouselButtonsAppearance()
 	}
 	
-	@IBAction func scrollForewordButtonAction(_ sender: Any) {
-		collectionView.scrollToItem(at: IndexPath(item: currentIndex.row + 1, section: 0), at: .centeredHorizontally, animated: true)
-
+	@IBAction func carouselLeftButtonAction(_ sender: Any) {
+        index += 1
+        updateCarouselButtonsAppearance()
+        collectionView.scrollToItem(at: IndexPath(item: index, section: 0), 
+                                    at: .centeredHorizontally, animated: true)
 	}
-	@IBAction func scrollBackButtonAction(_ sender: Any) {
-		collectionView.scrollToItem(at: IndexPath(item: currentIndex.row - 1, section: 0), at: .centeredHorizontally, animated: true)
+	@IBAction func carouselRightButtonAction(_ sender: Any) {
+        index -= 1
+        updateCarouselButtonsAppearance()
+        collectionView.scrollToItem(at: IndexPath(item: index, section: 0), 
+                                    at: .centeredHorizontally, animated: true)
 	}
 
 	@IBAction func backButtonAction(_ sender: Any) {
@@ -87,6 +96,7 @@ extension QuestionnaireFatPresentViewController: UICollectionViewDelegate, UICol
 }
 
 extension QuestionnaireFatPresentViewController {
+    
 	private func setupTextFields() {
 		titleTextLabel.text = StaticStringsManager.shared.getGenderString?[4]
 	}
@@ -128,13 +138,24 @@ extension QuestionnaireFatPresentViewController {
 			}
 		}
 		DispatchQueue.main.async {
-			self.collectionView.scrollToItem(at: IndexPath(item: self.index ?? 0, section: 0), at: .centeredHorizontally, animated: true)
+			self.collectionView.scrollToItem(at: IndexPath(item: self.index, section: 0),
+                                             at: .centeredHorizontally, animated: true)
 		}
 	}
 	private func setUpCollectionView() {
 		collectionView.isUserInteractionEnabled = true
 		layout(collectionView)
 	}
+    private func updateCarouselButtonsAppearance() {
+        if index == 5 {
+            carouselRightButton.isHidden = true
+        } else if index == 0 {
+            carouselLeftButton.isHidden = true
+        } else {
+            carouselLeftButton.isHidden = false
+            carouselRightButton.isHidden = false
+        }
+    }
 	
 	//MARK: - CollectionView CompositionalLayout
 	private func layout(_ collectionView: UICollectionView) {

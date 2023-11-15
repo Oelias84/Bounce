@@ -176,7 +176,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="scrollBackButtonAction:" destination="pSN-kH-Eth" eventType="touchUpInside" id="Hkf-bG-HBm"/>
+                                            <action selector="carouselRightButtonAction:" destination="pSN-kH-Eth" eventType="touchUpInside" id="Hkf-bG-HBm"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="אנא בחרי את התמונה שהכי משקפת את הנראות שלך" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zyd-iD-ZRb">
@@ -200,7 +200,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="scrollForewordButtonAction:" destination="pSN-kH-Eth" eventType="touchUpInside" id="1Wx-7e-UVA"/>
+                                            <action selector="carouselLeftButtonAction:" destination="pSN-kH-Eth" eventType="touchUpInside" id="1Wx-7e-UVA"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -246,6 +246,8 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="C88-MQ-EkB"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="carouselLeftButton" destination="vsp-EA-oMM" id="EFn-hh-msz"/>
+                        <outlet property="carouselRightButton" destination="OqG-Qw-7Gl" id="vQf-B0-PZz"/>
                         <outlet property="collectionView" destination="haf-7R-eyy" id="Z5U-2a-ogt"/>
                         <outlet property="titleTextLabel" destination="Zyd-iD-ZRb" id="6DG-nA-oL8"/>
                         <segue destination="9J8-iP-E6D" kind="show" identifier="moveToActivity" id="YLV-FR-FGj"/>
@@ -1407,7 +1409,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="85y-dg-LYi">
-                                                <rect key="frame" x="0.0" y="127.33333333333336" width="299" height="53.666666666666671"/>
+                                                <rect key="frame" x="0.0" y="127.33333333333336" width="299" height="53.666666666666643"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="גובה" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xzD-MB-W37">
                                                         <rect key="frame" x="0.0" y="0.0" width="299" height="23.666666666666668"/>
