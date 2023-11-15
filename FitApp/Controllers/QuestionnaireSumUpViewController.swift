@@ -24,7 +24,8 @@ class QuestionnaireSumUpViewController: UIViewController {
 	@IBOutlet weak var numberOfExternalWorkoutsLabel: UITextField!
 	@IBOutlet weak var numberOfExternalWorkoutsStack: UIStackView!
 	
-
+    @IBOutlet weak var menuGoalStackView: UIStackView!
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationItem.setHidesBackButton(true, animated: false)
@@ -69,65 +70,6 @@ class QuestionnaireSumUpViewController: UIViewController {
 		}
 	}
 }
-extension QuestionnaireSumUpViewController: UITextFieldDelegate {
-//
-//	func textFieldDidBeginEditing(_ textField: UITextField) {
-//
-//		let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-//
-//		switch textField {
-//		case ageLabel:
-//			print(textField.text)
-//		case weightLabel:
-//			print(textField.text)
-//		case heightLabel:
-//			print(textField.text)
-//		case activityLevelLabel:
-//			if userData.kilometer != nil || UserProfile.defaults.steps != nil  {
-//				if let vc = viewControllers.filter({ $0 is QuestionnaireActivityViewController }).first {
-//					navigationController!.popToViewController(vc, animated: true)
-//				}
-//			} else {
-//				if let vc = viewControllers.filter({ $0 is QuestionnaireSecondActivityViewController }).first {
-//					navigationController!.popToViewController(vc, animated: true)
-//				}
-//			}
-//		case numberOfMealsLabel:
-//			print("")
-//		case numberOfWorkoutsLabel:
-//			print("")
-//		case numberOfExternalWorkoutsLabel:
-//			print("")
-//		case numberOfExternalWorkoutsStack:
-//			print("")
-//		default:
-//			break
-//		}
-//	}
-//	func textFieldDidEndEditing(_ textField: UITextField) {
-//
-//		switch textField {
-//		case ageLabel:
-//
-//		case weightLabel:
-//			print(textField.text)
-//		case heightLabel:
-//			print(textField.text)
-//		case activityLevelLabel:
-//			print(textField.text)
-//		case numberOfMealsLabel:
-//			print("")
-//		case numberOfWorkoutsLabel:
-//			print("")
-//		case numberOfExternalWorkoutsLabel:
-//			print("")
-//		case numberOfExternalWorkoutsStack:
-//			print("")
-//		default:
-//			break
-//		}
-//	}
-}
 
 extension QuestionnaireSumUpViewController {
 	
@@ -145,15 +87,18 @@ extension QuestionnaireSumUpViewController {
            let birthDate = userData.birthDate,
 		   let height = userData.height,
            let mealsPerDay = userData.mealsPerDay,
-		   let weaklyWorkouts = userData.weaklyWorkouts,
-           let menuGoal = userData.naturalMenu {
+		   let weaklyWorkouts = userData.weaklyWorkouts {
 			
 			ageLabel.text = birthDate.age
 			weightLabel.text = "\(weight) " + K.Units.Kilograms
 			heightLabel.text = "\(height) " + K.Units.centimeter
 			numberOfMealsLabel.text = "\(mealsPerDay)"
 			numberOfWorkoutsLabel.text = "\(weaklyWorkouts)"
-            menuGoalLabel.text = menuGoal ? "שמירה על משקל" : "חיטוב"
+            
+            if IOSKeysManager.shared.isFeatureOpen(.neutralMenu) {
+                menuGoalStackView.isHidden = false
+                menuGoalLabel.text = userData.naturalMenu == true ? StaticStringsManager.shared.getGenderString?[46] ?? "" : StaticStringsManager.shared.getGenderString?[48] ?? ""
+            }
 		}
 		
 		if let externalWorkout = userData.externalWorkout, externalWorkout != 0 {

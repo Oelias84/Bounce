@@ -273,8 +273,8 @@
         {
             "name": "natural_menu_title",
             "key": "46",
-            "male": "שמירה על המשקל",
-            "female": "שמירה על המשקל",
+            "male": "שמירה על משקל",
+            "female": "שמירה על משקל",
         },
         {
             "name": "natural_menu_text",

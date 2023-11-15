@@ -43,7 +43,12 @@ class QuestionnaireNutritionViewController: UIViewController {
 		if numberOfMeals != 0 && mostHunger != 0 {
 			UserProfile.defaults.mealsPerDay = numberOfMeals
 			UserProfile.defaults.mostHungry = mostHunger
-			performSegue(withIdentifier: K.SegueId.moveToNutritionGoal, sender: self)
+            
+            if IOSKeysManager.shared.isFeatureOpen(.neutralMenu) {
+                performSegue(withIdentifier: K.SegueId.moveToNutritionGoal, sender: self)
+            } else {
+                performSegue(withIdentifier: K.SegueId.moveToFitnessLevel, sender: self)
+            }
 		} else if numberOfMeals == 0 {
 			presentOkAlert(withTitle: "אופס",withMessage: StaticStringsManager.shared.getGenderString?[37] ?? "", buttonText: "הבנתי")
 			return

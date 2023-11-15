@@ -84,7 +84,7 @@ extension SettingsOptionsViewModel {
 		
 		switch contentType {
         case .nutritios:
-            tableViewItemArray = ["נטרלי" ,"חיטוב"]
+            tableViewItemArray =  [StaticStringsManager.shared.getGenderString?[46] ?? "", StaticStringsManager.shared.getGenderString?[48] ?? ""]
 		case .fitnessLevel:
 			tableViewItemArray = [StaticStringsManager.shared.getGenderString?[14] ?? "מתחיל", "ביניים", StaticStringsManager.shared.getGenderString?[17] ?? "מתקדם"]
 		case .mostHungry:

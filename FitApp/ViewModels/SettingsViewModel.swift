@@ -75,10 +75,10 @@ class SettingsViewModel {
     //MARK: - Private Funcs
     private var getNutritiousTitle: String {
         if let naturalMenu = userData.naturalMenu {
-            return naturalMenu == true ? "נטרלי" : "חיטוב"
+            return naturalMenu == true ? StaticStringsManager.shared.getGenderString?[46] ?? "" : StaticStringsManager.shared.getGenderString?[48] ?? ""
         } else {
             UserProfile.defaults.naturalMenu = true
-            return "נטרלי"
+            return StaticStringsManager.shared.getGenderString?[46] ?? ""
         }
     }
     private var getActivityTitle: String {
