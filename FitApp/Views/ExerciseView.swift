@@ -46,7 +46,7 @@ struct ExerciseView: View {
                 //MARK: - Exercise Options Button
                 let exerciseType = ExerciseType(rawValue: type)
                 
-                if !(exerciseType == .full_warmup || exerciseType == .lower_warmup || exerciseType == .lower_warmup) {
+                if !(exerciseType == .full_warmup || exerciseType == .lower_warmup || exerciseType == .upper_warmup) {
                     Button {
                         guard let exerciseNumber else { return }
                         replacerButtonAction(exerciseNumber)
