@@ -46,6 +46,20 @@ class SettingsOptionsTableViewController: UIViewController {
             viewModel.updateNotification()
         }
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if contentType == .fitnessLevel {
+            WorkoutManager.shared.removePreferredWorkoutData {
+                // Reloading manager data
+                WorkoutManager.shared.loadData()
+                // Update server
+                UserProfile.updateServer()
+                // Remove Spinner
+                Spinner.shared.stop()
+            }
+        }
+    }
 }
 
 //MARK: - Delegate
