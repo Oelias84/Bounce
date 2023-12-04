@@ -103,15 +103,6 @@ class WorkoutManager {
         }
     }
     
-    func addWarmup(_ type: WorkoutType) -> WorkoutExercise {
-        switch type {
-        case .home:
-            return WorkoutExercise(exercise: "13", repeats: "10", sets: "3", exerciseToPresent: nil)
-        case .gym:
-            return WorkoutExercise(exercise: "17", repeats: "10", sets: "3", exerciseToPresent: nil)
-        }
-    }
-    
     //MARK: - Getters
     var getCurrentWorkoutType: WorkoutType {
         currentWorkoutType
@@ -273,9 +264,6 @@ class WorkoutManager {
                 
                 switch result {
                 case .success(let workouts):
-                    workouts.forEach {
-                        $0.exercises.insert(self.addWarmup(.home), at: 0)
-                    }
                     self.homeWorkouts.append(contentsOf: workouts.filter {$0.type == weeklyWorkout})
                 case .failure(let error):
                     print("There was an issue getting workouts: ", error )
@@ -297,9 +285,6 @@ class WorkoutManager {
                 
                 switch result {
                 case .success(let workouts):
-                    workouts.forEach {
-                        $0.exercises.insert(self.addWarmup(.gym), at: 0)
-                    }
                     self.gymWorkouts.append(contentsOf: workouts.filter {$0.type == weeklyWorkout})
                 case .failure(let error):
                     print("There was an issue getting workouts: ", error )
