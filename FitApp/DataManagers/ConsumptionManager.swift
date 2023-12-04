@@ -109,11 +109,14 @@ extension ConsumptionManager {
 			}
 		}
 		
-        var NIT: Double {
-            if let Kilometer {
-                return (Kilometer * weight) * 0.93
-            }
-            return BMR * lifeStyle!
+        var NIT: Double!
+        
+        if let Kilometer = Kilometer {
+            NIT = (Kilometer * weight) * 0.93
+        } else if let lifeStyle = lifeStyle {
+            NIT = BMR * lifeStyle
+        } else {
+            return nil
         }
 		
 		var result: Double {
