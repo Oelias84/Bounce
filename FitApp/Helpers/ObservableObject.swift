@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class ObservableObject<T> {
+final class ProjectObservableObject<T> {
 	
 	var value: T {
 		didSet {

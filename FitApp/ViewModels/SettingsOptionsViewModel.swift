@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingTableViewModel {
+class SettingsOptionsViewModel {
 	
 	var vc: UIViewController!
 	var contentType: SettingsContentType!
@@ -38,15 +38,13 @@ class SettingTableViewModel {
 }
 
 //MARK: - Delegates
-extension SettingTableViewModel: PopupAlertViewDelegate {
+extension SettingsOptionsViewModel: PopupAlertViewDelegate {
 	
 	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
 		guard let level = level else { return }
 		
 		switch self.level {
-		case 1:
-			UserProfile.defaults.weaklyWorkouts = 2
-		case 2:
+        case 1, 2:
 			UserProfile.defaults.weaklyWorkouts = 2
 		case 3:
 			UserProfile.defaults.weaklyWorkouts = 3
@@ -64,12 +62,14 @@ extension SettingTableViewModel: PopupAlertViewDelegate {
 }
 
 //MARK: - Functions
-extension SettingTableViewModel {
+extension SettingsOptionsViewModel {
 	
 	//MARK: - Setters
 	private func setTitle() {
 		
 		switch contentType {
+        case .nutritios:
+            tableViewTitle = ""
 		case .fitnessLevel:
 			tableViewTitle = "רמת כושר"
 		case .mostHungry:
@@ -83,56 +83,84 @@ extension SettingTableViewModel {
 	private func setTableView() {
 		
 		switch contentType {
+        case .nutritios:
+            tableViewItemArray =  [StaticStringsManager.shared.getGenderString?[46] ?? "", StaticStringsManager.shared.getGenderString?[48] ?? ""]
 		case .fitnessLevel:
 			tableViewItemArray = [StaticStringsManager.shared.getGenderString?[14] ?? "מתחיל", "ביניים", StaticStringsManager.shared.getGenderString?[17] ?? "מתקדם"]
 		case .mostHungry:
 			tableViewItemArray = ["בוקר", "צהריים", "ערב", "לא ידוע"]
 		case .notifications:
-			tableViewItemArray = ["התראות שקילה", "התראות שתייה"]
+			tableViewItemArray = ["התראות שקילה", "התראות שתייה", "הצג התראות ניתוח נתונים"]
 		case .none:
 			break
-		}
+        }
 	}
 	
 	//MARK: - Getters
 	func getVCTitle() -> String {
-		return tableViewTitle
+		tableViewTitle
 	}
 	func getNumberOfSections() -> Int {
-		return (contentType == .notifications) ? 2 : 1
+		(contentType == .notifications) ? 2 : 1
 	}
 	func getCellTitle(at index: Int) -> String {
-		return tableViewItemArray[index]
+        tableViewItemArray[index]
 	}
-	func getNotificationCell(at index: Int) -> Notification {
-		return notificationsArray![index]
-	}
+    
+    func getNotificationCellTitle(at index: Int) -> String {
+        notificationsArray?[index].title ?? ""
+    }
+    func getNotificationCell(at index: Int) -> Notification {
+        notificationsArray![index]
+    }
+    func getNotificationCellAccessoryView(at indexPath: IndexPath) -> UIView {
+        if contentType == .notifications {
+            if indexPath.section == 0 {
+                guard let notificationsArray else { return UIImageView(image: UIImage(systemName: "plus")) }
+                
+                if indexPath.row == 0 {
+                    if notificationsArray.contains(where: {$0.id == NotificationTypes.weightNotification.rawValue }) {
+                        return UIImageView(image: UIImage(systemName: "square.and.pencil"))
+                    } else {
+                        return UIImageView(image: UIImage(systemName: "plus"))
+                    }
+                } else {
+                    if notificationsArray.contains(where: {$0.id == NotificationTypes.waterNotification.rawValue }) {
+                        return UIImageView(image: UIImage(systemName: "square.and.pencil"))
+                    } else {
+                        return UIImageView(image: UIImage(systemName: "plus"))
+                    }
+                }
+            } else {
+                let calendar = Calendar.current
+                if let notificationComponents = notificationsArray?[indexPath.row].dateTime,
+                   let date = calendar.date(from: notificationComponents) {
+                    
+                    // Use the transformed date here
+                    let timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 24))
+                    timeLabel.text = "שעת התראה - " + date.onlyTime.timeString
+                    timeLabel.textAlignment = .left
+                    return timeLabel
+                } else {
+                    return UIImageView(image: nil)
+                }
+            }
+        } else {
+            return UIImageView(image: nil)
+        }
+    }
+    
 	func getNumberOfRows() -> Int {
-		return tableViewItemArray.count
+		tableViewItemArray.count
 	}
 	func getNumberOfNotificationsRows() -> Int {
-		return notificationsArray?.count ?? 0
-	}
-	func getNotificationTitleCellAccessoryView(at index: Int) -> UIView {
-		
-		switch index {
-		case 0:
-			if let scaleNotification = notificationsArray?.filter({ $0.id == "weightNotification" }) {
-				if scaleNotification.count > 0 {
-					return UIImageView(image: UIImage(systemName: "square.and.pencil"))
-				}
-			} else {
-				return UIImageView(image: UIImage(systemName: "plus"))
-			}
-		default:
-			break
-		}
-		return UIImageView(image: UIImage(systemName: "plus"))
+		notificationsArray?.count ?? 0
 	}
 	func didSelect(at indexPath: IndexPath) {
-		
 		switch contentType {
-		case .mostHungry:
+        case .nutritios:
+            menuChange()
+        case .mostHungry:
 			mealChange(at: indexPath.row)
 		case .fitnessLevel:
 			fitnessLevelChange(at: indexPath.row+1)
@@ -145,6 +173,11 @@ extension SettingTableViewModel {
 		}
 	}
 	
+    func menuChange() {
+        UserProfile.defaults.naturalMenu?.toggle()
+        UserProfile.updateServer()
+        vc.navigationController?.popViewController(animated: true)
+    }
 	func mealChange(at hunger: Int) {
 		
 		if hunger == 3 {
@@ -209,6 +242,7 @@ extension SettingTableViewModel {
 	func updateNotification() {
 		self.notificationsArray = notificationManager.getNotifications()
 	}
+
 	private func updateAndPopViewController(_ level: Int) {
 		UserProfile.defaults.fitnessLevel = level
 		UserProfile.updateServer()

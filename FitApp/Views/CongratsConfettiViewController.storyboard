@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Assistant-SemiBold.ttf">
+            <string>Assistant-SemiBold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Congrats Confetti View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="CongratsConfettiViewController" modalTransitionStyle="crossDissolve" id="Y6W-OH-hqX" customClass="CongratsConfettiViewController" customModule="FitApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqh-Py-0Lg">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hxl-nj-SZf">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="at4-a6-fQ0" customClass="LottieAnimationView" customModule="Lottie">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="668"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="Confetti"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ft9-wX-y8t">
+                                            <rect key="frame" x="26" y="98" width="338" height="648"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" איזה כיף, סיימתי אימון 😁  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLQ-nV-535">
+                                                    <rect key="frame" x="46" y="575.66666666666663" width="246" height="26.333333333333371"/>
+                                                    <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="20"/>
+                                                    <color key="textColor" name="ProjectLightGreen"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shahar&amp;yael" translatesAutoresizingMaskIntoConstraints="NO" id="8od-lZ-ipR">
+                                                    <rect key="frame" x="20" y="20" width="298" height="529.66666666666663"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="8od-lZ-ipR" secondAttribute="height" multiplier="9:16" id="tSO-5t-tjT"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                            <real key="value" value="7"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="dLQ-nV-535" firstAttribute="centerX" secondItem="ft9-wX-y8t" secondAttribute="centerX" id="1am-js-gyl"/>
+                                                <constraint firstAttribute="trailing" secondItem="dLQ-nV-535" secondAttribute="trailing" constant="46" id="3hO-jb-BcF"/>
+                                                <constraint firstItem="8od-lZ-ipR" firstAttribute="leading" secondItem="ft9-wX-y8t" secondAttribute="leading" constant="20" id="7NJ-Ej-fv1"/>
+                                                <constraint firstAttribute="trailing" secondItem="8od-lZ-ipR" secondAttribute="trailing" constant="20" id="8S8-ez-xBf"/>
+                                                <constraint firstItem="8od-lZ-ipR" firstAttribute="centerX" secondItem="ft9-wX-y8t" secondAttribute="centerX" id="Ect-m7-IG2"/>
+                                                <constraint firstItem="dLQ-nV-535" firstAttribute="top" secondItem="8od-lZ-ipR" secondAttribute="bottom" constant="26" id="Lho-MF-Otz"/>
+                                                <constraint firstItem="dLQ-nV-535" firstAttribute="leading" secondItem="ft9-wX-y8t" secondAttribute="leading" constant="46" id="QuP-U2-XhB"/>
+                                                <constraint firstAttribute="bottom" secondItem="dLQ-nV-535" secondAttribute="bottom" constant="46" id="UZD-hO-TKT"/>
+                                                <constraint firstItem="8od-lZ-ipR" firstAttribute="top" secondItem="ft9-wX-y8t" secondAttribute="top" constant="20" id="VBX-Qa-XoR"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                    <real key="value" value="7"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Pf-Be-wFJ" customClass="LottieAnimationView" customModule="Lottie">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="644"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="Confetti"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Of-nU-E5n">
+                                            <rect key="frame" x="330" y="50" width="36" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="9Of-nU-E5n" secondAttribute="height" multiplier="1:1" id="V6g-VK-vch"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal">
+                                                <imageReference key="image" image="xmark.circle.fill" catalog="system" symbolScale="large"/>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="closeButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="fIy-YZ-W4b"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="at4-a6-fQ0" secondAttribute="bottom" constant="176" id="0U2-Vh-YeW"/>
+                                        <constraint firstItem="ft9-wX-y8t" firstAttribute="centerX" secondItem="hxl-nj-SZf" secondAttribute="centerX" id="1jV-6x-Cu8"/>
+                                        <constraint firstItem="1Pf-Be-wFJ" firstAttribute="top" secondItem="hxl-nj-SZf" secondAttribute="top" id="1ll-ZY-29w"/>
+                                        <constraint firstItem="at4-a6-fQ0" firstAttribute="leading" secondItem="hxl-nj-SZf" secondAttribute="leading" id="KR7-kM-rwG"/>
+                                        <constraint firstAttribute="trailing" secondItem="at4-a6-fQ0" secondAttribute="trailing" id="Pa6-Sj-pPb"/>
+                                        <constraint firstAttribute="trailing" secondItem="ft9-wX-y8t" secondAttribute="trailing" constant="26" id="R0k-4b-FtJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="1Pf-Be-wFJ" secondAttribute="bottom" constant="200" id="T4R-kP-0wu"/>
+                                        <constraint firstItem="1Pf-Be-wFJ" firstAttribute="leading" secondItem="hxl-nj-SZf" secondAttribute="leading" id="TOP-Ae-8IB"/>
+                                        <constraint firstItem="ft9-wX-y8t" firstAttribute="top" secondItem="9Of-nU-E5n" secondAttribute="bottom" constant="12" id="YfR-tR-2Tq"/>
+                                        <constraint firstItem="ft9-wX-y8t" firstAttribute="centerY" secondItem="hxl-nj-SZf" secondAttribute="centerY" id="aqS-Cf-Mva"/>
+                                        <constraint firstAttribute="trailing" secondItem="1Pf-Be-wFJ" secondAttribute="trailing" id="f3D-HE-84H"/>
+                                        <constraint firstAttribute="trailing" secondItem="9Of-nU-E5n" secondAttribute="trailing" constant="24" id="jg6-is-mTa"/>
+                                        <constraint firstItem="ft9-wX-y8t" firstAttribute="leading" secondItem="hxl-nj-SZf" secondAttribute="leading" constant="26" id="pct-h9-nKX"/>
+                                        <constraint firstItem="at4-a6-fQ0" firstAttribute="top" secondItem="hxl-nj-SZf" secondAttribute="top" id="qvw-Ct-6Gj"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="systemUltraThinMaterial"/>
+                            </visualEffectView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jqh-Py-0Lg" secondAttribute="trailing" id="ed9-3z-u36"/>
+                            <constraint firstItem="jqh-Py-0Lg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="gwI-Xo-ywH"/>
+                            <constraint firstItem="jqh-Py-0Lg" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="i0O-Vy-NV6"/>
+                            <constraint firstAttribute="bottom" secondItem="jqh-Py-0Lg" secondAttribute="bottom" id="ile-y8-hgG"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="animation" destination="at4-a6-fQ0" id="tfr-EB-Glb"/>
+                        <outlet property="animationTop" destination="1Pf-Be-wFJ" id="etl-cN-Hm4"/>
+                        <outlet property="titleLabel" destination="dLQ-nV-535" id="46T-n3-XsR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140" y="3.5545023696682461"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="shahar&amp;yael" width="4480" height="6720"/>
+        <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
+        <namedColor name="ProjectLightGreen">
+            <color red="0.28600001335144043" green="0.57599997520446777" blue="0.56099998950958252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="secondarySystemFillColor">
+            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

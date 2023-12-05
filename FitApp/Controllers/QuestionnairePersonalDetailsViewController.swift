@@ -20,7 +20,8 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	@IBOutlet weak var termsOfUseCheckMarkButton: UIButton!
 	@IBOutlet weak var healthTermsViewButton: UIButton!
 	
-	@IBOutlet weak var termsButtonsStackView: UIStackView!
+    @IBOutlet weak var healthTermsCheckMarkButton: UIButton!
+    @IBOutlet weak var termsButtonsStackView: UIStackView!
 	
 	@IBOutlet weak var nextButton: UIButton!
 	
@@ -40,7 +41,7 @@ class QuestionnairePersonalDetailsViewController: UIViewController {
 	private var weighWholeString: String?
 	private var weightFractionString: String?
     
-    private let googleManager = GoogleApiManager()
+    private let googleManager = GoogleApiManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -270,10 +271,13 @@ extension QuestionnairePersonalDetailsViewController {
 			self.userName = name
 		}
 		if userData.termsApproval != nil {
-			termsButtonsStackView.isHidden = true
 			userHasCheckedTermOfUse = true
-			userHasCheckedHealth = true
+            termsOfUseCheckMarkButton.isSelected = true
 		}
+        if userData.healthApproval != nil {
+            userHasCheckedHealth = true
+            healthTermsCheckMarkButton.isSelected = true
+        }
 	}
 	private func configureTextFields() {
 		

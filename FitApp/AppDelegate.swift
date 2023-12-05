@@ -100,12 +100,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 		switch id {
 		case NotificationTypes.mealNotification.rawValue:
 			if (UserProfile.defaults.showMealNotFinishedAlert ?? true) {
-				completionHandler([.sound, .alert, .badge])
+				completionHandler([.sound, .badge])
 			}
 		default:
 			if let userInfo = notification.request.content.userInfo as? [String: Any], let userId = userInfo["id"] as? String {
 				if presentMessageNotifications(chatUserId: userId) {
-					completionHandler([.sound, .alert, .badge])
+					completionHandler([.sound, .badge])
 				}
 			}
 		}
@@ -147,7 +147,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 extension AppDelegate: MessagingDelegate {
 	
-	func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+	func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        guard let fcmToken else { return }
 		let tokenDict = ["token": fcmToken]
 		
 		UserProfile.defaults.fcmToken = tokenDict["token"]
@@ -171,7 +172,8 @@ extension AppDelegate {
 				}
 			}
 		}
-		return true
+        guard let permissionLevel = UserProfile.defaults.permissionLevel else { return false }
+        return  permissionLevel >= 10
 	}
 	
 	private func moveTo(storyboardId: String, vcId: String, userChatId: String? = nil) {
@@ -215,6 +217,8 @@ extension AppDelegate {
 						}
 					} else {
 						// User
+                        guard let permissionLevel = UserProfile.defaults.permissionLevel, permissionLevel >= 10 else { return }
+                        
 						chatViewContainer.chatViewController = ChatViewController(viewModel: ChatViewModel(chat: nil))
 						navController.pushViewController(chatViewContainer, animated: true)
 					}

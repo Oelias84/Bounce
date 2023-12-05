@@ -43,7 +43,8 @@ class HomeViewController: UIViewController {
 		super.viewDidLoad()
 		changeStackSpacing()
 		weightAlertsManager = WeightAlertsManager()
-		
+        IOSKeysManager.shared
+        
 		if (UserProfile.defaults.finishOnboarding ?? false) {
 			viewModel.bindToMealViewModel {
 				[weak self] in

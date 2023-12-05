@@ -18,10 +18,7 @@ extension UIAlertController {
 											.filter({$0.isKeyWindow}).first
 		
 		DispatchQueue.main.async {
-			#warning("Change back to last commit")
-			keyWindow?.rootViewController?.dismiss(animated: false) {
-				keyWindow?.rootViewController?.present(self, animated: true)
-			}
+            keyWindow?.rootViewController?.present(self, animated: true)
 		}
 	}
 }

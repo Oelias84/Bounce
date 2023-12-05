@@ -9,7 +9,7 @@ import UIKit
 
 protocol AddMealAlertViewDelegate: AnyObject {
 	
-	func didFinish(with meal: Meal)
+	func didFinishAdding(_ meal: Meal)
 }
 
 class AddMealAlertView: UIView {
@@ -69,7 +69,7 @@ class AddMealAlertView: UIView {
 		}
 		
 		let meal = Meal(mealType: .other, dishes: dishes, date: mealDate.dateStringForDB)
-		delegate?.didFinish(with: meal)
+		delegate?.didFinishAdding(meal)
 		removeFromSuperview()
 	}
 	@IBAction func cancelButtonAction(_ sender: Any) {

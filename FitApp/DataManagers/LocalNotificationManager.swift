@@ -96,12 +96,54 @@ class LocalNotificationManager {
 
 //MARK: - Class Functions
 extension LocalNotificationManager {
+    
+    func checkUserPermissions(complition: @escaping (Bool) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .authorized:
+                // Notifications are authorized
+                print("Notifications are authorized.")
+                self.getScheduledNotifications()
+                complition(true)
+            case .denied, .notDetermined:
+                // Notifications are denied
+                print("Notifications are denied.")
+                // Permissions have not been requested yet
+                print("Notification permissions have not been requested.")
+                
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "נראה כי אין הרשאה לקבלת התראות",
+                                                  message: "בכדי להוסיף ולקבל התראות יש לאפשר להרשאות בהגדרות האפליקציה, אם בצונך לעבור למסך ההגדרות בכדי לאפשר התראות לחצו על כפתור האישור",
+                                                  preferredStyle: .alert)
+                    
+                    let confirmAction = UIAlertAction(title: "אישור", style: .default) { (action) in
+                        if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(settingsURL, options: [:]) { m in
+                                print(m)
+                            }
+                        }
+                    }
+                    alert.addAction(UIAlertAction(title: "ביטול", style: .cancel))
+                    alert.addAction(confirmAction)
+                    alert.showAlert()
+                }
+                complition(false)
+            case .provisional:
+                // Notifications are provisionally authorized (iOS 12+)
+                print("Notifications are provisionally authorized.")
+            default:
+                // Handle any future authorization status cases
+                break
+            }
+        }
+    }
+    
 	
 	private func schedule() {
 		UNUserNotificationCenter.current().getNotificationSettings { settings in
 			
 			switch settings.authorizationStatus {
-			case .notDetermined:
+			case .notDetermined, .denied:
 				self.requestAuthorization()
 			case .authorized, .provisional:
 				self.scheduleNotifications()

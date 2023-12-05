@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import GMStepper
 
 class MoveDishView: UIView {
 	
@@ -45,7 +44,7 @@ class MoveDishView: UIView {
 	@IBOutlet weak var mealTitleLabel: UILabel!
 	@IBOutlet weak var dishToMoveTextfield: DishCellTextFieldView!
 	@IBOutlet weak var destinationMealTextfield: DishCellTextFieldView!
-	@IBOutlet weak var dishAmountStepper: GMStepper!
+	@IBOutlet weak var dishAmountStepper: StepperView!
 	@IBOutlet weak var dishAmountLabel: UILabel!
 	@IBOutlet weak var bottomViewConstrain: NSLayoutConstraint!
 	
@@ -70,12 +69,21 @@ class MoveDishView: UIView {
 		}
 	}
 	
-	@IBAction func confirmButtonAction(_ sender: Any) {
+	@IBAction func confirmButtonAction(_ sender: UIButton) {
 		Spinner.shared.show()
-		
+        sender.isEnabled = false
+        
 		if let dish = dishToMove, let portion = dishAmount, let toMeal = moveToMealIndex {
-			mealViewModel.move(portion: portion, of: dish, from: meal, to: toMeal)
-			removeFromSuperview()
+			mealViewModel.move(portion: portion, of: dish, from: meal, to: toMeal) { error in
+				Spinner.shared.stop()
+                sender.isEnabled = true
+                
+				if error != nil {
+					self.presentOkAlertWithDelegate(withTitle: "שגיאה בהעברה", withMessage: "אנא נסו שנית מאור יותר")
+				} else {
+					self.removeFromSuperview()
+				}
+			}
 		} else {
 			self.presentOkAlertWithDelegate(withTitle: "שגיאה בהעברה", withMessage: "יש לקבוע לאיזו ארוחה להעביר את המנה")
 		}
@@ -203,7 +211,7 @@ extension MoveDishView {
 		contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 	}
 	private func setupStepper() {
-		dishAmountStepper.roundButtons = true
+//		dishAmountStepper.roundButtons = true
 		dishAmountStepper.labelTextColor = .black
 		dishAmountStepper.backgroundColor = .clear
 		dishAmountStepper.buttonsTextColor = .white
@@ -236,7 +244,7 @@ extension MoveDishView {
 
 		window.rootViewController?.present(customAlert, animated: true, completion: nil)
 	}
-	@objc func stepperValueChanged(stepper: GMStepper) {
+	@objc func stepperValueChanged(stepper: StepperView) {
 		dishAmount = stepper.value
 		updateAmountLabel()
 	}

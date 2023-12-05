@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import GMStepper
-import Foundation
 
 protocol SettingsStepperViewCellDelegate: AnyObject {
 	
@@ -24,7 +22,7 @@ class SettingsTableViewCell: UITableViewCell {
 	}
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var secondaryLabel: UILabel!
-	@IBOutlet weak var stepperView: GMStepper!
+	@IBOutlet weak var stepperView: StepperView!
 	@IBOutlet weak var labelStackView: UIStackView!
 	@IBOutlet weak var infoButton: UIButton!
 	
@@ -37,11 +35,12 @@ class SettingsTableViewCell: UITableViewCell {
 	override func prepareForReuse() {
 		super.prepareForReuse()
 		infoButton.isHidden = true
+        titleLabel.textColor = .black
 	}
 	override func setSelected(_ selected: Bool, animated: Bool) {
 		super.setSelected(selected, animated: animated)
 	}
-	@objc func stepperValueChanged(stepper: GMStepper) {
+	@objc func stepperValueChanged(stepper: StepperView) {
 		delegate?.valueChanged(stepper.value, cell: self)
 		print(stepper.value, terminator: "")
 	}
@@ -56,11 +55,9 @@ extension SettingsTableViewCell {
 	
 	private func setupView() {
 		selectionStyle = .none
-		stepperView.roundButtons = true
 		stepperView.labelTextColor = .black
-		stepperView.backgroundColor = .clear
 		stepperView.buttonsTextColor = .white
-		stepperView.labelBackgroundColor = .clear
+        stepperView.labelBackgroundColor = .clear
 		stepperView.buttonsBackgroundColor = .projectTail
 		stepperView.labelFont = UIFont(name: "Assistant-SemiBold", size: 18)!
 		stepperView.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)

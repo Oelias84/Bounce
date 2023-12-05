@@ -134,7 +134,7 @@ class HomeViewModel {
 					switch result {
 					case .success(let motivations):
 						if let motivations = motivations {
-							completion(motivations.text[Int.random(in: 0...motivations.text.count)])
+							completion(motivations.text[Int.random(in: 0...motivations.text.count-1)])
 						}
 					case .failure(let error):
 						

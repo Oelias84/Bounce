@@ -24,16 +24,17 @@ class QuestionnaireNutritionViewController: UIViewController {
 	@IBOutlet weak var mostHungerCheckSecond: UIButton!
 	@IBOutlet weak var mostHungerCheckThird: UIButton!
 	@IBOutlet weak var mostHungerCheckForth: UIButton!
-	
-	@IBOutlet weak var nextButton: UIButton!
+	    
+    @IBOutlet weak var nextButton: UIButton!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		navigationItem.setHidesBackButton(true, animated: false)
 		
-		setupTextFields()
+		setupView()
 		setupCheckCheckMark()
 	}
+    
 	@IBAction func backButtonAction(_ sender: Any) {
 		navigationController?.popViewController(animated: true)
 	}
@@ -42,7 +43,12 @@ class QuestionnaireNutritionViewController: UIViewController {
 		if numberOfMeals != 0 && mostHunger != 0 {
 			UserProfile.defaults.mealsPerDay = numberOfMeals
 			UserProfile.defaults.mostHungry = mostHunger
-			performSegue(withIdentifier: K.SegueId.moveToFitnessLevel, sender: self)
+            
+            if IOSKeysManager.shared.isFeatureOpen(.neutralMenu) {
+                performSegue(withIdentifier: K.SegueId.moveToNutritionGoal, sender: self)
+            } else {
+                performSegue(withIdentifier: K.SegueId.moveToFitnessLevel, sender: self)
+            }
 		} else if numberOfMeals == 0 {
 			presentOkAlert(withTitle: "אופס",withMessage: StaticStringsManager.shared.getGenderString?[37] ?? "", buttonText: "הבנתי")
 			return
@@ -125,14 +131,23 @@ class QuestionnaireNutritionViewController: UIViewController {
 			return
 		}
 	}
+    
+    @IBAction func neutralMenuCheckMark(sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        UserProfile.defaults.naturalMenu = sender.isSelected
+    }
+    @IBAction func negativMenuCheckMark(sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        UserProfile.defaults.naturalMenu = !sender.isSelected
+    }
 }
 
 extension QuestionnaireNutritionViewController {
 	
-	private func setupTextFields() {
-		titleTextLabel.text = StaticStringsManager.shared.getGenderString?[12]
-		whatTimeTextLabel.text = StaticStringsManager.shared.getGenderString?[13]
-	}
+    private func setupView() {
+        titleTextLabel.text = StaticStringsManager.shared.getGenderString?[12]
+        whatTimeTextLabel.text = StaticStringsManager.shared.getGenderString?[13]
+    }
 	private func setupCheckCheckMark() {
 		let userData = UserProfile.defaults
 		
@@ -170,7 +185,7 @@ extension QuestionnaireNutritionViewController {
 				break
 			}
 		}
-		if let meals = userData.mealsPerDay, let hunger = userData.mostHungry{
+		if let meals = userData.mealsPerDay, let hunger = userData.mostHungry {
 			self.mostHunger = hunger
 			self.numberOfMeals = meals
 		}

@@ -30,7 +30,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		} else {
 			// Run code here for every other launch but the first
 			DispatchQueue.global(qos: .userInteractive).async {
-				print(Date().onlyDate.second)
 				if Auth.auth().currentUser != nil {
 					//Check if the user is approved in data base
 					GoogleApiManager.shared.checkUserApproved() {
@@ -38,7 +37,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 						
 						switch result {
 						case .success(let isApproved):
-							
 							if isApproved {
 								if UserProfile.defaults.finishOnboarding == true {
 									self.goToHome(window) {

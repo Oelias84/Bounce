@@ -13,6 +13,19 @@ class Workout: Codable {
     var name: String
 	var time: String
     var type: Int
+    
+	init(exercises: [WorkoutExercise], name: String, time: String, type: Int) {
+		self.exercises = exercises
+		self.name = name
+		self.time = time
+		self.type = type
+	}
+    
+    func removeExerciseData() {
+        exercises.forEach {
+            $0.exerciseToPresent = nil
+        }
+    }
 }
 
 struct Workouts: Codable {
@@ -24,7 +37,7 @@ struct Workouts: Codable {
 
 class WorkoutExercise: Codable {
 	
-	let exercise: String
+	var exercise: String
 	let repeats: String
 	let sets: String
 	var exerciseToPresent: Exercise?
@@ -34,5 +47,75 @@ class WorkoutExercise: Codable {
 		self.repeats = repeats
 		self.sets = sets
 		self.exerciseToPresent = exerciseToPresent
+	}
+}
+
+class WorkoutStates: Codable {
+	
+	private var stateDate: String?
+
+	var workoutType: WorkoutType!
+	var workoutStates = [WorkoutState]()
+	
+	init(workoutType: WorkoutType?) {
+		self.workoutType = workoutType
+		self.resetIsChecked()
+	}
+	
+	func resetIsChecked() {
+		if let date = stateDate?.dateFromString?.onlyDate {
+			if let endOfTheWeek = date.endOfWeek {
+				if Date().isLater(than: endOfTheWeek) {
+					// Reset Data
+					stateDate = Date().dateStringForDB
+					workoutStates.forEach {
+						$0.isChecked = false
+					}
+				}
+			}
+		} else {
+			stateDate = Date().onlyDate.dateStringForDB
+		}
+	}
+}
+
+class ExerciseState: Codable {
+	
+	var exerciseNumber: Int
+	var setsState: [SetModel]
+	
+	init(exerciseNumber: Int, setsState: [SetModel] = []) {
+		self.exerciseNumber = exerciseNumber
+		self.setsState = setsState
+	}
+}
+
+class WorkoutState: Codable {
+	
+	var index: Int
+	var isChecked: Bool = false
+    
+	init(index: Int) {
+		self.index = index
+	}
+}
+
+struct WorkoutStatesData: Codable {
+	
+	let workoutStatesData: [WorkoutStates]
+}
+struct ExercisesStatesData: Codable {
+    
+    let exercisesStatesData: [ExerciseState]
+}
+struct SetModel: Codable, Identifiable, Equatable {
+	
+	var id = UUID()
+	var setIndex: Int!
+	var repeats: Int?
+	var weight: Double?
+	
+	init(setIndex: Int) {
+		self.setIndex = setIndex
 	}
 }

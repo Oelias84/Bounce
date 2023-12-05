@@ -66,7 +66,7 @@ class ChartView: UIView {
 		let chartData = LineChartData()
 		let chartDataSet = LineChartDataSet(entries: lineDataEntry, label: "שקילות")
 		
-		chartData.addDataSet(chartDataSet)
+		chartData.append(chartDataSet)
 		
 		chartDataSet.colors = [.projectTail]
 		chartDataSet.setCircleColor(.projectTail)
@@ -87,12 +87,12 @@ class ChartView: UIView {
 										colors: gradientColors, locations: colorLocation) else { return }
 
 		chartDataSet.drawFilledEnabled = true
-		chartDataSet.fill = Fill(linearGradient: gradient, angle: 90.0)
+		chartDataSet.fill = LinearGradientFill(gradient: gradient, angle: 90.0)
 		
 		lineChartView.setScaleEnabled(false)
 		lineChartView.legend.enabled = true
 		lineChartView.rightAxis.enabled = false
-		lineChartView.chartDescription?.enabled = false
+		lineChartView.chartDescription.enabled = false
 		
 		lineChartView.leftAxis.granularity = 1
 		lineChartView.leftAxis.drawLabelsEnabled = true

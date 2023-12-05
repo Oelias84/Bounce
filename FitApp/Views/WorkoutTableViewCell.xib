@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,14 +36,39 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="MBJ-iF-fsi">
                                 <rect key="frame" x="24" y="16" width="464" height="127"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="שם האימון" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ad-XL-m3F">
-                                        <rect key="frame" x="0.0" y="0.0" width="464" height="37.5"/>
-                                        <fontDescription key="fontDescription" name="Assistant-Bold" family="Assistant" pointSize="25"/>
-                                        <color key="textColor" name="ProjectTail"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="4gj-y6-faG">
+                                        <rect key="frame" x="0.0" y="0.0" width="464" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7R3-82-qke">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="7R3-82-qke" secondAttribute="height" multiplier="1:1" id="4Bd-80-ZIb"/>
+                                                    <constraint firstAttribute="width" constant="30" id="Iz2-EC-Pup"/>
+                                                </constraints>
+                                                <color key="tintColor" name="ProjectTail"/>
+                                                <state key="normal">
+                                                    <imageReference key="image" image="circle" catalog="system" symbolScale="large"/>
+                                                </state>
+                                                <state key="selected">
+                                                    <imageReference key="image" image="checkmark.circle" catalog="system" symbolScale="large"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="workoutCheckboxAction:" destination="779-ZJ-vvt" eventType="touchUpInside" id="B6H-0m-aB7"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="שם האימון" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ad-XL-m3F">
+                                                <rect key="frame" x="33" y="0.0" width="431" height="30"/>
+                                                <fontDescription key="fontDescription" name="Assistant-Bold" family="Assistant" pointSize="25"/>
+                                                <color key="textColor" name="ProjectTail"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="7R3-82-qke" firstAttribute="width" secondItem="7R3-82-qke" secondAttribute="height" multiplier="1:1" id="x2k-Mk-ddx"/>
+                                        </constraints>
+                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="משפט המתאר את האימון בקצרה" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPb-ke-Qm1">
-                                        <rect key="frame" x="0.0" y="41.5" width="464" height="51.5"/>
+                                        <rect key="frame" x="0.0" y="34" width="464" height="59"/>
                                         <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -51,10 +77,10 @@
                                         <rect key="frame" x="0.0" y="97" width="464" height="30"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="nba-9E-zCy">
-                                                <rect key="frame" x="0.0" y="0.0" width="272.5" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="260" height="30"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="FoE-C3-KPx">
-                                                        <rect key="frame" x="0.0" y="6" width="67.5" height="18"/>
+                                                        <rect key="frame" x="0.0" y="6" width="65.5" height="18.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.up.left.and.arrow.down.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="uA5-Lp-CEo">
                                                                 <rect key="frame" x="0.0" y="1" width="18" height="16"/>
@@ -65,7 +91,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="תרגילים" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uX6-Rg-aRO">
-                                                                <rect key="frame" x="24" y="1" width="43.5" height="16.5"/>
+                                                                <rect key="frame" x="24" y="0.0" width="41.5" height="18.5"/>
                                                                 <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -73,7 +99,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="SZy-nM-IEe">
-                                                        <rect key="frame" x="104" y="6" width="52.5" height="18"/>
+                                                        <rect key="frame" x="99.5" y="6" width="51" height="18.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.counterclockwise" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Kh4-UR-qUk">
                                                                 <rect key="frame" x="0.0" y="-1" width="18" height="18"/>
@@ -84,7 +110,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="סטים" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNj-8H-yWi">
-                                                                <rect key="frame" x="24" y="1" width="28.5" height="16.5"/>
+                                                                <rect key="frame" x="24" y="0.0" width="27" height="18.5"/>
                                                                 <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -92,7 +118,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="8I8-pv-4bg">
-                                                        <rect key="frame" x="180.5" y="6" width="92" height="18"/>
+                                                        <rect key="frame" x="174.5" y="6" width="85.5" height="18.5"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stopwatch" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ymw-qB-aRj">
                                                                 <rect key="frame" x="0.0" y="-1.5" width="18" height="19"/>
@@ -103,7 +129,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="55-45 דקות" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPE-3b-GvW">
-                                                                <rect key="frame" x="24" y="1" width="68" height="16.5"/>
+                                                                <rect key="frame" x="24" y="0.0" width="61.5" height="18.5"/>
                                                                 <fontDescription key="fontDescription" name="Assistant-Regular" family="Assistant" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -125,6 +151,12 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="4gj-y6-faG" firstAttribute="top" secondItem="MBJ-iF-fsi" secondAttribute="top" id="Kke-tT-vnA"/>
+                                    <constraint firstItem="4gj-y6-faG" firstAttribute="leading" secondItem="MBJ-iF-fsi" secondAttribute="leading" id="kPq-VT-AK0"/>
+                                    <constraint firstAttribute="trailing" secondItem="4gj-y6-faG" secondAttribute="trailing" id="s4K-iZ-MHl"/>
+                                    <constraint firstItem="tPb-ke-Qm1" firstAttribute="top" secondItem="4gj-y6-faG" secondAttribute="bottom" constant="4" id="tQ4-0k-KKD"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -150,6 +182,7 @@
                 <outlet property="setsLabel" destination="gNj-8H-yWi" id="IHi-Qz-Imj"/>
                 <outlet property="timeLabel" destination="kPE-3b-GvW" id="eds-DT-F7O"/>
                 <outlet property="workoutBackgroundCell" destination="wDS-aq-ZBq" id="nJJ-Gg-7Jx"/>
+                <outlet property="workoutCheckbox" destination="7R3-82-qke" id="LJ7-PF-KLG"/>
                 <outlet property="workoutDescriptionLabel" destination="tPb-ke-Qm1" id="f0r-HO-YmV"/>
                 <outlet property="workoutTitleLabel" destination="3Ad-XL-m3F" id="Tf2-Rq-dfD"/>
             </connections>
@@ -159,6 +192,8 @@
     <resources>
         <image name="arrow.counterclockwise" catalog="system" width="115" height="128"/>
         <image name="arrow.up.left.and.arrow.down.right" catalog="system" width="128" height="115"/>
+        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+        <image name="circle" catalog="system" width="128" height="121"/>
         <image name="stopwatch" catalog="system" width="121" height="128"/>
         <namedColor name="ProjectTail">
             <color red="0.067000001668930054" green="0.47499999403953552" blue="0.45100000500679016" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

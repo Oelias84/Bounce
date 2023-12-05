@@ -12,7 +12,7 @@ import DateToolsSwift
 class WeightsViewModel {
 	
 	var selectedDate: Date!
-	var splittedWeights: ObservableObject<[WeightPeriod]?> = ObservableObject(nil)
+	var splittedWeights: ProjectObservableObject<[WeightPeriod]?> = ProjectObservableObject(nil)
 	
 	fileprivate var weightsManager = WeightsManager.shared
 	

@@ -23,14 +23,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DVS-bx-UAm">
-                                <rect key="frame" x="0.0" y="214" width="414" height="682"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="jTV-rI-T0V" id="bZt-Th-6aQ"/>
-                                    <outlet property="delegate" destination="jTV-rI-T0V" id="Mbq-Ge-YbU"/>
-                                </connections>
-                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJ8-gt-CiY">
+                                <rect key="frame" x="0.0" y="214" width="414" height="648"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dT-qn-pGP" userLabel="TopBarView" customClass="BounceNavigationBarView" customModule="FitApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="214"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -42,18 +38,18 @@
                         <viewLayoutGuide key="safeArea" id="Kdj-rf-K5U"/>
                         <color key="backgroundColor" name="ProjectBackground"/>
                         <constraints>
-                            <constraint firstItem="DVS-bx-UAm" firstAttribute="top" secondItem="5dT-qn-pGP" secondAttribute="bottom" id="5Pg-bl-yXr"/>
+                            <constraint firstItem="aJ8-gt-CiY" firstAttribute="leading" secondItem="Kdj-rf-K5U" secondAttribute="leading" id="6VP-xC-CtA"/>
                             <constraint firstItem="5dT-qn-pGP" firstAttribute="top" secondItem="pGf-YY-agy" secondAttribute="top" id="8fc-f9-gyU"/>
                             <constraint firstItem="5dT-qn-pGP" firstAttribute="leading" secondItem="Kdj-rf-K5U" secondAttribute="leading" id="FM4-dn-RcY"/>
+                            <constraint firstItem="Kdj-rf-K5U" firstAttribute="trailing" secondItem="aJ8-gt-CiY" secondAttribute="trailing" id="PPH-Yr-k2y"/>
+                            <constraint firstItem="Kdj-rf-K5U" firstAttribute="bottom" secondItem="aJ8-gt-CiY" secondAttribute="bottom" id="Uh8-Ff-5CB"/>
                             <constraint firstItem="5dT-qn-pGP" firstAttribute="trailing" secondItem="Kdj-rf-K5U" secondAttribute="trailing" id="Y6j-In-vpX"/>
-                            <constraint firstItem="DVS-bx-UAm" firstAttribute="bottom" secondItem="pGf-YY-agy" secondAttribute="bottom" id="d3f-KS-N96"/>
-                            <constraint firstItem="DVS-bx-UAm" firstAttribute="trailing" secondItem="Kdj-rf-K5U" secondAttribute="trailing" id="iVZ-1U-B6s"/>
-                            <constraint firstItem="DVS-bx-UAm" firstAttribute="leading" secondItem="Kdj-rf-K5U" secondAttribute="leading" id="j9B-2i-hTg"/>
+                            <constraint firstItem="aJ8-gt-CiY" firstAttribute="top" secondItem="5dT-qn-pGP" secondAttribute="bottom" id="h12-xe-dNb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="Wny-WH-c3Z"/>
                     <connections>
-                        <outlet property="tableView" destination="DVS-bx-UAm" id="Ave-Hj-LOn"/>
+                        <outlet property="swiftUIContainer" destination="aJ8-gt-CiY" id="yMo-oe-jUp"/>
                         <outlet property="topBarView" destination="5dT-qn-pGP" id="JYC-cV-3F4"/>
                         <segue destination="OF6-fl-RTm" kind="show" identifier="moveToExerciseDetailViewController" id="Ie6-H3-7sG"/>
                     </connections>

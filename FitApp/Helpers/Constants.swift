@@ -85,7 +85,7 @@ struct K {
         static let questionnaireSecond = "QuestionnaireSecond"
         static let questionnaireThird = "QuestionnaireThird"
         static let questionnaireForth = "QuestionnaireForth"
-		static let questionnaireForthSecondPart = "QuestionnaireForthSecondPart"
+		static let questionnaireFifthSecondPart = "QuestionnaireFifthSecondPart"
         static let questionnaireFifth = "QuestionnaireFifth"
         static let questionnaireSixth = "QuestionnaireSixth"
         static let questionnaireSeventh = "QuestionnaireSeventh"
@@ -130,6 +130,7 @@ struct K {
         static let moveToActivity = "moveToActivity"
 		static let moveToSecondActivity = "moveToSecondActivity"
         static let moveToNutrition = "moveToNutrition"
+        static let moveToNutritionGoal = "moveToNutritionGoal"
         static let moveToFitnessLevel = "moveToFitnessLevel"
         static let moveToSumup = "moveToSumup"
 		//Settings
@@ -149,11 +150,13 @@ struct K {
         static let workoutCell = "workoutCell"
 		static let settingsOptionCell = "settingsOptionCell"
 		static let notificationCell = "notificationCell"
+        static let notificationSwitchCell = "notificationSwitchCell"
 		static let chatCell = "chatCell"
 		static let dishesCell = "dishesCell"
 		static let addingCell = "addingCell"
 		
 		static let settingCell = "settingCell"
+        static let checkboxCell = "checkboxCell"
 		
 		static let activityCell = "activityCell"
 		static let numberOfMealsCell = "numberOfMealsCell"
@@ -168,7 +171,8 @@ struct K {
     struct NibName {
 		
         //Cells
-		static let SettingsTableViewCell = "SettingsTableViewCell"
+		static let settingsTableViewCell = "SettingsTableViewCell"
+        static let settingsCheckboxTableViewCell = "SettingsCheckboxTableViewCell"
 		
 		static let chatTableViewCell = "ChatTableViewCell"
 		static let addingTableViewCell = "AddingTableViewCell"
@@ -182,6 +186,7 @@ struct K {
 		static let exerciseTableViewCell = "ExerciseTableViewCell"
 		static let mealPlanTableViewCell = "MealPlanTableViewCell"
 		static let notificationTableViewCell = "NotificationTableViewCell"
+        static let notificationSwitchTableViewCell = "NotificationSwitchTableViewCell"
 		static let questionnaireFatCollectionViewCell = "QuestionnaireFatCollectionViewCell"
 		static let collapsibleTableViewHeader = "CollapsibleTableViewHeader"
 
@@ -214,5 +219,13 @@ struct K {
 		static let alertWeterMessage = "באיזה שעה תרצי לקבוע תזכורת שתיה?"
 		static let alertWeightTitle = "קביעת תזכורת שקילה"
 		static let alertWeightMessage = "באיזה שעה תרצי לקבוע תזכורת לשקילה?"
+	}
+	
+	struct Fonts {
+
+		static let boldText = "Assistant-Bold"
+		static let lightText = "Assistant-Light"
+        static let semiBold = "Assistant-SemiBold"
+		static let regularText = "Assistant-Regular"
 	}
 }

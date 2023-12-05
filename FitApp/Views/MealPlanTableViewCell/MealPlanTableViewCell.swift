@@ -75,7 +75,19 @@ extension MealPlanTableViewCell {
 	private func presentTrashingMealAlert() {
 		let alert = UIAlertController(title: "הסרת ארוחת חריגה", message: "האם ברצונך להסיר ארוחה זאת?", preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: "אישור", style: .default, handler: { _ in
-			self.mealViewModel.removeExceptionalMeal(for: self.meal.date)
+			Spinner.shared.show()
+			self.mealViewModel.removeExceptionalMeal(for: self.meal.date) {
+				error in
+
+				Spinner.shared.stop() {
+					if let error {
+						print(error)
+						self.parentViewController?.presentOkAlert(withTitle: "שגיאה בהעברה", withMessage: "אנא נסו שנית מאור יותר")
+					} else {
+						self.parentViewController?.presentOkAlert(withMessage: "הארוחה הוסרה בהצלחה")
+					}
+				}
+			}
 		}))
 		alert.addAction(UIAlertAction(title: "ביטול", style: .cancel))
 		self.parentViewController?.present(alert, animated: true)
@@ -121,9 +133,11 @@ extension MealPlanTableViewCell {
 extension MealPlanTableViewCell: DishViewDelegate {
 	
 	func didCheck(dish: Dish) {
+        
 		var allChecked = false
 		
 		let isDishesChecked = meal.dishes.compactMap{ $0.isDishDone }
+        
 		for isDone in isDishesChecked {
 			if !isDone {
 				allChecked = false
@@ -132,10 +146,14 @@ extension MealPlanTableViewCell: DishViewDelegate {
 				allChecked = true
 			}
 		}
+        
 		mealViewModel.getProgress()
 		meal.isMealDone = allChecked
 		mealIsDoneCheckMark.isSelected = allChecked
-		mealViewModel.updateMeals(for: meal.date)
+        		
+        mealViewModel.updateMeals(for: meal.date) { _ in
+//            Spinner.shared.stop()
+		}
 	}
 }
 
@@ -152,6 +170,6 @@ extension MealPlanTableViewCell {
 			$0.isDishDone = sender.isSelected
 		}
 		configureData()
-		mealViewModel.updateMeals(for: meal.date)
+		mealViewModel.updateMeals(for: meal.date) {_ in}
 	}
 }

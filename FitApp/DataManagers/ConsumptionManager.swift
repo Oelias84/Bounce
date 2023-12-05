@@ -19,6 +19,7 @@ class ConsumptionManager {
 	private var numberOfTrainings: Int?
 	private var externalNumberOfTraining: Int?
 	private var lifeStyle: Double?
+    private var naturalMenu: Bool?
 	
 	private var dailyCalories: Double?
 	private var dailyFatPortion: Double?
@@ -66,6 +67,7 @@ class ConsumptionManager {
 		self.fatPercentage = userData.fatPercentage
 		self.Kilometer = userData.kilometer
 		self.lifeStyle = userData.lifeStyle
+        self.naturalMenu = userData.naturalMenu
 		self.numberOfTrainings = userData.weaklyWorkouts
 		self.externalNumberOfTraining = userData.externalWorkout
 		
@@ -93,11 +95,11 @@ extension ConsumptionManager {
 	
 	//MARK: - lean body weight
 	//= daily calories
-	private func TDEE(gender: Gender, weight: Double, fatPercentage: Double, Kilometer: Double?, lifeStyle: Double?, numberOfTrainings: Int) -> Double? {
+    private func TDEE(gender: Gender, naturalMenu: Bool, weight: Double, fatPercentage: Double, Kilometer: Double?, lifeStyle: Double?, numberOfTrainings: Int) -> Double? {
 		
 		let LBM = weight * ((100 - fatPercentage) / 100)
-		let BMR = (LBM * 22.0) + 500.0
-		
+        let BMR = (LBM * 22.0) + 500.0
+        
 		var EAT: Double {
 			switch gender {
 			case .female:
@@ -107,21 +109,21 @@ extension ConsumptionManager {
 			}
 		}
 		
-		var NIT: Double!
-		
-		if let Kilometer = Kilometer {
-			NIT = (Kilometer * weight) * 0.93
-		} else if let lifeStyle = lifeStyle {
-			NIT = BMR * lifeStyle
-		} else {
-			return nil
-		}
+        var NIT: Double!
+        
+        if let Kilometer = Kilometer {
+            NIT = (Kilometer * weight) * 0.93
+        } else if let lifeStyle = lifeStyle {
+            NIT = BMR * lifeStyle
+        } else {
+            return nil
+        }
 		
 		var result: Double {
 			if lifeStyle != nil {
-				return (NIT + EAT) - 500
+                return (NIT + EAT) - (naturalMenu ? 0 : 500.0)
 			}
-			return ((BMR * 1.1) + NIT + EAT) - 500
+			return ((BMR * 1.1) + NIT + EAT) - (naturalMenu ? 0 : 500.0)
 		}
 		
 		if result < 1200 {
@@ -169,7 +171,7 @@ extension ConsumptionManager {
 	private func configureData() {
 		guard let gender = gender, let weight = weight, let fatPercentage = fatPercentage, var numberOfTrainings = numberOfTrainings else { return }
 		if let externalTraining = externalNumberOfTraining { numberOfTrainings += externalTraining }
-		guard let calculatedCalories = TDEE(gender: gender, weight: currentAverageWeight ?? weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings) else { return }
+        guard let calculatedCalories = TDEE(gender: gender, naturalMenu: naturalMenu ?? false, weight: currentAverageWeight ?? weight, fatPercentage: fatPercentage, Kilometer: Kilometer, lifeStyle: lifeStyle, numberOfTrainings: numberOfTrainings) else { return }
 		
 		dailyCalories = calculatedCalories
 		dailyFatPortion = portionFat(tdee: dailyCalories!)

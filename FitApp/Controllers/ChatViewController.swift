@@ -74,18 +74,18 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
 //Media Messages
 extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, MessagesDisplayDelegate, MessageCellDelegate {
-	
-	func currentSender() -> SenderType {
-		if let sender = viewModel.getSelfSender {
-			return sender
-		}
-		fatalError("Self Sender in nil, email should cached")
-	}
+    
+    var currentSender: MessageKit.SenderType {
+       if let sender = viewModel.getSelfSender {
+           return sender
+       }
+       fatalError("Self Sender in nil, email should cached")
+    }
 	func isFromCurrentSender(message: MessageType) -> Bool {
 		if isAdmin {
 			return message.sender.senderId != viewModel.getChatUserId
 		}
-		return message.sender.senderId == currentSender().senderId
+        return message.sender.senderId == currentSender.senderId
 	}
 	
 	//Collection view dataSource
@@ -119,7 +119,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 					return presentingInitials
 				}
 			}
-			if message.sender.senderId != currentSender().senderId {
+			if message.sender.senderId != currentSender.senderId {
 				return "B"
 			} else {
 				let senderName = UserProfile.defaults.name?.splitFullName
@@ -132,7 +132,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		if isAdmin {
 			avatarView.backgroundColor = message.sender.senderId == viewModel.getChatUserId  ? .projectIncomingMessageBubble : .projectOutgoingMessageBubble
 		} else {
-			avatarView.backgroundColor = message.sender.senderId != currentSender().senderId ? .projectIncomingMessageBubble : .projectOutgoingMessageBubble
+			avatarView.backgroundColor = message.sender.senderId != currentSender.senderId ? .projectIncomingMessageBubble : .projectOutgoingMessageBubble
 		}
 		avatarView.placeholderFont = UIFont(name: "Assistant-Regular", size: 12)!
 		avatarView.placeholderTextColor = .black
@@ -252,11 +252,9 @@ extension ChatViewController {
 				DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
 					self.ableInteraction()
 					self.messagesCollectionView.reloadDataAndKeepOffset()
+                    
 					if self.ifFirstLoad {
-						UIView.animate(withDuration: 0.5) {
-							self.messageInputBar.alpha = 1
-							self.messagesCollectionView.alpha = 1
-						}
+                        self.showChatTextField()
 						self.messagesCollectionView.scrollToLastItem(animated: false)
 					} else {
 						self.refreshControl.endRefreshing()
@@ -264,6 +262,8 @@ extension ChatViewController {
 				}
 			} else {
 				self.ableInteraction()
+                self.showChatTextField()
+                self.messagesCollectionView.scrollToLastItem(animated: false)
 			}
 		}
 	}
@@ -391,6 +391,12 @@ extension ChatViewController {
 	private func ableInteraction() {
 		Spinner.shared.stop()
 	}
+    private func showChatTextField() {
+        UIView.animate(withDuration: 0.5) {
+            self.messageInputBar.alpha = 1
+            self.messagesCollectionView.alpha = 1
+        }
+    }
 	@objc fileprivate func loadMoreMessages() {
 		DispatchQueue.global(qos: .userInteractive).async {
 			self.viewModel.listenToMessages()

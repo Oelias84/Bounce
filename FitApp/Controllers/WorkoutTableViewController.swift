@@ -10,7 +10,7 @@ import BetterSegmentedControl
 
 class WorkoutTableViewController: UIViewController {
 	
-	private var workoutViewModel: WorkoutViewModel!
+	private var viewModel: WorkoutViewModel = WorkoutViewModel()
 	
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var topBarView: BounceNavigationBarView!
@@ -18,35 +18,36 @@ class WorkoutTableViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
 		Spinner.shared.show()
-		setupView()
+        
+        setupView()
 		setUpTableView()
-		workoutViewModel = WorkoutViewModel()
 	}
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		
+        
+        viewModel.finishHomeWorkoutConfiguringData.bind { didFinish in
+            if didFinish == true {
+                Spinner.shared.stop()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+        
+		viewModel.updateWorkoutStates(isChecked: false)
 		topBarView.setImage()
-		workoutViewModel.refreshDate()
-		workoutViewModel.bindWorkoutViewModelToController = {
-			Spinner.shared.stop()
-			DispatchQueue.main.async {
-				self.tableView.reloadData()
-			}
-		}
 	}
 	
 	@IBAction func segmentedControlAction(_ sender: BetterSegmentedControl) {
 		switch sender.index {
 		case 0:
-			workoutViewModel.type = .home
+			viewModel.setWorkoutType(.home)
 		case 1:
-			workoutViewModel.type = .gym
+			viewModel.setWorkoutType(.gym)
 		default:
 			break
 		}
-		
 		DispatchQueue.main.async {
 			self.tableView.reloadData()
 		}
@@ -58,21 +59,22 @@ extension WorkoutTableViewController: UITableViewDelegate, UITableViewDataSource
 	
 	// MARK: - Table view data source
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		workoutViewModel.getWorkoutsCount()
+		return viewModel.getWorkoutsCount()
 	}
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cellData = workoutViewModel.getWorkout(for: indexPath.row)
+		let cellData = viewModel.getWorkout(for: indexPath.row)
 		let cell = tableView.dequeueReusableCell(withIdentifier: K.CellId.workoutCell, for: indexPath) as! WorkoutTableViewCell
 		
-		cell.workoutType = workoutViewModel.type
+		cell.delegate = self
+		cell.indexPathForCell = indexPath
+		cell.workoutState = viewModel.getWorkoutState(for: indexPath.row)
+		cell.workoutType = viewModel.type
 		cell.workoutNumber = indexPath.row + 1
 		cell.workout = cellData
 		return cell
 	}
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let workout = workoutViewModel.getWorkout(for: indexPath.row)
-		
-		moveToExercisesView(for: workout)
+		moveToExercisesView(for: indexPath.row)
 	}
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		146
@@ -82,9 +84,30 @@ extension WorkoutTableViewController: BounceNavigationBarDelegate {
 	
 	func backButtonTapped() {}
 }
+extension WorkoutTableViewController: WorkoutTableViewCellDelegate {
+	
+	func workoutCheckboxAction(didCheck: Bool) {
+		
+		viewModel.updateWorkoutStates(isChecked: didCheck) {
+			[weak self] workoutCongratsType in
+			guard let self = self else { return }
+			
+			self.presetCongratsPopup(popupType: workoutCongratsType)
+		}
+	}
+}
 
 //MARK: Functions
 extension WorkoutTableViewController {
+	
+	private func presetCongratsPopup(popupType: WorkoutCongratsPopupType) {
+		let storyboard = UIStoryboard(name: K.ViewControllerId.congratsConfettiViewController, bundle: nil)
+		let vc = storyboard.instantiateViewController(withIdentifier: K.ViewControllerId.congratsConfettiViewController) as! CongratsConfettiViewController
+		
+		vc.popupType = popupType
+		vc.modalPresentationStyle = .overFullScreen
+		present(vc, animated: true)
+	}
 	
 	private func setupView() {
 		segmentedControl.backgroundColor = .projectBackgroundColor
@@ -114,11 +137,13 @@ extension WorkoutTableViewController {
 		tableView.dataSource = self
 		tableView.register(UINib(nibName: K.NibName.workoutTableViewCell, bundle: nil), forCellReuseIdentifier: K.CellId.workoutCell)
 	}
-	private func moveToExercisesView(for workout: Workout) {
+	private func moveToExercisesView(for index: Int) {
+		guard let workout = viewModel.getWorkout(for: index) else { return }
 		let storyboard = UIStoryboard(name: K.StoryboardName.workout, bundle: nil)
-		let workoutVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.exercisesTableViewController) as ExercisesTableViewController
+		let exercisesVC = storyboard.instantiateViewController(identifier: K.ViewControllerId.exercisesTableViewController) as ExercisesTableViewController
 		
-		workoutVC.workout = workout
-		navigationController?.pushViewController(workoutVC, animated: true)
+		exercisesVC.workout = workout
+		exercisesVC.workoutIndex = index
+		navigationController?.pushViewController(exercisesVC, animated: true)
 	}
 }
