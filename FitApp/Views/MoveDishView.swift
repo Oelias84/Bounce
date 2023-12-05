@@ -69,12 +69,15 @@ class MoveDishView: UIView {
 		}
 	}
 	
-	@IBAction func confirmButtonAction(_ sender: Any) {
+	@IBAction func confirmButtonAction(_ sender: UIButton) {
 		Spinner.shared.show()
-		
+        sender.isEnabled = false
+        
 		if let dish = dishToMove, let portion = dishAmount, let toMeal = moveToMealIndex {
 			mealViewModel.move(portion: portion, of: dish, from: meal, to: toMeal) { error in
 				Spinner.shared.stop()
+                sender.isEnabled = true
+                
 				if error != nil {
 					self.presentOkAlertWithDelegate(withTitle: "שגיאה בהעברה", withMessage: "אנא נסו שנית מאור יותר")
 				} else {
