@@ -37,8 +37,8 @@ extension ActivityLevelAlertView {
         
         private let userData = UserProfile.defaults
         
-        @Published var isKilometeresChecked: Bool
-        @Published var isStepsChecked: Bool
+        @Published var isKilometeresChecked: Bool = false
+        @Published var isStepsChecked: Bool = false
         
         @Published var kilometersValue: Double = 0 {
             didSet {
@@ -74,17 +74,13 @@ extension ActivityLevelAlertView {
             if let steps = userData.steps {
                 stepsValue = Double(steps)
                 isStepsChecked = true
+                isKilometeresChecked = false
                 viewType = .activity
-            } else {
-                isStepsChecked = false
-            }
-            
-            if let kilometers = userData.kilometer {
+            } else if let kilometers = userData.kilometer {
                 kilometersValue = Double(kilometers)
                 isKilometeresChecked = true
                 viewType = .activity
-            } else {
-                isKilometeresChecked = false
+                isStepsChecked = false
             }
             if let activityLifeStyle = userData.lifeStyle {
                 selectedOption[getLifeIndexSelection(for: activityLifeStyle)] = true
@@ -104,7 +100,7 @@ extension ActivityLevelAlertView {
                         complition(false, .steps)
                     } else {
                         UserProfile.defaults.steps = Int(stepsValue)
-                        UserProfile.defaults.kilometer = nil
+                        UserProfile.defaults.kilometer = ConsumptionManager.shared.stepsToKilometers(steps: userData.steps! , height: userData.height!)
                         UserProfile.defaults.lifeStyle = nil
                         complition(true, nil)
                     }
