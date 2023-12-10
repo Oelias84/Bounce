@@ -92,13 +92,13 @@ class LoginViewController: UIViewController {
 		}
 	}
 	@IBAction func noAccountButtonAction(_ sender: Any) {
-		presentAlert(withTitle: "שימו לב!", withMessage: "הרכישה דרך החנות כוללת את האפליקציה בלבד. על מנת לרכוש את הסדנה אנא עברו לאתר המקושר.", options: "המשך ברכישה", "מעבר לאתר", "ביטול", alertNumber: 6)
+		presentAlert(withTitle: "שימו לב!", withMessage: "הרכישה דרך החנות כוללת את האפליקציה בלבד.", options: "המשך ברכישה", "ביטול", alertNumber: 6)
 	}
 }
 
 //MARK: - Delegates
 extension LoginViewController: PopupAlertViewDelegate {
-	
+    
 	func okButtonTapped(alertNumber: Int, selectedOption: String?, textFieldValue: String?) {
 		view.endEditing(true)
 		
@@ -121,15 +121,6 @@ extension LoginViewController: PopupAlertViewDelegate {
 			break
 		}
 	}
-	func cancelButtonTapped(alertNumber: Int) {
-		if alertNumber == 6 {
-			if let url = URL(string: "https://www.bouncefit.co.il") {
-				UIApplication.shared.open(url)
-			}
-		} else {
-			return
-		}
-	}
 	func thirdButtonTapped(alertNumber: Int) {
 		if alertNumber == 6 {
 			return
@@ -137,6 +128,9 @@ extension LoginViewController: PopupAlertViewDelegate {
 			return
 		}
 	}
+    func cancelButtonTapped(alertNumber: Int) {
+        dismissView()
+    }
 }
 
 //MARK: - Function
