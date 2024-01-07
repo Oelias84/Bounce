@@ -253,6 +253,16 @@ final class GoogleDatabaseManager {
             var userLastSeen: String? {
                 chatData["user_last_seen"] as? String
             }
+            var outsourceType: Int? {
+                if displayName == "Ofir Test7" {
+                    print("m")
+                }
+                let m = chatData["outsource_type"] as? Int
+                if let m {
+                    print(m)
+                }
+                return m
+            }
             var commentLastSeen: [CommentLastSeenList]? {
                 var commentLastSeenData = [CommentLastSeenList(state: .read), CommentLastSeenList(state: .update)]
                 
@@ -282,7 +292,9 @@ final class GoogleDatabaseManager {
                             lastSeenMessageDate: lastSeenMessageTimestamp?.dateFromMillisecondsSince2020,
                             userLastSeen: userLastSeen,
                             programExpirationDate: programExpirationDate,
-                            commetLastSeen: commentLastSeen)
+                            outsourceType: outsourceType, 
+                            commetLastSeen: commentLastSeen
+            )
             
 			chats.append(chat)
 		}

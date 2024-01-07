@@ -214,11 +214,13 @@ class UsersListViewModel {
                         if let oldChat = users.first(where: { $0.userId == chat.userId }) {
                             oldChat.chat = chat
                         } else {
-                            users.append(UserViewModel(chat))
+                            if chat.outsourceType == nil {
+                                users.append(UserViewModel(chat))
+                            }
                         }
                     }
                 } else {
-                    self.originalUsers = chats.map({UserViewModel($0)})
+                    self.originalUsers = chats.filter{ $0.outsourceType == nil }.map{ UserViewModel($0) }
                 }
                 completion()
             }

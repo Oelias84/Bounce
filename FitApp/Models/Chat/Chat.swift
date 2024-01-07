@@ -26,6 +26,7 @@ class Chat: Comparable {
     var userLastSeen: String?
     var programExpirationDate: String?
     var commentLastSeen: [CommentLastSeenList]?
+    var outsourceType: Int?
     
     init(userId: String,
          isAdmin: Bool = false,
@@ -36,6 +37,7 @@ class Chat: Comparable {
          lastSeenMessageDate: Date? = nil,
          userLastSeen: String? = nil,
          programExpirationDate: String? = nil,
+         outsourceType: Int? = nil,
          commetLastSeen: [CommentLastSeenList]? = nil) {
         
         self.userId = userId
@@ -46,6 +48,7 @@ class Chat: Comparable {
         self.lastSeenMessageDate = lastSeenMessageDate
         self.userLastSeen = userLastSeen
         self.programExpirationDate = programExpirationDate
+        self.outsourceType = outsourceType
         self.commentLastSeen = commetLastSeen
     }
     
