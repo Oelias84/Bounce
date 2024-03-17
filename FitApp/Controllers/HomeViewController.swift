@@ -44,7 +44,7 @@ class HomeViewController: UIViewController {
 		changeStackSpacing()
 		weightAlertsManager = WeightAlertsManager()
         IOSKeysManager.shared
-        
+
 		if (UserProfile.defaults.finishOnboarding ?? false) {
 			viewModel.bindToMealViewModel {
 				[weak self] in
@@ -181,20 +181,13 @@ extension HomeViewController {
 			self.caloriesLabel.text = self.viewModel.getUserExceptionalCalories
 		}
 	}
-	private func setupMotivationText() {
-		viewModel.getMotivationText { motivationText in
-			if let motivationText {
-				DispatchQueue.main.async {
-					self.topBarView.motivationText = motivationText
-					UserProfile.defaults.motivationText = motivationText
-				}
-			} else {
-				DispatchQueue.main.async {
-					self.topBarView.motivationText = "..."
-				}
-			}
-		}
-	}
+    private func setupMotivationText() {
+        viewModel.getMotivationText {
+            DispatchQueue.main.async {
+                self.topBarView.motivationText = UserProfile.defaults.motivationText ?? "..."
+            }
+        }
+    }
 	
 	private func setupNavigationBarView() {
 		topBarView.delegate = self
@@ -202,6 +195,7 @@ extension HomeViewController {
 		topBarView.nameTitle = UserProfile.defaults.name  ?? ""
 		topBarView.isBackButtonHidden = true
 		topBarView.isClearButtonHidden = true
+        topBarView.motivationText = UserProfile.defaults.motivationText ?? "..."
 	}
 	private func setUpProgressTextFields() {
 		fatCountLabel.text = viewModel.getFatCurrentValue

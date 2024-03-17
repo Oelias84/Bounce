@@ -70,7 +70,7 @@ final class BounceNavigationBarView: UIView {
 			dayWelcomeLabel.text = dayWelcomeText
 		}
 	}
-	var motivationText: String? = "" {
+	var motivationText: String? = "..." {
 		didSet {
 			motivationLabel.text = motivationText
 		}

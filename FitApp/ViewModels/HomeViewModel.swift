@@ -108,40 +108,39 @@ class HomeViewModel {
 			}
 		}
 	}
-	func getMotivationText(completion: @escaping (String?) -> ()) {
-		if let motivationText = UserProfile.defaults.motivationText {
-			completion(motivationText)
-			if let lastMotivationDate = UserProfile.defaults.lastMotivationDate?.onlyDate, lastMotivationDate.isLater(than: Date().onlyDate) {
-				DispatchQueue.global(qos: .background).async {
-					GoogleApiManager.shared.getMotivations { result in
-						switch result {
-						case .success(let motivations):
-							if let motivations = motivations {
-								completion(motivations.text.filter{ $0 != motivationText }[Int.random(in: 0...motivations.text.count-2)])
-								UserProfile.defaults.lastMotivationDate = Date().onlyDate
-							}
-						case .failure(let error):
-							completion(motivationText)
-							print(error)
-						}
-					}
-				}
-			}
-		} else {
-			completion(nil)
-			DispatchQueue.global(qos: .background).async {
-				GoogleApiManager.shared.getMotivations { result in
-					switch result {
-					case .success(let motivations):
-						if let motivations = motivations {
-							completion(motivations.text[Int.random(in: 0...motivations.text.count-1)])
-						}
-					case .failure(let error):
-						
-						print(error)
-					}
-				}
-			}
-		}
+    func getMotivationText(completion: @escaping () -> Void) {
+        if let lastMotivationDate = UserProfile.defaults.lastMotivationDate?.onlyDate {
+            // Check if motivation Date exist
+            // Then check if bigger then today
+            if lastMotivationDate.isEarlier(than: Date().onlyDate) {
+                // Fetch new motivation text
+                fetchMotivationText(completion)
+            } else {
+                // Set the current motivation text
+                completion()
+            }
+        } else { 
+            // Fetch first time
+            fetchMotivationText(completion)
+        }
 	}
+    
+    private func fetchMotivationText(_ completion: @escaping () -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            GoogleApiManager.shared.getMotivations { result in
+                switch result {
+                case .success(let motivations):
+                    if let motivations = motivations {
+                        let motivationText = motivations.text[Int.random(in: 0...motivations.text.count-1)]
+                        UserProfile.defaults.motivationText = motivationText
+                        UserProfile.defaults.lastMotivationDate = Date().onlyDate
+                    }
+                    
+                case .failure(let error):
+                    print(error)
+                }
+                completion()
+            }
+        }
+    }
 }
