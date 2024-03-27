@@ -91,9 +91,9 @@ class LoginViewController: UIViewController {
 			print("Something went wrong!")
 		}
 	}
-	@IBAction func noAccountButtonAction(_ sender: Any) {
-		presentAlert(withTitle: "שימו לב!", withMessage: "הרכישה דרך החנות כוללת את האפליקציה בלבד. על מנת לרכוש את הסדנה אנא עברו לאתר המקושר.", options: "המשך ברכישה", "מעבר לאתר", "ביטול", alertNumber: 6)
-	}
+//	@IBAction func noAccountButtonAction(_ sender: Any) {
+//		presentAlert(withTitle: "שימו לב!", withMessage: "הרכישה דרך החנות כוללת את האפליקציה בלבד. על מנת לרכוש את הסדנה אנא עברו לאתר המקושר.", options: "המשך ברכישה", "מעבר לאתר", "ביטול", alertNumber: 6)
+//	}
 }
 
 //MARK: - Delegates
